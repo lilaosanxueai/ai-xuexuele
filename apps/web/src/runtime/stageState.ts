@@ -17,6 +17,11 @@ export function getRunSpeed(): RunSpeed { return runSpeed; }
 
 export interface StageTargetState extends StageTarget { reached: boolean }
 
+/** 画笔轨迹线段（数学动态演示用） */
+export interface PenLine { x1: number; y1: number; x2: number; y2: number; color: string }
+const PEN_COLORS: Record<string, string> = { blue: '#1d4ed8', red: '#dc2626', green: '#16a34a', orange: '#ea580c', '蓝': '#1d4ed8', '红': '#dc2626', '绿': '#16a34a', '橙': '#ea580c' };
+const MAX_PEN_LINES = 2000;
+
 /** 小剧场状态机：角色状态 + 命令 API + 运行证据（供关卡校验） */
 export class StageState {
   x = 0;
@@ -31,6 +36,9 @@ export class StageState {
   /** AI 训练场识别结果：当前类别索引（'0'/'1'/'2'）与置信度，null=未开启/没认出 */
   recognized: string | null = null;
   recognizedConfidence = 0;
+  /** 画笔：落下后移动会留下轨迹 */
+  pen = { down: false, color: '#1d4ed8' };
+  penLines: PenLine[] = [];
 
   /** 运行证据（跨多次运行累积，通关校验用） */
   saidTexts: string[] = [];
@@ -43,6 +51,8 @@ export class StageState {
     this.targets = (targets ?? []).map((t) => ({ ...t, reached: false }));
     this.saidTexts = [];
     this.keysHeld.clear();
+    this.pen.down = false;
+    this.penLines = [];
   }
 
   private reachCheck(): void {
@@ -55,6 +65,12 @@ export class StageState {
     }
   }
 
+  private trace(x1: number, y1: number, x2: number, y2: number): void {
+    if (this.pen.down && this.penLines.length < MAX_PEN_LINES && (x1 !== x2 || y1 !== y2)) {
+      this.penLines.push({ x1, y1, x2, y2, color: this.pen.color });
+    }
+  }
+
   reachedTargetIndices(): number[] {
     return this.targets.flatMap((t, i) => (t.reached ? [i] : []));
   }
@@ -63,16 +79,22 @@ export class StageState {
   readonly api = {
     move: async (steps: number) => {
       const rad = (this.dir * Math.PI) / 180;
-      this.x = clamp(this.x + steps * Math.sin(rad), -BOUND_X, BOUND_X);
-      this.y = clamp(this.y + steps * Math.cos(rad), -BOUND_Y, BOUND_Y);
+      const nx = clamp(this.x + steps * Math.sin(rad), -BOUND_X, BOUND_X);
+      const ny = clamp(this.y + steps * Math.cos(rad), -BOUND_Y, BOUND_Y);
+      this.trace(this.x, this.y, nx, ny);
+      this.x = nx;
+      this.y = ny;
       this.reachCheck();
       await scaled(60);
     },
     turnRight: async (deg: number) => { this.dir = norm(this.dir + deg); await scaled(60); },
     turnLeft: async (deg: number) => { this.dir = norm(this.dir - deg); await scaled(60); },
     goTo: async (x: number, y: number) => {
-      this.x = clamp(x, -BOUND_X, BOUND_X);
-      this.y = clamp(y, -BOUND_Y, BOUND_Y);
+      const nx = clamp(x, -BOUND_X, BOUND_X);
+      const ny = clamp(y, -BOUND_Y, BOUND_Y);
+      this.trace(this.x, this.y, nx, ny);
+      this.x = nx;
+      this.y = ny;
       this.reachCheck();
       await scaled(60);
     },
@@ -104,6 +126,9 @@ export class StageState {
     keyDown: (key: string): boolean => this.keysHeld.has(key),
     recognize: (cls: string): boolean => this.recognized === cls && this.recognizedConfidence >= 0.6,
     eq: (a: number, b: number): boolean => Number(a) === Number(b),
+    penDown: async () => { this.pen.down = true; await scaled(30); },
+    penUp: async () => { this.pen.down = false; await scaled(30); },
+    penColor: async (c: string) => { this.pen.color = PEN_COLORS[String(c)] ?? PEN_COLORS.blue; await scaled(30); },
     random: (from: number, to: number): number => {
       const lo = Math.min(from, to), hi = Math.max(from, to);
       return Math.floor(Math.random() * (hi - lo + 1)) + lo;

@@ -28,7 +28,10 @@
     "island_costume",
     "island_change_size",
     "island_eq",
-    "island_touching_edge"
+    "island_touching_edge",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color"
   ],
   "actor": {
     "costume": "💡",
@@ -41,6 +44,7 @@
       "id": "t1",
       "text": "入射光：光斑从左上角 (-140,140) 沿 45° 斜线走到镜面点 🪞 (0,0)",
       "hintPrompts": [
+        "先「🖊 落笔」再走光路——入射光和反射光画成折线，对称看得见！",
         "用「移到」直达 (0,0)——左上到中心就是 45° 方向"
       ],
       "check": {

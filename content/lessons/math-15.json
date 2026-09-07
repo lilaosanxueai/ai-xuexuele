@@ -20,6 +20,7 @@
       "id": "t1",
       "text": "运行程序：机器人沿双曲线滑行，经过靶点（x=4 时 y=180/4=45）",
       "hintPrompts": [
+        "落笔画出双曲线：越靠右越贴近横轴",
         "range(2, 12) 从 x=2 走到 11，避开 x=0（不能除以0！）"
       ],
       "check": {
@@ -85,7 +86,7 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 反比例函数 y = k / x 双曲线\nk = 180\n\nfor x in range(2, 12):\n    go_to(x * 20, k / x)\n    wait(0.1)\n\nsay(\"x 越大 y 越小——反比例！\")\n",
+  "starterCode": "# 反比例函数 y = k / x 双曲线（画出真曲线）\nk = 180\n\npen_color(\"blue\")\npen_down()\nfor x in range(2, 12):\n    go_to(x * 20, k / x)\n    wait(0.1)\npen_up()\ngo_to(0, -150)\n\nsay(\"x 越大 y 越小——反比例！\")\n",
   "subjectArea": "数学",
   "gradeBand": "junior"
 }

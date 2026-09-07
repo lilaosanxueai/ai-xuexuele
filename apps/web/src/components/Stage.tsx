@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { STAGE_W, STAGE_H, type StageState } from '../runtime/stageState.ts';
 
+// 轨迹线（画笔）渲染在背景之上、角色之下
+
 interface Props {
   stage: StageState;
   onSpriteClick?: () => void;
@@ -39,6 +41,19 @@ export default function Stage({ stage, onSpriteClick, onCanvasReady }: Props) {
       ctx.fillRect(0, STAGE_H - 26, STAGE_W, 26);
 
       const toCanvas = (x: number, y: number): [number, number] => [STAGE_W / 2 + x, STAGE_H / 2 - y];
+
+      // 画笔轨迹（数学动态演示）
+      ctx.lineWidth = 3.5;
+      ctx.lineCap = 'round';
+      for (const ln of s.penLines) {
+        const [ax, ay] = toCanvas(ln.x1, ln.y1);
+        const [bx, by] = toCanvas(ln.x2, ln.y2);
+        ctx.strokeStyle = ln.color;
+        ctx.beginPath();
+        ctx.moveTo(ax, ay);
+        ctx.lineTo(bx, by);
+        ctx.stroke();
+      }
 
       // 目标点
       ctx.font = '30px serif';

@@ -129,6 +129,9 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
       setSettings(s);
       setWsReady(false);
       if (!l) { setToast('找不到这一课'); setProgressReady(true); return; }
+      // 切课时停掉旧的运行器（组件复用时 pyRunnerRef 被覆盖但旧实例仍在跑）
+      pyRunnerRef.current?.stop();
+      execRef.current?.stop();
       setLesson(l);
       if (mode.kind === 'freeplay') {
         const idea = localStorage.getItem('island-idea');

@@ -16,6 +16,9 @@ const CMD_MAP: Record<string, (stage: StageState, args: (number | string | boole
   hide: (s) => s.api.hide(),
   play: (s, a) => s.api.play(String(a[0])),
   wait: (s, a) => s.api.wait(Number(a[0])),
+  pen_down: (s) => s.api.penDown(),
+  pen_up: (s) => s.api.penUp(),
+  pen_color: (s, a) => s.api.penColor(String(a[0])),
 };
 
 export function pyStageApi(stage: StageState): PyStageApi {

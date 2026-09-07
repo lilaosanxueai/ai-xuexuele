@@ -22,7 +22,10 @@
     "island_repeat",
     "island_number",
     "island_costume",
-    "island_change_size"
+    "island_change_size",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color"
   ],
   "actor": {
     "costume": "🖋",
@@ -35,6 +38,7 @@
       "id": "t1",
       "text": "先走正十二边形：重复 12 次 { 移动 60， 右转 30 }（360÷12=30）",
       "hintPrompts": [
+        "先「🖊 落笔」再走正多边形——12 边形、36 边形、72 边形叠加画在一起，看它们一步步逼近圆！",
         "转角 = 360 ÷ 边数，十二边形转 30 度"
       ],
       "check": {

@@ -22,7 +22,10 @@
     "island_repeat",
     "island_number",
     "island_costume",
-    "island_change_size"
+    "island_change_size",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color"
   ],
   "actor": {
     "costume": "🐸",
@@ -35,6 +38,7 @@
       "id": "t1",
       "text": "笨办法先走一遍：连放 5 块「移动 60」，看青蛙跳到 120 的靶心",
       "hintPrompts": [
+        "先「🖊 落笔」再跳格子——跳过的距离连成线，乘法就是长度！",
         "-180+60+60+60+60+60，加 5 次就是 120"
       ],
       "check": {

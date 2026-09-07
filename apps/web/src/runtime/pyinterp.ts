@@ -51,7 +51,7 @@ function toLines(src: string): Line[] {
 
 const COMMANDS = new Set([
   'move', 'turn_right', 'turn_left', 'go_to', 'bounce', 'say', 'say_for', 'costume',
-  'change_size', 'show', 'hide', 'play', 'wait',
+  'change_size', 'show', 'hide', 'play', 'wait', 'pen_down', 'pen_up', 'pen_color',
 ]);
 const FUNCS = new Set(['touching_edge', 'key_down', 'recognize', 'random', 'range', 'sin', 'cos', 'sqrt', 'abs', 'eq', 'print']);
 

@@ -22,7 +22,10 @@
     "island_number",
     "island_costume",
     "island_change_size",
-    "island_play"
+    "island_play",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color"
   ],
   "actor": {
     "costume": "🌍",
@@ -42,6 +45,7 @@
       "id": "t1",
       "text": "画出圆形轨道：在 🌟 旁边「重复 36 次 { 移动 20，右转 10，等待 0.05 }」",
       "hintPrompts": [
+        "先「🖊 落笔」再转圈——地球的轨道真的画出来了！",
         "上节课的秘密：36 × 10° = 360°，正好一圈",
         "每步等 0.05 秒，能看清地球一路的位置"
       ],

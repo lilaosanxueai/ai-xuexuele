@@ -26,7 +26,7 @@ export const SOUND_OPTIONS: [string, string][] = [
   ['🎵 sol', 'sol'], ['🎵 la', 'la'], ['🎵 xi', 'xi'], ['🎶 do（高）', 'do2'],
 ];
 
-const C = { event: '#FFBF00', motion: '#4C97FF', looks: '#9966FF', sound: '#CF63CF', control: '#FFAB19', sensing: '#5CB1D6', ops: '#59C059' };
+const C = { event: '#FFBF00', motion: '#4C97FF', looks: '#9966FF', sound: '#CF63CF', control: '#FFAB19', sensing: '#5CB1D6', ops: '#59C059', pen: '#0EA5E9' };
 
 export const BLOCK_CATEGORIES: Record<string, { name: string; colour: string; blocks: string[] }> = {
   event:   { name: '⚡ 事件', colour: C.event,   blocks: ['island_when_run', 'island_when_key', 'island_when_clicked', 'island_when_recognized'] },
@@ -36,6 +36,7 @@ export const BLOCK_CATEGORIES: Record<string, { name: string; colour: string; bl
   control: { name: '🔁 控制', colour: C.control, blocks: ['island_repeat', 'island_forever', 'island_wait', 'island_if', 'island_if_else'] },
   sensing: { name: '👀 侦测', colour: C.sensing, blocks: ['island_touching_edge', 'island_key_down', 'island_recognize'] },
   ops:     { name: '🎲 运算', colour: C.ops,     blocks: ['island_number', 'island_random', 'island_eq'] },
+  pen:     { name: '🖊 画笔', colour: C.pen,     blocks: ['island_pen_down', 'island_pen_up', 'island_pen_color'] },
 };
 
 export const ALL_BLOCK_TYPES = Object.values(BLOCK_CATEGORIES).flatMap((c) => c.blocks);
@@ -76,6 +77,11 @@ Blockly.defineBlocksWithJsonArray([
   { type: 'island_touching_edge', message0: '碰到边缘？', output: 'Boolean', colour: C.sensing, tooltip: '角色是否碰到了舞台边缘' },
   { type: 'island_key_down', message0: '按下 %1 键？', args0: [{ type: 'field_dropdown', name: 'KEY', options: KEY_OPTIONS }], output: 'Boolean', colour: C.sensing, tooltip: '某个键此刻是否被按着' },
   { type: 'island_recognize', message0: 'AI 认出 %1 ？', args0: [{ type: 'field_dropdown', name: 'CLASS', options: AI_CLASS_OPTIONS }], output: 'Boolean', colour: C.sensing, tooltip: '摄像头此刻认出的是不是这个类别（要在 AI 训练场先教它）' },
+
+  // ---------- 画笔（数学动态演示） ----------
+  { type: 'island_pen_down', message0: '落笔（走过留下线）', previousStatement: null, nextStatement: null, colour: C.pen, tooltip: '之后移动会画出路线' },
+  { type: 'island_pen_up', message0: '抬笔（停止画线）', previousStatement: null, nextStatement: null, colour: C.pen, tooltip: '不再画线' },
+  { type: 'island_pen_color', message0: '笔的颜色 %1', args0: [{ type: 'field_dropdown', name: 'COLOR', options: [['🔵 蓝', 'blue'], ['🔴 红', 'red'], ['🟢 绿', 'green'], ['🟠 橙', 'orange']] }], previousStatement: null, nextStatement: null, colour: C.pen, tooltip: '换一支彩笔' },
 
   // ---------- 运算 ----------
   { type: 'island_number', message0: '%1', args0: [{ type: 'field_number', name: 'NUM', value: 1 }], output: 'Number', colour: C.ops, tooltip: '一个数字，可以塞进别的积木空位里' },
