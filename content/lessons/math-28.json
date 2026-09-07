@@ -1,0 +1,82 @@
+{
+  "id": "math-28",
+  "island": "math",
+  "order": 48,
+  "title": "按比例分配",
+  "emoji": "⚖️",
+  "story": "100 元奖金按 2:3 分给两个人——不是对半，是按比例！甲拿 2/5（40 元），乙拿 3/5（60 元）。公式：总数 × 自己的份数 ÷ 总份数。Python 算给 TA 看，谁也别吵。",
+  "goals": [
+    "理解比的意义",
+    "会按比例分配"
+  ],
+  "toolbox": [],
+  "actor": {
+    "costume": "⚖️",
+    "x": 0,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "运行程序：100 元按 2:3 分——甲 40 元、乙 60 元",
+      "hintPrompts": [
+        "100×2÷5=40；100×3÷5=60"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "验证公平：40+60=100 ✓，40:60=2:3 ✓（分完且比例不变）",
+      "hintPrompts": [
+        "按比例分配的两个检验标准"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "t3",
+      "text": "换比例：按 3:7 分 200 元（60 和 140）",
+      "hintPrompts": [
+        "200×3÷10=60"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：果汁按 1:4 兑水，300 毫升果汁水要加多少水？（1200 毫升）",
+      "hintPrompts": [
+        "浓的和稀的比：1:4 总份数 5"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第三学段（5-6年级）",
+    "module": "数据与编码",
+    "points": [
+      "比例计算"
+    ]
+  },
+  "subject": {
+    "name": "数学·理解比的意义",
+    "emoji": "🔢",
+    "points": [
+      "理解比的意义",
+      "会按比例分配"
+    ]
+  },
+  "subjectArea": "数学",
+  "gradeBand": "primary",
+  "aiIntro": "⚖️ 分东西起争执？数学来仲裁！按比例分配是人类发明最公平的算法之一——股东分红、调颜料、兑果汁全用它。",
+  "celebrate": "比例分配出师！「总数×份数÷总份数」这句口诀配上你的程序，以后小组分工算工分、分零食，都是你说了算 ⚖️",
+  "codeLesson": true,
+  "starterCode": "# 按比例分配：100 元按 2:3 分\ntotal = 100\nratio_a = 2\nratio_b = 3\n\na = total * ratio_a / (ratio_a + ratio_b)\nb = total * ratio_b / (ratio_a + ratio_b)\nsay(\"甲分 \" + a + \" 元，乙分 \" + b + \" 元\")\n"
+}

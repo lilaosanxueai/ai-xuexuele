@@ -1,0 +1,107 @@
+{
+  "id": "math-29",
+  "island": "math",
+  "order": 49,
+  "title": "三角形内角和的秘密",
+  "emoji": "🔺",
+  "story": "三角形的三个内角加起来永远是 180°——凭什么？走一个三角形试试：每转过一个弯（外角），三个弯加起来正好一圈 360°。而「外角 = 180 - 内角」……三式一联立，内角和的真相大白！",
+  "goals": [
+    "验证三角形内角和 180°",
+    "理解外角和 360°"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_eq"
+  ],
+  "actor": {
+    "costume": "🔺",
+    "x": -90,
+    "y": -50,
+    "dir": 30
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "等边三角形：移动 150 右转 120，重复 3 次——每个外角 120°，走完一圈回到起点",
+      "hintPrompts": [
+        "外角和 = 120×3 = 360°（正好一圈）"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
+    },
+    {
+      "id": "t2",
+      "text": "不等边三角形：移动 120 右转 150 移动 90 右转 110 移动 100 右转 100——三个外角 150+110+100=360，还是一圈！",
+      "hintPrompts": [
+        "不管什么三角形，外角和都是 360°"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_turn_right",
+        "count": 3
+      }
+    },
+    {
+      "id": "t3",
+      "text": "推出真相：说「内角和 = 3×180 - 360 = 180°！」",
+      "hintPrompts": [
+        "每个内角=180-外角，三个加起来 540-360=180"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：四边形呢？走一个四边形数外角（还是 360 → 内角和 360°）",
+      "hintPrompts": [
+        "n 边形内角和 = (n-2)×180"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第四学段（7-9年级）",
+    "module": "身边的算法",
+    "points": [
+      "角度累加验证"
+    ]
+  },
+  "subject": {
+    "name": "数学·验证三角形内",
+    "emoji": "🔢",
+    "points": [
+      "验证三角形内角和 180°",
+      "理解外角和 360°"
+    ]
+  },
+  "subjectArea": "数学",
+  "gradeBand": "junior",
+  "aiIntro": "🔺 为什么内角和是 180？课本直接告诉你，今天你自己推出来：走一圈 360° 是钥匙。数学证明的乐趣，从这一步开始。",
+  "celebrate": "内角和定理被你「走」出来了！你用的方法叫「外角法」——它还能推广到 n 边形：(n-2)×180°。初二证明题的路数，你已经趟过一遍 🔺",
+  "targets": [
+    {
+      "emoji": "🏠",
+      "x": -90,
+      "y": -50
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "id": "math-21",
+  "island": "math",
+  "order": 41,
+  "title": "除法：分组跳格子",
+  "emoji": "➗",
+  "story": "除法是乘法的反向：180 里面有几个 60？让青蛙从 0 出发，每次跳 60，跳几次正好到 180？数一数「重复」的次数——那就是 180÷60 的答案！",
+  "goals": [
+    "理解除法是平均分与包含除",
+    "除法与乘法互为逆运算"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_eq"
+  ],
+  "actor": {
+    "costume": "🐸",
+    "x": 0,
+    "y": 0,
+    "dir": 90
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "试跳：重复 3 次 { 移动 60 }——正好停在 180 的靶心！说「180 ÷ 60 = 3」",
+      "hintPrompts": [
+        "跳 3 次每次 60，共 180——除法答案就是跳的次数"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
+    },
+    {
+      "id": "t2",
+      "text": "换一题：跳到 180，每次跳 45，要几次？（先算：4 次）改积木验证",
+      "hintPrompts": [
+        "180 ÷ 45 = 4；「重复 4 次 { 移动 45 }」"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t3",
+      "text": "平均分：12 颗糖分给 4 人，每人几颗？用跳格子讲给爸妈听（12÷4=3）",
+      "hintPrompts": [
+        "12 步分 4 段，每段 3 步——这就是平均分"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：有余数的除法——跳到 190 每次跳 60：3 次后还剩 10（190÷60=3 余 10）",
+      "hintPrompts": [
+        "跳 3 次到 180，剩 10 步不够跳一次——余数！"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二学段（3-4年级）",
+    "module": "身边的算法",
+    "points": [
+      "循环与计数"
+    ]
+  },
+  "subject": {
+    "name": "数学·理解除法是平",
+    "emoji": "🔢",
+    "points": [
+      "理解除法是平均分与包含除",
+      "除法与乘法互为逆运算"
+    ]
+  },
+  "subjectArea": "数学",
+  "gradeBand": "primary",
+  "aiIntro": "🐸 除法上线！它其实是乘法的倒放：乘法是「跳几次共多远」，除法是「共多远、每次跳多远、要跳几次」。跳一遍就懂。",
+  "celebrate": "除法搞定！「平均分」和「包含除」你都用脚步走出来过。二年级的除法口诀，你已经是用模型理解的了 ➗",
+  "targets": [
+    {
+      "emoji": "🎯",
+      "x": 180,
+      "y": 0
+    }
+  ]
+}

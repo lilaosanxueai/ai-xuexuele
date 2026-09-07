@@ -1,0 +1,105 @@
+{
+  "id": "math-23",
+  "island": "math",
+  "order": 43,
+  "title": "数格子算面积",
+  "emoji": "🟦",
+  "story": "周长是「走一圈」，面积是「铺满格子」！横着 4 格、竖着 4 格，一共要铺 4×4=16 块地砖。让角色像扫地机器人一样一排排扫过去，数它扫了几块地。",
+  "goals": [
+    "理解面积的含义",
+    "掌握正方形/长方形面积公式"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_eq"
+  ],
+  "actor": {
+    "costume": "🧹",
+    "x": -80,
+    "y": -80,
+    "dir": 90
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "扫地模式：重复 4 次 { 重复 4 次 { 移动 40 }， 右转， 走到下一行的开头 }——把 4×4 的地面扫一遍（循环套循环！）",
+      "hintPrompts": [
+        "外层循环换行、内层循环扫一行——两层重复就是「扫过每一格」"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_repeat"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "数格子：一共扫了 16 格，说「面积 = 4 × 4 = 16 格！」",
+      "hintPrompts": [
+        "横 4 竖 4，乘起来就是总格数"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t3",
+      "text": "长方形：改成 5×3 的地面（改两个循环次数），面积 = 5 × 3 = 15 格",
+      "hintPrompts": [
+        "长×宽=面积公式现形"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：面积单位：如果每格是 1 平方米，16 格就是 16 平方米——说给爸妈听",
+      "hintPrompts": [
+        "带单位说话是数学的好习惯"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二、三学段（3-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "嵌套循环遍历"
+    ]
+  },
+  "subject": {
+    "name": "数学·理解面积的含",
+    "emoji": "🔢",
+    "points": [
+      "理解面积的含义",
+      "掌握正方形/长方形面积公式"
+    ]
+  },
+  "subjectArea": "数学",
+  "gradeBand": "primary",
+  "aiIntro": "🧹 面积和周长是双胞胎，总有人分不清。今天你当扫地机器人：走一圈是周长，铺满每格是面积——身体先懂，公式后到。",
+  "celebrate": "面积拿下！「长×宽」不是死记——是你一排一排扫出来的。以后做应用题分不清周长面积，就想扫地机器人 🟦",
+  "targets": [
+    {
+      "emoji": "🏁",
+      "x": -80,
+      "y": -80
+    }
+  ]
+}

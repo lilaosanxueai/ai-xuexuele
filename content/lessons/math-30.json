@@ -1,0 +1,90 @@
+{
+  "id": "math-30",
+  "island": "math",
+  "order": 50,
+  "title": "二元一次方程组",
+  "emoji": "🔀",
+  "story": "x + y = 10，x - y = 2——两个未知数两个方程，联立就能解！用 Python 写消元法：x=(10+2)÷2=6，y=(10-2)÷2=4。再让角色走到数轴上 (x×y) 的位置验证——两数之积 24！",
+  "goals": [
+    "掌握代入/加减消元法",
+    "理解方程组的解"
+  ],
+  "toolbox": [],
+  "actor": {
+    "costume": "🔀",
+    "x": -120,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "运行程序：解出 x=6、y=4，并验证 x+y=10 ✓",
+      "hintPrompts": [
+        "加减消元：两式相加得 2x=12"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "数轴验证：走到 x×y=24×5=120 的位置命中靶心",
+      "hintPrompts": [
+        "6×4=24，24×5=120 是缩放后位置"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
+    },
+    {
+      "id": "t3",
+      "text": "换一组：x+y=12，x-y=4（先心算 x=8,y=4）再改程序验证",
+      "hintPrompts": [
+        "x=(12+4)/2=8"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：鸡兔同笼！头 10 个脚 28 只：x+y=10，2x+4y=28——解出鸡兔各几只",
+      "hintPrompts": [
+        "x=6 鸡，y=4 兔——千年名题一秒解"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第四学段（7年级）",
+    "module": "身边的算法",
+    "points": [
+      "消元法的程序化"
+    ]
+  },
+  "subject": {
+    "name": "数学·掌握代入/加",
+    "emoji": "🔢",
+    "points": [
+      "掌握代入/加减消元法",
+      "理解方程组的解"
+    ]
+  },
+  "subjectArea": "数学",
+  "gradeBand": "junior",
+  "aiIntro": "🔀 一个方程两个未知数解不了，两个方程一起就解开了——这就是「方程组」的力量。加一个千年名题：鸡兔同笼，等你来破。",
+  "celebrate": "方程组通关！消元法你已程序化——鸡兔同笼这种让古人挠头的题，你的程序一秒出答案。初一数学的重点章，提前拿稳 🔀",
+  "targets": [
+    {
+      "emoji": "🎯",
+      "x": 120,
+      "y": 0
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 二元一次方程组：x+y=10, x-y=2\ns = 10    # 两数之和\nd = 2     # 两数之差\n\nx = (s + d) / 2\ny = (s - d) / 2\nsay(\"x = \" + x + \"，y = \" + y)\nsay(\"验证：x+y = \" + (x + y))\n\ngo_to(x * y * 5, 0)   # 走到 x*y 的验证点\n"
+}

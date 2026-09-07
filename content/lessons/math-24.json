@@ -1,0 +1,100 @@
+{
+  "id": "math-24",
+  "island": "math",
+  "order": 44,
+  "title": "轴对称：走一个 Λ",
+  "emoji": "🦋",
+  "story": "蝴蝶为什么美？因为左右两边一模一样——轴对称！走一个「Λ」形：左半边怎么走，右半边就镜像怎么走（角度一正一反）。走对了，图形天然对称。",
+  "goals": [
+    "认识轴对称图形",
+    "理解对称轴两侧角度相反"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_eq"
+  ],
+  "actor": {
+    "costume": "🦋",
+    "x": 0,
+    "y": -60,
+    "dir": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "左半边：从底往上走斜线（右转 30 度后移动 150）——这是 Λ 的左边一半",
+      "hintPrompts": [
+        "先转向再走，走出左斜坡"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_move"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "右半边：到顶后左转 60 度再移动 150 落下来——Λ 完成！左右角度正好相反（30 对 30）",
+      "hintPrompts": [
+        "左 30 右 30，方向相反、大小相等——对称！"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_turn_right",
+        "count": 1
+      }
+    },
+    {
+      "id": "t3",
+      "text": "宣布对称：说「轴对称图形：对称轴两边完全重合！」",
+      "hintPrompts": [
+        "把 Λ 沿竖直轴折叠，两边会重合"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：走一个 M 形（两个 Λ 连起来）或 W 形——对称世家",
+      "hintPrompts": [
+        "M 有竖直对称轴，W 也一样"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二、三学段（3-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "角度的相反数"
+    ]
+  },
+  "subject": {
+    "name": "数学·认识轴对称图",
+    "emoji": "🔢",
+    "points": [
+      "认识轴对称图形",
+      "理解对称轴两侧角度相反"
+    ]
+  },
+  "subjectArea": "数学",
+  "gradeBand": "primary",
+  "aiIntro": "🦋 大自然最爱对称：蝴蝶、雪花、你的脸。今天用脚步走一个对称图形——左脚 30 度，右脚就得 30 度，一边大一边小就不美了。",
+  "celebrate": "对称美学达成！「镜像」这个概念你已经用腿走过——初中坐标里的对称点 (x,y)→(-x,y)，就是今天这个 Λ 的数学化 🦋"
+}
