@@ -1,0 +1,142 @@
+{
+  "id": "cross-39",
+  "island": "cross",
+  "order": 91,
+  "title": "营养家族分类",
+  "emoji": "🥗",
+  "story": "身体需要四大营养家族：蛋白质（长身体的砖头：肉蛋奶）、糖类（供能量：米面薯）、脂肪（储备能源：油坚果）、维生素（守护健康：果蔬）。没有一种食物什么都含——所以要不挑食！程序当营养师：报食物，你来归类！",
+  "goals": [
+    "认识四大营养素及其作用",
+    "养成均衡饮食观念"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_forever",
+    "island_if",
+    "island_if_else",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_eq",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color",
+    "island_touching_edge"
+  ],
+  "actor": {
+    "costume": "🥗",
+    "x": 0,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "报家族：「蛋白质=长身体的砖头！鸡蛋牛奶鱼肉都是」",
+      "hintPrompts": [
+        "建筑比喻好记"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "继续报：「糖类=能量发动机（米饭面条土豆）；脂肪=储备电池（食用油坚果）」",
+      "hintPrompts": [
+        "三大产能营养素"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_say",
+        "count": 3
+      }
+    },
+    {
+      "id": "t3",
+      "text": "维生素压轴：「果蔬里的维生素=维修工！缺了会生病」并说「不挑食才能营养全」",
+      "hintPrompts": [
+        "挑食=缺维生素"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：早餐分类：鸡蛋（蛋白质）+面包（糖类）+牛奶（蛋白质+钙）+橙子（维生素）——报给爸妈听",
+      "hintPrompts": [
+        "一顿均衡早餐的样本"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二、三学段（3-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "分类表达",
+      "概念梳理"
+    ]
+  },
+  "subject": {
+    "name": "科学·健康（小学）",
+    "emoji": "🔬",
+    "points": [
+      "认识四大营养素及其作用",
+      "养成均衡饮食观念"
+    ]
+  },
+  "subjectArea": "科学",
+  "gradeBand": "primary",
+  "aiIntro": "🥗 你吃下去的每口饭都在回答一个问题：它属于哪个营养家族？今天程序当营养师考官——分类分对了才能长高高！",
+  "celebrate": "营养家族全认识！蛋白质盖楼、糖类供电、脂肪储电、维生素维修——下次吃饭你就是餐桌上的营养专家 🥗",
+  "exercises": [
+    {
+      "q": "长身体的「砖头」是？",
+      "options": [
+        "糖类",
+        "蛋白质",
+        "脂肪",
+        "水"
+      ],
+      "answer": 1,
+      "explain": "蛋白质是生长发育的基础"
+    },
+    {
+      "q": "米饭馒头主要提供？",
+      "options": [
+        "蛋白质",
+        "维生素",
+        "糖类（能量）",
+        "脂肪"
+      ],
+      "answer": 2,
+      "explain": "主食=糖类=能量"
+    },
+    {
+      "q": "维生素主要来自？",
+      "options": [
+        "肉类",
+        "果蔬",
+        "白米饭",
+        "食用油"
+      ],
+      "answer": 1,
+      "explain": "蔬菜水果是维生素宝库"
+    }
+  ],
+  "codeLesson": false
+}

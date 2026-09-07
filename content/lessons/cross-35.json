@@ -1,0 +1,142 @@
+{
+  "id": "cross-35",
+  "island": "cross",
+  "order": 87,
+  "title": "光与影实验",
+  "emoji": "🌗",
+  "story": "同一个人，中午影子短、傍晚影子长——太阳位置决定了影子的长度！光的直线传播遇到障碍物就留下影子。画三根影子验证规律：太阳越高、影子越短。古人就是用这个发明了日晷！",
+  "goals": [
+    "知道光沿直线传播形成影子",
+    "发现太阳高度与影长的关系"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_forever",
+    "island_if",
+    "island_if_else",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_eq",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color",
+    "island_touching_edge"
+  ],
+  "actor": {
+    "costume": "🧍",
+    "x": 0,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "立杆见影：角色站在原地（树 🧍），先「落笔」",
+      "hintPrompts": [
+        "笔色选橙色画影子"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_pen_down"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "早晨的影子：太阳低斜——影子长长的（右转 60 度移动 120 画出长影）",
+      "hintPrompts": [
+        "太阳低→影子长"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_move"
+      }
+    },
+    {
+      "id": "t3",
+      "text": "中午的影子：太阳当头——影子短短的（右转 10 度移动 25）说「太阳越高影子越短！」",
+      "hintPrompts": [
+        "日晷就是用影长报时"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：傍晚再画一根长影子——早中晚三根影子，自己排成日晷",
+      "hintPrompts": [
+        "早晨影子偏西、傍晚偏东"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二、三学段（3-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "画线模拟",
+      "规律归纳"
+    ]
+  },
+  "subject": {
+    "name": "科学·光与影（小学）",
+    "emoji": "🔬",
+    "points": [
+      "知道光沿直线传播形成影子",
+      "发现太阳高度与影长的关系"
+    ]
+  },
+  "subjectArea": "科学",
+  "gradeBand": "primary",
+  "aiIntro": "🌗 影子是光的「请假条」——光被挡住的地方就留下它。今天你当太阳的助手，画出一天的影子变化，顺便看懂古人的钟表！",
+  "celebrate": "光影实验完成！「太阳越高、影子越短」——你已经会用画笔观测天文了。日晷的原理就这么简单 🌗",
+  "exercises": [
+    {
+      "q": "影子形成是因为光？",
+      "options": [
+        "沿直线传播",
+        "会拐弯",
+        "速度太快",
+        "有颜色"
+      ],
+      "answer": 0,
+      "explain": "光走直线，被挡住形成影"
+    },
+    {
+      "q": "一天中影子最短的时候是？",
+      "options": [
+        "早晨",
+        "中午",
+        "傍晚",
+        "深夜"
+      ],
+      "answer": 1,
+      "explain": "太阳最高时影子最短"
+    },
+    {
+      "q": "古代利用影子计时的工具叫？",
+      "options": [
+        "沙漏",
+        "日晷",
+        "水钟",
+        "香篆"
+      ],
+      "answer": 1,
+      "explain": "日晷=影子的钟表"
+    }
+  ],
+  "codeLesson": false
+}

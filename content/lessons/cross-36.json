@@ -1,0 +1,141 @@
+{
+  "id": "cross-36",
+  "island": "cross",
+  "order": 88,
+  "title": "磁铁的奥秘",
+  "emoji": "🧲",
+  "story": "磁铁有两极：N 和 S。它们有个铁律：同名极相斥（推开！）、异名极相吸（贴贴！）。指南针就是靠地球这个大磁铁指路的。让两块磁铁相遇：同极相撞就后退，异极靠近就吸上——规律演出来！",
+  "goals": [
+    "掌握磁极相互作用规律",
+    "了解指南针原理"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_forever",
+    "island_if",
+    "island_if_else",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_eq",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color",
+    "island_touching_edge"
+  ],
+  "actor": {
+    "costume": "🧲",
+    "x": -100,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "相吸实验：拿着 S 极靠近 N 极——移动贴近并说「异名极相吸！」",
+      "hintPrompts": [
+        "N-S 见面就贴贴"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_move"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "相斥实验：翻转磁极 N 靠 N——角色后退说「同名极相斥！」（换方向移动）",
+      "hintPrompts": [
+        "同极互推"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t3",
+      "text": "说原理：「指南针的磁针被地球大磁铁吸引——永远指南北！」",
+      "hintPrompts": [
+        "地球是个大磁铁"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：磁悬浮列车为什么能浮起来？（同极相斥的推力托起列车）",
+      "hintPrompts": [
+        "相斥力的超级应用"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二、三学段（3-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "条件分支",
+      "规律表达"
+    ]
+  },
+  "subject": {
+    "name": "科学·磁（小学）",
+    "emoji": "🔬",
+    "points": [
+      "掌握磁极相互作用规律",
+      "了解指南针原理"
+    ]
+  },
+  "subjectArea": "科学",
+  "gradeBand": "primary",
+  "aiIntro": "🧲 磁铁是自然界最神奇的「社交达人」：要么疯狂贴贴，要么死活推开——规矩只有一条。今天你演磁铁，体会吸引和排斥！",
+  "celebrate": "磁铁规律通关！同极相斥、异极相吸——磁悬浮、指南针、冰箱贴，全靠这八个字 🧲",
+  "exercises": [
+    {
+      "q": "N 极靠近 S 极会？",
+      "options": [
+        "相吸",
+        "相斥",
+        "没反应",
+        "发热"
+      ],
+      "answer": 0,
+      "explain": "异名极相互吸引"
+    },
+    {
+      "q": "同名磁极相互？",
+      "options": [
+        "吸引",
+        "排斥",
+        "静止",
+        "融化"
+      ],
+      "answer": 1,
+      "explain": "同极相斥"
+    },
+    {
+      "q": "指南针能指南是因为？",
+      "options": [
+        "有电池",
+        "地球是大磁铁",
+        "风的方向",
+        "太阳吸引"
+      ],
+      "answer": 1,
+      "explain": "地磁场对磁针的作用"
+    }
+  ],
+  "codeLesson": false
+}

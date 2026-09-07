@@ -1,0 +1,142 @@
+{
+  "id": "cross-37",
+  "island": "cross",
+  "order": 89,
+  "title": "摩擦力大比拼",
+  "emoji": "🧊",
+  "story": "冰面溜、地毯涩——同样的力气，滑的距离天差地别！这就是摩擦力：表面越粗糙，摩擦越大，走得越近。让小车在三种表面滑行：冰面（滑最远）、木地板（中等）、地毯（最近）——对比实验一目了然。",
+  "goals": [
+    "感知摩擦力与表面粗糙度的关系",
+    "学会对比实验"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_forever",
+    "island_if",
+    "island_if_else",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_eq",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color",
+    "island_touching_edge"
+  ],
+  "actor": {
+    "costume": "🚗",
+    "x": -150,
+    "y": 60,
+    "dir": 90
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "冰面实验：重复 6 次{移动 30}——小车滑出 180 步（远！）",
+      "hintPrompts": [
+        "冰面光滑摩擦小"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_repeat"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "地毯实验：回到起点改重复 3 次{移动 30}——只滑 90 步（近！）说「表面越粗糙，摩擦越大」",
+      "hintPrompts": [
+        "地毯涩，滑不远"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t3",
+      "text": "举一反三：「鞋底的花纹（增大摩擦防滑）、滑梯的光面（减小摩擦滑得爽）」",
+      "hintPrompts": [
+        "增大/减小摩擦的应用"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：下雨天路滑怎么办？（减速慢行——水减小了摩擦）",
+      "hintPrompts": [
+        "安全应用"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二、三学段（3-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "变量对比",
+      "距离测量"
+    ]
+  },
+  "subject": {
+    "name": "科学·力（小学）",
+    "emoji": "🔬",
+    "points": [
+      "感知摩擦力与表面粗糙度的关系",
+      "学会对比实验"
+    ]
+  },
+  "subjectArea": "科学",
+  "gradeBand": "primary",
+  "aiIntro": "🧊 拔河的时候你可不敢穿冰鞋！今天让小车替你试：三种表面、同样的力气——看谁滑得远，摩擦力当场现形！",
+  "celebrate": "摩擦力实验完成！光滑省力、粗糙抓地——鞋底纹、雨路滑、冰刀快，全世界的表面都被你理解了 🧊",
+  "exercises": [
+    {
+      "q": "表面越光滑，摩擦力？",
+      "options": [
+        "越大",
+        "越小",
+        "不变",
+        "消失"
+      ],
+      "answer": 1,
+      "explain": "光滑=摩擦小"
+    },
+    {
+      "q": "鞋底做花纹是为了？",
+      "options": [
+        "好看",
+        "减小摩擦",
+        "增大摩擦防滑",
+        "省材料"
+      ],
+      "answer": 2,
+      "explain": "增大摩擦，走路不打滑"
+    },
+    {
+      "q": "同样的推力，小车在哪滑得最远？",
+      "options": [
+        "地毯",
+        "木地板",
+        "冰面",
+        "沙滩"
+      ],
+      "answer": 2,
+      "explain": "冰面摩擦最小"
+    }
+  ],
+  "codeLesson": false
+}

@@ -1,0 +1,118 @@
+{
+  "id": "cross-34",
+  "island": "cross",
+  "order": 86,
+  "title": "遗传密码：显性与隐性",
+  "emoji": "🧬",
+  "story": "为什么爸妈双眼皮孩子可能是单眼皮？基因有显性（A，说了算）和隐性（a，躲起来）之分：AA、Aa 都是双眼皮，只有 aa 才单眼皮。两个 Aa 的爸妈，孩子有 1/4 的机会是单眼皮！用蒙特卡洛模拟：生 100 个娃，数数比例——遗传学的神奇规律自己浮现。",
+  "goals": [
+    "理解显隐性基因",
+    "用模拟验证 3:1 分离比"
+  ],
+  "toolbox": [],
+  "actor": {
+    "costume": "🧬",
+    "x": 0,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "运行：Aa×Aa 的爸妈生 100 个娃——AA 约 25、Aa 约 50、aa 约 25",
+      "hintPrompts": [
+        "1:2:1 的基因型比"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "数表现型：双眼皮（AA+Aa）约 75，单眼皮（aa）约 25——3:1！",
+      "hintPrompts": [
+        "孟德尔分离定律"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "t3",
+      "text": "说原理：「显性基因盖住隐性——只要有一个 A 就是双眼皮」",
+      "hintPrompts": [
+        "aa 才表现隐性性状"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：AA×aa 的孩子全是 Aa——为什么全是双眼皮？（每个孩子必得一个 A）",
+      "hintPrompts": [
+        "纯显×纯隐=全杂合"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第四学段（7-9年级）",
+    "module": "身边的算法",
+    "points": [
+      "蒙特卡洛模拟",
+      "比例统计"
+    ]
+  },
+  "subject": {
+    "name": "生物·遗传（初中）",
+    "emoji": "🔬",
+    "points": [
+      "理解显隐性基因",
+      "用模拟验证 3:1 分离比"
+    ]
+  },
+  "subjectArea": "生物",
+  "gradeBand": "junior",
+  "aiIntro": "🧬 孟德尔种了 8 年豌豆发现的比例，你 100 次模拟就能看到！双眼皮单眼皮的谜题，今天用程序破案。",
+  "celebrate": "遗传规律破案！3:1 不是魔法是概率——孟德尔若活到今天，一定会给你点赞 🧬",
+  "exercises": [
+    {
+      "q": "Aa 表现出的性状是？",
+      "options": [
+        "显性",
+        "隐性",
+        "混合",
+        "随机"
+      ],
+      "answer": 0,
+      "explain": "显性基因说了算"
+    },
+    {
+      "q": "Aa×Aa 后代单眼皮（aa）的比例约？",
+      "options": [
+        "0",
+        "1/4",
+        "1/2",
+        "3/4"
+      ],
+      "answer": 1,
+      "explain": "1/4——3:1 分离比"
+    },
+    {
+      "q": "单眼皮的基因型只能是？",
+      "options": [
+        "AA",
+        "Aa",
+        "aa",
+        "AA 或 Aa"
+      ],
+      "answer": 2,
+      "explain": "隐性性状必须两个隐性基因"
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 遗传模拟：Aa x Aa 生 100 个娃\naa = 0\nhas_A = 0\nfor kid in range(100):\n    dad = random(1, 2)      # 1=A, 2=a\n    mom = random(1, 2)\n    if dad == 2:\n        if mom == 2:\n            aa = aa + 1     # 隐性纯合：单眼皮\n        else:\n            has_A = has_A + 1\n    else:\n        has_A = has_A + 1\n\nsay(\"单眼皮 aa 约 \" + aa + \" 个（理论 25）\")\nsay(\"双眼皮 约 \" + has_A + \" 个（理论 75）\")\nsay(\"比例接近 3:1 —— 孟德尔分离定律！\")\n"
+}

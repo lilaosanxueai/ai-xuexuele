@@ -1,0 +1,144 @@
+{
+  "id": "cross-38",
+  "island": "cross",
+  "order": 90,
+  "title": "天气播报员",
+  "emoji": "🌦",
+  "story": "晴☀️、多云⛅、雨🌧、雪❄️、雷阵雨⛈——天气符号是全世界的通用语言。今天你就是天气预报主持人：随机生成天气、切换对应造型、播报温度和建议（带伞/防晒/加衣）——科学+表达双练！",
+  "goals": [
+    "认识常见天气符号",
+    "了解天气与生活的联系"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_forever",
+    "island_if",
+    "island_if_else",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_eq",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color",
+    "island_touching_edge"
+  ],
+  "actor": {
+    "costume": "☀️",
+    "x": 0,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "随机抽天气：用「随机数 1~4」决定今天什么天（1晴 2多云 3雨 4雪）",
+      "hintPrompts": [
+        "随机数当骰子用"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_random"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "换装播报：抽到雨就「变成 🌧」并说「今天有雨，出门带伞！」",
+      "hintPrompts": [
+        "造型对应天气"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_costume"
+      }
+    },
+    {
+      "id": "t3",
+      "text": "连续播报：重复 4 次，每次随机新天气（永远重复+等待）",
+      "hintPrompts": [
+        "像真的天气台一样"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_repeat"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：加「如果随机=1 那么说紫外线强注意防晒」（条件播报）",
+      "hintPrompts": [
+        "条件+随机组合"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_if"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二、三学段（3-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "随机模拟",
+      "条件响应"
+    ]
+  },
+  "subject": {
+    "name": "科学·天气（小学）",
+    "emoji": "🔬",
+    "points": [
+      "认识常见天气符号",
+      "了解天气与生活的联系"
+    ]
+  },
+  "subjectArea": "科学",
+  "gradeBand": "primary",
+  "aiIntro": "🌦 欢迎收看 AI学学乐天气台！今天你上岗当主持人——抽天气、换造型、发提醒，一条龙播报！",
+  "celebrate": "天气播报完成！随机模拟了真实世界的「不确定性」，还练了表达——科学课的天气预报单元你提前毕业了 🌦",
+  "exercises": [
+    {
+      "q": "下面哪个是晴天符号？",
+      "options": [
+        "🌧",
+        "☀️",
+        "❄️",
+        "🌪"
+      ],
+      "answer": 1,
+      "explain": "太阳=晴"
+    },
+    {
+      "q": "下雨天出门应该？",
+      "options": [
+        "带伞",
+        "防晒",
+        "放风筝",
+        "晒被子"
+      ],
+      "answer": 0,
+      "explain": "雨天带伞"
+    },
+    {
+      "q": "天气预报主要预测什么？",
+      "options": [
+        "心情",
+        "气温和降水",
+        "考试成绩",
+        "股票"
+      ],
+      "answer": 1,
+      "explain": "核心要素：气温、降水、风"
+    }
+  ],
+  "codeLesson": false
+}
