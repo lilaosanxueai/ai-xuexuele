@@ -84,5 +84,7 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 正弦波发生器：y = sin(t) × 120\nfor i in range(12):\n    t = i * 30          # 每 30 度走一步\n    go_to(t - 160, sin(t) * 120)\n    wait(0.1)\n\nsay(\"一个周期 = 12 步 = 360 度\")\n"
+  "starterCode": "# 正弦波发生器：y = sin(t) × 120\nfor i in range(12):\n    t = i * 30          # 每 30 度走一步\n    go_to(t - 160, sin(t) * 120)\n    wait(0.1)\n\nsay(\"一个周期 = 12 步 = 360 度\")\n",
+  "subjectArea": "数学",
+  "gradeBand": "senior"
 }

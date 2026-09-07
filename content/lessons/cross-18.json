@@ -77,5 +77,7 @@
   "aiIntro": "⚗️ 化学反应不是魔法：原子只是重新排队，一个都不会多、一个都不会少。今天你写程序当「配平检查员」——这可是化学老师批改作业时干的事！",
   "celebrate": "质量守恒验证通过！你不是背了「配平」——你是像化学家一样数了原子。初中化学最容易被扣分的配平题，你已经会写程序自动检查了 ⚖️",
   "codeLesson": true,
-  "starterCode": "# 质量守恒验证：2H2 + O2 = 2H2O\nh_left = 2 * 2     # 2 个 H2，每个 2 个氢原子\no_left = 2         # 1 个 O2，2 个氧原子\nh_right = 2 * 2    # 2 个 H2O，每个 2 个氢\no_right = 2        # 2 个 H2O，每个 1 个氧\n\nsay(\"H: 左边 \" + h_left + \" 个 vs 右边 \" + h_right + \" 个\")\nsay(\"O: 左边 \" + o_left + \" 个 vs 右边 \" + o_right + \" 个\")\n\nif h_left == h_right:\n    say(\"氢原子守恒，配平正确！\")\n"
+  "starterCode": "# 质量守恒验证：2H2 + O2 = 2H2O\nh_left = 2 * 2     # 2 个 H2，每个 2 个氢原子\no_left = 2         # 1 个 O2，2 个氧原子\nh_right = 2 * 2    # 2 个 H2O，每个 2 个氢\no_right = 2        # 2 个 H2O，每个 1 个氧\n\nsay(\"H: 左边 \" + h_left + \" 个 vs 右边 \" + h_right + \" 个\")\nsay(\"O: 左边 \" + o_left + \" 个 vs 右边 \" + o_right + \" 个\")\n\nif h_left == h_right:\n    say(\"氢原子守恒，配平正确！\")\n",
+  "subjectArea": "化学",
+  "gradeBand": "senior"
 }

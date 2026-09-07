@@ -67,6 +67,10 @@ export interface Lesson {
   curriculum?: CurriculumInfo;
   /** 交叉课程学科标注：编程 × 学科（跨学科主题学习） */
   subject?: { name: string; emoji: string; points: string[] };
+  /** 学科分类（九大学科）：语文/数学/英语/科学/物理/化学/生物/地理/音乐/信息科技 */
+  subjectArea?: string;
+  /** 学段：primary 小学 / junior 初中 / senior 高中衔接 */
+  gradeBand?: 'primary' | 'junior' | 'senior';
   aiIntro: string;
   celebrate: string;
 }

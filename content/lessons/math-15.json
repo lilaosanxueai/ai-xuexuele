@@ -85,5 +85,7 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 反比例函数 y = k / x 双曲线\nk = 180\n\nfor x in range(2, 12):\n    go_to(x * 20, k / x)\n    wait(0.1)\n\nsay(\"x 越大 y 越小——反比例！\")\n"
+  "starterCode": "# 反比例函数 y = k / x 双曲线\nk = 180\n\nfor x in range(2, 12):\n    go_to(x * 20, k / x)\n    wait(0.1)\n\nsay(\"x 越大 y 越小——反比例！\")\n",
+  "subjectArea": "数学",
+  "gradeBand": "junior"
 }

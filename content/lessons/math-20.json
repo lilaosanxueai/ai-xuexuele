@@ -85,5 +85,7 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 三种增长大赛跑：目标 1000000\ngoal = 1000000\n\n# 指数选手：每次翻倍，数步数\np = 1\nsteps = 0\nwhile p < goal:\n    p = p * 2\n    steps = steps + 1\n    go_to(steps * 8 - 80, steps * 5)   # 爬翻倍阶梯\n    wait(0.15)\n\nsay(\"翻倍到 100 万只需 \" + steps + \" 步\")\nsay(\"而每次 +1 需要 1000000 步！\")\n"
+  "starterCode": "# 三种增长大赛跑：目标 1000000\ngoal = 1000000\n\n# 指数选手：每次翻倍，数步数\np = 1\nsteps = 0\nwhile p < goal:\n    p = p * 2\n    steps = steps + 1\n    go_to(steps * 8 - 80, steps * 5)   # 爬翻倍阶梯\n    wait(0.15)\n\nsay(\"翻倍到 100 万只需 \" + steps + \" 步\")\nsay(\"而每次 +1 需要 1000000 步！\")\n",
+  "subjectArea": "数学",
+  "gradeBand": "senior"
 }

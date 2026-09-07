@@ -84,5 +84,7 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 一次函数 y = kx + b 画图机\nk = 1\nb = 0\n\nfor x in range(-6, 7):\n    go_to(x * 30, (k * x + b) * 30)\n    wait(0.1)\n\nsay(\"y = \" + k + \"x + \" + b + \" 画好了！\")\n"
+  "starterCode": "# 一次函数 y = kx + b 画图机\nk = 1\nb = 0\n\nfor x in range(-6, 7):\n    go_to(x * 30, (k * x + b) * 30)\n    wait(0.1)\n\nsay(\"y = \" + k + \"x + \" + b + \" 画好了！\")\n",
+  "subjectArea": "数学",
+  "gradeBand": "junior"
 }

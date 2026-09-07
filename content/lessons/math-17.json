@@ -77,5 +77,7 @@
   "aiIntro": "🧮 求根公式是初中公式的巅峰——但背下来不等于理解。今天你把它翻译成程序：b*b-4*a*c 是判别式，sqrt 开根，± 就是算两次。每一步都亲手敲过，考场上想忘都难。",
   "celebrate": "求根公式拿下了！你不仅会用它，还见过它的心脏——Δ 那道闸门。更妙的是你顺手摸到了韦达定理：根与系数的暗号。九年级最硬的一章，提前通关 🧮",
   "codeLesson": true,
-  "starterCode": "# 求根公式：x = (-b ± √(b²-4ac)) / 2a\na = 1\nb = -5\nc = 6\n\nd = b * b - 4 * a * c        # 判别式 Δ\nsay(\"判别式 = \" + d)\n\nx1 = (-b + sqrt(d)) / (2 * a)\nx2 = (-b - sqrt(d)) / (2 * a)\nsay(\"两个根：x1 = \" + x1 + \"，x2 = \" + x2)\n\n# 韦达验证：x1*x2 应等于 c\nsay(\"两根之积 = \" + x1 * x2)\n"
+  "starterCode": "# 求根公式：x = (-b ± √(b²-4ac)) / 2a\na = 1\nb = -5\nc = 6\n\nd = b * b - 4 * a * c        # 判别式 Δ\nsay(\"判别式 = \" + d)\n\nx1 = (-b + sqrt(d)) / (2 * a)\nx2 = (-b - sqrt(d)) / (2 * a)\nsay(\"两个根：x1 = \" + x1 + \"，x2 = \" + x2)\n\n# 韦达验证：x1*x2 应等于 c\nsay(\"两根之积 = \" + x1 * x2)\n",
+  "subjectArea": "数学",
+  "gradeBand": "junior"
 }

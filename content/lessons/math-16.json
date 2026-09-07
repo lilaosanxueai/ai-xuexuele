@@ -85,5 +85,7 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 一元一次方程 ax + b = c 的求解器\na = 2\nb = 3\nc = 11\n\nx = (c - b) / a\nsay(\"x = \" + x)\n\n# 验根：走到数轴上 x 的位置（×30 缩放）\ngo_to(x * 30, 0)\nsay(\"验根通过！\")\n"
+  "starterCode": "# 一元一次方程 ax + b = c 的求解器\na = 2\nb = 3\nc = 11\n\nx = (c - b) / a\nsay(\"x = \" + x)\n\n# 验根：走到数轴上 x 的位置（×30 缩放）\ngo_to(x * 30, 0)\nsay(\"验根通过！\")\n",
+  "subjectArea": "数学",
+  "gradeBand": "junior"
 }

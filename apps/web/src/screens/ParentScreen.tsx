@@ -171,6 +171,13 @@ function ReportTab({ profileId }: { profileId: string }) {
     }
   }
 
+  // 学科维度聚合
+  const bySubject: Record<string, Lesson[]> = {};
+  for (const l of lessons) {
+    const key = l.subjectArea ?? '信息科技';
+    (bySubject[key] ??= []).push(l);
+  }
+
   // 跨学科覆盖：编程 × 学科（交叉学院 + 数学岛）
   const crossLessons = lessons.filter((l) => l.subject);
   const crossDone = crossLessons.filter((l) => done(l.id));
@@ -184,6 +191,24 @@ function ReportTab({ profileId }: { profileId: string }) {
         <StatCard label="连续天数" value={`${streak} 天`} emoji="🔥" />
         <StatCard label="课程通关" value={`${doneCount}/${lessons.length}`} emoji="🏁" />
         <StatCard label="创作作品" value={`${projects.length} 个`} emoji="🖼" />
+      </div>
+
+      <div className="mb-4 rounded-2xl bg-white/80 p-5">
+        <h3 className="mb-3 font-black">📚 各学科进度</h3>
+        <div className="grid gap-2 sm:grid-cols-2">
+          {Object.entries(bySubject).map(([area, ls]) => {
+            const d = ls.filter((l) => done(l.id)).length;
+            return (
+              <div key={area} className="flex items-center gap-2 text-sm">
+                <span className="w-16 shrink-0 font-bold text-slate-600">{area}</span>
+                <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-100">
+                  <div className="h-full rounded-full bg-sky-400" style={{ width: `${(d / ls.length) * 100}%` }} />
+                </div>
+                <span className="w-10 text-right text-xs text-slate-400">{d}/{ls.length}</span>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       <div className="rounded-2xl bg-white/80 p-5">

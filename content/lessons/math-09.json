@@ -85,5 +85,7 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 勾股定理：a² + b² = c²\na = 3\nb = 4\nc = sqrt(a * a + b * b)\nsay(\"斜边 = \" + c)\n\n# 机器人走一遍验证（每格 30）\nmove(a * 30)\nturn_right(90)\nmove(b * 30)\nturn_right(180 - 37)   # 朝向起点（约 143°，试出来的角度！）\nmove(c * 30)\nsay(\"三角形闭合，定理成立！\")\n"
+  "starterCode": "# 勾股定理：a² + b² = c²\na = 3\nb = 4\nc = sqrt(a * a + b * b)\nsay(\"斜边 = \" + c)\n\n# 机器人走一遍验证（每格 30）\nmove(a * 30)\nturn_right(90)\nmove(b * 30)\nturn_right(180 - 37)   # 朝向起点（约 143°，试出来的角度！）\nmove(c * 30)\nsay(\"三角形闭合，定理成立！\")\n",
+  "subjectArea": "数学",
+  "gradeBand": "junior"
 }

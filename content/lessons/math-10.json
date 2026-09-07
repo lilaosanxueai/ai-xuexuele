@@ -84,5 +84,7 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 二次函数 y = x² 画图机（y 方向 ×6 缩放）\nfor x in range(-5, 6):\n    go_to(x * 30, x * x * 6)\n    wait(0.1)\n\nsay(\"抛物线 y = x² 画好了！\")\n"
+  "starterCode": "# 二次函数 y = x² 画图机（y 方向 ×6 缩放）\nfor x in range(-5, 6):\n    go_to(x * 30, x * x * 6)\n    wait(0.1)\n\nsay(\"抛物线 y = x² 画好了！\")\n",
+  "subjectArea": "数学",
+  "gradeBand": "junior"
 }

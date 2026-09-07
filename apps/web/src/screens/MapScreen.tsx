@@ -4,7 +4,10 @@ import type { Lesson, ProfileProgress } from '@shared/types.ts';
 import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
+import { SUBJECTS, SUBJECT_STYLE } from '../components/subjectMeta.ts';
+import { recommendNext } from '../runtime/recommend.ts';
 
+/** 学科中心：以「学科 × 学段」组织全部课程（对标课表结构） */
 export default function MapScreen() {
   const nav = useNavigate();
   const { current: profile } = useProfileStore();
@@ -20,175 +23,86 @@ export default function MapScreen() {
   if (!profile) return null;
 
   const lessonDone = (id: string) => progress?.lessons[id]?.status === 'completed';
-  const nextRec = lessons.find((l) => !lessonDone(l.id)); // 建议下一站，不再上锁
   const today = new Date().toISOString().slice(0, 10);
   const todayMin = progress?.dailyUsage[today] ?? 0;
-  const basics = lessons.filter((l) => l.island === 'basics');
-  const extras = lessons.filter((l) => l.island === 'extra');
-  const cross = lessons.filter((l) => l.island === 'cross');
-  const mathLessons = lessons.filter((l) => l.island === 'math');
-  // 结业证书只看核心路线（基础+拓展）——交叉学院/数学岛是自由探索，不计入
-  const coreLessons = lessons.filter((l) => l.island === 'basics' || l.island === 'extra');
-  const coreDone = coreLessons.length > 0 && coreLessons.every((l) => lessonDone(l.id));
+  const rec = recommendNext(lessons, progress);
+  const doneCount = lessons.filter((l) => lessonDone(l.id)).length;
+
+  // 按学科聚合
+  const byArea = new Map<string, Lesson[]>();
+  for (const l of [...lessons].sort((a, b) => a.order - b.order)) {
+    const key = l.subjectArea ?? '信息科技';
+    if (!byArea.has(key)) byArea.set(key, []);
+    byArea.get(key)!.push(l);
+  }
 
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="mx-auto w-full max-w-5xl flex-1 px-6 pb-10">
-        {/* 学习概览 */}
-        <div className="mb-4 flex items-center justify-center gap-3">
-          <span className="rounded-full bg-white/70 px-4 py-1.5 text-sm text-slate-500">今日学习 {todayMin} 分钟</span>
-          <span className="rounded-full bg-white/70 px-4 py-1.5 text-sm text-slate-500">已探索 {lessons.filter((l) => lessonDone(l.id)).length}/{lessons.length} 站</span>
+        {/* 学习概览 + 智能推荐 */}
+        <div className="mb-6 rounded-3xl bg-white/80 p-5 shadow-md">
+          <div className="mb-3 flex items-center gap-3 text-sm text-slate-500">
+            <span className="rounded-full bg-white px-3 py-1 shadow-sm">今日学习 {todayMin} 分钟</span>
+            <span className="rounded-full bg-white px-3 py-1 shadow-sm">已学 {doneCount}/{lessons.length} 课</span>
+            <span className="ml-auto text-xs text-slate-400">覆盖 3-9 年级 + 高中衔接 · 对标课程标准</span>
+          </div>
+          {rec && (
+            <button
+              onClick={() => nav(`/lesson/${rec.lessonId}`)}
+              className="flex w-full items-center gap-4 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-500 p-4 text-left text-white shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl"
+            >
+              <div className="text-4xl">{rec.emoji}</div>
+              <div className="min-w-0">
+                <div className="text-xs opacity-80">🤖 智能推荐 · {rec.subjectArea}</div>
+                <div className="truncate text-xl font-black">{rec.title}</div>
+                <div className="mt-0.5 text-sm opacity-90">{rec.reason}</div>
+              </div>
+              <div className="ml-auto shrink-0 rounded-xl bg-white/20 px-4 py-2 font-bold">开始 →</div>
+            </button>
+          )}
         </div>
 
-        {/* 基础岛 */}
-        <section className="mb-8">
-          <h2 className="mb-4 flex items-center gap-2 text-2xl font-black text-amber-700">
-            <span>🧭</span> 基础岛
-            <span className="text-sm font-normal text-slate-400">编程的五种本领，顺着玩或跳着玩都行</span>
-          </h2>
-          <div className="relative">
-            <div className="absolute left-0 right-0 top-1/2 hidden border-t-4 border-dashed border-amber-300 sm:block" />
-            <div className="relative flex gap-4 overflow-x-auto pb-4">
-              {basics.map((l) => {
-                const i = lessons.indexOf(l);
-                const done = lessonDone(l.id);
-                const rec = nextRec?.id === l.id;
-                return (
-                  <button
-                    key={l.id}
-                    onClick={() => nav(`/lesson/${l.id}`)}
-                    className={`w-44 shrink-0 rounded-3xl p-4 text-center shadow-md transition hover:-translate-y-1 hover:shadow-xl ${
-                      done ? 'bg-emerald-50 ring-4 ring-emerald-400' : rec ? 'bg-amber-50 ring-4 ring-amber-300' : 'bg-white'
-                    }`}
-                  >
-                    <div className="text-5xl">{l.emoji}</div>
-                    <div className="mt-2 font-bold">{i + 1}. {l.title}</div>
-                    <div className="mt-1 text-xs text-slate-400">{l.goals[0]}</div>
-                    <div className={`mt-2 inline-block rounded-full px-3 py-0.5 text-xs font-bold ${done ? 'bg-emerald-500 text-white' : rec ? 'bg-amber-400 text-white' : 'bg-slate-300 text-white'}`}>
-                      {done ? '✅ 探索过' : rec ? '💡 建议下一站' : '随时去玩'}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* 拓展岛 */}
-        {extras.length > 0 && (
-          <section className="mb-8">
-            <h2 className="mb-4 flex items-center gap-2 text-2xl font-black text-teal-700">
-              <span>🏔</span> 拓展岛
-              <span className="text-sm font-normal text-slate-400">数学寻宝 · 信息安全 · 还有真 Python</span>
-            </h2>
-            <div className="relative">
-              <div className="absolute left-0 right-0 top-1/2 hidden border-t-4 border-dashed border-teal-300 sm:block" />
-              <div className="relative flex gap-4 overflow-x-auto pb-4">
-                {extras.map((l) => {
-                  const i = lessons.indexOf(l);
-                  const done = lessonDone(l.id);
-                  const rec = nextRec?.id === l.id;
-                  return (
-                    <button
-                      key={l.id}
-                      onClick={() => nav(`/lesson/${l.id}`)}
-                      className={`w-44 shrink-0 rounded-3xl p-4 text-center shadow-md transition hover:-translate-y-1 hover:shadow-xl ${
-                        done ? 'bg-emerald-50 ring-4 ring-emerald-400' : rec ? 'bg-amber-50 ring-4 ring-amber-300' : 'bg-white'
-                      }`}
-                    >
-                      <div className="text-5xl">{l.emoji}</div>
-                      <div className="mt-2 font-bold">{i + 1}. {l.title}</div>
-                      <div className="mt-1 text-xs text-slate-400">{l.curriculum ? `${l.curriculum.module}` : l.goals[0]}</div>
-                      <div className={`mt-2 inline-block rounded-full px-3 py-0.5 text-xs font-bold ${done ? 'bg-emerald-500 text-white' : rec ? 'bg-amber-400 text-white' : 'bg-slate-300 text-white'}`}>
-                        {done ? '✅ 探索过' : rec ? '💡 建议下一站' : '随时去玩'}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* 数学岛 */}
-        {mathLessons.length > 0 && (
-          <section className="mb-8">
-            <h2 className="mb-1 flex items-center gap-2 text-2xl font-black text-sky-700">
-              <span>📐</span> 数学岛
-              <span className="text-sm font-normal text-slate-400">数学答案就是通关位置——算对了，角色才停得在那</span>
-            </h2>
-            <div className="mb-3 flex flex-wrap gap-2 text-xs">
-              <span className="rounded-full bg-sky-100 px-3 py-1 font-bold text-sky-700">🏛 小学馆 · 数与代数 / 图形与几何</span>
-              <span className="rounded-full bg-indigo-100 px-3 py-1 font-bold text-indigo-700">🏛 初中馆 · 代数式 / 函数 / 勾股（Python）</span>
-              <span className="rounded-full bg-violet-100 px-3 py-1 font-bold text-violet-700">🏛 高中馆 · 三角函数 / 指数（Python）</span>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {mathLessons.map((l) => {
-                const done = lessonDone(l.id);
-                const hall = l.order <= 22 ? '小学馆' : l.order <= 30 ? '初中馆' : '高中馆';
-                return (
-                  <button
-                    key={l.id}
-                    onClick={() => nav(`/lesson/${l.id}`)}
-                    className={`rounded-3xl p-4 text-left shadow-md transition hover:-translate-y-1 hover:shadow-xl ${
-                      done ? 'bg-sky-50 ring-4 ring-sky-300' : 'bg-white'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="text-4xl">{l.emoji}</div>
-                      <div className="min-w-0">
-                        <div className="truncate font-bold">{l.title}</div>
-                        <div className="mt-0.5 text-xs text-sky-600">{hall} · {l.subject?.name?.replace('数学·', '')}</div>
-                      </div>
-                      {done && <span className="ml-auto text-xl">✅</span>}
-                      {l.codeLesson && <span className={`${done ? '' : 'ml-auto'} shrink-0 rounded-full bg-slate-800 px-2 py-0.5 text-xs font-bold text-white`} title="Python 代码课">🐍</span>}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </section>
-        )}
-
-        {/* 交叉学院 */}
-        {cross.length > 0 && (
-          <section className="mb-8">
-            <h2 className="mb-4 flex items-center gap-2 text-2xl font-black text-rose-700">
-              <span>🎓</span> 交叉学院
-              <span className="text-sm font-normal text-slate-400">编程 × 语文 · 数学 · 音乐 · 科学——新课标的跨学科主题学习</span>
-            </h2>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {cross.map((l) => {
-                const done = lessonDone(l.id);
-                const rec = nextRec?.id === l.id;
-                return (
-                  <button
-                    key={l.id}
-                    onClick={() => nav(`/lesson/${l.id}`)}
-                    className={`rounded-3xl p-4 text-left shadow-md transition hover:-translate-y-1 hover:shadow-xl ${
-                      done ? 'bg-rose-50 ring-4 ring-rose-300' : 'bg-white'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="text-4xl">{l.emoji}</div>
-                      <div className="min-w-0">
-                        <div className="truncate font-bold">{l.title}</div>
-                        <div className="mt-0.5 text-xs text-rose-500">{l.subject?.emoji} 编程 × {l.subject?.name}</div>
-                      </div>
-                      {done && <span className="ml-auto text-xl">✅</span>}
-                      {rec && !done && <span className="ml-auto text-xl">💡</span>}
-                    </div>
-                    <div className="mt-2 text-xs leading-relaxed text-slate-400">{l.goals[0]}</div>
-                  </button>
-                );
-              })}
-            </div>
-          </section>
-        )}
+        {/* 学科网格 */}
+        <h2 className="mb-3 text-xl font-black text-slate-700">📚 学科中心</h2>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {[...byArea.entries()].map(([area, ls]) => {
+            const meta = SUBJECTS[area] ?? { emoji: '📘', color: 'slate', desc: '' };
+            const style = SUBJECT_STYLE[area] ?? SUBJECT_STYLE['信息科技'];
+            const done = ls.filter((l) => lessonDone(l.id)).length;
+            const bands = [...new Set(ls.map((l) => l.gradeBand ?? 'primary'))];
+            const bandText = bands.map((b) => (b === 'primary' ? '小学' : b === 'junior' ? '初中' : '高中衔接')).join(' · ');
+            return (
+              <button
+                key={area}
+                onClick={() => nav(`/subject/${encodeURIComponent(area)}`)}
+                className={`group relative overflow-hidden rounded-3xl bg-gradient-to-br ${style.card} p-5 text-left text-white shadow-md transition hover:-translate-y-1 hover:shadow-xl`}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="text-4xl">{meta.emoji}</div>
+                  <div className="min-w-0">
+                    <div className="text-xl font-black">{area}</div>
+                    <div className="mt-0.5 truncate text-xs opacity-80">{meta.desc}</div>
+                  </div>
+                  <div className="ml-auto shrink-0 text-right">
+                    <div className="text-2xl font-black">{done}<span className="text-sm opacity-70">/{ls.length}</span></div>
+                    <div className="text-[10px] opacity-70">已学课程</div>
+                  </div>
+                </div>
+                <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/30">
+                  <div className="h-full rounded-full bg-white transition-all" style={{ width: `${ls.length ? (done / ls.length) * 100 : 0}%` }} />
+                </div>
+                <div className="mt-2 flex items-center justify-between text-xs opacity-80">
+                  <span>{bandText}</span>
+                  <span className="opacity-0 transition group-hover:opacity-100">进入学习 →</span>
+                </div>
+              </button>
+            );
+          })}
+        </div>
 
         {/* AI 实验室 + 证书 */}
-        <section className="grid gap-4 md:grid-cols-2">
+        <section className="mt-6 grid gap-4 md:grid-cols-2">
           <button
             onClick={() => nav('/playground')}
             className="rounded-3xl bg-gradient-to-br from-pink-400 to-rose-500 p-6 text-center text-white shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
@@ -198,15 +112,12 @@ export default function MapScreen() {
             <div className="mt-1 text-xs opacity-90">采集样本 → 训练识别模型 → 测试验证，理解「AI 是从数据学出来的」</div>
           </button>
           <button
-            disabled={!coreDone}
             onClick={() => nav('/certificate')}
-            className={`rounded-3xl p-5 text-center shadow-lg transition ${
-              coreDone ? 'bg-gradient-to-br from-amber-300 to-yellow-500 text-amber-950 hover:-translate-y-1 hover:shadow-2xl' : 'cursor-not-allowed bg-slate-200/70 text-slate-400'
-            }`}
+            className="rounded-3xl bg-gradient-to-br from-amber-300 to-yellow-500 p-6 text-center text-amber-950 shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
           >
-            <div className="text-4xl">{coreDone ? '🏆' : '🔒'}</div>
-            <div className="mt-1.5 text-base font-black">结业证书</div>
-            <div className="mt-0.5 text-xs">{coreDone ? '来领取属于你的证书 →' : `走完发现之路（基础+拓展共 ${coreLessons.length} 站）解锁`}</div>
+            <div className="text-5xl">🏆</div>
+            <div className="mt-2 text-xl font-black">结业证书</div>
+            <div className="mt-1 text-xs opacity-80">完成信息科技学习路线（8 课）即可领取 · 可打印</div>
           </button>
         </section>
       </main>

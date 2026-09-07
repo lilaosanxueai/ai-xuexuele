@@ -84,5 +84,7 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 国王的麦粒：每格翻倍\np = 1\nfor i in range(10):\n    p = p * 2              # 翻倍！\n    go_to(i * 20 - 80, p / 8)\n    wait(0.2)\n\nsay(\"2 的 10 次方 = \" + p + \" 粒麦子\")\n"
+  "starterCode": "# 国王的麦粒：每格翻倍\np = 1\nfor i in range(10):\n    p = p * 2              # 翻倍！\n    go_to(i * 20 - 80, p / 8)\n    wait(0.2)\n\nsay(\"2 的 10 次方 = \" + p + \" 粒麦子\")\n",
+  "subjectArea": "数学",
+  "gradeBand": "senior"
 }

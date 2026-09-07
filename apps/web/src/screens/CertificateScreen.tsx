@@ -24,7 +24,7 @@ export default function CertificateScreen() {
 
   const done = lessons.filter((l) => progress?.lessons[l.id]?.status === 'completed');
   // 结业证书只看核心路线（基础+拓展）；交叉学院/数学岛是自由探索
-  const core = lessons.filter((l) => l.island === 'basics' || l.island === 'extra');
+  const core = lessons.filter((l) => l.subjectArea === '信息科技');
   const coreDoneIds = new Set(done.filter((l) => core.some((c) => c.id === l.id)).map((l) => l.id));
   const allDone = core.length > 0 && core.every((l) => coreDoneIds.has(l.id));
   const completedAt = progress?.lessons[core[core.length - 1]?.id]?.completedAt;

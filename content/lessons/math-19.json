@@ -77,5 +77,7 @@
   "aiIntro": "🧒 传说高斯 9 岁那年全班被罚算 1 加到 100，别人埋头苦算，他三秒交卷。今天你复刻这个传说——而且你有程序，可以验证他没吹牛。",
   "celebrate": "5050 双方法验证一致！你刚刚经历了计算机科学的第一个大思想：同一个问题，笨办法和聪明办法差一千倍。高斯是数学家，也是最早的算法工程师 🧒",
   "codeLesson": true,
-  "starterCode": "# 高斯求和：1 + 2 + ... + 100\nn = 100\n\n# 方法一：老实循环累加\ntotal = 0\nfor i in range(1, n + 1):\n    total = total + i\nsay(\"循环累加 = \" + total)\n\n# 方法二：高斯公式\ngauss = n * (n + 1) / 2\nsay(\"高斯公式 = \" + gauss)\n"
+  "starterCode": "# 高斯求和：1 + 2 + ... + 100\nn = 100\n\n# 方法一：老实循环累加\ntotal = 0\nfor i in range(1, n + 1):\n    total = total + i\nsay(\"循环累加 = \" + total)\n\n# 方法二：高斯公式\ngauss = n * (n + 1) / 2\nsay(\"高斯公式 = \" + gauss)\n",
+  "subjectArea": "数学",
+  "gradeBand": "senior"
 }
