@@ -21,7 +21,7 @@ if (fs.existsSync(webDist)) {
 }
 
 app.listen(cfg.server.port, cfg.server.host, () => {
-  console.log(`🏝 AI 创意岛已启动：http://${cfg.server.host}:${cfg.server.port}`);
+  console.log(`🏝 AI学学乐已启动：http://${cfg.server.host}:${cfg.server.port}`);
   console.log(`📁 数据目录：${DATA_DIR}`);
   const keySet = cfg.llm.apiKey.trim().length > 0 && !cfg.llm.apiKey.includes('在这里填');
   console.log(keySet

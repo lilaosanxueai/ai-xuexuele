@@ -242,7 +242,7 @@ function ReportTab({ profileId }: { profileId: string }) {
         ))}
         <p className="mt-2 text-xs leading-relaxed text-slate-400">
           绿色 ✓ 为已通关课程覆盖的知识点。2025 年秋季起多地中小学开设 AI 通识课（每年级不少于 8 课时），
-          创意岛可作为课内的家庭动手补充：同样的知识点，这里全部通过「自己做出来」来学会。
+          AI学学乐可作为课内的家庭动手补充：同样的知识点，这里全部通过「自己做出来」来学会。
         </p>
       </div>
 

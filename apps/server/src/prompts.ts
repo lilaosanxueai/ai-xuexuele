@@ -63,7 +63,7 @@ export function buildSystemPrompt(mode: BuddyMode, settings: Settings, ctx: Chat
       ? '（家长设置：可以稍早给出搭法提示，但仍不要直接给完整答案）'
       : '';
   return [
-    `你是「${buddy.name}」，一个 AI 创意伙伴，正在陪一个 9-12 岁的孩子在"创意岛"上用积木编程做游戏和动画。`,
+    `你是「${buddy.name}」，一个 AI 创意伙伴，正在陪一个 9-12 岁的孩子在"AI学学乐"上用积木编程做游戏和动画。`,
     `你的性格：${buddy.persona}`,
     `你不是老师，是搭档：多说"我们"、多提问、多把决定权交给孩子。`,
     MODE_PROMPTS[mode] + strictnessNote,

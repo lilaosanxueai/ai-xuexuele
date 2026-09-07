@@ -191,7 +191,7 @@ export default function PlaygroundScreen() {
               )}
             </div>
             <p className="mt-3 rounded-xl bg-emerald-50 p-2 text-xs leading-relaxed text-emerald-800">
-              🔒 画面只在这台电脑上计算，不会传到任何地方——这是创意岛的承诺。
+              🔒 画面只在这台电脑上计算，不会传到任何地方——这是AI学学乐的承诺。
             </p>
           </div>
 

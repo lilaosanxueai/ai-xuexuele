@@ -1,7 +1,7 @@
 {
-  "name": "AI 创意岛",
-  "short_name": "创意岛",
-  "description": "用积木编程，和 AI 伙伴一起做游戏",
+  "name": "AI学学乐",
+  "short_name": "AI学学乐",
+  "description": "AI学学乐——学科编程学习岛",
   "start_url": ".",
   "display": "standalone",
   "orientation": "landscape",

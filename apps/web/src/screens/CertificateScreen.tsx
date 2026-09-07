@@ -44,13 +44,13 @@ export default function CertificateScreen() {
     <div className="flex min-h-screen flex-col items-center justify-center gap-6 p-6 print:h-auto print:justify-start">
       <div className="cert-paper relative w-full max-w-2xl rounded-3xl border-8 border-double border-amber-500 bg-[#fffdf5] p-10 text-center shadow-2xl print:shadow-none">
         <div className="text-6xl">🏆</div>
-        <h1 className="mt-2 text-3xl font-black tracking-widest text-amber-700">创 意 岛 结 业 证 书</h1>
-        <p className="mt-1 text-sm text-amber-600/80">CERTIFICATE OF CREATIVE CODING</p>
+        <h1 className="mt-2 text-3xl font-black tracking-widest text-amber-700">AI 学学乐 · 结业证书</h1>
+        <p className="mt-1 text-sm text-amber-600/80">CERTIFICATE OF AI LEARNING</p>
 
         <p className="mt-8 text-lg text-slate-700">兹证明</p>
         <p className="my-2 text-4xl font-black text-slate-900">{profile.avatar} {profile.name}</p>
         <p className="mx-auto max-w-md leading-relaxed text-slate-700">
-          独立完成了创意岛发现之路全部 <b>{core.length}</b> 站，掌握了
+          独立完成了AI学学乐发现之路全部 <b>{core.length}</b> 站，掌握了
           <b>顺序、循环、事件、条件、调试</b>五大编程法宝，
           并创作出了完全属于自己的作品。特发此证，以资鼓励！
         </p>
@@ -66,7 +66,7 @@ export default function CertificateScreen() {
         <div className="mt-10 flex items-end justify-between text-sm text-slate-500">
           <div>
             <div className="mb-1 text-3xl">🏝</div>
-            <div>AI 创意岛</div>
+            <div>AI学学乐</div>
           </div>
           <div className="text-center">
             <div className="mb-1 text-3xl">{settings.buddy.emoji}</div>

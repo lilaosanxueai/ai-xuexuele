@@ -47,7 +47,7 @@ export default function HomeScreen() {
     <div className="flex min-h-screen flex-col">
       <div className="text-center pt-16 pb-10">
         <div className="text-7xl">🏝</div>
-        <h1 className="mt-3 text-4xl font-black text-sky-800">AI 创意岛</h1>
+        <h1 className="mt-3 text-4xl font-black text-sky-800">AI学学乐</h1>
         <p className="mt-2 text-slate-500">对标信息科技与数学课程标准的编程学习岛 · 覆盖小学到高中</p>
       </div>
 

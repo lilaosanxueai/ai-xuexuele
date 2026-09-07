@@ -62,7 +62,7 @@ export default function TaskPanel({ lesson, taskDone, ideaHint, onToggleManual, 
         <>
           <div className="mt-1 flex items-center gap-2 border-t border-dashed border-slate-200 pt-3">
             <span className="font-bold text-amber-500">⭐ 隐藏关卡</span>
-            <span className="text-xs text-slate-400">找到就是创意岛高手 {challengeDone}/{challenges.length}</span>
+            <span className="text-xs text-slate-400">找到就是AI学学乐高手 {challengeDone}/{challenges.length}</span>
           </div>
           <ol className="space-y-2">
             {challenges.map((t) => (
