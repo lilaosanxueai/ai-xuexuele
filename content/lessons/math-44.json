@@ -1,0 +1,90 @@
+{
+  "id": "math-44",
+  "island": "math",
+  "order": 64,
+  "title": "二次函数最值：找顶点",
+  "emoji": "⛰",
+  "story": "y = x² - 4x + 5 的最小值藏在顶点处！配方：y = (x-2)² + 1——顶点 (2, 1)，最小值 1。画出这条抛物线，顶点一目了然；再让程序算出配方，两种方法互相印证。",
+  "goals": [
+    "掌握二次函数顶点与最值",
+    "理解配方法"
+  ],
+  "toolbox": [],
+  "actor": {
+    "costume": "⛰",
+    "x": 0,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "运行：画出抛物线 y=x²-4x+5（蓝），角色登上顶点靶心 (2,1)",
+      "hintPrompts": [
+        "顶点是抛物线的谷底"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
+    },
+    {
+      "id": "t2",
+      "text": "配方验证：x=2 代入：(2)²-4×2+5 = 1——顶点纵坐标就是最小值",
+      "hintPrompts": [
+        "在对称轴 x=2 处取到最小"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t3",
+      "text": "顶点公式：x = -b/(2a) = 4/2 = 2，程序算出来对上了",
+      "hintPrompts": [
+        "通用公式和配方殊途同归"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：最大值呢？y = -x²+6x-5（开口向下）顶点是最大值点 (3,4)——改程序验证",
+      "hintPrompts": [
+        "a<0 开口向下，顶点变山峰"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第四学段（9年级）",
+    "module": "身边的算法",
+    "points": [
+      "参数扫描"
+    ]
+  },
+  "subject": {
+    "name": "数学·掌握二次函数",
+    "emoji": "🔢",
+    "points": [
+      "掌握二次函数顶点与最值",
+      "理解配方法"
+    ]
+  },
+  "subjectArea": "数学",
+  "gradeBand": "junior",
+  "aiIntro": "⛰ 为什么投篮、喷泉、利润最大化都考二次函数？因为「最值」就藏在抛物线顶点！今天画出来、算出来、登上它。",
+  "celebrate": "二次最值攻克！配方→顶点→最值，一条龙。中考必考的「二次函数应用题」，你已经从图像到代数全链路打通 ⛰",
+  "targets": [
+    {
+      "emoji": "🎯",
+      "x": 0,
+      "y": 20
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 二次函数最值：y = x^2 - 4x + 5\na = 1\nb = -4\nc = 5\n\n# 顶点公式：x = -b/(2a)\nxv = -b / (2 * a)\nyv = a * xv * xv + b * xv + c\nsay(\"顶点 (\" + xv + \", \" + yv + \")，最小值 = \" + yv)\n\n# 画抛物线（蓝），坐标平移让顶点可见\npen_color(\"blue\")\npen_down()\nfor x in range(-3, 8):\n    y = a * x * x + b * x + c\n    go_to((x - 2) * 30, (y - 1) * 30 + 20)\npen_up()\ngo_to(0, 20)   # 登上顶点\n"
+}

@@ -1,0 +1,90 @@
+{
+  "id": "math-40",
+  "island": "math",
+  "order": 60,
+  "title": "掷骰子画统计图",
+  "emoji": "📊",
+  "story": "掷 60 次骰子，每个点数出现几次？光有数据不够——画成柱状图一眼看出规律！程序掷骰、计数，再用画笔把 6 根柱子画出来：柱子越高，出现越多。统计图 = 数据的衣服。",
+  "goals": [
+    "认识条形统计图",
+    "用程序生成并可视化数据"
+  ],
+  "toolbox": [],
+  "actor": {
+    "costume": "📊",
+    "x": -150,
+    "y": -150
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "运行程序：掷 60 次，数出每个点数的次数（c1 到 c6）",
+      "hintPrompts": [
+        "六个计数器各管一个点数"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "画柱状图：6 根绿柱从底线拔地而起，高度=次数——哪根最高？",
+      "hintPrompts": [
+        "柱高 = 次数 x 20 像素"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
+    },
+    {
+      "id": "t3",
+      "text": "读图：说出「出现最多的是 X 点（约 10 次），六根柱子差不多高——因为每个点数概率都是 1/6」",
+      "hintPrompts": [
+        "越掷得多，六根柱子越接近一样高"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：把 60 改成 200 次——柱子高度差变小了吗？",
+      "hintPrompts": [
+        "大数定律又来了！"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第三学段（4-6年级）",
+    "module": "数据与编码",
+    "points": [
+      "数据可视化"
+    ]
+  },
+  "subject": {
+    "name": "数学·认识条形统计",
+    "emoji": "🔢",
+    "points": [
+      "认识条形统计图",
+      "用程序生成并可视化数据"
+    ]
+  },
+  "subjectArea": "数学",
+  "gradeBand": "primary",
+  "aiIntro": "📊 数据会说话，但要给它穿衣服——统计图就是数据的时装。今天你写程序掷骰子、计数、画柱，全套数据分析师流程。",
+  "celebrate": "统计图绘制完成！收集→整理→可视化→解读，数据分析全流程你走了一遍。这是大数据时代最底层的能力 📊",
+  "targets": [
+    {
+      "emoji": "🎯",
+      "x": 150,
+      "y": -150
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 掷骰子 60 次 + 画柱状图\nc1 = 0; c2 = 0; c3 = 0; c4 = 0; c5 = 0; c6 = 0\nfor i in range(60):\n    d = random(1, 6)\n    if d == 1: c1 = c1 + 1\n    if d == 2: c2 = c2 + 1\n    if d == 3: c3 = c3 + 1\n    if d == 4: c4 = c4 + 1\n    if d == 5: c5 = c5 + 1\n    if d == 6: c6 = c6 + 1\n\nsay(\"1点 \" + c1 + \" 次，6点 \" + c6 + \" 次\")\n\n# 画 6 根柱子（绿）\npen_color(\"green\")\nx = -125\nfor i in range(6):\n    if i == 0: h = c1\n    if i == 1: h = c2\n    if i == 2: h = c3\n    if i == 3: h = c4\n    if i == 4: h = h\n    if i == 4: h = c5\n    if i == 5: h = c6\n    go_to(x, -150)\n    pen_down()\n    go_to(x, -150 + h * 12)\n    pen_up()\n    x = x + 50\nsay(\"柱状图完成！\")\n"
+}

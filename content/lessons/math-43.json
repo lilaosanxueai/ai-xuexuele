@@ -1,0 +1,90 @@
+{
+  "id": "math-43",
+  "island": "math",
+  "order": 63,
+  "title": "函数交点：方程的另一个名字",
+  "emoji": "❌",
+  "story": "方程 x - 2 = 0 的解，和直线 y = x - 2 与 x 轴的交点，是同一件事！画出函数，它与 x 轴相交的地方就是根。数形结合的王炸演示：一条蓝线、一条红轴，交点即答案。",
+  "goals": [
+    "理解函数图像与方程解的关系",
+    "掌握数形结合思想"
+  ],
+  "toolbox": [],
+  "actor": {
+    "costume": "❌",
+    "x": 0,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "运行：画出蓝色直线 y=x-2，再画红色横轴（x 轴）",
+      "hintPrompts": [
+        "两条线在同一坐标系里"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "找交点：蓝线穿过红轴的位置 (60,0)——正是 x=2（像素缩放 30 倍）命中靶心！",
+      "hintPrompts": [
+        "y=0 的点就是与 x 轴的交点=方程的解"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
+    },
+    {
+      "id": "t3",
+      "text": "宣布秘密：说「方程 x-2=0 的解 = 函数 y=x-2 与 x 轴交点的横坐标」",
+      "hintPrompts": [
+        "数形结合：代数问题几何化"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：y=x²-4 与 x 轴有几个交点？（两个：x=±2）——这就是二次方程两个根的图像意义",
+      "hintPrompts": [
+        "抛物线穿轴两次=两个根"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第四学段（8年级）",
+    "module": "身边的算法",
+    "points": [
+      "多函数同图"
+    ]
+  },
+  "subject": {
+    "name": "数学·理解函数图像",
+    "emoji": "🔢",
+    "points": [
+      "理解函数图像与方程解的关系",
+      "掌握数形结合思想"
+    ]
+  },
+  "subjectArea": "数学",
+  "gradeBand": "junior",
+  "aiIntro": "❌ 初中数学最深刻的一句话：方程的根就是函数图像与 x 轴的交点。不懂时它像绕口令——画出来，一眼懂。",
+  "celebrate": "数形结合大成！以后解不出方程，你还有第二招：画图找交点。解析几何的鼻祖笛卡尔，就是这个想法改变了数学史 ❌",
+  "targets": [
+    {
+      "emoji": "🎯",
+      "x": 60,
+      "y": 0
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 函数交点 = 方程的解\n# 蓝线：y = x - 2\npen_color(\"blue\")\npen_down()\nfor x in range(-4, 7):\n    go_to(x * 30, (x - 2) * 30)\n    wait(0.05)\npen_up()\n\n# 红轴：x 轴（y=0）\npen_color(\"red\")\ngo_to(-150, 0)\npen_down()\ngo_to(150, 0)\npen_up()\n\n# 交点：(60, 0) 即 x=2 —— 方程 x-2=0 的解！\ngo_to(60, 0)\nsay(\"交点 x=2 就是方程的解！\")\n"
+}

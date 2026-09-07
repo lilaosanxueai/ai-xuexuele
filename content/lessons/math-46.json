@@ -1,0 +1,90 @@
+{
+  "id": "math-46",
+  "island": "math",
+  "order": 66,
+  "title": "相位差：波的赛跑",
+  "emoji": "🌊",
+  "story": "sin 和 cos 是双胞胎：长得一模一样，只是 cos「提前出发」了 90°！两条波画在同一张图上：蓝 sin、红 cos——红总是先到山顶。这个「先出发的角度」就叫相位差，信号、音乐、交流电全靠它。",
+  "goals": [
+    "理解相位与相位差",
+    "认识 sin/cos 的关系"
+  ],
+  "toolbox": [],
+  "actor": {
+    "costume": "🌊",
+    "x": -160,
+    "y": -150
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "运行：画出蓝 sin 波和红 cos 波（同图）",
+      "hintPrompts": [
+        "两条波一样高（振幅同）一样长（周期同）"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "找相位差：红 cos 先到第一个波峰（90°）——说「cos 比 sin 提前 90°」",
+      "hintPrompts": [
+        "提前的这 90° 就是相位差"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
+    },
+    {
+      "id": "t3",
+      "text": "验证恒等式：程序算 sin(90) 和 cos(0)——都是 1！sin(x+90)=cos(x)",
+      "hintPrompts": [
+        "平移 90° 后完全重合"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：把 cos 的振幅改小（×0.5），波形变成「矮胖双胞胎」",
+      "hintPrompts": [
+        "振幅和相位是波的两个独立旋钮"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "高中·三角函数（衔接课）",
+    "module": "过程与控制",
+    "points": [
+      "多函数同图叠加"
+    ]
+  },
+  "subject": {
+    "name": "数学·理解相位与相",
+    "emoji": "🔢",
+    "points": [
+      "理解相位与相位差",
+      "认识 sin/cos 的关系"
+    ]
+  },
+  "subjectArea": "数学",
+  "gradeBand": "senior",
+  "aiIntro": "🌊 高中物理的交流电、高中的 y=Asin(ωx+φ)，全都在讲相位。今天两条彩笔画出双胞胎赛跑，相位差不再是天书。",
+  "celebrate": "相位差通关！sin 和 cos 的关系你已「看」到——红先蓝后 90°。以后学波动方程、交流电，脑子里就放这两条赛跑的波 🌊",
+  "targets": [
+    {
+      "emoji": "🎯",
+      "x": 80,
+      "y": 120
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 相位差：sin（蓝）vs cos（红）\npen_color(\"blue\")\npen_down()\nfor i in range(13):\n    t = i * 30\n    go_to(t * 1.1 - 160, sin(t) * 120)\npen_up()\n\npen_color(\"red\")\npen_down()\nfor i in range(13):\n    t = i * 30\n    go_to(t * 1.1 - 160, cos(t) * 120)\npen_up()\n\nsay(\"sin(90) = \" + sin(90) + \"，cos(0) = \" + cos(0))\nsay(\"红 cos 提前 90 度到山顶——这就是相位差！\")\n"
+}

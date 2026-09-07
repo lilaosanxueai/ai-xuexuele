@@ -1,0 +1,107 @@
+{
+  "id": "math-36",
+  "island": "math",
+  "order": 56,
+  "title": "分数加法：数轴拼段",
+  "emoji": "🧩",
+  "story": "1/4 加 2/4 等于几？别背规则——把数轴分成 4 段，先走 1 段再走 2 段，落点就是 3/4！同分母分数加法：分母不变，分子相加。落笔画出来，分数看得见。",
+  "goals": [
+    "掌握同分母分数加法",
+    "理解分数单位"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_number",
+    "island_costume",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color",
+    "island_eq"
+  ],
+  "actor": {
+    "costume": "🐰",
+    "x": 0,
+    "y": 0,
+    "dir": 90
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "把 0~200 的路分成 4 段（每段 50）：先「落笔」，走第一段到 50（这就是 1/4）",
+      "hintPrompts": [
+        "pen_down 后移动 50，画下第一段"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_pen_down"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "接着走 2 段（50 到 150）：1/4 + 2/4，落点 150 就是 3/4！命中靶心",
+      "hintPrompts": [
+        "分母都是 4（段一样大），分子 1+2=3 段"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
+    },
+    {
+      "id": "t3",
+      "text": "说出规则：「同分母分数相加：分母不变，分子相加！」",
+      "hintPrompts": [
+        "四句话换一句：分母不变分子加"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：1/4+3/4 = 4/4 = 1（走满全程回到整数！）",
+      "hintPrompts": [
+        "4 段全走=200=整个=1"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第三学段（5-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "参数化分段"
+    ]
+  },
+  "subject": {
+    "name": "数学·掌握同分母分",
+    "emoji": "🔢",
+    "points": [
+      "掌握同分母分数加法",
+      "理解分数单位"
+    ]
+  },
+  "subjectArea": "数学",
+  "gradeBand": "primary",
+  "aiIntro": "🧩 分数加法最容易错在「分母也加起来」。今天画出来：段的大小没变（分母），只是走了几段变了（分子）——规则自己长出来。",
+  "celebrate": "分数加法通关！你永远不会再犯「1/4+2/4=2/8」这种错——因为段是画出来的，1 段+2 段明明是 3 段，怎么可能变成 2 小段？🧩",
+  "targets": [
+    {
+      "emoji": "🎯",
+      "x": 150,
+      "y": 0
+    }
+  ]
+}

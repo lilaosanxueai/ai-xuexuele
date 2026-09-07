@@ -1,0 +1,107 @@
+{
+  "id": "math-37",
+  "island": "math",
+  "order": 57,
+  "title": "乘法分配律：两条路一个终点",
+  "emoji": "🛤",
+  "story": "(2+3)×4 和 2×4+3×4 是同一件事！让机器人分两条走法到同一个终点：先合起来跳 5 组×4，或分开跳 2 组×4 再 3 组×4——落点分毫不差。运算律不是背的，是走出来验证的。",
+  "goals": [
+    "掌握乘法分配律 (a+b)×c=a×c+b×c",
+    "用两种算法互相验证"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_number",
+    "island_costume",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color",
+    "island_eq"
+  ],
+  "actor": {
+    "costume": "🤖",
+    "x": -180,
+    "y": 0,
+    "dir": 90
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "走法一：重复 5 次 { 移动 40 }——(2+3) 组 × 每组 40，从 -180 走到 20 靶心",
+      "hintPrompts": [
+        "5×40=200：-180+200=20"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
+    },
+    {
+      "id": "t2",
+      "text": "走法二：回到起点，「重复 2 次{移动 40} + 重复 3 次{移动 40}」——2×40 + 3×40，还是 20！",
+      "hintPrompts": [
+        "80+120=200，殊途同归"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_repeat"
+      }
+    },
+    {
+      "id": "t3",
+      "text": "宣布定律：说「(2+3)×4 = 2×4 + 3×4 = 20！」（换成格子数就是 (2+3)×4）",
+      "hintPrompts": [
+        "两条路一个终点，这就是分配律"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：用它算简便：99×8 = (100-1)×8 = 800-8 = 792，改走法验证",
+      "hintPrompts": [
+        "把 99 拆成 100-1，好算！"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第三学段（4-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "两种路径验证"
+    ]
+  },
+  "subject": {
+    "name": "数学·掌握乘法分配",
+    "emoji": "🔢",
+    "points": [
+      "掌握乘法分配律 (a+b)×c=a×c+b×c",
+      "用两种算法互相验证"
+    ]
+  },
+  "subjectArea": "数学",
+  "gradeBand": "primary",
+  "aiIntro": "🛤 数学家说运算律是数学的「交通规则」。分配律是其中最常用的一个——今天你用两条路证明它，以后算 99×8 就有妙招了。",
+  "celebrate": "分配律走通了！两条路一个终点——这种「换个算法互相验证」的思想比定律本身更值钱，它是数学家自查错误的神器 🛤",
+  "targets": [
+    {
+      "emoji": "🎯",
+      "x": 20,
+      "y": 0
+    }
+  ]
+}

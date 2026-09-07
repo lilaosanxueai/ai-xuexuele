@@ -1,0 +1,101 @@
+{
+  "id": "math-38",
+  "island": "math",
+  "order": 58,
+  "title": "三角形家族大点兵",
+  "emoji": "🔺",
+  "story": "三角形三兄弟：锐角三角形（三个角都小于 90°）、直角三角形（有一个 90°）、钝角三角形（有一个大于 90°）。还有等腰（两边相等）和等边（三边相等）！落笔画出家族全家福。",
+  "goals": [
+    "认识三角形的分类",
+    "知道等腰与等边三角形"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_number",
+    "island_costume",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color",
+    "island_eq"
+  ],
+  "actor": {
+    "costume": "📐",
+    "x": -120,
+    "y": -60,
+    "dir": 40
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "等边三角形：落笔，重复 3 次 { 移动 140， 右转 120 }——三边相等三角相等（60°）",
+      "hintPrompts": [
+        "外角 120 → 内角 60，等边三角形"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_pen_down"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "直角三角形：移到新起点，移动 140 右转 90 移动 100 右转？（试试走完闭合）——有一个角正好 90°",
+      "hintPrompts": [
+        "直角三角形藏着勾股定理：140²+100²=斜边²"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_turn_right",
+        "count": 3
+      }
+    },
+    {
+      "id": "t3",
+      "text": "钝角三角形：走一个有 120° 大角的三角形（外角 60），说出「钝角三角形有个角大于 90°」",
+      "hintPrompts": [
+        "外角转得少（60），内角就大（120）"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：等腰三角形：两腰一样长（移动 120 右转 100 移动 120……试试角度凑成闭合）",
+      "hintPrompts": [
+        "等腰两腰相等，两个底角也相等"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二、三学段（3-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "分类与参数"
+    ]
+  },
+  "subject": {
+    "name": "数学·认识三角形的",
+    "emoji": "🔢",
+    "points": [
+      "认识三角形的分类",
+      "知道等腰与等边三角形"
+    ]
+  },
+  "subjectArea": "数学",
+  "gradeBand": "primary",
+  "aiIntro": "📐 三角形家族集体报到！按角分三类、按边分三类——今天全家福画出来，边画边点名。",
+  "celebrate": "三角形分类完成！按角分：锐角/直角/钝角；按边分：不等边/等腰/等边。以后看到任何三角形，你都能 3 秒报出它的户口 🔺"
+}

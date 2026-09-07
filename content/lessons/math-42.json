@@ -1,0 +1,90 @@
+{
+  "id": "math-42",
+  "island": "math",
+  "order": 62,
+  "title": "完全平方：面积证明",
+  "emoji": "🟦",
+  "story": "(a+b)² = a² + 2ab + b²——死记容易错（漏掉 2ab）！画一个大正方形，边长 (a+b)，切三刀分成四块：大方 a²、小方 b²、两个长方 ab——面积加起来就是公式本身。几何证明，画出来就永远忘不了。",
+  "goals": [
+    "掌握完全平方公式",
+    "理解公式的几何意义"
+  ],
+  "toolbox": [],
+  "actor": {
+    "costume": "🟦",
+    "x": -90,
+    "y": -90
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "运行动画：画出边长 5 的大正方形（a=3, b=2），红线切出 a 和 b 的分界",
+      "hintPrompts": [
+        "大正方形边长 = a+b = 5"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
+    },
+    {
+      "id": "t2",
+      "text": "数值验证：(3+2)² = 25；3²+2×3×2+2² = 9+12+4 = 25 ✓",
+      "hintPrompts": [
+        "两个算法都到 25"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t3",
+      "text": "说出公式：「(a+b)² = a² + 2ab + b²——大正方形 = 大块 + 两条长块 + 小块」",
+      "hintPrompts": [
+        "几何图就是证明"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：平方差 (a+b)(a-b) = a²-b²？设 a=5 b=3 验证 = 16",
+      "hintPrompts": [
+        "(5+3)(5-3)=16, 25-9=16 ✓"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第四学段（8年级）",
+    "module": "过程与控制",
+    "points": [
+      "几何代数互证"
+    ]
+  },
+  "subject": {
+    "name": "数学·掌握完全平方",
+    "emoji": "🔢",
+    "points": [
+      "掌握完全平方公式",
+      "理解公式的几何意义"
+    ]
+  },
+  "subjectArea": "数学",
+  "gradeBand": "junior",
+  "aiIntro": "🟦 乘法公式是初二代数的重点，也是错题重灾区——因为只背不用。今天画出来：公式不再是字母游戏，是一张地图。",
+  "celebrate": "完全平方拿下！那块 2ab 的长条你亲眼看过——以后考试忘了公式，脑中画个正方形切三刀，公式自己长回来 🟦",
+  "targets": [
+    {
+      "emoji": "🎯",
+      "x": 35,
+      "y": 35
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 完全平方公式的面积证明（a=3, b=2）\na = 3\nb = 2\n\n# 大正方形 边长 (a+b)=5，边长像素 25\ns = 25\n# 画大正方形（蓝）\npen_color(\"blue\")\ngo_to(-62, -62)\npen_down()\ngo_to(-62 + (a + b) * s, -62)\ngo_to(-62 + (a + b) * s, -62 + (a + b) * s)\ngo_to(-62, -62 + (a + b) * s)\ngo_to(-62, -62)\npen_up()\n\n# 分割线（红）：在 a=3 处切横竖两刀\npen_color(\"red\")\ngo_to(-62 + a * s, -62)\npen_down()\ngo_to(-62 + a * s, -62 + (a + b) * s)\npen_up()\ngo_to(-62, -62 + a * s)\npen_down()\ngo_to(-62 + (a + b) * s, -62 + a * s)\npen_up()\n\n# 数值验证\nsay(\"(a+b)^2 = \" + (a + b) * (a + b))\nsay(\"a^2+2ab+b^2 = \" + (a * a + 2 * a * b + b * b))\n"
+}
