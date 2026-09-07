@@ -1,0 +1,98 @@
+{
+  "id": "cross-14",
+  "island": "cross",
+  "order": 35,
+  "title": "英语单词快闪剧场",
+  "emoji": "🔤",
+  "story": "英语要开口说！让角色当你的脱口秀搭档：说 Hello、报单词、喊口号——每句话都是一块「说」积木。今天的任务只有一个：大声把英语说出来（拼对了才好玩）！",
+  "goals": [
+    "开口说基础英语问候与单词",
+    "把英文句子和动作连起来"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size"
+  ],
+  "actor": {
+    "costume": "🎤",
+    "x": 0,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "开场问候：让角色说「Hello! My name is Neo!」（名字换成你自己的英文名）",
+      "hintPrompts": [
+        "「说」积木里直接打英文"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "单词三连：连说 apple、banana、orange 三个单词，每个配一个音效",
+      "hintPrompts": [
+        "说一个词播一个音，节奏感出来"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_say",
+        "count": 3
+      }
+    },
+    {
+      "id": "t3",
+      "text": "互动问答：说「How are you?」等 1 秒，再说「I am fine, thank you!」",
+      "hintPrompts": [
+        "用「等待」模拟一问一答的停顿"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_say",
+        "count": 5
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：演一段 3 句的自我介绍（名字、年龄、喜欢的食物），全英文",
+      "hintPrompts": [
+        "My name is... / I am ... years old / I like ..."
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二学段（3-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "顺序结构与台词"
+    ]
+  },
+  "subject": {
+    "name": "英语·口语表达",
+    "emoji": "🔤",
+    "points": [
+      "日常问候用语",
+      "常见单词",
+      "自我介绍句型"
+    ]
+  },
+  "aiIntro": "🎤 Welcome to English Theater! 今天不背单词表——你的角色替你说、你听、你笑。英语是说出来会的，不是背出来会的！",
+  "celebrate": "You did it! 开口说英语的第一关过了！记住这个感觉：说错没关系，说出来就赢。你的角色已经是你的英语搭档了 🔤"
+}

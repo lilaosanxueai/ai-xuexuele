@@ -1,0 +1,104 @@
+{
+  "id": "cross-19",
+  "island": "cross",
+  "order": 40,
+  "title": "成语动作剧场：画蛇添足",
+  "emoji": "🎭",
+  "story": "画蛇添足——多此一举！这个成语今天由你演出来：先认真「画」一条蛇（走一条 S 形路线），蛇成了宣布完工，然后……手贱给它添四只脚！演完这个典故，这个成语一辈子忘不了。",
+  "goals": [
+    "理解成语「画蛇添足」的寓意",
+    "用动作序列演典故"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size"
+  ],
+  "actor": {
+    "costume": "🐍",
+    "x": -140,
+    "y": 60,
+    "dir": 45
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "画蛇身：重复 4 次 { 移动 70， 右转 60， 移动 70， 左转 60 }——走出一条弯弯的 S 形蛇",
+      "hintPrompts": [
+        "重复里放两组「移动+转向」，蛇身就扭起来了"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_repeat"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "宣布完工：走到酒杯 🍷 旁边，说「蛇先画完，酒是我的了！」",
+      "hintPrompts": [
+        "典故里：最先画完蛇的人赢得那壶酒"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
+    },
+    {
+      "id": "t3",
+      "text": "手贱时刻：回去「添足」——在蛇尾画四只小脚（移动小段×4），然后说「哎呀，多此一举！」",
+      "hintPrompts": [
+        "给蛇添脚 = 丢了酒——成语的教训来了"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：再演一个「守株待兔」：角色站着不动等待 3 秒，说「兔子没来，田却荒了…」",
+      "hintPrompts": [
+        "不劳而获的教训"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二、三学段（3-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "动作序列编排"
+    ]
+  },
+  "subject": {
+    "name": "语文·成语典故",
+    "emoji": "🎭",
+    "points": [
+      "成语「画蛇添足」",
+      "典故的表演化理解",
+      "寓意：多余的反而坏事"
+    ]
+  },
+  "aiIntro": "🎭 今天的剧场排的是两千年前楚国的故事：一群人比赛画蛇，赢的人得意忘形给蛇添了脚——结果酒没了。你是导演兼主演，开演！",
+  "celebrate": "演出成功！「画蛇添足」不再是一个要背的成语——它是你亲手演过的故事。语文里几百个成语，都能这么「演」着学 🎭",
+  "targets": [
+    {
+      "emoji": "🍷",
+      "x": 130,
+      "y": -40
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "id": "cross-15",
+  "island": "cross",
+  "order": 36,
+  "title": "英语数字报数员",
+  "emoji": "🔢",
+  "story": "one two three four five——用程序报数学英文数字！for 循环从 1 数到 5，if 判断当前数字该说哪个英文单词。改一个数字，全场跟着换——这就是「变量」的魔力英语课。",
+  "goals": [
+    "掌握 one 到 ten 英文数字",
+    "练习 if 条件判断"
+  ],
+  "toolbox": [],
+  "actor": {
+    "costume": "🦜",
+    "x": 0,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "运行程序：鹦鹉从 one 报到 five，一个不落",
+      "hintPrompts": [
+        "for i in range(1, 6) 让 i 从 1 走到 5；if i == 1 就说 one"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "扩展报数：加上 six 到 ten（再复制五组 if），看鹦鹉报到十",
+      "hintPrompts": [
+        "照着上面的样子写 if i == 6: say(\"six\")"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "t3",
+      "text": "倒着数：改成 range(5, 0, -1)？我们不支持倒序——那就手动把五组 say 倒着排！报 five four three two one",
+      "hintPrompts": [
+        "倒着报数 = 顺序反过来写"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：数到几就跳几步：if i == 3 时顺便 move(30)，数到 5 时播放欢呼",
+      "hintPrompts": [
+        "报数+动作结合，全英语沉浸"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二学段（3-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "循环变量与多重条件"
+    ]
+  },
+  "subject": {
+    "name": "英语·数字与句型",
+    "emoji": "🔢",
+    "points": [
+      "one~ten 英文数字",
+      "数字与动作结合"
+    ]
+  },
+  "aiIntro": "🦜 Polly wants a cracker... and numbers! 今天你的鹦鹉学会用英语报数——它会一个一个判断再开口，跟小学生数数一模一样。",
+  "celebrate": "英语报数通关！one 到 ten 你已经用程序验证过——顺便你还练了 if 判断。英语+编程，一次学两样，这就是交叉学院的效率 🔢",
+  "codeLesson": true,
+  "starterCode": "# 英语数字报数员：one 到 five\nfor i in range(1, 6):\n    if i == 1:\n        say(\"one\")\n    if i == 2:\n        say(\"two\")\n    if i == 3:\n        say(\"three\")\n    if i == 4:\n        say(\"four\")\n    if i == 5:\n        say(\"five\")\n        play(\"cheer\")\n"
+}

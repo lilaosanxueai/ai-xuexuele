@@ -1,0 +1,115 @@
+{
+  "id": "cross-17",
+  "island": "cross",
+  "order": 38,
+  "title": "纬度带探险",
+  "emoji": "🧭",
+  "story": "舞台的竖线就是经线！从赤道出发一路向北：赤道最热、北回归线是热带的北边界、北极圈里全是冰雪。让探险家走三站，每一站都是地球上一条真实的纬线。",
+  "goals": [
+    "认识赤道、回归线与极圈",
+    "了解五带与气候分布"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size"
+  ],
+  "actor": {
+    "costume": "🧭",
+    "x": -60,
+    "y": -110
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "第一站·赤道 🌊：移到赤道（y=-100 的位置），说「赤道最热，阳光直射！」",
+      "hintPrompts": [
+        "「移到 y:-100」——舞台竖轴就是纬度"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
+    },
+    {
+      "id": "t2",
+      "text": "第二站·北回归线 🌴（y=0）：说「热带的北边界，北纬 23.5°！」",
+      "hintPrompts": [
+        "回归线附近沙漠多——撒哈拉就在这"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 1
+      }
+    },
+    {
+      "id": "t3",
+      "text": "第三站·北极圈 ❄️（y=100）：说「极昼极夜出现的地方，北纬 66.5°！」",
+      "hintPrompts": [
+        "夏天太阳不落、冬天太阳不升"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 2
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：一口气从赤道走到北极圈，每站配不同造型（🌴→🍂→❄️）表现气候变冷",
+      "hintPrompts": [
+        "越走越北越冷——纬度决定气候"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_costume"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第三学段（5-6年级）衔接初中地理",
+    "module": "过程与控制",
+    "points": [
+      "坐标即地理模型"
+    ]
+  },
+  "subject": {
+    "name": "地理·纬度与气候",
+    "emoji": "🧭",
+    "points": [
+      "赤道与回归线",
+      "极圈与五带",
+      "纬度影响气候"
+    ]
+  },
+  "aiIntro": "🧭 纬度带探险队出发！从炎热的赤道一路向北走到冰天雪地的北极圈——三站路，走完你就懂了为什么「越北越冷」。",
+  "celebrate": "三站通关！你用舞台的 y 坐标当纬度走了一遍地球——从赤道到北极圈，热温寒三带刻进了脚步里。地理考试的经纬网图，从此就是你的舞台 🌐",
+  "targets": [
+    {
+      "emoji": "🌊",
+      "x": -60,
+      "y": -100
+    },
+    {
+      "emoji": "🌴",
+      "x": -60,
+      "y": 0
+    },
+    {
+      "emoji": "❄️",
+      "x": -60,
+      "y": 100
+    }
+  ]
+}
