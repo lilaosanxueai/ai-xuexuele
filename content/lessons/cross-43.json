@@ -1,0 +1,151 @@
+{
+  "id": "cross-43",
+  "island": "cross",
+  "order": 95,
+  "title": "望庐山瀑布·夸张的李白",
+  "emoji": "🏞",
+  "story": "「飞流直下三千尺，疑是银河落九天」——李白说瀑布有三千尺！真有那么长吗？没有——这就是夸张：把特点放大一百倍，读者立马「哇」出来。让瀑布从天而降，再对比真实高度，修辞之王的魔法看得见。",
+  "goals": [
+    "背诵《望庐山瀑布》",
+    "认识夸张修辞手法"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_forever",
+    "island_if",
+    "island_if_else",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_eq",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color",
+    "island_touching_edge",
+    "island_key_down",
+    "island_when_key"
+  ],
+  "actor": {
+    "costume": "🏞",
+    "x": 0,
+    "y": 150
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "日照香炉生紫烟：角色在山顶变出烟雾缭绕（变成 🌫 缓缓移动）",
+      "hintPrompts": [
+        "先演「生紫烟」的仙气"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_costume"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "飞流直下：从舞台最高处（y=150）直冲最低处瀑布潭 🌊——快速下落表现「飞流」！",
+      "hintPrompts": [
+        "移到 y:150 再落到靶点"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
+    },
+    {
+      "id": "t3",
+      "text": "三千尺的秘密：说「夸张！瀑布其实约 155 米，李白说三千尺——放大了 6 倍，读起来才震撼！」",
+      "hintPrompts": [
+        "夸张≠撒谎，是艺术放大"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：你也能夸张——说一句夸张句：「教室安静得连针掉地上都听得见！」",
+      "hintPrompts": [
+        "试着自己造一句"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二、三学段（1-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "顺序结构",
+      "动画编排"
+    ]
+  },
+  "subject": {
+    "name": "语文·古诗《望庐山瀑布》",
+    "emoji": "📖",
+    "points": [
+      "背诵《望庐山瀑布》",
+      "认识夸张修辞手法"
+    ]
+  },
+  "subjectArea": "语文",
+  "gradeBand": "primary",
+  "aiIntro": "🏞 李白是修辞界的魔术师——「三千尺」的瀑布其实只有一百多米！今天揭穿（并学会）他的夸张魔法。",
+  "celebrate": "《望庐山瀑布》+ 夸张修辞双达成！下次作文里用一句恰当的夸张，老师眼前一亮 🏞",
+  "exercises": [
+    {
+      "q": "「飞流直下三千尺」用了什么修辞？",
+      "options": [
+        "比喻",
+        "夸张",
+        "拟人",
+        "排比"
+      ],
+      "answer": 1,
+      "explain": "三千尺=艺术放大"
+    },
+    {
+      "q": "夸张修辞的作用是？",
+      "options": [
+        "骗人",
+        "增强感染力让画面震撼",
+        "凑字数",
+        "押韵"
+      ],
+      "answer": 1,
+      "explain": "放大概率突出特点"
+    },
+    {
+      "q": "《望庐山瀑布》写的是哪座山？",
+      "options": [
+        "泰山",
+        "黄山",
+        "庐山",
+        "华山"
+      ],
+      "answer": 2,
+      "explain": "江西庐山"
+    }
+  ],
+  "codeLesson": false,
+  "targets": [
+    {
+      "emoji": "🌊",
+      "x": 0,
+      "y": -120
+    }
+  ]
+}

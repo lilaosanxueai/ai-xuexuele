@@ -1,0 +1,146 @@
+{
+  "id": "cross-48",
+  "island": "cross",
+  "order": 100,
+  "title": "标点剧场：语气魔法师",
+  "emoji": "❗",
+  "story": "同一句「下雨了」，加句号是陈述、加问号是疑问、加感叹号是惊喜/惊讶——标点就是语气开关！程序用「等待」的停顿长度演语气：句号平静、问号上扬、感叹号强烈。标点用错，意思全错！",
+  "goals": [
+    "正确使用句号问号感叹号",
+    "体会标点表达语气"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_forever",
+    "island_if",
+    "island_if_else",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_eq",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color",
+    "island_touching_edge",
+    "island_key_down",
+    "island_when_key"
+  ],
+  "actor": {
+    "costume": "☔",
+    "x": 0,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "陈述版：说「下雨了。」（平静语气，等 1 秒）——句号=平稳陈述",
+      "hintPrompts": [
+        "句号收尾，平铺直叙"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "疑问版：说「下雨了？」（疑惑：不是说晴天吗）问号=提出问题",
+      "hintPrompts": [
+        "问号上扬"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_say",
+        "count": 2
+      }
+    },
+    {
+      "id": "t3",
+      "text": "感叹版：说「下雨了！」（惊喜：太棒了不用上学？/糟糕：没带伞！）——感叹号=强烈感情",
+      "hintPrompts": [
+        "同一句话两种感叹"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_say",
+        "count": 3
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：逗号的魔法——「下雨了，我们回家」和「下雨了我们回家」哪个通顺？说给伙伴听",
+      "hintPrompts": [
+        "逗号=喘口气的地方"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二、三学段（1-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "顺序结构",
+      "动画编排"
+    ]
+  },
+  "subject": {
+    "name": "语文·标点符号",
+    "emoji": "📖",
+    "points": [
+      "正确使用句号问号感叹号",
+      "体会标点表达语气"
+    ]
+  },
+  "subjectArea": "语文",
+  "gradeBand": "primary",
+  "aiIntro": "❗ 标点是句子的表情包！句号扑克脸、问号歪头、感叹号瞪眼——今天用程序演出三种语气！",
+  "celebrate": "标点语气全掌握！句号平、问号扬、感叹号强——从此作文的标点一个不错 ❗",
+  "exercises": [
+    {
+      "q": "「你去吗」中间应填什么标点？",
+      "options": [
+        "句号",
+        "问号",
+        "感叹号",
+        "逗号"
+      ],
+      "answer": 1,
+      "explain": "疑问用问号？"
+    },
+    {
+      "q": "表达强烈感情的标点是？",
+      "options": [
+        "句号",
+        "逗号",
+        "感叹号",
+        "省略号"
+      ],
+      "answer": 2,
+      "explain": "感叹号！"
+    },
+    {
+      "q": "「妈妈说 快来吃饭」引号后应填？",
+      "options": [
+        "句号",
+        "逗号",
+        "问号",
+        "不用标点"
+      ],
+      "answer": 1,
+      "explain": "「说」后用逗号"
+    }
+  ],
+  "codeLesson": false
+}

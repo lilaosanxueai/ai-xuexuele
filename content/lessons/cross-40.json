@@ -1,0 +1,147 @@
+{
+  "id": "cross-40",
+  "island": "cross",
+  "order": 92,
+  "title": "咏鹅·白毛浮绿水",
+  "emoji": "🦢",
+  "story": "「鹅，鹅，鹅，曲项向天歌」——骆宾王 7 岁写的诗！白鹅浮在绿水上、红掌拨着清波，颜色搭配美极了。让小鹅真的游起来：浮水、拨掌、向天歌——一年级必背古诗的动画首秀。",
+  "goals": [
+    "背诵并理解《咏鹅》",
+    "体会诗中的颜色与动作描写"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_forever",
+    "island_if",
+    "island_if_else",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_eq",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color",
+    "island_touching_edge",
+    "island_key_down",
+    "island_when_key"
+  ],
+  "actor": {
+    "costume": "🦢",
+    "x": -100,
+    "y": 20
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "曲项向天歌：小鹅右转抬头（右转 30 度）并嘎嘎唱歌（播放声音）",
+      "hintPrompts": [
+        "抬头动作配「向天歌」"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_turn_right"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "白毛浮绿水：小鹅在水面缓缓漂过（移动 80，等待 1）——白毛浮在绿水上",
+      "hintPrompts": [
+        "慢速移动表现「浮」的悠闲"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_move"
+      }
+    },
+    {
+      "id": "t3",
+      "text": "红掌拨清波：小鹅原地小幅左右摆动（重复 4 次{左转 15，右转 15}）像在划水",
+      "hintPrompts": [
+        "小幅度=拨水的细节"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_repeat"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：背诵全诗——用 4 块「说」积木把四句诗完整念出来",
+      "hintPrompts": [
+        "鹅鹅鹅，曲项向天歌。白毛浮绿水，红掌拨清波。"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_say",
+        "count": 4
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二、三学段（1-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "顺序结构",
+      "动画编排"
+    ]
+  },
+  "subject": {
+    "name": "语文·古诗《咏鹅》",
+    "emoji": "📖",
+    "points": [
+      "背诵并理解《咏鹅》",
+      "体会诗中的颜色与动作描写"
+    ]
+  },
+  "subjectArea": "语文",
+  "gradeBand": "primary",
+  "aiIntro": "🦢 一千多年前有个 7 岁小朋友看着大鹅随口一念，成了千古名篇。今天你的小鹅替他再游一遍！",
+  "celebrate": "《咏鹅》动画完成！白、绿、红三种颜色你都在动画里看到了——原来古诗还是色彩课 🦢",
+  "exercises": [
+    {
+      "q": "《咏鹅》的作者是谁？",
+      "options": [
+        "李白",
+        "骆宾王",
+        "杜甫",
+        "白居易"
+      ],
+      "answer": 1,
+      "explain": "骆宾王 7 岁所作"
+    },
+    {
+      "q": "「曲项向天歌」描写鹅的什么？",
+      "options": [
+        "游泳",
+        "伸着脖子朝天叫",
+        "吃东西",
+        "睡觉"
+      ],
+      "answer": 1,
+      "explain": "曲项=弯着脖子"
+    },
+    {
+      "q": "诗里没提到的颜色是？",
+      "options": [
+        "白",
+        "绿",
+        "红",
+        "黄"
+      ],
+      "answer": 3,
+      "explain": "白毛、绿水、红掌——没有黄"
+    }
+  ],
+  "codeLesson": false
+}

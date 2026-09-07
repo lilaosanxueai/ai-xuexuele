@@ -1,0 +1,144 @@
+{
+  "id": "cross-50",
+  "island": "cross",
+  "order": 102,
+  "title": "多音字擂台",
+  "emoji": "🎯",
+  "story": "「长」可以是 cháng（长江）也可以是 zhǎng（长大）；「行」可以是 xíng（行走）也可以是 háng（银行）——同一个字两副面孔！程序摆擂台：每轮报一个多音字、造两个句子、你判断读音——看看谁是多音字冠军！",
+  "goals": [
+    "掌握常见多音字",
+    "正确辨析读音"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_forever",
+    "island_if",
+    "island_if_else",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_eq",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color",
+    "island_touching_edge",
+    "island_key_down",
+    "island_when_key"
+  ],
+  "actor": {
+    "costume": "🎯",
+    "x": 0,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "第一场·长：说「长江很长（cháng）」和「我长大了（zhǎng）」——两个读音两种意思",
+      "hintPrompts": [
+        "长=长短/生长"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "第二场·行与好：说「步行（xíng）上学」「银行（háng）开门」；「好（hǎo）人」「爱（hào）学习」",
+      "hintPrompts": [
+        "行、好各两读"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_say",
+        "count": 4
+      }
+    },
+    {
+      "id": "t3",
+      "text": "擂台总结：说「多音字要看词语定读音——不能想当然乱念！」",
+      "hintPrompts": [
+        "语境定音"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：终极多音字「了」：来了（le）、了解（liǎo）、了不起（liǎo）——三个词三种用法",
+      "hintPrompts": [
+        "了是擂主"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二、三学段（1-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "顺序结构",
+      "动画编排"
+    ]
+  },
+  "subject": {
+    "name": "语文·多音字",
+    "emoji": "📖",
+    "points": [
+      "掌握常见多音字",
+      "正确辨析读音"
+    ]
+  },
+  "subjectArea": "语文",
+  "gradeBand": "primary",
+  "aiIntro": "🎯 汉字里的「双面间谍」——同一个字两副面孔！今天摆擂台对决：读对一个赢一场！",
+  "celebrate": "多音字擂台夺冠！长、行、好、了四大擂主全被你拿下——朗读课文再也不会念错 🎯",
+  "exercises": [
+    {
+      "q": "「长大」的长读？",
+      "options": [
+        "cháng",
+        "zhǎng",
+        "都行",
+        "zhàng"
+      ],
+      "answer": 1,
+      "explain": "生长=zhǎng"
+    },
+    {
+      "q": "「银行」的行读？",
+      "options": [
+        "xíng",
+        "háng",
+        "héng",
+        "xiáng"
+      ],
+      "answer": 1,
+      "explain": "háng=行列/机构"
+    },
+    {
+      "q": "「爱好」的好读？",
+      "options": [
+        "hǎo",
+        "hào",
+        "hāo",
+        "都一样"
+      ],
+      "answer": 1,
+      "explain": "爱好=hào（四声）"
+    }
+  ],
+  "codeLesson": false
+}

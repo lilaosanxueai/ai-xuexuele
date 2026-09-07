@@ -1,0 +1,145 @@
+{
+  "id": "cross-51",
+  "island": "cross",
+  "order": 103,
+  "title": "对联小课堂：天对地雨对风",
+  "emoji": "🏮",
+  "story": "「天对地，雨对风，大陆对长空」——《笠翁对韵》的对仗启蒙！对联规则：字数相等、词性相对、平仄相协。程序当节奏器：一拍一字打拍子念对子，再玩数字对、反义词对——语文+音乐的双重美感！",
+  "goals": [
+    "了解对仗基本规则",
+    "积累经典对子"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_forever",
+    "island_if",
+    "island_if_else",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_eq",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color",
+    "island_touching_edge",
+    "island_key_down",
+    "island_when_key"
+  ],
+  "actor": {
+    "costume": "🏮",
+    "x": 0,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "打拍子念对子：说「天对地，雨对风」，每字配一个音阶（do~sol）——一拍一字",
+      "hintPrompts": [
+        "音乐+对韵"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_play"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "数字对：说「一对二，三对四，五对六」再进阶「一日对千年，五岳对九州」",
+      "hintPrompts": [
+        "数字对数字"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_say",
+        "count": 3
+      }
+    },
+    {
+      "id": "t3",
+      "text": "反义词对：说「大对小，多对少，白天对黑夜」——词性相同、意义相对！",
+      "hintPrompts": [
+        "对仗核心规律"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：试对下联——上联「书山有路」，你能对出 4 个字的下联吗？（学海无涯）",
+      "hintPrompts": [
+        "千古名对"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二、三学段（1-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "顺序结构",
+      "动画编排"
+    ]
+  },
+  "subject": {
+    "name": "语文·对联与对韵",
+    "emoji": "📖",
+    "points": [
+      "了解对仗基本规则",
+      "积累经典对子"
+    ]
+  },
+  "subjectArea": "语文",
+  "gradeBand": "primary",
+  "aiIntro": "🏮 对联是汉语独有的对称艺术——连字数都要一样多！今天打著拍子念对子，体会中文的对称美。",
+  "celebrate": "对韵入门！字数相等、词性相对——你已经能对出简单下联了。春节帮家里写春联时露一手 🏮",
+  "exercises": [
+    {
+      "q": "对联的基本要求不包括？",
+      "options": [
+        "字数相等",
+        "词性相对",
+        "意思完全相同",
+        "平仄协调"
+      ],
+      "answer": 2,
+      "explain": "对联上下联意思相关但不相同"
+    },
+    {
+      "q": "「天对地，雨对风」出自哪部启蒙读物？",
+      "options": [
+        "三字经",
+        "笠翁对韵",
+        "千字文",
+        "弟子规"
+      ],
+      "answer": 1,
+      "explain": "《笠翁对韵》"
+    },
+    {
+      "q": "「书山有路」的经典下联是？",
+      "options": [
+        "学海无涯",
+        "大海无边",
+        "高山流水",
+        "日月同辉"
+      ],
+      "answer": 0,
+      "explain": "书山有路勤为径，学海无涯苦作舟"
+    }
+  ],
+  "codeLesson": false
+}

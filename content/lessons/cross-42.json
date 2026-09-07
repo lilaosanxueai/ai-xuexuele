@@ -1,0 +1,151 @@
+{
+  "id": "cross-42",
+  "island": "cross",
+  "order": 94,
+  "title": "悯农·粒粒皆辛苦",
+  "emoji": "🌾",
+  "story": "「锄禾日当午，汗滴禾下土」——大太阳底下农民伯伯弯腰锄地，汗水滴进泥土。每一粒米都来之不易！让农民伯伯演一遍耕作的辛苦，你就懂了为什么「粒粒皆辛苦」。",
+  "goals": [
+    "背诵并理解《悯农》",
+    "培养珍惜粮食的品德"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_forever",
+    "island_if",
+    "island_if_else",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_eq",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color",
+    "island_touching_edge",
+    "island_key_down",
+    "island_when_key"
+  ],
+  "actor": {
+    "costume": "👨‍🌾",
+    "x": 0,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "烈日当空：角色先变成太阳般辛勤劳作——走到稻田 🌾 旁边",
+      "hintPrompts": [
+        "走到田边准备干活"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
+    },
+    {
+      "id": "t2",
+      "text": "锄地弯腰：重复 4 次 { 右转 25（弯腰）， 等待 0.3， 左转 25（直起）}——一下一下真辛苦",
+      "hintPrompts": [
+        "弯腰直起=锄地动作"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_repeat"
+      }
+    },
+    {
+      "id": "t3",
+      "text": "汗滴与感悟：说「汗滴禾下土」再说「谁知盘中餐，粒粒皆辛苦！」",
+      "hintPrompts": [
+        "感悟点题"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：光盘行动宣言——说「我承诺不剩饭，尊重每一粒粮食！」",
+      "hintPrompts": [
+        "从诗到行动"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二、三学段（1-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "顺序结构",
+      "动画编排"
+    ]
+  },
+  "subject": {
+    "name": "语文·古诗《悯农》",
+    "emoji": "📖",
+    "points": [
+      "背诵并理解《悯农》",
+      "培养珍惜粮食的品德"
+    ]
+  },
+  "subjectArea": "语文",
+  "gradeBand": "primary",
+  "aiIntro": "🌾 这首诗每个中国孩子都会背——但「辛苦」两个字，弯过腰的人才真懂。今天你替农民伯伯锄一回地！",
+  "celebrate": "《悯农》演出完成！以后端起饭碗，你会想起自己弯腰锄地的这 30 秒——这就是诗教的力量 🌾",
+  "exercises": [
+    {
+      "q": "《悯农》的「悯」意思是？",
+      "options": [
+        "同情",
+        "高兴",
+        "描写",
+        "歌唱"
+      ],
+      "answer": 0,
+      "explain": "悯=怜悯、同情农民"
+    },
+    {
+      "q": "「锄禾日当午」点明了什么？",
+      "options": [
+        "地点",
+        "时间和劳作辛苦",
+        "人物",
+        "天气凉爽"
+      ],
+      "answer": 1,
+      "explain": "正午烈日+锄地=最辛苦"
+    },
+    {
+      "q": "这首诗告诉我们什么道理？",
+      "options": [
+        "种田有趣",
+        "粮食来之不易要珍惜",
+        "太阳很晒",
+        "汗很多"
+      ],
+      "answer": 1,
+      "explain": "珍惜粮食"
+    }
+  ],
+  "codeLesson": false,
+  "targets": [
+    {
+      "emoji": "🌾",
+      "x": 120,
+      "y": 0
+    }
+  ]
+}

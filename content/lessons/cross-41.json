@@ -1,0 +1,147 @@
+{
+  "id": "cross-41",
+  "island": "cross",
+  "order": 93,
+  "title": "春晓·夜来风雨声",
+  "emoji": "🌸",
+  "story": "「春眠不觉晓，处处闻啼鸟」——孟浩然睡了个懒觉，醒来听见满树鸟叫，想起昨夜风雨，不知道打落了多少花。让春天在剧场里醒来：鸟叫、风雨、落花——二首必背古诗的清晨剧场。",
+  "goals": [
+    "背诵并理解《春晓》",
+    "体会诗人惜春之情"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_forever",
+    "island_if",
+    "island_if_else",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_eq",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color",
+    "island_touching_edge",
+    "island_key_down",
+    "island_when_key"
+  ],
+  "actor": {
+    "costume": "🌸",
+    "x": 0,
+    "y": 60
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "处处闻啼鸟：播放两声清脆的鸟叫（叮咚），说「处处闻啼鸟」",
+      "hintPrompts": [
+        "声音把春天叫醒"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_play"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "夜来风雨声：花瓣左右摇晃（重复 4 次{左转 20，右转 20，等待 0.2}）——风雨来了！",
+      "hintPrompts": [
+        "摇晃表现风雨"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_repeat"
+      }
+    },
+    {
+      "id": "t3",
+      "text": "花落知多少：花瓣从高处缓缓飘落（移到下方）并变小——说「花落知多少……」",
+      "hintPrompts": [
+        "变小+下落=飘零"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_change_size"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：按顺序完整演出：春眠→鸟叫→风雨→落花（用「等待」控制节奏）",
+      "hintPrompts": [
+        "四句诗四个场景"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_say",
+        "count": 4
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二、三学段（1-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "顺序结构",
+      "动画编排"
+    ]
+  },
+  "subject": {
+    "name": "语文·古诗《春晓》",
+    "emoji": "📖",
+    "points": [
+      "背诵并理解《春晓》",
+      "体会诗人惜春之情"
+    ]
+  },
+  "subjectArea": "语文",
+  "gradeBand": "primary",
+  "aiIntro": "🌸 一场春雨过后，孟浩然数着落花心疼不已。今天你把这场「风雨落花」搬上舞台！",
+  "celebrate": "《春晓》演出成功！你演的不只是诗——还有古人对春天的珍惜 🌸",
+  "exercises": [
+    {
+      "q": "《春晓》的作者是？",
+      "options": [
+        "孟浩然",
+        "王维",
+        "李白",
+        "杜牧"
+      ],
+      "answer": 0,
+      "explain": "孟浩然，唐代山水诗人"
+    },
+    {
+      "q": "「春眠不觉晓」的「晓」意思是？",
+      "options": [
+        "晚上",
+        "天亮",
+        "做梦",
+        "中午"
+      ],
+      "answer": 1,
+      "explain": "晓=天亮"
+    },
+    {
+      "q": "「花落知多少」表达了诗人怎样的感情？",
+      "options": [
+        "高兴",
+        "惋惜春天逝去",
+        "愤怒",
+        "害怕"
+      ],
+      "answer": 1,
+      "explain": "惜春之情"
+    }
+  ],
+  "codeLesson": false
+}

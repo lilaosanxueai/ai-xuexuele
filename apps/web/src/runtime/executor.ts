@@ -66,7 +66,13 @@ export class Executor {
   /** ▶ 按钮：跑完主程序后回调（⏹ 中途停止也会走到回调，用于收集运行证据） */
   async run(onComplete: () => void): Promise<void> {
     this.lastError = null;
-    await this.trigger({ type: 'run' });
+    try {
+      await this.trigger({ type: 'run' });
+    } catch (e) {
+      // 编译段异常也不能让 UI 卡死在 running
+      this.lastError = e instanceof Error ? e.message : String(e);
+      this._running = false;
+    }
     onComplete();
   }
 

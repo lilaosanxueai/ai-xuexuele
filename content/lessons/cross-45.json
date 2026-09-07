@@ -1,0 +1,144 @@
+{
+  "id": "cross-45",
+  "island": "cross",
+  "order": 97,
+  "title": "刻舟求剑·剑去哪了",
+  "emoji": "🗡",
+  "story": "楚国人的剑掉进江里，他在船帮上刻了个记号：「剑是从这儿掉的！」船到岸，他从记号处下水找剑——捞了半天：没有！船在动、剑没动，参照物选错了。画笔标记掉剑点，走远了再回去找——直观看见这个千年笑话。",
+  "goals": [
+    "理解成语「刻舟求剑」",
+    "领会参照物/运动相对性"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_forever",
+    "island_if",
+    "island_if_else",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_eq",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color",
+    "island_touching_edge",
+    "island_key_down",
+    "island_when_key"
+  ],
+  "actor": {
+    "costume": "🗡",
+    "x": -100,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "落剑点标记：先「落笔」，在掉剑处画一条红色竖线（这就是「刻舟」的记号）",
+      "hintPrompts": [
+        "pen_color 选红"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_pen_down"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "船开走了：从记号处移动 200 步（船在前进，记号跟着走？不——舞台记号不动，船动！）",
+      "hintPrompts": [
+        "关键是：剑和河底都没动"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_move"
+      }
+    },
+    {
+      "id": "t3",
+      "text": "靠岸找剑：回到红色记号处（移回起点），说「剑呢？！——船动剑没动，记号白刻了！」",
+      "hintPrompts": [
+        "参照物错误=方法错误"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：生活里的刻舟求剑——「用去年的地图找今年的路」，再举一个你自己的例子",
+      "hintPrompts": [
+        "变通思维"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二、三学段（1-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "顺序结构",
+      "动画编排"
+    ]
+  },
+  "subject": {
+    "name": "语文·成语「刻舟求剑」",
+    "emoji": "📖",
+    "points": [
+      "理解成语「刻舟求剑」",
+      "领会参照物/运动相对性"
+    ]
+  },
+  "subjectArea": "语文",
+  "gradeBand": "primary",
+  "aiIntro": "🗡 剑掉水里不慌，先刻记号——听起来很聪明？演一遍你就笑出声了。物理课的「参照物」也藏在这里！",
+  "celebrate": "刻舟求剑破案！船动剑没动——你用画笔留下了铁证。这个成语+参照物思维双入账 🗡",
+  "exercises": [
+    {
+      "q": "刻舟求剑的人错在？",
+      "options": [
+        "不会游泳",
+        "船动剑没动，参照物错了",
+        "剑太重",
+        "记号刻歪了"
+      ],
+      "answer": 1,
+      "explain": "运动和静止是相对的"
+    },
+    {
+      "q": "这个成语讽刺什么？",
+      "options": [
+        "墨守成规不知变通",
+        "剑质量差",
+        "船太慢",
+        "水太深"
+      ],
+      "answer": 0,
+      "explain": "情况变了方法不变"
+    },
+    {
+      "q": "「舟」指的是？",
+      "options": [
+        "汽车",
+        "船",
+        "桥",
+        "岸"
+      ],
+      "answer": 1,
+      "explain": "舟=船"
+    }
+  ],
+  "codeLesson": false
+}

@@ -1,0 +1,144 @@
+{
+  "id": "cross-49",
+  "island": "cross",
+  "order": 101,
+  "title": "汉字侦探：偏旁寻宝",
+  "emoji": "🔍",
+  "story": "「江、河、湖、海」为什么都有三点水？因为它们都和水有关！「烧、烤、灯、烛」都有火字旁——都和火有关！偏旁部首是汉字的「含义标签」，认识它就能猜生字的意思。程序串烧分类，侦探开始办案！",
+  "goals": [
+    "认识常见偏旁与字义的关系",
+    "学会部首猜字法"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_forever",
+    "island_if",
+    "island_if_else",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_eq",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color",
+    "island_touching_edge",
+    "island_key_down",
+    "island_when_key"
+  ],
+  "actor": {
+    "costume": "🔍",
+    "x": -100,
+    "y": 60
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "水家族办案：连说「江！河！湖！海！」并宣布「三点水=都和水有关」",
+      "hintPrompts": [
+        "氵=水"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "火家族+木家族：连说「烧！烤！灯！烛！」（火字旁）；「树！林！桥！椅！」（木字旁）",
+      "hintPrompts": [
+        "火=烧，木=树"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_say",
+        "count": 8
+      }
+    },
+    {
+      "id": "t3",
+      "text": "侦探测验：说「带口字旁的字往往和嘴有关：吃！喝！唱！叫！」",
+      "hintPrompts": [
+        "口=嘴"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：猜生字——「沐」什么意思？（三点水=和水有关：洗头发/沐浴）",
+      "hintPrompts": [
+        "部首猜字法实战"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二、三学段（1-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "顺序结构",
+      "动画编排"
+    ]
+  },
+  "subject": {
+    "name": "语文·偏旁部首",
+    "emoji": "📖",
+    "points": [
+      "认识常见偏旁与字义的关系",
+      "学会部首猜字法"
+    ]
+  },
+  "subjectArea": "语文",
+  "gradeBand": "primary",
+  "aiIntro": "🔍 汉字是全世界唯一有「偏旁密码」的文字！破译了偏旁，生字的意思猜个八九不离十——侦探请就位！",
+  "celebrate": "偏旁密码破译！氵火木口四大部首入手——以后见到生字先看偏旁，猜字如破案 🔍",
+  "exercises": [
+    {
+      "q": "「河」「湖」的偏旁是？",
+      "options": [
+        "木字旁",
+        "三点水",
+        "火字旁",
+        "口字旁"
+      ],
+      "answer": 1,
+      "explain": "都和水有关"
+    },
+    {
+      "q": "「烤」「灯」共有的偏旁暗示什么？",
+      "options": [
+        "水",
+        "火",
+        "山",
+        "人"
+      ],
+      "answer": 1,
+      "explain": "火字旁=和火有关"
+    },
+    {
+      "q": "猜一猜「闻」和什么有关？",
+      "options": [
+        "水",
+        "门/听见",
+        "火",
+        "树"
+      ],
+      "answer": 1,
+      "explain": "门+耳=用耳朵听"
+    }
+  ],
+  "codeLesson": false
+}

@@ -1,0 +1,150 @@
+{
+  "id": "cross-44",
+  "island": "cross",
+  "order": 96,
+  "title": "文言文启蒙：守株待兔",
+  "emoji": "📜",
+  "story": "「宋人有耕者。田中有株。兔走触株，折颈而死。」——这是小学第一篇文言文！文言文像密码：字少意思深。程序逐句解密：念一句原文、翻一句白话、演一段动画——文言文启蒙原来可以这么好玩。",
+  "goals": [
+    "读懂文言《守株待兔》",
+    "积累文言词汇（走=跑、株=树桩）"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_forever",
+    "island_if",
+    "island_if_else",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_eq",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color",
+    "island_touching_edge",
+    "island_key_down",
+    "island_when_key"
+  ],
+  "actor": {
+    "costume": "🐰",
+    "x": -140,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "解密第一句：「宋人有耕者」= 宋国有个种田人——说出翻译",
+      "hintPrompts": [
+        "有……者=有个……的人"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "演名场面：「兔走触株，折颈而死」——兔子飞跑撞上树桩 🪵（注意：走=跑！）",
+      "hintPrompts": [
+        "文言的「走」是跑，慢慢走是「行」"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
+    },
+    {
+      "id": "t3",
+      "text": "讽刺点题：「身为宋国笑」——说「兔子撞树是偶然，等兔子的人被全国笑话！」",
+      "hintPrompts": [
+        "不能把偶然当必然"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：文言小词典——「走=跑、株=树桩、冀=希望、身为宋国笑=被笑话」，讲给爸妈听",
+      "hintPrompts": [
+        "四个关键词全记住"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二、三学段（1-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "顺序结构",
+      "动画编排"
+    ]
+  },
+  "subject": {
+    "name": "语文·文言文《守株待兔》",
+    "emoji": "📖",
+    "points": [
+      "读懂文言《守株待兔》",
+      "积累文言词汇（走=跑、株=树桩）"
+    ]
+  },
+  "subjectArea": "语文",
+  "gradeBand": "primary",
+  "aiIntro": "📜 文言文不可怕，它只是压缩包！今天程序当解压器：一句原文+一句翻译+一段动画——四年级最难的一课变游戏。",
+  "celebrate": "文言文首战告捷！「走=跑」这类密码你已经会破译——初中三年的文言文，你提前踩点了 📜",
+  "exercises": [
+    {
+      "q": "文言文「兔走触株」的「走」意思是？",
+      "options": [
+        "走路",
+        "跑步",
+        "跳舞",
+        "离开"
+      ],
+      "answer": 1,
+      "explain": "古汉语走=跑；行=走"
+    },
+    {
+      "q": "「田中有株」的「株」是指？",
+      "options": [
+        "庄稼",
+        "树桩",
+        "兔子",
+        "田埂"
+      ],
+      "answer": 1,
+      "explain": "株=露在地面的树桩"
+    },
+    {
+      "q": "守株待兔的人为什么被笑话？",
+      "options": [
+        "兔子太慢",
+        "把偶然当必然",
+        "树桩太小",
+        "没种田"
+      ],
+      "answer": 1,
+      "explain": "偶然事件不会天天发生"
+    }
+  ],
+  "codeLesson": false,
+  "targets": [
+    {
+      "emoji": "🪵",
+      "x": 100,
+      "y": 0
+    }
+  ]
+}

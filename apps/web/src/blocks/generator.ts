@@ -23,6 +23,10 @@ javascriptGenerator.forBlock['island_turn_left'] = (b) => `await api.turnLeft(${
 javascriptGenerator.forBlock['island_goto'] = (b) => `await api.goTo(${valOr(b, 'X', '0')}, ${valOr(b, 'Y', '0')});\n`;
 javascriptGenerator.forBlock['island_bounce'] = () => 'await api.bounce();\n';
 
+javascriptGenerator.forBlock['island_pen_down'] = () => 'await api.penDown();\n';
+javascriptGenerator.forBlock['island_pen_up'] = () => 'await api.penUp();\n';
+javascriptGenerator.forBlock['island_pen_color'] = (b) => `await api.penColor(${str(b.getFieldValue('COLOR'))});\n`;
+
 javascriptGenerator.forBlock['island_say'] = (b) => `await api.say(${str(b.getFieldValue('TEXT'))});\n`;
 javascriptGenerator.forBlock['island_say_for'] = (b) => `await api.sayFor(${str(b.getFieldValue('TEXT'))}, ${num(b.getFieldValue('SECS'))});\n`;
 javascriptGenerator.forBlock['island_costume'] = (b) => `await api.costume(${str(b.getFieldValue('COSTUME'))});\n`;

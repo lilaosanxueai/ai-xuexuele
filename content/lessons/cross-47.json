@@ -1,0 +1,145 @@
+{
+  "id": "cross-47",
+  "island": "cross",
+  "order": 99,
+  "title": "修辞魔法：比喻·拟人·排比",
+  "emoji": "✨",
+  "story": "「月亮圆」太平淡；「月亮像银盘」是比喻；「月亮笑弯了腰」是拟人；「月亮美，星星美，夜空更美」是排比——三大修辞让作文发光！程序对比朗读+角色表演：同一轮月亮，三种写法三倍精彩。",
+  "goals": [
+    "认识比喻、拟人、排比",
+    "初步运用修辞造句"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_forever",
+    "island_if",
+    "island_if_else",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_eq",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color",
+    "island_touching_edge",
+    "island_key_down",
+    "island_when_key"
+  ],
+  "actor": {
+    "costume": "🌙",
+    "x": 0,
+    "y": 80
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "普通版：说「月亮圆」——平铺直叙，没味道",
+      "hintPrompts": [
+        "先听平淡版才懂修辞的妙"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "比喻版：说「月亮像一个大银盘」（角色变圆变大=银盘）——比喻=打比方！",
+      "hintPrompts": [
+        "本体+喻体+像"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_change_size"
+      }
+    },
+    {
+      "id": "t3",
+      "text": "拟人版+排比版：说「月亮笑弯了腰」（拟人：当人写）；再连说三句「风在唱，云在跳，星星在眨眼」（排比：三句同结构）",
+      "hintPrompts": [
+        "拟人=赋予人的动作；排比=三连击"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_say",
+        "count": 4
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：用比喻写一句「时间过得快」：时间像飞箭/像流水",
+      "hintPrompts": [
+        "换个本体练一次"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二、三学段（1-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "顺序结构",
+      "动画编排"
+    ]
+  },
+  "subject": {
+    "name": "语文·修辞手法",
+    "emoji": "📖",
+    "points": [
+      "认识比喻、拟人、排比",
+      "初步运用修辞造句"
+    ]
+  },
+  "subjectArea": "语文",
+  "gradeBand": "primary",
+  "aiIntro": "✨ 同一轮月亮，会写的人能写出三种花样！修辞三宝——比喻、拟人、排比，一次学齐。",
+  "celebrate": "修辞三宝入手！作文里各用一次，字数质量双提升——下篇作文直接升级 ✨",
+  "exercises": [
+    {
+      "q": "「月亮像银盘」是什么修辞？",
+      "options": [
+        "拟人",
+        "比喻",
+        "排比",
+        "夸张"
+      ],
+      "answer": 1,
+      "explain": "有「像」=打比方"
+    },
+    {
+      "q": "「月亮笑弯了腰」是什么修辞？",
+      "options": [
+        "比喻",
+        "夸张",
+        "拟人",
+        "排比"
+      ],
+      "answer": 2,
+      "explain": "把月亮当人写=拟人"
+    },
+    {
+      "q": "排比至少需要几个相似结构？",
+      "options": [
+        "1 个",
+        "2 个",
+        "3 个",
+        "5 个"
+      ],
+      "answer": 2,
+      "explain": "三句起步才有气势"
+    }
+  ],
+  "codeLesson": false
+}

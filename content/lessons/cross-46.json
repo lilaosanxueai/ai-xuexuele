@@ -1,0 +1,151 @@
+{
+  "id": "cross-46",
+  "island": "cross",
+  "order": 98,
+  "title": "掩耳盗铃·自欺欺人",
+  "emoji": "🔔",
+  "story": "小偷捂住自己耳朵去偷铃铛——「我听不见，别人也听不见！」天下最傻的逻辑。程序揭穿他：捂住耳朵（换造型）铃照样响（播放声音）——声音不会因为你听不见就消失！",
+  "goals": [
+    "理解成语「掩耳盗铃」",
+    "明白自欺欺人的荒谬逻辑"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_forever",
+    "island_if",
+    "island_if_else",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_eq",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color",
+    "island_touching_edge",
+    "island_key_down",
+    "island_when_key"
+  ],
+  "actor": {
+    "costume": "🤫",
+    "x": -100,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "靠近铃铛：捂着耳朵（🤫 造型）悄悄走到大铃 🔔 旁边",
+      "hintPrompts": [
+        "自以为听不见=安全"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
+    },
+    {
+      "id": "t2",
+      "text": "铃照样响：碰到铃铛立刻「播放声音 叮」——你说：「捂住的是自己的耳朵，铃还是响了！」",
+      "hintPrompts": [
+        "客观存在不因主观改变"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_play"
+      }
+    },
+    {
+      "id": "t3",
+      "text": "点题成语：说「掩耳盗铃=自己骗自己，骗不了的！」",
+      "hintPrompts": [
+        "自欺欺人"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：考试没复习却骗自己「明天再补也来得及」——这也是掩耳盗铃！再举一例",
+      "hintPrompts": [
+        "照见自己"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二、三学段（1-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "顺序结构",
+      "动画编排"
+    ]
+  },
+  "subject": {
+    "name": "语文·成语「掩耳盗铃》",
+    "emoji": "📖",
+    "points": [
+      "理解成语「掩耳盗铃」",
+      "明白自欺欺人的荒谬逻辑"
+    ]
+  },
+  "subjectArea": "语文",
+  "gradeBand": "primary",
+  "aiIntro": "🔔 捂住耳朵偷铃铛——自己听不见，铃就不响了吗？今天程序替铃铛发声！",
+  "celebrate": "掩耳盗铃演完！客观事实不会因为闭眼捂耳就消失——这是成语教给我们的清醒 🔔",
+  "exercises": [
+    {
+      "q": "掩耳盗铃的人以为？",
+      "options": [
+        "铃坏了",
+        "捂住耳铃就不响",
+        "没人看见",
+        "铃是自己的"
+      ],
+      "answer": 1,
+      "explain": "主观不能改变客观"
+    },
+    {
+      "q": "这个成语比喻？",
+      "options": [
+        "技巧高超",
+        "自欺欺人",
+        "勇敢",
+        "听力好"
+      ],
+      "answer": 1,
+      "explain": "自己欺骗自己"
+    },
+    {
+      "q": "正确做法是？",
+      "options": [
+        "继续偷",
+        "承认事实不再自欺",
+        "换更大的铃",
+        "更用力捂耳朵"
+      ],
+      "answer": 1,
+      "explain": "直面现实"
+    }
+  ],
+  "codeLesson": false,
+  "targets": [
+    {
+      "emoji": "🔔",
+      "x": 100,
+      "y": 0
+    }
+  ]
+}
