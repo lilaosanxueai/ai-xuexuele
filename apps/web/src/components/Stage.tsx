@@ -7,13 +7,35 @@ interface Props {
   stage: StageState;
   onSpriteClick?: () => void;
   onCanvasReady?: (canvas: HTMLCanvasElement) => void;
+  /** 沉浸模式：canvas 填满父容器并保持 4:3 居中（父容器必须有确定尺寸） */
+  fit?: boolean;
 }
 
 /** 小剧场：把 StageState 画到 canvas（中心原点、y 向上） */
-export default function Stage({ stage, onSpriteClick, onCanvasReady }: Props) {
+export default function Stage({ stage, onSpriteClick, onCanvasReady, fit = false }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const stageRef = useRef(stage);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const boxRef = useRef<HTMLDivElement>(null);
   stageRef.current = stage;
+
+  // fit 模式：按容器尺寸算出最大 4:3 内接矩形，避免 aspect-ratio 在 max 约束下破比例
+  useEffect(() => {
+    if (!fit) return;
+    const wrap = wrapRef.current;
+    const box = boxRef.current;
+    if (!wrap || !box) return;
+    const ro = new ResizeObserver(() => {
+      const w = wrap.clientWidth;
+      const h = wrap.clientHeight;
+      if (w === 0 || h === 0) return;
+      const tw = Math.min(w, (h * 4) / 3);
+      box.style.width = `${Math.floor(tw)}px`;
+      box.style.height = `${Math.floor((tw * 3) / 4)}px`;
+    });
+    ro.observe(wrap);
+    return () => ro.disconnect();
+  }, [fit]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -99,6 +121,20 @@ export default function Stage({ stage, onSpriteClick, onCanvasReady }: Props) {
     const sx = STAGE_W / 2 + stage.x, sy = STAGE_H / 2 - stage.y;
     if (Math.hypot(px - sx, py - sy) < 45) onSpriteClick();
   };
+
+  if (fit) {
+    return (
+      <div ref={wrapRef} className="flex h-full w-full items-center justify-center">
+        <div ref={boxRef} className="relative" style={{ aspectRatio: '4 / 3', width: '100%', maxWidth: '100%' }}>
+          <canvas
+            ref={canvasRef}
+            onClick={handleClick}
+            className="h-full w-full rounded-2xl border-4 border-white shadow-xl cursor-pointer"
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <canvas

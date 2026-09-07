@@ -17,5 +17,7 @@ export const islandTheme = Blockly.Theme.defineTheme('islandKid', {
     insertionMarkerOpacity: 0.5,
     cursorColour: '#f59e0b',
   },
-  fontStyle: { family: 'inherit', weight: '600', size: 16 },
+  // 字体必须写显式栈：'inherit' 会让文字测量与实际渲染解析到不同字体，
+  // 中文字宽算偏小 → 积木宽度不足 → 文字被硬截断
+  fontStyle: { family: '"PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif', weight: '600', size: 14 },
 });

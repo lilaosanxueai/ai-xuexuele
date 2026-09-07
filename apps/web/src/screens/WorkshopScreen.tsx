@@ -69,7 +69,10 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
   const [taskDone, setTaskDone] = useState<Record<string, boolean>>({});
   const [lessonCompleted, setLessonCompleted] = useState(false);
   const [celebrate, setCelebrate] = useState(false);
-  const [buddyOpen, setBuddyOpen] = useState(true);
+  const [buddyOpen, setBuddyOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [taskListOpen, setTaskListOpen] = useState(false);
   const [saveOpen, setSaveOpen] = useState(false);
   const [saveTitle, setSaveTitle] = useState('');
   const [toast, setToast] = useState<string | null>(null);
@@ -560,92 +563,222 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
     return <Center>正在打开工作台…</Center>;
   }
 
+  const requiredTasks = lesson.tasks.filter((t) => !t.optional);
+  const currentTask = requiredTasks.find((t) => !taskDone[t.id]) ?? null;
+  const currentIdx = currentTask ? requiredTasks.indexOf(currentTask) : -1;
+
   return (
-    <div className="flex h-screen flex-col overflow-hidden">
-      {/* 顶栏 */}
-      <header className="flex items-center gap-2 bg-white/70 px-3 py-2 backdrop-blur">
-        <button onClick={() => nav('/map')} className="rounded-xl bg-slate-200 px-3 py-1.5 font-bold hover:bg-slate-300">← 地图</button>
-        <h1 className="text-lg font-black">{lesson.emoji} {lesson.title}</h1>
-        {lesson.tasks.length > 0 && (
-          <span className={`rounded-full px-3 py-1 text-sm font-bold ${
+    <div className="flex h-screen flex-col overflow-hidden bg-gradient-to-b from-sky-100 via-sky-50 to-emerald-50">
+      {/* 顶部悬浮条 */}
+      <header className="z-30 flex items-center gap-2 border-b border-white/60 bg-white/70 px-3 py-2 backdrop-blur">
+        <button onClick={() => nav('/map')} className="rounded-xl bg-white/80 px-3 py-1.5 font-bold shadow-sm hover:bg-white">← 地图</button>
+        <h1 className="truncate text-lg font-black">{lesson.emoji} {lesson.title}</h1>
+        {requiredTasks.length > 0 && (
+          <span className={`shrink-0 rounded-full px-3 py-1 text-sm font-bold ${
             requiredTasksDone(lesson.tasks, taskDone) ? 'bg-violet-500 text-white' : 'bg-violet-100 text-violet-700'
           }`}>
-            ✨ 发现 {lesson.tasks.filter((t) => !t.optional && taskDone[t.id]).length}/{lesson.tasks.filter((t) => !t.optional).length}
+            ✨ 发现 {requiredTasks.filter((t) => taskDone[t.id]).length}/{requiredTasks.length}
           </span>
         )}
-        <div className="ml-auto flex items-center gap-1.5">
-          <button onClick={() => setSaveOpen(true)} className="rounded-xl bg-violet-500 px-3 py-1.5 font-bold text-white hover:bg-violet-600">💾 存作品</button>
+        <div className="ml-auto flex shrink-0 items-center gap-1.5">
           <button
             onClick={() => setBuddyOpen((v) => !v)}
-            className="rounded-xl bg-slate-200 px-3 py-1.5 font-bold hover:bg-slate-300"
+            className={`rounded-xl px-3 py-1.5 font-bold shadow-sm transition ${
+              buddyOpen ? 'bg-amber-400 text-white hover:bg-amber-500' : 'bg-white/80 text-slate-700 hover:bg-white'
+            }`}
           >
-            {settings.buddy.emoji} {buddyOpen ? '收起伙伴' : '展开伙伴'}
+            {settings.buddy.emoji} {buddyOpen ? '收起伙伴' : settings.buddy.name}
           </button>
+          <button onClick={() => setSaveOpen(true)} className="rounded-xl bg-violet-500 px-3 py-1.5 font-bold text-white shadow-sm hover:bg-violet-600">💾 存作品</button>
+          {/* 更多工具 */}
+          <div className="relative">
+            <button
+              onClick={() => setMenuOpen((v) => !v)}
+              className="rounded-xl bg-white/80 px-3 py-1.5 font-bold shadow-sm hover:bg-white"
+              title="更多工具"
+            >
+              ⋯
+            </button>
+            {menuOpen && (
+              <>
+                <div className="fixed inset-0 z-40" onClick={() => setMenuOpen(false)} />
+                <div className="absolute right-0 top-full z-50 mt-2 w-56 rounded-2xl bg-white p-2 shadow-2xl">
+                  <MenuItem onClick={() => { setMenuOpen(false); cycleSpeed(); }}>{SPEED_LABEL[speed]}</MenuItem>
+                  <MenuItem onClick={() => { setMenuOpen(false); setCodeText(wsApiRef.current?.getCode() ?? ''); setCodeOpen(true); }}>👀 魔法代码</MenuItem>
+                  <MenuItem onClick={() => { setMenuOpen(false); toggleMute(); }}>{muted ? '🔊 打开音效' : '🔇 关掉音效'}</MenuItem>
+                  <MenuItem onClick={() => { setMenuOpen(false); void toggleCam(); }}>{camOn ? '📷 关闭 AI 眼睛' : '📷 打开 AI 眼睛'}</MenuItem>
+                  <MenuItem onClick={() => { setMenuOpen(false); toggleFullscreen(); }}>⛶ 全屏</MenuItem>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </header>
 
-      {/* 工具条 */}
-      <div className="flex items-center gap-1.5 bg-white/50 px-3 pb-1.5 text-sm">
-        <ToolBtn title="撤销（放错积木不要紧）" onClick={() => wsApiRef.current?.workspace.undo(false)}>↩️ 撤销</ToolBtn>
-        <ToolBtn title="重做" onClick={() => wsApiRef.current?.workspace.undo(true)}>↪️ 重做</ToolBtn>
-        <ToolBtn title="把积木排整齐" onClick={() => wsApiRef.current?.workspace.cleanUp()}>🧹 整理</ToolBtn>
-        <span className="mx-1 text-slate-300">|</span>
-        <ToolBtn title="切换运行速度：慢速能看清每一步" onClick={cycleSpeed}>{SPEED_LABEL[speed]}</ToolBtn>
-        <ToolBtn title="看看你的积木变成了什么代码" onClick={() => { setCodeText(wsApiRef.current?.getCode() ?? ''); setCodeOpen(true); }}>👀 魔法代码</ToolBtn>
-        <span className="mx-1 text-slate-300">|</span>
-        <ToolBtn title={muted ? '打开音效' : '关掉音效'} onClick={toggleMute}>{muted ? '🔇' : '🔊'}</ToolBtn>
-        <ToolBtn title={camOn ? '关闭 AI 摄像头' : '打开 AI 摄像头（需先在 AI 实验室训练）'} onClick={() => void toggleCam()}>{camOn ? '📷 AI 眼睛开' : '📷 AI 眼睛'}</ToolBtn>
-        <ToolBtn title={codeMode ? '回到积木画布' : '看看积木变成的 Python 代码（可以直接改！）'} onClick={switchMode}>{codeMode ? '🧩 积木模式' : '🐍 代码模式'}</ToolBtn>
-        {lesson.exercises && lesson.exercises.length > 0 && (
-          <ToolBtn title="随堂小练：检验这课学得牢不牢" onClick={() => setQuizOpen(true)}>📝 随堂小练</ToolBtn>
-        )}
-        <ToolBtn title="全屏（更像一台游戏机）" onClick={toggleFullscreen}>⛶ 全屏</ToolBtn>
-        <span className="ml-auto pr-1 text-xs text-slate-400">画布会自动保存，放心关掉</span>
-      </div>
-
-      {/* 主体三栏 */}
-      <div className="flex min-h-0 flex-1 gap-2 p-2">
-        {/* 左：任务 / 灵感 */}
-        <div className="w-60 shrink-0">
-          {lesson.tasks.length > 0 ? (
-            <TaskPanel
-              lesson={lesson}
-              taskDone={taskDone}
-              ideaHint={ideaHint}
-              onToggleManual={(id) => {
-                const next = { ...taskDoneRef.current, [id]: !taskDoneRef.current[id] };
-                setTaskDone(next);
-                maybeComplete(next);
-              }}
-              onAskHint={(text) => buddyRef.current?.askInMode('hint', `我在做「${text}」，给我一点提示！`)}
-            />
-          ) : (
-            <div className="flex h-full min-h-0 flex-col gap-2 overflow-y-auto rounded-2xl bg-white/90 p-4 shadow-md">
-              <h2 className="text-lg font-black">🧪 学科实验工坊</h2>
-              {ideaHint && (
-                <div className="rounded-xl bg-violet-50 p-2.5 text-sm leading-relaxed text-violet-700">
-                  🧪 本次实验方向：{ideaHint}——需要什么本领就问旁边的{settings.buddy.name}
-                </div>
-              )}
-              {IDEAS.map((idea) => (
-                <div key={idea.title} className="rounded-xl border border-slate-200 p-3">
-                  <div className="text-2xl">{idea.emoji}</div>
-                  <div className="font-bold">{idea.title}</div>
-                  <div className="text-sm text-slate-500">{idea.desc}</div>
-                </div>
-              ))}
-              <button
-                onClick={() => buddyRef.current?.askInMode('idea', '给我 3 个今天就能做的小作品点子！')}
-                className="mt-auto rounded-xl bg-amber-400 px-3 py-2 font-bold text-white hover:bg-amber-500"
-              >
-                💡 问{settings.buddy.name}要更多点子
-              </button>
-            </div>
-          )}
+      {/* 舞台层（沉浸式）：全屏居中，伙伴打开时让位右移 */}
+      <div className="relative min-h-0 flex-1">
+        <div className={`absolute inset-0 p-4 transition-all duration-300 ${buddyOpen ? 'pr-[23rem]' : ''}`}>
+          <Stage
+            fit
+            stage={stageRef.current}
+            onCanvasReady={(c) => { canvasRef.current = c; }}
+            onSpriteClick={() => { if (running) fireHat('click'); }}
+          />
         </div>
 
-        {/* 中：积木编辑器 / Python 编辑器（积木保持挂载，切模式不丢状态） */}
-        <div className="relative min-w-0 flex-1" key={lesson.id}>
+        {/* 左上：任务卡（一次只聚焦一个任务，大字） */}
+        {requiredTasks.length > 0 ? (
+          <div className="absolute left-4 top-4 z-20 w-[19rem] max-w-[calc(100%-2rem)] rounded-2xl border border-white/70 bg-white/85 p-4 shadow-xl backdrop-blur">
+            {currentTask ? (
+              <>
+                <div className="text-xs font-bold tracking-wide text-violet-500">
+                  🎯 当前任务 · 第 {currentIdx + 1} 步 / 共 {requiredTasks.length} 步
+                </div>
+                <div className="mt-1.5 text-xl font-black leading-snug text-slate-800">{currentTask.text}</div>
+                <div className="mt-3 flex gap-2">
+                  <button
+                    onClick={() => {
+                      setBuddyOpen(true);
+                      buddyRef.current?.askInMode('hint', `我在做「${currentTask.text}」，给我一点提示！`);
+                    }}
+                    className="rounded-full bg-amber-400 px-4 py-1.5 text-sm font-bold text-white shadow hover:bg-amber-500"
+                  >
+                    💡 要提示
+                  </button>
+                  <button
+                    onClick={() => setTaskListOpen((v) => !v)}
+                    className="rounded-full bg-slate-100 px-4 py-1.5 text-sm font-bold text-slate-600 hover:bg-slate-200"
+                  >
+                    {taskListOpen ? '▲ 收起清单' : '📋 全部任务'}
+                  </button>
+                </div>
+                {taskListOpen && (
+                  <div className="mt-3 max-h-[34vh] overflow-y-auto rounded-xl">
+                    <TaskPanel
+                      lesson={lesson}
+                      taskDone={taskDone}
+                      ideaHint={ideaHint}
+                      onToggleManual={(id) => {
+                        const next = { ...taskDoneRef.current, [id]: !taskDoneRef.current[id] };
+                        setTaskDone(next);
+                        maybeComplete(next);
+                      }}
+                      onAskHint={(text) => {
+                        setBuddyOpen(true);
+                        buddyRef.current?.askInMode('hint', `我在做「${text}」，给我一点提示！`);
+                      }}
+                    />
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="text-center">
+                <div className="text-3xl">🌟</div>
+                <div className="mt-1 text-lg font-black text-violet-600">全部发现都点亮啦！</div>
+                <div className="mt-1 text-sm text-slate-500">点 ▶ 再玩一次，或回地图解锁下一课</div>
+                <button onClick={() => nav('/map')} className="mt-3 rounded-xl bg-emerald-500 px-4 py-2 font-bold text-white hover:bg-emerald-600">回到地图 🏝</button>
+              </div>
+            )}
+          </div>
+        ) : (
+          /* 自由模式：实验方向卡 */
+          <div className="absolute left-4 top-4 z-20 max-h-[calc(100%-2rem)] w-[19rem] max-w-[calc(100%-2rem)] overflow-y-auto rounded-2xl border border-white/70 bg-white/85 p-4 shadow-xl backdrop-blur">
+            <h2 className="text-lg font-black">🧪 学科实验工坊</h2>
+            {ideaHint && (
+              <div className="mt-2 rounded-xl bg-violet-50 p-2.5 text-sm leading-relaxed text-violet-700">
+                🧪 本次实验方向：{ideaHint}——需要什么本领就问{settings.buddy.name}
+              </div>
+            )}
+            <div className="mt-2 space-y-2">
+              {IDEAS.map((idea) => (
+                <div key={idea.title} className="rounded-xl border border-slate-200 bg-white/70 p-2.5">
+                  <div className="font-bold">{idea.emoji} {idea.title}</div>
+                  <div className="text-xs text-slate-500">{idea.desc}</div>
+                </div>
+              ))}
+            </div>
+            <button
+              onClick={() => { setBuddyOpen(true); buddyRef.current?.askInMode('idea', '给我 3 个今天就能做的小作品点子！'); }}
+              className="mt-3 w-full rounded-xl bg-amber-400 px-3 py-2 font-bold text-white hover:bg-amber-500"
+            >
+              💡 问{settings.buddy.name}要更多点子
+            </button>
+          </div>
+        )}
+
+        {/* 右下：运行大按钮 */}
+        <div className="absolute bottom-4 right-5 z-20 flex flex-col items-center gap-1.5">
+          {running ? (
+            <button onClick={handleStop} className="flex h-16 w-16 items-center justify-center rounded-full bg-rose-500 text-3xl text-white shadow-xl ring-4 ring-white/60 hover:bg-rose-600 transition" title="停止">⏹</button>
+          ) : (
+            <button onClick={handleRun} className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500 text-3xl text-white shadow-xl ring-4 ring-white/60 hover:scale-105 hover:bg-emerald-600 transition" title="运行">▶</button>
+          )}
+          <span className="rounded-full bg-white/80 px-3 py-1 text-xs font-semibold text-slate-500 shadow-sm">
+            {running ? '运行中 · 点角色可互动' : '点我运行'}
+          </span>
+        </div>
+
+        {/* AI 伙伴浮动面板：始终挂载，收起时滑出（喝彩/引导语仍会进对话记录） */}
+        <div
+          className={`absolute bottom-24 right-3 top-3 z-30 w-[22rem] max-w-[calc(100%-1.5rem)] transition-all duration-300 ${
+            buddyOpen ? 'translate-x-0 opacity-100' : 'pointer-events-none translate-x-8 opacity-0'
+          }`}
+        >
+          <AIBuddy
+            ref={buddyRef}
+            profileId={profile.id}
+            buddy={settings.buddy}
+            defaultMode={mode.kind === 'lesson' ? 'hint' : 'idea'}
+            intro={lesson.aiIntro || `嗨！我是${settings.buddy.name}${settings.buddy.emoji} 今天我们做点什么好玩的？`}
+            getContext={buildContext}
+          />
+        </div>
+      </div>
+
+      {/* 底部积木抽屉：可收起，收起后舞台最大化（剧场模式） */}
+      <div
+        className={`z-40 shrink-0 overflow-hidden border-t border-slate-200 bg-white shadow-[0_-6px_24px_rgba(15,23,42,0.10)] transition-[height] duration-300 ${
+          drawerOpen ? 'h-[46vh]' : 'h-12'
+        }`}
+      >
+        {/* 抽屉把手行：编辑工具贴着编辑器 */}
+        <div className="flex h-12 items-center gap-1.5 px-3">
+          <button
+            onClick={switchMode}
+            className="rounded-xl bg-slate-100 px-3 py-1.5 text-sm font-bold text-slate-700 hover:bg-slate-200"
+            title={codeMode ? '回到积木画布' : '看看积木变成的 Python 代码（可以直接改！）'}
+          >
+            {codeMode ? '🧩 积木模式' : '🐍 代码模式'}
+          </button>
+          {codeMode ? (
+            !lesson.codeLesson && (
+              <ToolBtn title="用积木重新生成代码（会覆盖当前代码）" onClick={regenerateFromBlocks}>⟲ 从积木重新生成</ToolBtn>
+            )
+          ) : (
+            <>
+              <ToolBtn title="撤销（放错积木不要紧）" onClick={() => wsApiRef.current?.workspace.undo(false)}>↩️</ToolBtn>
+              <ToolBtn title="重做" onClick={() => wsApiRef.current?.workspace.undo(true)}>↪️</ToolBtn>
+              <ToolBtn title="把积木排整齐" onClick={() => wsApiRef.current?.workspace.cleanUp()}>🧹 整理</ToolBtn>
+              <ToolBtn title="切换运行速度：慢速能看清每一步" onClick={cycleSpeed}>{SPEED_LABEL[speed]}</ToolBtn>
+            </>
+          )}
+          <span className="ml-auto hidden text-xs text-slate-400 sm:block">画布会自动保存，放心关掉</span>
+          {lesson.exercises && lesson.exercises.length > 0 && (
+            <ToolBtn title="随堂小练：检验这课学得牢不牢" onClick={() => setQuizOpen(true)}>📝 随堂小练</ToolBtn>
+          )}
+          <button
+            onClick={() => setDrawerOpen((v) => !v)}
+            className={`ml-1.5 rounded-xl px-3 py-1.5 text-sm font-bold shadow-sm transition ${
+              drawerOpen ? 'bg-sky-500 text-white hover:bg-sky-600' : 'bg-sky-100 text-sky-700 hover:bg-sky-200 animate-pulse'
+            }`}
+            title={drawerOpen ? '收起积木，全屏看舞台' : '展开积木画布'}
+          >
+            {drawerOpen ? '▾ 收起看舞台' : '▴ 展开积木'}
+          </button>
+        </div>
+
+        {/* 抽屉内容：积木 / 代码编辑器（保持挂载，收起仅视觉裁掉，切课草稿不丢） */}
+        <div className="relative h-[calc(46vh-3rem)]" key={lesson.id}>
           <div className={`h-full ${codeMode ? 'hidden' : ''}`}>
             {progressReady ? (
               <BlocklyWorkspace
@@ -665,20 +798,15 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
                 }}
               />
             ) : (
-              <div className="flex h-full items-center justify-center rounded-2xl bg-white/60 text-slate-400">正在恢复你的画布…</div>
+              <div className="flex h-full items-center justify-center text-slate-400">正在恢复你的画布…</div>
             )}
           </div>
 
           {codeMode && (
-            <div className="flex h-full min-h-0 flex-col rounded-2xl bg-white shadow-md">
+            <div className="flex h-full min-h-0 flex-col">
               <div className="flex items-center gap-2 border-b border-slate-100 px-3 py-2 text-sm">
                 <span className="font-bold text-slate-700">🐍 Python 代码</span>
                 <span className="text-xs text-slate-400">和学校里学的 Python 是同一种语言！直接改，点 ▶ 就能跑</span>
-                <div className="ml-auto flex gap-1.5">
-                  {!lesson.codeLesson && (
-                    <button onClick={regenerateFromBlocks} className="rounded-lg bg-slate-100 px-2.5 py-1 font-semibold text-slate-600 hover:bg-slate-200">⟲ 从积木重新生成</button>
-                  )}
-                </div>
               </div>
               <textarea
                 value={codeText}
@@ -695,7 +823,7 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
                 }}
                 spellCheck={false}
                 placeholder={'say("你好，Python！")\nfor _ in range(4):\n    move(80)\n    turn_right(90)'}
-                className="min-h-0 flex-1 resize-none rounded-b-2xl p-4 font-mono text-[15px] leading-7 text-slate-800 outline-none"
+                className="min-h-0 flex-1 resize-none p-4 font-mono text-[15px] leading-7 text-slate-800 outline-none"
               />
               {codeError && (
                 <div className="border-t border-rose-100 bg-rose-50 px-4 py-2 text-sm text-rose-700">
@@ -705,37 +833,6 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
             </div>
           )}
         </div>
-
-        {/* 右：舞台 */}
-        <div className={`flex w-[400px] shrink-0 flex-col gap-2 ${buddyOpen ? '' : 'w-[480px]'}`}>
-          <Stage
-            stage={stageRef.current}
-            onCanvasReady={(c) => { canvasRef.current = c; }}
-            onSpriteClick={() => { if (running) fireHat('click'); }}
-          />
-          <div className="flex items-center justify-center gap-4 rounded-2xl bg-white/90 py-3 shadow-md">
-            {running ? (
-              <button onClick={handleStop} className="flex h-14 w-14 items-center justify-center rounded-full bg-rose-500 text-2xl text-white shadow-lg hover:bg-rose-600" title="停止">⏹</button>
-            ) : (
-              <button onClick={handleRun} className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-2xl text-white shadow-lg hover:bg-emerald-600" title="运行">▶</button>
-            )}
-            <span className="text-sm text-slate-500">{running ? '程序运行中…（点角色可以触发点击事件）' : '点 ▶ 运行你的程序'}</span>
-          </div>
-        </div>
-
-        {/* 最右：AI 伙伴 */}
-        {buddyOpen && (
-          <div className="w-80 shrink-0">
-            <AIBuddy
-              ref={buddyRef}
-              profileId={profile.id}
-              buddy={settings.buddy}
-              defaultMode={mode.kind === 'lesson' ? 'hint' : 'idea'}
-              intro={lesson.aiIntro || `嗨！我是${settings.buddy.name}${settings.buddy.emoji} 今天我们做点什么好玩的？`}
-              getContext={buildContext}
-            />
-          </div>
-        )}
       </div>
 
       {/* 魔法代码预览 */}
@@ -867,7 +964,18 @@ function ToolBtn({ title, onClick, children }: { title: string; onClick: () => v
     <button
       onClick={onClick}
       title={title}
-      className="rounded-lg bg-white/80 px-2.5 py-1 font-semibold text-slate-600 shadow-sm transition hover:bg-white hover:text-sky-700"
+      className="rounded-lg bg-slate-100 px-2.5 py-1 text-sm font-semibold text-slate-600 transition hover:bg-slate-200 hover:text-sky-700"
+    >
+      {children}
+    </button>
+  );
+}
+
+function MenuItem({ onClick, children }: { onClick: () => void; children: React.ReactNode }) {
+  return (
+    <button
+      onClick={onClick}
+      className="block w-full rounded-xl px-3 py-2 text-left text-sm font-semibold text-slate-700 transition hover:bg-sky-50 hover:text-sky-700"
     >
       {children}
     </button>

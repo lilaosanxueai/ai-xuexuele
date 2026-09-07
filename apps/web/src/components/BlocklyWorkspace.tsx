@@ -44,7 +44,7 @@ export default function BlocklyWorkspace({ toolbox, initialXml, onReady, onChang
       grid: { spacing: 28, length: 2, colour: '#e2e8f0', snap: true },
       trashcan: true,
       move: { scrollbars: { horizontal: true, vertical: true }, drag: true, wheel: true },
-      zoom: { controls: true, wheel: false, pinch: true, startScale: 1, maxScale: 1.5, minScale: 0.6, scaleSpeed: 1.1 },
+      zoom: { controls: true, wheel: false, pinch: true, startScale: 0.85, maxScale: 1.5, minScale: 0.5, scaleSpeed: 1.1 },
     });
 
     if (initialXml) {
