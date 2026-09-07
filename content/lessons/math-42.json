@@ -86,5 +86,40 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 完全平方公式的面积证明（a=3, b=2）\na = 3\nb = 2\n\n# 大正方形 边长 (a+b)=5，边长像素 25\ns = 25\n# 画大正方形（蓝）\npen_color(\"blue\")\ngo_to(-62, -62)\npen_down()\ngo_to(-62 + (a + b) * s, -62)\ngo_to(-62 + (a + b) * s, -62 + (a + b) * s)\ngo_to(-62, -62 + (a + b) * s)\ngo_to(-62, -62)\npen_up()\n\n# 分割线（红）：在 a=3 处切横竖两刀\npen_color(\"red\")\ngo_to(-62 + a * s, -62)\npen_down()\ngo_to(-62 + a * s, -62 + (a + b) * s)\npen_up()\ngo_to(-62, -62 + a * s)\npen_down()\ngo_to(-62 + (a + b) * s, -62 + a * s)\npen_up()\n\n# 数值验证\nsay(\"(a+b)^2 = \" + (a + b) * (a + b))\nsay(\"a^2+2ab+b^2 = \" + (a * a + 2 * a * b + b * b))\n"
+  "starterCode": "# 完全平方公式的面积证明（a=3, b=2）\na = 3\nb = 2\n\n# 大正方形 边长 (a+b)=5，边长像素 25\ns = 25\n# 画大正方形（蓝）\npen_color(\"blue\")\ngo_to(-62, -62)\npen_down()\ngo_to(-62 + (a + b) * s, -62)\ngo_to(-62 + (a + b) * s, -62 + (a + b) * s)\ngo_to(-62, -62 + (a + b) * s)\ngo_to(-62, -62)\npen_up()\n\n# 分割线（红）：在 a=3 处切横竖两刀\npen_color(\"red\")\ngo_to(-62 + a * s, -62)\npen_down()\ngo_to(-62 + a * s, -62 + (a + b) * s)\npen_up()\ngo_to(-62, -62 + a * s)\npen_down()\ngo_to(-62 + (a + b) * s, -62 + a * s)\npen_up()\n\n# 数值验证\nsay(\"(a+b)^2 = \" + (a + b) * (a + b))\nsay(\"a^2+2ab+b^2 = \" + (a * a + 2 * a * b + b * b))\n",
+  "exercises": [
+    {
+      "q": "(a+b)² = ?",
+      "options": [
+        "a²+b²",
+        "a²+2ab+b²",
+        "a²+b²+ab",
+        "2a+2b"
+      ],
+      "answer": 1,
+      "explain": "最易漏 2ab！面积图记住"
+    },
+    {
+      "q": "(3+2)² = ?",
+      "options": [
+        "25",
+        "13",
+        "11",
+        "10"
+      ],
+      "answer": 0,
+      "explain": "5²=25；或 9+12+4=25"
+    },
+    {
+      "q": "(x+1)² 展开是？",
+      "options": [
+        "x²+1",
+        "x²+2x+1",
+        "x²+x+1",
+        "2x+1"
+      ],
+      "answer": 1,
+      "explain": "a=x, b=1 代入公式"
+    }
+  ]
 }

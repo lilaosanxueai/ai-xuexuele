@@ -79,5 +79,40 @@
   "codeLesson": true,
   "starterCode": "# 求根公式：x = (-b ± √(b²-4ac)) / 2a\na = 1\nb = -5\nc = 6\n\nd = b * b - 4 * a * c        # 判别式 Δ\nsay(\"判别式 = \" + d)\n\nx1 = (-b + sqrt(d)) / (2 * a)\nx2 = (-b - sqrt(d)) / (2 * a)\nsay(\"两个根：x1 = \" + x1 + \"，x2 = \" + x2)\n\n# 韦达验证：x1*x2 应等于 c\nsay(\"两根之积 = \" + x1 * x2)\n",
   "subjectArea": "数学",
-  "gradeBand": "junior"
+  "gradeBand": "junior",
+  "exercises": [
+    {
+      "q": "方程 x²-3x+2=0 的两个根是？",
+      "options": [
+        "x=1 和 x=2",
+        "x=-1 和 x=-2",
+        "x=1 和 x=3",
+        "无解"
+      ],
+      "answer": 0,
+      "explain": "Δ=9-8=1，x=(3±1)/2"
+    },
+    {
+      "q": "判别式 Δ=b²-4ac<0 说明方程？",
+      "options": [
+        "有两个不等实根",
+        "无实数根",
+        "有两个相等实根",
+        "只有一个根"
+      ],
+      "answer": 1,
+      "explain": "负数不能开平方 → 无实根"
+    },
+    {
+      "q": "x²-5x+6=0 两根之积是？（韦达）",
+      "options": [
+        "5",
+        "-5",
+        "6",
+        "-6"
+      ],
+      "answer": 2,
+      "explain": "两根之积 = c = 6"
+    }
+  ]
 }

@@ -171,6 +171,11 @@ function ReportTab({ profileId }: { profileId: string }) {
     }
   }
 
+  // 练习成绩
+  const exEntries = Object.entries(progress?.exercises ?? {});
+  const exTotal = exEntries.reduce((a, [, e]) => a + e.total, 0);
+  const exCorrect = exEntries.reduce((a, [, e]) => a + e.correct, 0);
+
   // 学科维度聚合
   const bySubject: Record<string, Lesson[]> = {};
   for (const l of lessons) {
@@ -191,6 +196,7 @@ function ReportTab({ profileId }: { profileId: string }) {
         <StatCard label="连续天数" value={`${streak} 天`} emoji="🔥" />
         <StatCard label="课程通关" value={`${doneCount}/${lessons.length}`} emoji="🏁" />
         <StatCard label="创作作品" value={`${projects.length} 个`} emoji="🖼" />
+        <StatCard label="随堂练习" value={exTotal ? `${Math.round((exCorrect / exTotal) * 100)}%` : '—'} emoji="📝" />
       </div>
 
       <div className="mb-4 rounded-2xl bg-white/80 p-5">

@@ -16,6 +16,14 @@ export type CheckRule =
   | { type: 'actor_reach'; targetIndex: number; tolerance?: number }
   | { type: 'manual' };
 
+/** 随堂练习题 */
+export interface Exercise {
+  q: string;
+  options: string[];
+  answer: number; // 正确选项下标
+  explain: string;
+}
+
 export interface LessonTask {
   id: string;
   text: string;
@@ -65,6 +73,8 @@ export interface Lesson {
   freeplayLesson?: boolean;
   /** 对标课标信息（家长端学情报告与任务面板展示） */
   curriculum?: CurriculumInfo;
+  /** 随堂练习（通关后解锁，成绩进家长报告） */
+  exercises?: Exercise[];
   /** 交叉课程学科标注：编程 × 学科（跨学科主题学习） */
   subject?: { name: string; emoji: string; points: string[] };
   /** 学科分类（九大学科）：语文/数学/英语/科学/物理/化学/生物/地理/音乐/信息科技 */
@@ -95,6 +105,8 @@ export interface ProfileProgress {
   lessonDrafts: Record<string, string>;
   /** 每课的 Python 代码草稿（代码模式），离开后自动恢复 */
   lessonCodes: Record<string, string>;
+  /** 随堂练习成绩：lessonId -> {correct, total} */
+  exercises?: Record<string, { correct: number; total: number }>;
 }
 
 export interface Project {

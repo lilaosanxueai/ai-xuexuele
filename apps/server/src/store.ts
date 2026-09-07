@@ -50,7 +50,7 @@ function progressFile(profileId: string): string {
 }
 
 export function getProgress(profileId: string): ProfileProgress {
-  return readJson<ProfileProgress>(progressFile(profileId), { profileId, lessons: {}, dailyUsage: {}, lessonDrafts: {}, lessonCodes: {} });
+  return readJson<ProfileProgress>(progressFile(profileId), { profileId, lessons: {}, dailyUsage: {}, lessonDrafts: {}, lessonCodes: {}, exercises: {} });
 }
 
 export function mergeProgress(profileId: string, patch: {
@@ -60,6 +60,7 @@ export function mergeProgress(profileId: string, patch: {
   minutesDelta?: number;
   draft?: string;
   code?: string;
+  exercise?: { correct: number; total: number };
 }): ProfileProgress {
   const cur = getProgress(profileId);
   if (patch.lessonId) {
@@ -80,6 +81,10 @@ export function mergeProgress(profileId: string, patch: {
     if (typeof patch.code === 'string' && patch.code.length <= 100_000) {
       cur.lessonCodes = cur.lessonCodes ?? {};
       cur.lessonCodes[patch.lessonId] = patch.code;
+    }
+    if (patch.exercise && patch.exercise.total > 0 && patch.exercise.total <= 50) {
+      cur.exercises = cur.exercises ?? {};
+      cur.exercises[patch.lessonId] = { correct: Math.max(0, Math.round(patch.exercise.correct)), total: Math.round(patch.exercise.total) };
     }
   }
   if (patch.minutesDelta && patch.minutesDelta > 0) {

@@ -18,6 +18,7 @@ import { recognizer } from '../ml/recognizer.ts';
 import { parsePy, PyRunner } from '../runtime/pyinterp.ts';
 import { pyStageApi } from '../runtime/pyBridge.ts';
 import { workspaceToPython } from '../blocks/python.ts';
+import ExercisePanel from '../components/ExercisePanel.tsx';
 import { guideRespond, newGuideState, type GuideState } from '../runtime/guideBrain.ts';
 
 export interface WorkshopMode {
@@ -82,6 +83,7 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
   const [restOverlay, setRestOverlay] = useState(false);
   const [restCountdown, setRestCountdown] = useState(0);
   const [locked, setLocked] = useState(false);
+  const [quizOpen, setQuizOpen] = useState(false);
   const [pinInput, setPinInput] = useState('');
 
   const wsApiRef = useRef<WorkspaceApi | null>(null);
@@ -594,6 +596,9 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
         <ToolBtn title={muted ? '打开音效' : '关掉音效'} onClick={toggleMute}>{muted ? '🔇' : '🔊'}</ToolBtn>
         <ToolBtn title={camOn ? '关闭 AI 摄像头' : '打开 AI 摄像头（需先在 AI 实验室训练）'} onClick={() => void toggleCam()}>{camOn ? '📷 AI 眼睛开' : '📷 AI 眼睛'}</ToolBtn>
         <ToolBtn title={codeMode ? '回到积木画布' : '看看积木变成的 Python 代码（可以直接改！）'} onClick={switchMode}>{codeMode ? '🧩 积木模式' : '🐍 代码模式'}</ToolBtn>
+        {lesson.exercises && lesson.exercises.length > 0 && (
+          <ToolBtn title="随堂小练：检验这课学得牢不牢" onClick={() => setQuizOpen(true)}>📝 随堂小练</ToolBtn>
+        )}
         <ToolBtn title="全屏（更像一台游戏机）" onClick={toggleFullscreen}>⛶ 全屏</ToolBtn>
         <span className="ml-auto pr-1 text-xs text-slate-400">画布会自动保存，放心关掉</span>
       </div>
@@ -786,11 +791,29 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
               </div>
             ) : <p className="mb-6" />}
             <div className="flex justify-center gap-3">
+              {lesson.exercises && lesson.exercises.length > 0 && (
+                <button onClick={() => { setCelebrate(false); setQuizOpen(true); }} className="rounded-xl bg-amber-400 px-4 py-2 font-bold text-white hover:bg-amber-500">📝 随堂小练</button>
+              )}
               <button onClick={() => setCelebrate(false)} className="rounded-xl bg-slate-200 px-4 py-2 font-bold hover:bg-slate-300">再改进一下</button>
               <button onClick={() => nav('/map')} className="rounded-xl bg-emerald-500 px-4 py-2 font-bold text-white hover:bg-emerald-600">回到地图 🏝</button>
             </div>
           </div>
         </div>
+      )}
+
+      {/* 随堂小练 */}
+      {quizOpen && lesson.exercises && profile && (
+        <ExercisePanel
+          title={lesson.title}
+          exercises={lesson.exercises}
+          onClose={() => setQuizOpen(false)}
+          onDone={(correct) => {
+            void api.updateProgress(profile.id, {
+              lessonId: lesson.id,
+              exercise: { correct, total: lesson.exercises!.length },
+            }).catch(() => {});
+          }}
+        />
       )}
 
       {/* 护眼 20-20-20：连续 20 分钟远眺 20 秒 */}
