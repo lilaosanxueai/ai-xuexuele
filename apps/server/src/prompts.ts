@@ -75,7 +75,7 @@ export function buildSystemPrompt(mode: BuddyMode, settings: Settings, ctx: Chat
 }
 
 /** AI 代搭：把孩子口述转成积木指令 JSON（只输出 JSON，前端逐块搭上画布） */
-export function buildSystemPromptForBuild(catalog: BlockCatalogEntry[], ctx: ChatContext): string {
+export function buildSystemPromptForBuild(catalog: BlockCatalogEntry[], ctx: ChatContext, current: BuildOp[] = []): string {
   const catalogText = catalog
     .map((c) => {
       const fields = c.fields.length
@@ -84,6 +84,9 @@ export function buildSystemPromptForBuild(catalog: BlockCatalogEntry[], ctx: Cha
       return `- ${c.type}｜${c.label}${c.container ? '｜可含子积木(children)' : ''}${c.hat ? '｜帽子(程序入口)' : ''}｜字段: ${fields}`;
     })
     .join('\n');
+  const currentText = current.length
+    ? `\n孩子画布上现在的程序（按执行顺序）：\n${JSON.stringify(current)}\n\n孩子说"再加/改成/删掉"时，基于这个程序输出修改后的【完整】新程序（第一个 op 用 clear 再整体重建）；说"清空"才只留 clear；说"再加一个X"也可以只输出新增的那几块（不带 clear，应用会自动接到程序末尾）。`
+    : '\n孩子画布当前是空的。';
   const task = ctx.currentTask ? `孩子当前的任务：${ctx.currentTask}` : '';
   return [
     '你是儿童编程应用"AI学学乐"里的积木搭建器。孩子用一句话描述想要的程序，你把它翻译成积木指令 JSON，由应用自动搭到画布上。',
@@ -91,17 +94,17 @@ export function buildSystemPromptForBuild(catalog: BlockCatalogEntry[], ctx: Cha
     '输出要求（严格遵守）：',
     '1. 只输出一个 JSON 对象，形如 {"ops":[...]}，不要任何解释文字、不要 markdown 代码块。',
     '2. ops 是按执行顺序的数组，每项二选一：',
-    '   {"op":"clear"} —— 孩子要求清空/重新搭时放第一个',
+    '   {"op":"clear"} —— 整体重建时放第一个',
     '   {"op":"add","type":"积木类型","fields":{"字段名":"值"},"children":[...],"branch":"STACK"}',
     '3. 只能使用下面目录里的 type；fields 只能填该积木列出的字段；下拉字段必须用列出的可选值；数字字段传数字字符串。',
     '4. 容器积木（重复/如果/一直重复）的内部步骤放 children（同样是 add 数组）；如果否则的第二分支用 "branch":"STACK2"。',
-    '5. 程序第一步通常是帽子积木 island_when_run；除非孩子明确说保留已有积木，否则先输出完整新程序（必要时第一个 op 用 clear）。',
-    '6. 语句积木之间是顺序执行（一个接一个接在 next 上），你只管按顺序列出。',
+    '5. 画布为空或整体重建时，程序第一步通常是帽子积木 island_when_run。',
+    '6. 语句积木之间是顺序执行，你只管按顺序列出。',
     '7. 总块数不超过 30。孩子没提到的东西不要自作主张加。',
     '',
     '可用积木目录：',
     catalogText,
-    '',
+    currentText,
     task,
     '翻译不了的模糊说法：输出 {"ops":[]} 即可，应用会提示孩子换个说法。',
   ].join('\n');

@@ -1,5 +1,5 @@
 import { Router, type Request, type Response } from 'express';
-import type { BlockCatalogEntry, BuddyMode, ChatContext, ChatMessage, PlaygroundModel, Settings } from '@shared/types.ts';
+import type { BlockCatalogEntry, BuddyMode, BuildOp, ChatContext, ChatMessage, PlaygroundModel, Settings } from '@shared/types.ts';
 import type { AppConfig } from './config.ts';
 import { llmConfigured } from './config.ts';
 import * as store from './store.ts';
@@ -173,7 +173,7 @@ export function buildRouter(cfg: AppConfig): Router {
 
   // ---------- AI 代搭：孩子口述 → 积木指令 JSON（非流式；无 key/失败/空结果时前端走本地解析降级） ----------
   r.post('/build', async (req, res) => {
-    const { profileId, message, catalog, context } = req.body ?? {};
+    const { profileId, message, catalog, context, current } = req.body ?? {};
     if (!profileId || typeof message !== 'string' || !Array.isArray(catalog)) {
       return res.status(400).json({ error: '参数不完整' });
     }
@@ -187,6 +187,7 @@ export function buildRouter(cfg: AppConfig): Router {
     const system = buildSystemPromptForBuild(
       catalog.slice(0, 60) as BlockCatalogEntry[],
       (context ?? {}) as ChatContext,
+      Array.isArray(current) ? (current as BuildOp[]).slice(0, 60) : [],
     );
     try {
       const raw = await completeChat(cfg.llm, [

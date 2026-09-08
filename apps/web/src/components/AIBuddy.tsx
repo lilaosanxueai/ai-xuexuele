@@ -20,6 +20,8 @@ interface Props {
   catalog?: BlockCatalogEntry[];
   /** 代搭指令执行回调：由工作台搭上画布 */
   onBuildOps?: (ops: BuildOp[]) => void;
+  /** 画布当前程序（代搭"接着改"上下文） */
+  getCurrentOps?: () => BuildOp[];
 }
 
 const MODES: { key: BuddyMode; label: string }[] = [
@@ -59,7 +61,7 @@ interface SpeechEventLike {
 }
 
 const AIBuddy = forwardRef<BuddyHandle, Props>(function AIBuddy(
-  { profileId, buddy, intro, defaultMode, getContext, catalog, onBuildOps },
+  { profileId, buddy, intro, defaultMode, getContext, catalog, onBuildOps, getCurrentOps },
   ref,
 ) {
   const [mode, setMode] = useState<BuddyMode>(defaultMode);
@@ -90,7 +92,7 @@ const AIBuddy = forwardRef<BuddyHandle, Props>(function AIBuddy(
       let ops: BuildOp[] | null = null;
       let via = '';
       try {
-        const r = await askBuild({ profileId, message: text, catalog: catalog ?? [], context: getContext() });
+        const r = await askBuild({ profileId, message: text, catalog: catalog ?? [], context: getContext(), current: getCurrentOps?.() ?? [] });
         const note = r.note;
         if (note) {
           setMessages((prev) => [...prev, { role: 'assistant', content: note, mode: 'build' }]);

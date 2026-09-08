@@ -87,6 +87,62 @@ export function sanitizeOps(input: unknown, catalog: BlockCatalogEntry[], depth 
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
+/** 画布程序 → 指令序列（逆向序列化：给大模型看当前程序，支持"接着改"） */
+export function workspaceToOps(ws: Blockly.WorkspaceSvg): BuildOp[] {
+  const blockToOp = (b: Blockly.BlockSvg): BuildOp | null => {
+    const op: BuildOp = { op: 'add', type: b.type };
+    const fields: Record<string, string> = {};
+    for (const input of b.inputList) {
+      for (const field of input.fieldRow) {
+        const v = field.getValue();
+        if (field.name && typeof v === 'string' && v !== '') fields[field.name] = v.slice(0, 40);
+      }
+      // 数字槽里的影子数字积木 → 记为字段值
+      const target = input.connection?.targetBlock() as Blockly.BlockSvg | null;
+      if (target && target.isShadow() && target.type === 'island_number') {
+        fields[input.name] = String(target.getFieldValue('NUM'));
+      }
+    }
+    if (Object.keys(fields).length) op.fields = fields;
+    const stackInput = b.getInput('STACK') ?? b.getInput('STACK2');
+    if (stackInput?.connection) {
+      const children: BuildOp[] = [];
+      let child = stackInput.connection.targetBlock() as Blockly.BlockSvg | null;
+      while (child) {
+        const c = blockToOp(child);
+        if (c) children.push(c);
+        child = child.getNextBlock() as Blockly.BlockSvg | null;
+      }
+      if (children.length) { op.branch = stackInput.name; op.children = children; }
+    }
+    return op;
+  };
+
+  const ops: BuildOp[] = [];
+  for (const top of ws.getTopBlocks(false) as Blockly.BlockSvg[]) {
+    // 只序列化链头（没有 previous 连接的块）；值积木（有 output）跳过
+    if (top.outputConnection) continue;
+    if (top.previousConnection && top.getParent()) continue;
+    let cur: Blockly.BlockSvg | null = top;
+    while (cur) {
+      const o = blockToOp(cur);
+      if (o) ops.push(o);
+      cur = cur.getNextBlock() as Blockly.BlockSvg | null;
+    }
+  }
+  return ops;
+}
+
+/** 画布第一条执行链的链尾（增量追加的接入点）；无链返回 null */
+function findChainTail(ws: Blockly.WorkspaceSvg): Blockly.BlockSvg | null {
+  const tops = (ws.getTopBlocks(false) as Blockly.BlockSvg[]).filter((b) => !b.outputConnection);
+  const head = tops.find((b) => b.type.startsWith('island_when')) ?? tops[0];
+  if (!head) return null;
+  let tail = head;
+  while (tail.getNextBlock()) tail = tail.getNextBlock() as Blockly.BlockSvg;
+  return tail;
+}
+
 /** 语句积木链（含子容器递归）。返回链尾积木（用于顶层续接下一组指令） */
 function addChain(
   ws: Blockly.WorkspaceSvg,
@@ -130,15 +186,22 @@ function addChain(
   return tail;
 }
 
-/** 执行指令：搭上画布。animate=true 时逐块出现（每块 ~0.4s），最后自动排整齐。顶层指令依次串成一条执行链 */
+/** 执行指令：搭上画布。animate=true 时逐块出现（每块 ~0.4s），最后自动排整齐。
+ *  含 clear → 重建；不含 clear → 追加到画布现有执行链尾部（增量修改语义），
+ *  画布已有帽子链时自动丢弃解析器补的帽子，避免出现双入口死链 */
 export async function applyBuildOps(
   ws: Blockly.WorkspaceSvg,
-  ops: BuildOp[],
+  rawOps: BuildOp[],
   opts: { animate?: boolean; onEach?: (n: number) => void } = {},
 ): Promise<{ added: number }> {
   const { animate = true, onEach } = opts;
   const state = { added: 0 };
+  let ops = rawOps;
   let topTail: Blockly.BlockSvg | null = null;
+  if (!ops.some((o) => o.op === 'clear')) {
+    topTail = findChainTail(ws);
+    if (topTail && ops[0]?.op === 'add' && ops[0].type === 'island_when_run') ops = ops.slice(1);
+  }
   for (const op of ops) {
     if (op.op === 'clear') {
       ws.clear();

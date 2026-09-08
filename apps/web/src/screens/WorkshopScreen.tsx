@@ -19,7 +19,7 @@ import { recognizer } from '../ml/recognizer.ts';
 import { parsePy, PyRunner } from '../runtime/pyinterp.ts';
 import { pyStageApi } from '../runtime/pyBridge.ts';
 import { workspaceToPython } from '../blocks/python.ts';
-import { applyBuildOps, buildCatalog } from '../runtime/builder.ts';
+import { applyBuildOps, buildCatalog, workspaceToOps } from '../runtime/builder.ts';
 import ExercisePanel from '../components/ExercisePanel.tsx';
 import { guideRespond, newGuideState, type GuideState } from '../runtime/guideBrain.ts';
 
@@ -749,6 +749,10 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
             getContext={buildContext}
             catalog={blockCatalog}
             onBuildOps={handleBuildOps}
+            getCurrentOps={() => {
+              const ws = wsApiRef.current?.workspace as Blockly.WorkspaceSvg | undefined;
+              return ws ? workspaceToOps(ws) : [];
+            }}
           />
         </div>
       </div>

@@ -45,7 +45,7 @@ export const api = {
 
 /** AI 代搭：口述 → 积木指令（fallback=true 表示服务端没有大模型，前端走本地解析） */
 export async function askBuild(
-  payload: { profileId: string; message: string; catalog: BlockCatalogEntry[]; context: ChatContext },
+  payload: { profileId: string; message: string; catalog: BlockCatalogEntry[]; context: ChatContext; current?: BuildOp[] },
 ): Promise<{ ops?: BuildOp[]; fallback?: boolean; note?: string }> {
   return req<{ ops?: BuildOp[]; fallback?: boolean; note?: string }>('/api/build', {
     method: 'POST',
