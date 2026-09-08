@@ -1,6 +1,7 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import type { BuddyMode, BuddySettings, ChatContext, ChatMessage } from '@shared/types.ts';
-import { chatStream } from '../api.ts';
+import type { BlockCatalogEntry, BuddyMode, BuddySettings, BuildOp, ChatContext, ChatMessage } from '@shared/types.ts';
+import { askBuild, chatStream } from '../api.ts';
+import { parseChineseBuild } from '../runtime/nlParser.ts';
 
 export interface BuddyHandle {
   /** 从任务面板/灵感卡片跳进来提问 */
@@ -15,10 +16,15 @@ interface Props {
   intro: string;
   defaultMode: BuddyMode;
   getContext: () => ChatContext;
+  /** 本课可用的积木目录（代搭用：大模型只能从这里选积木） */
+  catalog?: BlockCatalogEntry[];
+  /** 代搭指令执行回调：由工作台搭上画布 */
+  onBuildOps?: (ops: BuildOp[]) => void;
 }
 
 const MODES: { key: BuddyMode; label: string }[] = [
   { key: 'idea', label: '💡 灵感' },
+  { key: 'build', label: '🤖 代搭' },
   { key: 'hint', label: '🆘 提示' },
   { key: 'explain', label: '📖 讲解' },
   { key: 'review', label: '🌟 点评' },
@@ -26,10 +32,13 @@ const MODES: { key: BuddyMode; label: string }[] = [
 
 const QUICK: Record<BuddyMode, string[]> = {
   idea: ['给我 3 个作品点子！', '帮我把点子变成步骤'],
+  build: ['帮我搭：重复4次{右转90，移动80}', '清空画布', '搭：说你好，移动100'],
   hint: ['我卡住了，给点提示', '再提示我多一点'],
   explain: ['「重复」积木是干什么的？', '什么是条件？'],
   review: ['看看我的作品！', '哪里可以更好？'],
 };
+
+const BUILD_HELP = '我没能听懂这句话 😅 换个说法试试，比如：\n「帮我搭：说你好，移动100」\n「重复4次{右转90，移动80}」\n「清空画布」';
 
 const URL_RE = /https?:\/\/\S+|www\.\S+/g;
 
@@ -50,7 +59,7 @@ interface SpeechEventLike {
 }
 
 const AIBuddy = forwardRef<BuddyHandle, Props>(function AIBuddy(
-  { profileId, buddy, intro, defaultMode, getContext },
+  { profileId, buddy, intro, defaultMode, getContext, catalog, onBuildOps },
   ref,
 ) {
   const [mode, setMode] = useState<BuddyMode>(defaultMode);
@@ -73,11 +82,42 @@ const AIBuddy = forwardRef<BuddyHandle, Props>(function AIBuddy(
     listEnd.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  /** 代搭分支：口述 → 指令（服务端大模型优先，离线降级本地解析）→ 搭上画布 */
+  const sendBuild = async (text: string) => {
+    setMessages((prev) => [...prev, { role: 'user', content: text, mode: 'build' }]);
+    setBusy(true);
+    try {
+      let ops: BuildOp[] | null = null;
+      let via = '';
+      try {
+        const r = await askBuild({ profileId, message: text, catalog: catalog ?? [], context: getContext() });
+        const note = r.note;
+        if (note) {
+          setMessages((prev) => [...prev, { role: 'assistant', content: note, mode: 'build' }]);
+          return;
+        }
+        if (Array.isArray(r.ops) && r.ops.length > 0) { ops = r.ops; via = '动用了我的大脑袋 🧠'; }
+      } catch { /* 服务端不可达 → 本地解析 */ }
+      if (!ops) { ops = parseChineseBuild(text); via = '用离线小脑 💪'; }
+      const addCount = (ops ?? []).filter((o) => o.op === 'add').reduce((a, o) => a + 1 + (o.children?.length ?? 0), 0);
+      if (addCount === 0 || !ops) {
+        setMessages((prev) => [...prev, { role: 'assistant', content: BUILD_HELP, mode: 'build' }]);
+        return;
+      }
+      setMessages((prev) => [...prev, { role: 'assistant', content: `好嘞，${via}给你搭：一共 ${addCount} 块积木，看着画布，马上拼好 🧩`, mode: 'build' }]);
+      onBuildOps?.(ops);
+      setMessages((prev) => [...prev, { role: 'assistant', content: '搭好啦！看看是不是你想的那样——不对就告诉我改，对了就点 ▶ 试试！你也可以拖动任何一块积木自己调整 ✨', mode: 'build' }]);
+    } finally {
+      setBusy(false);
+    }
+  };
+
   const send = async (text: string, forceMode?: BuddyMode) => {
     const m = forceMode ?? modeRef.current;
     const trimmed = text.trim();
     if (!trimmed || busy) return;
     setInput('');
+    if (m === 'build') return sendBuild(trimmed);
     setMessages((prev) => [...prev, { role: 'user', content: trimmed, mode: m }, { role: 'assistant', content: '', mode: m, streaming: true }]);
     setBusy(true);
     try {
@@ -238,7 +278,7 @@ const AIBuddy = forwardRef<BuddyHandle, Props>(function AIBuddy(
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder={listening ? '我在听你说…' : `和 ${buddy.name} 说说想法…`}
+          placeholder={listening ? '我在听你说…' : mode === 'build' ? '说出想搭的程序，如：重复4次{右转90，移动80}' : `和 ${buddy.name} 说说想法…`}
           maxLength={200}
           className="min-w-0 flex-1 rounded-xl border border-slate-300 px-3 py-2 text-[15px] outline-none focus:border-sky-400"
         />

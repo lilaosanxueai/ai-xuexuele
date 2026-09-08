@@ -1,11 +1,11 @@
 import { Router, type Request, type Response } from 'express';
-import type { BuddyMode, ChatContext, ChatMessage, PlaygroundModel, Settings } from '@shared/types.ts';
+import type { BlockCatalogEntry, BuddyMode, ChatContext, ChatMessage, PlaygroundModel, Settings } from '@shared/types.ts';
 import type { AppConfig } from './config.ts';
 import { llmConfigured } from './config.ts';
 import * as store from './store.ts';
 import { loadLessons, findLesson } from './lessons.ts';
-import { streamChat, type LlmMessage } from './llm.ts';
-import { buildSystemPrompt } from './prompts.ts';
+import { completeChat, streamChat, type LlmMessage } from './llm.ts';
+import { buildSystemPrompt, buildSystemPromptForBuild } from './prompts.ts';
 import { checkKidInput, stripUrls } from './safety.ts';
 import { appendChatLog, readChatLogs, listChatDates } from './logging.ts';
 import { getPlayground, savePlayground } from './playground.ts';
@@ -168,6 +168,50 @@ export function buildRouter(cfg: AppConfig): Router {
       const friendly = `哎呀，我的大脑连接出了一点小问题 😵‍💫 请爸爸妈妈看看服务器窗口里的报错信息。\n（技术详情：${msg.slice(0, 120)}）`;
       send('delta', { text: friendly });
       finish(`${full}${friendly}`, 'error');
+    }
+  });
+
+  // ---------- AI 代搭：孩子口述 → 积木指令 JSON（非流式；无 key/失败/空结果时前端走本地解析降级） ----------
+  r.post('/build', async (req, res) => {
+    const { profileId, message, catalog, context } = req.body ?? {};
+    if (!profileId || typeof message !== 'string' || !Array.isArray(catalog)) {
+      return res.status(400).json({ error: '参数不完整' });
+    }
+
+    // 输入安检与对话一致：命中即不调大模型
+    const blocked = checkKidInput(message);
+    if (blocked) return res.json({ ops: [], note: blocked });
+
+    if (!llmConfigured(cfg)) return res.json({ fallback: true });
+
+    const system = buildSystemPromptForBuild(
+      catalog.slice(0, 60) as BlockCatalogEntry[],
+      (context ?? {}) as ChatContext,
+    );
+    try {
+      const raw = await completeChat(cfg.llm, [
+        { role: 'system', content: system },
+        { role: 'user', content: message.slice(0, 300) },
+      ], { mock: false });
+      // 容错提取 JSON：剥可能的 markdown 围栏 / 前后杂文
+      const jsonText = raw.slice(Math.max(0, raw.indexOf('{')), raw.lastIndexOf('}') + 1);
+      let ops: unknown = null;
+      try { ops = JSON.parse(jsonText)?.ops; } catch { ops = null; }
+      appendChatLog({
+        ts: new Date().toISOString(), profileId, mode: 'build',
+        user: message.slice(0, 500),
+        assistant: `指令 ${Array.isArray(ops) ? ops.length : 0} 条`, model: cfg.llm.model,
+      });
+      if (!Array.isArray(ops) || ops.length === 0) return res.json({ ops: [] });
+      res.json({ ops });
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.error('[build] LLM 调用失败，前端将走本地解析：', msg.slice(0, 200));
+      appendChatLog({
+        ts: new Date().toISOString(), profileId, mode: 'build',
+        user: message.slice(0, 500), assistant: `LLM 失败：${msg.slice(0, 150)}`, model: 'error',
+      });
+      res.json({ fallback: true });
     }
   });
 

@@ -128,7 +128,34 @@ export interface Project {
   updatedAt: string;
 }
 
-export type BuddyMode = 'idea' | 'hint' | 'explain' | 'review';
+export type BuddyMode = 'idea' | 'build' | 'hint' | 'explain' | 'review';
+
+/** AI 代搭指令：孩子口述 → 大模型/本地解析 → 积木操作序列（前端逐块搭上画布） */
+export interface BuildOp {
+  op: 'clear' | 'add';
+  /** add：积木类型（island_ 前缀，必须在课程工具箱白名单内） */
+  type?: string;
+  /** add：字段值（字段名 → 文本值，数字字段也传字符串） */
+  fields?: Record<string, string>;
+  /** add：子积木（重复/如果 等容器积木内部） */
+  children?: BuildOp[];
+  /** add：容器积木的分支名（默认 STACK，如果否则的第二个分支是 STACK2） */
+  branch?: string;
+}
+
+/** 积木目录条目：前端从定义生成，发给服务端供大模型选积木用 */
+export interface BlockCatalogEntry {
+  type: string;
+  label: string;
+  /** 积木上的完整文案（含 %1 占位），供大模型理解语义 */
+  message: string;
+  /** 可填字段：name=字段名 kind=类型 options=下拉可选项 */
+  fields: { name: string; kind: 'number' | 'text' | 'dropdown'; options?: string[] }[];
+  /** 是否有内部子积木槽（重复/如果等） */
+  container?: boolean;
+  /** 是否帽子积木（程序入口，一屏最多一个） */
+  hat?: boolean;
+}
 
 export interface ChatMessage {
   role: 'user' | 'assistant';

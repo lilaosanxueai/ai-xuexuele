@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { BuddyMode, ChatContext, Lesson, Settings } from '@shared/types.ts';
+import * as Blockly from 'blockly';
+import type { BlockCatalogEntry, BuddyMode, BuildOp, ChatContext, Lesson, Settings } from '@shared/types.ts';
 import { DEFAULT_SETTINGS } from '@shared/types.ts';
 import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
@@ -18,6 +19,7 @@ import { recognizer } from '../ml/recognizer.ts';
 import { parsePy, PyRunner } from '../runtime/pyinterp.ts';
 import { pyStageApi } from '../runtime/pyBridge.ts';
 import { workspaceToPython } from '../blocks/python.ts';
+import { applyBuildOps, buildCatalog } from '../runtime/builder.ts';
 import ExercisePanel from '../components/ExercisePanel.tsx';
 import { guideRespond, newGuideState, type GuideState } from '../runtime/guideBrain.ts';
 
@@ -456,6 +458,20 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
   }, [lesson, mode.kind]);
 
   const toolbox = useMemo(() => buildToolbox(lesson?.toolbox ?? ALL_BLOCK_TYPES), [lesson]);
+  /** 本课积木目录：代搭时大模型只能从这里选积木（跟工具箱一致，不会搭出超纲积木） */
+  const blockCatalog = useMemo(() => buildCatalog(lesson?.toolbox ?? ALL_BLOCK_TYPES), [lesson]);
+
+  /** AI 代搭落地：展开抽屉 → 逐块搭上画布 → 重新校验任务 */
+  const handleBuildOps = useCallback((ops: BuildOp[]) => {
+    setDrawerOpen(true);
+    setBuddyOpen(true);
+    const ws = wsApiRef.current?.workspace as Blockly.WorkspaceSvg | undefined;
+    if (!ws) return;
+    void applyBuildOps(ws, ops, { animate: true }).then(() => {
+      revalidate(false);
+      lastActivityRef.current = Date.now();
+    });
+  }, [revalidate]);
 
   // ---------- 工具条动作 ----------
   const cycleSpeed = () => {
@@ -731,6 +747,8 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
             defaultMode={mode.kind === 'lesson' ? 'hint' : 'idea'}
             intro={lesson.aiIntro || `嗨！我是${settings.buddy.name}${settings.buddy.emoji} 今天我们做点什么好玩的？`}
             getContext={buildContext}
+            catalog={blockCatalog}
+            onBuildOps={handleBuildOps}
           />
         </div>
       </div>

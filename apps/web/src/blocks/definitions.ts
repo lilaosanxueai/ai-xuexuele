@@ -41,7 +41,7 @@ export const BLOCK_CATEGORIES: Record<string, { name: string; colour: string; bl
 
 export const ALL_BLOCK_TYPES = Object.values(BLOCK_CATEGORIES).flatMap((c) => c.blocks);
 
-Blockly.defineBlocksWithJsonArray([
+export const BLOCK_DEFS = [
   // ---------- 事件（帽子积木） ----------
   { type: 'island_when_run', message0: '当 ▶ 开始被点击', nextStatement: null, colour: C.event, tooltip: '点下面的 ▶ 按钮时，从这里开始执行' },
   { type: 'island_when_key', message0: '当按下 %1 键', args0: [{ type: 'field_dropdown', name: 'KEY', options: KEY_OPTIONS }], nextStatement: null, colour: C.event, tooltip: '运行中按下这个键时触发' },
@@ -87,7 +87,9 @@ Blockly.defineBlocksWithJsonArray([
   { type: 'island_number', message0: '%1', args0: [{ type: 'field_number', name: 'NUM', value: 1 }], output: 'Number', colour: C.ops, tooltip: '一个数字，可以塞进别的积木空位里' },
   { type: 'island_eq', message0: '%1 等于 %2 ?', args0: [{ type: 'input_value', name: 'A', check: 'Number' }, { type: 'input_value', name: 'B', check: 'Number' }], output: 'Boolean', colour: C.ops, tooltip: '两个数相等吗？' },
   { type: 'island_random', message0: '在 %1 和 %2 之间取随机数', args0: [{ type: 'input_value', name: 'FROM', check: 'Number' }, { type: 'input_value', name: 'TO', check: 'Number' }], output: 'Number', colour: C.ops, tooltip: '每次都抽一个不一样的数' },
-]);
+] as Parameters<typeof Blockly.defineBlocksWithJsonArray>[0];
+
+Blockly.defineBlocksWithJsonArray(BLOCK_DEFS);
 
 /** 积木类型 → 中文名（给 AI 上下文摘要用） */
 export const BLOCK_LABELS: Record<string, string> = {
@@ -96,4 +98,5 @@ export const BLOCK_LABELS: Record<string, string> = {
   island_say: '说', island_say_for: '说几秒', island_costume: '换造型', island_change_size: '改变大小', island_show: '显示', island_hide: '隐藏',
   island_play: '播放声音', island_repeat: '重复几次', island_forever: '一直重复', island_wait: '等待', island_if: '如果', island_if_else: '如果否则',
   island_touching_edge: '碰到边缘?', island_key_down: '按下某键?', island_recognize: 'AI认出?', island_number: '数字', island_random: '随机数',
+  island_pen_down: '落笔', island_pen_up: '抬笔', island_pen_color: '换笔颜色',
 };

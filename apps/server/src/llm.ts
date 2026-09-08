@@ -13,8 +13,7 @@ export async function* streamChat(
   cfg: LlmConfig,
   messages: LlmMessage[],
   opts: { mock: boolean },
-): AsyncGenerator<string> {
-  if (opts.mock) {
+): AsyncGenerator<string> {  if (opts.mock) {
     for (const line of MOCK_REPLIES) {
       for (const ch of line) {
         yield ch;
@@ -57,4 +56,22 @@ export async function* streamChat(
       } catch { /* 忽略半包 */ }
     }
   }
+}
+
+/** 非流式一次性补全（AI 代搭转指令用：需要完整 JSON，不适合逐段流式） */
+export async function completeChat(cfg: LlmConfig, messages: LlmMessage[], opts: { mock: boolean }): Promise<string> {
+  if (opts.mock) return '';
+  const resp = await fetch(`${cfg.baseURL.replace(/\/$/, '')}/chat/completions`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${cfg.apiKey}` },
+    body: JSON.stringify({
+      model: cfg.model, messages, max_tokens: Math.min(1200, cfg.maxTokens), temperature: 0.2, stream: false,
+    }),
+  });
+  if (!resp.ok) {
+    const detail = await resp.text().catch(() => '');
+    throw new Error(`LLM 接口返回 ${resp.status}：${detail.slice(0, 300)}`);
+  }
+  const data = (await resp.json()) as { choices?: { message?: { content?: string } }[] };
+  return data.choices?.[0]?.message?.content ?? '';
 }

@@ -1,4 +1,4 @@
-import type { BuddyMode, ChatContext, ChatMessage, Lesson, PlaygroundModel, Profile, ProfileProgress, Project, Settings } from '@shared/types.ts';
+import type { BlockCatalogEntry, BuddyMode, BuildOp, ChatContext, ChatMessage, Lesson, PlaygroundModel, Profile, ProfileProgress, Project, Settings } from '@shared/types.ts';
 
 async function req<T>(url: string, init?: RequestInit): Promise<T> {
   const resp = await fetch(url, {
@@ -42,6 +42,16 @@ export const api = {
     req<{ ts: string; mode: string; user: string; assistant: string }[]>(
       `/api/chatlogs?profileId=${profileId}&date=${date}`, { headers: { 'x-parent-pin': pin } }),
 };
+
+/** AI 代搭：口述 → 积木指令（fallback=true 表示服务端没有大模型，前端走本地解析） */
+export async function askBuild(
+  payload: { profileId: string; message: string; catalog: BlockCatalogEntry[]; context: ChatContext },
+): Promise<{ ops?: BuildOp[]; fallback?: boolean; note?: string }> {
+  return req<{ ops?: BuildOp[]; fallback?: boolean; note?: string }>('/api/build', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+}
 
 /** AI 伙伴流式对话：onDelta 收文本增量，返回完整回复 */
 export async function chatStream(
