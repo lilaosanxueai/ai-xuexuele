@@ -10,6 +10,10 @@ export const SUBJECTS: Record<string, { emoji: string; color: string; desc: stri
   '生物': { emoji: '🌿', color: 'emerald', desc: '生命周期 · 生态系统' },
   '地理': { emoji: '🌏', color: 'orange', desc: '地球运动 · 纬度与气候' },
   '音乐': { emoji: '🎵', color: 'pink', desc: '音阶 · 旋律 · 节奏' },
+  '艺术': { emoji: '🎨', color: 'fuchsia', desc: '造型与构图 · 色彩与设计' },
+  '道德与法治': { emoji: '🤝', color: 'red', desc: '规则与安全 · 公共生活' },
+  '劳动': { emoji: '🧹', color: 'lime', desc: '生活自理 · 班级服务' },
+  '体育与健康': { emoji: '🤸', color: 'cyan', desc: '运动技能 · 健康生活' },
 };
 
 /** 学段显示名 */
@@ -31,4 +35,8 @@ export const SUBJECT_STYLE: Record<string, { card: string; badge: string; text: 
   '生物': { card: 'from-emerald-500 to-green-600', badge: 'bg-emerald-100 text-emerald-700', text: 'text-emerald-700', ring: 'ring-emerald-300' },
   '地理': { card: 'from-orange-500 to-amber-600', badge: 'bg-orange-100 text-orange-700', text: 'text-orange-700', ring: 'ring-orange-300' },
   '音乐': { card: 'from-pink-500 to-fuchsia-600', badge: 'bg-pink-100 text-pink-700', text: 'text-pink-700', ring: 'ring-pink-300' },
+  '艺术': { card: 'from-fuchsia-500 to-pink-600', badge: 'bg-fuchsia-100 text-fuchsia-700', text: 'text-fuchsia-700', ring: 'ring-fuchsia-300' },
+  '道德与法治': { card: 'from-red-500 to-rose-600', badge: 'bg-red-100 text-red-700', text: 'text-red-700', ring: 'ring-red-300' },
+  '劳动': { card: 'from-lime-500 to-green-600', badge: 'bg-lime-100 text-lime-700', text: 'text-lime-700', ring: 'ring-lime-300' },
+  '体育与健康': { card: 'from-cyan-500 to-sky-600', badge: 'bg-cyan-100 text-cyan-700', text: 'text-cyan-700', ring: 'ring-cyan-300' },
 };

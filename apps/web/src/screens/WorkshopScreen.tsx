@@ -67,6 +67,7 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
   const [draftXml, setDraftXml] = useState<string | null>(null);
   const [progressReady, setProgressReady] = useState(false);
   const [wsReady, setWsReady] = useState(false);
+  const [blockTotal, setBlockTotal] = useState(0);
   const [running, setRunning] = useState(false);
   const [taskDone, setTaskDone] = useState<Record<string, boolean>>({});
   const [lessonCompleted, setLessonCompleted] = useState(false);
@@ -304,6 +305,7 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
     lastActivityRef.current = Date.now();
     const counts = wsApiRef.current?.getBlockCounts() ?? {};
     const total = Object.values(counts).reduce((a, b) => a + b, 0);
+    setBlockTotal(total);
     if (total > 0 && !hadBlocksRef.current) {
       hadBlocksRef.current = true;
       sayGuide({ type: 'first-block' });
@@ -778,8 +780,8 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
             )
           ) : (
             <>
-              <ToolBtn title="撤销（放错积木不要紧）" onClick={() => wsApiRef.current?.workspace.undo(false)}>↩️</ToolBtn>
-              <ToolBtn title="重做" onClick={() => wsApiRef.current?.workspace.undo(true)}>↪️</ToolBtn>
+              <ToolBtn title="撤销（放错积木不要紧）" onClick={() => wsApiRef.current?.workspace.undo(false)}>↩️ 撤销</ToolBtn>
+              <ToolBtn title="重做" onClick={() => wsApiRef.current?.workspace.undo(true)}>↪️ 重做</ToolBtn>
               <ToolBtn title="把积木排整齐" onClick={() => wsApiRef.current?.workspace.cleanUp()}>🧹 整理</ToolBtn>
               <ToolBtn title="切换运行速度：慢速能看清每一步" onClick={cycleSpeed}>{SPEED_LABEL[speed]}</ToolBtn>
             </>
@@ -801,7 +803,7 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
 
         {/* 抽屉内容：积木 / 代码编辑器（保持挂载，收起仅视觉裁掉，切课草稿不丢） */}
         <div className="relative h-[calc(46vh-3rem)]" key={lesson.id}>
-          <div className={`h-full ${codeMode ? 'hidden' : ''}`}>
+          <div className={`relative h-full ${codeMode ? 'hidden' : ''}`}>
             {progressReady ? (
               <BlocklyWorkspace
                 toolbox={toolbox}
@@ -812,6 +814,7 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
                   (window as unknown as { __islandWs?: unknown }).__islandWs = api;
                   (window as unknown as { __islandStage?: unknown }).__islandStage = stageRef.current;
                   setWsReady(true);
+                  setBlockTotal(Object.values(api.getBlockCounts() ?? {}).reduce((a, b) => a + b, 0));
                 }}
                 onChange={handleWorkspaceChange}
                 onFlush={(xml) => {
@@ -821,6 +824,14 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
               />
             ) : (
               <div className="flex h-full items-center justify-center text-slate-400">正在恢复你的画布…</div>
+            )}
+            {/* 空画布新手引导：不知道拖什么时给个方向（不挡操作） */}
+            {!codeMode && wsReady && blockTotal <= 1 && (
+              <div className="pointer-events-none absolute inset-x-0 bottom-6 z-10 flex justify-center px-6">
+                <div className="rounded-2xl bg-amber-100/95 px-5 py-3 text-center text-sm font-bold text-amber-800 shadow-lg">
+                  👋 第一步：从左边拖一块积木进来（比如「外观」里的「说」），拼到黄色积木下面，再点右下角 ▶ 试试！
+                </div>
+              </div>
             )}
           </div>
 

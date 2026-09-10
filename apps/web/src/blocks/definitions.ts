@@ -97,6 +97,6 @@ export const BLOCK_LABELS: Record<string, string> = {
   island_move: '移动', island_turn_right: '右转', island_turn_left: '左转', island_goto: '移到xy', island_bounce: '边缘反弹',
   island_say: '说', island_say_for: '说几秒', island_costume: '换造型', island_change_size: '改变大小', island_show: '显示', island_hide: '隐藏',
   island_play: '播放声音', island_repeat: '重复几次', island_forever: '一直重复', island_wait: '等待', island_if: '如果', island_if_else: '如果否则',
-  island_touching_edge: '碰到边缘?', island_key_down: '按下某键?', island_recognize: 'AI认出?', island_number: '数字', island_random: '随机数',
+  island_touching_edge: '碰到边缘?', island_key_down: '按下某键?', island_recognize: 'AI认出?', island_number: '数字', island_eq: '等于?', island_random: '随机数',
   island_pen_down: '落笔', island_pen_up: '抬笔', island_pen_color: '换笔颜色',
 };
