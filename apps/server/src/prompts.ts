@@ -50,7 +50,7 @@ function contextBlock(ctx: ChatContext): string {
     lines.push('正在自由创造模式');
     if (ctx.projectTitle) lines.push(`作品名：《${ctx.projectTitle}》`);
   }
-  const counts = Object.entries(ctx.blockCounts).filter(([, n]) => n > 0);
+  const counts = Object.entries(ctx.blockCounts ?? {}).filter(([, n]) => n > 0);
   lines.push(counts.length ? `作品里已用的积木：${counts.map(([k, n]) => `${k}×${n}`).join('、')}` : '画布上还没有积木');
   if (ctx.runOk === true) lines.push('最近一次运行成功');
   if (ctx.lastError) lines.push(`最近遇到的问题：${ctx.lastError}`);
