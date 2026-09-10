@@ -1,0 +1,57 @@
+{
+  "id": "cross-61",
+  "island": "cross",
+  "order": 119,
+  "title": "AI 运动计数员",
+  "emoji": "🏅",
+  "story": "运动员训练时，教练拿着计数器喊：「8 个！再来 2 个！」今天你的 AI 就是计数教练：教它认「运动中」和「休息中」，你动它就欢呼，你停它就倒数休息。科学锻炼 + 科技助力，全家运动挑战赛开始！",
+  "goals": ["理解运动与休息交替的科学", "用 AI 做一个运动陪伴小助手"],
+  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_costume", "island_play", "island_repeat", "island_when_recognized", "island_recognize"],
+  "actor": { "costume": "📣", "x": -60, "y": 0, "dir": 0 },
+  "targets": [{ "emoji": "🥇", "x": 130, "y": 40 }],
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "训练 AI 教练：类别 1 = 「运动中」（比如原地摆臂的动作），类别 2 = 「休息中」（站直不动），各拍 10 张",
+      "hintPrompts": ["动作要做标准，AI 才认得准", "一个动态一个静态，差别明显好区分"],
+      "check": { "type": "manual" }
+    },
+    {
+      "id": "t2",
+      "text": "动起来：「当 AI 认出 运动中」→ 教练角色播放欢呼声并喊「动起来！加油！」",
+      "hintPrompts": ["音效里的 🎉 欢呼最合适", "对着摄像头做运动动作试试看"],
+      "check": { "type": "block_used", "block": "island_when_recognized" }
+    },
+    {
+      "id": "t3",
+      "text": "会休息：「当 AI 认出 休息中」→ 变身 😌 说「休息也是训练！喝水～」",
+      "hintPrompts": ["科学运动=运动+休息交替，练练停停才有效", "会喊休息的教练才是好教练"],
+      "check": { "type": "say_text" }
+    },
+    {
+      "id": "t4",
+      "text": "完成一组训练：运动 20 秒 + 休息 10 秒（用等待积木帮你计时），然后走到 🥇 领奖台",
+      "hintPrompts": ["「重复 8 次」+「等待 1 秒」就是 8 秒计时器", "组间休息时心率会慢慢降下来——这就是恢复"],
+      "check": { "type": "actor_reach", "targetIndex": 0 }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：全家挑战赛——爸妈做动作你举牌，看谁的「运动中」被 AI 认出得最多！",
+      "hintPrompts": ["每人 30 秒，AI 认出次数就是得分", "不同人的动作 AI 也能认吗？试试就知道（提示：可能要补拍样本）"],
+      "check": { "type": "manual" },
+      "optional": true
+    }
+  ],
+  "curriculum": { "stage": "第三学段（5-6年级）", "module": "过程与控制", "points": ["循环与计时控制", "反馈系统设计"] },
+  "subject": { "name": "体育与健康·科学锻炼", "emoji": "🏅", "points": ["运动与休息的科学安排", "心率与恢复的常识", "坚持锻炼的家庭氛围"] },
+  "subjectArea": "体育与健康",
+  "gradeBand": "primary",
+  "aiIntro": "📣 你的专属 AI 教练已上线！它有两句口头禅：你动它喊加油，你停它喊喝水。准备好了吗？记住：会休息的人才会运动！",
+  "celebrate": "训练完成，颁发生成！🥇 你做出了一个真正的「运动陪伴系统」——运动手环、健身 App 的教练功能就是这么做的。今晚家庭挑战赛，用你的 AI 当裁判！",
+  "exercises": [
+    { "q": "科学运动应该？", "options": ["一直练到累趴", "运动与休息交替进行", "只休息不运动", "憋气用力"], "answer": 1, "explain": "运动-休息交替让身体恢复，锻炼效果更好也更安全" },
+    { "q": "运动后科学的补水方式是？", "options": ["一口气灌一大瓶", "小口多次补充", "喝冰水最爽", "不喝水"], "answer": 1, "explain": "小口多次补水，身体吸收更好，肠胃负担小" },
+    { "q": "AI 教练认不出你的动作时，最该做的是？", "options": ["换个教练", "补充不同角度的动作样本再训练", "放弃这个游戏", "怪 AI 太笨"], "answer": 1, "explain": "识别不准通常因为样本不够多样，补数据再训练是正解" }
+  ],
+  "codeLesson": false
+}

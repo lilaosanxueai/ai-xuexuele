@@ -87,5 +87,40 @@
   "codeLesson": true,
   "starterCode": "# 正弦波发生器：y = sin(t) × 120（画出真波形）\npen_color(\"blue\")\npen_down()\nfor i in range(13):\n    t = i * 30\n    go_to(t - 160, sin(t) * 120)\n    wait(0.1)\npen_up()\ngo_to(0, -150)\n\nsay(\"正弦波画好了！一个周期 360 度\")\n",
   "subjectArea": "数学",
-  "gradeBand": "senior"
+  "gradeBand": "senior",
+  "exercises": [
+    {
+      "q": "sin(30°) 的值约是？",
+      "options": [
+        "0.5",
+        "1",
+        "0.87",
+        "0"
+      ],
+      "answer": 0,
+      "explain": "常用值：sin30°=1/2，sin90°=1"
+    },
+    {
+      "q": "正弦函数的图像形状是？",
+      "options": [
+        "直线",
+        "波浪线（曲线往复）",
+        "折线",
+        "圆"
+      ],
+      "answer": 1,
+      "explain": "sin 图像是一条起伏的波浪线，周期性重复"
+    },
+    {
+      "q": "把 sin(x) 的 x 从 0 增到 360，波形完成？",
+      "options": [
+        "半个周期",
+        "一个完整周期",
+        "两个周期",
+        "四分之一"
+      ],
+      "answer": 1,
+      "explain": "三角函数以 360° 为周期：一圈回到起点"
+    }
+  ]
 }

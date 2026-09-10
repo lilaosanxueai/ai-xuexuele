@@ -1,0 +1,158 @@
+{
+  "id": "cross-53",
+  "island": "cross",
+  "order": 105,
+  "title": "七彩变装秀",
+  "emoji": "🌈",
+  "story": "聚光灯亮起，时装周开场！你的模特要走一场「色彩顺序秀」：红、橙、黄、绿……每种颜色一套造型，配一个节拍。观众记住的不只是颜色，还有色彩的顺序和节奏——这就是视觉设计！",
+  "goals": [
+    "用造型序列设计色彩搭配",
+    "让音效与走秀节拍同步"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_costume",
+    "island_change_size",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_wait",
+    "island_play",
+    "island_repeat"
+  ],
+  "actor": {
+    "costume": "🧑‍🎤",
+    "x": -110,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "🎬",
+      "x": 120,
+      "y": 0
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "开场白：模特登台说「七彩走秀，现在开始！」",
+      "hintPrompts": [
+        "用「说 停 2 秒」报幕，聚光灯就位"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "色彩系列：依次换上 🟥 🟧 🟨 🟩 等颜色造型，至少 4 套",
+      "hintPrompts": [
+        "「变成 🟥」一块积木一套衣服",
+        "想想你的色彩顺序：像彩虹？像日落？"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_costume",
+        "count": 4
+      }
+    },
+    {
+      "id": "t3",
+      "text": "每套造型亮相时走几步台步（至少 4 块移动）",
+      "hintPrompts": [
+        "「移动 20 步」+「右转一点」，走出来的线更像 T 台",
+        "一色一停顿，观众才能看清"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_move",
+        "count": 4
+      }
+    },
+    {
+      "id": "t4",
+      "text": "每个节拍配一个音效（至少 3 次），最后走到舞台中央 🎬 谢幕",
+      "hintPrompts": [
+        "「播放声音」踩在节拍上，秀才有节奏感",
+        "终点在右边的 🎬，走过去完美收尾"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：把整套走秀放进「重复 2 次」——返场再来一遍！",
+      "hintPrompts": [
+        "返场是时装秀的传统，你的程序也可以有",
+        "第二遍试试更快的节拍"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_repeat"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第三学段（5-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "循环结构",
+      "序列与节奏设计"
+    ]
+  },
+  "subject": {
+    "name": "艺术·色彩与设计",
+    "emoji": "🌈",
+    "points": [
+      "色彩序列与搭配",
+      "视觉节奏感",
+      "造型展示与编排"
+    ]
+  },
+  "aiIntro": "🌈 时装周导演就是你！这场秀的关键是「顺序」：颜色按什么顺序出场？音乐踩在哪个点上？把色彩排成序列，观众就会记住你的设计语言。",
+  "celebrate": "你的七彩变装秀轰动了整座创意岛！🥳 色彩的顺序、走台的节奏、音乐的节拍——三个「序列」叠在一起就是设计。问爸妈最喜欢哪套配色！",
+  "subjectArea": "艺术",
+  "gradeBand": "primary",
+  "exercises": [
+    {
+      "q": "彩虹七色的正确顺序是？",
+      "options": [
+        "红橙黄绿青蓝紫",
+        "红黄橙绿蓝青紫",
+        "紫蓝青绿黄橙红",
+        "红绿蓝黄橙青紫"
+      ],
+      "answer": 0,
+      "explain": "红橙黄绿青蓝紫，是阳光被雨滴分开后的顺序"
+    },
+    {
+      "q": "红、黄、蓝三种颜色被称为？",
+      "options": [
+        "冷色",
+        "三原色",
+        "对比色",
+        "无彩色"
+      ],
+      "answer": 1,
+      "explain": "三原色互相调配，能调出大部分其他颜色"
+    },
+    {
+      "q": "想让走秀有「节奏感」，最重要的是？",
+      "options": [
+        "颜色越多越好",
+        "每套造型停留一样的时间并配上音效",
+        "一直不停地换",
+        "只用一种颜色"
+      ],
+      "answer": 1,
+      "explain": "有规律的停顿 + 重复的音效，就是视觉节奏"
+    }
+  ],
+  "codeLesson": false
+}

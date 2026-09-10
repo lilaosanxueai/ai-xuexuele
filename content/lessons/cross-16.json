@@ -88,5 +88,40 @@
   "codeLesson": true,
   "starterCode": "# 地球公转与四季：轨道半径 130\nfor i in range(37):\n    angle = i * 10\n    go_to(cos(angle) * 130, sin(angle) * 130)\n    wait(0.1)\n    if i == 9:\n        say(\"夏至！北半球直射北回归线\")\n    if i == 18:\n        say(\"秋分！阳光直射赤道\")\n    if i == 27:\n        say(\"冬至！北半球阳光最斜\")\n",
   "subjectArea": "地理",
-  "gradeBand": "senior"
+  "gradeBand": "senior",
+  "exercises": [
+    {
+      "q": "地球公转产生了？",
+      "options": [
+        "昼夜交替",
+        "四季变化",
+        "月相",
+        "日出方向变化"
+      ],
+      "answer": 1,
+      "explain": "公转+地轴倾斜→太阳直射点移动→四季；自转产生昼夜"
+    },
+    {
+      "q": "我们这边是夏天时，南半球是？",
+      "options": [
+        "夏天",
+        "冬天",
+        "春天",
+        "秋天"
+      ],
+      "answer": 1,
+      "explain": "南北半球季节相反：直射北半球时北边夏南边冬"
+    },
+    {
+      "q": "地球公转一圈的时间是？",
+      "options": [
+        "24 小时",
+        "约 365 天",
+        "30 天",
+        "12 小时"
+      ],
+      "answer": 1,
+      "explain": "一年=公转一圈；一天=自转一圈"
+    }
+  ]
 }

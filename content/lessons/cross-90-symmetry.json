@@ -1,0 +1,56 @@
+{
+  "id": "cross-90",
+  "island": "cross",
+  "order": 151,
+  "title": "对称的美：画笔魔法",
+  "emoji": "🦋",
+  "story": "蝴蝶的翅膀、剪纸的窗花、故宫的平面图——它们美得整齐，因为「对称」！今天你有了画笔积木：落笔、走线、换色，走出左右对称的双翼图案。数学的对称轴，艺术的平衡美，一支画笔全画出来！",
+  "goals": ["理解轴对称图形", "用画笔绘制对称图案"],
+  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_turn_right", "island_turn_left", "island_costume", "island_play", "island_repeat", "island_pen_down", "island_pen_up", "island_pen_color"],
+  "actor": { "costume": "🦋", "x": -90, "y": 0, "dir": 0 },
+  "targets": [{ "emoji": "🌸", "x": 130, "y": 40 }],
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "落笔画左翼：先「移到」起点，落笔，移动走出左翅的轮廓（至少 3 块移动）",
+      "hintPrompts": ["落笔之后移动才会画线——先落笔再走", "左翼随便走：折线、斜线都行，记住你走了几步"],
+      "check": { "type": "block_used", "block": "island_pen_down" }
+    },
+    {
+      "id": "t2",
+      "text": "画对称右翼：右翼的每一步和左翼「镜像相同」（距离相等、方向相反），也至少 3 块移动",
+      "hintPrompts": ["左翼向右上走 40，右翼就向右下走 40——像照镜子", "转的角度也要相反：左转 45 对右转 45"],
+      "check": { "type": "block_count_min", "block": "island_move", "count": 6 }
+    },
+    {
+      "id": "t3",
+      "text": "给双翼上色：换 2 次画笔颜色，让翅膀色彩对称呼应",
+      "hintPrompts": ["两侧颜色也可以对称：左红右红，或左蓝右橙的呼应色", "换色前记得抬笔再移到新起点"],
+      "check": { "type": "block_count_min", "block": "island_pen_color", "count": 2 }
+    },
+    {
+      "id": "t4",
+      "text": "作品完成：抬笔，走到 🌸 花丛旁，说「对称，就是美的一半镜子另一半！」",
+      "hintPrompts": ["画完抬笔，不然走哪画哪", "找找你的图案：那条看不见的镜子线就是对称轴"],
+      "check": { "type": "actor_reach", "targetIndex": 0 }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：剪纸连续纹样——把一对翅膀放进「重复 4 次」绕中心转出花窗图案",
+      "hintPrompts": ["重复走+固定转角=旋转对称，剪纸的奥秘", "转 90 度重复 4 次正好一圈"],
+      "check": { "type": "block_used", "block": "island_repeat" },
+      "optional": true
+    }
+  ],
+  "curriculum": { "stage": "第二、三学段（3-6年级）", "module": "过程与控制", "points": ["参数化的对称控制", "画笔轨迹的规划"] },
+  "subject": { "name": "艺术·图案与设计", "emoji": "🦋", "points": ["轴对称与对称轴", "对称带来的平衡美", "剪纸中的对称纹样"] },
+  "subjectArea": "艺术",
+  "gradeBand": "primary",
+  "aiIntro": "🦋 画笔已到货！今天的任务是给蝴蝶画一双对称的翅膀——左边走一步，右边照镜子走一步。画完你会发现：对称不是数学题，是大自然和艺术家共同的心头好！",
+  "celebrate": "对称双翼画成！🦋 你刚刚亲手执行了「镜像操作」——这条看不见的对称轴，撑起了从蝴蝶翅膀到故宫布局的所有平衡美。作品存档，给爸妈开个画展！",
+  "exercises": [
+    { "q": "轴对称图形的特点是？", "options": ["两边完全一样", "沿对称轴对折后完全重合", "颜色相同", "大小不同"], "answer": 1, "explain": "对折重合才是轴对称——形状、大小都要镜像一致" },
+    { "q": "以下哪个是轴对称图形？", "options": ["平行四边形（一般）", "等腰三角形", "字母 N", "风车"], "answer": 1, "explain": "等腰三角形沿底边中线对折重合；一般平行四边形是中心对称" },
+    { "q": "画左翼走「右转45+移动40」，镜像的右翼应该？", "options": ["右转45+移动80", "左转45+移动40", "左转90+移动40", "右转45+移动20"], "answer": 1, "explain": "镜像方向相反、距离相同：左转 45 配移动 40" }
+  ]
+}

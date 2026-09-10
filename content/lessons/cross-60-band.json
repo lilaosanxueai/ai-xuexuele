@@ -1,0 +1,57 @@
+{
+  "id": "cross-60",
+  "island": "cross",
+  "order": 118,
+  "title": "AI 乐器点名",
+  "emoji": "🥁",
+  "story": "乐队开演前要点名！鼓——到！铃——到！今天你是指挥：教 AI 认两种「乐器」（用手比划或画出来都行），它认出哪个，你的舞台就奏响哪个音。一场由你指挥、由 AI 演奏的音乐会，马上开始！",
+  "goals": ["分辨不同乐器的音色", "把「识别」和「声音输出」连成互动"],
+  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_costume", "island_play", "island_repeat", "island_when_recognized", "island_recognize"],
+  "actor": { "costume": "🥁", "x": -60, "y": 0, "dir": 0 },
+  "targets": [{ "emoji": "🎼", "x": 130, "y": 40 }],
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "准备乐器：类别 1 = 鼓（拍手/敲桌面的动作或一张鼓的图），类别 2 = 铃（摇手动作或一张铃的图），各拍 10 张教会 AI",
+      "hintPrompts": ["没有真乐器？画一张或用手势比划都行", "两个动作/图片差别要明显，AI 才不认混"],
+      "check": { "type": "manual" }
+    },
+    {
+      "id": "t2",
+      "text": "鼓声报到：「当 AI 认出 鼓」→ 舞台变身 🥁 并说「鼓——声音低沉有力，咚咚咚！」",
+      "hintPrompts": ["先说说鼓的声音：咚咚咚，低沉有力", "认出→变身→报名字，像乐队点名"],
+      "check": { "type": "block_used", "block": "island_when_recognized" }
+    },
+    {
+      "id": "t3",
+      "text": "铃声报到：「当 AI 认出 铃」→ 变身 🔔 说「铃——声音清脆明亮，叮叮叮！」，并各自配一个最像的音效",
+      "hintPrompts": ["铃铛的声音像音效里的「叮咚 ding」", "鼓可以配「砰 pop」，自己听一听哪个最像"],
+      "check": { "type": "block_used", "block": "island_play" }
+    },
+    {
+      "id": "t4",
+      "text": "合奏时间：轮流对镜头「点」两种乐器，让舞台连续奏出不同音色，最后走到 🎼 指挥台谢幕",
+      "hintPrompts": ["连续认出几种乐器，就是一场合奏", "指挥家最后要鞠躬——走到指挥台吧"],
+      "check": { "type": "actor_reach", "targetIndex": 0 }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：音色侦探——闭上眼睛听音效（do/mi/sol），猜猜哪个音最高？跟爸妈说说你的发现",
+      "hintPrompts": ["do 最低，sol 较高——声音的高低叫「音调」", "乐器音色的不同，就像每个人声音的不同"],
+      "check": { "type": "manual" },
+      "optional": true
+    }
+  ],
+  "curriculum": { "stage": "第三学段（5-6年级）", "module": "过程与控制", "points": ["事件与声音输出", "互动系统设计"] },
+  "subject": { "name": "音乐·音色与节奏", "emoji": "🥁", "points": ["常见乐器的音色分辨", "音调的高低初体验", "乐队协作与指挥"] },
+  "subjectArea": "音乐",
+  "gradeBand": "primary",
+  "aiIntro": "🥁 音乐会马上开始！今天 AI 是你的乐手：认出鼓就打鼓，认出铃就摇铃。指挥棒在你手里——预备，起！（悄悄说：音效积木里有 do re mi fa sol，都是你的乐器）",
+  "celebrate": "演出成功！🎼 你把「AI 认出」和「声音播放」连在了一起——这正是电子乐器和体感音乐游戏的核心原理！下次听到智能音箱放歌，想想：里面也有一场这样的音乐会。",
+  "exercises": [
+    { "q": "鼓的声音特点是？", "options": ["清脆明亮", "低沉有力", "尖锐刺耳", "沙沙作响"], "answer": 1, "explain": "鼓面振动慢、振幅大，声音低沉有力：咚咚咚" },
+    { "q": "声音的高低叫？", "options": ["音量", "音调", "音色", "节奏"], "answer": 1, "explain": "音调由振动快慢决定：do 比 sol 低，因为振动更慢" },
+    { "q": "「AI 认出鼓就播鼓声」用到的核心积木是？", "options": ["等待", "当 AI 认出", "移动", "大小改变"], "answer": 1, "explain": "「当 AI 认出」事件积木触发后面的播放动作" }
+  ],
+  "codeLesson": false
+}

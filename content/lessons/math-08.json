@@ -87,5 +87,40 @@
   "codeLesson": true,
   "starterCode": "# 一次函数 y = kx + b 画图机（落笔画出真直线）\nk = 1\nb = 0\n\npen_color(\"blue\")\npen_down()\nfor x in range(-6, 7):\n    go_to(x * 30, (k * x + b) * 30)\n    wait(0.1)\npen_up()\ngo_to(0, -150)\n\nsay(\"y = \" + k + \"x + \" + b + \" 画好了！\")\n",
   "subjectArea": "数学",
-  "gradeBand": "junior"
+  "gradeBand": "junior",
+  "exercises": [
+    {
+      "q": "一次函数 y=2x+1 的图像是？",
+      "options": [
+        "曲线",
+        "一条直线",
+        "点",
+        "圆"
+      ],
+      "answer": 1,
+      "explain": "一次函数图像是直线：k=2 是斜率（陡缓），b=1 是截距"
+    },
+    {
+      "q": "y=2x+1 中 x=3 时 y=？",
+      "options": [
+        "6",
+        "7",
+        "5",
+        "8"
+      ],
+      "answer": 1,
+      "explain": "y=2×3+1=7"
+    },
+    {
+      "q": "程序画函数图像的方法是？",
+      "options": [
+        "手画",
+        "循环取多个 x 算 y，逐点连线",
+        "随机点",
+        "贴图"
+      ],
+      "answer": 1,
+      "explain": "描点法程序化：循环算出一串点，连线即图像"
+    }
+  ]
 }

@@ -87,5 +87,40 @@
   "codeLesson": true,
   "starterCode": "# 一元一次方程 ax + b = c 的求解器\na = 2\nb = 3\nc = 11\n\nx = (c - b) / a\nsay(\"x = \" + x)\n\n# 验根：走到数轴上 x 的位置（×30 缩放）\ngo_to(x * 30, 0)\nsay(\"验根通过！\")\n",
   "subjectArea": "数学",
-  "gradeBand": "junior"
+  "gradeBand": "junior",
+  "exercises": [
+    {
+      "q": "方程 2x+3=11 的解是？",
+      "options": [
+        "x=3",
+        "x=4",
+        "x=5",
+        "x=2"
+      ],
+      "answer": 1,
+      "explain": "2x=8，x=4：移项后两边同除"
+    },
+    {
+      "q": "解一元一次方程的目标是？",
+      "options": [
+        "消掉 x",
+        "求出 x 的值",
+        "算出 y",
+        "两边相加"
+      ],
+      "answer": 1,
+      "explain": "把 x 单独留在一边，求出使等式成立的值"
+    },
+    {
+      "q": "在数轴上表示 x>2，正确的是？",
+      "options": [
+        "2 左边全部",
+        "2 右边全部（不含 2 画空心圈）",
+        "只有 2 这点",
+        "整条数轴"
+      ],
+      "answer": 1,
+      "explain": "不等式解集是范围：x>2 表示 2 右侧所有点"
+    }
+  ]
 }

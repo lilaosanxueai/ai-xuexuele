@@ -86,5 +86,40 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 平行四边形割补动画\n# 原始平行四边形（蓝）：(-80,-40) (80,-40) (40,40) (-40,40)\npen_color(\"blue\")\npen_down()\ngo_to(80, -40)\ngo_to(40, 40)\ngo_to(-40, 40)\ngo_to(-80, -40)\npen_up()\n\n# 割补线（红）：切下右三角\npen_color(\"red\")\ngo_to(40, 40)\npen_down()\ngo_to(40, -40)\npen_up()\nsay(\"剪下右边的三角形，贴到左边缺口……\")\n\n# 补出的长方形（绿）：(-80,-40) 到 (40,40)\npen_color(\"green\")\ngo_to(-80, -40)\npen_down()\ngo_to(40, -40)\ngo_to(40, 40)\ngo_to(-80, 40)\ngo_to(-80, -40)\npen_up()\n\nsay(\"长方形：底 120 x 高 80 = 面积 9600\")\n"
+  "starterCode": "# 平行四边形割补动画\n# 原始平行四边形（蓝）：(-80,-40) (80,-40) (40,40) (-40,40)\npen_color(\"blue\")\npen_down()\ngo_to(80, -40)\ngo_to(40, 40)\ngo_to(-40, 40)\ngo_to(-80, -40)\npen_up()\n\n# 割补线（红）：切下右三角\npen_color(\"red\")\ngo_to(40, 40)\npen_down()\ngo_to(40, -40)\npen_up()\nsay(\"剪下右边的三角形，贴到左边缺口……\")\n\n# 补出的长方形（绿）：(-80,-40) 到 (40,40)\npen_color(\"green\")\ngo_to(-80, -40)\npen_down()\ngo_to(40, -40)\ngo_to(40, 40)\ngo_to(-80, 40)\ngo_to(-80, -40)\npen_up()\n\nsay(\"长方形：底 120 x 高 80 = 面积 9600\")\n",
+  "exercises": [
+    {
+      "q": "平行四边形面积公式是？",
+      "options": [
+        "S=ah（底×高）",
+        "S=a+b",
+        "S=ab",
+        "S=2(a+b)"
+      ],
+      "answer": 0,
+      "explain": "S=底×高：沿高剪开平移拼成长方形（割补法）"
+    },
+    {
+      "q": "割补法的核心思想是？",
+      "options": [
+        "变大变小",
+        "形状变面积不变（等积变形）",
+        "颜色变换",
+        "随机裁剪"
+      ],
+      "answer": 1,
+      "explain": "把不会算的图形变成会算的图形，面积守恒"
+    },
+    {
+      "q": "底 8 高 3 的平行四边形面积是？",
+      "options": [
+        "11",
+        "24",
+        "16",
+        "48"
+      ],
+      "answer": 1,
+      "explain": "S=8×3=24——注意高要是对应底边上的高"
+    }
+  ]
 }

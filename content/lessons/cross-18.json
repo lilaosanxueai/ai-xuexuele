@@ -79,5 +79,40 @@
   "codeLesson": true,
   "starterCode": "# 质量守恒验证：2H2 + O2 = 2H2O\nh_left = 2 * 2     # 2 个 H2，每个 2 个氢原子\no_left = 2         # 1 个 O2，2 个氧原子\nh_right = 2 * 2    # 2 个 H2O，每个 2 个氢\no_right = 2        # 2 个 H2O，每个 1 个氧\n\nsay(\"H: 左边 \" + h_left + \" 个 vs 右边 \" + h_right + \" 个\")\nsay(\"O: 左边 \" + o_left + \" 个 vs 右边 \" + o_right + \" 个\")\n\nif h_left == h_right:\n    say(\"氢原子守恒，配平正确！\")\n",
   "subjectArea": "化学",
-  "gradeBand": "senior"
+  "gradeBand": "senior",
+  "exercises": [
+    {
+      "q": "质量守恒定律：化学反应前后总质量？",
+      "options": [
+        "增加",
+        "减少",
+        "不变",
+        "先增后减"
+      ],
+      "answer": 2,
+      "explain": "原子种类数目不变，只是重新组合，总质量守恒"
+    },
+    {
+      "q": "蜡烛燃烧后变轻了，违反质量守恒吗？",
+      "options": [
+        "违反",
+        "不违反：生成的 CO₂ 和水蒸气跑掉了",
+        "蜡烛消失",
+        "无法判断"
+      ],
+      "answer": 1,
+      "explain": "算上逸散的气体，反应前后质量依然相等"
+    },
+    {
+      "q": "用天平验证质量守恒，关键是？",
+      "options": [
+        "称得快",
+        "封闭体系（不让气体跑掉）",
+        "用大蜡烛",
+        "不用称"
+      ],
+      "answer": 1,
+      "explain": "有气体参与/生成的反应必须在密闭容器中称量"
+    }
+  ]
 }

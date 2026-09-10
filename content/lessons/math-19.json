@@ -79,5 +79,40 @@
   "codeLesson": true,
   "starterCode": "# 高斯求和：1 + 2 + ... + 100\nn = 100\n\n# 方法一：老实循环累加\ntotal = 0\nfor i in range(1, n + 1):\n    total = total + i\nsay(\"循环累加 = \" + total)\n\n# 方法二：高斯公式\ngauss = n * (n + 1) / 2\nsay(\"高斯公式 = \" + gauss)\n",
   "subjectArea": "数学",
-  "gradeBand": "senior"
+  "gradeBand": "senior",
+  "exercises": [
+    {
+      "q": "1+2+3+…+100 = ?",
+      "options": [
+        "5050",
+        "5000",
+        "1000",
+        "1010"
+      ],
+      "answer": 0,
+      "explain": "高斯配对法：(1+100)×100÷2=5050"
+    },
+    {
+      "q": "高斯求和的巧妙之处是？",
+      "options": [
+        "逐个硬加",
+        "首尾配对：每对和都是 101",
+        "数手指",
+        "猜的"
+      ],
+      "answer": 1,
+      "explain": "50 对、每对 101——找规律把加法变乘法"
+    },
+    {
+      "q": "程序用循环累加 100 次 vs 直接套公式，正确说法是？",
+      "options": [
+        "循环快",
+        "公式一步到位：算法有优劣",
+        "一样慢",
+        "都不对"
+      ],
+      "answer": 1,
+      "explain": "好算法（公式 O(1)）完胜笨办法（循环 O(n)）——数学是算法的加速器"
+    }
+  ]
 }

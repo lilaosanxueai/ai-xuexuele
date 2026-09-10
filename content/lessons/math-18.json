@@ -79,5 +79,40 @@
   "codeLesson": true,
   "starterCode": "# 圆的面积：S = πr²\nr = 5\nS = pi * r * r\nsay(\"半径 \" + r + \" 的圆面积 = \" + S)\n\n# 翻倍实验：改成 r = 10 再运行，看面积翻几倍\n",
   "subjectArea": "数学",
-  "gradeBand": "junior"
+  "gradeBand": "junior",
+  "exercises": [
+    {
+      "q": "圆的面积公式是？",
+      "options": [
+        "S=2πr",
+        "S=πr²",
+        "S=πd",
+        "S=r²"
+      ],
+      "answer": 1,
+      "explain": "S=πr²；注意 2πr 是周长"
+    },
+    {
+      "q": "半径变 2 倍，圆面积变？",
+      "options": [
+        "2 倍",
+        "4 倍",
+        "8 倍",
+        "不变"
+      ],
+      "answer": 1,
+      "explain": "S=πr²：半径平方关系，2²=4 倍"
+    },
+    {
+      "q": "把圆切成小扇形拼成近似长方形，是在推导？",
+      "options": [
+        "周长",
+        "面积公式",
+        "直径",
+        "切线"
+      ],
+      "answer": 1,
+      "explain": "化圆为方：分割拼补推出 S=πr²"
+    }
+  ]
 }

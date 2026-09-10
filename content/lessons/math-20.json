@@ -87,5 +87,40 @@
   "codeLesson": true,
   "starterCode": "# 三种增长大赛跑：目标 1000000\ngoal = 1000000\n\n# 指数选手：每次翻倍，数步数\np = 1\nsteps = 0\nwhile p < goal:\n    p = p * 2\n    steps = steps + 1\n    go_to(steps * 8 - 80, steps * 5)   # 爬翻倍阶梯\n    wait(0.15)\n\nsay(\"翻倍到 100 万只需 \" + steps + \" 步\")\nsay(\"而每次 +1 需要 1000000 步！\")\n",
   "subjectArea": "数学",
-  "gradeBand": "senior"
+  "gradeBand": "senior",
+  "exercises": [
+    {
+      "q": "直线增长、指数增长、对数增长中，后期最猛的是？",
+      "options": [
+        "直线",
+        "指数",
+        "对数",
+        "三者一样"
+      ],
+      "answer": 1,
+      "explain": "指数增长后期一骑绝尘；对数增长越来越慢"
+    },
+    {
+      "q": "「龟兔赛跑」初期领先但后期被反超，像哪种对比？",
+      "options": [
+        "对数 vs 指数",
+        "直线 vs 指数",
+        "指数 vs 直线",
+        "都一样"
+      ],
+      "answer": 0,
+      "explain": "对数起步快后劲不足，指数起步慢后程爆发"
+    },
+    {
+      "q": "程序里 while 循环模拟「不断翻倍」最像哪种增长？",
+      "options": [
+        "直线",
+        "指数",
+        "对数",
+        "随机"
+      ],
+      "answer": 1,
+      "explain": "每圈 ×2：循环内乘法累积=指数增长"
+    }
+  ]
 }

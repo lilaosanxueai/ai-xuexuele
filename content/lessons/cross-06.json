@@ -79,5 +79,40 @@
   "codeLesson": true,
   "starterCode": "# 欧姆定律计算器：U = I × R\nI = 0.5      # 电流，单位安培(A)\nR = 10       # 电阻，单位欧姆(Ω)\n\nU = I * R\nsay(\"电压 = \" + U + \" 伏\")\n\n# 实验：改上面的数字再运行，观察电压怎么变\n",
   "subjectArea": "物理",
-  "gradeBand": "junior"
+  "gradeBand": "junior",
+  "exercises": [
+    {
+      "q": "欧姆定律的公式是？",
+      "options": [
+        "U=IR",
+        "P=W/t",
+        "F=ma",
+        "ρ=m/V"
+      ],
+      "answer": 0,
+      "explain": "电压=电流×电阻，电学三兄弟的关系式"
+    },
+    {
+      "q": "电阻不变时，电压变大，电流会？",
+      "options": [
+        "变小",
+        "变大",
+        "不变",
+        "归零"
+      ],
+      "answer": 1,
+      "explain": "I=U/R：电压增大电流按比例增大"
+    },
+    {
+      "q": "程序里用变量算 U=IR 体现了什么思想？",
+      "options": [
+        "画图",
+        "公式程序化（用计算验证规律）",
+        "随机",
+        "等待"
+      ],
+      "answer": 1,
+      "explain": "把物理公式写成代码，代入数据自动算出结果"
+    }
+  ]
 }

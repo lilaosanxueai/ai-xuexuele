@@ -78,5 +78,40 @@
   "codeLesson": true,
   "starterCode": "# 英语数字报数员：one 到 five\nfor i in range(1, 6):\n    if i == 1:\n        say(\"one\")\n    if i == 2:\n        say(\"two\")\n    if i == 3:\n        say(\"three\")\n    if i == 4:\n        say(\"four\")\n    if i == 5:\n        say(\"five\")\n        play(\"cheer\")\n",
   "subjectArea": "英语",
-  "gradeBand": "senior"
+  "gradeBand": "senior",
+  "exercises": [
+    {
+      "q": "英语数字 1-10 中，「七」是？",
+      "options": [
+        "six",
+        "seven",
+        "nine",
+        "ten"
+      ],
+      "answer": 1,
+      "explain": "one two three four five six seven eight nine ten"
+    },
+    {
+      "q": "「十五」的正确说法是？",
+      "options": [
+        "five-ten",
+        "fifteen",
+        "fivety",
+        "ten-five"
+      ],
+      "answer": 1,
+      "explain": "13-19 用 -teen：thirteen, fourteen, fifteen…"
+    },
+    {
+      "q": "程序「报数」1 到 10 依次说出，用什么结构？",
+      "options": [
+        "分支",
+        "循环+计数变量",
+        "随机",
+        "造型"
+      ],
+      "answer": 1,
+      "explain": "循环让计数器每次加 1 并报出，就是程序报数"
+    }
+  ]
 }

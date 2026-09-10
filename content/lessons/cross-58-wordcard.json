@@ -1,0 +1,57 @@
+{
+  "id": "cross-58",
+  "island": "cross",
+  "order": 116,
+  "title": "AI 单词闪卡",
+  "emoji": "🃏",
+  "story": "Show and tell 时间！你做过单词卡吗？今天升级版：把单词卡教给 AI，它认出哪张，你的角色就大声喊出英文单词——Apple! Book! 这是全世界只有你能做的「AI 英语闪卡」，还能顺便教爸妈念！",
+  "goals": ["开口说常见物品的英文单词", "体验「识别→语音反馈」的交互设计"],
+  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_costume", "island_play", "island_when_recognized", "island_recognize"],
+  "actor": { "costume": "🧑‍🏫", "x": -60, "y": 0, "dir": 0 },
+  "targets": [{ "emoji": "📚", "x": 130, "y": 40 }],
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "做卡片：找两样东西当「单词卡」——比如一个苹果🍎和一本书📖，去 AI 实验场把类别 1、类别 2 分别教会（每样 10 张，换角度拍）",
+      "hintPrompts": ["家里的水果、文具、玩具都能当卡", "类别记得改名：类别 1 改成 apple，类别 2 改成 book"],
+      "check": { "type": "manual" }
+    },
+    {
+      "id": "t2",
+      "text": "AI 开口：「当 AI 认出 类别 1」→ 角色大声说「Apple! 苹果！」并变成 🍎 造型",
+      "hintPrompts": ["英文要读得响亮自信", "认出→说→变身，一套动作一气呵成"],
+      "check": { "type": "block_used", "block": "island_when_recognized" }
+    },
+    {
+      "id": "t3",
+      "text": "第二张卡：「当 AI 认出 类别 2」→ 说「Book! 书！」变成 📖 造型",
+      "hintPrompts": ["对着摄像头举书试试", "两张卡轮流举，看角色跟着变"],
+      "check": { "type": "block_count_min", "block": "island_costume", "count": 2 }
+    },
+    {
+      "id": "t4",
+      "text": "闯关收尾：连续答对 3 次（apple、book、apple 轮流举），角色走到 📚 单词墙贴上新卡",
+      "hintPrompts": ["每次认出后可以加一块「说 停 1 秒」让自己跟读", "跟读是记单词的最好办法"],
+      "check": { "type": "actor_reach", "targetIndex": 0 }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：加第三张卡——类别 3 教一个新单词（比如 pen 钢笔），让闪卡游戏更丰富！",
+      "hintPrompts": ["AI 训练场最多能教 3 类，正好 3 张卡", "试试 cat、dog、sun 这些简单词"],
+      "check": { "type": "manual" },
+      "optional": true
+    }
+  ],
+  "curriculum": { "stage": "第三学段（5-6年级）", "module": "过程与控制", "points": ["事件驱动", "输入与输出的即时反馈"] },
+  "subject": { "name": "英语·词汇与口语", "emoji": "🃏", "points": ["常见物品英文单词", "大胆开口说英语", "实物与单词关联记忆"] },
+  "subjectArea": "英语",
+  "gradeBand": "primary",
+  "aiIntro": "🃏 Hello! 今天的英语课有点不一样：你的单词卡会自己「说话」！教会 AI 认苹果和书，然后大声跟它一起念——Apple! Book! Ready?",
+  "celebrate": "Wonderful! 🎉 你的 AI 闪卡做好啦！实物 + 单词 + 开口念，三样一起上，单词想忘都难。下次 show and tell，全班都会羡慕你的 AI 教具！",
+  "exercises": [
+    { "q": "「苹果」的英文是？", "options": ["Book", "Apple", "Pen", "Cat"], "answer": 1, "explain": "apple = 苹果 🍎" },
+    { "q": "「书」的英文是？", "options": ["Dog", "Sun", "Book", "Bag"], "answer": 2, "explain": "book = 书 📖" },
+    { "q": "记单词最有效的方法之一是？", "options": ["只默看不读", "实物+单词+大声跟读", "抄一百遍", "等考试前突击"], "answer": 1, "explain": "调动眼睛、耳朵、嘴巴多感官记忆，效果最好" }
+  ],
+  "codeLesson": false
+}

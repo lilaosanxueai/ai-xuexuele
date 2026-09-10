@@ -1,0 +1,57 @@
+{
+  "id": "ai-06",
+  "island": "cross",
+  "order": 114,
+  "title": "智慧社会：身边的 AI",
+  "emoji": "🏙",
+  "story": "早上语音助手报天气，刷脸进小区，视频网站猜你喜欢，导航预测堵车……你每天都活在 AI 包围圈里！它们的共同秘密只有两个词：认出（识别）+ 猜测（预测）。今天你当「AI 博物馆」讲解员，把身边的 AI 讲给全家听。",
+  "goals": ["识别身边 AI 应用的共同原理", "理解 AI 给社会带来的便利与烦恼"],
+  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_costume", "island_change_size", "island_move", "island_play", "island_repeat", "island_when_recognized", "island_recognize"],
+  "actor": { "costume": "🎤", "x": -60, "y": 0, "dir": 0 },
+  "targets": [{ "emoji": "🏛", "x": 130, "y": 40 }],
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "讲解员开场：说「欢迎来到 AI 博物馆！今天介绍 4 位 AI 大明星」",
+      "hintPrompts": ["讲解员要热情大方，先报幕再带路"],
+      "check": { "type": "say_text" }
+    },
+    {
+      "id": "t2",
+      "text": "四位明星登场（换 4 次造型）：🎤 语音助手（识别声音）、📷 刷脸支付（识别人脸）、📺 视频推荐（猜你喜欢）、🗺 导航（预测路况），每人一句介绍",
+      "hintPrompts": ["每个造型配一句「我是……我会……」，讲解更清楚", "语音助手=识别声音；刷脸=识别脸；推荐=预测喜好；导航=预测时间"],
+      "check": { "type": "block_count_min", "block": "island_costume", "count": 4 }
+    },
+    {
+      "id": "t3",
+      "text": "每介绍一位停 2 秒让观众看清楚（至少 4 块等待）",
+      "hintPrompts": ["讲解节奏：说→停→变身→说→停", "博物馆讲解不能像机关枪"],
+      "check": { "type": "block_count_min", "block": "island_wait", "count": 4 }
+    },
+    {
+      "id": "t4",
+      "text": "互动展区：先在 AI 实验场教它认一样展品（比如你的橡皮），再用「当 AI 认出」做「感应自动门」——认出才开门说欢迎，最后走到 🏛 博物馆大门",
+      "hintPrompts": ["这就是你身边的刷脸门禁的迷你版！", "认出→说「欢迎光临」，和小区门禁一个道理"],
+      "check": { "type": "actor_reach", "targetIndex": 0 }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：座谈时间——和爸妈聊聊：AI 给我们带来哪些方便？哪些烦恼？（提示：方便有快和聪明，烦恼有隐私和上瘾）",
+      "hintPrompts": ["推荐算法让你一直看——是服务还是套路？", "技术没有好坏，用的人有智慧才有好坏"],
+      "check": { "type": "manual" },
+      "optional": true
+    }
+  ],
+  "curriculum": { "stage": "第四学段（7-9年级）", "module": "人工智能与智慧社会", "points": ["身边的智能应用及其原理", "智能社会带来的机遇与挑战"] },
+  "subject": { "name": "信息科技·人工智能与社会", "emoji": "🏙", "points": ["识别与预测：AI 应用的共同原理", "语音识别/人脸识别/推荐系统启蒙", "智慧社会的机遇与责任"] },
+  "subjectArea": "信息科技",
+  "gradeBand": "junior",
+  "aiIntro": "🏙 欢迎来到 AI 博物馆！你每天都在用 AI 却可能没发现：喊一声「播放儿歌」是语音识别，刷一下脸是图像识别，连「猜你喜欢」都是 AI 在偷偷预测你。今天，把它们全部揭密！",
+  "celebrate": "讲解圆满结束！🏛 你发现了吗——身边所有 AI 玩的都是两个把戏：认出模式、预测下一步。你在训练场教 AI 认手势时，就已经在玩和科技大厂一样的把戏了！",
+  "exercises": [
+    { "q": "语音助手「听懂」你说的话，主要用了？", "options": ["语音识别", "人脸识别", "温度感应", "卫星定位"], "answer": 0, "explain": "语音识别把声音转成文字，AI 才能理解指令" },
+    { "q": "视频 App「猜你喜欢」靠什么？", "options": ["随机乱推", "读心术", "分析你的观看记录做预测", "客服人员推荐"], "answer": 2, "explain": "推荐算法分析历史行为数据，预测你可能喜欢什么" },
+    { "q": "关于 AI 与社会，说法正确的是？", "options": ["AI 全是好处没有问题", "AI 带来便利也带来隐私、沉迷等新问题", "AI 会取代所有人", "小孩用不着了解 AI"], "answer": 1, "explain": "技术是双刃剑：享受便利的同时要警惕隐私、成瘾、偏见等问题" }
+  ],
+  "codeLesson": false
+}

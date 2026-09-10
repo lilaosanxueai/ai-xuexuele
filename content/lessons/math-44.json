@@ -86,5 +86,40 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 二次函数最值：y = x^2 - 4x + 5\na = 1\nb = -4\nc = 5\n\n# 顶点公式：x = -b/(2a)\nxv = -b / (2 * a)\nyv = a * xv * xv + b * xv + c\nsay(\"顶点 (\" + xv + \", \" + yv + \")，最小值 = \" + yv)\n\n# 画抛物线（蓝），坐标平移让顶点可见\npen_color(\"blue\")\npen_down()\nfor x in range(-3, 8):\n    y = a * x * x + b * x + c\n    go_to((x - 2) * 30, (y - 1) * 30 + 20)\npen_up()\ngo_to(0, 20)   # 登上顶点\n"
+  "starterCode": "# 二次函数最值：y = x^2 - 4x + 5\na = 1\nb = -4\nc = 5\n\n# 顶点公式：x = -b/(2a)\nxv = -b / (2 * a)\nyv = a * xv * xv + b * xv + c\nsay(\"顶点 (\" + xv + \", \" + yv + \")，最小值 = \" + yv)\n\n# 画抛物线（蓝），坐标平移让顶点可见\npen_color(\"blue\")\npen_down()\nfor x in range(-3, 8):\n    y = a * x * x + b * x + c\n    go_to((x - 2) * 30, (y - 1) * 30 + 20)\npen_up()\ngo_to(0, 20)   # 登上顶点\n",
+  "exercises": [
+    {
+      "q": "二次函数 y=(x-2)²+3 的最小值是？",
+      "options": [
+        "2",
+        "3",
+        "5",
+        "0"
+      ],
+      "answer": 1,
+      "explain": "顶点式：x=2 时取最小值 3（开口向上）"
+    },
+    {
+      "q": "求最值的关键是找？",
+      "options": [
+        "端点",
+        "顶点（对称轴处）",
+        "任意点",
+        "原点"
+      ],
+      "answer": 1,
+      "explain": "开口向上顶点最低（最小值）；向下顶点最高"
+    },
+    {
+      "q": "「何时面积最大」这类问题常转化为？",
+      "options": [
+        "解方程",
+        "求二次函数最值",
+        "概率",
+        "统计"
+      ],
+      "answer": 1,
+      "explain": "建立二次函数模型，用顶点求最值——数学建模"
+    }
+  ]
 }

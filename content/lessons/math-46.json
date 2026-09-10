@@ -86,5 +86,40 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 相位差：sin（蓝）vs cos（红）\npen_color(\"blue\")\npen_down()\nfor i in range(13):\n    t = i * 30\n    go_to(t * 1.1 - 160, sin(t) * 120)\npen_up()\n\npen_color(\"red\")\npen_down()\nfor i in range(13):\n    t = i * 30\n    go_to(t * 1.1 - 160, cos(t) * 120)\npen_up()\n\nsay(\"sin(90) = \" + sin(90) + \"，cos(0) = \" + cos(0))\nsay(\"红 cos 提前 90 度到山顶——这就是相位差！\")\n"
+  "starterCode": "# 相位差：sin（蓝）vs cos（红）\npen_color(\"blue\")\npen_down()\nfor i in range(13):\n    t = i * 30\n    go_to(t * 1.1 - 160, sin(t) * 120)\npen_up()\n\npen_color(\"red\")\npen_down()\nfor i in range(13):\n    t = i * 30\n    go_to(t * 1.1 - 160, cos(t) * 120)\npen_up()\n\nsay(\"sin(90) = \" + sin(90) + \"，cos(0) = \" + cos(0))\nsay(\"红 cos 提前 90 度到山顶——这就是相位差！\")\n",
+  "exercises": [
+    {
+      "q": "两列波「相位差」指的是？",
+      "options": [
+        "高度差",
+        "步调错开的程度",
+        "颜色差",
+        "速度差"
+      ],
+      "answer": 1,
+      "explain": "相位差=起点错开的角度：0° 同步，180° 正好相反"
+    },
+    {
+      "q": "相位差 180° 的两列波叠加会？",
+      "options": [
+        "加倍",
+        "相互抵消（波峰对波谷）",
+        "不变",
+        "爆炸"
+      ],
+      "answer": 1,
+      "explain": "反相叠加相消——降噪耳机正是利用这个原理！"
+    },
+    {
+      "q": "程序同时画 sin(x) 和 sin(x+90) 是在比较？",
+      "options": [
+        "颜色",
+        "相位不同的两列波",
+        "大小",
+        "音量"
+      ],
+      "answer": 1,
+      "explain": "同一波形错开相位——多函数同图对比的典型用法"
+    }
+  ]
 }

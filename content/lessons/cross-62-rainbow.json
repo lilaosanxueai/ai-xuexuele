@@ -1,0 +1,57 @@
+{
+  "id": "cross-62",
+  "island": "cross",
+  "order": 120,
+  "title": "彩虹颜色歌",
+  "emoji": "🌈",
+  "story": "红橙黄绿蓝靛紫，彩虹有七种颜色，英语也有七个好听的名字：red、orange、yellow、green……今天你来做一条「会唱歌的彩虹」：每种颜色配一个造型、一句英文，从红到紫唱上去，你的第一首英文歌！",
+  "goals": ["掌握常见颜色英文单词", "用序列编排一段英文歌谣"],
+  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_costume", "island_change_size", "island_move", "island_play", "island_repeat"],
+  "actor": { "costume": "🧑‍🎨", "x": -80, "y": 0, "dir": 0 },
+  "targets": [{ "emoji": "🌈", "x": 130, "y": 50 }],
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "第一个颜色：角色变成红色造型（用 🎂 蛋糕或自选）并大声唱「Red! Red! 红色！」",
+      "hintPrompts": ["造型不够红？说的时候喊出红色就行", "「说 停 1.5 秒」像唱歌的节拍"],
+      "check": { "type": "say_text" }
+    },
+    {
+      "id": "t2",
+      "text": "彩虹阶梯：至少换 4 次造型，每次说一个颜色单词——red → orange → yellow → green（红橙黄绿）",
+      "hintPrompts": ["颜色顺序按彩虹来：red orange yellow green blue", "每个颜色停一拍（等待 1 秒），像爬楼梯"],
+      "check": { "type": "block_count_min", "block": "island_costume", "count": 4 }
+    },
+    {
+      "id": "t3",
+      "text": "唱到蓝色时角色「飞」向天空：移动到高处的彩虹 🌈（blue blue 蓝蓝天）",
+      "hintPrompts": ["彩虹在右上方，转向再移动", "blue 是天空的颜色——飞上去！"],
+      "check": { "type": "actor_reach", "targetIndex": 0 }
+    },
+    {
+      "id": "t4",
+      "text": "给彩虹之歌配节拍：每句颜色之间播放一个音效（至少 3 次，do re mi 顺着往上爬）",
+      "hintPrompts": ["do→re→mi→fa，音越来越高，像彩虹越爬越高", "音乐+颜色+单词，三重记忆！"],
+      "check": { "type": "block_count_min", "block": "island_play", "count": 3 }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：把整首颜色歌放进「重复 2 次」再唱一遍，第二遍挑战不说中文提示",
+      "hintPrompts": ["第二遍只唱英文：red! orange! yellow! green!", "能唱下来就是真的记住了"],
+      "check": { "type": "block_used", "block": "island_repeat" },
+      "optional": true
+    }
+  ],
+  "curriculum": { "stage": "第三学段（5-6年级）", "module": "身边的算法", "points": ["顺序结构", "序列化编排"] },
+  "subject": { "name": "英语·颜色词汇", "emoji": "🌈", "points": ["常见颜色单词 red/orange/yellow/green/blue", "英文歌谣跟唱", "颜色与自然观察"] },
+  "subjectArea": "英语",
+  "gradeBand": "primary",
+  "aiIntro": "🌈 Let's sing! 今天的英语课在彩虹上！每爬一阶学一个颜色单词，边唱边变装。准备好了吗？Red, orange, yellow, green——跟我来！",
+  "celebrate": "你的彩虹颜色歌唱完啦！🌈 七种颜色七句话，颜色+造型+音效三管齐下——以后看到彩虹，嘴里会自动蹦英文！唱给爸妈听一次，它就永远属于你。",
+  "exercises": [
+    { "q": "「黄色」的英文是？", "options": ["Red", "Green", "Yellow", "Blue"], "answer": 2, "explain": "yellow = 黄色" },
+    { "q": "彩虹的颜色顺序（从外到内）正确的是？", "options": ["红橙黄绿蓝靛紫", "紫蓝绿黄橙红靛", "红黄橙绿蓝紫靛", "蓝红黄绿橙紫靛"], "answer": 0, "explain": "红橙黄绿蓝靛紫——彩虹从外圈红到内圈紫" },
+    { "q": "「天空是蓝色的」英文说法是？", "options": ["The sky is red.", "The sky is blue.", "The sky is green.", "The sky is orange."], "answer": 1, "explain": "blue = 蓝色，The sky is blue. 天空是蓝色的" }
+  ],
+  "codeLesson": false
+}

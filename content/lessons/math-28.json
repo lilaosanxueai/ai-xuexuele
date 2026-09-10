@@ -78,5 +78,40 @@
   "aiIntro": "⚖️ 分东西起争执？数学来仲裁！按比例分配是人类发明最公平的算法之一——股东分红、调颜料、兑果汁全用它。",
   "celebrate": "比例分配出师！「总数×份数÷总份数」这句口诀配上你的程序，以后小组分工算工分、分零食，都是你说了算 ⚖️",
   "codeLesson": true,
-  "starterCode": "# 按比例分配：100 元按 2:3 分\ntotal = 100\nratio_a = 2\nratio_b = 3\n\na = total * ratio_a / (ratio_a + ratio_b)\nb = total * ratio_b / (ratio_a + ratio_b)\nsay(\"甲分 \" + a + \" 元，乙分 \" + b + \" 元\")\n"
+  "starterCode": "# 按比例分配：100 元按 2:3 分\ntotal = 100\nratio_a = 2\nratio_b = 3\n\na = total * ratio_a / (ratio_a + ratio_b)\nb = total * ratio_b / (ratio_a + ratio_b)\nsay(\"甲分 \" + a + \" 元，乙分 \" + b + \" 元\")\n",
+  "exercises": [
+    {
+      "q": "按 2:3 分 50 颗糖，两份各多少？",
+      "options": [
+        "10 和 40",
+        "20 和 30",
+        "25 和 25",
+        "15 和 35"
+      ],
+      "answer": 1,
+      "explain": "总份数 5，每份 50÷5=10：2×10=20，3×10=30"
+    },
+    {
+      "q": "把 a:b=1:4 中两份同时乘 2，比值？",
+      "options": [
+        "变 1:8",
+        "不变仍是 1:4",
+        "变 1:2",
+        "变 2:4"
+      ],
+      "answer": 1,
+      "explain": "比的前后项同乘同除，比值不变"
+    },
+    {
+      "q": "地图比例尺 1:100000 表示图上 1 厘米=实际？",
+      "options": [
+        "1 米",
+        "100 米",
+        "1 千米",
+        "10 千米"
+      ],
+      "answer": 2,
+      "explain": "1cm×100000=100000cm=1km"
+    }
+  ]
 }

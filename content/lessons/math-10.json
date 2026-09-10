@@ -87,5 +87,40 @@
   "codeLesson": true,
   "starterCode": "# 二次函数 y = x² 画图机（画出真抛物线）\npen_color(\"blue\")\npen_down()\nfor x in range(-5, 6):\n    go_to(x * 30, x * x * 6)\n    wait(0.1)\npen_up()\ngo_to(0, -150)\n\nsay(\"抛物线 y = x² 画好了！\")\n",
   "subjectArea": "数学",
-  "gradeBand": "junior"
+  "gradeBand": "junior",
+  "exercises": [
+    {
+      "q": "抛物线 y=x² 在 x=2 处的 y 值是？",
+      "options": [
+        "2",
+        "4",
+        "1",
+        "8"
+      ],
+      "answer": 1,
+      "explain": "代入：y=2²=4"
+    },
+    {
+      "q": "y=x² 的图像开口方向？",
+      "options": [
+        "向下",
+        "向上",
+        "向左",
+        "向右"
+      ],
+      "answer": 1,
+      "explain": "二次项系数为正，开口向上"
+    },
+    {
+      "q": "抛物线和投篮轨迹的关系？",
+      "options": [
+        "无关",
+        "都是抛物线形状",
+        "抛物线是直线",
+        "轨迹是圆"
+      ],
+      "answer": 1,
+      "explain": "斜抛运动轨迹就是抛物线——数学与物理在此相遇"
+    }
+  ]
 }

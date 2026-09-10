@@ -1,0 +1,56 @@
+{
+  "id": "cross-93",
+  "island": "cross",
+  "order": 154,
+  "title": "My Day：英语作息播报员",
+  "emoji": "🕰",
+  "story": "What time do you get up? I get up at seven! 今天你是英文台的「作息播报员」：从起床到睡觉，用一般现在时播报你的一天。程序里的时间轴走到哪，你的英语说到哪——播完这一条，日常表达全拿下！",
+  "goals": ["掌握一般现在时描述日常作息", "熟练使用 at + 时间点"],
+  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_costume", "island_change_size", "island_play", "island_repeat"],
+  "actor": { "costume": "🧑‍💼", "x": -80, "y": 0, "dir": 0 },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "开播：说「Good morning! I get up at seven.」",
+      "hintPrompts": ["一般现在时说习惯：I get up / I go / I have", "at seven = 在七点，钟点前用 at"],
+      "check": { "type": "say_text" }
+    },
+    {
+      "id": "t2",
+      "text": "播报一天的 4 个时刻：起床☀️ → 上学🎒 → 吃饭🍚 → 睡觉🌙（至少 4 块「说 停几秒」：I go to school at eight...）",
+      "hintPrompts": ["每句结构一样：I + 动词 + at + 时间", "发音自信，主播范儿！"],
+      "check": { "type": "block_count_min", "block": "island_say_for", "count": 4 }
+    },
+    {
+      "id": "t3",
+      "text": "每个时刻配一个造型：☀️🎒🍚🌙 至少换 3 次，像换台的动画",
+      "hintPrompts": ["说和变身同时进行，观众更入戏", "时间轴从早到晚，顺序别乱"],
+      "check": { "type": "block_count_min", "block": "island_costume", "count": 3 }
+    },
+    {
+      "id": "t4",
+      "text": "收播：走到 🕰 大本钟，说「This is my day! Good night!」配结束音效",
+      "hintPrompts": ["主播收尾要挥手微笑（想象镜头）", "Good night 收尾，一天的播报完美闭环"],
+      "check": { "type": "actor_reach", "targetIndex": 0 }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：第三人称单数——改成播报爸爸的一天：He gets up at six. 注意动词加了 s！",
+      "hintPrompts": ["he/she/it 做主语，动词加 s：gets/goes/has", "goes 是加 es 哦——广播出去前检查一下！"],
+      "check": { "type": "manual" },
+      "optional": true
+    }
+  ],
+  "targets": [{ "emoji": "🕰", "x": 130, "y": 40 }],
+  "curriculum": { "stage": "第四学段（7-9年级）", "module": "身边的算法", "points": ["顺序结构", "时间轴的序列表达"] },
+  "subject": { "name": "英语·日常表达（初中）", "emoji": "🕰", "points": ["一般现在时（I get up at...）", "at + 钟点", "第三人称单数 -s/-es"] },
+  "subjectArea": "英语",
+  "gradeBand": "junior",
+  "aiIntro": "🕰 3, 2, 1, on air! 今天你是英文台主播，全天候播报自己的作息。一句一个动作一个钟点——播完你就发现：说英语的日常，就这么几句！",
+  "celebrate": "Broadcast complete! 🕰 你已经能用一般现在时完整描述一天——这是英语口语的地基。明天早晨对着镜子来一句：I get up at six thirty! 做自己的英文闹钟！",
+  "exercises": [
+    { "q": "「我七点起床」正确的说法是？", "options": ["I get up at seven.", "I get up on seven.", "I get up in seven.", "I gets up at seven."], "answer": 0, "explain": "钟点前用 at；主语 I 后动词不加 s" },
+    { "q": "He ___ to school at eight. 空里填？", "options": ["go", "goes", "going", "went"], "answer": 1, "explain": "第三人称单数 he + 一般现在时，动词加 es：goes" },
+    { "q": "晚上十点睡觉，怎么说？", "options": ["I go to bed at ten p.m.", "I go bed at ten.", "I sleep in ten.", "I go to bed on ten."], "answer": 0, "explain": "go to bed + at + 时间（p.m. 表示下午/晚上）" }
+  ]
+}

@@ -86,5 +86,40 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 函数交点 = 方程的解\n# 蓝线：y = x - 2\npen_color(\"blue\")\npen_down()\nfor x in range(-4, 7):\n    go_to(x * 30, (x - 2) * 30)\n    wait(0.05)\npen_up()\n\n# 红轴：x 轴（y=0）\npen_color(\"red\")\ngo_to(-150, 0)\npen_down()\ngo_to(150, 0)\npen_up()\n\n# 交点：(60, 0) 即 x=2 —— 方程 x-2=0 的解！\ngo_to(60, 0)\nsay(\"交点 x=2 就是方程的解！\")\n"
+  "starterCode": "# 函数交点 = 方程的解\n# 蓝线：y = x - 2\npen_color(\"blue\")\npen_down()\nfor x in range(-4, 7):\n    go_to(x * 30, (x - 2) * 30)\n    wait(0.05)\npen_up()\n\n# 红轴：x 轴（y=0）\npen_color(\"red\")\ngo_to(-150, 0)\npen_down()\ngo_to(150, 0)\npen_up()\n\n# 交点：(60, 0) 即 x=2 —— 方程 x-2=0 的解！\ngo_to(60, 0)\nsay(\"交点 x=2 就是方程的解！\")\n",
+  "exercises": [
+    {
+      "q": "求两个函数图像的交点，即求方程组的？",
+      "options": [
+        "斜率",
+        "公共解（交点坐标）",
+        "面积",
+        "最大值"
+      ],
+      "answer": 1,
+      "explain": "交点同时在两条曲线上→坐标同时满足两个方程"
+    },
+    {
+      "q": "y=2x 与 y=x+1 的交点是？",
+      "options": [
+        "(1,2)",
+        "(0,1)",
+        "(2,2)",
+        "(1,1)"
+      ],
+      "answer": 0,
+      "explain": "2x=x+1→x=1，y=2：交点 (1,2)"
+    },
+    {
+      "q": "「方程的解」与「图像的交点」的关系是？",
+      "options": [
+        "无关",
+        "数与形：一个问题的两种表达",
+        "互相对立",
+        "只在直线时成立"
+      ],
+      "answer": 1,
+      "explain": "数形结合：代数解↔几何交点，双向翻译"
+    }
+  ]
 }
