@@ -114,5 +114,7 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 燃烧三条件判断\nfuel = True      # 有可燃物（蜡烛）\noxygen = True    # 有氧气\nhot = True       # 温度达到着火点\n\nif fuel:\n    if oxygen:\n        if hot:\n            say(\"三个条件齐了——燃烧！\")\n        else:\n            say(\"温度不够，点不着\")\n    else:\n        say(\"没氧气，熄灭！\")\n\n# 消防实验：盖杯盖（隔绝氧气）\noxygen = False\nif oxygen == False:\n    say(\"盖上杯盖 -> 氧气耗尽 -> 火灭了！\")\n"
+  "starterCode": "# 燃烧三条件判断\nfuel = True      # 有可燃物（蜡烛）\noxygen = True    # 有氧气\nhot = True       # 温度达到着火点\n\nif fuel:\n    if oxygen:\n        if hot:\n            say(\"三个条件齐了——燃烧！\")\n        else:\n            say(\"温度不够，点不着\")\n    else:\n        say(\"没氧气，熄灭！\")\n\n# 消防实验：盖杯盖（隔绝氧气）\noxygen = False\nif oxygen == False:\n    say(\"盖上杯盖 -> 氧气耗尽 -> 火灭了！\")\n",
+  "textbook": "人教版化学九年级上册",
+  "grade": 9
 }

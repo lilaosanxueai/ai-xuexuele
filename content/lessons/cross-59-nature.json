@@ -5,53 +5,150 @@
   "title": "AI 自然观察家",
   "emoji": "🌿",
   "story": "科学家走进森林，第一件事不是做实验，而是观察、记录。今天你就是自然观察家：捡两样自然物（树叶、石头、贝壳……），教 AI 认识它们，再让机器人帮你写「观察日志」。达尔文的笔记本，今天换成你的程序！",
-  "goals": ["学会用观察和描述记录自然", "用 AI 建立自己的「物种图鉴」"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_costume", "island_play", "island_when_recognized", "island_recognize"],
-  "actor": { "costume": "🔎", "x": -60, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "📓", "x": 130, "y": 40 }],
+  "goals": [
+    "学会用观察和描述记录自然",
+    "用 AI 建立自己的「物种图鉴」"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_costume",
+    "island_play",
+    "island_when_recognized",
+    "island_recognize"
+  ],
+  "actor": {
+    "costume": "🔎",
+    "x": -60,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "📓",
+      "x": 130,
+      "y": 40
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "采集标本：在小区或阳台找两样自然物（一片树叶🍃、一块小石头🪨），先仔细看：什么颜色？光滑还是粗糙？",
-      "hintPrompts": ["观察三连：看颜色、摸质感、比大小", "科学家观察时要说得出细节，不只是「一片叶子」"],
-      "check": { "type": "manual" }
+      "hintPrompts": [
+        "观察三连：看颜色、摸质感、比大小",
+        "科学家观察时要说得出细节，不只是「一片叶子」"
+      ],
+      "check": {
+        "type": "manual"
+      }
     },
     {
       "id": "t2",
       "text": "教 AI 认标本：类别 1 = 树叶，类别 2 = 石头，各拍 10 张（正面、背面、侧面都拍）",
-      "hintPrompts": ["叶脉清晰的正面照要多拍几张", "正反面差异大，都要「喂」给 AI"],
-      "check": { "type": "manual" }
+      "hintPrompts": [
+        "叶脉清晰的正面照要多拍几张",
+        "正反面差异大，都要「喂」给 AI"
+      ],
+      "check": {
+        "type": "manual"
+      }
     },
     {
       "id": "t3",
       "text": "AI 观察员上线：「当 AI 认出 树叶」→ 机器人念观察记录「树叶：绿色，有叶脉，会飘落」",
-      "hintPrompts": ["观察记录要说出 2~3 个特征", "换成石头应该怎么描述？灰色、坚硬、不会飘"],
-      "check": { "type": "block_used", "block": "island_when_recognized" }
+      "hintPrompts": [
+        "观察记录要说出 2~3 个特征",
+        "换成石头应该怎么描述？灰色、坚硬、不会飘"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_when_recognized"
+      }
     },
     {
       "id": "t4",
       "text": "日志归档：再给石头也写一句观察记录，然后走到 📓 观察日志本处保存",
-      "hintPrompts": ["两类标本都有记录，图鉴才算完整", "达尔文环游世界记了 368 页笔记，你从第 2 页开始！"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "两类标本都有记录，图鉴才算完整",
+        "达尔文环游世界记了 368 页笔记，你从第 2 页开始！"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：换季观察——把同一棵树的叶子在不同季节的变化画下来/拍下来，做成「四季图鉴」",
-      "hintPrompts": ["春天嫩绿、夏天深绿、秋天金黄", "长期观察是科学家的看家本领"],
-      "check": { "type": "manual" },
+      "hintPrompts": [
+        "春天嫩绿、夏天深绿、秋天金黄",
+        "长期观察是科学家的看家本领"
+      ],
+      "check": {
+        "type": "manual"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第三学段（5-6年级）", "module": "过程与控制", "points": ["信息的采集与记录", "用工具辅助观察"] },
-  "subject": { "name": "科学·科学与探究", "emoji": "🌿", "points": ["观察与描述的方法", "自然物特征记录", "建立图鉴的分类意识"] },
+  "curriculum": {
+    "stage": "第三学段（5-6年级）",
+    "module": "过程与控制",
+    "points": [
+      "信息的采集与记录",
+      "用工具辅助观察"
+    ]
+  },
+  "subject": {
+    "name": "科学·科学与探究",
+    "emoji": "🌿",
+    "points": [
+      "观察与描述的方法",
+      "自然物特征记录",
+      "建立图鉴的分类意识"
+    ]
+  },
   "subjectArea": "科学",
   "gradeBand": "primary",
   "aiIntro": "🔎 观察家集合！今天的装备：一个放大镜、一台会学习的 AI、还有你最好奇的眼睛。记住：AI 只能帮你「认出」，观察和思考永远是你自己的超能力！",
   "celebrate": "观察日志第一页写好啦！📓 你用「看细节 + 说特征 + AI 帮忙记」走完了科学观察的完整流程——和大科学家的方法只差数量：他们记了几百页，你才刚开始！",
   "exercises": [
-    { "q": "科学观察最重要的是？", "options": ["看得快", "如实记录看到的细节", "凭印象写", "只看好看的东西"], "answer": 1, "explain": "观察要客观、如实、有细节，这是科学的起点" },
-    { "q": "描述一片树叶，最好的说法是？", "options": ["一片叶子", "绿色、边缘锯齿、有平行叶脉", "挺好看的", "像别人家那片"], "answer": 1, "explain": "好的观察描述包含颜色、形状、结构等具体特征" },
-    { "q": "AI 在自然观察中适合做什么？", "options": ["替你思考结论", "快速认出并帮你记录", "伪造观察数据", "完全代替观察"], "answer": 1, "explain": "AI 擅长快速识别和记录，观察、判断和思考仍是人的核心工作" }
+    {
+      "q": "科学观察最重要的是？",
+      "options": [
+        "看得快",
+        "如实记录看到的细节",
+        "凭印象写",
+        "只看好看的东西"
+      ],
+      "answer": 1,
+      "explain": "观察要客观、如实、有细节，这是科学的起点"
+    },
+    {
+      "q": "描述一片树叶，最好的说法是？",
+      "options": [
+        "一片叶子",
+        "绿色、边缘锯齿、有平行叶脉",
+        "挺好看的",
+        "像别人家那片"
+      ],
+      "answer": 1,
+      "explain": "好的观察描述包含颜色、形状、结构等具体特征"
+    },
+    {
+      "q": "AI 在自然观察中适合做什么？",
+      "options": [
+        "替你思考结论",
+        "快速认出并帮你记录",
+        "伪造观察数据",
+        "完全代替观察"
+      ],
+      "answer": 1,
+      "explain": "AI 擅长快速识别和记录，观察、判断和思考仍是人的核心工作"
+    }
   ],
-  "codeLesson": false
+  "codeLesson": false,
+  "textbook": "冀人版科学（小学）"
 }

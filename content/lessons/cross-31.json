@@ -114,5 +114,7 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 光合作用工厂：白天 vs 夜晚\no2 = 0\nfor hour in range(6):\n    if hour < 4:\n        say(\"白天 \" + (hour + 6) + \" 点：阳光充足，开工！\")\n        o2 = o2 + 10\n        wait(0.3)\n    else:\n        say(\"天黑了：无光，光合作用停止\")\n\nsay(\"一天产出氧气 \" + o2 + \" 份！\")\nsay(\"动物呼吸排出 CO2，植物吸收变 O2 —— 完美循环！\")\n"
+  "starterCode": "# 光合作用工厂：白天 vs 夜晚\no2 = 0\nfor hour in range(6):\n    if hour < 4:\n        say(\"白天 \" + (hour + 6) + \" 点：阳光充足，开工！\")\n        o2 = o2 + 10\n        wait(0.3)\n    else:\n        say(\"天黑了：无光，光合作用停止\")\n\nsay(\"一天产出氧气 \" + o2 + \" 份！\")\nsay(\"动物呼吸排出 CO2，植物吸收变 O2 —— 完美循环！\")\n",
+  "textbook": "人教版生物学七年级上册",
+  "grade": 7
 }

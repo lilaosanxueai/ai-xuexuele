@@ -5,52 +5,152 @@
   "title": "磁铁的秘密力量",
   "emoji": "🧲",
   "story": "看不见、摸不着，却能隔着桌面拉动回形针——磁力是物质世界的隐形魔法！磁铁有个铁规矩：只吸铁、钴、镍，别的免谈；还有个脾气：同极相斥、异极相吸，见面就分手或就抱住。今天你当「磁力侦探」，把这两条规律演出来！",
-  "goals": ["知道磁铁能吸引铁类物质", "理解同极相斥、异极相吸"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_turn_right", "island_turn_left", "island_costume", "island_play", "island_repeat"],
-  "actor": { "costume": "🧲", "x": -80, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "📎", "x": 130, "y": 40 }],
+  "goals": [
+    "知道磁铁能吸引铁类物质",
+    "理解同极相斥、异极相吸"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_costume",
+    "island_play",
+    "island_repeat"
+  ],
+  "actor": {
+    "costume": "🧲",
+    "x": -80,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "📎",
+      "x": 130,
+      "y": 40
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "侦探开场：磁铁 🧲 说「磁力大搜查！什么东西我能吸住？」",
-      "hintPrompts": ["侦探要带着悬念开场", "铁钉、回形针、剪刀——都含铁！"],
-      "check": { "type": "say_text" }
+      "hintPrompts": [
+        "侦探要带着悬念开场",
+        "铁钉、回形针、剪刀——都含铁！"
+      ],
+      "check": {
+        "type": "say_text"
+      }
     },
     {
       "id": "t2",
       "text": "吸铁测试：对三样东西逐一测试并报告——铁钉 📎「吸住了！」、木块「不行」、塑料尺「不行」（每测一样说结果）",
-      "hintPrompts": ["磁铁只对铁、钴、镍有反应，这是它的「铁规矩」", "铝罐、铜线都吸不住——不是金属就行的哦"],
-      "check": { "type": "block_count_min", "block": "island_say_for", "count": 3 }
+      "hintPrompts": [
+        "磁铁只对铁、钴、镍有反应，这是它的「铁规矩」",
+        "铝罐、铜线都吸不住——不是金属就行的哦"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_say_for",
+        "count": 3
+      }
     },
     {
       "id": "t3",
       "text": "同极相斥：另一块磁铁 N 极对 N 极——角色猛然后退（移动后退）+ 播放「弹开」音效：「同极相斥，弹开！」",
-      "hintPrompts": ["N 对 N、S 对 S：像两个闹别扭的人，越近弹得越远", "后退的移动要突然、快速，像被弹开"],
-      "check": { "type": "block_used", "block": "island_play" }
+      "hintPrompts": [
+        "N 对 N、S 对 S：像两个闹别扭的人，越近弹得越远",
+        "后退的移动要突然、快速，像被弹开"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_play"
+      }
     },
     {
       "id": "t4",
       "text": "异极相吸：N 极对 S 极——移动靠近回形针 📎 直至贴上：「异极相吸，抱住了！」",
-      "hintPrompts": ["N 对 S：一拍即合，啪地吸住", "指南针就是小磁针：地球本身就是大磁铁！"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "N 对 S：一拍即合，啪地吸住",
+        "指南针就是小磁针：地球本身就是大磁铁！"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：生活中的磁——找找家里的冰箱贴、门吸、耳机、磁悬浮列车用了什么磁铁原理，说给爸妈听",
-      "hintPrompts": ["冰箱贴：异极吸在门板上", "磁悬浮：同极相斥让列车浮起来！"],
-      "check": { "type": "manual" },
+      "hintPrompts": [
+        "冰箱贴：异极吸在门板上",
+        "磁悬浮：同极相斥让列车浮起来！"
+      ],
+      "check": {
+        "type": "manual"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第二、三学段（3-6年级）", "module": "过程与控制", "points": ["条件测试的表达", "运动方向与力的模拟"] },
-  "subject": { "name": "科学·物质世界", "emoji": "🧲", "points": ["磁铁吸引铁钴镍", "同极相斥异极相吸", "生活中的磁现象"] },
+  "curriculum": {
+    "stage": "第二、三学段（3-6年级）",
+    "module": "过程与控制",
+    "points": [
+      "条件测试的表达",
+      "运动方向与力的模拟"
+    ]
+  },
+  "subject": {
+    "name": "科学·物质世界",
+    "emoji": "🧲",
+    "points": [
+      "磁铁吸引铁钴镍",
+      "同极相斥异极相吸",
+      "生活中的磁现象"
+    ]
+  },
   "subjectArea": "科学",
   "gradeBand": "primary",
   "aiIntro": "🧲 隔空取物不是魔法，是磁力！这块小石头般的磁铁有两条家规：只吸铁家三兄弟、同性相斥异性相吸。今天你变身磁力侦探，把家规一条条验证出来！",
   "celebrate": "磁力档案建立！🧲 你验证了磁的两条铁律——它们正藏在冰箱贴里、耳机里、还有飞驰的磁悬浮列车里。看不见的力，看得见的好奇心！",
   "exercises": [
-    { "q": "磁铁能吸引的物体是？", "options": ["所有金属", "铁、钴、镍", "塑料", "玻璃"], "answer": 1, "explain": "磁铁只吸引铁磁性物质：铁、钴、镍" },
-    { "q": "两块磁铁 N 极对 N 极会？", "options": ["相吸", "相斥", "没反应", "变磁"], "answer": 1, "explain": "同名磁极相互排斥，异名磁极相互吸引" },
-    { "q": "磁悬浮列车「浮」起来利用了？", "options": ["同极相斥", "异极相吸", "磁铁吸铁", "重力"], "answer": 0, "explain": "轨道与列车磁极同名相斥，斥力托起车身消除摩擦" }
-  ]
+    {
+      "q": "磁铁能吸引的物体是？",
+      "options": [
+        "所有金属",
+        "铁、钴、镍",
+        "塑料",
+        "玻璃"
+      ],
+      "answer": 1,
+      "explain": "磁铁只吸引铁磁性物质：铁、钴、镍"
+    },
+    {
+      "q": "两块磁铁 N 极对 N 极会？",
+      "options": [
+        "相吸",
+        "相斥",
+        "没反应",
+        "变磁"
+      ],
+      "answer": 1,
+      "explain": "同名磁极相互排斥，异名磁极相互吸引"
+    },
+    {
+      "q": "磁悬浮列车「浮」起来利用了？",
+      "options": [
+        "同极相斥",
+        "异极相吸",
+        "磁铁吸铁",
+        "重力"
+      ],
+      "answer": 0,
+      "explain": "轨道与列车磁极同名相斥，斥力托起车身消除摩擦"
+    }
+  ],
+  "textbook": "冀人版科学（小学）"
 }

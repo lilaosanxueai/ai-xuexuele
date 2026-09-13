@@ -5,52 +5,153 @@
   "title": "Number Song：数字歌",
   "emoji": "🔢",
   "story": "One, two, three, four, five——数字是英语世界的第一把钥匙！今天你当「数字乐队」主唱：从 one 唱到 ten，每个数字配一个造型一个节拍。唱完这首歌，数字就长在你嘴上了！",
-  "goals": ["掌握 1-10 的英文说法", "用节拍串联数字序列"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_costume", "island_play", "island_repeat"],
-  "actor": { "costume": "🎤", "x": -80, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "🔟", "x": 130, "y": 40 }],
+  "goals": [
+    "掌握 1-10 的英文说法",
+    "用节拍串联数字序列"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_costume",
+    "island_play",
+    "island_repeat"
+  ],
+  "actor": {
+    "costume": "🎤",
+    "x": -80,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "🔟",
+      "x": 130,
+      "y": 40
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "开嗓：大声唱出「One! Two! Three!」（用「说 停 1 秒」一句一个）",
-      "hintPrompts": ["发音饱满：万-吐-碎（one two three）", "主唱要有节奏感，别抢拍"],
-      "check": { "type": "say_text" }
+      "hintPrompts": [
+        "发音饱满：万-吐-碎（one two three）",
+        "主唱要有节奏感，别抢拍"
+      ],
+      "check": {
+        "type": "say_text"
+      }
     },
     {
       "id": "t2",
       "text": "数字造型秀：从 one 到 five 至少换 5 次造型（1️⃣2️⃣3️⃣4️⃣5️⃣ 的顺序），每换一个念一个数字",
-      "hintPrompts": ["造型和数字要对上号，观众才记得住", "one→1️⃣、two→2️⃣，一一对应"],
-      "check": { "type": "block_count_min", "block": "island_costume", "count": 5 }
+      "hintPrompts": [
+        "造型和数字要对上号，观众才记得住",
+        "one→1️⃣、two→2️⃣，一一对应"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_costume",
+        "count": 5
+      }
     },
     {
       "id": "t3",
       "text": "加上节拍：每句数字之间播放一个音效（至少 3 次），像敲小鼓",
-      "hintPrompts": ["do re mi 顺着敲，音越来越高", "节拍稳，歌才好听"],
-      "check": { "type": "block_count_min", "block": "island_play", "count": 3 }
+      "hintPrompts": [
+        "do re mi 顺着敲，音越来越高",
+        "节拍稳，歌才好听"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_play",
+        "count": 3
+      }
     },
     {
       "id": "t4",
       "text": "唱到十：继续 six seven eight nine ten，走到 🔟 数字城堡领「数字主唱」徽章",
-      "hintPrompts": ["six 和 seven 的发音要分清：six 咬舌音", "ten 是终点，唱完谢幕！"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "six 和 seven 的发音要分清：six 咬舌音",
+        "ten 是终点，唱完谢幕！"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：火箭倒计时——从 ten 倒着数到 one，然后「Lift off! 发射！」配欢呼声",
-      "hintPrompts": ["倒序：ten nine eight…one", "倒计时+音效，气势拉满！"],
-      "check": { "type": "block_used", "block": "island_repeat" },
+      "hintPrompts": [
+        "倒序：ten nine eight…one",
+        "倒计时+音效，气势拉满！"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_repeat"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第二、三学段（3-6年级）", "module": "身边的算法", "points": ["序列化表达", "顺序结构"] },
-  "subject": { "name": "英语·数字（小学）", "emoji": "🔢", "points": ["one 到 ten 的认读", "数字与数量对应", "倒序数数"] },
+  "curriculum": {
+    "stage": "第二、三学段（3-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "序列化表达",
+      "顺序结构"
+    ]
+  },
+  "subject": {
+    "name": "英语·数字（小学）",
+    "emoji": "🔢",
+    "points": [
+      "one 到 ten 的认读",
+      "数字与数量对应",
+      "倒序数数"
+    ]
+  },
   "subjectArea": "英语",
   "gradeBand": "primary",
   "aiIntro": "🔢 Welcome to the Number Show! 从 one 到 ten，十个数字十个造型一段节拍——唱完这首歌，你就是英语数字界的小巨星！Ready? One, two, three, go!",
   "celebrate": "Number Song 大获成功！🔟 one two three four five six seven eight nine ten——正着数倒着数都难不倒你！下次数楼梯、数星星，换英语数！",
   "exercises": [
-    { "q": "「七」的英文是？", "options": ["six", "seven", "nine", "ten"], "answer": 1, "explain": "six=6, seven=7, nine=9, ten=10" },
-    { "q": "one, two, three 的下一个是？", "options": ["five", "four", "six", "seven"], "answer": 1, "explain": "顺序：one two three four five…" },
-    { "q": "火箭倒计时从几开始数？", "options": ["one", "ten", "five", "three"], "answer": 1, "explain": "Ten, nine, eight…one, lift off!" }
-  ]
+    {
+      "q": "「七」的英文是？",
+      "options": [
+        "six",
+        "seven",
+        "nine",
+        "ten"
+      ],
+      "answer": 1,
+      "explain": "six=6, seven=7, nine=9, ten=10"
+    },
+    {
+      "q": "one, two, three 的下一个是？",
+      "options": [
+        "five",
+        "four",
+        "six",
+        "seven"
+      ],
+      "answer": 1,
+      "explain": "顺序：one two three four five…"
+    },
+    {
+      "q": "火箭倒计时从几开始数？",
+      "options": [
+        "one",
+        "ten",
+        "five",
+        "three"
+      ],
+      "answer": 1,
+      "explain": "Ten, nine, eight…one, lift off!"
+    }
+  ],
+  "textbook": "人教PEP英语三年级上册",
+  "grade": 3
 }

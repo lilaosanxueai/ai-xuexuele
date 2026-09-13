@@ -133,5 +133,7 @@
       "answer": 2,
       "explain": "大写 A B D，小写 c——每个字母都有大小写两副面孔。"
     }
-  ]
+  ],
+  "textbook": "人教PEP英语三年级上册",
+  "grade": 3
 }

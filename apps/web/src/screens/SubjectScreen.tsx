@@ -73,10 +73,12 @@ export default function SubjectScreen() {
                       <div className="flex items-center gap-2">
                         <span className="truncate font-bold text-slate-800">{l.title}</span>
                         {l.codeLesson && <span className="shrink-0 rounded-full bg-slate-800 px-2 py-0.5 text-xs font-bold text-white">Python</span>}
+                        {l.grade != null && <span className="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-bold text-amber-700">{l.grade}年级</span>}
                       </div>
                       <div className="mt-0.5 truncate text-xs text-slate-400">
                         {l.subject ? `${l.subject.emoji} ${l.subject.name}` : l.curriculum ? `📗 ${l.curriculum.module}` : ''}
                         {l.curriculum ? ` · ${l.curriculum.points.slice(0, 2).join(' / ')}` : ''}
+                        {l.textbook ? ` · 📚 ${l.textbook}` : ''}
                       </div>
                     </div>
                     <span className="shrink-0 text-xl">{isDone ? '✅' : '▶'}</span>

@@ -5,52 +5,153 @@
   "title": "At the Shop：购物英语",
   "emoji": "🛒",
   "story": "Welcome to our shop! 假装你在国外的小卖部：问价格、说自己想要什么、付钱道谢——三句英语走天下！今天你自导自演一出购物小剧场：一人分饰店员和顾客两句台词，练完就能在模拟商店里「全英文购物」！",
-  "goals": ["掌握购物场景的常用句型", "练习数字与价格的英语表达"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_costume", "island_change_size", "island_play", "island_repeat"],
-  "actor": { "costume": "🧑", "x": -80, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "💵", "x": 130, "y": 40 }],
+  "goals": [
+    "掌握购物场景的常用句型",
+    "练习数字与价格的英语表达"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_costume",
+    "island_change_size",
+    "island_play",
+    "island_repeat"
+  ],
+  "actor": {
+    "costume": "🧑",
+    "x": -80,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "💵",
+      "x": 130,
+      "y": 40
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "顾客登场：变身 🧑 顾客，说「Hello! How much is this toy?」（你好，这个玩具多少钱？）",
-      "hintPrompts": ["How much is it? 万能问价句", "顾客先开口，语气礼貌自信"],
-      "check": { "type": "say_text" }
+      "hintPrompts": [
+        "How much is it? 万能问价句",
+        "顾客先开口，语气礼貌自信"
+      ],
+      "check": {
+        "type": "say_text"
+      }
     },
     {
       "id": "t2",
       "text": "店员回应：变身 🏪 店员，说「It's ten yuan.」（十元）——再演三轮：苹果 a red apple / 书 a book / 蛋糕 a cake（至少换 3 次造型，每轮报不同价格）",
-      "hintPrompts": ["价格句型：It's + 数字 + yuan/dollars", "店员和顾客轮流变身，像真正的双人剧"],
-      "check": { "type": "block_count_min", "block": "island_costume", "count": 3 }
+      "hintPrompts": [
+        "价格句型：It's + 数字 + yuan/dollars",
+        "店员和顾客轮流变身，像真正的双人剧"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_costume",
+        "count": 3
+      }
     },
     {
       "id": "t3",
       "text": "成交台词：顾客说「I'd like it, please! Here you are.」（我想要它，给你钱）店员说「Thank you!」（每句之间停顿等待，让对手「接戏」）",
-      "hintPrompts": ["I'd like... = 我想要（比 I want 更礼貌）", "Here you are 递东西时说；Thank you 收到时说"],
-      "check": { "type": "block_count_min", "block": "island_wait", "count": 2 }
+      "hintPrompts": [
+        "I'd like... = 我想要（比 I want 更礼貌）",
+        "Here you are 递东西时说；Thank you 收到时说"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_wait",
+        "count": 2
+      }
     },
     {
       "id": "t4",
       "text": "购物完成：走到 💵 收银台，播放收银音效，说「Shopping in English — easy and fun!」",
-      "hintPrompts": ["收银「叮咚」音效最配", "回顾四句：How much / It's... / I'd like / Thank you"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "收银「叮咚」音效最配",
+        "回顾四句：How much / It's... / I'd like / Thank you"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：点餐版——把台词换成餐厅版：Can I have a hamburger? / Here you are. / Enjoy your meal! 和爸妈演一遍",
-      "hintPrompts": ["Can I have...? = 我可以来一份…吗", "句型一换，场景百变——英语的乐高！"],
-      "check": { "type": "manual" },
+      "hintPrompts": [
+        "Can I have...? = 我可以来一份…吗",
+        "句型一换，场景百变——英语的乐高！"
+      ],
+      "check": {
+        "type": "manual"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第四学段（7-9年级）", "module": "身边的算法", "points": ["对话序列的编排", "角色切换的程序表达"] },
-  "subject": { "name": "英语·情景交际（初中）", "emoji": "🛒", "points": ["How much 问价句型", "I'd like... 表达愿望", "礼貌用语与购物对话"] },
+  "curriculum": {
+    "stage": "第四学段（7-9年级）",
+    "module": "身边的算法",
+    "points": [
+      "对话序列的编排",
+      "角色切换的程序表达"
+    ]
+  },
+  "subject": {
+    "name": "英语·情景交际（初中）",
+    "emoji": "🛒",
+    "points": [
+      "How much 问价句型",
+      "I'd like... 表达愿望",
+      "礼貌用语与购物对话"
+    ]
+  },
   "subjectArea": "英语",
   "gradeBand": "junior",
   "aiIntro": "🛒 Welcome! 今天的小卖部只收英文！你演顾客也演店员，四句台词搞定一场购物——演完你会发现：出国买东西，英语就这几句！",
   "celebrate": "Shopping complete! 💵 How much / It's… / I'd like / Thank you——四句台词一套剧，你已能全程英文买东西。下回去便利店，心里默默演一遍！",
   "exercises": [
-    { "q": "问「这个多少钱」应该说？", "options": ["How old is it?", "How much is it?", "What is it?", "Where is it?"], "answer": 1, "explain": "How much 询问价格；How old 问年龄" },
-    { "q": "想礼貌地买某物，说？", "options": ["Give me it!", "I'd like it, please.", "It's mine.", "I have it."], "answer": 1, "explain": "I'd like…, please. 委婉表达「我想要」" },
-    { "q": "递给别人东西时说？", "options": ["Here you are.", "You are here.", "Here we go.", "Come here."], "answer": 0, "explain": "Here you are = 给你；对方回答 Thank you" }
-  ]
+    {
+      "q": "问「这个多少钱」应该说？",
+      "options": [
+        "How old is it?",
+        "How much is it?",
+        "What is it?",
+        "Where is it?"
+      ],
+      "answer": 1,
+      "explain": "How much 询问价格；How old 问年龄"
+    },
+    {
+      "q": "想礼貌地买某物，说？",
+      "options": [
+        "Give me it!",
+        "I'd like it, please.",
+        "It's mine.",
+        "I have it."
+      ],
+      "answer": 1,
+      "explain": "I'd like…, please. 委婉表达「我想要」"
+    },
+    {
+      "q": "递给别人东西时说？",
+      "options": [
+        "Here you are.",
+        "You are here.",
+        "Here we go.",
+        "Come here."
+      ],
+      "answer": 0,
+      "explain": "Here you are = 给你；对方回答 Thank you"
+    }
+  ],
+  "textbook": "人教版英语七年级上册",
+  "grade": 7
 }

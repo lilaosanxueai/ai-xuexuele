@@ -1,0 +1,145 @@
+{
+  "id": "hb-12",
+  "island": "cross",
+  "order": 204,
+  "title": "集合的交与并：容斥原理",
+  "emoji": "🔵",
+  "story": "高中数学从「集合」开门：A = 10 以内 2 的倍数，B = 10 以内 3 的倍数——既在 A 又在 B 的是交集，A 或 B 的全部是并集。有个漂亮的公式：|A∪B| = |A| + |B| - |A∩B|（容斥原理）。今天用双重循环把集合运算数出来，眼见为实！",
+  "goals": [
+    "理解交集与并集的含义",
+    "验证容斥原理 |A∪B|=|A|+|B|-|A∩B|"
+  ],
+  "toolbox": [],
+  "codeLesson": true,
+  "starterCode": "# 集合运算计数器：A=10以内2的倍数, B=10以内3的倍数\ncountA = 0\ncountB = 0\nboth = 0\n\nfor i in range(1, 11):\n    isA = 0\n    isB = 0\n    for j in range(1, 6):\n        if i == j * 2:\n            isA = 1\n    for k in range(1, 4):\n        if i == k * 3:\n            isB = 1\n    countA = countA + isA\n    countB = countB + isB\n    if isA + isB == 2:\n        both = both + 1\n        say(i + \" 同时属于 A 和 B！\")\n\nsay(\"A 有 \" + countA + \" 个元素, B 有 \" + countB + \" 个\")\nsay(\"交集 A∩B 有 \" + both + \" 个\")\nsay(\"并集个数 = 5 + 3 - 1 = \" + (countA + countB - both))\nsay(\"容斥原理：|A∪B| = |A| + |B| - |A∩B| —— 重叠部分只算一次！\")\n",
+  "actor": {
+    "costume": "🔵",
+    "x": -70,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "🔴",
+      "x": 130,
+      "y": 40
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "运行程序：A 和 B 的交集是哪个数？为什么只有它同时满足两个条件？",
+      "hintPrompts": [
+        "6 = 2×3，既是 2 的倍数又是 3 的倍数",
+        "交集 = 同时满足所有条件"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "验证容斥：|A|=5、|B|=3、|A∩B|=1，并集是不是 5+3-1=7？为什么不能直接相加？",
+      "hintPrompts": [
+        "直接相加把 6 数了两次",
+        "减掉一次交集才是准确个数"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "t3",
+      "text": "改实验：把条件换成「2 的倍数」和「5 的倍数」，交集变成谁？（先心算再改程序验证）",
+      "hintPrompts": [
+        "10 以内 2 和 5 的公倍数：只有 10",
+        "j 和 k 的上限也要跟着改"
+      ],
+      "check": {
+        "type": "manual"
+      }
+    },
+    {
+      "id": "t4",
+      "text": "集合语言通关：走到 🔴 集合馆，说「符号语言：A∩B、A∪B——数学的简洁之美」",
+      "hintPrompts": [
+        "∩ 像交点、∪ 像杯子",
+        "集合是整个高中数学的「通用语言」"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：全班 45 人，喜欢数学 28 人、喜欢物理 21 人、都喜欢 12 人——两样都不喜欢的几人？（容斥两步算，说给爸妈）",
+      "hintPrompts": [
+        "至少喜欢一门 = 28+21-12 = 37",
+        "都不喜欢 = 45-37 = 8 人"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "高中·必修",
+    "module": "身边的算法",
+    "points": [
+      "嵌套循环与条件标记",
+      "容斥原理的程序验证"
+    ]
+  },
+  "subject": {
+    "name": "数学·集合与常用逻辑用语（必修一）",
+    "emoji": "🔵",
+    "points": [
+      "交集与并集",
+      "容斥原理",
+      "集合的表示（描述法直觉）"
+    ]
+  },
+  "subjectArea": "数学",
+  "gradeBand": "senior",
+  "grade": 10,
+  "textbook": "人教A版数学必修第一册",
+  "aiIntro": "🔵 高中数学第一章从集合开始——它是一切数学概念的「容器」！今天不画维恩图，直接用循环数数：数出交集、数出并集，让容斥原理自己蹦出来！",
+  "celebrate": "集合运算通关！🔵 你用双重循环验证了容斥原理——「重叠只算一次」这个思想，从小学一年级数手指到大学概率论一直管用。高中数学，开门红！",
+  "exercises": [
+    {
+      "q": "A∩B 表示？",
+      "options": [
+        "A 与 B 的并集",
+        "同时属于 A 和 B 的元素",
+        "A 减 B",
+        "空集"
+      ],
+      "answer": 1,
+      "explain": "交集=公共元素组成的集合"
+    },
+    {
+      "q": "|A|=5、|B|=3、|A∩B|=1，则 |A∪B|=?",
+      "options": [
+        "9",
+        "8",
+        "7",
+        "6"
+      ],
+      "answer": 2,
+      "explain": "5+3-1=7（容斥原理）"
+    },
+    {
+      "q": "若 A∩B = A，说明？",
+      "options": [
+        "A=B",
+        "A 是 B 的子集",
+        "B 是 A 的子集",
+        "无交集"
+      ],
+      "answer": 1,
+      "explain": "A 的元素全在 B 里（子集），交集才是 A 自己"
+    }
+  ]
+}

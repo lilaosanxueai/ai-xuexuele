@@ -114,5 +114,7 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 呼吸作用：细胞在吃饭\nenergy = 0\nfor breath in range(5):\n    say(\"吸入氧气 O2 ...\")\n    wait(0.2)\n    say(\"线粒体：养分 + O2 -> 能量 + CO2 + 水\")\n    energy = energy + 20\n    say(\"呼出 CO2 ... 累计能量 \" + energy + \" 份\")\n    wait(0.3)\n\nsay(\"和光合作用正好相反！一动一静，地球循环\")\n"
+  "starterCode": "# 呼吸作用：细胞在吃饭\nenergy = 0\nfor breath in range(5):\n    say(\"吸入氧气 O2 ...\")\n    wait(0.2)\n    say(\"线粒体：养分 + O2 -> 能量 + CO2 + 水\")\n    energy = energy + 20\n    say(\"呼出 CO2 ... 累计能量 \" + energy + \" 份\")\n    wait(0.3)\n\nsay(\"和光合作用正好相反！一动一静，地球循环\")\n",
+  "textbook": "人教版生物学七年级上册",
+  "grade": 7
 }

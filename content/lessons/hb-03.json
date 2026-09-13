@@ -1,0 +1,58 @@
+{
+  "id": "hb-03",
+  "island": "cross",
+  "order": 195,
+  "title": "Body Exercise：身体部位英语操",
+  "emoji": "🕺",
+  "story": "Head, shoulders, knees and toes! 今天你当英语体育老师：喊一个身体部位，让「学生」摸对地方——摸对了欢呼，摸错了纠正。一套英语身体操做下来，head/nose/mouth 全部长在身上，不用死记！",
+  "goals": ["掌握常见身体部位英文", "用「当按下某键」做互动反应游戏"],
+  "toolbox": ["island_when_run", "island_when_key", "island_say", "island_say_for", "island_wait", "island_move", "island_costume", "island_play", "island_if", "island_key_down"],
+  "actor": { "costume": "🙋", "x": -70, "y": 0, "dir": 0 },
+  "targets": [{ "emoji": "🧑‍🏫", "x": 130, "y": 40 }],
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "老师就位：说「English body exercise! Follow me! Touch your head!」",
+      "hintPrompts": ["体育老师的口令要响亮", "Touch your + 部位 = 摸你的……"],
+      "check": { "type": "say_text" }
+    },
+    {
+      "id": "t2",
+      "text": "口令三连：依次喊「Touch your nose!」「Touch your mouth!」「Touch your eyes!」（至少 3 块「说 停几秒」，每句之间停 2 秒让学生反应）",
+      "hintPrompts": ["nose 鼻子 / mouth 嘴巴 / eyes 眼睛", "口令之间等待 2 秒，像真的做操"],
+      "check": { "type": "block_count_min", "block": "island_say_for", "count": 3 }
+    },
+    {
+      "id": "t3",
+      "text": "互动检查：用「当按下 空格 键」——学生摸对了（变 🙆 + 欢呼声「Great!」）",
+      "hintPrompts": ["「当按下某键」做摸对时的欢呼开关", "运行后按空格测试欢呼效果"],
+      "check": { "type": "block_used", "block": "island_when_key" }
+    },
+    {
+      "id": "t4",
+      "text": "做操收尾：喊最后一句「Touch your knees! Wave goodbye!（摸膝盖，挥挥手）」走到 🧑‍🏫 老师处领「英语体育老师」证书",
+      "hintPrompts": ["knees 膝盖（复数，两只膝盖）", "wave goodbye = 挥手告别"],
+      "check": { "type": "actor_reach", "targetIndex": 0 }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：反向考老师——让爸妈喊中文（摸鼻子！），你用英语回答并做动作，10 个部位全对算过关",
+      "hintPrompts": ["head 头 / hair 头发 / face 脸 / ear 耳朵 / arm 手臂 / hand 手 / leg 腿 / foot 脚", "错一个做 5 个开合跳（也是英语操的一部分）！"],
+      "check": { "type": "manual" },
+      "optional": true
+    }
+  ],
+  "curriculum": { "stage": "第一学段（1-2年级）", "module": "身边的算法", "points": ["事件驱动", "序列与节奏"] },
+  "subject": { "name": "英语·身体部位", "emoji": "🕺", "points": ["head/nose/mouth/eyes/knees 等部位词", "Touch your... 祈使句", "反应速度与听力"] },
+  "subjectArea": "英语",
+  "gradeBand": "primary",
+  "grade": 3,
+  "textbook": "人教PEP英语三年级上册",
+  "aiIntro": "🕺 Ready for exercise? 今天的英语课在操场上！喊口令、摸部位、做对欢呼——一套操下来，身体部位的单词全部「长」在身上，想忘都忘不掉！",
+  "celebrate": "英语身体操大成功！🕺 Touch your head! 现在喊任何部位，你的手比脑子还快——这就是「身体记忆」，比抄十遍单词都管用！",
+  "exercises": [
+    { "q": "「鼻子」的英文是？", "options": ["mouth", "nose", "eyes", "ears"], "answer": 1, "explain": "nose=鼻子；mouth=嘴巴；eyes=眼睛" },
+    { "q": "「Touch your head!」的意思是？", "options": ["摇摇头", "摸摸你的头", "抬头看", "点头"], "answer": 1, "explain": "Touch your + 部位 = 摸摸你的……" },
+    { "q": "knees 指的是？", "options": ["脚趾", "膝盖（两只）", "手指", "肩膀"], "answer": 1, "explain": "knee 膝盖，两只用 knees（复数）" }
+  ]
+}

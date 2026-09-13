@@ -123,5 +123,7 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 光的折射演示\npen_color(\"blue\")\ngo_to(-160, 80)\npen_down()\ngo_to(0, 0)      # 入射到水面 (0,0)，入射角约 45 度\npen_up()\nsay(\"空气中的入射光：45 度\")\n\n# 折射进入水中：角度变小约 32 度\npen_color(\"red\")\ngo_to(0, 0)\npen_down()\ngo_to(60, -100)  # 水下折射线，更接近竖直\npen_up()\nsay(\"水中的折射光：约 32 度——变弯了！\")\n"
+  "starterCode": "# 光的折射演示\npen_color(\"blue\")\ngo_to(-160, 80)\npen_down()\ngo_to(0, 0)      # 入射到水面 (0,0)，入射角约 45 度\npen_up()\nsay(\"空气中的入射光：45 度\")\n\n# 折射进入水中：角度变小约 32 度\npen_color(\"red\")\ngo_to(0, 0)\npen_down()\ngo_to(60, -100)  # 水下折射线，更接近竖直\npen_up()\nsay(\"水中的折射光：约 32 度——变弯了！\")\n",
+  "textbook": "人教版物理八年级上册",
+  "grade": 8
 }

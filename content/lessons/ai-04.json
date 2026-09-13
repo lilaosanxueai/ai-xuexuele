@@ -5,53 +5,149 @@
   "title": "AI 会犯错吗？",
   "emoji": "❓",
   "story": "大家总说 AI 很聪明，但它真的永远正确吗？今天我们故意「坑」它一次：只用固定背景训练，再换背景测试——看它还认不认得。你会亲眼看到 AI 犯错，并且学会一件大人也常忘记的事：AI 是助手，不是裁判。",
-  "goals": ["通过实验认识 AI 的局限性", "建立「人机协作、人来判断」的批判思维"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_costume", "island_play", "island_if", "island_if_else", "island_recognize"],
-  "actor": { "costume": "🕵", "x": -50, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "🧩", "x": 130, "y": 40 }],
+  "goals": [
+    "通过实验认识 AI 的局限性",
+    "建立「人机协作、人来判断」的批判思维"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_costume",
+    "island_play",
+    "island_if",
+    "island_if_else",
+    "island_recognize"
+  ],
+  "actor": {
+    "costume": "🕵",
+    "x": -50,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "🧩",
+      "x": 130,
+      "y": 40
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "设下「陷阱」：类别 1 的 10 张照片全部在同一个背景上拍（比如都放在白纸上）",
-      "hintPrompts": ["背景完全一样，AI 可能会「偷懒」把背景也记住", "这叫偏见数据——现实里常有，比如某类照片特别少"],
-      "check": { "type": "manual" }
+      "hintPrompts": [
+        "背景完全一样，AI 可能会「偷懒」把背景也记住",
+        "这叫偏见数据——现实里常有，比如某类照片特别少"
+      ],
+      "check": {
+        "type": "manual"
+      }
     },
     {
       "id": "t2",
       "text": "换个背景再测：把东西拿到花纹桌布/深色桌面上，看 AI 还认得出吗？记录结果",
-      "hintPrompts": ["多测几次，一次认错可能是巧合，次次认错就是规律", "把结果记下来：换背景前 vs 后"],
-      "check": { "type": "manual" }
+      "hintPrompts": [
+        "多测几次，一次认错可能是巧合，次次认错就是规律",
+        "把结果记下来：换背景前 vs 后"
+      ],
+      "check": {
+        "type": "manual"
+      }
     },
     {
       "id": "t3",
       "text": "让侦探机器人说出你的发现（比如「背景一换，AI 就懵了！」）",
-      "hintPrompts": ["犯错不可怕，看不出犯错才可怕", "你的发现就是实验结论"],
-      "check": { "type": "say_text" }
+      "hintPrompts": [
+        "犯错不可怕，看不出犯错才可怕",
+        "你的发现就是实验结论"
+      ],
+      "check": {
+        "type": "say_text"
+      }
     },
     {
       "id": "t4",
       "text": "写一个「纠错小助手」：用「AI 认出 类别 1 ？」+「如果…否则」——认对播放欢呼，认错提醒「请人再检查！」，最后走到 🧩 真相拼图处",
-      "hintPrompts": ["「如果…否则」两头都要填：认对一头，认错一头", "认错时的提醒，就是人类在把关"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "「如果…否则」两头都要填：认对一头，认错一头",
+        "认错时的提醒，就是人类在把关"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：和爸妈讨论——自动驾驶汽车、医生看片助手，为什么都必须有人类监督？",
-      "hintPrompts": ["AI 犯错的代价越大，人的把关越重要", "人负责判断对错和责任，AI 负责提速度"],
-      "check": { "type": "manual" },
+      "hintPrompts": [
+        "AI 犯错的代价越大，人的把关越重要",
+        "人负责判断对错和责任，AI 负责提速度"
+      ],
+      "check": {
+        "type": "manual"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第四学段（7-9年级）", "module": "人工智能与智慧社会", "points": ["人工智能的局限性", "人机协同与人的判断"] },
-  "subject": { "name": "信息科技·人工智能与社会", "emoji": "❓", "points": ["AI 会出错、会有偏见", "数据偏见导致识别偏差", "AI 是助手不是裁判"] },
+  "curriculum": {
+    "stage": "第四学段（7-9年级）",
+    "module": "人工智能与智慧社会",
+    "points": [
+      "人工智能的局限性",
+      "人机协同与人的判断"
+    ]
+  },
+  "subject": {
+    "name": "信息科技·人工智能与社会",
+    "emoji": "❓",
+    "points": [
+      "AI 会出错、会有偏见",
+      "数据偏见导致识别偏差",
+      "AI 是助手不是裁判"
+    ]
+  },
   "subjectArea": "信息科技",
   "gradeBand": "junior",
   "aiIntro": "🕵 侦探事务所新案子：被告是 AI，罪名是「永远正确」。你的任务——找出它犯错的证据！提示：陷阱就在背景里。",
   "celebrate": "结案！🧩 你证明了：AI 会犯错，而且犯错的原因常常藏在训练数据里。所以聪明人用 AI 都留一手——自己再检查一遍。这个习惯，值一百分！",
   "exercises": [
-    { "q": "AI 认错的常见原因是？", "options": ["它故意的", "训练数据有偏差或太少", "摄像头太贵", "程序太长"], "answer": 1, "explain": "数据偏差（如背景单一、类别不平衡）会让 AI 学到错误规律" },
-    { "q": "重要决策（医疗、驾驶）里 AI 的角色应该是？", "options": ["全听 AI 的", "AI 建议 + 人类最终判断", "完全不用 AI", "让 AI 负全责"], "answer": 1, "explain": "人机协同：AI 提供参考，人负责判断与责任" },
-    { "q": "发现 AI 常把某种情况认错，最好的做法是？", "options": ["删掉程序重写", "补充这类情况的训练数据再重训", "不用它了", "假装没看见"], "answer": 1, "explain": "针对薄弱场景补数据、再训练，是改进 AI 的正道" }
+    {
+      "q": "AI 认错的常见原因是？",
+      "options": [
+        "它故意的",
+        "训练数据有偏差或太少",
+        "摄像头太贵",
+        "程序太长"
+      ],
+      "answer": 1,
+      "explain": "数据偏差（如背景单一、类别不平衡）会让 AI 学到错误规律"
+    },
+    {
+      "q": "重要决策（医疗、驾驶）里 AI 的角色应该是？",
+      "options": [
+        "全听 AI 的",
+        "AI 建议 + 人类最终判断",
+        "完全不用 AI",
+        "让 AI 负全责"
+      ],
+      "answer": 1,
+      "explain": "人机协同：AI 提供参考，人负责判断与责任"
+    },
+    {
+      "q": "发现 AI 常把某种情况认错，最好的做法是？",
+      "options": [
+        "删掉程序重写",
+        "补充这类情况的训练数据再重训",
+        "不用它了",
+        "假装没看见"
+      ],
+      "answer": 1,
+      "explain": "针对薄弱场景补数据、再训练，是改进 AI 的正道"
+    }
   ],
-  "codeLesson": false
+  "codeLesson": false,
+  "textbook": "冀教版信息科技（初中）"
 }

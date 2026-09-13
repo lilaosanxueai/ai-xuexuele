@@ -5,53 +5,154 @@
   "title": "排队小明星",
   "emoji": "🚸",
   "story": "放学了，校门口同学们排成一条小火车：「一个跟着一个走，不推也不挤。」排队看起来简单，里面藏着大学问：先来先到、保持距离、耐心等待——这不就是程序里的「顺序」和「等待」吗？今天让角色们排好队，你就是最有秩序的队列指挥官！",
-  "goals": ["理解排队守序的规则与意义", "用顺序和等待表达「一个一个来」"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_turn_right", "island_turn_left", "island_costume", "island_play", "island_repeat"],
-  "actor": { "costume": "🧒", "x": -90, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "🚸", "x": 130, "y": 0 }],
+  "goals": [
+    "理解排队守序的规则与意义",
+    "用顺序和等待表达「一个一个来」"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_costume",
+    "island_play",
+    "island_repeat"
+  ],
+  "actor": {
+    "costume": "🧒",
+    "x": -90,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "🚸",
+      "x": 130,
+      "y": 0
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "小队长宣布规则：说「排队啦！先来的站前面，一个跟着一个走」",
-      "hintPrompts": ["排队三规则：先来先到、保持距离、不推不挤", "队长的声音要清楚坚定"],
-      "check": { "type": "say_text" }
+      "hintPrompts": [
+        "排队三规则：先来先到、保持距离、不推不挤",
+        "队长的声音要清楚坚定"
+      ],
+      "check": {
+        "type": "say_text"
+      }
     },
     {
       "id": "t2",
       "text": "一个一个来：角色走一步停一停（移动+等待交替，至少 3 块等待），像队伍慢慢向前挪",
-      "hintPrompts": ["「移动 20」+「等待 1」+「移动 20」——节奏就是秩序", "等待就是「不着急、不插队」"],
-      "check": { "type": "block_count_min", "block": "island_wait", "count": 3 }
+      "hintPrompts": [
+        "「移动 20」+「等待 1」+「移动 20」——节奏就是秩序",
+        "等待就是「不着急、不插队」"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_wait",
+        "count": 3
+      }
     },
     {
       "id": "t3",
       "text": "轮流换人：排队走一段就换个造型（🧒→🦊→🐼），表示「下一位同学」，至少换 3 次",
-      "hintPrompts": ["一个造型代表一位同学，轮到他才走", "谁也不插队，谁也不掉队"],
-      "check": { "type": "block_count_min", "block": "island_costume", "count": 3 }
+      "hintPrompts": [
+        "一个造型代表一位同学，轮到他才走",
+        "谁也不插队，谁也不掉队"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_costume",
+        "count": 3
+      }
     },
     {
       "id": "t4",
       "text": "安全到达：队伍走到 🚸 校门口，播放放学铃声，说「排好队，安全回家！」",
-      "hintPrompts": ["到站配个铃声，像放学铃一样", "排好队的队伍走得又快又安全——这就是秩序的力量"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "到站配个铃声，像放学铃一样",
+        "排好队的队伍走得又快又安全——这就是秩序的力量"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：和爸妈聊一聊——生活中哪些地方要排队？如果人人插队会怎样？",
-      "hintPrompts": ["车站、超市、医院、游乐场……", "插队=程序乱了顺序，会出错、会撞车、会吵架"],
-      "check": { "type": "manual" },
+      "hintPrompts": [
+        "车站、超市、医院、游乐场……",
+        "插队=程序乱了顺序，会出错、会撞车、会吵架"
+      ],
+      "check": {
+        "type": "manual"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第三学段（5-6年级）", "module": "身边的算法", "points": ["顺序结构", "用等待表达秩序"] },
-  "subject": { "name": "道德与法治·公共秩序", "emoji": "🚸", "points": ["排队守序好习惯", "先来后到的公平规则", "公共安全意识"] },
+  "curriculum": {
+    "stage": "第三学段（5-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "顺序结构",
+      "用等待表达秩序"
+    ]
+  },
+  "subject": {
+    "name": "道德与法治·公共秩序",
+    "emoji": "🚸",
+    "points": [
+      "排队守序好习惯",
+      "先来后到的公平规则",
+      "公共安全意识"
+    ]
+  },
   "subjectArea": "道德与法治",
   "gradeBand": "primary",
   "aiIntro": "🚸 放学铃响啦！今天你是最棒的队列指挥官。你会发现：排队和程序用的是同一个道理——按顺序、会等待、不插队。这样的程序不崩溃，这样的队伍不拥挤！",
   "celebrate": "全队安全到达！🚸 你发现了排队的小秘密：它就是生活里的「顺序结构 + 等待」。守秩序不是死板，而是让所有人又快又安全的聪明办法。明天放学，做个排队小明星！",
   "exercises": [
-    { "q": "排队的正确做法是？", "options": ["挤到最前面", "先来先到，一个跟着一个", "和朋友并排横着走", "谁跑得快谁先来"], "answer": 1, "explain": "先来后到、依次行进，对每个人都公平" },
-    { "q": "有人插队时，你应该？", "options": ["把他也挤出去", "提醒他排队，或告诉老师", "跟着一起插队", "大声吵架"], "answer": 1, "explain": "礼貌提醒或求助大人，用规则解决问题" },
-    { "q": "排队和程序里哪个结构最像？", "options": ["随机数", "顺序执行和等待", "音效", "换造型"], "answer": 1, "explain": "一个接一个执行（走），中间有等待——正是顺序结构" }
+    {
+      "q": "排队的正确做法是？",
+      "options": [
+        "挤到最前面",
+        "先来先到，一个跟着一个",
+        "和朋友并排横着走",
+        "谁跑得快谁先来"
+      ],
+      "answer": 1,
+      "explain": "先来后到、依次行进，对每个人都公平"
+    },
+    {
+      "q": "有人插队时，你应该？",
+      "options": [
+        "把他也挤出去",
+        "提醒他排队，或告诉老师",
+        "跟着一起插队",
+        "大声吵架"
+      ],
+      "answer": 1,
+      "explain": "礼貌提醒或求助大人，用规则解决问题"
+    },
+    {
+      "q": "排队和程序里哪个结构最像？",
+      "options": [
+        "随机数",
+        "顺序执行和等待",
+        "音效",
+        "换造型"
+      ],
+      "answer": 1,
+      "explain": "一个接一个执行（走），中间有等待——正是顺序结构"
+    }
   ],
-  "codeLesson": false
+  "codeLesson": false,
+  "textbook": "统编版道德与法治（小学）"
 }

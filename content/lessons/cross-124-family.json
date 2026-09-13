@@ -5,52 +5,152 @@
   "title": "My Family：全家福发布会",
   "emoji": "👨‍👩‍👧‍👦",
   "story": "This is my father. This is my mother……用英语介绍家人，是每个英语小达人的第一场「发布会」！今天你当主持人：把爸爸妈妈、兄弟姐妹一个个请上台，每人一句英文介绍——发布完全家福，你就是最棒的 Family Spokesperson！",
-  "goals": ["掌握家庭成员的英文说法", "会用 This is my... 句型介绍"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_costume", "island_play", "island_repeat"],
-  "actor": { "costume": "🙋", "x": -80, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "🖼", "x": 130, "y": 40 }],
+  "goals": [
+    "掌握家庭成员的英文说法",
+    "会用 This is my... 句型介绍"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_costume",
+    "island_play",
+    "island_repeat"
+  ],
+  "actor": {
+    "costume": "🙋",
+    "x": -80,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "🖼",
+      "x": 130,
+      "y": 40
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "主持人开场：说「Welcome to my family show!（欢迎来到我的家庭发布会）」",
-      "hintPrompts": ["开场要有主持人的自信", "Welcome to... 万能开场句"],
-      "check": { "type": "say_text" }
+      "hintPrompts": [
+        "开场要有主持人的自信",
+        "Welcome to... 万能开场句"
+      ],
+      "check": {
+        "type": "say_text"
+      }
     },
     {
       "id": "t2",
       "text": "请出四位家人：爸爸 👨「This is my father!」妈妈 👩「This is my mother!」……至少换 4 次造型",
-      "hintPrompts": ["father 爸爸 / mother 妈妈 / brother 兄弟 / sister 姐妹", "每位上台停一拍，观众鼓掌（等待）"],
-      "check": { "type": "block_count_min", "block": "island_costume", "count": 4 }
+      "hintPrompts": [
+        "father 爸爸 / mother 妈妈 / brother 兄弟 / sister 姐妹",
+        "每位上台停一拍，观众鼓掌（等待）"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_costume",
+        "count": 4
+      }
     },
     {
       "id": "t3",
       "text": "每位家人一句台词：This is my…（至少 4 块「说 停几秒」），介绍完等待 1 秒",
-      "hintPrompts": ["句型固定：This is my + 家人", "声音洪亮，指着「家人」说"],
-      "check": { "type": "block_count_min", "block": "island_say_for", "count": 4 }
+      "hintPrompts": [
+        "句型固定：This is my + 家人",
+        "声音洪亮，指着「家人」说"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_say_for",
+        "count": 4
+      }
     },
     {
       "id": "t4",
       "text": "全家福时刻：走到 🖼 相框处，说「I love my family!（我爱我家）」配温馨音效",
-      "hintPrompts": ["收尾金句：I love my family", "这句要让全家人听见！"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "收尾金句：I love my family",
+        "这句要让全家人听见！"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：扩展家族——加上 grandfather（爷爷）和 grandmother（奶奶），做一张六口人的全家福",
-      "hintPrompts": ["grand- 前缀=「辈分+1」：grandfather/grandmother", "全家福越大越热闹！"],
-      "check": { "type": "manual" },
+      "hintPrompts": [
+        "grand- 前缀=「辈分+1」：grandfather/grandmother",
+        "全家福越大越热闹！"
+      ],
+      "check": {
+        "type": "manual"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第二、三学段（3-6年级）", "module": "身边的算法", "points": ["序列化展示", "角色轮换的编排"] },
-  "subject": { "name": "英语·家庭（小学）", "emoji": "👨‍👩‍👧‍👦", "points": ["家庭成员称谓", "This is my... 介绍句型", "爱与表达"] },
+  "curriculum": {
+    "stage": "第二、三学段（3-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "序列化展示",
+      "角色轮换的编排"
+    ]
+  },
+  "subject": {
+    "name": "英语·家庭（小学）",
+    "emoji": "👨‍👩‍👧‍👦",
+    "points": [
+      "家庭成员称谓",
+      "This is my... 介绍句型",
+      "爱与表达"
+    ]
+  },
   "subjectArea": "英语",
   "gradeBand": "primary",
   "aiIntro": "👨‍👩‍👧‍👦 Welcome to my family show! 今天的发布会有四位神秘嘉宾——都是你最爱的人！用英语把他们一个个请上台，最后来一张会说话的全家福！",
   "celebrate": "Family Show 圆满！🖼 father、mother、brother、 sister 全部闪亮登场，你还能用 This is my... 流利介绍——回家开一场真的发布会，让爸妈当观众！",
   "exercises": [
-    { "q": "「妈妈」的英文是？", "options": ["father", "mother", "brother", "sister"], "answer": 1, "explain": "mother=妈妈；father=爸爸" },
-    { "q": "介绍家人用哪句？", "options": ["This is my mother.", "I am mother.", "My is mother.", "Mother is this."], "answer": 0, "explain": "This is my + 称谓：标准介绍句型" },
-    { "q": "grandfather 是？", "options": ["哥哥", "爷爷/外公", "叔叔", " cousin"], "answer": 1, "explain": "grand- 表示上一辈：grandfather 爷爷/外公" }
-  ]
+    {
+      "q": "「妈妈」的英文是？",
+      "options": [
+        "father",
+        "mother",
+        "brother",
+        "sister"
+      ],
+      "answer": 1,
+      "explain": "mother=妈妈；father=爸爸"
+    },
+    {
+      "q": "介绍家人用哪句？",
+      "options": [
+        "This is my mother.",
+        "I am mother.",
+        "My is mother.",
+        "Mother is this."
+      ],
+      "answer": 0,
+      "explain": "This is my + 称谓：标准介绍句型"
+    },
+    {
+      "q": "grandfather 是？",
+      "options": [
+        "哥哥",
+        "爷爷/外公",
+        "叔叔",
+        " cousin"
+      ],
+      "answer": 1,
+      "explain": "grand- 表示上一辈：grandfather 爷爷/外公"
+    }
+  ],
+  "textbook": "人教PEP英语三年级上册",
+  "grade": 3
 }

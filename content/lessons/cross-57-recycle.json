@@ -5,53 +5,150 @@
   "title": "AI 垃圾分类小卫士",
   "emoji": "♻️",
   "story": "香蕉皮该进哪个桶？矿泉水瓶呢？很多人一直分不清——但现在你有一个别人没有的武器：自己训练的 AI！教它认「可回收」和「其他垃圾」，再让它当你的分类小助手。科技 + 环保，你就是小区最靓的 AI 卫士！",
-  "goals": ["学会常见垃圾的正确分类", "体验用 AI 解决生活问题"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_costume", "island_play", "island_when_recognized", "island_recognize"],
-  "actor": { "costume": "🧑‍🚒", "x": -70, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "🗑", "x": 120, "y": 30 }],
+  "goals": [
+    "学会常见垃圾的正确分类",
+    "体验用 AI 解决生活问题"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_costume",
+    "island_play",
+    "island_when_recognized",
+    "island_recognize"
+  ],
+  "actor": {
+    "costume": "🧑‍🚒",
+    "x": -70,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "🗑",
+      "x": 120,
+      "y": 30
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "去 AI 实验场训练：类别 1 改名「可回收」，拍矿泉水瓶/废纸盒等 10 张；类别 2 改名「其他垃圾」，拍用过的纸巾/ snack 袋等 10 张",
-      "hintPrompts": ["可回收：瓶子、纸盒、易拉罐——能再利用的", "其他垃圾：脏纸巾、破碎陶瓷——不能再利用的"],
-      "check": { "type": "manual" }
+      "hintPrompts": [
+        "可回收：瓶子、纸盒、易拉罐——能再利用的",
+        "其他垃圾：脏纸巾、破碎陶瓷——不能再利用的"
+      ],
+      "check": {
+        "type": "manual"
+      }
     },
     {
       "id": "t2",
       "text": "AI 上岗：「当 AI 认出 可回收」→ 小卫士说「可回收！变废为宝」并播放欢呼音效",
-      "hintPrompts": ["认出可回收要开心——它将变成新东西获得第二次生命", "事件积木下放：说→音效，顺序随心"],
-      "check": { "type": "block_used", "block": "island_when_recognized" }
+      "hintPrompts": [
+        "认出可回收要开心——它将变成新东西获得第二次生命",
+        "事件积木下放：说→音效，顺序随心"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_when_recognized"
+      }
     },
     {
       "id": "t3",
       "text": "另一类也别漏：「当 AI 认出 其他垃圾」→ 说「其他垃圾！单独打包」，让两类都有回应",
-      "hintPrompts": ["两个事件积木并排，就像两个分类口", "对着摄像头轮流举两种垃圾试试"],
-      "check": { "type": "say_text" }
+      "hintPrompts": [
+        "两个事件积木并排，就像两个分类口",
+        "对着摄像头轮流举两种垃圾试试"
+      ],
+      "check": {
+        "type": "say_text"
+      }
     },
     {
       "id": "t4",
       "text": "送垃圾回家：小卫士走到分类回收站 🗑，完成一次完整的分类任务",
-      "hintPrompts": ["回收站在右边，认出后走过去投放", "分类投放，从你我做起"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "回收站在右边，认出后走过去投放",
+        "分类投放，从你我做起"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：考考 AI 也考考自己——电池、过期药品属于什么垃圾？（提示：有害垃圾，要投红色桶）",
-      "hintPrompts": ["有害垃圾：电池、药品、温度计——会污染环境的", "它们数量少威力大，必须单独处理"],
-      "check": { "type": "manual" },
+      "hintPrompts": [
+        "有害垃圾：电池、药品、温度计——会污染环境的",
+        "它们数量少威力大，必须单独处理"
+      ],
+      "check": {
+        "type": "manual"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第三学段（5-6年级）", "module": "过程与控制", "points": ["智能系统的输入与输出", "用技术解决生活问题"] },
-  "subject": { "name": "道德与法治·绿色环保", "emoji": "♻️", "points": ["垃圾分类的方法", "变废为宝的循环意识", "科技服务生活"] },
+  "curriculum": {
+    "stage": "第三学段（5-6年级）",
+    "module": "过程与控制",
+    "points": [
+      "智能系统的输入与输出",
+      "用技术解决生活问题"
+    ]
+  },
+  "subject": {
+    "name": "道德与法治·绿色环保",
+    "emoji": "♻️",
+    "points": [
+      "垃圾分类的方法",
+      "变废为宝的循环意识",
+      "科技服务生活"
+    ]
+  },
   "subjectArea": "道德与法治",
   "gradeBand": "primary",
   "aiIntro": "♻️ 地球需要你——和你的 AI！先教会它分清可回收和其他垃圾，再让它当你的环保助手。注意：AI 也会认错，投放前记得自己再确认一遍哦！",
   "celebrate": "AI 垃圾分类小卫士正式上岗！♻️ 你用科技做了对地球有益的事——这正是「人工智能与智慧社会」最酷的打开方式。回家考考爸妈：电池该进哪个桶？",
   "exercises": [
-    { "q": "喝完的矿泉水瓶属于？", "options": ["其他垃圾", "可回收物", "有害垃圾", "厨余垃圾"], "answer": 1, "explain": "塑料瓶可以回收再利用，属于可回收物" },
-    { "q": "用过的纸巾属于？", "options": ["可回收物", "有害垃圾", "其他垃圾", "厨余垃圾"], "answer": 2, "explain": "脏纸巾无法再利用，属于其他垃圾" },
-    { "q": "废电池应该？", "options": ["扔进普通垃圾桶", "投进有害垃圾红色桶", "埋进土里", "烧掉"], "answer": 1, "explain": "电池含重金属会污染土壤水源，必须投有害垃圾桶" }
+    {
+      "q": "喝完的矿泉水瓶属于？",
+      "options": [
+        "其他垃圾",
+        "可回收物",
+        "有害垃圾",
+        "厨余垃圾"
+      ],
+      "answer": 1,
+      "explain": "塑料瓶可以回收再利用，属于可回收物"
+    },
+    {
+      "q": "用过的纸巾属于？",
+      "options": [
+        "可回收物",
+        "有害垃圾",
+        "其他垃圾",
+        "厨余垃圾"
+      ],
+      "answer": 2,
+      "explain": "脏纸巾无法再利用，属于其他垃圾"
+    },
+    {
+      "q": "废电池应该？",
+      "options": [
+        "扔进普通垃圾桶",
+        "投进有害垃圾红色桶",
+        "埋进土里",
+        "烧掉"
+      ],
+      "answer": 1,
+      "explain": "电池含重金属会污染土壤水源，必须投有害垃圾桶"
+    }
   ],
-  "codeLesson": false
+  "codeLesson": false,
+  "textbook": "统编版道德与法治（小学）"
 }

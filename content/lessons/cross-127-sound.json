@@ -5,52 +5,151 @@
   "title": "声音是怎样产生的",
   "emoji": "🎵",
   "story": "说话时摸摸喉咙——麻麻的在振动！声音不是凭空来的，它来自物体不停歇的振动：喉咙的声带、敲响的鼓面、拔动的琴弦。振动停，声音停。今天你先做「人体实验」，再用程序把看不见的振动演出来！",
-  "goals": ["知道声音由振动产生", "理解振动停止则发声停止"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_turn_right", "island_turn_left", "island_costume", "island_play", "island_repeat"],
-  "actor": { "costume": "🔊", "x": -80, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "🎤", "x": 130, "y": 40 }],
+  "goals": [
+    "知道声音由振动产生",
+    "理解振动停止则发声停止"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_costume",
+    "island_play",
+    "island_repeat"
+  ],
+  "actor": {
+    "costume": "🔊",
+    "x": -80,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "🎤",
+      "x": 130,
+      "y": 40
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "人体实验：把手轻放在喉咙上大声说「啊——」，感受手指下的振动，完成打勾",
-      "hintPrompts": ["声带在振动——你摸到的就是声音的源头", "说得越大声，振动越明显"],
-      "check": { "type": "manual" }
+      "hintPrompts": [
+        "声带在振动——你摸到的就是声音的源头",
+        "说得越大声，振动越明显"
+      ],
+      "check": {
+        "type": "manual"
+      }
     },
     {
       "id": "t2",
       "text": "程序演绎：把振动「演」出来——用「重复 8 次」+左右小转向（5 度左右）快速摆动，模拟鼓面/声带的来回振动",
-      "hintPrompts": ["振动=来回往复的小动作", "转 5 度、-5 度交替，速度要快才像"],
-      "check": { "type": "block_used", "block": "island_repeat" }
+      "hintPrompts": [
+        "振动=来回往复的小动作",
+        "转 5 度、-5 度交替，速度要快才像"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_repeat"
+      }
     },
     {
       "id": "t3",
       "text": "振动与声音配对：振动时播放音效（咚咚），说「振动→声音」",
-      "hintPrompts": ["有振动才有声音", "音效和振动同步，观众就懂了"],
-      "check": { "type": "block_used", "block": "island_play" }
+      "hintPrompts": [
+        "有振动才有声音",
+        "音效和振动同步，观众就懂了"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_play"
+      }
     },
     {
       "id": "t4",
       "text": "停止实验：程序停下来的瞬间声音也停——走到 🎤 话筒前说「振动停止，声音消失！」",
-      "hintPrompts": ["按 ⏹ 停止，音效戛然而止——正好演示", "固体、液体、气体振动都能发声（敲桌、水声、风声）"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "按 ⏹ 停止，音效戛然而止——正好演示",
+        "固体、液体、气体振动都能发声（敲桌、水声、风声）"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：尺子实验——把塑料尺一端压在桌边，拨另一端：伸出越长声音怎么变？（声音高低和振动快慢的秘密）",
-      "hintPrompts": ["尺子伸出越长，振动越慢，音调越低", "这就是音调与频率的关系！"],
-      "check": { "type": "manual" },
+      "hintPrompts": [
+        "尺子伸出越长，振动越慢，音调越低",
+        "这就是音调与频率的关系！"
+      ],
+      "check": {
+        "type": "manual"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第二、三学段（3-6年级）", "module": "过程与控制", "points": ["周期运动的程序表达", "快慢参数的体验"] },
-  "subject": { "name": "科学·声音（小学）", "emoji": "🎵", "points": ["声音由振动产生", "振动停止发声停止", "固体液体气体都能发声"] },
+  "curriculum": {
+    "stage": "第二、三学段（3-6年级）",
+    "module": "过程与控制",
+    "points": [
+      "周期运动的程序表达",
+      "快慢参数的体验"
+    ]
+  },
+  "subject": {
+    "name": "科学·声音（小学）",
+    "emoji": "🎵",
+    "points": [
+      "声音由振动产生",
+      "振动停止发声停止",
+      "固体液体气体都能发声"
+    ]
+  },
   "subjectArea": "科学",
   "gradeBand": "primary",
   "aiIntro": "🎵 声音看得见吗？摸摸喉咙大声说「啊」——那个麻麻的感觉，就是声音的真身：振动！今天先做人体实验，再用程序把振动放大给你看！",
   "celebrate": "振动真相大白！🎤 一切声音都是振动的名片：喉咙、鼓面、琴弦、空气。从今天起，你听到的每个声音，都能想象出它背后疯狂振动的小源头！",
   "exercises": [
-    { "q": "声音是由什么产生的？", "options": ["空气流动", "物体的振动", "光的照射", "温度升高"], "answer": 1, "explain": "振动产生声音：声带、鼓面、琴弦都是振动发声" },
-    { "q": "敲鼓后用手按住鼓面，声音立刻消失，因为？", "options": ["耳朵坏了", "振动被强制停止，发声停止", "鼓累了", "声音被吸收"], "answer": 1, "explain": "振动停止=发声停止，这是声音产生的必要条件" },
-    { "q": "下列哪种情况不能发声？", "options": ["敲击水瓶", "真空中的铃铛", "吹口哨", "拍手"], "answer": 1, "explain": "真空不能传声（听不见）；振动仍发生但声音传不出来" }
-  ]
+    {
+      "q": "声音是由什么产生的？",
+      "options": [
+        "空气流动",
+        "物体的振动",
+        "光的照射",
+        "温度升高"
+      ],
+      "answer": 1,
+      "explain": "振动产生声音：声带、鼓面、琴弦都是振动发声"
+    },
+    {
+      "q": "敲鼓后用手按住鼓面，声音立刻消失，因为？",
+      "options": [
+        "耳朵坏了",
+        "振动被强制停止，发声停止",
+        "鼓累了",
+        "声音被吸收"
+      ],
+      "answer": 1,
+      "explain": "振动停止=发声停止，这是声音产生的必要条件"
+    },
+    {
+      "q": "下列哪种情况不能发声？",
+      "options": [
+        "敲击水瓶",
+        "真空中的铃铛",
+        "吹口哨",
+        "拍手"
+      ],
+      "answer": 1,
+      "explain": "真空不能传声（听不见）；振动仍发生但声音传不出来"
+    }
+  ],
+  "textbook": "冀人版科学（小学）"
 }

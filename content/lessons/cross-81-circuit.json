@@ -5,52 +5,150 @@
   "title": "AI 电学实验员：认电路元件",
   "emoji": "🔋",
   "story": "物理实验室新来了个 AI 助手，第一天上岗就得认识老朋友：电池🔋和电阻📉。你来当它的师傅——教会它认这两种元件，它就能在实验时报出「电压来源」和「电流阻碍」，全班的电路实验汇报都靠它了！",
-  "goals": ["复习电池与电阻的作用", "训练 AI 识别并搭建自动汇报程序"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_costume", "island_play", "island_when_recognized", "island_recognize"],
-  "actor": { "costume": "🔋", "x": -70, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "💡", "x": 130, "y": 40 }],
+  "goals": [
+    "复习电池与电阻的作用",
+    "训练 AI 识别并搭建自动汇报程序"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_costume",
+    "island_play",
+    "island_when_recognized",
+    "island_recognize"
+  ],
+  "actor": {
+    "costume": "🔋",
+    "x": -70,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "💡",
+      "x": 130,
+      "y": 40
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "培训 AI：去「🧠 AI 实验室」，类别 1 改名「电池」，拍电池/电池图片 10 张；类别 2 改名「电阻」，拍电阻或画一个电阻符号拍照，也 10 张",
-      "hintPrompts": ["没有实物？课本上的电路图拍照也行！", "两类照片背景差别别太大，AI 才专注认元件本身"],
-      "check": { "type": "manual" }
+      "hintPrompts": [
+        "没有实物？课本上的电路图拍照也行！",
+        "两类照片背景差别别太大，AI 才专注认元件本身"
+      ],
+      "check": {
+        "type": "manual"
+      }
     },
     {
       "id": "t2",
       "text": "AI 汇报 1：「当 AI 认出 电池」→ 说「电池：提供电压，是电流的动力源！」",
-      "hintPrompts": ["电压像「水压」，推动电荷流动", "干电池 1.5V，家用插座 220V——电压就是推力大小"],
-      "check": { "type": "block_used", "block": "island_when_recognized" }
+      "hintPrompts": [
+        "电压像「水压」，推动电荷流动",
+        "干电池 1.5V，家用插座 220V——电压就是推力大小"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_when_recognized"
+      }
     },
     {
       "id": "t3",
       "text": "AI 汇报 2：「当 AI 认出 电阻」→ 说「电阻：阻碍电流，把电能变成热和光！」并播放提示音",
-      "hintPrompts": ["电阻不是「坏事」——电热水壶、灯泡都是利用电阻发热发光", "欧姆定律：电压=电流×电阻（U=IR）"],
-      "check": { "type": "say_text" }
+      "hintPrompts": [
+        "电阻不是「坏事」——电热水壶、灯泡都是利用电阻发热发光",
+        "欧姆定律：电压=电流×电阻（U=IR）"
+      ],
+      "check": {
+        "type": "say_text"
+      }
     },
     {
       "id": "t4",
       "text": "联动电路：举起电池对着摄像头，AI 认出后角色变亮 💡 走到灯泡处——「电池点亮小灯泡」的自动演示！",
-      "hintPrompts": ["认出电池→变身💡→走向灯泡，一条链编出来", "这就是「识别→触发动作」的自动化！"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "认出电池→变身💡→走向灯泡，一条链编出来",
+        "这就是「识别→触发动作」的自动化！"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：第三类元件——类别 3 教它认「开关」，认出后说「开关：控制电路通断」",
-      "hintPrompts": ["画一个开关符号拍照就能教", "三种元件认齐，AI 就是正式的电学实验员了！"],
-      "check": { "type": "manual" },
+      "hintPrompts": [
+        "画一个开关符号拍照就能教",
+        "三种元件认齐，AI 就是正式的电学实验员了！"
+      ],
+      "check": {
+        "type": "manual"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第四学段（7-9年级）", "module": "过程与控制", "points": ["事件驱动与自动触发", "识别系统的应用搭建"] },
-  "subject": { "name": "物理·电学与人工智能（初中）", "emoji": "🔋", "points": ["电池=电压源", "电阻=阻碍电流", "简单电路的组成"] },
+  "curriculum": {
+    "stage": "第四学段（7-9年级）",
+    "module": "过程与控制",
+    "points": [
+      "事件驱动与自动触发",
+      "识别系统的应用搭建"
+    ]
+  },
+  "subject": {
+    "name": "物理·电学与人工智能（初中）",
+    "emoji": "🔋",
+    "points": [
+      "电池=电压源",
+      "电阻=阻碍电流",
+      "简单电路的组成"
+    ]
+  },
   "subjectArea": "物理",
   "gradeBand": "junior",
   "aiIntro": "🔋 实验室警报：新来的 AI 助手谁也不认识！电池、电阻在它眼里都是马赛克。师傅（就是你）赶紧上岗：教认元件、编好汇报程序——今天实验课能不能自动化，全看你的了！",
   "celebrate": "AI 实验员考核通过！💡 你教会了 AI 认电路元件，还搭出了「识别→汇报→演示」的自动链路。真实工厂里的质检 AI，干的就是这份工作——认零件、查错误、报结果！",
   "exercises": [
-    { "q": "电池在电路中的作用是？", "options": ["阻碍电流", "提供电压驱动电流", "消耗电能", "控制通断"], "answer": 1, "explain": "电池是电源，提供电压（推力），驱动电荷定向流动" },
-    { "q": "电阻的作用是？", "options": ["加大电流", "阻碍电流", "产生电压", "储存电荷"], "answer": 1, "explain": "电阻阻碍电流，电流通过时把电能转化为热（及光）" },
-    { "q": "U=IR 表示？", "options": ["电压=电流×电阻（欧姆定律）", "电流=电压×电阻", "电阻=电压×电流", "功率=电压×电流"], "answer": 0, "explain": "欧姆定律：导体两端电压等于电流与电阻的乘积" }
-  ]
+    {
+      "q": "电池在电路中的作用是？",
+      "options": [
+        "阻碍电流",
+        "提供电压驱动电流",
+        "消耗电能",
+        "控制通断"
+      ],
+      "answer": 1,
+      "explain": "电池是电源，提供电压（推力），驱动电荷定向流动"
+    },
+    {
+      "q": "电阻的作用是？",
+      "options": [
+        "加大电流",
+        "阻碍电流",
+        "产生电压",
+        "储存电荷"
+      ],
+      "answer": 1,
+      "explain": "电阻阻碍电流，电流通过时把电能转化为热（及光）"
+    },
+    {
+      "q": "U=IR 表示？",
+      "options": [
+        "电压=电流×电阻（欧姆定律）",
+        "电流=电压×电阻",
+        "电阻=电压×电流",
+        "功率=电压×电流"
+      ],
+      "answer": 0,
+      "explain": "欧姆定律：导体两端电压等于电流与电阻的乘积"
+    }
+  ],
+  "textbook": "人教版物理九年级全一册",
+  "grade": 9
 }

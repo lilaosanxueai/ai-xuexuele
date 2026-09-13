@@ -5,52 +5,153 @@
   "title": "消化系统：美食奇幻之旅",
   "emoji": "🍎",
   "story": "一口苹果咽下去，9 米长的消化之旅就开始了！牙齿切碎、唾液软化、胃酸搅拌、小肠吸收——食物一路走一路变小，最后变成身体需要的营养。今天你扮成一粒苹果块，亲身体验这条 9 米的奇幻隧道！",
-  "goals": ["掌握消化道的顺序与各器官功能", "理解消化与吸收的区别"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_costume", "island_change_size", "island_play", "island_repeat"],
-  "actor": { "costume": "🍎", "x": -100, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "💪", "x": 130, "y": 40 }],
+  "goals": [
+    "掌握消化道的顺序与各器官功能",
+    "理解消化与吸收的区别"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_costume",
+    "island_change_size",
+    "island_play",
+    "island_repeat"
+  ],
+  "actor": {
+    "costume": "🍎",
+    "x": -100,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "💪",
+      "x": 130,
+      "y": 40
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "第一站 口腔：说「牙齿切碎，唾液里的酶开始分解淀粉——细细咀嚼有回甘！」",
-      "hintPrompts": ["米饭嚼久会变甜——唾液淀粉酶把淀粉变糖", "每口嚼 20 下是给胃减负"],
-      "check": { "type": "say_text" }
+      "hintPrompts": [
+        "米饭嚼久会变甜——唾液淀粉酶把淀粉变糖",
+        "每口嚼 20 下是给胃减负"
+      ],
+      "check": {
+        "type": "say_text"
+      }
     },
     {
       "id": "t2",
       "text": "隧道旅行：依次经过 食道🚇 → 胃🫙 → 小肠🌀 → 大肠🚽（每站换造型+说一句功能，共 4 次变身）",
-      "hintPrompts": ["食道只管推送；胃像搅拌机（胃酸+蠕动）", "小肠 5-6 米长才是吸收主战场！大肠主要吸水"],
-      "check": { "type": "block_count_min", "block": "island_costume", "count": 4 }
+      "hintPrompts": [
+        "食道只管推送；胃像搅拌机（胃酸+蠕动）",
+        "小肠 5-6 米长才是吸收主战场！大肠主要吸水"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_costume",
+        "count": 4
+      }
     },
     {
       "id": "t3",
       "text": "一路变小：每过一站「大小改变 -15」左右——食物被一步步分解（至少 3 次）",
-      "hintPrompts": ["物理消化（切碎磨小）+化学消化（酶分解）双管齐下", "变小=变成能被吸收的小分子"],
-      "check": { "type": "block_count_min", "block": "island_change_size", "count": 3 }
+      "hintPrompts": [
+        "物理消化（切碎磨小）+化学消化（酶分解）双管齐下",
+        "变小=变成能被吸收的小分子"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_change_size",
+        "count": 3
+      }
     },
     {
       "id": "t4",
       "text": "终点：营养被小肠吸收进血液！走到 💪 肌肉，说「苹果变成了我的能量！」",
-      "hintPrompts": ["吸收的营养随血液送到全身细胞", "消化=分解食物；吸收=营养进血——两件事！"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "吸收的营养随血液送到全身细胞",
+        "消化=分解食物；吸收=营养进血——两件事！"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：为什么不能边跑边吃 / 饭后剧烈运动？从消化系统的角度讲给爸妈听",
-      "hintPrompts": ["血液跑去肌肉，胃肠供血不足，消化变差", "细嚼慢咽+饭后散步，才是对 9 米隧道的尊重！"],
-      "check": { "type": "manual" },
+      "hintPrompts": [
+        "血液跑去肌肉，胃肠供血不足，消化变差",
+        "细嚼慢咽+饭后散步，才是对 9 米隧道的尊重！"
+      ],
+      "check": {
+        "type": "manual"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第四学段（7-9年级）", "module": "过程与控制", "points": ["顺序流程的表达", "状态变化的过程模拟"] },
-  "subject": { "name": "生物·人的食物（初中）", "emoji": "🍎", "points": ["消化道的组成与顺序", "各消化器官的功能", "消化与吸收的区别"] },
+  "curriculum": {
+    "stage": "第四学段（7-9年级）",
+    "module": "过程与控制",
+    "points": [
+      "顺序流程的表达",
+      "状态变化的过程模拟"
+    ]
+  },
+  "subject": {
+    "name": "生物·人的食物（初中）",
+    "emoji": "🍎",
+    "points": [
+      "消化道的组成与顺序",
+      "各消化器官的功能",
+      "消化与吸收的区别"
+    ]
+  },
   "subjectArea": "生物",
   "gradeBand": "junior",
   "aiIntro": "🍎 一口苹果的 9 米奇幻漂流，现在开始报名！你是主角：被切碎、被搅拌、被分解、被吸收——有点惨，但结局是变成你的能量，值了！",
   "celebrate": "旅行圆满结束！💪 你把 9 米消化隧道走了一遍：口腔切碎、胃搅拌、小肠吸收、大肠收尾。从今天起，细嚼慢咽不再是大人的唠叨，而是你对这条隧道最深的敬意！",
   "exercises": [
-    { "q": "消化吸收的主要器官是？", "options": ["胃", "大肠", "小肠", "食道"], "answer": 2, "explain": "小肠长 5-6 米、内壁有绒毛，是吸收营养的主战场" },
-    { "q": "唾液对淀粉的作用属于？", "options": ["物理消化", "化学消化（酶的分解）", "吸收", "排泄"], "answer": 1, "explain": "唾液淀粉酶把淀粉分解为麦芽糖——化学消化" },
-    { "q": "大肠的主要功能是？", "options": ["吸收大量营养", "吸收水分、形成粪便", "分泌胆汁", "搅拌食物"], "answer": 1, "explain": "大肠主要回收水分；胆汁由肝脏分泌、胆囊储存" }
-  ]
+    {
+      "q": "消化吸收的主要器官是？",
+      "options": [
+        "胃",
+        "大肠",
+        "小肠",
+        "食道"
+      ],
+      "answer": 2,
+      "explain": "小肠长 5-6 米、内壁有绒毛，是吸收营养的主战场"
+    },
+    {
+      "q": "唾液对淀粉的作用属于？",
+      "options": [
+        "物理消化",
+        "化学消化（酶的分解）",
+        "吸收",
+        "排泄"
+      ],
+      "answer": 1,
+      "explain": "唾液淀粉酶把淀粉分解为麦芽糖——化学消化"
+    },
+    {
+      "q": "大肠的主要功能是？",
+      "options": [
+        "吸收大量营养",
+        "吸收水分、形成粪便",
+        "分泌胆汁",
+        "搅拌食物"
+      ],
+      "answer": 1,
+      "explain": "大肠主要回收水分；胆汁由肝脏分泌、胆囊储存"
+    }
+  ],
+  "textbook": "人教版生物学七年级下册",
+  "grade": 7
 }

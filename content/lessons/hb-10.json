@@ -1,0 +1,58 @@
+{
+  "id": "hb-10",
+  "island": "cross",
+  "order": 202,
+  "title": "健康小顾问：What's the matter?",
+  "emoji": "🩺",
+  "story": "诊所开诊！病人来了：「What's the matter? I have a cold.」你这位小医生要用 should / shouldn't 给建议：「You should drink hot water. You shouldn't stay up late.」治好三位病人，你就是最 warm-hearted（热心）的健康顾问！",
+  "goals": ["会用 should/shouldn't 给建议", "掌握常见病症英文说法"],
+  "toolbox": ["island_when_run", "island_when_key", "island_say", "island_say_for", "island_wait", "island_move", "island_costume", "island_play", "island_if", "island_key_down"],
+  "actor": { "costume": "🩺", "x": -80, "y": 0, "dir": 0 },
+  "targets": [{ "emoji": "💊", "x": 130, "y": 40 }],
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "开诊：医生说「Good morning! What's the matter?」——病人一号登场（变 🤒）：「I have a cold.（我感冒了）」",
+      "hintPrompts": ["What's the matter? 万能问诊句", "have a cold 感冒 / have a fever 发烧 / have a headache 头疼"],
+      "check": { "type": "say_text" }
+    },
+    {
+      "id": "t2",
+      "text": "给一号开处方：说「You should drink hot water and rest.（该多喝热水多休息）」——建议至少 2 句（should 一句 + shouldn't 一句）",
+      "hintPrompts": ["should + 动词原形 = 应该做", "shouldn't = should not = 不应该"],
+      "check": { "type": "block_count_min", "block": "island_say_for", "count": 2 }
+    },
+    {
+      "id": "t3",
+      "text": "病人二号：按空格键切换，变 🤕 说「I have a headache.」——医生给建议（该早睡，不该玩手机游戏太久）",
+      "hintPrompts": ["「当按下某键」切换病人，像叫号", " shouldn't play games too late!"],
+      "check": { "type": "block_used", "block": "island_when_key" }
+    },
+    {
+      "id": "t4",
+      "text": "三号病人是「牙疼 have a toothache」——给出建议后，走到 💊 药房领取「金牌健康顾问」勋章",
+      "hintPrompts": ["You should see a dentist.（看牙医）", "shouldn't eat too much candy!"],
+      "check": { "type": "actor_reach", "targetIndex": 0 }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：给自己写处方——你最近有什么坏习惯？（如玩太久手机）用一句 should 和一句 shouldn't 写成「健康处方」贴在书桌上",
+      "hintPrompts": ["You should do eye exercises every day.", "You shouldn't use the phone before bed."],
+      "check": { "type": "manual" },
+      "optional": true
+    }
+  ],
+  "curriculum": { "stage": "第四学段（7-9年级）", "module": "身边的算法", "points": ["事件切换的表达", "对话序列编排"] },
+  "subject": { "name": "英语·健康与建议（八上）", "emoji": "🩺", "points": ["What's the matter? 问诊句型", "should/shouldn't 提建议", "常见病症词汇"] },
+  "subjectArea": "英语",
+  "gradeBand": "junior",
+  "grade": 8,
+  "textbook": "人教版英语八年级上册",
+  "aiIntro": "🩺 小医生诊所开张！三位病人排队等你看诊：感冒的、头疼的、牙疼的——记住你的两件法宝：What's the matter? 和 should/shouldn't。祝你好运，Dr. 奇点！",
+  "celebrate": "三位病人全部「治愈」！💊 should 管建议、shouldn't 管提醒——英语里最实用的一对兄弟。下次爸妈不舒服，用英语给他们开张「健康处方」吧！",
+  "exercises": [
+    { "q": "「你该多喝水」正确说法是？", "options": ["You should drink more water.", "You drink should more water.", "You shouldn't drink water.", "Should you drink water?"], "answer": 0, "explain": "should + 动词原形：You should drink..." },
+    { "q": "「我头疼」说？", "options": ["I have a headache.", "I am headache.", "I have head.", "My head hurts cold."], "answer": 0, "explain": "have a headache 固定搭配=头疼" },
+    { "q": "医生建议「不该熬夜」，说？", "options": ["You shouldn't stay up late.", "You should stay up late.", "You not stay up late.", "Stay up late is good."], "answer": 0, "explain": "shouldn't = 不应该；stay up late 熬夜" }
+  ]
+}

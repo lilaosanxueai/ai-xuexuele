@@ -5,52 +5,152 @@
   "title": "光的直线传播：影子剧场",
   "emoji": "🔦",
   "story": "影子里藏着一条大道理：光沿直线传播！正因为光不会拐弯，身体背后才会留下影子；也正因为光走直线，排队的同学看齐只要看后脑勺、日食月食才会如约而至。今天你用程序开一场「影子剧场」，把这条直线照出来！",
-  "goals": ["知道光在同种介质中沿直线传播", "能用直线传播解释影子与小孔成像"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_turn_right", "island_turn_left", "island_costume", "island_show", "island_hide", "island_play", "island_repeat"],
-  "actor": { "costume": "🔦", "x": -140, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "🧍", "x": 60, "y": 0 }],
+  "goals": [
+    "知道光在同种介质中沿直线传播",
+    "能用直线传播解释影子与小孔成像"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_costume",
+    "island_show",
+    "island_hide",
+    "island_play",
+    "island_repeat"
+  ],
+  "actor": {
+    "costume": "🔦",
+    "x": -140,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "🧍",
+      "x": 60,
+      "y": 0
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "打开手电：🔦 说「光出发！直直走，绝不拐弯！」快速直线移动一段（不加转向）",
-      "hintPrompts": ["移动全程不转向——这就是「直线传播」的演出", "光在同一种空气里走直线"],
-      "check": { "type": "say_text" }
+      "hintPrompts": [
+        "移动全程不转向——这就是「直线传播」的演出",
+        "光在同一种空气里走直线"
+      ],
+      "check": {
+        "type": "say_text"
+      }
     },
     {
       "id": "t2",
       "text": "影子诞生：光走到 🧍 小人身后被挡住——变出影子造型（或用隐藏/显示），说「光照不到的地方=影子！」",
-      "hintPrompts": ["光被挡住→背后形成暗区", "影子的形状像挡光的人/物——因为光不走弯路"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "光被挡住→背后形成暗区",
+        "影子的形状像挡光的人/物——因为光不走弯路"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "t3",
       "text": "影子变化：光源离得越近影子越大、越远越小——移动光源自已验证（说一句你的发现）",
-      "hintPrompts": ["手电贴近手，墙上影子巨大", "晚上路灯下走：离灯越远影子越长！"],
-      "check": { "type": "manual" }
+      "hintPrompts": [
+        "手电贴近手，墙上影子巨大",
+        "晚上路灯下走：离灯越远影子越长！"
+      ],
+      "check": {
+        "type": "manual"
+      }
     },
     {
       "id": "t4",
       "text": "小孔成像：说「光穿过小孔沿直线走→屏上出现倒立的像！」配光影音效",
-      "hintPrompts": ["树荫下的圆斑=太阳经过树叶缝隙的小孔成像", "上下的光交叉穿过小孔，所以像是倒的"],
-      "check": { "type": "block_used", "block": "island_play" }
+      "hintPrompts": [
+        "树荫下的圆斑=太阳经过树叶缝隙的小孔成像",
+        "上下的光交叉穿过小孔，所以像是倒的"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_play"
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：天象剧场——查一查日食和月食怎么用「光的直线传播」解释，画给爸妈看",
-      "hintPrompts": ["日食：月亮挡在太阳地球之间（月影落在地球）", "月食：地球挡在中间，月亮走进地影"],
-      "check": { "type": "manual" },
+      "hintPrompts": [
+        "日食：月亮挡在太阳地球之间（月影落在地球）",
+        "月食：地球挡在中间，月亮走进地影"
+      ],
+      "check": {
+        "type": "manual"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第二、三学段（3-6年级）", "module": "过程与控制", "points": ["直线运动的表达", "遮挡与因果关系"] },
-  "subject": { "name": "科学·光（小学）", "emoji": "🔦", "points": ["光的直线传播", "影子的成因与变化", "小孔成像初步"] },
+  "curriculum": {
+    "stage": "第二、三学段（3-6年级）",
+    "module": "过程与控制",
+    "points": [
+      "直线运动的表达",
+      "遮挡与因果关系"
+    ]
+  },
+  "subject": {
+    "name": "科学·光（小学）",
+    "emoji": "🔦",
+    "points": [
+      "光的直线传播",
+      "影子的成因与变化",
+      "小孔成像初步"
+    ]
+  },
   "subjectArea": "科学",
   "gradeBand": "primary",
   "aiIntro": "🔦 开演啦！本剧场唯一的主角是一条不会拐弯的光线。它一路直冲，撞上小人——啪，影子诞生！看完这场剧，日食月食、树荫圆斑全都难不倒你！",
   "celebrate": "影子剧场谢幕！🔦 一条直线，解释了影子、小孔成像、日食月食——物理规律就是这样：一句话，管一片现象。你已握住光的第一个秘密！",
   "exercises": [
-    { "q": "光在空气中传播的路径是？", "options": ["曲线", "直线", "折线随便走", "波浪线"], "answer": 1, "explain": "同种均匀介质中光沿直线传播" },
-    { "q": "影子的形成是因为？", "options": ["光会拐弯", "光沿直线传播被不透明物体挡住", "物体发光", "空气变色"], "answer": 1, "explain": "直线传播+遮挡=背后光照不到的暗区，即影子" },
-    { "q": "小孔成像中像是倒立的，因为？", "options": ["小孔太小", "光沿直线传播，上下光线交叉穿过小孔", "屏幕倒了", "眼睛问题"], "answer": 1, "explain": "上部光线直穿小孔落在屏下部、下部落在上部——倒立实像" }
-  ]
+    {
+      "q": "光在空气中传播的路径是？",
+      "options": [
+        "曲线",
+        "直线",
+        "折线随便走",
+        "波浪线"
+      ],
+      "answer": 1,
+      "explain": "同种均匀介质中光沿直线传播"
+    },
+    {
+      "q": "影子的形成是因为？",
+      "options": [
+        "光会拐弯",
+        "光沿直线传播被不透明物体挡住",
+        "物体发光",
+        "空气变色"
+      ],
+      "answer": 1,
+      "explain": "直线传播+遮挡=背后光照不到的暗区，即影子"
+    },
+    {
+      "q": "小孔成像中像是倒立的，因为？",
+      "options": [
+        "小孔太小",
+        "光沿直线传播，上下光线交叉穿过小孔",
+        "屏幕倒了",
+        "眼睛问题"
+      ],
+      "answer": 1,
+      "explain": "上部光线直穿小孔落在屏下部、下部落在上部——倒立实像"
+    }
+  ],
+  "textbook": "冀人版科学（小学）"
 }

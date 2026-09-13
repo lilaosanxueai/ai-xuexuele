@@ -121,5 +121,7 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 椭圆：压扁的圆（横半径 160，纵半径 110）\npen_color(\"blue\")\npen_down()\nfor i in range(37):\n    t = i * 10\n    go_to(cos(t) * 160, sin(t) * 110)\npen_up()\ngo_to(0, 110)   # 登上椭圆顶点\n\nsay(\"椭圆画好了！地球的轨道就是它\")\n"
+  "starterCode": "# 椭圆：压扁的圆（横半径 160，纵半径 110）\npen_color(\"blue\")\npen_down()\nfor i in range(37):\n    t = i * 10\n    go_to(cos(t) * 160, sin(t) * 110)\npen_up()\ngo_to(0, 110)   # 登上椭圆顶点\n\nsay(\"椭圆画好了！地球的轨道就是它\")\n",
+  "textbook": "人教A版数学选择性必修第一册",
+  "grade": 11
 }

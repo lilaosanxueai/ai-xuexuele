@@ -114,5 +114,7 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# pH 判断机\nph = 2\nif ph < 7:\n    say(\"pH \" + ph + \" 酸性！像柠檬一样酸\")\nif ph == 7:\n    say(\"pH 7 中性，纯净的水\")\nif ph > 7:\n    say(\"pH \" + ph + \" 碱性！像肥皂水滑滑的\")\n\n# 中和反应：胃酸 + 胃药\nsay(\"胃酸过多？喝碱性胃药 -> 中和！\")\nsay(\"酸 + 碱 -> 盐 + 水，pH 回到 7\")\n"
+  "starterCode": "# pH 判断机\nph = 2\nif ph < 7:\n    say(\"pH \" + ph + \" 酸性！像柠檬一样酸\")\nif ph == 7:\n    say(\"pH 7 中性，纯净的水\")\nif ph > 7:\n    say(\"pH \" + ph + \" 碱性！像肥皂水滑滑的\")\n\n# 中和反应：胃酸 + 胃药\nsay(\"胃酸过多？喝碱性胃药 -> 中和！\")\nsay(\"酸 + 碱 -> 盐 + 水，pH 回到 7\")\n",
+  "textbook": "人教版化学九年级下册",
+  "grade": 9
 }

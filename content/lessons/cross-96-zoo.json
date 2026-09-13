@@ -5,52 +5,152 @@
   "title": "动物家族大点名",
   "emoji": "🦁",
   "story": "动物园开园啦！新来的动物们要分馆入住：鱼类馆（水中游、用鳃呼吸）、鸟类馆（有羽毛、会下蛋）、哺乳类馆（胎生、喝奶长大）。你是分馆馆长——给动物们点名、归队、挂牌！分类，是生物学家认识世界的第一把钥匙。",
-  "goals": ["掌握脊椎动物三大类群的特征", "练习按特征分类的方法"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_costume", "island_play", "island_repeat"],
-  "actor": { "costume": "🧑‍✈️", "x": -80, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "🏛", "x": 130, "y": 40 }],
+  "goals": [
+    "掌握脊椎动物三大类群的特征",
+    "练习按特征分类的方法"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_costume",
+    "island_play",
+    "island_repeat"
+  ],
+  "actor": {
+    "costume": "🧑‍✈️",
+    "x": -80,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "🏛",
+      "x": 130,
+      "y": 40
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "开园点名：说「动物家族大点名！鱼类、鸟类、哺乳类，各就各位！」",
-      "hintPrompts": ["馆长要有气势！", "三大类的名字先报一遍，观众心里有数"],
-      "check": { "type": "say_text" }
+      "hintPrompts": [
+        "馆长要有气势！",
+        "三大类的名字先报一遍，观众心里有数"
+      ],
+      "check": {
+        "type": "say_text"
+      }
     },
     {
       "id": "t2",
       "text": "鱼类馆点名：变身 🐟，说「鱼类：生活在水里，用鳃呼吸，用鳍游泳——鲫鱼、鲨鱼报到！」",
-      "hintPrompts": ["鳃呼吸+鳍游泳=鱼类的两大标志", "鲸鱼不是鱼！它用肺呼吸、胎生——记牢这句"],
-      "check": { "type": "block_count_min", "block": "island_costume", "count": 1 }
+      "hintPrompts": [
+        "鳃呼吸+鳍游泳=鱼类的两大标志",
+        "鲸鱼不是鱼！它用肺呼吸、胎生——记牢这句"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_costume",
+        "count": 1
+      }
     },
     {
       "id": "t3",
       "text": "鸟类和哺乳类也点名：🕊「鸟类：有羽毛、会下蛋」、🐺「哺乳类：胎生、喝奶长大」，每馆说完停 2 秒",
-      "hintPrompts": ["羽毛是鸟类独有——会飞的蝙蝠是哺乳类！", "喝妈妈的奶长大=哺乳，这是类群名字的来历"],
-      "check": { "type": "block_count_min", "block": "island_wait", "count": 2 }
+      "hintPrompts": [
+        "羽毛是鸟类独有——会飞的蝙蝠是哺乳类！",
+        "喝妈妈的奶长大=哺乳，这是类群名字的来历"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_wait",
+        "count": 2
+      }
     },
     {
       "id": "t4",
       "text": "开园！走到 🏛 动物园大门，说「分类完成，欢迎光临！」配开园音效",
-      "hintPrompts": ["两栖类、爬行类也各有特征——进阶馆下次开", "分类标准不同，分法就不同（会飞/不会飞？水陆？）"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "两栖类、爬行类也各有特征——进阶馆下次开",
+        "分类标准不同，分法就不同（会飞/不会飞？水陆？）"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：陷阱题大会——考爸妈：鲸鱼、蝙蝠、企鹅、海马分别属于哪类？",
-      "hintPrompts": ["鲸鱼=哺乳、蝙蝠=哺乳、企鹅=鸟、海马=鱼", "「像不像」不重要，「特征」才作数——这就是分类学"],
-      "check": { "type": "manual" },
+      "hintPrompts": [
+        "鲸鱼=哺乳、蝙蝠=哺乳、企鹅=鸟、海马=鱼",
+        "「像不像」不重要，「特征」才作数——这就是分类学"
+      ],
+      "check": {
+        "type": "manual"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第二、三学段（3-6年级）", "module": "身边的算法", "points": ["分类思想", "序列化点名编排"] },
-  "subject": { "name": "生物·生物分类（小学）", "emoji": "🦁", "points": ["脊椎动物的三大类群", "各类群的关键特征", "按特征分类的方法"] },
+  "curriculum": {
+    "stage": "第二、三学段（3-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "分类思想",
+      "序列化点名编排"
+    ]
+  },
+  "subject": {
+    "name": "生物·生物分类（小学）",
+    "emoji": "🦁",
+    "points": [
+      "脊椎动物的三大类群",
+      "各类群的关键特征",
+      "按特征分类的方法"
+    ]
+  },
   "subjectArea": "生物",
   "gradeBand": "primary",
   "aiIntro": "🦁 馆长上任第一天！鱼类馆、鸟类馆、哺乳类馆三馆齐开，动物们排队点名。记住口诀：鳃鳍是鱼、羽卵是鸟、奶大是兽——分类钥匙到手！",
   "celebrate": "三馆开园，馆长威武！🏛 你已经会用「特征」给动物分类——这把钥匙还能开植物馆、昆虫馆。对了，考考爸妈鲸鱼是哪类，看他们掉不掉坑！",
   "exercises": [
-    { "q": "鲸鱼属于？", "options": ["鱼类", "哺乳类", "鸟类", "两栖类"], "answer": 1, "explain": "鲸用肺呼吸、胎生哺乳——是住在海里的哺乳动物" },
-    { "q": "鸟类的独有特征是？", "options": ["会飞", "有羽毛", "下蛋", "有翅膀"], "answer": 1, "explain": "羽毛是鸟类独一无二的特征（蝙蝠有翅膀会飞但是哺乳类）" },
-    { "q": "「哺乳类」名字的来历是？", "options": ["住在陆地", "喝母乳长大", "体型大", "跑得快"], "answer": 1, "explain": "胎生、以乳汁哺育幼崽，是哺乳类的定义特征" }
-  ]
+    {
+      "q": "鲸鱼属于？",
+      "options": [
+        "鱼类",
+        "哺乳类",
+        "鸟类",
+        "两栖类"
+      ],
+      "answer": 1,
+      "explain": "鲸用肺呼吸、胎生哺乳——是住在海里的哺乳动物"
+    },
+    {
+      "q": "鸟类的独有特征是？",
+      "options": [
+        "会飞",
+        "有羽毛",
+        "下蛋",
+        "有翅膀"
+      ],
+      "answer": 1,
+      "explain": "羽毛是鸟类独一无二的特征（蝙蝠有翅膀会飞但是哺乳类）"
+    },
+    {
+      "q": "「哺乳类」名字的来历是？",
+      "options": [
+        "住在陆地",
+        "喝母乳长大",
+        "体型大",
+        "跑得快"
+      ],
+      "answer": 1,
+      "explain": "胎生、以乳汁哺育幼崽，是哺乳类的定义特征"
+    }
+  ],
+  "textbook": "人教版生物学八年级上册",
+  "grade": 8
 }

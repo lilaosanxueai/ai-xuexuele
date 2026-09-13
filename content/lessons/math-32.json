@@ -113,5 +113,7 @@
       "answer": 2,
       "explain": "互余角：sinα=cos(90°-α)"
     }
-  ]
+  ],
+  "textbook": "人教版数学九年级下册",
+  "grade": 9
 }

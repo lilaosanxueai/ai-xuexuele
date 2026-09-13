@@ -5,53 +5,155 @@
   "title": "天气符号播报员",
   "emoji": "🌤",
   "story": "「各位观众，今天晴转多云，午后有雷阵雨——」电视里的天气预报员总是那么从容。他们靠什么说话？天气符号！☀️ 晴、🌧 雨、❄️ 雪……今天你来当播报员，把一周天气编成程序播出去，全家都看你的预报！",
-  "goals": ["认识常见天气符号与天气现象", "用程序编排一段天气预报"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_turn_right", "island_turn_left", "island_costume", "island_change_size", "island_play", "island_repeat"],
-  "actor": { "costume": "🧑‍💼", "x": -70, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "📺", "x": 130, "y": 40 }],
+  "goals": [
+    "认识常见天气符号与天气现象",
+    "用程序编排一段天气预报"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_costume",
+    "island_change_size",
+    "island_play",
+    "island_repeat"
+  ],
+  "actor": {
+    "costume": "🧑‍💼",
+    "x": -70,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "📺",
+      "x": 130,
+      "y": 40
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "开场白：播报员说「大家好，今天的一周天气播报开始！」",
-      "hintPrompts": ["播报员要字正腔圆、面带微笑（想象镜头在眼前）"],
-      "check": { "type": "say_text" }
+      "hintPrompts": [
+        "播报员要字正腔圆、面带微笑（想象镜头在眼前）"
+      ],
+      "check": {
+        "type": "say_text"
+      }
     },
     {
       "id": "t2",
       "text": "播报四种天气：☀️「星期一，晴天！」→ 🌧「星期三，下雨，记得带伞」→ ⛈「星期五，雷阵雨」→ ❄️「星期日，下雪啦」，至少换 4 次造型",
-      "hintPrompts": ["一个天气一个造型一个台词，最清楚", "雨天记得提醒观众带伞——播报员的贴心"],
-      "check": { "type": "block_count_min", "block": "island_costume", "count": 4 }
+      "hintPrompts": [
+        "一个天气一个造型一个台词，最清楚",
+        "雨天记得提醒观众带伞——播报员的贴心"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_costume",
+        "count": 4
+      }
     },
     {
       "id": "t3",
       "text": "控制播报节奏：每条天气之间等待 1.5 秒左右（至少 4 块等待），像真的新闻播报",
-      "hintPrompts": ["播报不能抢话，一条一条来", "语速稳，观众才听得清"],
-      "check": { "type": "block_count_min", "block": "island_wait", "count": 4 }
+      "hintPrompts": [
+        "播报不能抢话，一条一条来",
+        "语速稳，观众才听得清"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_wait",
+        "count": 4
+      }
     },
     {
       "id": "t4",
       "text": "播报收尾：配一个开场/结束音效，走到 📺 电视台镜头前说「以上就是本周天气，再见！」",
-      "hintPrompts": ["结尾音效用「叮咚」最像新闻联播", "镜头在右边，走过去谢幕"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "结尾音效用「叮咚」最像新闻联播",
+        "镜头在右边，走过去谢幕"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：查一下本周你所在城市的真实天气，把节目改成「本地版预报」播给爸妈听",
-      "hintPrompts": ["真实数据最有说服力——这也叫「数据驱动的程序」", "播完问问爸妈：准吗？明天信不信你的预报？"],
-      "check": { "type": "manual" },
+      "hintPrompts": [
+        "真实数据最有说服力——这也叫「数据驱动的程序」",
+        "播完问问爸妈：准吗？明天信不信你的预报？"
+      ],
+      "check": {
+        "type": "manual"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第三学段（5-6年级）", "module": "身边的算法", "points": ["顺序结构", "用程序表达信息"] },
-  "subject": { "name": "地理·天气与气候", "emoji": "🌤", "points": ["常见天气符号", "天气与生活的关系", "天气播报的信息表达"] },
+  "curriculum": {
+    "stage": "第三学段（5-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "顺序结构",
+      "用程序表达信息"
+    ]
+  },
+  "subject": {
+    "name": "地理·天气与气候",
+    "emoji": "🌤",
+    "points": [
+      "常见天气符号",
+      "天气与生活的关系",
+      "天气播报的信息表达"
+    ]
+  },
   "subjectArea": "地理",
   "gradeBand": "primary",
   "aiIntro": "🌤 各位观众晚上好！今天的地理课在电视台直播间：你要认识天气符号、写好播报稿、控制播报节奏——一条都不能乱。3、2、1，开播！",
   "celebrate": "播出成功！🌤 你认识了一周的天气符号，还学会了把信息「编排」成节目——这正是气象台和新闻节目在做的事。明早出门前，做一期晨间预报吧！",
   "exercises": [
-    { "q": "符号 ☔ 提醒我们？", "options": ["记得带伞", "适合晒被子", "不用上学", "天气很热"], "answer": 0, "explain": "☔ 表示有雨，出门要带伞" },
-    { "q": "下列哪组天气都可能出现在冬天？", "options": ["晴、雷阵雨、台风", "晴、下雪、雾", "沙尘暴、冰雹、酷暑", "只有下雪"], "answer": 1, "explain": "冬天常见晴、雪、雾等天气" },
-    { "q": "天气预报对生活的帮助不包括？", "options": ["提前知道带不带伞", "安排周末活动", "决定穿什么衣服", "让天气变好"], "answer": 3, "explain": "预报只能「预知」天气，不能改变天气" }
+    {
+      "q": "符号 ☔ 提醒我们？",
+      "options": [
+        "记得带伞",
+        "适合晒被子",
+        "不用上学",
+        "天气很热"
+      ],
+      "answer": 0,
+      "explain": "☔ 表示有雨，出门要带伞"
+    },
+    {
+      "q": "下列哪组天气都可能出现在冬天？",
+      "options": [
+        "晴、雷阵雨、台风",
+        "晴、下雪、雾",
+        "沙尘暴、冰雹、酷暑",
+        "只有下雪"
+      ],
+      "answer": 1,
+      "explain": "冬天常见晴、雪、雾等天气"
+    },
+    {
+      "q": "天气预报对生活的帮助不包括？",
+      "options": [
+        "提前知道带不带伞",
+        "安排周末活动",
+        "决定穿什么衣服",
+        "让天气变好"
+      ],
+      "answer": 3,
+      "explain": "预报只能「预知」天气，不能改变天气"
+    }
   ],
-  "codeLesson": false
+  "codeLesson": false,
+  "textbook": "人教版地理七年级上册",
+  "grade": 7
 }

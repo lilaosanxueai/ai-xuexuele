@@ -5,52 +5,149 @@
   "title": "AI 化学实验员：认试剂",
   "emoji": "🧪",
   "story": "化学实验最最重要的一条：进实验室先认全试剂！今天厨房就是你的预备实验室——白醋和小苏打，一个酸一个碱，都是安全又神奇的「试剂」。教会 AI 认它们，再让它编好实验提醒：认错试剂可是会出大事的（就算厨房里只会冒泡泡）！",
-  "goals": ["了解酸性与碱性物质的日常例子", "用 AI 识别做实验前的安全检查"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_costume", "island_play", "island_when_recognized", "island_recognize"],
-  "actor": { "costume": "🧪", "x": -70, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "⚗️", "x": 130, "y": 40 }],
+  "goals": [
+    "了解酸性与碱性物质的日常例子",
+    "用 AI 识别做实验前的安全检查"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_costume",
+    "island_play",
+    "island_when_recognized",
+    "island_recognize"
+  ],
+  "actor": {
+    "costume": "🧪",
+    "x": -70,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "⚗️",
+      "x": 130,
+      "y": 40
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "培训：去「🧠 AI 实验室」，类别 1 改名「白醋」，类别 2 改名「小苏打」，各拍 10 张（瓶子标签拍清楚）",
-      "hintPrompts": ["厨房找白醋和小苏打，标签朝镜头", "换角度多拍几张，AI 认得更稳"],
-      "check": { "type": "manual" }
+      "hintPrompts": [
+        "厨房找白醋和小苏打，标签朝镜头",
+        "换角度多拍几张，AI 认得更稳"
+      ],
+      "check": {
+        "type": "manual"
+      }
     },
     {
       "id": "t2",
       "text": "安全播报 1：「当 AI 认出 白醋」→ 说「白醋：酸性！闻起来酸酸的，别凑近猛吸」",
-      "hintPrompts": ["闻气体的正确姿势：扇闻，不是凑上去吸！", "酸性物质遇到紫色石蕊会变红"],
-      "check": { "type": "block_used", "block": "island_when_recognized" }
+      "hintPrompts": [
+        "闻气体的正确姿势：扇闻，不是凑上去吸！",
+        "酸性物质遇到紫色石蕊会变红"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_when_recognized"
+      }
     },
     {
       "id": "t3",
       "text": "安全播报 2：「当 AI 认出 小苏打」→ 说「小苏打：碱性！和醋相遇会冒泡泡（二氧化碳）」并播放提示音",
-      "hintPrompts": ["醋+小苏打=酸碱反应，产生 CO₂——火山实验的原料", "碱性物质让紫色石蕊变蓝"],
-      "check": { "type": "say_text" }
+      "hintPrompts": [
+        "醋+小苏打=酸碱反应，产生 CO₂——火山实验的原料",
+        "碱性物质让紫色石蕊变蓝"
+      ],
+      "check": {
+        "type": "say_text"
+      }
     },
     {
       "id": "t4",
       "text": "实验预告片：举着白醋对镜头，AI 认出后角色变身 🌋 走到试管架——自动预告「小苏弹火山实验即将开始！」",
-      "hintPrompts": ["认出→变身火山→走向试管，自动小剧场", "真的做实验时要有大人在场哦！"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "认出→变身火山→走向试管，自动小剧场",
+        "真的做实验时要有大人在场哦！"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：酸碱指示剂——查一查紫甘蓝汁遇到酸和碱分别变什么颜色，讲给爸妈听",
-      "hintPrompts": ["紫甘蓝汁遇酸变红、遇碱变绿蓝——天然指示剂！", "在家就能做的安全实验（需家长陪同）"],
-      "check": { "type": "manual" },
+      "hintPrompts": [
+        "紫甘蓝汁遇酸变红、遇碱变绿蓝——天然指示剂！",
+        "在家就能做的安全实验（需家长陪同）"
+      ],
+      "check": {
+        "type": "manual"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第四学段（7-9年级）", "module": "过程与控制", "points": ["识别触发与安全提醒", "事件与条件广播"] },
-  "subject": { "name": "化学·酸碱盐与人工智能（初中）", "emoji": "🧪", "points": ["生活中的酸性与碱性物质", "酸碱反应产生 CO₂", "实验室安全规范"] },
+  "curriculum": {
+    "stage": "第四学段（7-9年级）",
+    "module": "过程与控制",
+    "points": [
+      "识别触发与安全提醒",
+      "事件与条件广播"
+    ]
+  },
+  "subject": {
+    "name": "化学·酸碱盐与人工智能（初中）",
+    "emoji": "🧪",
+    "points": [
+      "生活中的酸性与碱性物质",
+      "酸碱反应产生 CO₂",
+      "实验室安全规范"
+    ]
+  },
   "subjectArea": "化学",
   "gradeBand": "junior",
   "aiIntro": "🧪 新实验员报到！第一课不是背元素表，是认试剂：白醋（酸）和小苏打（碱）。教会 AI 之后，它会在每次实验前自动播报安全提示——化学+AI，安全又炫酷！",
   "celebrate": "AI 化学实验员上岗成功！🌋 你把「认试剂→播性质→报安全」串成了自动流程——这正是智能实验室的模样。酸碱知识也顺便复习了：变红的是酸，变蓝的是碱！",
   "exercises": [
-    { "q": "白醋属于哪类物质？", "options": ["碱性", "酸性", "中性", "盐"], "answer": 1, "explain": "白醋含醋酸，是常见的酸性物质" },
-    { "q": "白醋+小苏打会产生？", "options": ["氧气", "二氧化碳气体（泡泡）", "氢气", "没有变化"], "answer": 1, "explain": "酸碱反应生成二氧化碳，所以会冒泡——小火山实验的原理" },
-    { "q": "闻未知气体的正确做法是？", "options": ["凑近深吸", "用手扇动少量气体到鼻边", "完全不能闻", "用嘴尝"], "answer": 1, "explain": "扇闻法：用手轻扇，让少量气体飘向鼻孔，安全又有效" }
-  ]
+    {
+      "q": "白醋属于哪类物质？",
+      "options": [
+        "碱性",
+        "酸性",
+        "中性",
+        "盐"
+      ],
+      "answer": 1,
+      "explain": "白醋含醋酸，是常见的酸性物质"
+    },
+    {
+      "q": "白醋+小苏打会产生？",
+      "options": [
+        "氧气",
+        "二氧化碳气体（泡泡）",
+        "氢气",
+        "没有变化"
+      ],
+      "answer": 1,
+      "explain": "酸碱反应生成二氧化碳，所以会冒泡——小火山实验的原理"
+    },
+    {
+      "q": "闻未知气体的正确做法是？",
+      "options": [
+        "凑近深吸",
+        "用手扇动少量气体到鼻边",
+        "完全不能闻",
+        "用嘴尝"
+      ],
+      "answer": 1,
+      "explain": "扇闻法：用手轻扇，让少量气体飘向鼻孔，安全又有效"
+    }
+  ],
+  "textbook": "人教版化学（初中）"
 }

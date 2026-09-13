@@ -5,52 +5,150 @@
   "title": "AI 叶子图鉴：叶脉侦探",
   "emoji": "🍃",
   "story": "捡起一片叶子，仔细看它的「血管」——叶脉！有的叶子叶脉像渔网（网状脉，比如杨树叶），有的像平行线（平行脉，比如稻叶）。这个小小的区别，竟能帮植物学家判断它是单子叶还是双子叶植物！今天你把 AI 训练成「叶脉侦探」，见叶知「类」！",
-  "goals": ["学会区分网状脉与平行脉", "用 AI 搭建自动识别的植物图鉴"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_costume", "island_play", "island_when_recognized", "island_recognize"],
-  "actor": { "costume": "🍃", "x": -70, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "📖", "x": 130, "y": 40 }],
+  "goals": [
+    "学会区分网状脉与平行脉",
+    "用 AI 搭建自动识别的植物图鉴"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_costume",
+    "island_play",
+    "island_when_recognized",
+    "island_recognize"
+  ],
+  "actor": {
+    "costume": "🍃",
+    "x": -70,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "📖",
+      "x": 130,
+      "y": 40
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "采集标本：找一片网状脉叶子（杨树/桃树/桑叶）和一片平行脉叶子（稻叶/兰草/竹叶），对比观察 1 分钟",
-      "hintPrompts": ["网状脉：主脉+侧脉交织成网；平行脉：条纹互相平行不打结", "摸一摸：平行脉的叶子通常又细又长"],
-      "check": { "type": "manual" }
+      "hintPrompts": [
+        "网状脉：主脉+侧脉交织成网；平行脉：条纹互相平行不打结",
+        "摸一摸：平行脉的叶子通常又细又长"
+      ],
+      "check": {
+        "type": "manual"
+      }
     },
     {
       "id": "t2",
       "text": "训练侦探：去「🧠 AI 实验室」，类别 1 改名「网状脉」、类别 2 改名「平行脉」，各拍 10 张（叶面朝上、光线充足）",
-      "hintPrompts": ["叶脉拍清楚是关键——斜着拍能拍出立体感", "两种叶子多换几片拍，AI 才不会只认住那一片"],
-      "check": { "type": "manual" }
+      "hintPrompts": [
+        "叶脉拍清楚是关键——斜着拍能拍出立体感",
+        "两种叶子多换几片拍，AI 才不会只认住那一片"
+      ],
+      "check": {
+        "type": "manual"
+      }
     },
     {
       "id": "t3",
       "text": "侦探上线：「当 AI 认出 网状脉」→ 说「网状脉 → 多半是双子叶植物！」",
-      "hintPrompts": ["双子叶：种子两瓣，如豆类、杨树、桃树", "网状脉是双子叶的典型特征"],
-      "check": { "type": "block_used", "block": "island_when_recognized" }
+      "hintPrompts": [
+        "双子叶：种子两瓣，如豆类、杨树、桃树",
+        "网状脉是双子叶的典型特征"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_when_recognized"
+      }
     },
     {
       "id": "t4",
       "text": "双通道：「当 AI 认出 平行脉」→ 说「平行脉 → 多半是单子叶植物！（水稻、小麦养活了世界）」然后走进 📖 图鉴馆",
-      "hintPrompts": ["单子叶：种子一瓣，如水稻、小麦、玉米、竹子", "认错也别怪 AI——拍更多样的照片让它进步"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "单子叶：种子一瓣，如水稻、小麦、玉米、竹子",
+        "认错也别怪 AI——拍更多样的照片让它进步"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：小区植物普查——带爸妈散步，用你的 AI 图鉴认 5 片叶子，统计网状脉多还是平行脉多",
-      "hintPrompts": ["乔木（杨柳槐）多为网状脉；草坪禾草多为平行脉", "把统计结果记下来——你做了一次真正的田野调查！"],
-      "check": { "type": "manual" },
+      "hintPrompts": [
+        "乔木（杨柳槐）多为网状脉；草坪禾草多为平行脉",
+        "把统计结果记下来——你做了一次真正的田野调查！"
+      ],
+      "check": {
+        "type": "manual"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第四学段（7-9年级）", "module": "过程与控制", "points": ["识别与分类输出", "训练样本的多样性"] },
-  "subject": { "name": "生物·植物与人工智能（初中）", "emoji": "🍃", "points": ["叶脉的类型：网状脉与平行脉", "单子叶与双子叶的区别", "用分类工具观察生物"] },
+  "curriculum": {
+    "stage": "第四学段（7-9年级）",
+    "module": "过程与控制",
+    "points": [
+      "识别与分类输出",
+      "训练样本的多样性"
+    ]
+  },
+  "subject": {
+    "name": "生物·植物与人工智能（初中）",
+    "emoji": "🍃",
+    "points": [
+      "叶脉的类型：网状脉与平行脉",
+      "单子叶与双子叶的区别",
+      "用分类工具观察生物"
+    ]
+  },
   "subjectArea": "生物",
   "gradeBand": "junior",
   "aiIntro": "🍃 一片叶子一个身份！叶脉就是植物的「指纹」：网状脉写着一瓣还是两瓣的秘密。把 AI 教成叶脉侦探后，你在小区里就是移动的植物图鉴馆！",
   "celebrate": "叶脉侦探结业！📖 你掌握了「看叶辨类」的博物学本领，还教会了 AI 同款技能——生物分类+人工智能，博物学家的现代装备你都有了。下次散步，考考爸妈！",
   "exercises": [
-    { "q": "水稻叶的叶脉是？", "options": ["网状脉", "平行脉", "没有叶脉", "螺旋脉"], "answer": 1, "explain": "水稻是单子叶植物，叶脉平行排列" },
-    { "q": "网状脉通常提示植物是？", "options": ["单子叶", "双子叶", "蕨类", "苔藓"], "answer": 1, "explain": "双子叶植物（如杨、桃、豆类）典型特征是网状脉" },
-    { "q": "生物分类的最基本单位是？", "options": ["界", "科", "种", "株"], "answer": 2, "explain": "从界到种，种是分类的基本单位" }
-  ]
+    {
+      "q": "水稻叶的叶脉是？",
+      "options": [
+        "网状脉",
+        "平行脉",
+        "没有叶脉",
+        "螺旋脉"
+      ],
+      "answer": 1,
+      "explain": "水稻是单子叶植物，叶脉平行排列"
+    },
+    {
+      "q": "网状脉通常提示植物是？",
+      "options": [
+        "单子叶",
+        "双子叶",
+        "蕨类",
+        "苔藓"
+      ],
+      "answer": 1,
+      "explain": "双子叶植物（如杨、桃、豆类）典型特征是网状脉"
+    },
+    {
+      "q": "生物分类的最基本单位是？",
+      "options": [
+        "界",
+        "科",
+        "种",
+        "株"
+      ],
+      "answer": 2,
+      "explain": "从界到种，种是分类的基本单位"
+    }
+  ],
+  "textbook": "人教版生物学七年级上册",
+  "grade": 7
 }

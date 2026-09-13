@@ -114,5 +114,7 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 串联与并联\nr1 = 3\nr2 = 3\n\nseries = r1 + r2\nparallel = 1 / (1 / r1 + 1 / r2)\n\nsay(\"串联：R = \" + series + \" 欧姆\")\nsay(\"并联：R = \" + parallel + \" 欧姆\")\nsay(\"并联总电阻更小——电流多了一条路！\")\n"
+  "starterCode": "# 串联与并联\nr1 = 3\nr2 = 3\n\nseries = r1 + r2\nparallel = 1 / (1 / r1 + 1 / r2)\n\nsay(\"串联：R = \" + series + \" 欧姆\")\nsay(\"并联：R = \" + parallel + \" 欧姆\")\nsay(\"并联总电阻更小——电流多了一条路！\")\n",
+  "textbook": "人教版物理九年级全一册",
+  "grade": 9
 }

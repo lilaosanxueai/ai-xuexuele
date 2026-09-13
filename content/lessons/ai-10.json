@@ -5,52 +5,154 @@
   "title": "如果…那么…否则：程序的分岔路",
   "emoji": "🔀",
   "story": "程序不总是一条道走到黑——它也会遇到岔路口：「如果碰到边缘，那么反弹，否则继续走！」这个会思考的结构叫「分支」。今天你亲手搭三条分岔路：边缘判断、按键判断、AI 判断——搭完你就是「教会程序做选择」的人！",
-  "goals": ["掌握如果/如果…否则积木的用法", "理解条件与分支的执行逻辑"],
-  "toolbox": ["island_when_run", "island_when_key", "island_say", "island_say_for", "island_wait", "island_move", "island_turn_right", "island_costume", "island_play", "island_if", "island_if_else", "island_touching_edge", "island_key_down"],
-  "actor": { "costume": "🔀", "x": -70, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "🛤", "x": 130, "y": 40 }],
+  "goals": [
+    "掌握如果/如果…否则积木的用法",
+    "理解条件与分支的执行逻辑"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_when_key",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_turn_right",
+    "island_costume",
+    "island_play",
+    "island_if",
+    "island_if_else",
+    "island_touching_edge",
+    "island_key_down"
+  ],
+  "actor": {
+    "costume": "🔀",
+    "x": -70,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "🛤",
+      "x": 130,
+      "y": 40
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "认识岔路：说「程序的三岔口：顺序、分支、循环——今天攻分支！」",
-      "hintPrompts": ["顺序是直路，分支是岔路，循环是转圈路", "报完目标再开工，思路清晰"],
-      "check": { "type": "say_text" }
+      "hintPrompts": [
+        "顺序是直路，分支是岔路，循环是转圈路",
+        "报完目标再开工，思路清晰"
+      ],
+      "check": {
+        "type": "say_text"
+      }
     },
     {
       "id": "t2",
       "text": "单岔口：「如果 碰到边缘？ 那么」——里面放一块移动或转向，让角色到了边上自动转向",
-      "hintPrompts": ["「碰到边缘？」是六边形判断积木，放进如果的空位", "先移动几步再运行，看它到边时拐弯"],
-      "check": { "type": "block_used", "block": "island_if" }
+      "hintPrompts": [
+        "「碰到边缘？」是六边形判断积木，放进如果的空位",
+        "先移动几步再运行，看它到边时拐弯"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_if"
+      }
     },
     {
       "id": "t3",
       "text": "双岔口：「如果 按下上箭头？ 那么 说出发！ 否则 说待命！」——按下和松开各试一次",
-      "hintPrompts": ["「如果…否则」两头都要填：真走一头，假走另一头", "运行后按住↑：它说出发；松开：它说待命"],
-      "check": { "type": "block_used", "block": "island_if_else" }
+      "hintPrompts": [
+        "「如果…否则」两头都要填：真走一头，假走另一头",
+        "运行后按住↑：它说出发；松开：它说待命"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_if_else"
+      }
     },
     {
       "id": "t4",
       "text": "三岔口试炼：走到 🛤 岔路口，总结「分支=条件+两条路，真假各走一条」",
-      "hintPrompts": ["条件为真走「那么」，为假走「否则」", "没有否则也行——条件不满足就什么都不做"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "条件为真走「那么」，为假走「否则」",
+        "没有否则也行——条件不满足就什么都不做"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：AI 岔口——「如果 AI 认出 类别 1？ 那么 播欢呼 否则 说没认出」（要先在训练场教它）",
-      "hintPrompts": ["AI 认出？也是六边形，和其它条件积木同族", "分支条件可以是按键、边缘、AI——万物皆可判断！"],
-      "check": { "type": "manual" },
+      "hintPrompts": [
+        "AI 认出？也是六边形，和其它条件积木同族",
+        "分支条件可以是按键、边缘、AI——万物皆可判断！"
+      ],
+      "check": {
+        "type": "manual"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第四学段（7-9年级）", "module": "身边的算法", "points": ["分支结构（选择结构）", "条件表达式的真与假"] },
-  "subject": { "name": "信息科技·程序设计（初中）", "emoji": "🔀", "points": ["三种基本控制结构之分支", "单分支与双分支", "条件判断积木的使用"] },
+  "curriculum": {
+    "stage": "第四学段（7-9年级）",
+    "module": "身边的算法",
+    "points": [
+      "分支结构（选择结构）",
+      "条件表达式的真与假"
+    ]
+  },
+  "subject": {
+    "name": "信息科技·程序设计（初中）",
+    "emoji": "🔀",
+    "points": [
+      "三种基本控制结构之分支",
+      "单分支与双分支",
+      "条件判断积木的使用"
+    ]
+  },
   "subjectArea": "信息科技",
   "gradeBand": "junior",
   "aiIntro": "🔀 直走还是拐弯？程序每天都在做选择！今天的「如果…那么…否则」就是给程序装上判断力——搭完三条岔路，你的程序就会自己思考了！",
   "celebrate": "岔路工程竣工！🛤 你教会了程序做选择——这是从「听话的工具」到「会思考的助手」的第一步。红绿灯、游戏 AI、自动驾驶，全靠分支结构做决定！",
   "exercises": [
-    { "q": "分支结构的作用是？", "options": ["让程序重复执行", "根据条件选择执行不同路径", "让程序跑得更快", "让程序变长"], "answer": 1, "explain": "分支（选择）结构：条件真走一支，假走另一支" },
-    { "q": "「如果…否则」中，条件为假时执行？", "options": ["那么里的代码", "否则里的代码", "都不执行", "重新开始"], "answer": 1, "explain": "双分支：真走 then，假走 else，必走其一" },
-    { "q": "以下哪个能放进「如果」的条件空位？", "options": ["移动积木", "碰到边缘？（六边形）", "说 停 2 秒", "等待 1 秒"], "answer": 1, "explain": "条件必须是六边形的布尔积木（碰到边缘/按键/AI认出/等于）" }
-  ]
+    {
+      "q": "分支结构的作用是？",
+      "options": [
+        "让程序重复执行",
+        "根据条件选择执行不同路径",
+        "让程序跑得更快",
+        "让程序变长"
+      ],
+      "answer": 1,
+      "explain": "分支（选择）结构：条件真走一支，假走另一支"
+    },
+    {
+      "q": "「如果…否则」中，条件为假时执行？",
+      "options": [
+        "那么里的代码",
+        "否则里的代码",
+        "都不执行",
+        "重新开始"
+      ],
+      "answer": 1,
+      "explain": "双分支：真走 then，假走 else，必走其一"
+    },
+    {
+      "q": "以下哪个能放进「如果」的条件空位？",
+      "options": [
+        "移动积木",
+        "碰到边缘？（六边形）",
+        "说 停 2 秒",
+        "等待 1 秒"
+      ],
+      "answer": 1,
+      "explain": "条件必须是六边形的布尔积木（碰到边缘/按键/AI认出/等于）"
+    }
+  ],
+  "textbook": "冀教版信息科技（初中）"
 }

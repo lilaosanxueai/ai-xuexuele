@@ -5,53 +5,151 @@
   "title": "AI 是怎么学习的？",
   "emoji": "🧠",
   "story": "小婴儿是怎么认得猫的？看了很多很多猫，就学会了！AI 也一样——它不是天生聪明，而是靠「看例子」学出来的。今天你当一次 AI 的老师：带它上第一堂课，教它认两样东西，你会发现「学习」的秘密。",
-  "goals": ["体验「数据→训练→预测」三步", "理解 AI 是从例子中学规律的"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_costume", "island_play", "island_repeat", "island_when_recognized", "island_recognize"],
-  "actor": { "costume": "🤖", "x": -40, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "🎓", "x": 130, "y": 40 }],
+  "goals": [
+    "体验「数据→训练→预测」三步",
+    "理解 AI 是从例子中学规律的"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_costume",
+    "island_play",
+    "island_repeat",
+    "island_when_recognized",
+    "island_recognize"
+  ],
+  "actor": {
+    "costume": "🤖",
+    "x": -40,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "🎓",
+      "x": 130,
+      "y": 40
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "去「🧠 AI 实验室」：选类别 1，给同一样东西（比如你的铅笔✏️）拍 8~10 张照片——这就是 AI 的「课本」",
-      "hintPrompts": ["拍的时候换个角度、换个远近，课本越丰富学得越好", "每张照片就是一个「例子」，AI 靠例子学习"],
-      "check": { "type": "manual" }
+      "hintPrompts": [
+        "拍的时候换个角度、换个远近，课本越丰富学得越好",
+        "每张照片就是一个「例子」，AI 靠例子学习"
+      ],
+      "check": {
+        "type": "manual"
+      }
     },
     {
       "id": "t2",
       "text": "再教它类别 2：另找一样东西（比如橡皮），也拍几张",
-      "hintPrompts": ["两个类别要明显不同，AI 才好区分", "拍完点测试，看看它能不能认对"],
-      "check": { "type": "manual" }
+      "hintPrompts": [
+        "两个类别要明显不同，AI 才好区分",
+        "拍完点测试，看看它能不能认对"
+      ],
+      "check": {
+        "type": "manual"
+      }
     },
     {
       "id": "t3",
       "text": "回到课程写程序：用「当 AI 认出 类别 1」积木，让机器人大声说出它认出了什么",
-      "hintPrompts": ["「当 AI 认出」是绿色的事件积木，和「当开始被点击」是亲戚", "在它下面放一块「说」，认出时就会开口"],
-      "check": { "type": "block_used", "block": "island_when_recognized" }
+      "hintPrompts": [
+        "「当 AI 认出」是绿色的事件积木，和「当开始被点击」是亲戚",
+        "在它下面放一块「说」，认出时就会开口"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_when_recognized"
+      }
     },
     {
       "id": "t4",
       "text": "对着摄像头举起铅笔，让机器人真的说出口（比如「我看到铅笔啦！」），再走到 🎓 领取「AI 教师证」",
-      "hintPrompts": ["按 ▶ 运行后对着摄像头举东西试试", "认不出来就回 AI 实验室多拍几张不同角度"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "按 ▶ 运行后对着摄像头举东西试试",
+        "认不出来就回 AI 实验室多拍几张不同角度"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：用「AI 认出 类别 2 ？」+「如果」积木，写一个会判断的小助手",
-      "hintPrompts": ["「AI 认出？」是六边形积木，放进「如果」的空位里", "认出类别 2 时说一句不同的话"],
-      "check": { "type": "block_used", "block": "island_recognize" },
+      "hintPrompts": [
+        "「AI 认出？」是六边形积木，放进「如果」的空位里",
+        "认出类别 2 时说一句不同的话"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_recognize"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第三学段（5-6年级）", "module": "过程与控制", "points": ["智能系统的输入与输出", "人工智能从数据中学习"] },
-  "subject": { "name": "信息科技·人工智能启蒙", "emoji": "🧠", "points": ["机器学习三步：数据→训练→预测", "AI 靠例子学规律", "本机数据不上传"] },
+  "curriculum": {
+    "stage": "第三学段（5-6年级）",
+    "module": "过程与控制",
+    "points": [
+      "智能系统的输入与输出",
+      "人工智能从数据中学习"
+    ]
+  },
+  "subject": {
+    "name": "信息科技·人工智能启蒙",
+    "emoji": "🧠",
+    "points": [
+      "机器学习三步：数据→训练→预测",
+      "AI 靠例子学规律",
+      "本机数据不上传"
+    ]
+  },
   "subjectArea": "信息科技",
   "gradeBand": "primary",
   "aiIntro": "🧠 你好，AI 老师！今天你要教一个 AI 从零开始认东西。记住它的学习口诀：看例子、找规律、再猜新——这不就是你学认字的方法吗？",
   "celebrate": "恭喜！你教会了人生第一个 AI 学生 🎓 它现在能认出两样东西了——而你学会了更重要的事：AI 不是魔法，是「从例子中学习」。这个秘密很多大人都说不清！",
   "exercises": [
-    { "q": "AI 学认东西，主要靠什么？", "options": ["天生就会", "看大量例子找规律", "靠别人告诉它答案", "靠猜"], "answer": 1, "explain": "AI 从数据（例子）中学习规律，这就是「机器学习」" },
-    { "q": "机器学习的正确顺序是？", "options": ["预测→训练→数据", "数据→训练→预测", "训练→预测→数据", "预测→数据→训练"], "answer": 1, "explain": "先收集数据（拍照），再训练，最后就能预测（认出）" },
-    { "q": "AI 实验场拍的照片存在哪里？", "options": ["上传到云端", "发到网上", "只存在这台电脑里", "发给AI伙伴"], "answer": 2, "explain": "AI学学乐的样本数据全部只在本机，不上云、不出门" }
+    {
+      "q": "AI 学认东西，主要靠什么？",
+      "options": [
+        "天生就会",
+        "看大量例子找规律",
+        "靠别人告诉它答案",
+        "靠猜"
+      ],
+      "answer": 1,
+      "explain": "AI 从数据（例子）中学习规律，这就是「机器学习」"
+    },
+    {
+      "q": "机器学习的正确顺序是？",
+      "options": [
+        "预测→训练→数据",
+        "数据→训练→预测",
+        "训练→预测→数据",
+        "预测→数据→训练"
+      ],
+      "answer": 1,
+      "explain": "先收集数据（拍照），再训练，最后就能预测（认出）"
+    },
+    {
+      "q": "AI 实验场拍的照片存在哪里？",
+      "options": [
+        "上传到云端",
+        "发到网上",
+        "只存在这台电脑里",
+        "发给AI伙伴"
+      ],
+      "answer": 2,
+      "explain": "AI学学乐的样本数据全部只在本机，不上云、不出门"
+    }
   ],
-  "codeLesson": false
+  "codeLesson": false,
+  "textbook": "冀教版信息科技（小学）"
 }

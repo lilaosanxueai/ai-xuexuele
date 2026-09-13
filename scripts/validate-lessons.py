@@ -44,6 +44,12 @@ for f in files:
         errors.append(f"{n}: subjectArea 非法 {d['subjectArea']!r}")
     if d.get("gradeBand") is not None and d["gradeBand"] not in VALID_BANDS:
         errors.append(f"{n}: gradeBand 非法 {d['gradeBand']!r}")
+    g = d.get("grade")
+    if g is not None and (not isinstance(g, int) or not (1 <= g <= 12)):
+        errors.append(f"{n}: grade 非法 {g!r}（应为 1-12 整数）")
+    tb = d.get("textbook")
+    if tb is not None and (not isinstance(tb, str) or not tb.strip() or len(tb) > 40):
+        errors.append(f"{n}: textbook 非法（应为 1-40 字字符串）")
     for i, ex in enumerate(d.get("exercises") or []):
         if not ex.get("q") or not isinstance(ex.get("options"), list) or len(ex["options"]) < 2:
             errors.append(f"{n}/ex{i}: 题目或选项非法")

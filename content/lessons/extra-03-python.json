@@ -112,5 +112,6 @@
       "answer": 1,
       "explain": "for i in range(3) 就是 Python 版的「重复 3 次」"
     }
-  ]
+  ],
+  "textbook": "冀教版信息科技（初中）"
 }

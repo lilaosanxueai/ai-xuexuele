@@ -114,5 +114,7 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 元素点名：前 10 号\nfor i in range(1, 11):\n    if i == 1:\n        say(\"1 号 氢 H —— 宇宙最多的元素\")\n    if i == 2:\n        say(\"2 号 氦 He —— 气球里的安全气\")\n    if i == 3:\n        say(\"3 号 锂 Li —— 电池的心脏\")\n    if i == 6:\n        say(\"6 号 碳 C —— 钻石和铅笔芯\")\n    if i == 8:\n        say(\"8 号 氧 O —— 我们呼吸的它\")\n    if i == 10:\n        say(\"10 号 氖 Ne —— 霓虹灯的光\")\n    wait(0.4)\n\nsay(\"原子序数 = 质子数 = 电子数！\")\n"
+  "starterCode": "# 元素点名：前 10 号\nfor i in range(1, 11):\n    if i == 1:\n        say(\"1 号 氢 H —— 宇宙最多的元素\")\n    if i == 2:\n        say(\"2 号 氦 He —— 气球里的安全气\")\n    if i == 3:\n        say(\"3 号 锂 Li —— 电池的心脏\")\n    if i == 6:\n        say(\"6 号 碳 C —— 钻石和铅笔芯\")\n    if i == 8:\n        say(\"8 号 氧 O —— 我们呼吸的它\")\n    if i == 10:\n        say(\"10 号 氖 Ne —— 霓虹灯的光\")\n    wait(0.4)\n\nsay(\"原子序数 = 质子数 = 电子数！\")\n",
+  "textbook": "人教版化学九年级上册",
+  "grade": 9
 }

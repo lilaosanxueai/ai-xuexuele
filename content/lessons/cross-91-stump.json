@@ -5,52 +5,153 @@
   "title": "文言文小剧场：守株待兔",
   "emoji": "🐇",
   "story": "「宋人有耕者，田中有株，兔走触株，折颈而死。」文言文像密码？演一遍就破解了！今天你当导演兼主演：逐句翻译《守株待兔》，用动作把它演成小剧场——演完你会发现，两千年前宋国那个农夫，和今天想「躺赢」的人一模一样。",
-  "goals": ["读懂《守株待兔》的文意与寓意", "练习文白对照的表达"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_turn_right", "island_turn_left", "island_costume", "island_play", "island_repeat"],
-  "actor": { "costume": "🧑‍🌾", "x": -80, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "🪵", "x": 120, "y": 30 }],
+  "goals": [
+    "读懂《守株待兔》的文意与寓意",
+    "练习文白对照的表达"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_costume",
+    "island_play",
+    "island_repeat"
+  ],
+  "actor": {
+    "costume": "🧑‍🌾",
+    "x": -80,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "🪵",
+      "x": 120,
+      "y": 30
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "第一句开场：说「宋人有耕者——宋国有个种田人」（先文言后白话，像双语字幕）",
-      "hintPrompts": ["文言一句+白话一句，观众全看懂", "耕者=种田的人，逐词对应着翻"],
-      "check": { "type": "say_text" }
+      "hintPrompts": [
+        "文言一句+白话一句，观众全看懂",
+        "耕者=种田的人，逐词对应着翻"
+      ],
+      "check": {
+        "type": "say_text"
+      }
     },
     {
       "id": "t2",
       "text": "名场面：兔子飞奔撞上树桩——换造型演兔子 🐇，冲向树桩 🪵（「兔走触株，折颈而死」）",
-      "hintPrompts": ["「走」在文言里是「跑」！兔子是撞飞过去的", "撞上后停住——悲剧发生（用等待表示戛然而止）"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "「走」在文言里是「跑」！兔子是撞飞过去的",
+        "撞上后停住——悲剧发生（用等待表示戛然而止）"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "t3",
       "text": "农夫的执念：「因释其耒而守株」——放下农具守在树桩旁，至少等待 3 次（等啊等，等啊等……）",
-      "hintPrompts": ["释=放下，耒=农具；守株=守着树桩", "连续的等待表现「一天又一天」的荒唐"],
-      "check": { "type": "block_count_min", "block": "island_wait", "count": 3 }
+      "hintPrompts": [
+        "释=放下，耒=农具；守株=守着树桩",
+        "连续的等待表现「一天又一天」的荒唐"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_wait",
+        "count": 3
+      }
     },
     {
       "id": "t4",
       "text": "点题收尾：说寓意「不能把偶然当必然——幸福要靠劳动创造！」配一个音效",
-      "hintPrompts": ["兔子撞树是万分之一的偶然，等第二只=傻等", "联系今天：中一次奖就辞职，是一样的道理吗？"],
-      "check": { "type": "block_used", "block": "island_play" }
+      "hintPrompts": [
+        "兔子撞树是万分之一的偶然，等第二只=傻等",
+        "联系今天：中一次奖就辞职，是一样的道理吗？"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_play"
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：续写剧场——「身为宋国笑」：农夫被全国笑话后醒悟了，演一段他的转变",
-      "hintPrompts": ["捡起耒，重新耕田——结局由你来写", "好的续写要符合人物性格哦"],
-      "check": { "type": "manual" },
+      "hintPrompts": [
+        "捡起耒，重新耕田——结局由你来写",
+        "好的续写要符合人物性格哦"
+      ],
+      "check": {
+        "type": "manual"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第四学段（7-9年级）", "module": "身边的算法", "points": ["顺序结构", "叙事序列的表达"] },
-  "subject": { "name": "语文·文言文阅读（初中）", "emoji": "🐇", "points": ["《守株待兔》文意理解", "重点文言词：走/释/株/耒", "寓言的寓意与现实意义"] },
+  "curriculum": {
+    "stage": "第四学段（7-9年级）",
+    "module": "身边的算法",
+    "points": [
+      "顺序结构",
+      "叙事序列的表达"
+    ]
+  },
+  "subject": {
+    "name": "语文·文言文阅读（初中）",
+    "emoji": "🐇",
+    "points": [
+      "《守株待兔》文意理解",
+      "重点文言词：走/释/株/耒",
+      "寓言的寓意与现实意义"
+    ]
+  },
   "subjectArea": "语文",
   "gradeBand": "junior",
   "aiIntro": "🐇 一只兔子、一个树桩、一个想不劳而获的农夫——三十个字演完一场人性大戏！今天你是导演：文言是剧本，白话是台词，舞台就是你的程序。",
   "celebrate": "小剧场杀青！🎬 你用「文白对照+动作演绎」破解了一篇文言文——原来古文不是密码，是浓缩的电影剧本。下一部《掩耳盗铃》，等你开拍！",
   "exercises": [
-    { "q": "「兔走触株」的「走」意思是？", "options": ["散步", "跑", "走开", "逃跑"], "answer": 1, "explain": "文言「走」=跑（如「走马观花」）；「行」才是走" },
-    { "q": "「因释其耒而守株」的「释」意思是？", "options": ["解释", "释放", "放下", "喜欢"], "answer": 2, "explain": "释=放下；整句：于是放下农具守在树桩旁" },
-    { "q": "《守株待兔》的寓意是？", "options": ["兔子跑得快", "不能存侥幸心理，要靠劳动/努力获得成果", "树桩很结实", "宋国农业发达"], "answer": 1, "explain": "偶然≠必然，把运气当规律注定落空" }
-  ]
+    {
+      "q": "「兔走触株」的「走」意思是？",
+      "options": [
+        "散步",
+        "跑",
+        "走开",
+        "逃跑"
+      ],
+      "answer": 1,
+      "explain": "文言「走」=跑（如「走马观花」）；「行」才是走"
+    },
+    {
+      "q": "「因释其耒而守株」的「释」意思是？",
+      "options": [
+        "解释",
+        "释放",
+        "放下",
+        "喜欢"
+      ],
+      "answer": 2,
+      "explain": "释=放下；整句：于是放下农具守在树桩旁"
+    },
+    {
+      "q": "《守株待兔》的寓意是？",
+      "options": [
+        "兔子跑得快",
+        "不能存侥幸心理，要靠劳动/努力获得成果",
+        "树桩很结实",
+        "宋国农业发达"
+      ],
+      "answer": 1,
+      "explain": "偶然≠必然，把运气当规律注定落空"
+    }
+  ],
+  "textbook": "统编版语文三年级下册",
+  "grade": 3
 }

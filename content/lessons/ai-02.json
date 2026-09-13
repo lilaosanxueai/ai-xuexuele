@@ -5,53 +5,151 @@
   "title": "教 AI 认我的手势",
   "emoji": "🖐",
   "story": "科幻电影里挥挥手就能控制机器——今天你就能做到！先教 AI 认两个手势，再用「当 AI 认出」积木把它们变成遥控器：举手，角色欢呼；比心，角色跳舞。你的手，就是遥控器！",
-  "goals": ["训练 AI 识别自己的手势", "用事件积木做出「手势遥控」效果"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_costume", "island_change_size", "island_move", "island_play", "island_when_recognized", "island_recognize"],
-  "actor": { "costume": "🦊", "x": -40, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "🎮", "x": 130, "y": 50 }],
+  "goals": [
+    "训练 AI 识别自己的手势",
+    "用事件积木做出「手势遥控」效果"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_costume",
+    "island_change_size",
+    "island_move",
+    "island_play",
+    "island_when_recognized",
+    "island_recognize"
+  ],
+  "actor": {
+    "costume": "🦊",
+    "x": -40,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "🎮",
+      "x": 130,
+      "y": 50
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "去「🧠 AI 实验室」：把类别 1 改名为「举手」，举着手掌拍 10 张（换高度、换左右手）",
-      "hintPrompts": ["只拍一种手势，别混进别的动作", "正对镜头、斜一点、远一点……变化越多学得越稳"],
-      "check": { "type": "manual" }
+      "hintPrompts": [
+        "只拍一种手势，别混进别的动作",
+        "正对镜头、斜一点、远一点……变化越多学得越稳"
+      ],
+      "check": {
+        "type": "manual"
+      }
     },
     {
       "id": "t2",
       "text": "类别 2 改名为「比心」，用另一个手势也拍 10 张",
-      "hintPrompts": ["两个手势差别越大，AI 越不容易认混", "拍完先在训练场测试一下准确率"],
-      "check": { "type": "manual" }
+      "hintPrompts": [
+        "两个手势差别越大，AI 越不容易认混",
+        "拍完先在训练场测试一下准确率"
+      ],
+      "check": {
+        "type": "manual"
+      }
     },
     {
       "id": "t3",
       "text": "写程序：「当 AI 认出 举手」→ 角色说「收到！起立！」并播放欢呼音效",
-      "hintPrompts": ["事件积木下面可以放一串动作：说→音效→移动", "先做最简单的：认出就说话，跑通了再加料"],
-      "check": { "type": "block_used", "block": "island_when_recognized" }
+      "hintPrompts": [
+        "事件积木下面可以放一串动作：说→音效→移动",
+        "先做最简单的：认出就说话，跑通了再加料"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_when_recognized"
+      }
     },
     {
       "id": "t4",
       "text": "加第二个手势：「当 AI 认出 比心」→ 角色变身跳舞（换造型或改变大小），最后走到 🎮 遥控器展台",
-      "hintPrompts": ["两个「当 AI 认出」可以并排放，像两个遥控按键", "对着摄像头试试，手势变了角色就变"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "两个「当 AI 认出」可以并排放，像两个遥控按键",
+        "对着摄像头试试，手势变了角色就变"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：做一个「手势抢答器」——认出举手立刻说「我先来！」，比一比谁反应快",
-      "hintPrompts": ["认出后只放一块「说 停 0.5 秒」就会很快", "和爸妈轮流举手，看 AI 帮不帮你们计时"],
-      "check": { "type": "manual" },
+      "hintPrompts": [
+        "认出后只放一块「说 停 0.5 秒」就会很快",
+        "和爸妈轮流举手，看 AI 帮不帮你们计时"
+      ],
+      "check": {
+        "type": "manual"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第三学段（5-6年级）", "module": "过程与控制", "points": ["事件驱动与人机交互", "训练与测试的迭代"] },
-  "subject": { "name": "信息科技·人工智能启蒙", "emoji": "🖐", "points": ["手势识别的原理", "数据多样性让识别更稳", "摄像头画面只在本机处理"] },
+  "curriculum": {
+    "stage": "第三学段（5-6年级）",
+    "module": "过程与控制",
+    "points": [
+      "事件驱动与人机交互",
+      "训练与测试的迭代"
+    ]
+  },
+  "subject": {
+    "name": "信息科技·人工智能启蒙",
+    "emoji": "🖐",
+    "points": [
+      "手势识别的原理",
+      "数据多样性让识别更稳",
+      "摄像头画面只在本机处理"
+    ]
+  },
   "subjectArea": "信息科技",
   "gradeBand": "primary",
   "aiIntro": "🖐 咻——遥控器启动！这一课你的手就是魔法棒。先教会 AI 两个手势，再把它们「焊」到事件积木上。对了，你猜猜：为什么拍照要换角度？",
   "celebrate": "挥手成真！你做出了自己的「体感遥控器」🎮 其实手机的人脸解锁、汽车的手势控制，原理和你这一课一模一样——都是先教 AI 认，再让它替你做事！",
   "exercises": [
-    { "q": "训练手势时，为什么要拍不同角度、不同远近的照片？", "options": ["凑数量好看", "让 AI 见过更多变化，认得更稳", "摄像头要求多拍", "没有原因"], "answer": 1, "explain": "例子越多样，AI 学到的规律越全面，识别越可靠" },
-    { "q": "「当 AI 认出」积木和下面哪个是同一类？", "options": ["移动积木", "等待积木", "当开始被点击", "说几秒"], "answer": 2, "explain": "它们都是事件积木（黄色），都在「某件事发生时」触发" },
-    { "q": "手势遥控时，摄像头画面会传到网上吗？", "options": ["会发给AI伙伴", "会上传云端", "不会，只在本机计算", "会发给爸爸妈妈手机"], "answer": 2, "explain": "AI学学乐的识别全部在本机浏览器里完成，画面不离开电脑" }
+    {
+      "q": "训练手势时，为什么要拍不同角度、不同远近的照片？",
+      "options": [
+        "凑数量好看",
+        "让 AI 见过更多变化，认得更稳",
+        "摄像头要求多拍",
+        "没有原因"
+      ],
+      "answer": 1,
+      "explain": "例子越多样，AI 学到的规律越全面，识别越可靠"
+    },
+    {
+      "q": "「当 AI 认出」积木和下面哪个是同一类？",
+      "options": [
+        "移动积木",
+        "等待积木",
+        "当开始被点击",
+        "说几秒"
+      ],
+      "answer": 2,
+      "explain": "它们都是事件积木（黄色），都在「某件事发生时」触发"
+    },
+    {
+      "q": "手势遥控时，摄像头画面会传到网上吗？",
+      "options": [
+        "会发给AI伙伴",
+        "会上传云端",
+        "不会，只在本机计算",
+        "会发给爸爸妈妈手机"
+      ],
+      "answer": 2,
+      "explain": "AI学学乐的识别全部在本机浏览器里完成，画面不离开电脑"
+    }
   ],
-  "codeLesson": false
+  "codeLesson": false,
+  "textbook": "冀教版信息科技（小学）"
 }

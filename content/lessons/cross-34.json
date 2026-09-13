@@ -114,5 +114,7 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 遗传模拟：Aa x Aa 生 100 个娃\naa = 0\nhas_A = 0\nfor kid in range(100):\n    dad = random(1, 2)      # 1=A, 2=a\n    mom = random(1, 2)\n    if dad == 2:\n        if mom == 2:\n            aa = aa + 1     # 隐性纯合：单眼皮\n        else:\n            has_A = has_A + 1\n    else:\n        has_A = has_A + 1\n\nsay(\"单眼皮 aa 约 \" + aa + \" 个（理论 25）\")\nsay(\"双眼皮 约 \" + has_A + \" 个（理论 75）\")\nsay(\"比例接近 3:1 —— 孟德尔分离定律！\")\n"
+  "starterCode": "# 遗传模拟：Aa x Aa 生 100 个娃\naa = 0\nhas_A = 0\nfor kid in range(100):\n    dad = random(1, 2)      # 1=A, 2=a\n    mom = random(1, 2)\n    if dad == 2:\n        if mom == 2:\n            aa = aa + 1     # 隐性纯合：单眼皮\n        else:\n            has_A = has_A + 1\n    else:\n        has_A = has_A + 1\n\nsay(\"单眼皮 aa 约 \" + aa + \" 个（理论 25）\")\nsay(\"双眼皮 约 \" + has_A + \" 个（理论 75）\")\nsay(\"比例接近 3:1 —— 孟德尔分离定律！\")\n",
+  "textbook": "人教版生物学八年级下册",
+  "grade": 8
 }

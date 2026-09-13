@@ -113,5 +113,7 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 因式分解验证：(x+2)(x+3) = x^2+5x+6 ?\nx = 10\nleft = (x + 2) * (x + 3)\nright = x * x + 5 * x + 6\nsay(\"左边 = \" + left + \"，右边 = \" + right)\n\nif left == right:\n    say(\"分解正确！\")\n"
+  "starterCode": "# 因式分解验证：(x+2)(x+3) = x^2+5x+6 ?\nx = 10\nleft = (x + 2) * (x + 3)\nright = x * x + 5 * x + 6\nsay(\"左边 = \" + left + \"，右边 = \" + right)\n\nif left == right:\n    say(\"分解正确！\")\n",
+  "textbook": "人教版数学八年级上册",
+  "grade": 8
 }

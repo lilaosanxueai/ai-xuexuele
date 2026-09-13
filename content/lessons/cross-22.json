@@ -114,5 +114,7 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 杠杆平衡：F1 x L1 = F2 x L2\nf1 = 2   # 动力（牛顿）\nl1 = 3   # 动力臂（格）\nf2 = 3   # 阻力\nl2 = 2   # 阻力臂\n\nsay(\"左边力矩 = \" + f1 * l1)\nsay(\"右边力矩 = \" + f2 * l2)\nif f1 * l1 == f2 * l2:\n    say(\"力矩相等，杠杆平衡！\")\nelse:\n    say(\"不平衡！要调整力或力臂\")\n"
+  "starterCode": "# 杠杆平衡：F1 x L1 = F2 x L2\nf1 = 2   # 动力（牛顿）\nl1 = 3   # 动力臂（格）\nf2 = 3   # 阻力\nl2 = 2   # 阻力臂\n\nsay(\"左边力矩 = \" + f1 * l1)\nsay(\"右边力矩 = \" + f2 * l2)\nif f1 * l1 == f2 * l2:\n    say(\"力矩相等，杠杆平衡！\")\nelse:\n    say(\"不平衡！要调整力或力臂\")\n",
+  "textbook": "人教版物理八年级下册",
+  "grade": 8
 }

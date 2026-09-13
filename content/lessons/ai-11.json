@@ -5,52 +5,151 @@
   "title": "流程图：把想法画成地图",
   "emoji": "🗺",
   "story": "工程师写程序前先画「流程图」：椭圆是起点终点、矩形是做事、菱形是判断、箭头是行进方向。它是程序的地图，也是和电脑「对暗号」的语言！今天你用造型当符号，把流程图在舞台上「演」出来！",
-  "goals": ["认识流程图的基本符号", "把生活流程翻译成流程图"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_costume", "island_play", "island_repeat", "island_if"],
-  "actor": { "costume": "🗺", "x": -80, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "📐", "x": 130, "y": 40 }],
+  "goals": [
+    "认识流程图的基本符号",
+    "把生活流程翻译成流程图"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_costume",
+    "island_play",
+    "island_repeat",
+    "island_if"
+  ],
+  "actor": {
+    "costume": "🗺",
+    "x": -80,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "📐",
+      "x": 130,
+      "y": 40
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "符号课堂：说「椭圆开始结束、矩形做事情、菱形做判断——箭头指方向！」",
-      "hintPrompts": ["开始/结束=椭圆，处理=矩形，判断=菱形", "先记住三个符号，马上要用"],
-      "check": { "type": "say_text" }
+      "hintPrompts": [
+        "开始/结束=椭圆，处理=矩形，判断=菱形",
+        "先记住三个符号，马上要用"
+      ],
+      "check": {
+        "type": "say_text"
+      }
     },
     {
       "id": "t2",
       "text": "演顺序结构：连续换造型走矩形队列——起床 ⏰→刷牙 🪥→吃早餐 🍞（每步说一句、停一拍）",
-      "hintPrompts": ["顺序=箭头一路向下，矩形排队", "生活中的流程天然就是流程图"],
-      "check": { "type": "block_count_min", "block": "island_costume", "count": 3 }
+      "hintPrompts": [
+        "顺序=箭头一路向下，矩形排队",
+        "生活中的流程天然就是流程图"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_costume",
+        "count": 3
+      }
     },
     {
       "id": "t3",
       "text": "演分支结构：加一个菱形判断——「如果 周一 那么 背书包 否则」…（用「如果」积木演菱形分岔）",
-      "hintPrompts": ["菱形出来两个箭头：是/否各一条路", "程序里的如果积木=流程图的菱形"],
-      "check": { "type": "block_used", "block": "island_if" }
+      "hintPrompts": [
+        "菱形出来两个箭头：是/否各一条路",
+        "程序里的如果积木=流程图的菱形"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_if"
+      }
     },
     {
       "id": "t4",
       "text": "演循环结构：把晨间流程放进「重复 5 次」= 上学日循环！走到 📐 流程图博物馆",
-      "hintPrompts": ["循环=箭头绕回上一步", "三大结构凑齐：顺序+分支+循环=一切程序！"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "循环=箭头绕回上一步",
+        "三大结构凑齐：顺序+分支+循环=一切程序！"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：画自己的流程图——用纸笔画「出门上学」流程图（至少 1 个菱形：带红领巾了吗？），拍照讲给爸妈",
-      "hintPrompts": ["从「开始」椭圆画到「结束」椭圆", "找出你流程里的循环：每天都一样的事！"],
-      "check": { "type": "manual" },
+      "hintPrompts": [
+        "从「开始」椭圆画到「结束」椭圆",
+        "找出你流程里的循环：每天都一样的事！"
+      ],
+      "check": {
+        "type": "manual"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第四学段（7-9年级）", "module": "身边的算法", "points": ["用流程图描述算法", "三种基本控制结构"] },
-  "subject": { "name": "信息科技·算法与程序设计（初中）", "emoji": "🗺", "points": ["流程图的符号与画法", "顺序/分支/循环的图示表达", "算法的自然语言描述"] },
+  "curriculum": {
+    "stage": "第四学段（7-9年级）",
+    "module": "身边的算法",
+    "points": [
+      "用流程图描述算法",
+      "三种基本控制结构"
+    ]
+  },
+  "subject": {
+    "name": "信息科技·算法与程序设计（初中）",
+    "emoji": "🗺",
+    "points": [
+      "流程图的符号与画法",
+      "顺序/分支/循环的图示表达",
+      "算法的自然语言描述"
+    ]
+  },
   "subjectArea": "信息科技",
   "gradeBand": "junior",
   "aiIntro": "🗺 程序员和电脑怎么商量事情？画图！流程图是程序的设计图： oval 开场、矩形干活、菱形判断。今天把这张「地图」在舞台上活生生演一遍！",
   "celebrate": "流程图毕业！📐 你掌握了工程师的「设计语言」——先画图后动手，大项目才不乱。顺序、分支、循环三块积木，可以搭出全世界所有的程序！",
   "exercises": [
-    { "q": "流程图中表示「判断」的符号是？", "options": ["椭圆", "矩形", "菱形", "圆"], "answer": 2, "explain": "菱形=判断（条件），有是/否两个出口" },
-    { "q": "程序的三种基本控制结构是？", "options": ["加减乘", "顺序、分支、循环", "输入输出存储", "与或非"], "answer": 1, "explain": "任何算法都由顺序、选择（分支）、循环三种结构组合而成" },
-    { "q": "「每天重复做早操」对应的结构是？", "options": ["顺序", "分支", "循环", "没有结构"], "answer": 2, "explain": "重复执行=循环结构，箭头绕回起点" }
-  ]
+    {
+      "q": "流程图中表示「判断」的符号是？",
+      "options": [
+        "椭圆",
+        "矩形",
+        "菱形",
+        "圆"
+      ],
+      "answer": 2,
+      "explain": "菱形=判断（条件），有是/否两个出口"
+    },
+    {
+      "q": "程序的三种基本控制结构是？",
+      "options": [
+        "加减乘",
+        "顺序、分支、循环",
+        "输入输出存储",
+        "与或非"
+      ],
+      "answer": 1,
+      "explain": "任何算法都由顺序、选择（分支）、循环三种结构组合而成"
+    },
+    {
+      "q": "「每天重复做早操」对应的结构是？",
+      "options": [
+        "顺序",
+        "分支",
+        "循环",
+        "没有结构"
+      ],
+      "answer": 2,
+      "explain": "重复执行=循环结构，箭头绕回起点"
+    }
+  ],
+  "textbook": "冀教版信息科技（初中）"
 }

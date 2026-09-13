@@ -113,5 +113,6 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "# 两枚硬币：枚举 + 模拟\nsay(\"四种结果：正正 正反 反正 反反\")\nsay(\"两正概率 = 1/4 = 25%\")\n\ncount = 0\nfor i in range(100):\n    a = random(1, 2)\n    b = random(1, 2)\n    if a == 1:\n        if b == 1:\n            count = count + 1\nsay(\"100 次模拟中两正出现 \" + count + \" 次\")\n"
+  "starterCode": "# 两枚硬币：枚举 + 模拟\nsay(\"四种结果：正正 正反 反正 反反\")\nsay(\"两正概率 = 1/4 = 25%\")\n\ncount = 0\nfor i in range(100):\n    a = random(1, 2)\n    b = random(1, 2)\n    if a == 1:\n        if b == 1:\n            count = count + 1\nsay(\"100 次模拟中两正出现 \" + count + \" 次\")\n",
+  "textbook": "人教版数学（初中）"
 }

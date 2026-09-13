@@ -5,52 +5,154 @@
   "title": "月亮代表团：古诗意象发布会",
   "emoji": "🌕",
   "story": "同样一轮月亮，李白看见乡愁，张继听见钟声，苏轼写下团圆——月亮是古诗里的「黄金配角」，诗人的心事都让它代言！这类背负感情的事物叫「意象」。今天你办一场意象发布会，让三个月亮轮流上台，说出各自诗句里的心事。",
-  "goals": ["理解意象：物象承载情感", "积累含「月」的经典诗句"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_costume", "island_change_size", "island_play", "island_repeat"],
-  "actor": { "costume": "🌕", "x": -80, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "📜", "x": 130, "y": 40 }],
+  "goals": [
+    "理解意象：物象承载情感",
+    "积累含「月」的经典诗句"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_costume",
+    "island_change_size",
+    "island_play",
+    "island_repeat"
+  ],
+  "actor": {
+    "costume": "🌕",
+    "x": -80,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "📜",
+      "x": 130,
+      "y": 40
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "开场报幕：说「欢迎来到意象发布会！第一位：思乡之月！」",
-      "hintPrompts": ["发布会要有主持人的气势", "先报意象类型，月亮再登场"],
-      "check": { "type": "say_text" }
+      "hintPrompts": [
+        "发布会要有主持人的气势",
+        "先报意象类型，月亮再登场"
+      ],
+      "check": {
+        "type": "say_text"
+      }
     },
     {
       "id": "t2",
       "text": "思乡月登场：念「举头望明月，低头思故乡」（李白）——月变亮变大，缓慢移动",
-      "hintPrompts": ["「大小改变」让月亮缓缓变亮，像思念渐浓", "念诗句要有停顿：举头望明月（停）低头思故乡"],
-      "check": { "type": "block_used_any", "blocks": ["island_change_size", "island_costume"] }
+      "hintPrompts": [
+        "「大小改变」让月亮缓缓变亮，像思念渐浓",
+        "念诗句要有停顿：举头望明月（停）低头思故乡"
+      ],
+      "check": {
+        "type": "block_used_any",
+        "blocks": [
+          "island_change_size",
+          "island_costume"
+        ]
+      }
     },
     {
       "id": "t3",
       "text": "三位月亮依次登台：思乡月🌕、愁绪月🌙（「月落乌啼霜满天」）、团圆月（「海上生明月」）——每次亮相至少等 2 秒让诗句读完",
-      "hintPrompts": ["张继的月是落月配愁眠；张九龄的月是天涯共此时", "不同的月亮配不同大小/造型——意象不同，气质不同"],
-      "check": { "type": "block_count_min", "block": "island_wait", "count": 4 }
+      "hintPrompts": [
+        "张继的月是落月配愁眠；张九龄的月是天涯共此时",
+        "不同的月亮配不同大小/造型——意象不同，气质不同"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_wait",
+        "count": 4
+      }
     },
     {
       "id": "t4",
       "text": "压轴总结：走到 📜 诗卷前，说「同一个意象，装得下千种心事——这就是诗！」",
-      "hintPrompts": ["意象是诗人和读者的暗号", "想想还有哪些意象：柳=留别、雁=思乡、梅=坚强……"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "意象是诗人和读者的暗号",
+        "想想还有哪些意象：柳=留别、雁=思乡、梅=坚强……"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：第二分会场——柳树意象发布会：「碧玉妆成一树高」「昔我往矣，杨柳依依」，查一查「柳」为什么常和离别一起出现",
-      "hintPrompts": ["柳=留，古人折柳送别", "再找找雁、梅、竹——组一支「意象代言团」"],
-      "check": { "type": "manual" },
+      "hintPrompts": [
+        "柳=留，古人折柳送别",
+        "再找找雁、梅、竹——组一支「意象代言团」"
+      ],
+      "check": {
+        "type": "manual"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第四学段（7-9年级）", "module": "身边的算法", "points": ["序列化展示", "参数表达情感差异"] },
-  "subject": { "name": "语文·古诗词鉴赏（初中）", "emoji": "🌕", "points": ["意象的概念", "月的思乡/愁绪/团圆多重意蕴", "借景抒情的手法"] },
+  "curriculum": {
+    "stage": "第四学段（7-9年级）",
+    "module": "身边的算法",
+    "points": [
+      "序列化展示",
+      "参数表达情感差异"
+    ]
+  },
+  "subject": {
+    "name": "语文·古诗词鉴赏（初中）",
+    "emoji": "🌕",
+    "points": [
+      "意象的概念",
+      "月的思乡/愁绪/团圆多重意蕴",
+      "借景抒情的手法"
+    ]
+  },
   "subjectArea": "语文",
   "gradeBand": "junior",
   "aiIntro": "🌕 有请月亮小姐登台！一千年来她在李白窗外、张继船头、苏轼酒杯里客串了无数次，从不收出场费——因为她承载的是诗人的心事。今晚，三个月亮，三种心情！",
   "celebrate": "意象发布会圆满！📜 你已经摸到诗词鉴赏的核心钥匙：看见意象，就读到情感。下次读到「月」，先问问：这轮月亮，在想什么？",
   "exercises": [
-    { "q": "「举头望明月」中月的意象偏？", "options": ["思乡", "战争", "丰收", "考试"], "answer": 0, "explain": "明月千里寄相思——月是思乡的经典意象" },
-    { "q": "「意象」指的是？", "options": ["诗人的想象力", "承载了主观情感的客观物象", "诗的标题", "修辞手法"], "answer": 1, "explain": "意象=物象+情感：外物被注入心情，成为情感符号" },
-    { "q": "古人送别常折「柳」，因为？", "options": ["柳树好看", "柳谐音「留」，寄托挽留不舍", "柳枝值钱", "柳能治病"], "answer": 1, "explain": "柳=留，折柳赠别是千年习俗，柳成为离别意象" }
-  ]
+    {
+      "q": "「举头望明月」中月的意象偏？",
+      "options": [
+        "思乡",
+        "战争",
+        "丰收",
+        "考试"
+      ],
+      "answer": 0,
+      "explain": "明月千里寄相思——月是思乡的经典意象"
+    },
+    {
+      "q": "「意象」指的是？",
+      "options": [
+        "诗人的想象力",
+        "承载了主观情感的客观物象",
+        "诗的标题",
+        "修辞手法"
+      ],
+      "answer": 1,
+      "explain": "意象=物象+情感：外物被注入心情，成为情感符号"
+    },
+    {
+      "q": "古人送别常折「柳」，因为？",
+      "options": [
+        "柳树好看",
+        "柳谐音「留」，寄托挽留不舍",
+        "柳枝值钱",
+        "柳能治病"
+      ],
+      "answer": 1,
+      "explain": "柳=留，折柳赠别是千年习俗，柳成为离别意象"
+    }
+  ],
+  "textbook": "统编版语文（初中）"
 }

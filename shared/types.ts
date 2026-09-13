@@ -81,6 +81,10 @@ export interface Lesson {
   subjectArea?: string;
   /** 学段：primary 小学 / junior 初中 / senior 高中衔接 */
   gradeBand?: 'primary' | 'junior' | 'senior';
+  /** 对应年级 1-12（河北教材适配：按冀教版/人教版/统编版实际教学序列标注） */
+  grade?: number;
+  /** 教材版本（如"冀教版数学五年级上册""统编版语文七年级上册""人教A版数学必修第一册"） */
+  textbook?: string;
   aiIntro: string;
   celebrate: string;
 }

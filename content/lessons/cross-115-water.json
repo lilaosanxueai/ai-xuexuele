@@ -5,52 +5,153 @@
   "title": "一滴水的旅行：水循环",
   "emoji": "💧",
   "story": "你杯子里的水，可能恐龙喝过！水在地球上旅行了几十亿年：太阳晒→蒸发上天→聚成云→遇冷下雨→汇成河→流回大海→再蒸发……这个圆圈叫水循环，它永不休息，也永不停靠——今天你演一滴水，走完这趟旅行！",
-  "goals": ["掌握水循环的完整路径", "理解蒸发与凝结的互逆关系"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_turn_right", "island_turn_left", "island_costume", "island_change_size", "island_play", "island_repeat"],
-  "actor": { "costume": "💧", "x": -100, "y": -60, "dir": 0 },
-  "targets": [{ "emoji": "🌊", "x": 130, "y": -60 }],
+  "goals": [
+    "掌握水循环的完整路径",
+    "理解蒸发与凝结的互逆关系"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_costume",
+    "island_change_size",
+    "island_play",
+    "island_repeat"
+  ],
+  "actor": {
+    "costume": "💧",
+    "x": -100,
+    "y": -60,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "🌊",
+      "x": 130,
+      "y": -60
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "旅程开始：小水滴在海里说「我是大海的一滴水，太阳晒得我暖洋洋……」",
-      "hintPrompts": ["开场交代身份：大海-起点", "语气陶醉一点，太阳很舒服"],
-      "check": { "type": "say_text" }
+      "hintPrompts": [
+        "开场交代身份：大海-起点",
+        "语气陶醉一点，太阳很舒服"
+      ],
+      "check": {
+        "type": "say_text"
+      }
     },
     {
       "id": "t2",
       "text": "蒸发上天：变身水蒸气（变小+上升），再变身云 ☁️（变大）——「我变轻飞上了天，和高空的朋友们抱成一朵云！」",
-      "hintPrompts": ["蒸发：液态→气态（变小升空）；凝结：气态→液态云滴（变大成云）", "上升用移动+改 y 实现"],
-      "check": { "type": "block_used", "block": "island_costume" }
+      "hintPrompts": [
+        "蒸发：液态→气态（变小升空）；凝结：气态→液态云滴（变大成云）",
+        "上升用移动+改 y 实现"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_costume"
+      }
     },
     {
       "id": "t3",
       "text": "遇冷降雨：变身雨 🌧 落下来——「高空好冷，我抱不住了……下雨啦！」（向下移动+配雨声音效）",
-      "hintPrompts": ["云越积越重→重力拉不住→降雨", "落在山上就汇进小溪，落在城市就流进下水道"],
-      "check": { "type": "block_used", "block": "island_play" }
+      "hintPrompts": [
+        "云越积越重→重力拉不住→降雨",
+        "落在山上就汇进小溪，落在城市就流进下水道"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_play"
+      }
     },
     {
       "id": "t4",
       "text": "百川归海：顺着河流移动回大海 🌊，说「旅行一圈回到家乡——水循环，永不停歇！」",
-      "hintPrompts": ["水滴的完整路线：海→蒸发→云→雨→河→海", "地球上的水就这样循环了几十亿年！"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "水滴的完整路线：海→蒸发→云→雨→河→海",
+        "地球上的水就这样循环了几十亿年！"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：循环上演——把整段旅程放进「重复 2 次」演两圈；再和爸妈讨论：水这么循环不完，为什么还要节水？",
-      "hintPrompts": ["淡水只占地球水约 2.5%，可用的更少！", "循环的是总量，脏了、冻住、混进海水的水暂时用不了"],
-      "check": { "type": "block_used", "block": "island_repeat" },
+      "hintPrompts": [
+        "淡水只占地球水约 2.5%，可用的更少！",
+        "循环的是总量，脏了、冻住、混进海水的水暂时用不了"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_repeat"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第二、三学段（3-6年级）", "module": "过程与控制", "points": ["用循环表达自然周期", "状态转换的过程模拟"] },
-  "subject": { "name": "科学·地球上的水", "emoji": "💧", "points": ["水循环的路径", "蒸发与凝结", "淡水资源的珍贵"] },
+  "curriculum": {
+    "stage": "第二、三学段（3-6年级）",
+    "module": "过程与控制",
+    "points": [
+      "用循环表达自然周期",
+      "状态转换的过程模拟"
+    ]
+  },
+  "subject": {
+    "name": "科学·地球上的水",
+    "emoji": "💧",
+    "points": [
+      "水循环的路径",
+      "蒸发与凝结",
+      "淡水资源的珍贵"
+    ]
+  },
   "subjectArea": "科学",
   "gradeBand": "primary",
   "aiIntro": "💧 登机啦！本次「水滴航班」途经：太阳→天空→云层→暴雨→小河→大海。全程免费，永不降落。你就是本次航班的乘客——一滴跑了几十亿年旅行的水！",
   "celebrate": "旅行圆满！🌊 你走完了地球最古老的圆圈——水循环。下次下雨时仰起头：那可能是刚从太平洋飞过来的水滴，跟你打了个照面！",
   "exercises": [
-    { "q": "水循环的正确路径是？", "options": ["海→蒸发→云→雨→河→海", "海→雨→云→蒸发→河", "云→海→蒸发→雨", "河→云→海→蒸发"], "answer": 0, "explain": "蒸发（海→气）→凝结成云→降水→径流归海，循环往复" },
-    { "q": "水变成水蒸气的过程叫？", "options": ["凝结", "蒸发", "降水", "融化"], "answer": 1, "explain": "液态→气态是蒸发；反过来气态→液态是凝结" },
-    { "q": "地球上的淡水约占总水量？", "options": ["一半", "97%", "约 2.5%（大多还是冰川）", "30%"], "answer": 2, "explain": "97.5% 是海水；淡水中大部分封存在冰川和深层地下，可直接用的极少" }
-  ]
+    {
+      "q": "水循环的正确路径是？",
+      "options": [
+        "海→蒸发→云→雨→河→海",
+        "海→雨→云→蒸发→河",
+        "云→海→蒸发→雨",
+        "河→云→海→蒸发"
+      ],
+      "answer": 0,
+      "explain": "蒸发（海→气）→凝结成云→降水→径流归海，循环往复"
+    },
+    {
+      "q": "水变成水蒸气的过程叫？",
+      "options": [
+        "凝结",
+        "蒸发",
+        "降水",
+        "融化"
+      ],
+      "answer": 1,
+      "explain": "液态→气态是蒸发；反过来气态→液态是凝结"
+    },
+    {
+      "q": "地球上的淡水约占总水量？",
+      "options": [
+        "一半",
+        "97%",
+        "约 2.5%（大多还是冰川）",
+        "30%"
+      ],
+      "answer": 2,
+      "explain": "97.5% 是海水；淡水中大部分封存在冰川和深层地下，可直接用的极少"
+    }
+  ],
+  "textbook": "冀人版科学（小学）"
 }
