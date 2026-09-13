@@ -109,8 +109,8 @@ export default function MapScreen() {
           })}
         </div>
 
-        {/* AI 实验室 + 证书 */}
-        <section className="mt-6 grid gap-4 md:grid-cols-2">
+        {/* AI 实验室 + 口算 + 证书 */}
+        <section className="mt-6 grid gap-4 md:grid-cols-3">
           <button
             onClick={() => nav('/playground')}
             className="rounded-3xl bg-gradient-to-br from-pink-400 to-rose-500 p-6 text-center text-white shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
@@ -118,6 +118,14 @@ export default function MapScreen() {
             <div className="text-5xl">🧠</div>
             <div className="mt-2 text-xl font-black">AI 实验室 · 人工智能通识</div>
             <div className="mt-1 text-xs opacity-90">采集样本 → 训练识别模型 → 测试验证，理解「AI 是从数据学出来的」</div>
+          </button>
+          <button
+            onClick={() => nav('/mentalmath')}
+            className="rounded-3xl bg-gradient-to-br from-sky-400 to-blue-500 p-6 text-center text-white shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
+          >
+            <div className="text-5xl">⚡</div>
+            <div className="mt-2 text-xl font-black">口算训练器</div>
+            <div className="mt-1 text-xs opacity-90">60 秒限时闯关 · 五档年级难度 · 连击加倍 · 错题自动重练</div>
           </button>
           <button
             onClick={() => nav('/certificate')}
