@@ -45,6 +45,13 @@ start.bat
    - **随堂题全覆盖（2026-09-07）**：为上游 63 课缺题课程分三批补齐 189 道随堂题（basics/extra 结业路线 9 课 + cross-01~19 上游旧课 19 课 + math 系列 35 课），**190 课随堂题 100% 覆盖（共 570 道题）**
    - **儿童易用性改进（2026-09-07，WorkshopScreen.tsx）**：撤销/重做按钮加中文文字；空画布时显示「第一步」新手引导条（blockTotal≤1 时出现、拖入积木自动消失，pointer-events-none 不挡操作）；onReady 时同步初始积木数。遗留优化方向（未做）：引导条加指向积木区的箭头动效、顶栏按钮收纳分组
    - **离线替身升级 + 上游崩溃 bug 修复（2026-09-07）**：llm.ts 的 mock 模式从 2 条固定回复升级为「求助/物理/化学/数学/语文/英语/音乐/AI/画笔」9 类关键词本地词典（**只匹配用户消息**——system 提示词含「提示」等词会污染匹配）；修复上游 prompts.ts:51 `Object.entries(ctx.blockCounts)` 对缺失 context 字段直接 500 崩溃（加 `?? {}` 兜底）。已实测三类场景回复正确
+   - **性能：前端分包 + 懒加载（2026-09-07）**：vite manualChunks 拆 Blockly(776KB)/React(232KB)/vendor；App.tsx 懒加载 Workshop/Playground/WrongBook/MentalMath——首屏 1.13MB→~310KB（-73%），Blockly 进课程才下载
+   - **上游三大新功能审计修复（2026-09-07，agent 全量审计 20+ 问题，修复 9 处）**：
+     - 【高】口算错题重练秒退（startRetry 未重置 timeLeft，功能从未可用）→ 已修并实测闭环（重练→答对→消灭）
+     - 【高】AI 代搭 sanitizeOps 白名单是死代码（LLM 幻觉积木类型会抛错中断整批）→ 已接入 + Promise catch + 代码模式自动切回积木
+     - 【高】profileId 路径穿越（`..` 可递归删除任意目录/覆写 config.json）→ store/logging 白名单校验 + 删除角色需家长 PIN（前端弹 PIN）
+     - 【中】store.ts tasks 重复键 done/done（时间戳覆盖布尔）→ doneAt 修正；writeJson 原子写（tmp+rename 防断电半 JSON）；projects title/xml 校验；builder「删掉最后一块」保护帽子积木；口算空局不再显示「全对」；去掉 inputMode=decimal（移动端负数）
+     - 未修（记录）：错题本重复题按内容匹配会错位（需重练项带 id，改动较大）；口算成绩与随堂练习在家长端混算（设计取舍）；nlParser 删除类口述丢弃同句后续指令；代搭空画布改参数产孤儿积木
 2. **理科 × AI 融合扩展（第四轮，9 课）**：
    - 数学·AI 3 课（`cross-77~79`，全代码课）：线性回归（拟合预测）、分类边界（调参分点）、神经元（加权求和实现与门/或门）——机器学习的数学内核
    - 物理·AI 2 课：`cross-80` 数据学重力（数据归纳 vs 公式推导，代码课）、`cross-81` AI 认电路元件（AI 积木课）
