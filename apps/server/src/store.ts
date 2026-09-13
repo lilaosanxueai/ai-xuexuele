@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { DATA_DIR } from './config.ts';
-import type { Profile, ProfileProgress, Project, Settings } from '@shared/types.ts';
+import type { Profile, ProfileProgress, Project, Settings, WrongItem } from '@shared/types.ts';
 import { DEFAULT_SETTINGS } from '@shared/types.ts';
 
 /** 家庭规模用 JSON 文件 + 启动时读入内存、写入即落盘，足够简单可靠 */
@@ -61,13 +61,15 @@ export function mergeProgress(profileId: string, patch: {
   draft?: string;
   code?: string;
   exercise?: { correct: number; total: number };
+  wrongAdds?: WrongItem[];
+  wrongClears?: string[];
 }): ProfileProgress {
   const cur = getProgress(profileId);
   if (patch.lessonId) {
     const lp = cur.lessons[patch.lessonId] ?? { status: 'in_progress' as const, tasks: {} };
     if (patch.tasks) {
       for (const [taskId, done] of Object.entries(patch.tasks)) {
-        lp.tasks[taskId] = { done, doneAt: done ? new Date().toISOString() : undefined };
+        lp.tasks[taskId] = { done, done: done ? new Date().toISOString() : undefined };
       }
     }
     if (patch.completed && lp.status !== 'completed') {
@@ -90,6 +92,34 @@ export function mergeProgress(profileId: string, patch: {
   if (patch.minutesDelta && patch.minutesDelta > 0) {
     const today = new Date().toISOString().slice(0, 10);
     cur.dailyUsage[today] = (cur.dailyUsage[today] ?? 0) + Math.round(patch.minutesDelta);
+  }
+  // 错题本：新错题合并（同 id 错次+1），消灭的错题移除并计数
+  if (Array.isArray(patch.wrongAdds) && patch.wrongAdds.length) {
+    cur.wrongBook = cur.wrongBook ?? [];
+    for (const w of patch.wrongAdds.slice(0, 50)) {
+      if (!w?.id || typeof w.q !== 'string') continue;
+      const exist = cur.wrongBook.find((x) => x.id === w.id);
+      if (exist) {
+        exist.times += 1;
+        exist.lastWrongAt = new Date().toISOString();
+        for (const p of w.wrongPicks ?? []) if (!exist.wrongPicks.includes(p)) exist.wrongPicks.push(p);
+      } else if (cur.wrongBook.length < 200) {
+        cur.wrongBook.push({
+          id: String(w.id).slice(0, 80), lessonId: String(w.lessonId ?? '').slice(0, 40),
+          lessonTitle: String(w.lessonTitle ?? '').slice(0, 60), subjectArea: String(w.subjectArea ?? '').slice(0, 20),
+          q: w.q.slice(0, 300), options: (w.options ?? []).slice(0, 4).map((o) => String(o).slice(0, 100)),
+          answer: Math.max(0, Math.min(3, Math.round(w.answer ?? 0))), explain: String(w.explain ?? '').slice(0, 500),
+          wrongPicks: (w.wrongPicks ?? []).slice(0, 4), times: Math.max(1, Math.round(w.times ?? 1)),
+          lastWrongAt: new Date().toISOString(),
+        });
+      }
+    }
+  }
+  if (Array.isArray(patch.wrongClears) && patch.wrongClears.length && cur.wrongBook?.length) {
+    const cleared = new Set(patch.wrongClears.slice(0, 100).map(String));
+    const before = cur.wrongBook.length;
+    cur.wrongBook = cur.wrongBook.filter((x) => !cleared.has(x.id));
+    cur.wrongCleared = (cur.wrongCleared ?? 0) + (before - cur.wrongBook.length);
   }
   writeJson(progressFile(profileId), cur);
   return cur;

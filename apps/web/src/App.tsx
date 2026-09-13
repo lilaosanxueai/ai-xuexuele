@@ -7,6 +7,7 @@ import ParentScreen from './screens/ParentScreen.tsx';
 import CertificateScreen from './screens/CertificateScreen.tsx';
 import PlaygroundScreen from './screens/PlaygroundScreen.tsx';
 import SubjectScreen from './screens/SubjectScreen.tsx';
+import WrongBookScreen from './screens/WrongBookScreen.tsx';
 
 function LessonRoute() {
   const { id } = useParams();
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/gallery" element={<GalleryScreen />} />
         <Route path="/parent" element={<ParentScreen />} />
         <Route path="/certificate" element={<CertificateScreen />} />
+        <Route path="/wrongbook" element={<WrongBookScreen />} />
         <Route path="/playground" element={<PlaygroundScreen />} />
         <Route path="/subject/:area" element={<SubjectScreen />} />
         <Route path="*" element={<Navigate to="/" replace />} />

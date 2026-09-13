@@ -42,9 +42,17 @@ export default function MapScreen() {
       <main className="mx-auto w-full max-w-5xl flex-1 px-6 pb-10">
         {/* 学习概览 + 智能推荐 */}
         <div className="mb-6 rounded-3xl bg-white/80 p-5 shadow-md">
-          <div className="mb-3 flex items-center gap-3 text-sm text-slate-500">
+          <div className="mb-3 flex flex-wrap items-center gap-3 text-sm text-slate-500">
             <span className="rounded-full bg-white px-3 py-1 shadow-sm">今日学习 {todayMin} 分钟</span>
             <span className="rounded-full bg-white px-3 py-1 shadow-sm">已学 {doneCount}/{lessons.length} 课</span>
+            {(progress?.wrongBook?.length ?? 0) > 0 && (
+              <button
+                onClick={() => nav('/wrongbook')}
+                className="rounded-full bg-rose-100 px-3 py-1 font-bold text-rose-600 shadow-sm transition hover:bg-rose-200"
+              >
+                📖 错题本 · {progress!.wrongBook!.length} 道等你消灭
+              </button>
+            )}
             <span className="ml-auto text-xs text-slate-400">覆盖 3-9 年级 + 高中衔接 · 对标课程标准</span>
           </div>
           {rec && (

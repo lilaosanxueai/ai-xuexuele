@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import type { Exercise } from '@shared/types.ts';
+
+/** 一道错题的原始信息：题目下标 + 孩子当时选的选项 */
+export interface WrongPick { idx: number; pick: number }
 
 interface Props {
   title: string;
   exercises: Exercise[];
-  onDone: (correct: number) => void;
+  /** 结束回调：答对数 + 错题明细（下标与错误选项） */
+  onDone: (correct: number, wrongs: WrongPick[]) => void;
   onClose: () => void;
 }
 
@@ -14,6 +18,7 @@ export default function ExercisePanel({ title, exercises, onDone, onClose }: Pro
   const [picked, setPicked] = useState<number | null>(null);
   const [correct, setCorrect] = useState(0);
   const [finished, setFinished] = useState(false);
+  const wrongsRef = useRef<WrongPick[]>([]);
 
   const ex = exercises[idx];
 
@@ -21,12 +26,13 @@ export default function ExercisePanel({ title, exercises, onDone, onClose }: Pro
     if (picked !== null) return;
     setPicked(i);
     if (i === ex.answer) setCorrect((c) => c + 1);
+    else wrongsRef.current.push({ idx, pick: i });
   };
 
   const next = () => {
     if (idx + 1 >= exercises.length) {
       setFinished(true);
-      onDone(correct + (picked === ex.answer ? 0 : 0)); // correct 已在 pick 中累计
+      onDone(correct, wrongsRef.current); // correct 已在 pick 中累计
       return;
     }
     setIdx(idx + 1);

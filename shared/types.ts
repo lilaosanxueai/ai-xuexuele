@@ -107,6 +107,27 @@ export interface ProfileProgress {
   lessonCodes: Record<string, string>;
   /** 随堂练习成绩：lessonId -> {correct, total} */
   exercises?: Record<string, { correct: number; total: number }>;
+  /** 错题本（练习答错的题自动收进来，重练全对后消灭） */
+  wrongBook?: WrongItem[];
+  /** 已消灭的错题总数（成长记录） */
+  wrongCleared?: number;
+}
+
+/** 错题本条目：题目快照 + 错误历史 */
+export interface WrongItem {
+  /** lessonId#题目序号 */
+  id: string;
+  lessonId: string;
+  lessonTitle: string;
+  subjectArea: string;
+  q: string;
+  options: string[];
+  answer: number;
+  explain: string;
+  /** 历史错选过的选项下标（看孩子容易被哪些干扰项迷惑） */
+  wrongPicks: number[];
+  times: number;
+  lastWrongAt: string;
 }
 
 export interface Project {

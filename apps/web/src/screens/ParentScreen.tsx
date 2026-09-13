@@ -176,6 +176,16 @@ function ReportTab({ profileId }: { profileId: string }) {
   const exTotal = exEntries.reduce((a, [, e]) => a + e.total, 0);
   const exCorrect = exEntries.reduce((a, [, e]) => a + e.correct, 0);
 
+  // 错题本
+  const wrongItems = progress?.wrongBook ?? [];
+  const wrongCleared = progress?.wrongCleared ?? 0;
+  const wrongBySubject = Object.entries(
+    wrongItems.reduce<Record<string, typeof wrongItems>>((acc, w) => {
+      (acc[w.subjectArea] ??= []).push(w);
+      return acc;
+    }, {}),
+  ).sort((a, b) => b[1].length - a[1].length);
+
   // 学科维度聚合
   const bySubject: Record<string, Lesson[]> = {};
   for (const l of lessons) {
@@ -197,7 +207,27 @@ function ReportTab({ profileId }: { profileId: string }) {
         <StatCard label="课程通关" value={`${doneCount}/${lessons.length}`} emoji="🏁" />
         <StatCard label="创作作品" value={`${projects.length} 个`} emoji="🖼" />
         <StatCard label="随堂练习" value={exTotal ? `${Math.round((exCorrect / exTotal) * 100)}%` : '—'} emoji="📝" />
+        <StatCard label="错题消灭" value={wrongItems.length + wrongCleared > 0 ? `${wrongCleared}/${wrongItems.length + wrongCleared}` : '—'} emoji="📖" />
       </div>
+
+      {/* 错题本：薄弱知识点一目了然 */}
+      {wrongItems.length > 0 && (
+        <div className="mb-4 rounded-2xl bg-white/80 p-5">
+          <h3 className="mb-3 font-black">📖 待消灭的错题（按学科）</h3>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {wrongBySubject.map(([area, items]) => (
+              <div key={area} className="flex items-center gap-2 text-sm">
+                <span className="w-16 shrink-0 font-bold text-slate-600">{area}</span>
+                <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-100">
+                  <div className="h-full rounded-full bg-rose-400" style={{ width: `${Math.min(100, items.reduce((a, w) => a + w.times, 0) * 20)}%` }} />
+                </div>
+                <span className="w-14 text-right text-xs text-slate-400">{items.length} 道</span>
+              </div>
+            ))}
+          </div>
+          <p className="mt-2 text-xs text-slate-400">错题会在孩子的错题本里等待重练，重练全对自动消灭（累计已消灭 {wrongCleared} 道）</p>
+        </div>
+      )}
 
       <div className="mb-4 rounded-2xl bg-white/80 p-5">
         <h3 className="mb-3 font-black">📚 各学科进度</h3>

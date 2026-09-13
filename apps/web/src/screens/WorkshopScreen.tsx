@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Blockly from 'blockly';
-import type { BlockCatalogEntry, BuddyMode, BuildOp, ChatContext, Lesson, Settings } from '@shared/types.ts';
+import type { BlockCatalogEntry, BuddyMode, BuildOp, ChatContext, Lesson, Settings, WrongItem } from '@shared/types.ts';
 import { DEFAULT_SETTINGS } from '@shared/types.ts';
 import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
@@ -926,10 +926,22 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
           title={lesson.title}
           exercises={lesson.exercises}
           onClose={() => setQuizOpen(false)}
-          onDone={(correct) => {
+          onDone={(correct, wrongs) => {
+            const wrongAdds: WrongItem[] = wrongs.map(({ idx, pick }) => {
+              const ex = lesson.exercises![idx];
+              return {
+                id: `${lesson.id}#${idx}`,
+                lessonId: lesson.id,
+                lessonTitle: lesson.title,
+                subjectArea: lesson.subjectArea ?? '数学',
+                q: ex.q, options: ex.options, answer: ex.answer, explain: ex.explain,
+                wrongPicks: [pick], times: 1, lastWrongAt: new Date().toISOString(),
+              };
+            });
             void api.updateProgress(profile.id, {
               lessonId: lesson.id,
               exercise: { correct, total: lesson.exercises!.length },
+              wrongAdds,
             }).catch(() => {});
           }}
         />
