@@ -14,6 +14,7 @@ export interface ChatLogEntry {
 }
 
 function logDir(profileId: string): string {
+  if (!/^[A-Za-z0-9_-]{1,80}$/.test(profileId)) throw new Error('非法 profileId');
   return path.join(DATA_DIR, 'chatlogs', profileId);
 }
 

@@ -15,8 +15,16 @@ function readJson<T>(file: string, fallback: T): T {
   }
 }
 
+/** 原子写：先写临时文件再改名，断电/崩溃不会留下半个 JSON（半个 JSON 会被 readJson 当成空数据固化） */
 function writeJson(file: string, value: unknown): void {
-  fs.writeFileSync(file, JSON.stringify(value, null, 2), 'utf-8');
+  const tmp = `${file}.tmp`;
+  fs.writeFileSync(tmp, JSON.stringify(value, null, 2), 'utf-8');
+  fs.renameSync(tmp, file);
+}
+
+/** profileId 是文件名的一部分：只允许安全字符，杜绝路径穿越（.. / 绝对路径 / 斜杠） */
+function validId(id: string): boolean {
+  return typeof id === 'string' && /^[A-Za-z0-9_-]{1,80}$/.test(id);
 }
 
 // ---------- 角色档案 ----------
@@ -36,6 +44,7 @@ export function createProfile(name: string, avatar: string): Profile {
 }
 
 export function deleteProfile(id: string): void {
+  if (!validId(id)) throw new Error('非法 profileId');
   writeJson(profilesFile, listProfiles().filter((p) => p.id !== id));
   for (const f of [progressFile(id), path.join(DATA_DIR, 'projects', `${id}.json`)]) {
     try { fs.rmSync(f); } catch { /* 不存在就算了 */ }
@@ -46,6 +55,7 @@ export function deleteProfile(id: string): void {
 // ---------- 学习进度 ----------
 
 function progressFile(profileId: string): string {
+  if (!validId(profileId)) throw new Error('非法 profileId');
   return path.join(DATA_DIR, 'progress', `${profileId}.json`);
 }
 
@@ -69,7 +79,7 @@ export function mergeProgress(profileId: string, patch: {
     const lp = cur.lessons[patch.lessonId] ?? { status: 'in_progress' as const, tasks: {} };
     if (patch.tasks) {
       for (const [taskId, done] of Object.entries(patch.tasks)) {
-        lp.tasks[taskId] = { done, done: done ? new Date().toISOString() : undefined };
+        lp.tasks[taskId] = { done, doneAt: done ? new Date().toISOString() : undefined };
       }
     }
     if (patch.completed && lp.status !== 'completed') {
@@ -128,6 +138,7 @@ export function mergeProgress(profileId: string, patch: {
 // ---------- 作品 ----------
 
 function projectsFile(profileId: string): string {
+  if (!validId(profileId)) throw new Error('非法 profileId');
   return path.join(DATA_DIR, 'projects', `${profileId}.json`);
 }
 

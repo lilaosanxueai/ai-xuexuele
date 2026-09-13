@@ -33,6 +33,7 @@ export function buildRouter(cfg: AppConfig): Router {
     res.status(201).json(store.createProfile(name, typeof avatar === 'string' ? avatar : '🧒'));
   });
   r.delete('/profiles/:id', (req, res) => {
+    if (!requirePin(req, res)) return;   // 删除角色连带清空学习数据，必须家长 PIN
     store.deleteProfile(req.params.id);
     res.json({ ok: true });
   });
@@ -70,8 +71,10 @@ export function buildRouter(cfg: AppConfig): Router {
   r.post('/projects', (req, res) => {
     const { profileId, title, xml, thumb, lessonId, stage, code, projectId } = req.body ?? {};
     if (!profileId || !xml) return res.status(400).json({ error: '缺少 profileId 或 xml' });
-    if ((thumb ?? '').length > 300_000) return res.status(413).json({ error: '截图太大' });
-    res.status(201).json(store.saveProject({ profileId, title, xml, thumb: thumb ?? '', lessonId, stage, code, projectId }));
+    if (typeof xml !== 'string' || xml.length > 300_000) return res.status(413).json({ error: 'xml 太大或格式不对' });
+    if (title != null && typeof title !== 'string') return res.status(400).json({ error: 'title 需要是文字' });
+    if (thumb != null && (typeof thumb !== 'string' || thumb.length > 300_000)) return res.status(413).json({ error: '截图太大' });
+    res.status(201).json(store.saveProject({ profileId, title: typeof title === 'string' ? title : '我的作品', xml, thumb: thumb ?? '', lessonId, stage, code, projectId }));
   });
   r.delete('/projects/:id', (req, res) => {
     const profileId = String(req.query.profileId ?? '');
