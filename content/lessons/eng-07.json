@@ -1,0 +1,137 @@
+{
+  "id": "eng-07",
+  "island": "cross",
+  "order": 107,
+  "title": "问答小剧场",
+  "emoji": "💬",
+  "story": "What's your name? — I'm Neo! 一问一答才叫对话！你的角色一人分饰两角：问完等 1 秒，换个造型再答——英语对话的节奏感就练出来了。",
+  "goals": [
+    "掌握基本问答句型",
+    "用等待模拟对话节奏"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color"
+  ],
+  "actor": {
+    "costume": "🐱",
+    "x": 0,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "提问方登场：说「What's your name?」",
+      "hintPrompts": [
+        "问句用 What's your name"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "停顿换角：等 1 秒，换一个造型",
+      "hintPrompts": [
+        "等待让对话有呼吸感"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_wait",
+        "count": 1
+      }
+    },
+    {
+      "id": "t3",
+      "text": "回答方上线：说「My name is Kitty! Nice to meet you!」",
+      "hintPrompts": [
+        "Nice to meet you 是回应问好的"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_say",
+        "count": 2
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：再演一轮「How old are you? — I am ten!」",
+      "hintPrompts": [
+        "换造型等于换演员"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二学段（3-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "顺序与事件"
+    ]
+  },
+  "subject": {
+    "name": "英语·口语表达",
+    "emoji": "💬",
+    "points": [
+      "问答句型",
+      "Nice to meet you"
+    ]
+  },
+  "aiIntro": "💬 一问一答，英语就活了！今天你的角色学会分身术——问的人是你，答的人也是你。",
+  "celebrate": "对话小剧场杀青！你已经掌握了英语对话的骨架：问句 + 停顿 + 回答。下次遇到外国朋友别紧张，就是这个节奏。",
+  "subjectArea": "英语",
+  "gradeBand": "junior",
+  "exercises": [
+    {
+      "q": "问对方名字应该说：",
+      "options": [
+        "What's your name?",
+        "How are you?",
+        "How old are you?",
+        "What's this?"
+      ],
+      "answer": 0,
+      "explain": "What's your name? 是问姓名的标准问句。"
+    },
+    {
+      "q": "别人说「Nice to meet you!」你应该回：",
+      "options": [
+        "Thank you!",
+        "Nice to meet you, too!",
+        "Goodbye!",
+        "I'm fine."
+      ],
+      "answer": 1,
+      "explain": "too 表示「也」——很高兴见到你，我也是！"
+    },
+    {
+      "q": "「How old are you?」是在问？",
+      "options": [
+        "名字",
+        "年龄",
+        "爱好",
+        "时间"
+      ],
+      "answer": 1,
+      "explain": "how old 固定搭配，问多大年纪。"
+    }
+  ]
+}

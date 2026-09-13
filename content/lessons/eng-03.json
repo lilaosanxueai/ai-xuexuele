@@ -1,0 +1,137 @@
+{
+  "id": "eng-03",
+  "island": "cross",
+  "order": 104,
+  "title": "字母操教练",
+  "emoji": "🅰️",
+  "story": "A 是站直，B 是弯腰……今天你的角色是字母操教练！按顺序报字母，每报一个做一个动作——26 个字母跳完，顺序就刻进身体记忆里了。",
+  "goals": [
+    "掌握 26 个字母顺序",
+    "把字母和动作配对记忆"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color"
+  ],
+  "actor": {
+    "costume": "🏀",
+    "x": 0,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "开场：说「ABC time! Let's go!」",
+      "hintPrompts": [
+        "英文直接打在「说」积木里"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "字母三连：连说 A、B、C，每个字母配一个音效",
+      "hintPrompts": [
+        "说一个字母播一个音效"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_say",
+        "count": 4
+      }
+    },
+    {
+      "id": "t3",
+      "text": "动作配对：说「A!」→ 跳一下（移动 50），说「B!」→ 转一圈（右转 360）",
+      "hintPrompts": [
+        "说完就动，动作跟字母"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_move",
+        "count": 1
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：用重复积木让「C! D! E!」三个字母快速连报",
+      "hintPrompts": [
+        "重复 3 次里放说+等待"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第一学段（1-2年级）",
+    "module": "身边的算法",
+    "points": [
+      "顺序结构"
+    ]
+  },
+  "subject": {
+    "name": "英语·字母",
+    "emoji": "🅰️",
+    "points": [
+      "字母表顺序",
+      "字母大小写"
+    ]
+  },
+  "aiIntro": "🅰️ 26 个字母是英语的地基！今天你的角色带你做字母操——身体记住了，顺序就不会忘。",
+  "celebrate": "字母操毕业！A 到 Z 的顺序已经长在你身上了。下次背单词拼不出来时，跳一遍字母操找感觉！",
+  "subjectArea": "英语",
+  "gradeBand": "primary",
+  "exercises": [
+    {
+      "q": "字母表一共有多少个字母？",
+      "options": [
+        "23 个",
+        "26 个",
+        "28 个",
+        "30 个"
+      ],
+      "answer": 1,
+      "explain": "26 个字母从 A 到 Z，是英语世界的基石。"
+    },
+    {
+      "q": "字母表中 A 的下一个是？",
+      "options": [
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "answer": 0,
+      "explain": "A B C D E F G……字母歌就是这么唱的！"
+    },
+    {
+      "q": "下面哪个是小写字母？",
+      "options": [
+        "A",
+        "B",
+        "c",
+        "D"
+      ],
+      "answer": 2,
+      "explain": "大写 A B D，小写 c——每个字母都有大小写两副面孔。"
+    }
+  ]
+}

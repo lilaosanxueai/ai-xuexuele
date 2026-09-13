@@ -1,0 +1,144 @@
+{
+  "id": "geo-04",
+  "island": "cross",
+  "order": 110,
+  "title": "海拔攀登队",
+  "emoji": "⛰️",
+  "story": "海平面是 0 米，珠峰是 8848 米——海拔就是离海平面的高度！用代码控制登山队沿 Y 轴爬升，每升一档报一次海拔：山脚、山腰、山顶……数学坐标直接变等高线！",
+  "goals": [
+    "理解海拔与等高线概念",
+    "用 Y 坐标模拟海拔爬升"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color"
+  ],
+  "actor": {
+    "costume": "🧗",
+    "x": -100,
+    "y": -100
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "大本营报到：运行程序，登山队从海拔 -100（山脚）出发",
+      "hintPrompts": [
+        "y=-100 是起点"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "爬到山腰：程序在中途报「海拔升高！山腰到了」",
+      "hintPrompts": [
+        "y 逐步变大"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t3",
+      "text": "登顶：到达山顶旗子处，报「8848 米！登顶成功!」",
+      "hintPrompts": [
+        "旗子就是山顶"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：让登山速度慢下来（等待变长），体会「越高越难爬」",
+      "hintPrompts": [
+        "真实登山也是越往上越慢"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第三学段（7-9年级）",
+    "module": "过程与控制",
+    "points": [
+      "循环与坐标"
+    ]
+  },
+  "subject": {
+    "name": "地理·地形与海拔",
+    "emoji": "⛰️",
+    "points": [
+      "海拔概念",
+      "等高线原理",
+      "地形分层"
+    ]
+  },
+  "aiIntro": "⛰️ 等高线图看得头晕？那是你没爬过！今天用 Y 坐标当海拔，亲手从山脚爬到山顶——等高线就是一圈圈的海拔刻度。",
+  "celebrate": "登顶成功！你用代码理解了海拔：数字越高，离海平面越远。下次看地形图，想象自己在爬它！",
+  "subjectArea": "地理",
+  "gradeBand": "junior",
+  "targets": [
+    {
+      "emoji": "🚩",
+      "x": -100,
+      "y": 110
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 海拔攀登队：Y 坐标就是海拔\nsay(\"大本营！海拔 -100 米\")\nfor i in range(8):\n    go_to(-100, -100 + i * 30)\n    wait(0.2)\n    if i == 4:\n        say(\"山腰！呼吸有点急了\")\nsay(\"8848 米！登顶成功!\")\n",
+  "exercises": [
+    {
+      "q": "海拔是指距离哪个面的高度？",
+      "options": [
+        "地面",
+        "海平面",
+        "山顶",
+        "赤道"
+      ],
+      "answer": 1,
+      "explain": "海拔 = 某点相对于海平面的垂直高度。"
+    },
+    {
+      "q": "珠穆朗玛峰的海拔约是？",
+      "options": [
+        "884 米",
+        "4880 米",
+        "8848 米",
+        "18848 米"
+      ],
+      "answer": 2,
+      "explain": "8848.86 米（2020 年测定）——世界第三极！"
+    },
+    {
+      "q": "等高线越密集说明地形？",
+      "options": [
+        "越平坦",
+        "坡越陡",
+        "海拔越低",
+        "离海越近"
+      ],
+      "answer": 1,
+      "explain": "等高线挤在一起 = 高度快速变化 = 陡坡！"
+    }
+  ]
+}

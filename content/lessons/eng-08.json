@@ -1,0 +1,137 @@
+{
+  "id": "eng-08",
+  "island": "cross",
+  "order": 108,
+  "title": "星期播报员",
+  "emoji": "📅",
+  "story": "Monday, Tuesday, Wednesday... 七天一个循环，用程序来表达最合适！让角色当电视台播报员，用循环把一周 7 天按顺序播出来——比死记硬带劲多了。",
+  "goals": [
+    "掌握 Monday~Sunday 七个单词",
+    "用循环表达周期"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color"
+  ],
+  "actor": {
+    "costume": "📺",
+    "x": 0,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "开播：说「This week on AI Island!」",
+      "hintPrompts": [
+        "先说开播词"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "播前三天：连说 Monday、Tuesday、Wednesday，每天配一个音效",
+      "hintPrompts": [
+        "一天一音效像新闻联播"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_say",
+        "count": 4
+      }
+    },
+    {
+      "id": "t3",
+      "text": "周末高潮：说「Saturday! Sunday! Weekend is here!」再欢呼",
+      "hintPrompts": [
+        "周末要播得最兴奋"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_say",
+        "count": 6
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：用重复 7 次的积木结构表达「一周有 7 天」的概念",
+      "hintPrompts": [
+        "循环结构对应周期"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二学段（3-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "循环结构"
+    ]
+  },
+  "subject": {
+    "name": "英语·日常用语",
+    "emoji": "📅",
+    "points": [
+      "星期表达",
+      "What day is it today?"
+    ]
+  },
+  "aiIntro": "📅 一周七天是个天然的循环！用程序员的脑子学英语：Monday 到 Sunday 就是循环体跑 7 遍。",
+  "celebrate": "一周播报完美收官！Monday 到 Sunday 再也不是乱码——它们是有顺序、有周末、有盼头的一串日子。",
+  "subjectArea": "英语",
+  "gradeBand": "junior",
+  "exercises": [
+    {
+      "q": "一周有几天？",
+      "options": [
+        "5 天",
+        "6 天",
+        "7 天",
+        "8 天"
+      ],
+      "answer": 2,
+      "explain": "Monday 到 Sunday 共 7 天——正好是一个循环！"
+    },
+    {
+      "q": "「星期六」的英文是？",
+      "options": [
+        "Sunday",
+        "Saturday",
+        "Monday",
+        "Friday"
+      ],
+      "answer": 1,
+      "explain": "Saturday 周六，Sunday 周日——周末两兄弟。"
+    },
+    {
+      "q": "一周的第一天（国际惯例）是？",
+      "options": [
+        "Monday",
+        "Sunday",
+        "Saturday",
+        "Tuesday"
+      ],
+      "answer": 1,
+      "explain": "国际惯例 Sunday 是一周第一天，中国习惯把 Monday 当第一天。"
+    }
+  ]
+}

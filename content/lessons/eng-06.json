@@ -1,0 +1,137 @@
+{
+  "id": "eng-06",
+  "island": "cross",
+  "order": 106,
+  "title": "自我介绍机器人",
+  "emoji": "🤖",
+  "story": "Hello! My name is... 你的英语第一句话从这里开始！让机器人替你做一段三句式自我介绍：名字、年龄、爱好——学会这个句型，走到哪儿都能交朋友。",
+  "goals": [
+    "掌握自我介绍三句句型",
+    "熟练组合说积木"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color"
+  ],
+  "actor": {
+    "costume": "🤖",
+    "x": 0,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "打招呼：说「Hello! My name is...」（换成你的英文名）",
+      "hintPrompts": [
+        "name 前加 My"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "报年龄：等 1 秒，说「I am nine years old.」（年龄换成你的）",
+      "hintPrompts": [
+        "I am + 数字 + years old"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_say",
+        "count": 2
+      }
+    },
+    {
+      "id": "t3",
+      "text": "说爱好：说「I like playing football!」（换成你喜欢的）",
+      "hintPrompts": [
+        "I like + doing"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_say",
+        "count": 3
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：介绍完转一圈鞠躬（右转 360），说「Thank you!」",
+      "hintPrompts": [
+        "谢幕也要有仪式感"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二学段（3-6年级）",
+    "module": "身边的算法",
+    "points": [
+      "顺序结构"
+    ]
+  },
+  "subject": {
+    "name": "英语·口语表达",
+    "emoji": "🤖",
+    "points": [
+      "自我介绍句型",
+      "I like... 表达"
+    ]
+  },
+  "aiIntro": "🤖 交朋友的第一步是介绍自己！三句话句型今天打包给你——名字、年龄、爱好，学会就是社交达人。",
+  "celebrate": "自我介绍毕业！这套句型在任何英语角都能用。明天试着真的用英语介绍一次自己？",
+  "subjectArea": "英语",
+  "gradeBand": "junior",
+  "exercises": [
+    {
+      "q": "自我介绍名字应该说：",
+      "options": [
+        "I am nine.",
+        "My name is Lily.",
+        "I like fish.",
+        "How are you?"
+      ],
+      "answer": 1,
+      "explain": "My name is + 名字，这是报姓名的标准句型。"
+    },
+    {
+      "q": "「I am ten years old.」说的是？",
+      "options": [
+        "名字",
+        "年龄",
+        "爱好",
+        "家庭"
+      ],
+      "answer": 1,
+      "explain": "years old 表示岁数——我十岁了。"
+    },
+    {
+      "q": "表达爱好应该用哪个句型？",
+      "options": [
+        "I am...",
+        "I have...",
+        "I like...",
+        "I can..."
+      ],
+      "answer": 2,
+      "explain": "I like + 事物/doing，表达喜欢什么。"
+    }
+  ]
+}

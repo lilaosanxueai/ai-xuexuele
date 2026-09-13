@@ -1,0 +1,144 @@
+{
+  "id": "mus-02",
+  "island": "cross",
+  "order": 112,
+  "title": "音阶爬楼梯",
+  "emoji": "🎵",
+  "story": "do re mi fa sol la xi do——音阶像楼梯，一级比一级高！你的角色一边放音阶一边往上走：耳朵听音高，眼睛看高度，音乐理论变成看得见的台阶。",
+  "goals": [
+    "认识八度音阶顺序",
+    "把音高和高度建立联觉"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color"
+  ],
+  "actor": {
+    "costume": "🎹",
+    "x": -150,
+    "y": -80
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "起音：播放 do，说「do——出发!」",
+      "hintPrompts": [
+        "音阶第一个音是 do"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "爬四级：播放 re、mi、fa、sol，每播一个向上移动 40 步",
+      "hintPrompts": [
+        "音高一级，人上一层"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_move",
+        "count": 2
+      }
+    },
+    {
+      "id": "t3",
+      "text": "到高音 do：爬完 la、xi，最后播 do（高）并到顶说「High do! 一个八度!」",
+      "hintPrompts": [
+        "从 do 到高音 do 共 8 个音"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_play",
+        "count": 8
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：再倒着爬下来（do xi la sol...），体会音阶对称",
+      "hintPrompts": [
+        "倒过来也是音阶"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二学段（3-6年级）",
+    "module": "过程与控制",
+    "points": [
+      "顺序结构"
+    ]
+  },
+  "subject": {
+    "name": "音乐·音阶与音高",
+    "emoji": "🎵",
+    "points": [
+      "自然大调音阶",
+      "八度概念"
+    ]
+  },
+  "aiIntro": "🎵 声音有高低，楼梯有层级——今天把它们连起来！每上一层楼就是一个音，爬到顶你就唱完一个八度。",
+  "celebrate": "一个八度爬完！do re mi fa sol la xi do 再也不是一串咒语——它们是你脚下的八级台阶。",
+  "subjectArea": "音乐",
+  "gradeBand": "primary",
+  "targets": [
+    {
+      "emoji": "🎯",
+      "x": -150,
+      "y": 120
+    }
+  ],
+  "exercises": [
+    {
+      "q": "自然大调音阶的顺序是？",
+      "options": [
+        "do mi re fa...",
+        "do re mi fa sol la xi do",
+        "do do re re mi",
+        "la xi do re..."
+      ],
+      "answer": 1,
+      "explain": "do re mi fa sol la xi do（高）——音乐课必唱！"
+    },
+    {
+      "q": "从 do 到高音 do 叫做？",
+      "options": [
+        "半个八度",
+        "一个八度",
+        "两个八度",
+        "四分之一"
+      ],
+      "answer": 1,
+      "explain": "8 个音组成一个八度（octave）。"
+    },
+    {
+      "q": "音阶中「fa」后面是哪个音？",
+      "options": [
+        "mi",
+        "re",
+        "sol",
+        "la"
+      ],
+      "answer": 2,
+      "explain": "do re mi fa sol——fa 的下一个是 sol。"
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "id": "eng-04",
+  "island": "cross",
+  "order": 105,
+  "title": "数字报数员",
+  "emoji": "🔢",
+  "story": "one, two, three, go! 你的角色今天当报数员：从 one 报到 ten，边报边往前走一步——数字和英语同时装进脑袋。",
+  "goals": [
+    "掌握 one~ten 英文数字",
+    "练习重复结构报数"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color"
+  ],
+  "actor": {
+    "costume": "🦊",
+    "x": -150,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "报数开始：说「Let's count!」",
+      "hintPrompts": [
+        "开场白先说"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "连报 one、two、three，每报一个移动 40 步",
+      "hintPrompts": [
+        "说+移动交替"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_say",
+        "count": 4
+      }
+    },
+    {
+      "id": "t3",
+      "text": "重复的力量：用重复 3 次积木把「four five six」节奏报出来",
+      "hintPrompts": [
+        "重复里放说+等待"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_repeat",
+        "count": 1
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：一直报到 ten，报完说「Ten! We did it!」",
+      "hintPrompts": [
+        "耐心排完 10 个数"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第一学段（1-2年级）",
+    "module": "身边的算法",
+    "points": [
+      "循环结构"
+    ]
+  },
+  "subject": {
+    "name": "英语·数字",
+    "emoji": "🔢",
+    "points": [
+      "one~ten",
+      "数字问答 How many"
+    ]
+  },
+  "aiIntro": "🔢 数数是每种语言的第一课！one two three 走起来，走到 ten 你就赢。",
+  "celebrate": "从 one 数到 ten！下次数楼梯、数糖果，试着用英语数——生活里全是练习场。",
+  "subjectArea": "英语",
+  "gradeBand": "primary",
+  "exercises": [
+    {
+      "q": "数字 3 的英文是？",
+      "options": [
+        "two",
+        "three",
+        "tree",
+        "ten"
+      ],
+      "answer": 1,
+      "explain": "three 是 3；tree 是树，发音相近别混淆！"
+    },
+    {
+      "q": "「one, two, ___」横线处是？",
+      "options": [
+        "four",
+        "five",
+        "three",
+        "six"
+      ],
+      "answer": 2,
+      "explain": "one two three——数数顺序不能乱。"
+    },
+    {
+      "q": "英语问「多少」用哪个词？",
+      "options": [
+        "How many",
+        "How old",
+        "What",
+        "Where"
+      ],
+      "answer": 0,
+      "explain": "How many 问数量，How old 问年龄。"
+    }
+  ]
+}

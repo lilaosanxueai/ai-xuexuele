@@ -1,0 +1,137 @@
+{
+  "id": "eng-05",
+  "island": "cross",
+  "order": 105.5,
+  "title": "颜色变变秀",
+  "emoji": "🎨",
+  "story": "红色的苹果 red apple、绿色的小草 green grass……你的角色是变色龙！每换一个造型就说一个颜色单词——颜色和单词一起变出来。",
+  "goals": [
+    "掌握 red/blue/green/yellow 等颜色词",
+    "练习外观与台词配合"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color"
+  ],
+  "actor": {
+    "costume": "🍏",
+    "x": 0,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "开场：说「Color magic show!」",
+      "hintPrompts": [
+        "先报幕再表演"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "变红色：换成苹果造型，说「Red! Like an apple!」",
+      "hintPrompts": [
+        "先换造型再说话"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_costume",
+        "count": 1
+      }
+    },
+    {
+      "id": "t3",
+      "text": "三连变：再变两次造型，分别说「Blue!」和「Green!」",
+      "hintPrompts": [
+        "造型和颜色要对上"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_say",
+        "count": 4
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：加一个自己喜欢的颜色（如 yellow），配上打节奏的音效",
+      "hintPrompts": [
+        "yellow 黄色，太阳的颜色"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第一学段（1-2年级）",
+    "module": "身边的算法",
+    "points": [
+      "顺序结构"
+    ]
+  },
+  "subject": {
+    "name": "英语·颜色",
+    "emoji": "🎨",
+    "points": [
+      "常见颜色单词",
+      "What color is it?"
+    ]
+  },
+  "aiIntro": "🎨 颜色是最好记的单词——因为你天天见！今天把 red blue green 变成你的口头禅。",
+  "celebrate": "颜色秀成功！你现在能用英语叫出好几种颜色了。看看窗外，用英语说说你看到了什么颜色？",
+  "subjectArea": "英语",
+  "gradeBand": "primary",
+  "exercises": [
+    {
+      "q": "「红色」的英文是？",
+      "options": [
+        "blue",
+        "green",
+        "red",
+        "yellow"
+      ],
+      "answer": 2,
+      "explain": "red 红色——红旗 red flag。"
+    },
+    {
+      "q": "苹果常见的颜色用英语说是？",
+      "options": [
+        "red",
+        "black",
+        "purple",
+        "pink"
+      ],
+      "answer": 0,
+      "explain": "Red apple！红色的苹果最常见。"
+    },
+    {
+      "q": "「What color is it?」是在问什么？",
+      "options": [
+        "这是什么",
+        "它是什么颜色",
+        "它在哪儿",
+        "它是谁的"
+      ],
+      "answer": 1,
+      "explain": "color 是颜色——这句问的是颜色。"
+    }
+  ]
+}

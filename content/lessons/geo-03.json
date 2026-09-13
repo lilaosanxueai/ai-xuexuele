@@ -1,0 +1,144 @@
+{
+  "id": "geo-03",
+  "island": "cross",
+  "order": 109,
+  "title": "地图方位侦查兵",
+  "emoji": "🧭",
+  "story": "上北下南左西右东——地图的铁律！让角色在舞台上走方位：向北、向东、再转向南……走一遍，方位感就在脚下长出来了。",
+  "goals": [
+    "掌握地图方位法则",
+    "用转向积木表达方位变化"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_goto",
+    "island_wait",
+    "island_play",
+    "island_repeat",
+    "island_number",
+    "island_random",
+    "island_costume",
+    "island_change_size",
+    "island_pen_down",
+    "island_pen_up",
+    "island_pen_color"
+  ],
+  "actor": {
+    "costume": "🧭",
+    "x": 0,
+    "y": 0
+  },
+  "tasks": [
+    {
+      "id": "t1",
+      "text": "出发报到：说「上北下南，左西右东!」",
+      "hintPrompts": [
+        "先背口诀再出发"
+      ],
+      "check": {
+        "type": "say_text"
+      }
+    },
+    {
+      "id": "t2",
+      "text": "向北侦查：向上移动 80 步（北是上方），说「North! 北!」",
+      "hintPrompts": [
+        "舞台上方就是北"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_move",
+        "count": 1
+      }
+    },
+    {
+      "id": "t3",
+      "text": "转向东进：右转 90 度，移动 80 步，说「East! 东!」",
+      "hintPrompts": [
+        "面向右转 90 度是东"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_turn_right",
+        "count": 1
+      }
+    },
+    {
+      "id": "c1",
+      "text": "⭐ 挑战：走一个「北→东→南→西」的完整方位圈，回到起点",
+      "hintPrompts": [
+        "走四边回原点就是绕一圈"
+      ],
+      "check": {
+        "type": "manual"
+      },
+      "optional": true
+    }
+  ],
+  "curriculum": {
+    "stage": "第二学段（3-6年级）",
+    "module": "过程与控制",
+    "points": [
+      "方位与运动"
+    ]
+  },
+  "subject": {
+    "name": "地理·地图三要素",
+    "emoji": "🧭",
+    "points": [
+      "方向判定",
+      "上北下南左西右东"
+    ]
+  },
+  "aiIntro": "🧭 会看方向的人永远不会迷路！今天的舞台就是地图——上北下南左西右东，用脚走出来。",
+  "celebrate": "方位侦查兵结业！你现在闭上眼都知道东南西北在哪儿——这是野外探险的第一项硬功夫。",
+  "subjectArea": "地理",
+  "gradeBand": "primary",
+  "targets": [
+    {
+      "emoji": "🗺️",
+      "x": 80,
+      "y": 80
+    }
+  ],
+  "exercises": [
+    {
+      "q": "地图上「上方」通常表示哪个方向？",
+      "options": [
+        "南",
+        "北",
+        "东",
+        "西"
+      ],
+      "answer": 1,
+      "explain": "上北下南左西右东——地图的铁口诀。"
+    },
+    {
+      "q": "你面向北站着，右手边是？",
+      "options": [
+        "东",
+        "西",
+        "南",
+        "北"
+      ],
+      "answer": 0,
+      "explain": "面北而立，右东左西，背后是南。"
+    },
+    {
+      "q": "指南针的作用是？",
+      "options": [
+        "量距离",
+        "辨方向",
+        "测温度",
+        "看时间"
+      ],
+      "answer": 1,
+      "explain": "指南针靠地磁指向南北，是辨方向的祖师爷。"
+    }
+  ]
+}
