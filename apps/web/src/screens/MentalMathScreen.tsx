@@ -105,6 +105,7 @@ export default function MentalMathScreen() {
     wrongsRef.current = []; setWrongs([]);
     setRetryMode(true);
     setFinished(false);
+    setTimeLeft(60);   // 重练也要重置计时：否则 effect 里 timeLeft<=0 立即 finish，重练秒退
     setQ(retryQueue.current[0]);
     setInput(''); setFeedback('none');
     setCorrectCount(0); setStreak(0);
@@ -220,6 +221,8 @@ export default function MentalMathScreen() {
                   🎯 只重练这些错题
                 </button>
               </>
+            ) : total === 0 ? (
+              <p className="mt-4 rounded-2xl bg-slate-50 p-3 text-sm font-bold text-slate-500">这局一题都没答完——再来一次，这次快一点 💪</p>
             ) : (
               <p className="mt-4 rounded-2xl bg-emerald-50 p-3 text-sm font-bold text-emerald-700">全对！一个错题都没有 🎉</p>
             )}
@@ -265,7 +268,6 @@ export default function MentalMathScreen() {
             ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            inputMode="decimal"
             autoFocus
             placeholder="输入答案，回车提交"
             className="min-w-0 flex-1 rounded-2xl border-2 border-slate-300 bg-white/95 px-5 py-4 text-center text-3xl font-black text-slate-800 outline-none focus:border-sky-400"

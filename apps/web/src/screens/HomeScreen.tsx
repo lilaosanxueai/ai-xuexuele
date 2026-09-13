@@ -38,7 +38,14 @@ export default function HomeScreen() {
 
   const remove = async (p: Profile) => {
     if (!confirm(`确定删除「${p.name}」吗？ TA 的学习进度、作品和对话记录都会一起删除。`)) return;
-    await api.deleteProfile(p.id);
+    const pin = window.prompt('请输入家长 PIN 确认删除：');
+    if (!pin) return;
+    try {
+      await api.deleteProfile(p.id, pin);
+    } catch {
+      window.alert('PIN 不正确，没有删除。');
+      return;
+    }
     if (current?.id === p.id) setCurrent(null);
     void refresh();
   };

@@ -222,7 +222,9 @@ export async function applyBuildOps(
       const targets = op.scope === 'last'
         ? [findChainTail(ws)].filter(Boolean) as Blockly.BlockSvg[]
         : (ws.getAllBlocks(false) as Blockly.BlockSvg[]).filter((b) => b.type === op.type);
-      for (const b of targets.slice(0, 20)) { try { b.dispose(false, true); } catch { /* 已连接的影子块等 */ } }
+      // 「删掉最后一块」时链尾可能就是帽子积木：删掉它程序就没了入口（死链），跳过
+      const removable = targets.filter((b) => !(b.type.startsWith('island_when') && !b.getNextBlock()));
+      for (const b of removable.slice(0, 20)) { try { b.dispose(false, true); } catch { /* 已连接的影子块等 */ } }
       topTail = null; // 链可能变短，下次操作前重找
       if (animate) await sleep(300);
       continue;

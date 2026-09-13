@@ -19,7 +19,7 @@ import { recognizer } from '../ml/recognizer.ts';
 import { parsePy, PyRunner } from '../runtime/pyinterp.ts';
 import { pyStageApi } from '../runtime/pyBridge.ts';
 import { workspaceToPython } from '../blocks/python.ts';
-import { applyBuildOps, buildCatalog, workspaceToOps } from '../runtime/builder.ts';
+import { applyBuildOps, buildCatalog, sanitizeOps, workspaceToOps } from '../runtime/builder.ts';
 import ExercisePanel from '../components/ExercisePanel.tsx';
 import { guideRespond, newGuideState, type GuideState } from '../runtime/guideBrain.ts';
 
@@ -463,17 +463,23 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
   /** 本课积木目录：代搭时大模型只能从这里选积木（跟工具箱一致，不会搭出超纲积木） */
   const blockCatalog = useMemo(() => buildCatalog(lesson?.toolbox ?? ALL_BLOCK_TYPES), [lesson]);
 
-  /** AI 代搭落地：展开抽屉 → 逐块搭上画布 → 重新校验任务 */
+  /** AI 代搭落地：白名单消毒 → 展开抽屉 → 逐块搭上画布 → 重新校验任务 */
   const handleBuildOps = useCallback((ops: BuildOp[]) => {
     setDrawerOpen(true);
     setBuddyOpen(true);
     const ws = wsApiRef.current?.workspace as Blockly.WorkspaceSvg | undefined;
     if (!ws) return;
-    void applyBuildOps(ws, ops, { animate: true }).then(() => {
+    if (codeMode) setCodeMode(false);   // 代码模式下代搭看不见，切回积木画布
+    // 白名单消毒：LLM 幻觉出的未知积木类型会让 Blockly 抛错中断整批，先过滤
+    const safe = sanitizeOps(ops, blockCatalog);
+    if (!safe.length) return;
+    void applyBuildOps(ws, safe, { animate: true }).then(() => {
       revalidate(false);
       lastActivityRef.current = Date.now();
+    }).catch(() => {
+      setToast('代搭时出了一点小问题，再试一次？');
     });
-  }, [revalidate]);
+  }, [revalidate, blockCatalog, codeMode]);
 
   // ---------- 工具条动作 ----------
   const cycleSpeed = () => {

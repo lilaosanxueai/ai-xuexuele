@@ -17,7 +17,7 @@ export const api = {
   profiles: () => req<Profile[]>('/api/profiles'),
   createProfile: (name: string, avatar: string) =>
     req<Profile>('/api/profiles', { method: 'POST', body: JSON.stringify({ name, avatar }) }),
-  deleteProfile: (id: string) => req<{ ok: boolean }>(`/api/profiles/${id}`, { method: 'DELETE' }),
+  deleteProfile: (id: string, pin: string) => req<{ ok: boolean }>(`/api/profiles/${id}`, { method: 'DELETE', headers: { 'x-parent-pin': pin } }),
   lessons: () => req<Lesson[]>('/api/lessons'),
   progress: (profileId: string) => req<ProfileProgress>(`/api/progress/${profileId}`),
   updateProgress: (profileId: string, patch: Record<string, unknown>) =>
