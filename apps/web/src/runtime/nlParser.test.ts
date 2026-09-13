@@ -64,6 +64,29 @@ describe('parseChineseBuild 中文口述 → 代搭指令', () => {
   it('完全听不懂 → null', () => {
     expect(parseChineseBuild('今天天气怎么样')).toBeNull();
   });
+
+  it('删掉最后一块 → remove last', () => {
+    expect(parseChineseBuild('删掉最后一块')).toEqual([{ op: 'remove', scope: 'last' }]);
+  });
+
+  it('删掉移动 → remove 该类型全部', () => {
+    expect(parseChineseBuild('帮我删掉移动')).toEqual([{ op: 'remove', type: 'island_move', scope: 'all' }]);
+  });
+
+  it('把移动100改成200 → 删旧 + 搭新（无自动 hat，因为返回含 remove 开头）', () => {
+    const ops = parseChineseBuild('把移动100改成200');
+    expect(ops?.[0]).toEqual({ op: 'remove', type: 'island_move', scope: 'all' });
+    expect(ops?.[1]).toEqual({ op: 'add', type: 'island_move', fields: { STEPS: '200' } });
+  });
+
+  it('「然后」当分隔符：说你好然后移动50', () => {
+    const ops = parseChineseBuild('说你好然后移动50');
+    expect(ops).toEqual([
+      { op: 'add', type: 'island_when_run' },
+      { op: 'add', type: 'island_say', fields: { TEXT: '你好' } },
+      { op: 'add', type: 'island_move', fields: { STEPS: '50' } },
+    ]);
+  });
 });
 
 describe('sanitizeOps 指令清洗（白名单防注入）', () => {

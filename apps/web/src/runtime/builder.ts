@@ -49,8 +49,13 @@ export function sanitizeOps(input: unknown, catalog: BlockCatalogEntry[], depth 
   const out: BuildOp[] = [];
   for (const raw of input) {
     if (!raw || typeof raw !== 'object') continue;
-    const op = raw as { op?: unknown; type?: unknown; fields?: unknown; children?: unknown; branch?: unknown };
+    const op = raw as { op?: unknown; type?: unknown; fields?: unknown; children?: unknown; branch?: unknown; scope?: unknown };
     if (op.op === 'clear') { out.push({ op: 'clear' }); continue; }
+    if (op.op === 'remove') {
+      if (op.scope === 'last') { out.push({ op: 'remove', scope: 'last' }); continue; }
+      if (typeof op.type === 'string' && byType.has(op.type)) out.push({ op: 'remove', type: op.type, scope: 'all' });
+      continue;
+    }
     if (op.op !== 'add' || typeof op.type !== 'string') continue;
     const entry = byType.get(op.type);
     if (!entry) continue;
@@ -200,7 +205,11 @@ export async function applyBuildOps(
   let topTail: Blockly.BlockSvg | null = null;
   if (!ops.some((o) => o.op === 'clear')) {
     topTail = findChainTail(ws);
-    if (topTail && ops[0]?.op === 'add' && ops[0].type === 'island_when_run') ops = ops.slice(1);
+    // 画布已有帽子链时，丢弃自动补的帽子（可能排在 remove 之后），避免出现双入口死链
+    if (topTail) {
+      const firstAdd = ops.findIndex((o) => o.op === 'add');
+      if (firstAdd >= 0 && ops[firstAdd].type === 'island_when_run') ops = [...ops.slice(0, firstAdd), ...ops.slice(firstAdd + 1)];
+    }
   }
   for (const op of ops) {
     if (op.op === 'clear') {
@@ -209,6 +218,16 @@ export async function applyBuildOps(
       if (animate) await sleep(300);
       continue;
     }
+    if (op.op === 'remove') {
+      const targets = op.scope === 'last'
+        ? [findChainTail(ws)].filter(Boolean) as Blockly.BlockSvg[]
+        : (ws.getAllBlocks(false) as Blockly.BlockSvg[]).filter((b) => b.type === op.type);
+      for (const b of targets.slice(0, 20)) { try { b.dispose(false, true); } catch { /* 已连接的影子块等 */ } }
+      topTail = null; // 链可能变短，下次操作前重找
+      if (animate) await sleep(300);
+      continue;
+    }
+    if (topTail === null && !ops.some((o) => o.op === 'clear')) topTail = findChainTail(ws);
     const prevTail = topTail;
     const tail = addChain(
       ws,

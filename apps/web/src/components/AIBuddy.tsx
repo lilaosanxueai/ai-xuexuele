@@ -102,11 +102,15 @@ const AIBuddy = forwardRef<BuddyHandle, Props>(function AIBuddy(
       } catch { /* 服务端不可达 → 本地解析 */ }
       if (!ops) { ops = parseChineseBuild(text); via = '用离线小脑 💪'; }
       const addCount = (ops ?? []).filter((o) => o.op === 'add').reduce((a, o) => a + 1 + (o.children?.length ?? 0), 0);
-      if (addCount === 0 || !ops) {
+      const removeCount = (ops ?? []).filter((o) => o.op === 'remove').length;
+      if (!ops || (addCount === 0 && removeCount === 0 && !ops.some((o) => o.op === 'clear'))) {
         setMessages((prev) => [...prev, { role: 'assistant', content: BUILD_HELP, mode: 'build' }]);
         return;
       }
-      setMessages((prev) => [...prev, { role: 'assistant', content: `好嘞，${via}给你搭：一共 ${addCount} 块积木，看着画布，马上拼好 🧩`, mode: 'build' }]);
+      const actionText = removeCount > 0
+        ? (addCount > 0 ? `删掉 ${removeCount} 处、再搭 ${addCount} 块` : `删掉 ${removeCount} 处积木 🧹`)
+        : `一共 ${addCount} 块积木`;
+      setMessages((prev) => [...prev, { role: 'assistant', content: `好嘞，${via}${removeCount > 0 && addCount === 0 ? '这就清理' : '给你搭'}：${actionText}，看着画布 🧩`, mode: 'build' }]);
       onBuildOps?.(ops);
       setMessages((prev) => [...prev, { role: 'assistant', content: '搭好啦！看看是不是你想的那样——不对就告诉我改，对了就点 ▶ 试试！你也可以拖动任何一块积木自己调整 ✨', mode: 'build' }]);
     } finally {

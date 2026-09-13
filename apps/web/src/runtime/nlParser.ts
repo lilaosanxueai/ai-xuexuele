@@ -90,14 +90,53 @@ function parseNested(body: string): BuildOp[] {
 /**
  * 主入口：中文口述 → 代搭指令。
  * - 「清空 / 重新搭」开头 → 先 clear
+ * - 「删掉最后一块 / 删掉X」→ remove
+ * - 「把X改成Y」→ 删X再搭Y
  * - 自动在最前面补「当 ▶ 开始」（若孩子没说）
  * - 一个字都没解析出来 → null（提示换个说法）
  */
 export function parseChineseBuild(text: string): BuildOp[] | null {
+  return parseImpl(text, true);
+}
+
+function parseImpl(text: string, autoHat: boolean): BuildOp[] | null {
   const raw = text.trim();
   if (!raw) return null;
+  // 「然后」当分隔符，方便孩子口述长指令
+  const normalized = raw.replace(/然后/g, '，');
   const ops: BuildOp[] = [];
-  const body = raw.replace(/^(帮我|请|给我)?(搭|拼|编)(?:一个)?[：:]?/, '').replace(/^(先)?(清空|全部删掉|删掉全部|重新搭)(画布|画板|积木)?[，,。！!]?/, (mm) => {
+
+  // 删掉最后一块 / 删掉移动（之类的语句积木）
+  let m = normalized.match(/删掉最后(一)?[块个]/);
+  if (m) return [{ op: 'remove', scope: 'last' }];
+  m = normalized.match(/(?:删掉|删除|去掉)(说|移动|走|右转|左转|等待|落笔|抬笔|重复|声音|音效)/);
+  if (m) {
+    const kind = m[1];
+    const type = kind === '说' ? 'island_say'
+      : kind === '移动' || kind === '走' ? 'island_move'
+      : kind === '右转' ? 'island_turn_right'
+      : kind === '左转' ? 'island_turn_left'
+      : kind === '等待' ? 'island_wait'
+      : kind === '落笔' ? 'island_pen_down'
+      : kind === '抬笔' ? 'island_pen_up'
+      : kind === '重复' ? 'island_repeat'
+      : 'island_play';
+    return [{ op: 'remove', type, scope: 'all' }];
+  }
+  // 把移动改成200 → 删移动 + 搭新移动（不补帽子：这是改现有程序）
+  m = normalized.match(/把(移动|走|右转|左转|等待|说)(\d+(?:\.\d+)?)(步|度|秒)?改成?(\d+(?:\.\d+)?)/);
+  if (m) {
+    const rebuilt = normalized.replace(/把(移动|走|右转|左转|等待|说)(\d+(?:\.\d+)?)(步|度|秒)?改成?(\d+(?:\.\d+)?)/, `${m[1]}${m[4]}${m[3] ?? ''}`);
+    const removed: BuildOp[] = [{
+      op: 'remove',
+      type: m[1] === '移动' || m[1] === '走' ? 'island_move' : m[1] === '右转' ? 'island_turn_right' : m[1] === '左转' ? 'island_turn_left' : m[1] === '等待' ? 'island_wait' : 'island_say',
+      scope: 'all',
+    }];
+    const added = parseImpl(rebuilt, false) ?? [];
+    return [...removed, ...added];
+  }
+
+  const body = normalized.replace(/^(帮我|请|给我)?(搭|拼|编)(?:一个)?[：:]?/, '').replace(/^(先)?(清空|全部删掉|删掉全部|重新搭)(画布|画板|积木)?[，,。！!]?/, (mm) => {
     if (/清空|删掉|重新搭/.test(mm)) ops.push({ op: 'clear' });
     return '';
   });
@@ -108,7 +147,7 @@ export function parseChineseBuild(text: string): BuildOp[] | null {
 
   const hasHat = statements.some((o) => typeof o.type === 'string' && o.type.startsWith('island_when'));
   const result: BuildOp[] = [...ops];
-  if (!hasHat) result.push({ op: 'add', type: 'island_when_run' });
+  if (!hasHat && autoHat) result.push({ op: 'add', type: 'island_when_run' });
   result.push(...statements);
   return result;
 }
