@@ -39,7 +39,7 @@ for f in files:
     if d.get("id") in seen: errors.append(f"{n}: id 重复 with {seen[d['id']]}")
     seen[d.get("id")] = n
     if d.get("island") not in VALID_ISLANDS: errors.append(f"{n}: island 非法 {d.get('island')!r}")
-    if not isinstance(d.get("order"), int): errors.append(f"{n}: order 非整数")
+    if not isinstance(d.get("order"), (int, float)): errors.append(f"{n}: order 非数字")
     if d.get("subjectArea") is not None and d["subjectArea"] not in VALID_AREAS:
         errors.append(f"{n}: subjectArea 非法 {d['subjectArea']!r}")
     if d.get("gradeBand") is not None and d["gradeBand"] not in VALID_BANDS:
