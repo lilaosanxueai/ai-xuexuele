@@ -72,6 +72,7 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
   const [taskDone, setTaskDone] = useState<Record<string, boolean>>({});
   const [lessonCompleted, setLessonCompleted] = useState(false);
   const [celebrate, setCelebrate] = useState(false);
+  const [nextLessons, setNextLessons] = useState<Lesson[]>([]);
   const [buddyOpen, setBuddyOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -197,6 +198,32 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
         draft: wsApiRef.current?.getXml(),
       }).catch(() => {});
     }
+    // 通关复盘三问（元认知）：AI 伙伴主动引导回顾——把「学完就跑」变成「学完想一想」
+    buddyRef.current?.sayLocal(
+      `🎓 复盘时间！三个问题（不用打字，心里答或说给爸妈听）：\n` +
+      `① 今天这课最重要的一点是什么？\n` +
+      `② 它让你想起了之前学过的什么？\n` +
+      `③ 生活里哪里能用到它？\n` +
+      `想聊聊就点下面的追问按钮，我陪你把理解加深一层！`,
+    );
+    // 延伸推荐：同学科 / 知识点相关的未完成课（扩展广度）
+    void api.lessons().then((all) => {
+      const scored = all
+        .filter((l) => l.id !== lesson.id)
+        .map((l) => {
+          let s = 0;
+          if ((l.subjectArea ?? '信息科技') === (lesson.subjectArea ?? '信息科技')) s += 5;
+          const shared = (l.curriculum?.points ?? []).filter((p) => lesson.curriculum?.points?.includes(p)).length;
+          s += shared * 3;
+          if (l.grade != null && lesson.grade != null && Math.abs(l.grade - lesson.grade) <= 1) s += 2;
+          return { l, s };
+        })
+        .filter((x) => x.s > 0)
+        .sort((a, b) => b.s - a.s)
+        .slice(0, 2)
+        .map((x) => x.l);
+      setNextLessons(scored);
+    }).catch(() => {});
   }, [lesson, profile]);
 
   const revalidate = useCallback((hasRun: boolean) => {
@@ -926,6 +953,30 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
                 </div>
               </div>
             ) : <p className="mb-6" />}
+            {/* 下一步探险：知识图谱式延伸推荐（同学科/知识点相关/相邻年级） */}
+            {nextLessons.length > 0 && (
+              <div className="mb-5 rounded-2xl bg-violet-50 p-3 text-left">
+                <div className="mb-1.5 text-sm font-bold text-violet-700">🔍 下一步探险（和这课最有关系）</div>
+                <div className="space-y-1.5">
+                  {nextLessons.map((nl) => (
+                    <button
+                      key={nl.id}
+                      onClick={() => { setCelebrate(false); nav(`/lesson/${nl.id}`); }}
+                      className="flex w-full items-center gap-2 rounded-xl bg-white px-3 py-2 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                    >
+                      <span className="text-2xl">{nl.emoji}</span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block truncate text-sm font-bold text-slate-800">{nl.title}</span>
+                        <span className="block truncate text-xs text-slate-400">
+                          {nl.subject?.name ?? nl.subjectArea}{nl.grade != null ? ` · ${nl.grade}年级` : ''}
+                        </span>
+                      </span>
+                      <span className="shrink-0 text-violet-400">去 →</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
             <div className="flex justify-center gap-3">
               {lesson.exercises && lesson.exercises.length > 0 && (
                 <button onClick={() => { setCelebrate(false); setQuizOpen(true); }} className="rounded-xl bg-amber-400 px-4 py-2 font-bold text-white hover:bg-amber-500">📝 随堂小练</button>

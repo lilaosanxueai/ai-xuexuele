@@ -137,6 +137,7 @@ export function buildRouter(cfg: AppConfig): Router {
         profileId, mode, user: message.slice(0, 500),
         assistant: assistant.slice(0, 2000), model,
       });
+      store.addQuestChat(profileId);   // 每日任务③：与伙伴交流
       send('done', {});
       res.end();
     };

@@ -249,6 +249,29 @@ const AIBuddy = forwardRef<BuddyHandle, Props>(function AIBuddy(
         <div ref={listEnd} />
       </div>
 
+      {/* Khanmigo 式深挖追问条：把「被动听讲」变成「主动追问」——点一下就往深处挖一层 */}
+      {(mode === 'hint' || mode === 'explain') && (
+        <div className="mt-2 flex flex-wrap gap-1">
+          {[
+            ['🤔', '为什么呀？给我讲讲道理'],
+            ['🔄', '换个说法再讲一遍，更简单一点'],
+            ['🌰', '举个生活中的例子吧'],
+            ['🌉', '这和我们之前学过的什么有关系？'],
+            ['🎯', '考考我！出个小问题检验我'],
+          ].map(([emoji, text]) => (
+            <button
+              key={text}
+              disabled={busy}
+              onClick={() => void send(text)}
+              className="rounded-full border border-violet-300 bg-violet-50 px-2 py-1 text-xs text-violet-700 hover:bg-violet-100 disabled:opacity-50"
+              title={text}
+            >
+              {emoji} {text.slice(0, 8)}
+            </button>
+          ))}
+        </div>
+      )}
+
       <div className="mt-2 flex flex-wrap gap-1">
         {QUICK[mode].map((q) => (
           <button

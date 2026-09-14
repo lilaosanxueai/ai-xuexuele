@@ -6,6 +6,7 @@ import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
 import { SUBJECTS, SUBJECT_STYLE } from '../components/subjectMeta.ts';
 import { recommendNext } from '../runtime/recommend.ts';
+import DailyQuestBar from '../components/DailyQuestBar.tsx';
 
 /** 学科中心：以「学科 × 学段」组织全部课程（对标课表结构） */
 export default function MapScreen() {
@@ -42,6 +43,9 @@ export default function MapScreen() {
       <main className="mx-auto w-full max-w-5xl flex-1 px-6 pb-10">
         {/* 学习概览 + 智能推荐 */}
         <div className="mb-6 rounded-3xl bg-white/80 p-5 shadow-md">
+          <div className="mb-3">
+            <DailyQuestBar progress={progress} />
+          </div>
           <div className="mb-3 flex flex-wrap items-center gap-3 text-sm text-slate-500">
             <span className="rounded-full bg-white px-3 py-1 shadow-sm">今日学习 {todayMin} 分钟</span>
             <span className="rounded-full bg-white px-3 py-1 shadow-sm">已学 {doneCount}/{lessons.length} 课</span>

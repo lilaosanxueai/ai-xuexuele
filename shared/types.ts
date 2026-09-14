@@ -115,6 +115,12 @@ export interface ProfileProgress {
   wrongBook?: WrongItem[];
   /** 已消灭的错题总数（成长记录） */
   wrongCleared?: number;
+  /** 学习经验值（Duolingo 式激励）：通关+50、答对一题+10、与伙伴交流+5 */
+  xp?: number;
+  /** 每日任务打卡日（YYYY-MM-DD，跨天自动重置） */
+  questDate?: string;
+  /** 今日任务进度：通关 1 课 / 答对 5 题 / 与伙伴交流 2 次 */
+  questDone?: { lesson?: boolean; quiz?: number; chat?: number };
 }
 
 /** 错题本条目：题目快照 + 错误历史 */
