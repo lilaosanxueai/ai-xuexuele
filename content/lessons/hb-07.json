@@ -142,5 +142,25 @@
       "answer": 1,
       "explain": "测定要求只耗氧气不产生新气体，红磷生成的是固体五氧化二磷"
     }
-  ]
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "o2pct",
+        "label": "氧气占比",
+        "min": 15,
+        "max": 30,
+        "step": 1,
+        "value": 21,
+        "unit": "%"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "正常的空气里氧气占百分之几？",
+      "氧气变多，蜡烛能烧更久吗？",
+      "红磷燃烧实验为什么水面上升约 1/5？"
+    ],
+    "code": "# 空气成分探索台\no2pct = 21   # 氧气占比（%）\n\nhide()\nn2 = 100 - o2pct - 1\npen_color(\"blue\")\npen_down()\ngo_to(-170, -100)\ngo_to(-170, 80)\ngo_to(-100, 80)\ngo_to(-100, -100)\ngo_to(-170, -100)\npen_up()\nwrite(\"氮气 \" + n2 + \"%\", -165, 95, \"blue\", 11)\npen_color(\"red\")\npen_down()\ngo_to(-90, -100)\nh2 = o2pct * 180 / 100\nif h2 < 20:\n    h2 = 20\ngo_to(-90, -100 + h2)\ngo_to(-20, -100 + h2)\ngo_to(-20, -100)\ngo_to(-90, -100)\npen_up()\nwrite(\"氧气 \" + o2pct + \"%\", -78, -120, \"red\", 11)\npen_color(\"green\")\npen_down()\ngo_to(-10, -100)\ngo_to(-10, -82)\ngo_to(60, -82)\ngo_to(60, -100)\ngo_to(-10, -100)\npen_up()\nwrite(\"其他 1%\", -5, -120, \"green\", 10)\ntime = o2pct * 2\nwrite(\"氧气 \" + o2pct + \"%：蜡烛可燃 \" + time + \" 单位时间\", -190, 140, \"red\", 13)\nif o2pct == 21:\n    write(\"正常空气：红磷实验水面升约 1/5\", -190, 112, \"orange\", 11)\nif o2pct > 25:\n    write(\"富氧！烧得更旺更久\", -190, 112, \"green\", 11)\nif o2pct < 18:\n    write(\"缺氧：呼吸都困难\", -190, 112, \"orange\", 11)"
+  }
 }

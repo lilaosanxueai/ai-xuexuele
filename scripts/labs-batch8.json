@@ -1,0 +1,397 @@
+{
+  "_说明": "互动实验室第八批（理科收官）：生物 14 节 + 地理 6 节。注入：node scripts/inject-labs.mjs labs-batch8.json",
+  "labs": {
+    "cross-101": {
+      "params": [
+        {
+          "name": "light",
+          "label": "光照强度",
+          "min": 0,
+          "max": 3,
+          "step": 0.25,
+          "value": 2
+        }
+      ],
+      "grid": false,
+      "explore": [
+        "没有光（0），植物还能造淀粉吗？",
+        "光越强，产出越多吗？",
+        "光合作用的原料和产品各是什么？"
+      ],
+      "code": "# 光合厨房探索台\nlight = 2   # 光照强度（0=黑夜）\n\nhide()\nstarch = light * 30\npen_color(\"orange\")\npen_down()\ngo_to(-30, -40)\ngo_to(-30, 10)\ngo_to(30, 10)\ngo_to(30, -40)\ngo_to(-30, -40)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(0, 10)\ngo_to(-24, 40)\ngo_to(0, 34)\ngo_to(24, 40)\ngo_to(0, 10)\npen_up()\npen_color(\"yellow\")\npen_down()\nr = 0\nwhile r < 18:\n    ang = r * 20\n    go_to(80 + 18 * cos(ang), 30 + 18 * sin(ang))\n    r = r + 1\npen_up()\nwrite(\"太阳\", 62, 62, \"orange\", 11)\nif light > 0:\n    pen_color(\"red\")\n    pen_down()\n    i = 0\n    while i < light:\n        x = -70 + i * 45\n        go_to(x, 70)\n        go_to(x + 20, 46)\n        pen_up()\n        i = i + 1\nwrite(\"光照 \" + light + \" → 淀粉 \" + starch + \" 份\", -190, 130, \"red\", 13)\nwrite(\"CO₂+水 --光/叶绿体--> 淀粉+O₂\", -190, 100, \"green\", 11)\nif light < 0.1:\n    write(\"黑夜：厨房停工！\", -100, -100, \"orange\", 12)"
+    },
+    "cross-104": {
+      "params": [
+        {
+          "name": "loops",
+          "label": "循环圈数",
+          "min": 1,
+          "max": 4,
+          "step": 1,
+          "value": 1,
+          "unit": " 圈"
+        }
+      ],
+      "grid": false,
+      "explore": [
+        "血液从心脏出发要跑几条路？（体循环+肺循环）",
+        "肺循环里血液变成鲜红色，为什么？",
+        "一圈循环要经过心脏几次？"
+      ],
+      "code": "# 血液循环探索台\nloops = 1   # 循环圈数\n\nhide()\npen_color(\"red\")\npen_down()\ni = 0\nwhile i < loops:\n    go_to(-120, 0)\n    go_to(-120, 60)\n    go_to(0, 60)\n    go_to(0, 0)\n    pen_up()\n    write(\"肺循环（右心→肺→左心）\", -160, 75, \"blue\", 10)\n    pen_down()\n    go_to(0, -20)\n    go_to(120, -20)\n    go_to(120, -70)\n    go_to(0, -70)\n    go_to(0, -20)\n    pen_up()\n    i = i + 1\nwrite(\"体循环（左心→全身→右心）\", 10, -95, \"red\", 10)\nwrite(\"❤ 心脏（中心）\", -30, 12, \"red\", 12)\nwrite(\"跑了 \" + loops + \" 圈 = \" + loops * 2 + \" 段循环\", -190, 130, \"red\", 13)\nwrite(\"动脉血(红)携氧出，静脉血(蓝)回\", -190, 100, \"blue\", 10)"
+    },
+    "cross-105": {
+      "params": [
+        {
+          "name": "food",
+          "label": "食物编号",
+          "min": 1,
+          "max": 4,
+          "step": 1,
+          "value": 1,
+          "unit": "（1淀2蛋3脂4水）"
+        }
+      ],
+      "grid": false,
+      "explore": [
+        "淀粉从哪站开始被消化？（口腔的唾液！）",
+        "蛋白质的主战场在哪？（胃）",
+        "脂肪要到小肠才有胆汁+酶帮忙——为什么？"
+      ],
+      "code": "# 消化之旅探索台（按食物看消化路线）\nfood = 1   # 1=淀粉 2=蛋白质 3=脂肪 4=水\n\nhide()\nstart = \"\"\nend = \"\"\nif food == 1:\n    start = \"口腔（唾液淀粉酶）\"\n    end = \"小肠（变成葡萄糖）\"\nif food == 2:\n    start = \"胃（胃蛋白酶+盐酸）\"\n    end = \"小肠（变成氨基酸）\"\nif food == 3:\n    start = \"小肠（胆汁乳化+酶）\"\n    end = \"小肠（变成甘油+脂肪酸）\"\nif food == 4:\n    start = \"胃和大肠\"\n    end = \"直接吸收，不用消化！\"\ni = 0\nwhile i < 5:\n    x = -170 + i * 85\n    pen_color(\"blue\")\n    if i == 0:\n        pen_color(\"green\")\n    pen_down()\n    go_to(x, 20)\n    go_to(x + 60, 20)\n    go_to(x + 60, -20)\n    go_to(x, -20)\n    go_to(x, 20)\n    pen_up()\n    i = i + 1\nwrite(\"口腔 → 食道 → 胃 → 小肠 → 大肠\", -190, 60, \"blue\", 11)\nwrite(\"起点：\" + start, -190, -80, \"green\", 13)\nwrite(\"终点：\" + end, -190, -115, \"red\", 13)\nwrite(\"绿色=第一站\", -190, 130, \"orange\", 10)"
+    },
+    "cross-12": {
+      "params": [
+        {
+          "name": "days",
+          "label": "生长天数",
+          "min": 1,
+          "max": 30,
+          "step": 1,
+          "value": 10,
+          "unit": " 天"
+        }
+      ],
+      "grid": true,
+      "explore": [
+        "种子发芽需要什么？（水、空气、温度）",
+        "第几天长出第一片真叶？",
+        "生长的速度一样快吗？哪段最快？"
+      ],
+      "code": "# 种子生长探索台\ndays = 10   # 生长天数\n\nhide()\nh = days * 6\nif h > 150:\n    h = 150\npen_color(\"green\")\npen_down()\ngo_to(0, -80)\ngo_to(0, -80 + h)\npen_up()\nstage = \"破土发芽\"\nif days > 6:\n    pen_color(\"green\")\n    pen_down()\n    go_to(0, -80 + h * 0.6)\n    go_to(-30, -80 + h * 0.6 + 18)\n    pen_up()\n    go_to(0, -80 + h * 0.6)\n    pen_down()\n    go_to(30, -80 + h * 0.6 + 18)\n    pen_up()\n    stage = \"长出子叶\"\nif days > 15:\n    pen_color(\"red\")\n    pen_down()\n    go_to(0, -80 + h)\n    go_to(8, -80 + h + 16)\n    pen_up()\n    stage = \"花苞出现\"\nif days > 25:\n    stage = \"开花结果\"\npen_color(\"blue\")\npen_down()\ngo_to(-40, -80)\ngo_to(40, -80)\npen_up()\nwrite(\"第 \" + days + \" 天：\" + stage, -190, 140, \"green\", 13)\nwrite(\"先长根还是先长芽？地下也在忙！\", -190, 110, \"orange\", 10)"
+    },
+    "cross-126": {
+      "params": [
+        {
+          "name": "amount",
+          "label": "激素分泌量",
+          "min": 0,
+          "max": 3,
+          "step": 0.5,
+          "value": 1.5
+        }
+      ],
+      "grid": true,
+      "explore": [
+        "激素起效快还是神经起效快？（看两条线）",
+        "激素量变多，作用持续更久吗？",
+        "神经像「短信」，激素像「挂号信」"
+      ],
+      "code": "# 激素调节探索台：慢邮差 vs 快递\namount = 1.5   # 激素分泌量\n\nhide()\npen_color(\"red\")\npen_down()\ngo_to(-180, -100)\ngo_to(-150, 60)\ngo_to(-90, 40)\ngo_to(0, 10)\ngo_to(180, 0)\npen_up()\nwrite(\"神经：毫秒级快闪\", -170, 75, \"red\", 10)\npen_color(\"blue\")\npen_down()\ngo_to(-180, -100)\ngo_to(0, -100 + 15 * amount)\ngo_to(60, -100 + 55 * amount)\ngo_to(130, -100 + 50 * amount)\ngo_to(180, -100 + 40 * amount)\npen_up()\nwrite(\"激素：慢起慢落\", -170, -125, \"blue\", 10)\nwrite(\"横轴=时间 纵轴=反应强度\", -190, 140, \"green\", 10)\nwrite(\"分泌量 \" + amount + \"：高峰 \" + 55 * amount, 60, 130, \"blue\", 12)\nif amount > 2.5:\n    write(\"激素过多：机能亢进！\", 60, 105, \"orange\", 11)\nif amount < 0.5:\n    write(\"激素不足：萎靡怕冷\", 60, 105, \"orange\", 11)"
+    },
+    "cross-13": {
+      "params": [
+        {
+          "name": "chain",
+          "label": "食物链长度",
+          "min": 2,
+          "max": 5,
+          "step": 1,
+          "value": 3,
+          "unit": " 级"
+        }
+      ],
+      "grid": false,
+      "explore": [
+        "每一级只剩上一级能量的百分之几？（约10%）",
+        "为什么顶级捕食者最少？",
+        "鹰要长 1 公斤，大约需要多少公斤草？"
+      ],
+      "code": "# 食物链能量金字塔探索台\nchain = 3   # 食物链级数\n\nhide()\nnames = \"草→兔→狐→鹰→虎\"\nenergy = 10000\ni = 0\nwhile i < chain:\n    w = energy / 100\n    if w < 12:\n        w = 12\n    x = 160 - i * 55\n    y = -90 + i * 55\n    pen_color(\"green\")\n    if i > 0:\n        pen_color(\"orange\")\n    if i > 2:\n        pen_color(\"red\")\n    pen_down()\n    go_to(x - w / 2, y)\n    go_to(x + w / 2, y)\n    go_to(x + w / 2 - 8, y + 42)\n    go_to(x - w / 2 + 8, y + 42)\n    go_to(x - w / 2, y)\n    pen_up()\n    energy = energy / 10\n    i = i + 1\nwrite(names, -190, 140, \"blue\", 12)\nwrite(\"每级只传 10% 能量\", -190, 112, \"red\", 12)\nif chain >= 4:\n    write(\"顶级捕食者能量极少→数量最少\", -190, 85, \"orange\", 11)"
+    },
+    "cross-30": {
+      "params": [
+        {
+          "name": "idx",
+          "label": "细胞器编号",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "value": 1,
+          "unit": "（1壁2膜3核4质5泡）"
+        }
+      ],
+      "grid": false,
+      "explore": [
+        "细胞核为什么叫「总指挥部」？",
+        "细胞膜和细胞壁谁是「门卫」？",
+        "液泡里装的是什么？"
+      ],
+      "code": "# 细胞大游览探索台\nidx = 1   # 参观站点\n\nhide()\npen_color(\"green\")\npen_down()\ngo_to(-150, 80)\ngo_to(150, 80)\ngo_to(150, -80)\ngo_to(-150, -80)\ngo_to(-150, 80)\npen_up()\nif idx == 1:\n    pen_color(\"green\")\n    pen_down()\n    go_to(-150, 84)\n    go_to(150, 84)\n    go_to(150, 92)\n    go_to(-150, 92)\n    go_to(-150, 84)\n    pen_up()\n    write(\"细胞壁：坚固外壳（植物才有）\", -190, 130, \"green\", 13)\nif idx == 2:\n    write(\"细胞膜：门卫，控制进出\", -190, 130, \"blue\", 13)\nif idx == 3:\n    pen_color(\"red\")\n    pen_down()\n    go_to(-30, 20)\n    go_to(30, 20)\n    go_to(30, -20)\n    go_to(-30, -20)\n    go_to(-30, 20)\n    pen_up()\n    write(\"细胞核：总指挥部（DNA在里）\", -190, 130, \"red\", 13)\nif idx == 4:\n    pen_color(\"orange\")\n    pen_down()\n    go_to(-100, 40)\n    go_to(-70, 40)\n    pen_up()\n    go_to(20, -40)\n    go_to(60, -40)\n    pen_up()\n    write(\"细胞质：流动的工作车间\", -190, 130, \"orange\", 13)\nif idx == 5:\n    pen_color(\"blue\")\n    pen_down()\n    go_to(60, 50)\n    go_to(120, 50)\n    go_to(120, 10)\n    go_to(60, 10)\n    go_to(60, 50)\n    pen_up()\n    write(\"液泡：储水储养分（酸甜汁）\", -190, 130, \"blue\", 13)\nwrite(\"按 1-5 逐站参观\", -190, -110, \"orange\", 11)"
+    },
+    "cross-32": {
+      "params": [
+        {
+          "name": "stop",
+          "label": "停靠站",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "value": 3
+        }
+      ],
+      "grid": false,
+      "explore": [
+        "食物按什么顺序经过这些器官？",
+        "最长的一站是哪？（小肠 5-7 米）",
+        "大肠的作用是什么？"
+      ],
+      "code": "# 消化系统一日游探索台\nstop = 1   # 停靠站\n\nhide()\ninfo = \"\"\nif stop == 1:\n    info = \"口腔：牙齿切碎+唾液分解淀粉\"\nif stop == 2:\n    info = \"食道：自动电梯，只传送\"\nif stop == 3:\n    info = \"胃：盐酸+蠕动=搅拌车间\"\nif stop == 4:\n    info = \"小肠：5-7米！90%营养在此吸收\"\nif stop == 5:\n    info = \"大肠：吸水，残渣变粪便\"\ni = 1\nwhile i < 6:\n    x = -170 + i * 68\n    if i == stop:\n        pen_color(\"red\")\n    if i != stop:\n        pen_color(\"blue\")\n    pen_down()\n    go_to(x - 24, 30)\n    go_to(x + 24, 30)\n    go_to(x + 24, -30)\n    go_to(x - 24, -30)\n    go_to(x - 24, 30)\n    pen_up()\n    write(\"\" + i, x, 48, \"blue\", 11)\n    i = i + 1\nwrite(\"第 \" + stop + \" 站：\" + info, -190, 130, \"red\", 12)\nwrite(\"红色=当前停靠站\", -190, 100, \"orange\", 10)"
+    },
+    "cross-33": {
+      "params": [
+        {
+          "name": "glu",
+          "label": "葡萄糖份数",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "value": 3
+        }
+      ],
+      "grid": true,
+      "explore": [
+        "吸入的氧气去哪了？（帮线粒体「烧」葡萄糖）",
+        "葡萄糖越多，能量越多吗？",
+        "呼吸作用和燃烧的共同点？"
+      ],
+      "code": "# 呼吸作用探索台：细胞在吃饭\nglu = 3   # 葡萄糖份数\n\nhide()\nenergy = glu * 30\npen_color(\"orange\")\npen_down()\ngo_to(-140, -60)\ngo_to(-140, 40)\ngo_to(-100, 40)\ngo_to(-100, -60)\ngo_to(-140, -60)\npen_up()\nwrite(\"葡萄糖\", -138, -80, \"orange\", 9)\npen_color(\"blue\")\npen_down()\ngo_to(-60, -60)\ngo_to(-60, 40)\ngo_to(-20, 40)\ngo_to(-20, -60)\ngo_to(-60, -60)\npen_up()\nwrite(\"氧气\", -50, -80, \"blue\", 9)\npen_color(\"red\")\npen_down()\nxx = -140\ni = 0\nwhile i < glu * 3:\n    xx = xx + 8\n    go_to(xx, -60 + (i + 1) * 90 / (glu * 3))\n    pen_up()\n    pen_down()\n    i = i + 1\npen_up()\nwrite(\"→\", 40, 20, \"red\", 14)\npen_color(\"green\")\npen_down()\ngo_to(120, -60)\ngo_to(120, -60 + energy * 0.8)\ngo_to(170, -60 + energy * 0.8)\ngo_to(170, -60)\ngo_to(120, -60)\npen_up()\nwrite(\"能量\", 130, -80, \"green\", 10)\nwrite(glu + \" 份葡萄糖 → \" + energy + \" 份能量(ATP)\", -190, 130, \"red\", 13)\nwrite(\"+ CO₂ + 水（呼出去的）\", -190, 100, \"blue\", 11)\nwrite(\"线粒体：细胞的发电厂\", -190, -110, \"orange\", 10)"
+    },
+    "cross-84": {
+      "params": [
+        {
+          "name": "kind",
+          "label": "叶脉类型",
+          "min": 1,
+          "max": 3,
+          "step": 1,
+          "value": 1,
+          "unit": "（1网2平3叉）"
+        }
+      ],
+      "grid": false,
+      "explore": [
+        "网状脉像什么植物的叶子？（大多数双子叶）",
+        "平行脉呢？（单子叶，如竹子小麦）",
+        "叶脉是叶子的「水管公路」"
+      ],
+      "code": "# 叶脉侦探探索台\nkind = 1   # 1=网状脉 2=平行脉 3=叉状脉\n\nhide()\npen_color(\"green\")\npen_down()\ni = 0\ngo_to(0, -110)\nwhile i < 36:\n    ang = (i + 1) * 10\n    if ang < 90:\n        go_to(85 * cos(ang - 90), -110 + 105 * sin(ang))\n    if ang >= 270:\n        go_to(85 * cos(ang - 90), -110 + 105 * sin(ang))\n    if ang >= 90:\n        if ang < 270:\n            go_to(70 * cos(ang + 90), -110 - 40 * sin(ang - 90))\n    i = i + 1\npen_up()\nif kind == 1:\n    pen_color(\"red\")\n    pen_down()\n    go_to(0, -110)\n    go_to(0, 20)\n    pen_up()\n    j = 1\n    while j < 5:\n        y = -100 + j * 24\n        pen_down()\n        go_to(-10, y + 14)\n        go_to(0, y)\n        go_to(10, y + 14)\n        pen_up()\n        j = j + 1\n    write(\"网状脉：互相交错成网\", -190, 130, \"red\", 12)\nif kind == 2:\n    pen_color(\"red\")\n    pen_down()\n    j = 0\n    while j < 7:\n        x = -54 + j * 18\n        go_to(x, -100)\n        go_to(x, 10)\n        pen_up()\n        j = j + 1\n    write(\"平行脉：条条平行到顶尖\", -190, 130, \"red\", 12)\nif kind == 3:\n    pen_color(\"red\")\n    pen_down()\n    go_to(0, -110)\n    go_to(0, -20)\n    go_to(-30, 30)\n    pen_up()\n    go_to(0, -20)\n    pen_down()\n    go_to(30, 30)\n    pen_up()\n    go_to(0, -20)\n    pen_down()\n    go_to(0, 60)\n    pen_up()\n    write(\"叉状脉：像分叉的树枝（银杏）\", -190, 130, \"red\", 12)"
+    },
+    "cross-85": {
+      "params": [
+        {
+          "name": "stim",
+          "label": "刺激强度",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "value": 3
+        }
+      ],
+      "grid": true,
+      "explore": [
+        "反射弧的 5 站是哪 5 站？",
+        "整个反射只要约 0.1 秒——为什么这么快？",
+        "缩手反射会先感到疼还是先缩手？"
+      ],
+      "code": "# 反射弧探索台\nstim = 3   # 刺激强度\n\nhide()\ni = 0\nwhile i < 5:\n    x = -170 + i * 85\n    pen_color(\"blue\")\n    pen_down()\n    go_to(x, 30)\n    go_to(x + 55, 30)\n    go_to(x + 55, -10)\n    go_to(x, -10)\n    go_to(x, 30)\n    pen_up()\n    write(\"\" + (i + 1), x + 24, 50, \"blue\", 11)\n    i = i + 1\npen_color(\"red\")\npen_down()\ni = 0\nwhile i < 5:\n    x = -142 + i * 85\n    y = 30\n    if i == 0:\n        y = 60 + stim * 4\n    go_to(x, y + 40)\n    pen_down()\n    go_to(x, y + 60)\n    pen_up()\n    i = i + 1\nwrite(\"1感受器→2传入神经→3神经中枢→4传出神经→5效应器\", -195, 105, \"red\", 10)\nwrite(\"刺激强度 \" + stim + \"：全程约 0.1 秒！\", -190, 140, \"blue\", 12)\nwrite(\"先缩手，后觉得疼（神经更快）\", -190, -60, \"orange\", 11)"
+    },
+    "cross-96": {
+      "params": [
+        {
+          "name": "group",
+          "label": "动物类群",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "value": 1,
+          "unit": "（1哺2鸟3鱼4爬5两）"
+        }
+      ],
+      "grid": false,
+      "explore": [
+        "哺乳动物的两个关键词？（胎生、哺乳）",
+        "鸟类的身体为飞行做了哪些改造？",
+        "两栖动物幼年和成年住的地方一样吗？"
+      ],
+      "code": "# 动物家族大点名探索台\ngroup = 1   # 类群\n\nhide()\ninfo = \"\"\nemoji = \"\"\nif group == 1:\n    emoji = \"🐶\"\n    info = \"哺乳类：胎生+哺乳，恒温，牙齿分化\"\nif group == 2:\n    emoji = \"🐦\"\n    info = \"鸟类：卵生，有羽毛+翅膀，骨中空\"\nif group == 3:\n    emoji = \"🐟\"\n    info = \"鱼类：卵生，用鳃呼吸，鳍游泳\"\nif group == 4:\n    emoji = \"🦎\"\n    info = \"爬行类：卵生有壳，鳞片皮肤，变温\"\nif group == 5:\n    emoji = \"🐸\"\n    info = \"两栖类：幼体水生用鳃，成体水陆两栖\"\nwrite(emoji, -60, 40, \"red\", 40)\nwrite(\"\" + emoji, -70, 30, \"blue\", 30)\nwrite(info, -190, -60, \"red\", 13)\nwrite(\"脊椎动物五大类\", -190, 140, \"blue\", 12)\nwrite(\"分类钥匙：生殖方式+呼吸器官+体温\", -190, 105, \"orange\", 10)"
+    },
+    "hb-09": {
+      "params": [
+        {
+          "name": "era",
+          "label": "地质年代",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "value": 1,
+          "unit": "（1太2古3中4新5今）"
+        }
+      ],
+      "grid": false,
+      "explore": [
+        "恐龙生活在哪个代？（中生代）",
+        "最古老的生命痕迹在哪？（太古代）",
+        "人类出现在最晚的新生代——历史很短！"
+      ],
+      "code": "# 化石时间线探索台\nera = 1   # 1太古代 2古生代 3中生代 4新生代 5现代\n\nhide()\npen_color(\"green\")\npen_down()\ngo_to(-180, 80)\ngo_to(180, 80)\npen_up()\ninfo = \"\"\ni = 1\nwhile i < 6:\n    x = -180 + i * 72\n    pen_color(\"blue\")\n    if i == era:\n        pen_color(\"red\")\n    pen_down()\n    go_to(x, 65)\n    go_to(x, 95)\n    pen_up()\n    if i == 1:\n        write(\"太古代\", x - 24, 115, \"blue\", 10)\n    if i == 2:\n        write(\"古生代\", x - 24, 115, \"blue\", 10)\n    if i == 3:\n        write(\"中生代\", x - 24, 115, \"blue\", 10)\n    if i == 4:\n        write(\"新生代\", x - 24, 115, \"blue\", 10)\n    if i == 5:\n        write(\"现代\", x - 24, 115, \"blue\", 10)\n    i = i + 1\nif era == 1:\n    info = \"最原始的生命（蓝藻）\"\nif era == 2:\n    info = \"三叶虫繁盛，鱼类登陆\"\nif era == 3:\n    info = \"恐龙统治地球🦕\"\nif era == 4:\n    info = \"哺乳动物崛起，冰川期\"\nif era == 5:\n    info = \"人类文明🌍\"\nwrite(info, -140, -30, \"red\", 15)\nwrite(\"左=远古 右=现在\", -180, 145, \"orange\", 10)"
+    },
+    "hb-15": {
+      "params": [
+        {
+          "name": "o2",
+          "label": "氧气供应（0无1有）",
+          "min": 0,
+          "max": 1,
+          "step": 1,
+          "value": 1
+        }
+      ],
+      "grid": false,
+      "explore": [
+        "有氧呼吸和无氧呼吸，谁的 ATP 多？",
+        "剧烈运动时肌肉为什么会「无氧」？",
+        "无氧呼吸的副产物让你哪里酸痛？"
+      ],
+      "code": "# 细胞呼吸发电厂探索台：有氧 vs 无氧\no2 = 1   # 1=有氧 0=无氧\n\nhide()\nwrite(\"同样 1 分子葡萄糖：\", -190, 140, \"blue\", 12)\nif o2 == 1:\n    atp = 30\n    pen_color(\"green\")\n    pen_down()\n    go_to(-150, -100)\n    go_to(-150, -100 + atp * 3)\n    go_to(-60, -100 + atp * 3)\n    go_to(-60, -100)\n    go_to(-150, -100)\n    pen_up()\n    write(\"有氧呼吸：30 ATP\", -150, -125, \"green\", 12)\n    write(\"葡萄糖+O₂→CO₂+水+30ATP（线粒体）\", -190, 105, \"green\", 11)\nif o2 == 0:\n    atp = 2\n    pen_color(\"orange\")\n    pen_down()\n    go_to(20, -100)\n    go_to(20, -100 + atp * 15)\n    go_to(110, -100 + atp * 15)\n    go_to(110, -100)\n    go_to(20, -100)\n    pen_up()\n    write(\"无氧呼吸：2 ATP\", 30, -125, \"orange\", 12)\n    write(\"葡萄糖→乳酸+2ATP（细胞质）\", -190, 105, \"orange\", 11)\nif o2 == 1:\n    write(\"氧气充足=高效发电\", -100, 50, \"green\", 12)\nif o2 == 0:\n    write(\"缺氧应急=乳酸堆积（肌肉酸痛）\", -190, 75, \"red\", 12)\nwrite(\"差 15 倍！深呼吸多重要\", -190, -150, \"red\", 11)"
+    },
+    "cross-17": {
+      "params": [
+        {
+          "name": "lat",
+          "label": "纬度",
+          "min": -80,
+          "max": 80,
+          "step": 10,
+          "value": 40,
+          "unit": "°"
+        }
+      ],
+      "grid": false,
+      "explore": [
+        "纬度越高（越靠近极地），气温越？",
+        "40°N 属于哪个温度带？（北温带）",
+        "赤道（0°）和两极，谁的太阳光更「正」？"
+      ],
+      "code": "# 纬度带探险探索台\nlat = 40   # 纬度\n\nhide()\npen_color(\"blue\")\npen_down()\ni = 0\ngo_to(110, 0)\nwhile i < 36:\n    ang = (i + 1) * 10\n    go_to(110 * cos(ang), 110 * sin(ang))\n    i = i + 1\npen_up()\npen_color(\"green\")\npen_down()\nqq = -80\nwhile qq < 81:\n    x = 110 * cos(qq)\n    if qq == lat:\n        pen_up()\n        pen_color(\"red\")\n    go_to(x, 110 * sin(qq))\n    if qq == lat:\n        pen_up()\n        pen_color(\"green\")\n        pen_down()\n    qq = qq + 10\npen_up()\ny = 110 * sin(lat)\nx = 110 * cos(lat)\npen_color(\"red\")\npen_down()\ngo_to(x - 8, y + 8)\ngo_to(x + 8, y + 8)\ngo_to(x + 8, y - 8)\ngo_to(x - 8, y - 8)\ngo_to(x - 8, y + 8)\npen_up()\nzone = \"北温带\"\nif lat > 66:\n    zone = \"北寒带\"\nif lat < 23:\n    if lat > -23:\n        zone = \"热带\"\nif lat < -66:\n    zone = \"南寒带\"\nif lat < -23:\n    if lat > -66:\n        zone = \"南温带\"\nwrite(\"纬度 \" + lat + \"° → \" + zone, -190, 140, \"red\", 13)\nwrite(\"红色=你选的纬线位置\", -190, 112, \"orange\", 10)\nwrite(\"纬度越高太阳越斜→越冷\", -190, -140, \"blue\", 10)"
+    },
+    "cross-63": {
+      "params": [
+        {
+          "name": "weather",
+          "label": "天气编号",
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "value": 1
+        }
+      ],
+      "grid": false,
+      "explore": [
+        "电视天气预报里这些符号你认识吗？",
+        "晴和多云的符号差在哪？",
+        "看到雷雨符号，出门要带什么？"
+      ],
+      "code": "# 天气符号播报探索台\nweather = 1   # 天气编号\n\nhide()\nicon = \"\"\ntxt = \"\"\ntip = \"\"\nif weather == 1:\n    icon = \"☀\"\n    txt = \"晴天\"\n    tip = \"阳光充足，适合户外\"\nif weather == 2:\n    icon = \"⛅\"\n    txt = \"多云\"\n    tip = \"云量增多，气温略降\"\nif weather == 3:\n    icon = \"☁\"\n    txt = \"阴天\"\n    tip = \"厚云遮日\"\nif weather == 4:\n    icon = \"🌧\"\n    txt = \"小雨\"\n    tip = \"带伞出门！\"\nif weather == 5:\n    icon = \"⛈\"\n    txt = \"雷阵雨\"\n    tip = \"远离大树和空旷高地\"\nif weather == 6:\n    icon = \"❄\"\n    txt = \"小雪\"\n    tip = \"保暖防滑\"\nwrite(icon, -50, 30, \"red\", 40)\nwrite(\"\" + icon, -58, 22, \"blue\", 36)\nwrite(\"今日天气：\" + txt, -190, 130, \"red\", 15)\nwrite(tip, -190, 95, \"green\", 13)\nwrite(\"播报员就是你！换编号试试\", -190, -80, \"orange\", 11)"
+    },
+    "geo-03": {
+      "params": [
+        {
+          "name": "heading",
+          "label": "行进方向",
+          "min": 0,
+          "max": 350,
+          "step": 10,
+          "value": 90,
+          "unit": "°"
+        }
+      ],
+      "grid": false,
+      "explore": [
+        "指南针红针指向哪？地图上北在哪？",
+        "「上北下南左西右东」——朝 90° 走是哪个方向？",
+        "180° 呢？270° 呢？"
+      ],
+      "code": "# 地图方位探索台\nheading = 90   # 行进方向（度）\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(0, -100)\ngo_to(0, 100)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-100, 0)\ngo_to(100, 0)\npen_up()\nwrite(\"北 N\", -12, 118, \"blue\", 13)\nwrite(\"南 S\", -12, -122, \"blue\", 12)\nwrite(\"西 W\", -128, -8, \"red\", 12)\nwrite(\"东 E\", 112, -8, \"red\", 12)\nx = 130 * cos(heading)\ny = 130 * sin(heading)\npen_color(\"green\")\npen_down()\ngo_to(0, 0)\ngo_to(x, y)\npen_up()\ndir = \"东\"\nif heading == 0:\n    dir = \"北\"\nif heading == 180:\n    dir = \"南\"\nif heading == 270:\n    dir = \"西\"\nif heading > 0:\n    if heading < 90:\n        dir = \"东北\"\nif heading > 90:\n    if heading < 180:\n        dir = \"东南\"\nif heading > 180:\n    if heading < 270:\n        dir = \"西南\"\nif heading > 270:\n    dir = \"西北\"\nwrite(\"朝 \" + heading + \"° 走 = \" + dir + \"方向\", -190, 140, \"green\", 13)\nwrite(\"上北下南，左西右东\", -190, 112, \"orange\", 10)"
+    },
+    "geo-04": {
+      "params": [
+        {
+          "name": "alt",
+          "label": "海拔",
+          "min": 0,
+          "max": 8848,
+          "step": 100,
+          "value": 2000,
+          "unit": " m"
+        }
+      ],
+      "grid": true,
+      "explore": [
+        "海拔 0 米在哪？（不是地面，是海平面！）",
+        "你的海拔越高，气温越？（每升 100 米降 0.6℃）",
+        "8848 米的珠峰顶是什么温度带？"
+      ],
+      "code": "# 海拔攀登探索台\nalt = 2000   # 海拔（米）\n\nhide()\nh = alt / 8848 * 160\npen_color(\"blue\")\npen_down()\ngo_to(-160, -100)\ngo_to(-160 + h * 0.7, -100 + h)\ngo_to(-160 + h * 1.3, -100 + h)\ngo_to(120, -100 + h * 0.7)\ngo_to(160, -100)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-160, -104)\ngo_to(-120, -104)\ngo_to(-120, -96)\ngo_to(-160, -96)\ngo_to(-160, -104)\npen_up()\nwrite(\"海平面 0m\", -158, -120, \"red\", 9)\ntemp = 20 - alt / 100 * 0.6\nband = \"山地\"\nif alt < 1500:\n    band = \"丘陵/平原\"\nif alt > 3500:\n    band = \"高山\"\nif alt > 5500:\n    band = \"雪山带\"\nwrite(\"海拔 \" + alt + \" 米（\" + band + \"）\", -190, 140, \"red\", 13)\nwrite(\"气温约 \" + temp + \"℃（每百米降 0.6℃）\", -190, 112, \"blue\", 12)\nwrite(\"相对高度=海拔之差\", -190, -150, \"orange\", 10)"
+    },
+    "geo-05": {
+      "params": [
+        {
+          "name": "lon",
+          "label": "经度",
+          "min": -180,
+          "max": 180,
+          "step": 15,
+          "value": 116,
+          "unit": "°"
+        }
+      ],
+      "grid": false,
+      "explore": [
+        "每 15° 经度相差 1 小时——你选的经度和北京差几小时？",
+        "东经为正、西经为负，往西时间越早还是晚？",
+        "180° 经线附近为什么有「日期变更线」？"
+      ],
+      "code": "# 时区环球旅行探索台：每 15° = 1 小时\nlon = 116   # 经度（东正西负）\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-190, 0)\ngo_to(190, 0)\npen_up()\nwrite(\"西 180°\", -190, 20, \"blue\", 9)\nwrite(\"0°\", -5, 20, \"blue\", 10)\nwrite(\"东 180°\", 165, 20, \"blue\", 9)\ni = -180\nwhile i < 181:\n    x = i * 1.03\n    pen_down()\n    go_to(x, -6)\n    go_to(x, 6)\n    pen_up()\n    i = i + 45\nx = lon * 1.03\npen_color(\"red\")\npen_down()\ngo_to(x, -30)\ngo_to(x, 40)\npen_up()\nwrite(\"你\", x - 8, 52, \"red\", 11)\nhourDiff = lon / 15\nbjDiff = (lon - 116) / 15\nwrite(\"经度 \" + lon + \"°：地方时≈UTC\" + hourDiff + \" 小时\", -190, 130, \"red\", 12)\nwrite(\"与北京(东八区)差 \" + bjDiff + \" 小时\", -190, 100, \"blue\", 12)\nif lon > 170:\n    write(\"快到日期变更线了！\", -120, -70, \"orange\", 11)\nif lon < -170:\n    write(\"昨天还是今天？跨线换一天\", -140, -70, \"orange\", 11)"
+    },
+    "hb-11": {
+      "params": [
+        {
+          "name": "step",
+          "label": "阶梯编号",
+          "min": 1,
+          "max": 3,
+          "step": 1,
+          "value": 1
+        }
+      ],
+      "grid": false,
+      "explore": [
+        "第一级阶梯平均海拔 4000 米以上，叫什么？（青藏高原）",
+        "第二、三级阶梯的分界线是什么山？（巫山雪峰山一带）",
+        "大河为什么自西向东流？"
+      ],
+      "code": "# 中国三级阶梯探索台\nstep = 1   # 阶梯编号\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-180, -90)\ngo_to(-180, 100)\ngo_to(-60, 100)\ngo_to(-60, 40)\ngo_to(40, 40)\ngo_to(40, -20)\ngo_to(180, -20)\ngo_to(180, -90)\ngo_to(-180, -90)\npen_up()\nif step == 1:\n    pen_color(\"red\")\n    pen_down()\n    go_to(-170, 105)\n    go_to(-70, 105)\n    pen_up()\n    write(\"第一级：青藏高原（>4000m）「世界屋脊」\", -190, 140, \"red\", 12)\n    write(\"雪山连绵，大河发源地（长江黄河）\", -190, 112, \"blue\", 10)\nif step == 2:\n    pen_color(\"red\")\n    pen_down()\n    go_to(-55, 45)\n    go_to(35, 45)\n    pen_up()\n    write(\"第二级：高原盆地（1000-2000m）\", -190, 140, \"red\", 12)\n    write(\"黄土高原/云贵高原/四川盆地…\", -190, 112, \"blue\", 10)\nif step == 3:\n    pen_color(\"red\")\n    pen_down()\n    go_to(45, -15)\n    go_to(175, -15)\n    pen_up()\n    write(\"第三级：平原丘陵（<500m）\", -190, 140, \"red\", 12)\n    write(\"华北平原/长江中下游平原：人口密集\", -190, 112, \"blue\", 10)\nwrite(\"红色=当前阶梯\", -100, -120, \"orange\", 10)\nwrite(\"地势西高东低→江河东流入海\", -190, -145, \"green\", 11)"
+    }
+  }
+}

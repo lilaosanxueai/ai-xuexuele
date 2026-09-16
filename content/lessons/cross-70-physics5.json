@@ -142,5 +142,24 @@
     }
   ],
   "textbook": "人教版物理八年级上册",
-  "grade": 8
+  "grade": 8,
+  "lab": {
+    "params": [
+      {
+        "name": "n2",
+        "label": "介质折射率",
+        "min": 1,
+        "max": 2.4,
+        "step": 0.05,
+        "value": 1.5
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "折射率 1.33（水）、1.5（玻璃）、2.4（钻石）——谁折得最厉害？",
+      "n=1 时折射角和入射角什么关系？（没有折射！）",
+      "折射率越大，光在介质中跑得越慢"
+    ],
+    "code": "# 折射定律探索台：n1·sinθ1 = n2·sinθ2（入射 45°）\nn2 = 1.5   # 介质折射率\n\nhide()\nn1 = 1\ninc = 45\nsinr = n1 * sin(inc) / n2\npen_color(\"blue\")\npen_down()\ngo_to(-170 * sin(inc), 150 * cos(inc))\ngo_to(0, 0)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(0, 0)\ni = 0\nwhile i < 150:\n    go_to(sinr * i, 0 - i)\n    i = i + 10\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(0, 130)\ngo_to(0, -130)\npen_up()\npen_color(\"blue\")\npen_down()\ngo_to(-190, 0)\ngo_to(190, 0)\npen_up()\nif n2 == 1:\n    write(\"n=1：不发生折射（同种介质）\", -190, 140, \"green\", 12)\nif n2 > 1:\n    write(\"n=\" + n2 + \"：折射角正弦 = \" + sinr, -190, 140, \"red\", 12)\nif n2 > 2:\n    write(\"钻石级折射：光被「拽」得很弯\", -190, 112, \"orange\", 11)"
+  }
 }

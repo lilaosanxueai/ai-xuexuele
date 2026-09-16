@@ -116,5 +116,24 @@
   "codeLesson": true,
   "starterCode": "# 元素点名：前 10 号\nfor i in range(1, 11):\n    if i == 1:\n        say(\"1 号 氢 H —— 宇宙最多的元素\")\n    if i == 2:\n        say(\"2 号 氦 He —— 气球里的安全气\")\n    if i == 3:\n        say(\"3 号 锂 Li —— 电池的心脏\")\n    if i == 6:\n        say(\"6 号 碳 C —— 钻石和铅笔芯\")\n    if i == 8:\n        say(\"8 号 氧 O —— 我们呼吸的它\")\n    if i == 10:\n        say(\"10 号 氖 Ne —— 霓虹灯的光\")\n    wait(0.4)\n\nsay(\"原子序数 = 质子数 = 电子数！\")\n",
   "textbook": "人教版化学九年级上册",
-  "grade": 9
+  "grade": 9,
+  "lab": {
+    "params": [
+      {
+        "name": "num",
+        "label": "原子序数",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "前 10 号元素你都认识吗？换编号看看",
+      "序号 = 核电荷数 = 质子数 = 电子数",
+      "氢和氦在第 1 周期，钠在第几周期？"
+    ],
+    "code": "# 元素周期表前 10 号探索台\nnum = 1   # 原子序数\n\nhide()\ni = 1\nwhile i < 11:\n    col = i - (i / 5) * 5\n    row = i / 5\n    x = -130 + col * 56\n    y = 50 - row * 62\n    if i == num:\n        pen_color(\"red\")\n    if i != num:\n        pen_color(\"blue\")\n    pen_down()\n    go_to(x, y)\n    go_to(x + 48, y)\n    go_to(x + 48, y - 52)\n    go_to(x, y - 52)\n    go_to(x, y)\n    pen_up()\n    write(\"\" + i, x + 8, y - 10, \"blue\", 9)\n    i = i + 1\nname = \"\"\nif num == 1:\n    name = \"氢 H：宇宙最多\"\nif num == 2:\n    name = \"氦 He：气球安全气\"\nif num == 3:\n    name = \"锂 Li：电池心脏\"\nif num == 4:\n    name = \"铍 Be：轻而硬\"\nif num == 5:\n    name = \"硼 B：洗涤剂\"\nif num == 6:\n    name = \"碳 C：钻石铅笔芯\"\nif num == 7:\n    name = \"氮 N：空气 78%\"\nif num == 8:\n    name = \"氧 O：生命之气\"\nif num == 9:\n    name = \"氟 F：牙膏防蛀\"\nif num == 10:\n    name = \"氖 Ne：霓虹灯\"\nwrite(\"\" + num + \" 号：\" + name, -190, 140, \"red\", 13)\nwrite(\"红色 = 当前选中\", -190, 112, \"orange\", 10)"
+  }
 }

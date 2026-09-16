@@ -142,5 +142,25 @@
       "answer": 1,
       "explain": "中生代（三叠纪-侏罗纪-白垩纪）是恐龙的时代"
     }
-  ]
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "era",
+        "label": "地质年代",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "value": 1,
+        "unit": "（1太2古3中4新5今）"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "恐龙生活在哪个代？（中生代）",
+      "最古老的生命痕迹在哪？（太古代）",
+      "人类出现在最晚的新生代——历史很短！"
+    ],
+    "code": "# 化石时间线探索台\nera = 1   # 1太古代 2古生代 3中生代 4新生代 5现代\n\nhide()\npen_color(\"green\")\npen_down()\ngo_to(-180, 80)\ngo_to(180, 80)\npen_up()\ninfo = \"\"\ni = 1\nwhile i < 6:\n    x = -180 + i * 72\n    pen_color(\"blue\")\n    if i == era:\n        pen_color(\"red\")\n    pen_down()\n    go_to(x, 65)\n    go_to(x, 95)\n    pen_up()\n    if i == 1:\n        write(\"太古代\", x - 24, 115, \"blue\", 10)\n    if i == 2:\n        write(\"古生代\", x - 24, 115, \"blue\", 10)\n    if i == 3:\n        write(\"中生代\", x - 24, 115, \"blue\", 10)\n    if i == 4:\n        write(\"新生代\", x - 24, 115, \"blue\", 10)\n    if i == 5:\n        write(\"现代\", x - 24, 115, \"blue\", 10)\n    i = i + 1\nif era == 1:\n    info = \"最原始的生命（蓝藻）\"\nif era == 2:\n    info = \"三叶虫繁盛，鱼类登陆\"\nif era == 3:\n    info = \"恐龙统治地球🦕\"\nif era == 4:\n    info = \"哺乳动物崛起，冰川期\"\nif era == 5:\n    info = \"人类文明🌍\"\nwrite(info, -140, -30, \"red\", 15)\nwrite(\"左=远古 右=现在\", -180, 145, \"orange\", 10)"
+  }
 }

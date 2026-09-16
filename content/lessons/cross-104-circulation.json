@@ -153,5 +153,25 @@
     }
   ],
   "textbook": "人教版生物学七年级下册",
-  "grade": 7
+  "grade": 7,
+  "lab": {
+    "params": [
+      {
+        "name": "loops",
+        "label": "循环圈数",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "value": 1,
+        "unit": " 圈"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "血液从心脏出发要跑几条路？（体循环+肺循环）",
+      "肺循环里血液变成鲜红色，为什么？",
+      "一圈循环要经过心脏几次？"
+    ],
+    "code": "# 血液循环探索台\nloops = 1   # 循环圈数\n\nhide()\npen_color(\"red\")\npen_down()\ni = 0\nwhile i < loops:\n    go_to(-120, 0)\n    go_to(-120, 60)\n    go_to(0, 60)\n    go_to(0, 0)\n    pen_up()\n    write(\"肺循环（右心→肺→左心）\", -160, 75, \"blue\", 10)\n    pen_down()\n    go_to(0, -20)\n    go_to(120, -20)\n    go_to(120, -70)\n    go_to(0, -70)\n    go_to(0, -20)\n    pen_up()\n    i = i + 1\nwrite(\"体循环（左心→全身→右心）\", 10, -95, \"red\", 10)\nwrite(\"❤ 心脏（中心）\", -30, 12, \"red\", 12)\nwrite(\"跑了 \" + loops + \" 圈 = \" + loops * 2 + \" 段循环\", -190, 130, \"red\", 13)\nwrite(\"动脉血(红)携氧出，静脉血(蓝)回\", -190, 100, \"blue\", 10)"
+  }
 }

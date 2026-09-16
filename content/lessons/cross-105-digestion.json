@@ -154,5 +154,25 @@
     }
   ],
   "textbook": "人教版生物学七年级下册",
-  "grade": 7
+  "grade": 7,
+  "lab": {
+    "params": [
+      {
+        "name": "food",
+        "label": "食物编号",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "value": 1,
+        "unit": "（1淀2蛋3脂4水）"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "淀粉从哪站开始被消化？（口腔的唾液！）",
+      "蛋白质的主战场在哪？（胃）",
+      "脂肪要到小肠才有胆汁+酶帮忙——为什么？"
+    ],
+    "code": "# 消化之旅探索台（按食物看消化路线）\nfood = 1   # 1=淀粉 2=蛋白质 3=脂肪 4=水\n\nhide()\nstart = \"\"\nend = \"\"\nif food == 1:\n    start = \"口腔（唾液淀粉酶）\"\n    end = \"小肠（变成葡萄糖）\"\nif food == 2:\n    start = \"胃（胃蛋白酶+盐酸）\"\n    end = \"小肠（变成氨基酸）\"\nif food == 3:\n    start = \"小肠（胆汁乳化+酶）\"\n    end = \"小肠（变成甘油+脂肪酸）\"\nif food == 4:\n    start = \"胃和大肠\"\n    end = \"直接吸收，不用消化！\"\ni = 0\nwhile i < 5:\n    x = -170 + i * 85\n    pen_color(\"blue\")\n    if i == 0:\n        pen_color(\"green\")\n    pen_down()\n    go_to(x, 20)\n    go_to(x + 60, 20)\n    go_to(x + 60, -20)\n    go_to(x, -20)\n    go_to(x, 20)\n    pen_up()\n    i = i + 1\nwrite(\"口腔 → 食道 → 胃 → 小肠 → 大肠\", -190, 60, \"blue\", 11)\nwrite(\"起点：\" + start, -190, -80, \"green\", 13)\nwrite(\"终点：\" + end, -190, -115, \"red\", 13)\nwrite(\"绿色=第一站\", -190, 130, \"orange\", 10)"
+  }
 }

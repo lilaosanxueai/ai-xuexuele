@@ -154,5 +154,24 @@
       "answer": 1,
       "explain": "水往低处流：地势决定了大江大河的走向"
     }
-  ]
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "step",
+        "label": "阶梯编号",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "第一级阶梯平均海拔 4000 米以上，叫什么？（青藏高原）",
+      "第二、三级阶梯的分界线是什么山？（巫山雪峰山一带）",
+      "大河为什么自西向东流？"
+    ],
+    "code": "# 中国三级阶梯探索台\nstep = 1   # 阶梯编号\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-180, -90)\ngo_to(-180, 100)\ngo_to(-60, 100)\ngo_to(-60, 40)\ngo_to(40, 40)\ngo_to(40, -20)\ngo_to(180, -20)\ngo_to(180, -90)\ngo_to(-180, -90)\npen_up()\nif step == 1:\n    pen_color(\"red\")\n    pen_down()\n    go_to(-170, 105)\n    go_to(-70, 105)\n    pen_up()\n    write(\"第一级：青藏高原（>4000m）「世界屋脊」\", -190, 140, \"red\", 12)\n    write(\"雪山连绵，大河发源地（长江黄河）\", -190, 112, \"blue\", 10)\nif step == 2:\n    pen_color(\"red\")\n    pen_down()\n    go_to(-55, 45)\n    go_to(35, 45)\n    pen_up()\n    write(\"第二级：高原盆地（1000-2000m）\", -190, 140, \"red\", 12)\n    write(\"黄土高原/云贵高原/四川盆地…\", -190, 112, \"blue\", 10)\nif step == 3:\n    pen_color(\"red\")\n    pen_down()\n    go_to(45, -15)\n    go_to(175, -15)\n    pen_up()\n    write(\"第三级：平原丘陵（<500m）\", -190, 140, \"red\", 12)\n    write(\"华北平原/长江中下游平原：人口密集\", -190, 112, \"blue\", 10)\nwrite(\"红色=当前阶梯\", -100, -120, \"orange\", 10)\nwrite(\"地势西高东低→江河东流入海\", -190, -145, \"green\", 11)"
+  }
 }

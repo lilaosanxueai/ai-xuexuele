@@ -142,5 +142,24 @@
     }
   ],
   "textbook": "人教版化学九年级下册",
-  "grade": 9
+  "grade": 9,
+  "lab": {
+    "params": [
+      {
+        "name": "h",
+        "label": "氢的分界分",
+        "min": 1,
+        "max": 4,
+        "step": 0.5,
+        "value": 2
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "分界线比谁高，谁就能跟稀酸反应放出氢气？",
+      "锌 4 分、铁 3 分、铜 1 分——谁能置换酸里的氢？",
+      "把分界线调到 1，铜也能反应了？（现实里不行哦）"
+    ],
+    "code": "# 金属活动性排行榜探索台\nh = 2   # 氢的分界分\n\nhide()\nzn = 4\nfe = 3\ncu = 1\npen_color(\"red\")\npen_down()\ngo_to(-170, -100)\ngo_to(-170, -100 + zn * 30)\ngo_to(-110, -100 + zn * 30)\ngo_to(-110, -100)\ngo_to(-170, -100)\npen_up()\nwrite(\"锌4\", -150, -122, \"red\", 10)\npen_down()\ngo_to(-70, -100)\ngo_to(-70, -100 + fe * 30)\ngo_to(-10, -100 + fe * 30)\ngo_to(-10, -100)\ngo_to(-70, -100)\npen_up()\nwrite(\"铁3\", -50, -122, \"red\", 10)\npen_down()\ngo_to(30, -100)\ngo_to(30, -100 + cu * 30)\ngo_to(90, -100 + cu * 30)\ngo_to(90, -100)\ngo_to(30, -100)\npen_up()\nwrite(\"铜1\", 50, -122, \"red\", 10)\npen_color(\"blue\")\npen_down()\ngo_to(-190, -100 + h * 30)\ngo_to(180, -100 + h * 30)\npen_up()\nwrite(\"氢的分界 \" + h, 130, -100 + h * 30 + 14, \"blue\", 11)\nif zn > h:\n    write(\"锌 > 氢：锌 + 稀酸 → 放氢气 ✓\", -190, 140, \"green\", 11)\nif zn <= h:\n    write(\"锌 < 氢：不反应 ✗\", -190, 140, \"orange\", 11)\nif fe > h:\n    write(\"铁 > 氢：铁 + 稀酸 → 放氢气 ✓\", -190, 118, \"green\", 11)\nif fe <= h:\n    write(\"铁 < 氢：不反应 ✗\", -190, 118, \"orange\", 11)\nif cu > h:\n    write(\"铜 > 氢：反应（现实里不可能！）\", -190, 96, \"red\", 11)\nif cu <= h:\n    write(\"铜 < 氢：铜 + 稀酸不反应 ✗\", -190, 96, \"orange\", 11)"
+  }
 }

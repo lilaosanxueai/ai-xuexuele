@@ -150,5 +150,25 @@
       "explain": "扇闻法：用手轻扇，让少量气体飘向鼻孔，安全又有效"
     }
   ],
-  "textbook": "人教版化学（初中）"
+  "textbook": "人教版化学（初中）",
+  "lab": {
+    "params": [
+      {
+        "name": "idx",
+        "label": "试剂编号",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "value": 1,
+        "unit": "（1酸2碱3盐4指示）"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "酸和碱的 pH 各在什么范围？",
+      "石蕊试液遇酸变什么色？遇碱呢？",
+      "盐是酸碱中和的产物！"
+    ],
+    "code": "# 认试剂探索台\nidx = 1   # 1=酸 2=碱 3=盐 4=指示剂\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-40, 110)\ngo_to(-40, -70)\ngo_to(-25, -100)\ngo_to(25, -100)\ngo_to(40, -70)\ngo_to(40, 110)\ngo_to(-40, 110)\npen_up()\nif idx == 1:\n    pen_color(\"red\")\n    write(\"稀盐酸（酸）pH<7\", -180, 130, \"red\", 13)\n    write(\"尝起来酸（严禁尝！）使石蕊变红\", -180, 92, \"blue\", 11)\nif idx == 2:\n    pen_color(\"blue\")\n    write(\"氢氧化钠（碱）pH>7\", -180, 130, \"red\", 13)\n    write(\"滑腻感（严禁摸！）使石蕊变蓝\", -180, 92, \"blue\", 11)\nif idx == 3:\n    pen_color(\"green\")\n    write(\"食盐（盐）\", -180, 130, \"red\", 13)\n    write(\"酸 + 碱 → 盐 + 水（中和反应）\", -180, 92, \"blue\", 11)\nif idx == 4:\n    pen_color(\"orange\")\n    write(\"石蕊试液（指示剂）\", -180, 130, \"red\", 13)\n    write(\"遇酸变红、遇碱变蓝的侦察兵\", -180, 92, \"blue\", 11)\nif idx != 4:\n    pen_down()\n    go_to(-38, 60)\n    go_to(38, 60)\n    go_to(38, -60)\n    go_to(-38, -60)\n    go_to(-38, 60)\n    pen_up()\nwrite(\"试管里的液体颜色会变哦\", -100, -140, \"green\", 10)"
+  }
 }

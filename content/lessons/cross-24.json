@@ -125,5 +125,25 @@
   "codeLesson": true,
   "starterCode": "# 过山车：势能与动能互转\ngo_to(-140, -100)\nsay(\"出发！电动爬坡中（势能储存中）...\")\ngo_to(0, 110)\nsay(\"最高点：势能最大，动能为零\")\nwait(0.5)\n\nsay(\"俯冲！势能 -> 动能\")\ngo_to(140, -100)\nsay(\"最低点：动能最大！\")\n\ngo_to(0, 0)\nsay(\"机械能 = 势能 + 动能，总量不变！\")\n",
   "textbook": "人教版物理八年级下册",
-  "grade": 8
+  "grade": 8,
+  "lab": {
+    "params": [
+      {
+        "name": "h0",
+        "label": "坡顶高度",
+        "min": 40,
+        "max": 130,
+        "step": 10,
+        "value": 110,
+        "unit": " m"
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "轨道最高点越高，冲下来时速度越大？",
+      "顶点时动能为 0 势能最大，最低点呢？",
+      "能量像「钱」在两个口袋间转移，总数不变"
+    ],
+    "code": "# 过山车能量探索台\nh0 = 110   # 最高点高度\n\nhide()\nm = 1\ng = 10\npen_color(\"blue\")\npen_down()\ngo_to(-160, -110)\ngo_to(0, -110 + h0)\ngo_to(160, -110)\npen_up()\nep = m * g * h0\nv = sqrt(2 * g * h0)\nwrite(\"顶点：势能 \" + ep + \" J，动能 0\", -190, 140, \"red\", 12)\nwrite(\"底点：动能 \" + ep + \" J，速度 v=√(2gh)=\" + v, -190, 112, \"green\", 12)\nwrite(\"Ep + Ek 恒 = \" + ep + \" J\", -190, 84, \"orange\", 12)\nwrite(\"越高冲得越快！\", -190, -145, \"blue\", 11)"
+  }
 }

@@ -124,5 +124,24 @@
   "codeLesson": true,
   "starterCode": "# 消化系统一日游\ngo_to(-150, 0)\nsay(\"第 1 站 口腔：牙齿切碎 + 唾液分解淀粉\")\ngo_to(-80, 0)\nsay(\"第 2 站 食道：自动电梯，只传送不消化\")\ngo_to(0, 0)\nsay(\"第 3 站 胃：强酸 + 蠕动 = 搅拌车间\")\ngo_to(130, 0)\nsay(\"第 4 站 小肠：5-7 米长！90% 营养在这里吸收\")\ngo_to(60, -80)\nsay(\"第 5 站 大肠：回收水分，旅程结束\")\nsay(\"全程 9 米，配合默契！\")\n",
   "textbook": "人教版生物学七年级下册",
-  "grade": 7
+  "grade": 7,
+  "lab": {
+    "params": [
+      {
+        "name": "stop",
+        "label": "停靠站",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "value": 3
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "食物按什么顺序经过这些器官？",
+      "最长的一站是哪？（小肠 5-7 米）",
+      "大肠的作用是什么？"
+    ],
+    "code": "# 消化系统一日游探索台\nstop = 1   # 停靠站\n\nhide()\ninfo = \"\"\nif stop == 1:\n    info = \"口腔：牙齿切碎+唾液分解淀粉\"\nif stop == 2:\n    info = \"食道：自动电梯，只传送\"\nif stop == 3:\n    info = \"胃：盐酸+蠕动=搅拌车间\"\nif stop == 4:\n    info = \"小肠：5-7米！90%营养在此吸收\"\nif stop == 5:\n    info = \"大肠：吸水，残渣变粪便\"\ni = 1\nwhile i < 6:\n    x = -170 + i * 68\n    if i == stop:\n        pen_color(\"red\")\n    if i != stop:\n        pen_color(\"blue\")\n    pen_down()\n    go_to(x - 24, 30)\n    go_to(x + 24, 30)\n    go_to(x + 24, -30)\n    go_to(x - 24, -30)\n    go_to(x - 24, 30)\n    pen_up()\n    write(\"\" + i, x, 48, \"blue\", 11)\n    i = i + 1\nwrite(\"第 \" + stop + \" 站：\" + info, -190, 130, \"red\", 12)\nwrite(\"红色=当前停靠站\", -190, 100, \"orange\", 10)"
+  }
 }

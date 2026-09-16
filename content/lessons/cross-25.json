@@ -116,5 +116,40 @@
   "codeLesson": true,
   "starterCode": "# 燃烧三条件判断\nfuel = True      # 有可燃物（蜡烛）\noxygen = True    # 有氧气\nhot = True       # 温度达到着火点\n\nif fuel:\n    if oxygen:\n        if hot:\n            say(\"三个条件齐了——燃烧！\")\n        else:\n            say(\"温度不够，点不着\")\n    else:\n        say(\"没氧气，熄灭！\")\n\n# 消防实验：盖杯盖（隔绝氧气）\noxygen = False\nif oxygen == False:\n    say(\"盖上杯盖 -> 氧气耗尽 -> 火灭了！\")\n",
   "textbook": "人教版化学九年级上册",
-  "grade": 9
+  "grade": 9,
+  "lab": {
+    "params": [
+      {
+        "name": "fuel",
+        "label": "可燃物（0无1有）",
+        "min": 0,
+        "max": 1,
+        "step": 1,
+        "value": 1
+      },
+      {
+        "name": "oxygen",
+        "label": "氧气（0无1有）",
+        "min": 0,
+        "max": 1,
+        "step": 1,
+        "value": 1
+      },
+      {
+        "name": "hot",
+        "label": "达到着火点（0/1）",
+        "min": 0,
+        "max": 1,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "三个条件都为 1 才能燃烧——试试关掉任何一个",
+      "关掉氧气：蜡烛为什么会灭？（盖杯子实验）",
+      "灭火的原理就是拆掉三要素之一！"
+    ],
+    "code": "# 燃烧三要素探索台\nfuel = 1     # 可燃物\noxygen = 1   # 氧气\nhot = 1      # 达到着火点\n\nhide()\nwrite(\"可燃物 \" + fuel + \"  氧气 \" + oxygen + \"  着火点 \" + hot, -190, 140, \"blue\", 12)\nif fuel == 1:\n    if oxygen == 1:\n        if hot == 1:\n            pen_color(\"red\")\n            pen_down()\n            go_to(0, -60)\n            go_to(-30, 10)\n            go_to(0, 70)\n            go_to(30, 10)\n            go_to(0, -60)\n            pen_up()\n            pen_color(\"orange\")\n            pen_down()\n            go_to(0, -50)\n            go_to(-15, 5)\n            go_to(0, 45)\n            go_to(15, 5)\n            go_to(0, -50)\n            pen_up()\n            write(\"🔥 燃烧！三要素齐了\", -80, 105, \"red\", 14)\nif fuel == 0:\n    write(\"没有可燃物，烧不起来\", -80, 105, \"orange\", 13)\nif oxygen == 0:\n    write(\"隔绝氧气→火灭（盖杯子）\", -80, 105, \"blue\", 13)\nif hot == 0:\n    write(\"没到着火点，点不着\", -80, 105, \"green\", 13)\npen_color(\"blue\")\npen_down()\ngo_to(-40, -60)\ngo_to(40, -60)\ngo_to(40, -75)\ngo_to(-40, -75)\ngo_to(-40, -60)\npen_up()\nwrite(\"蜡烛\", -18, -95, \"blue\", 10)"
+  }
 }

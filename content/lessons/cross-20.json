@@ -125,5 +125,33 @@
   "codeLesson": true,
   "starterCode": "# 光的折射演示\npen_color(\"blue\")\ngo_to(-160, 80)\npen_down()\ngo_to(0, 0)      # 入射到水面 (0,0)，入射角约 45 度\npen_up()\nsay(\"空气中的入射光：45 度\")\n\n# 折射进入水中：角度变小约 32 度\npen_color(\"red\")\ngo_to(0, 0)\npen_down()\ngo_to(60, -100)  # 水下折射线，更接近竖直\npen_up()\nsay(\"水中的折射光：约 32 度——变弯了！\")\n",
   "textbook": "人教版物理八年级上册",
-  "grade": 8
+  "grade": 8,
+  "lab": {
+    "params": [
+      {
+        "name": "inc",
+        "label": "入射角",
+        "min": 10,
+        "max": 80,
+        "step": 5,
+        "value": 45,
+        "unit": "°"
+      },
+      {
+        "name": "n2",
+        "label": "水的折射率",
+        "min": 1,
+        "max": 2.4,
+        "step": 0.05,
+        "value": 1.33
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "进入水中后，光线折向还是偏离法线？",
+      "入射角越大，折得越明显吗？",
+      "折射率调到 2.4（钻石），光线几乎贴着法线？"
+    ],
+    "code": "# 光的折射探索台：n1·sinθ1 = n2·sinθ2\ninc = 45   # 入射角\nn2 = 1.33 # 折射率（水 1.33 玻璃 1.5 钻石 2.4）\n\nhide()\nn1 = 1\nsinr = n1 * sin(inc) / n2\npen_color(\"blue\")\npen_down()\ngo_to(-170 * sin(inc), 150 * cos(inc))\ngo_to(0, 0)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(0, 0)\nsy = sinr / 1\ni = 0\nwhile i < 150:\n    go_to(sy * i, 0 - i)\n    i = i + 10\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(0, 130)\ngo_to(0, -130)\npen_up()\npen_color(\"blue\")\npen_down()\ngo_to(-190, 0)\ngo_to(190, 0)\npen_up()\nwrite(\"水（n=\" + n2 + \"）\", 150, 16, \"blue\", 10)\nwrite(\"空气\", 150, -16, \"green\", 10)\nwrite(\"入射 \" + inc + \"° → 折射更靠近法线\", -190, 140, \"red\", 12)\nwrite(\"光从空气进水：折向法线（变慢了）\", -190, 112, \"orange\", 11)"
+  }
 }

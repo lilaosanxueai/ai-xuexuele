@@ -156,5 +156,25 @@
     }
   ],
   "textbook": "人教版物理八年级上册",
-  "grade": 8
+  "grade": 8,
+  "lab": {
+    "params": [
+      {
+        "name": "inc",
+        "label": "入射角",
+        "min": 10,
+        "max": 80,
+        "step": 5,
+        "value": 45,
+        "unit": "°"
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "入射角变，反射角跟着变吗？总是相等？",
+      "法线（绿色虚线）和镜面（黑线）是什么关系？",
+      "入射光、反射光永远分居法线两侧"
+    ],
+    "code": "# 光的反射定律探索台\ninc = 45   # 入射角（度）\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-190 * sin(inc), -100)\ngo_to(0, 0)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(0, 0)\ngo_to(190 * sin(inc), -100)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(0, 120)\ngo_to(0, -110)\npen_up()\npen_color(\"blue\")\npen_down()\ngo_to(-190, -100)\ngo_to(190, -100)\npen_up()\nwrite(\"镜面\", 160, -120, \"blue\", 10)\nwrite(\"法线\", 10, 100, \"green\", 10)\nwrite(\"入射角 \" + inc + \"° = 反射角 \" + inc + \"°\", -190, 140, \"red\", 13)\nwrite(\"两角相等——永远！\", -190, 112, \"green\", 12)"
+  }
 }

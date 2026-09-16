@@ -153,5 +153,24 @@
     }
   ],
   "textbook": "人教版生物学七年级下册",
-  "grade": 7
+  "grade": 7,
+  "lab": {
+    "params": [
+      {
+        "name": "amount",
+        "label": "激素分泌量",
+        "min": 0,
+        "max": 3,
+        "step": 0.5,
+        "value": 1.5
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "激素起效快还是神经起效快？（看两条线）",
+      "激素量变多，作用持续更久吗？",
+      "神经像「短信」，激素像「挂号信」"
+    ],
+    "code": "# 激素调节探索台：慢邮差 vs 快递\namount = 1.5   # 激素分泌量\n\nhide()\npen_color(\"red\")\npen_down()\ngo_to(-180, -100)\ngo_to(-150, 60)\ngo_to(-90, 40)\ngo_to(0, 10)\ngo_to(180, 0)\npen_up()\nwrite(\"神经：毫秒级快闪\", -170, 75, \"red\", 10)\npen_color(\"blue\")\npen_down()\ngo_to(-180, -100)\ngo_to(0, -100 + 15 * amount)\ngo_to(60, -100 + 55 * amount)\ngo_to(130, -100 + 50 * amount)\ngo_to(180, -100 + 40 * amount)\npen_up()\nwrite(\"激素：慢起慢落\", -170, -125, \"blue\", 10)\nwrite(\"横轴=时间 纵轴=反应强度\", -190, 140, \"green\", 10)\nwrite(\"分泌量 \" + amount + \"：高峰 \" + 55 * amount, 60, 130, \"blue\", 12)\nif amount > 2.5:\n    write(\"激素过多：机能亢进！\", 60, 105, \"orange\", 11)\nif amount < 0.5:\n    write(\"激素不足：萎靡怕冷\", 60, 105, \"orange\", 11)"
+  }
 }

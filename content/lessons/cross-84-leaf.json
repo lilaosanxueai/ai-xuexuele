@@ -151,5 +151,25 @@
     }
   ],
   "textbook": "人教版生物学七年级上册",
-  "grade": 7
+  "grade": 7,
+  "lab": {
+    "params": [
+      {
+        "name": "kind",
+        "label": "叶脉类型",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1,
+        "unit": "（1网2平3叉）"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "网状脉像什么植物的叶子？（大多数双子叶）",
+      "平行脉呢？（单子叶，如竹子小麦）",
+      "叶脉是叶子的「水管公路」"
+    ],
+    "code": "# 叶脉侦探探索台\nkind = 1   # 1=网状脉 2=平行脉 3=叉状脉\n\nhide()\npen_color(\"green\")\npen_down()\ni = 0\ngo_to(0, -110)\nwhile i < 36:\n    ang = (i + 1) * 10\n    if ang < 90:\n        go_to(85 * cos(ang - 90), -110 + 105 * sin(ang))\n    if ang >= 270:\n        go_to(85 * cos(ang - 90), -110 + 105 * sin(ang))\n    if ang >= 90:\n        if ang < 270:\n            go_to(70 * cos(ang + 90), -110 - 40 * sin(ang - 90))\n    i = i + 1\npen_up()\nif kind == 1:\n    pen_color(\"red\")\n    pen_down()\n    go_to(0, -110)\n    go_to(0, 20)\n    pen_up()\n    j = 1\n    while j < 5:\n        y = -100 + j * 24\n        pen_down()\n        go_to(-10, y + 14)\n        go_to(0, y)\n        go_to(10, y + 14)\n        pen_up()\n        j = j + 1\n    write(\"网状脉：互相交错成网\", -190, 130, \"red\", 12)\nif kind == 2:\n    pen_color(\"red\")\n    pen_down()\n    j = 0\n    while j < 7:\n        x = -54 + j * 18\n        go_to(x, -100)\n        go_to(x, 10)\n        pen_up()\n        j = j + 1\n    write(\"平行脉：条条平行到顶尖\", -190, 130, \"red\", 12)\nif kind == 3:\n    pen_color(\"red\")\n    pen_down()\n    go_to(0, -110)\n    go_to(0, -20)\n    go_to(-30, 30)\n    pen_up()\n    go_to(0, -20)\n    pen_down()\n    go_to(30, 30)\n    pen_up()\n    go_to(0, -20)\n    pen_down()\n    go_to(0, 60)\n    pen_up()\n    write(\"叉状脉：像分叉的树枝（银杏）\", -190, 130, \"red\", 12)"
+  }
 }

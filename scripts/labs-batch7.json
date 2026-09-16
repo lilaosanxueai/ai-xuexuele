@@ -1,0 +1,225 @@
+{
+  "_说明": "互动实验室第七批：物理 8 节 + 化学 10 节。注入：node scripts/inject-labs.mjs labs-batch7.json",
+  "labs": {
+    "cross-08": {
+      "params": [
+        { "name": "freq", "label": "振动频率", "min": 1, "max": 12, "step": 1, "value": 3, "unit": " 次/拍" }
+      ],
+      "grid": true,
+      "explore": [
+        "频率越高，波形越密集还是稀疏？",
+        "波形密 = 音调高还是低？",
+        "慢摇（低频）像什么声音？快摇（高频）呢？"
+      ],
+      "code": "# 音调与频率探索台\nfreq = 3   # 振动频率\n\nhide()\npen_color(\"blue\")\npen_down()\nx = -190\nyo = 0\ni = 0\nwhile x < 190:\n    seg = 360 / freq * (x + 190) / 380 * freq\n    y = 60 * sin(x * freq)\n    go_to(x, y)\n    x = x + 4\npen_up()\nwrite(\"频率 \" + freq, -190, 140, \"red\", 13)\nif freq > 8:\n    write(\"波形密集 → 音调高（尖细）\", -190, 112, \"orange\", 12)\nif freq < 4:\n    write(\"波形稀疏 → 音调低（低沉）\", -190, 112, \"green\", 12)\nif freq >= 4:\n    if freq <= 8:\n        write(\"中等音调\", -190, 112, \"blue\", 12)\nwrite(\"横轴=距离，看波的疏密！\", -190, -140, \"blue\", 10)"
+    },
+    "cross-09": {
+      "params": [
+        { "name": "inc", "label": "入射角", "min": 10, "max": 80, "step": 5, "value": 45, "unit": "°" }
+      ],
+      "grid": true,
+      "explore": [
+        "入射角变，反射角跟着变吗？总是相等？",
+        "法线（绿色虚线）和镜面（黑线）是什么关系？",
+        "入射光、反射光永远分居法线两侧"
+      ],
+      "code": "# 光的反射定律探索台\ninc = 45   # 入射角（度）\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-190 * sin(inc), -100)\ngo_to(0, 0)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(0, 0)\ngo_to(190 * sin(inc), -100)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(0, 120)\ngo_to(0, -110)\npen_up()\npen_color(\"blue\")\npen_down()\ngo_to(-190, -100)\ngo_to(190, -100)\npen_up()\nwrite(\"镜面\", 160, -120, \"blue\", 10)\nwrite(\"法线\", 10, 100, \"green\", 10)\nwrite(\"入射角 \" + inc + \"° = 反射角 \" + inc + \"°\", -190, 140, \"red\", 13)\nwrite(\"两角相等——永远！\", -190, 112, \"green\", 12)"
+    },
+    "cross-20": {
+      "params": [
+        { "name": "inc", "label": "入射角", "min": 10, "max": 80, "step": 5, "value": 45, "unit": "°" },
+        { "name": "n2", "label": "水的折射率", "min": 1, "max": 2.4, "step": 0.05, "value": 1.33 }
+      ],
+      "grid": true,
+      "explore": [
+        "进入水中后，光线折向还是偏离法线？",
+        "入射角越大，折得越明显吗？",
+        "折射率调到 2.4（钻石），光线几乎贴着法线？"
+      ],
+      "code": "# 光的折射探索台：n1·sinθ1 = n2·sinθ2\ninc = 45   # 入射角\nn2 = 1.33 # 折射率（水 1.33 玻璃 1.5 钻石 2.4）\n\nhide()\nn1 = 1\nsinr = n1 * sin(inc) / n2\npen_color(\"blue\")\npen_down()\ngo_to(-170 * sin(inc), 150 * cos(inc))\ngo_to(0, 0)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(0, 0)\nsy = sinr / 1\ni = 0\nwhile i < 150:\n    go_to(sy * i, 0 - i)\n    i = i + 10\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(0, 130)\ngo_to(0, -130)\npen_up()\npen_color(\"blue\")\npen_down()\ngo_to(-190, 0)\ngo_to(190, 0)\npen_up()\nwrite(\"水（n=\" + n2 + \"）\", 150, 16, \"blue\", 10)\nwrite(\"空气\", 150, -16, \"green\", 10)\nwrite(\"入射 \" + inc + \"° → 折射更靠近法线\", -190, 140, \"red\", 12)\nwrite(\"光从空气进水：折向法线（变慢了）\", -190, 112, \"orange\", 11)"
+    },
+    "cross-24": {
+      "params": [
+        { "name": "h0", "label": "坡顶高度", "min": 40, "max": 130, "step": 10, "value": 110, "unit": " m" }
+      ],
+      "grid": true,
+      "explore": [
+        "轨道最高点越高，冲下来时速度越大？",
+        "顶点时动能为 0 势能最大，最低点呢？",
+        "能量像「钱」在两个口袋间转移，总数不变"
+      ],
+      "code": "# 过山车能量探索台\nh0 = 110   # 最高点高度\n\nhide()\nm = 1\ng = 10\npen_color(\"blue\")\npen_down()\ngo_to(-160, -110)\ngo_to(0, -110 + h0)\ngo_to(160, -110)\npen_up()\nep = m * g * h0\nv = sqrt(2 * g * h0)\nwrite(\"顶点：势能 \" + ep + \" J，动能 0\", -190, 140, \"red\", 12)\nwrite(\"底点：动能 \" + ep + \" J，速度 v=√(2gh)=\" + v, -190, 112, \"green\", 12)\nwrite(\"Ep + Ek 恒 = \" + ep + \" J\", -190, 84, \"orange\", 12)\nwrite(\"越高冲得越快！\", -190, -145, \"blue\", 11)"
+    },
+    "cross-70": {
+      "params": [
+        { "name": "n2", "label": "介质折射率", "min": 1, "max": 2.4, "step": 0.05, "value": 1.5 }
+      ],
+      "grid": true,
+      "explore": [
+        "折射率 1.33（水）、1.5（玻璃）、2.4（钻石）——谁折得最厉害？",
+        "n=1 时折射角和入射角什么关系？（没有折射！）",
+        "折射率越大，光在介质中跑得越慢"
+      ],
+      "code": "# 折射定律探索台：n1·sinθ1 = n2·sinθ2（入射 45°）\nn2 = 1.5   # 介质折射率\n\nhide()\nn1 = 1\ninc = 45\nsinr = n1 * sin(inc) / n2\npen_color(\"blue\")\npen_down()\ngo_to(-170 * sin(inc), 150 * cos(inc))\ngo_to(0, 0)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(0, 0)\ni = 0\nwhile i < 150:\n    go_to(sinr * i, 0 - i)\n    i = i + 10\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(0, 130)\ngo_to(0, -130)\npen_up()\npen_color(\"blue\")\npen_down()\ngo_to(-190, 0)\ngo_to(190, 0)\npen_up()\nif n2 == 1:\n    write(\"n=1：不发生折射（同种介质）\", -190, 140, \"green\", 12)\nif n2 > 1:\n    write(\"n=\" + n2 + \"：折射角正弦 = \" + sinr, -190, 140, \"red\", 12)\nif n2 > 2:\n    write(\"钻石级折射：光被「拽」得很弯\", -190, 112, \"orange\", 11)"
+    },
+    "cross-80": {
+      "params": [
+        { "name": "t", "label": "下落时间", "min": 1, "max": 5, "step": 0.5, "value": 3, "unit": " 秒" }
+      ],
+      "grid": true,
+      "explore": [
+        "数据点（红）连成的线像什么函数？",
+        "高度 h=5t²——时间翻倍高度变几倍？",
+        "AI 从数据里「学」到的规律，和课本公式一致！"
+      ],
+      "code": "# AI 学重力探索台：数据归纳 h = 5t²\nt = 3   # 下落时间\n\nhide()\npen_color(\"blue\")\npen_down()\nx = 0\nwhile x < 6.1:\n    go_to(x * 32 - 100, 130 - 5 * x * x * 0.9)\n    x = x + 0.25\npen_up()\ni = 1\nwhile i < 6:\n    pen_color(\"red\")\n    pen_down()\n    go_to(i * 32 - 100, 130 - 5 * i * i * 0.9)\n    pen_up()\n    go_to(i * 32 - 97, 133 - 5 * i * i * 0.9)\n    pen_down()\n    go_to(i * 32 - 103, 127 - 5 * i * i * 0.9)\n    pen_up()\n    i = i + 1\nh = 5 * t * t\nwrite(\"t=\" + t + \"s → h=5×\" + t + \"²=\" + h + \" 米\", -190, 140, \"red\", 12)\nwrite(\"红点=实验数据 蓝线=学到的规律\", -190, 112, \"blue\", 11)\nwrite(\"时间和高度不是正比，是平方！\", -190, -145, \"orange\", 11)"
+    },
+    "cross-81": {
+      "params": [
+        { "name": "idx", "label": "元件编号", "min": 1, "max": 4, "step": 1, "value": 1, "unit": "（1电2阻3灯4开）" }
+      ],
+      "grid": false,
+      "explore": [
+        "每个元件在电路里干什么？",
+        "电源是「推」电流的，那灯泡呢？",
+        "断开开关，电路里发生了什么？"
+      ],
+      "code": "# 认电路元件探索台\nidx = 1   # 1=电池 2=电阻 3=灯泡 4=开关\n\nhide()\nif idx == 1:\n    write(\"🔋 电池（电源）\", -120, 120, \"red\", 15)\n    write(\"提供电压，推动电流流动\", -120, 80, \"blue\", 12)\n    write(\"就像水泵把水推上高处\", -120, 45, \"orange\", 11)\nif idx == 2:\n    write(\"▭ 电阻\", -120, 120, \"red\", 15)\n    write(\"阻碍电流，分走电压\", -120, 80, \"blue\", 12)\n    write(\"就像水管里的窄路口\", -120, 45, \"orange\", 11)\nif idx == 3:\n    write(\"💡 灯泡（用电器）\", -120, 120, \"red\", 15)\n    write(\"把电能变成光和热\", -120, 80, \"blue\", 12)\n    write(\"电流做功的「工地」\", -120, 45, \"orange\", 11)\nif idx == 4:\n    write(\"🔀 开关\", -120, 120, \"red\", 15)\n    write(\"控制电路通断\", -120, 80, \"blue\", 12)\n    write(\"断了=电流停止=灯灭\", -120, 45, \"orange\", 11)\npen_color(\"blue\")\npen_down()\ngo_to(-140, -60)\ngo_to(140, -60)\ngo_to(140, -100)\ngo_to(-140, -100)\ngo_to(-140, -60)\npen_up()\nwrite(\"电路符号认识了吗？换编号继续\", -120, -140, \"green\", 11)"
+    },
+    "hb-06": {
+      "params": [
+        { "name": "m", "label": "质量 m", "min": 10, "max": 200, "step": 1, "value": 79, "unit": " g" },
+        { "name": "v", "label": "体积 V", "min": 10, "max": 50, "step": 1, "value": 10, "unit": " cm³" }
+      ],
+      "grid": false,
+      "explore": [
+        "算出的密度是多少？对照：铝2.7/铁7.9/金19.3",
+        "同体积下质量越大，密度越？",
+        "密度是物质的「身份证」——换形状也不变"
+      ],
+      "code": "# 密度鉴定所探索台：ρ = m / V\nm = 79   # 质量（克）\nv = 10   # 体积（立方厘米）\n\nhide()\nrho = m / v\npen_color(\"blue\")\npen_down()\ngo_to(-180, -100)\ngo_to(-180, -100 + rho * 11)\ngo_to(-120, -100 + rho * 11)\ngo_to(-120, -100)\ngo_to(-180, -100)\npen_up()\nwrite(\"铝 2.7\", -176, -125, \"blue\", 10)\npen_color(\"green\")\npen_down()\ngo_to(-80, -100)\ngo_to(-80, -100 + 7.9 * 11)\ngo_to(-20, -100 + 7.9 * 11)\ngo_to(-20, -100)\ngo_to(-80, -100)\npen_up()\nwrite(\"铁 7.9\", -70, -125, \"green\", 10)\npen_color(\"red\")\npen_down()\ngo_to(20, -100)\nif rho * 11 > 200:\n    pen_down()\n    go_to(20, 100)\n    go_to(80, 100)\n    go_to(80, -100)\n    go_to(20, -100)\nif rho * 11 <= 200:\n    go_to(20, -100 + rho * 11)\n    go_to(80, -100 + rho * 11)\n    go_to(80, -100)\n    go_to(20, -100)\npen_up()\nwrite(\"你的 ρ=\" + rho, 28, -125, \"red\", 10)\nwrite(m + \"g ÷ \" + v + \"cm³ = ρ \" + rho, -190, 140, \"red\", 14)\nif rho > 2.5:\n    if rho < 3:\n        write(\"像铝！\", 100, 90, \"green\", 12)\nif rho > 7:\n    if rho < 9:\n        write(\"像铁！\", 100, 90, \"green\", 12)\nif rho > 15:\n    write(\"比铁还密——重金属！\", 100, 90, \"orange\", 12)"
+    },
+    "cross-10": {
+      "params": [
+        { "name": "temp", "label": "温度", "min": -50, "max": 150, "step": 10, "value": 20, "unit": " ℃" }
+      ],
+      "grid": false,
+      "explore": [
+        "温度低于 0 时分子怎么排？（挤在一起=固态冰）",
+        "0-100 之间呢？（可以滑动=液态水）",
+        "超过 100 呢？（四处乱飞=气态水蒸气）"
+      ],
+      "code": "# 水的三态探索台\ntemp = 20   # 温度\n\nhide()\nstate = \"液态水\"\nspread = 26\nif temp < 0:\n    state = \"固态冰\"\n    spread = 14\nif temp > 100:\n    state = \"气态水蒸气\"\n    spread = 46\ni = 0\nwhile i < 12:\n    col = i - (i / 4) * 4\n    row = i / 4\n    x = -spread * 1.5 + col * spread\n    y = 40 - row * spread\n    pen_color(\"blue\")\n    pen_down()\n    go_to(x, y)\n    go_to(x + 3, y)\n    pen_up()\n    i = i + 1\nwrite(temp + \"℃ → \" + state, -190, 140, \"red\", 14)\nif temp < 0:\n    write(\"分子手拉手排排站（固定形状）\", -190, 112, \"blue\", 11)\nif temp > 100:\n    write(\"分子自由飞翔（充满整个空间）\", -190, 112, \"orange\", 11)\nif temp >= 0:\n    if temp <= 100:\n        write(\"分子可以滑动（随容器形状）\", -190, 112, \"green\", 11)\nwrite(\"温度=分子运动的剧烈程度\", -190, -140, \"green\", 10)"
+    },
+    "cross-11": {
+      "params": [
+        { "name": "temp", "label": "温度", "min": 0, "max": 100, "step": 5, "value": 40, "unit": " ℃" }
+      ],
+      "grid": false,
+      "explore": [
+        "温度越高，分子「跑」得越快还是慢？",
+        "热水为什么比冷水扩散快？",
+        "分子在动，我们看不见但能感觉到！"
+      ],
+      "code": "# 分子运动会探索台\ntemp = 40   # 温度\n\nhide()\nspeed = temp / 5\nwrite(\"温度 \" + temp + \"℃\", -190, 140, \"red\", 14)\npen_color(\"red\")\npen_down()\ngo_to(-180, -120)\ngo_to(-180 + temp * 1.6, -120)\ngo_to(-180 + temp * 1.6, -95)\ngo_to(-180, -95)\ngo_to(-180, -120)\npen_up()\nwrite(\"温度计\", -178, -85, \"red\", 9)\ni = 0\nwhile i < 10:\n    r1 = random(0, speed * 4)\n    r2 = random(0, speed * 4)\n    x = -60 + i * 14 + r1 - speed * 2\n    y = 40 + r2 - speed * 2\n    pen_color(\"blue\")\n    pen_down()\n    go_to(x, y)\n    go_to(x + 2 + speed / 2, y + 1)\n    pen_up()\n    i = i + 1\nif temp > 70:\n    write(\"分子横冲直撞！\", 60, 80, \"orange\", 12)\nif temp < 25:\n    write(\"分子慢悠悠\", 60, 80, \"green\", 12)\nwrite(\"蓝点=分子，线长=速度\", -120, -60, \"blue\", 10)"
+    },
+    "cross-129": {
+      "params": [
+        { "name": "h", "label": "氢的分界分", "min": 1, "max": 4, "step": 0.5, "value": 2 }
+      ],
+      "grid": true,
+      "explore": [
+        "分界线比谁高，谁就能跟稀酸反应放出氢气？",
+        "锌 4 分、铁 3 分、铜 1 分——谁能置换酸里的氢？",
+        "把分界线调到 1，铜也能反应了？（现实里不行哦）"
+      ],
+      "code": "# 金属活动性排行榜探索台\nh = 2   # 氢的分界分\n\nhide()\nzn = 4\nfe = 3\ncu = 1\npen_color(\"red\")\npen_down()\ngo_to(-170, -100)\ngo_to(-170, -100 + zn * 30)\ngo_to(-110, -100 + zn * 30)\ngo_to(-110, -100)\ngo_to(-170, -100)\npen_up()\nwrite(\"锌4\", -150, -122, \"red\", 10)\npen_down()\ngo_to(-70, -100)\ngo_to(-70, -100 + fe * 30)\ngo_to(-10, -100 + fe * 30)\ngo_to(-10, -100)\ngo_to(-70, -100)\npen_up()\nwrite(\"铁3\", -50, -122, \"red\", 10)\npen_down()\ngo_to(30, -100)\ngo_to(30, -100 + cu * 30)\ngo_to(90, -100 + cu * 30)\ngo_to(90, -100)\ngo_to(30, -100)\npen_up()\nwrite(\"铜1\", 50, -122, \"red\", 10)\npen_color(\"blue\")\npen_down()\ngo_to(-190, -100 + h * 30)\ngo_to(180, -100 + h * 30)\npen_up()\nwrite(\"氢的分界 \" + h, 130, -100 + h * 30 + 14, \"blue\", 11)\nif zn > h:\n    write(\"锌 > 氢：锌 + 稀酸 → 放氢气 ✓\", -190, 140, \"green\", 11)\nif zn <= h:\n    write(\"锌 < 氢：不反应 ✗\", -190, 140, \"orange\", 11)\nif fe > h:\n    write(\"铁 > 氢：铁 + 稀酸 → 放氢气 ✓\", -190, 118, \"green\", 11)\nif fe <= h:\n    write(\"铁 < 氢：不反应 ✗\", -190, 118, \"orange\", 11)\nif cu > h:\n    write(\"铜 > 氢：反应（现实里不可能！）\", -190, 96, \"red\", 11)\nif cu <= h:\n    write(\"铜 < 氢：铜 + 稀酸不反应 ✗\", -190, 96, \"orange\", 11)"
+    },
+    "cross-25": {
+      "params": [
+        { "name": "fuel", "label": "可燃物（0无1有）", "min": 0, "max": 1, "step": 1, "value": 1 },
+        { "name": "oxygen", "label": "氧气（0无1有）", "min": 0, "max": 1, "step": 1, "value": 1 },
+        { "name": "hot", "label": "达到着火点（0/1）", "min": 0, "max": 1, "step": 1, "value": 1 }
+      ],
+      "grid": false,
+      "explore": [
+        "三个条件都为 1 才能燃烧——试试关掉任何一个",
+        "关掉氧气：蜡烛为什么会灭？（盖杯子实验）",
+        "灭火的原理就是拆掉三要素之一！"
+      ],
+      "code": "# 燃烧三要素探索台\nfuel = 1     # 可燃物\noxygen = 1   # 氧气\nhot = 1      # 达到着火点\n\nhide()\nwrite(\"可燃物 \" + fuel + \"  氧气 \" + oxygen + \"  着火点 \" + hot, -190, 140, \"blue\", 12)\nif fuel == 1:\n    if oxygen == 1:\n        if hot == 1:\n            pen_color(\"red\")\n            pen_down()\n            go_to(0, -60)\n            go_to(-30, 10)\n            go_to(0, 70)\n            go_to(30, 10)\n            go_to(0, -60)\n            pen_up()\n            pen_color(\"orange\")\n            pen_down()\n            go_to(0, -50)\n            go_to(-15, 5)\n            go_to(0, 45)\n            go_to(15, 5)\n            go_to(0, -50)\n            pen_up()\n            write(\"🔥 燃烧！三要素齐了\", -80, 105, \"red\", 14)\nif fuel == 0:\n    write(\"没有可燃物，烧不起来\", -80, 105, \"orange\", 13)\nif oxygen == 0:\n    write(\"隔绝氧气→火灭（盖杯子）\", -80, 105, \"blue\", 13)\nif hot == 0:\n    write(\"没到着火点，点不着\", -80, 105, \"green\", 13)\npen_color(\"blue\")\npen_down()\ngo_to(-40, -60)\ngo_to(40, -60)\ngo_to(40, -75)\ngo_to(-40, -75)\ngo_to(-40, -60)\npen_up()\nwrite(\"蜡烛\", -18, -95, \"blue\", 10)"
+    },
+    "cross-27": {
+      "params": [
+        { "name": "num", "label": "原子序数", "min": 1, "max": 10, "step": 1, "value":  1 }
+      ],
+      "grid": false,
+      "explore": [
+        "前 10 号元素你都认识吗？换编号看看",
+        "序号 = 核电荷数 = 质子数 = 电子数",
+        "氢和氦在第 1 周期，钠在第几周期？"
+      ],
+      "code": "# 元素周期表前 10 号探索台\nnum = 1   # 原子序数\n\nhide()\ni = 1\nwhile i < 11:\n    col = i - (i / 5) * 5\n    row = i / 5\n    x = -130 + col * 56\n    y = 50 - row * 62\n    if i == num:\n        pen_color(\"red\")\n    if i != num:\n        pen_color(\"blue\")\n    pen_down()\n    go_to(x, y)\n    go_to(x + 48, y)\n    go_to(x + 48, y - 52)\n    go_to(x, y - 52)\n    go_to(x, y)\n    pen_up()\n    write(\"\" + i, x + 8, y - 10, \"blue\", 9)\n    i = i + 1\nname = \"\"\nif num == 1:\n    name = \"氢 H：宇宙最多\"\nif num == 2:\n    name = \"氦 He：气球安全气\"\nif num == 3:\n    name = \"锂 Li：电池心脏\"\nif num == 4:\n    name = \"铍 Be：轻而硬\"\nif num == 5:\n    name = \"硼 B：洗涤剂\"\nif num == 6:\n    name = \"碳 C：钻石铅笔芯\"\nif num == 7:\n    name = \"氮 N：空气 78%\"\nif num == 8:\n    name = \"氧 O：生命之气\"\nif num == 9:\n    name = \"氟 F：牙膏防蛀\"\nif num == 10:\n    name = \"氖 Ne：霓虹灯\"\nwrite(\"\" + num + \" 号：\" + name, -190, 140, \"red\", 13)\nwrite(\"红色 = 当前选中\", -190, 112, \"orange\", 10)"
+    },
+    "cross-29": {
+      "params": [
+        { "name": "case_id", "label": "案例编号", "min": 1, "max": 6, "step": 1, "value": 1 }
+      ],
+      "grid": false,
+      "explore": [
+        "这个变化生成了新物质吗？（看判断）",
+        "蜡烛的燃烧和熔化，哪个是化学变化？",
+        "判断钥匙：有没有新物质生成！"
+      ],
+      "code": "# 物理变化 vs 化学变化裁判台\ncase_id = 1   # 案例编号\n\nhide()\nq = \"\"\nans = \"物理变化\"\nwhy = \"没有新物质\"\nif case_id == 1:\n    q = \"冰 → 水\"\nif case_id == 2:\n    q = \"纸 → 灰烬\"\n    ans = \"化学变化\"\n    why = \"生成了新物质\"\nif case_id == 3:\n    q = \"铁 → 铁锈\"\n    ans = \"化学变化\"\n    why = \"氧化铁是新物质\"\nif case_id == 4:\n    q = \"水 → 水蒸气\"\nif case_id == 5:\n    q = \"蜡烛燃烧\"\n    ans = \"化学变化\"\n    why = \"生成 CO2 和水\"\nif case_id == 6:\n    q = \"蜡烛熔化\"\nwrite(\"案例\" + case_id + \"：「\" + q + \"」\", -190, 140, \"blue\", 13)\nwrite(\"判定：\" + ans, -190, 100, \"red\", 15)\nwrite(\"理由：\" + why, -190, 62, \"green\", 12)\nwrite(\"换案例编号再试！\", -190, -50, \"orange\", 11)"
+    },
+    "cross-82": {
+      "params": [
+        { "name": "idx", "label": "试剂编号", "min": 1, "max": 4, "step": 1, "value": 1, "unit": "（1酸2碱3盐4指示）" }
+      ],
+      "grid": false,
+      "explore": [
+        "酸和碱的 pH 各在什么范围？",
+        "石蕊试液遇酸变什么色？遇碱呢？",
+        "盐是酸碱中和的产物！"
+      ],
+      "code": "# 认试剂探索台\nidx = 1   # 1=酸 2=碱 3=盐 4=指示剂\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-40, 110)\ngo_to(-40, -70)\ngo_to(-25, -100)\ngo_to(25, -100)\ngo_to(40, -70)\ngo_to(40, 110)\ngo_to(-40, 110)\npen_up()\nif idx == 1:\n    pen_color(\"red\")\n    write(\"稀盐酸（酸）pH<7\", -180, 130, \"red\", 13)\n    write(\"尝起来酸（严禁尝！）使石蕊变红\", -180, 92, \"blue\", 11)\nif idx == 2:\n    pen_color(\"blue\")\n    write(\"氢氧化钠（碱）pH>7\", -180, 130, \"red\", 13)\n    write(\"滑腻感（严禁摸！）使石蕊变蓝\", -180, 92, \"blue\", 11)\nif idx == 3:\n    pen_color(\"green\")\n    write(\"食盐（盐）\", -180, 130, \"red\", 13)\n    write(\"酸 + 碱 → 盐 + 水（中和反应）\", -180, 92, \"blue\", 11)\nif idx == 4:\n    pen_color(\"orange\")\n    write(\"石蕊试液（指示剂）\", -180, 130, \"red\", 13)\n    write(\"遇酸变红、遇碱变蓝的侦察兵\", -180, 92, \"blue\", 11)\nif idx != 4:\n    pen_down()\n    go_to(-38, 60)\n    go_to(38, 60)\n    go_to(38, -60)\n    go_to(-38, -60)\n    go_to(-38, 60)\n    pen_up()\nwrite(\"试管里的液体颜色会变哦\", -100, -140, \"green\", 10)"
+    },
+    "cross-99": {
+      "params": [
+        { "name": "level", "label": "放大层级", "min": 1, "max": 3, "step": 1, "value": 1, "unit": "（1物2分子3原子）" }
+      ],
+      "grid": false,
+      "explore": [
+        "一层层放大：一杯水→水分子→氢氧原子",
+        "分子由什么构成？化学变化里谁被拆开重 组？",
+        "化学变化的本质：原子重新组合成新分子"
+      ],
+      "code": "# 物质的三层楼探索台\nlevel = 1   # 1=宏观物质 2=分子 3=原子\n\nhide()\nif level == 1:\n    write(\"第 1 层：一杯水（宏观）\", -140, 120, \"blue\", 14)\n    pen_color(\"blue\")\n    pen_down()\n    go_to(-60, 60)\n    go_to(-60, -50)\n    go_to(60, -50)\n    go_to(60, 60)\n    pen_up()\n    write(\"看得见摸得着\", -90, 80, \"green\", 11)\nif level == 2:\n    write(\"第 2 层：水分子 H₂O（微观）\", -140, 120, \"blue\", 14)\n    i = 0\n    while i < 6:\n        x = -110 + i * 44\n        pen_color(\"red\")\n        pen_down()\n        go_to(x, 20)\n        go_to(x + 8, 20)\n        pen_up()\n        pen_color(\"blue\")\n        go_to(x + 18, 32)\n        pen_down()\n        go_to(x + 26, 32)\n        pen_up()\n        pen_color(\"red\")\n        go_to(x + 36, 20)\n        pen_down()\n        go_to(x + 44, 20)\n        pen_up()\n        i = i + 1\n    write(\"红=氢原子 蓝=氧原子\", -100, -60, \"orange\", 11)\nif level == 3:\n    write(\"第 3 层：原子（化学变化的最小棋子）\", -140, 120, \"blue\", 14)\n    i = 0\n    while i < 8:\n        x = -150 + i * 42\n        col = \"red\"\n        if i > 2:\n            col = \"blue\"\n        pen_color(col)\n        pen_down()\n        go_to(x, 20)\n        go_to(x + 12, 20)\n        pen_up()\n        i = i + 1\n    write(\"原子在化学变化中不生不灭\", -120, -60, \"green\", 11)\nwrite(\"按 1→2→3 逐层放大\", -140, -110, \"orange\", 11)"
+    },
+    "hb-07": {
+      "params": [
+        { "name": "o2pct", "label": "氧气占比", "min": 15, "max": 30, "step": 1, "value": 21, "unit": "%" }
+      ],
+      "grid": false,
+      "explore": [
+        "正常的空气里氧气占百分之几？",
+        "氧气变多，蜡烛能烧更久吗？",
+        "红磷燃烧实验为什么水面上升约 1/5？"
+      ],
+      "code": "# 空气成分探索台\no2pct = 21   # 氧气占比（%）\n\nhide()\nn2 = 100 - o2pct - 1\npen_color(\"blue\")\npen_down()\ngo_to(-170, -100)\ngo_to(-170, 80)\ngo_to(-100, 80)\ngo_to(-100, -100)\ngo_to(-170, -100)\npen_up()\nwrite(\"氮气 \" + n2 + \"%\", -165, 95, \"blue\", 11)\npen_color(\"red\")\npen_down()\ngo_to(-90, -100)\nh2 = o2pct * 180 / 100\nif h2 < 20:\n    h2 = 20\ngo_to(-90, -100 + h2)\ngo_to(-20, -100 + h2)\ngo_to(-20, -100)\ngo_to(-90, -100)\npen_up()\nwrite(\"氧气 \" + o2pct + \"%\", -78, -120, \"red\", 11)\npen_color(\"green\")\npen_down()\ngo_to(-10, -100)\ngo_to(-10, -82)\ngo_to(60, -82)\ngo_to(60, -100)\ngo_to(-10, -100)\npen_up()\nwrite(\"其他 1%\", -5, -120, \"green\", 10)\ntime = o2pct * 2\nwrite(\"氧气 \" + o2pct + \"%：蜡烛可燃 \" + time + \" 单位时间\", -190, 140, \"red\", 13)\nif o2pct == 21:\n    write(\"正常空气：红磷实验水面升约 1/5\", -190, 112, \"orange\", 11)\nif o2pct > 25:\n    write(\"富氧！烧得更旺更久\", -190, 112, \"green\", 11)\nif o2pct < 18:\n    write(\"缺氧：呼吸都困难\", -190, 112, \"orange\", 11)"
+    },
+    "hb-14": {
+      "params": [
+        { "name": "m", "label": "水的质量", "min": 9, "max": 90, "step": 9, "value": 18, "unit": " g" }
+      ],
+      "grid": false,
+      "explore": [
+        "18 克水是几摩尔？（摩尔质量 18 g/mol）",
+        "质量翻倍，摩尔数翻倍吗？",
+        "1 摩尔 = 6.02×10²³ 个粒子——化学家的「打」"
+      ],
+      "code": "# 物质的量探索台：n = m / M\nm = 18   # 水的质量（克）\n\nhide()\nM = 18\nn = m / M\nparticles = n * 6.02\nwrite(m + \" 克水 = \" + m + \" ÷ 18 = \" + n + \" 摩尔\", -190, 140, \"red\", 14)\nwrite(\"含 \" + particles + \"×10²³ 个水分子\", -190, 108, \"blue\", 13)\ncnt = n\nif cnt > 5:\n    cnt = 5\ni = 0\nwhile i < cnt:\n    x = -120 + i * 55\n    pen_color(\"red\")\n    pen_down()\n    go_to(x, 20)\n    go_to(x + 8, 20)\n    pen_up()\n    pen_color(\"blue\")\n    go_to(x + 16, 34)\n    pen_down()\n    go_to(x + 24, 34)\n    pen_up()\n    pen_color(\"red\")\n    go_to(x + 32, 20)\n    pen_down()\n    go_to(x + 40, 20)\n    pen_up()\n    i = i + 1\nif n > 5:\n    write(\"…共 \" + n + \" 组分子\", 90, 30, \"orange\", 11)\nwrite(\"每个分子 3 个原子（H₂O）\", -150, -50, \"green\", 11)\nwrite(\"1 摩尔 = 一「 gigantic 打」= 6.02×10²³ 个\", -150, -85, \"orange\", 11)"
+    }
+  }
+}

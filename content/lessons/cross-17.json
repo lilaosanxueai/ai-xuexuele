@@ -152,5 +152,25 @@
     }
   ],
   "textbook": "人教版地理七年级上册",
-  "grade": 7
+  "grade": 7,
+  "lab": {
+    "params": [
+      {
+        "name": "lat",
+        "label": "纬度",
+        "min": -80,
+        "max": 80,
+        "step": 10,
+        "value": 40,
+        "unit": "°"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "纬度越高（越靠近极地），气温越？",
+      "40°N 属于哪个温度带？（北温带）",
+      "赤道（0°）和两极，谁的太阳光更「正」？"
+    ],
+    "code": "# 纬度带探险探索台\nlat = 40   # 纬度\n\nhide()\npen_color(\"blue\")\npen_down()\ni = 0\ngo_to(110, 0)\nwhile i < 36:\n    ang = (i + 1) * 10\n    go_to(110 * cos(ang), 110 * sin(ang))\n    i = i + 1\npen_up()\npen_color(\"green\")\npen_down()\nqq = -80\nwhile qq < 81:\n    x = 110 * cos(qq)\n    if qq == lat:\n        pen_up()\n        pen_color(\"red\")\n    go_to(x, 110 * sin(qq))\n    if qq == lat:\n        pen_up()\n        pen_color(\"green\")\n        pen_down()\n    qq = qq + 10\npen_up()\ny = 110 * sin(lat)\nx = 110 * cos(lat)\npen_color(\"red\")\npen_down()\ngo_to(x - 8, y + 8)\ngo_to(x + 8, y + 8)\ngo_to(x + 8, y - 8)\ngo_to(x - 8, y - 8)\ngo_to(x - 8, y + 8)\npen_up()\nzone = \"北温带\"\nif lat > 66:\n    zone = \"北寒带\"\nif lat < 23:\n    if lat > -23:\n        zone = \"热带\"\nif lat < -66:\n    zone = \"南寒带\"\nif lat < -23:\n    if lat > -66:\n        zone = \"南温带\"\nwrite(\"纬度 \" + lat + \"° → \" + zone, -190, 140, \"red\", 13)\nwrite(\"红色=你选的纬线位置\", -190, 112, \"orange\", 10)\nwrite(\"纬度越高太阳越斜→越冷\", -190, -140, \"blue\", 10)"
+  }
 }

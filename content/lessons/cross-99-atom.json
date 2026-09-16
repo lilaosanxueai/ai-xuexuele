@@ -155,5 +155,25 @@
     }
   ],
   "textbook": "人教版化学九年级上册",
-  "grade": 9
+  "grade": 9,
+  "lab": {
+    "params": [
+      {
+        "name": "level",
+        "label": "放大层级",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1,
+        "unit": "（1物2分子3原子）"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "一层层放大：一杯水→水分子→氢氧原子",
+      "分子由什么构成？化学变化里谁被拆开重 组？",
+      "化学变化的本质：原子重新组合成新分子"
+    ],
+    "code": "# 物质的三层楼探索台\nlevel = 1   # 1=宏观物质 2=分子 3=原子\n\nhide()\nif level == 1:\n    write(\"第 1 层：一杯水（宏观）\", -140, 120, \"blue\", 14)\n    pen_color(\"blue\")\n    pen_down()\n    go_to(-60, 60)\n    go_to(-60, -50)\n    go_to(60, -50)\n    go_to(60, 60)\n    pen_up()\n    write(\"看得见摸得着\", -90, 80, \"green\", 11)\nif level == 2:\n    write(\"第 2 层：水分子 H₂O（微观）\", -140, 120, \"blue\", 14)\n    i = 0\n    while i < 6:\n        x = -110 + i * 44\n        pen_color(\"red\")\n        pen_down()\n        go_to(x, 20)\n        go_to(x + 8, 20)\n        pen_up()\n        pen_color(\"blue\")\n        go_to(x + 18, 32)\n        pen_down()\n        go_to(x + 26, 32)\n        pen_up()\n        pen_color(\"red\")\n        go_to(x + 36, 20)\n        pen_down()\n        go_to(x + 44, 20)\n        pen_up()\n        i = i + 1\n    write(\"红=氢原子 蓝=氧原子\", -100, -60, \"orange\", 11)\nif level == 3:\n    write(\"第 3 层：原子（化学变化的最小棋子）\", -140, 120, \"blue\", 14)\n    i = 0\n    while i < 8:\n        x = -150 + i * 42\n        col = \"red\"\n        if i > 2:\n            col = \"blue\"\n        pen_color(col)\n        pen_down()\n        go_to(x, 20)\n        go_to(x + 12, 20)\n        pen_up()\n        i = i + 1\n    write(\"原子在化学变化中不生不灭\", -120, -60, \"green\", 11)\nwrite(\"按 1→2→3 逐层放大\", -140, -110, \"orange\", 11)"
+  }
 }

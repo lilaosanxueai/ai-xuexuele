@@ -140,5 +140,25 @@
     }
   ],
   "textbook": "人教版物理八年级上册",
-  "grade": 8
+  "grade": 8,
+  "lab": {
+    "params": [
+      {
+        "name": "freq",
+        "label": "振动频率",
+        "min": 1,
+        "max": 12,
+        "step": 1,
+        "value": 3,
+        "unit": " 次/拍"
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "频率越高，波形越密集还是稀疏？",
+      "波形密 = 音调高还是低？",
+      "慢摇（低频）像什么声音？快摇（高频）呢？"
+    ],
+    "code": "# 音调与频率探索台\nfreq = 3   # 振动频率\n\nhide()\npen_color(\"blue\")\npen_down()\nx = -190\nyo = 0\ni = 0\nwhile x < 190:\n    seg = 360 / freq * (x + 190) / 380 * freq\n    y = 60 * sin(x * freq)\n    go_to(x, y)\n    x = x + 4\npen_up()\nwrite(\"频率 \" + freq, -190, 140, \"red\", 13)\nif freq > 8:\n    write(\"波形密集 → 音调高（尖细）\", -190, 112, \"orange\", 12)\nif freq < 4:\n    write(\"波形稀疏 → 音调低（低沉）\", -190, 112, \"green\", 12)\nif freq >= 4:\n    if freq <= 8:\n        write(\"中等音调\", -190, 112, \"blue\", 12)\nwrite(\"横轴=距离，看波的疏密！\", -190, -140, \"blue\", 10)"
+  }
 }

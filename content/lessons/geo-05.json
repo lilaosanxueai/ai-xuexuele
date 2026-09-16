@@ -144,5 +144,25 @@
     }
   ],
   "textbook": "人教版地理七年级上册",
-  "grade": 7
+  "grade": 7,
+  "lab": {
+    "params": [
+      {
+        "name": "lon",
+        "label": "经度",
+        "min": -180,
+        "max": 180,
+        "step": 15,
+        "value": 116,
+        "unit": "°"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "每 15° 经度相差 1 小时——你选的经度和北京差几小时？",
+      "东经为正、西经为负，往西时间越早还是晚？",
+      "180° 经线附近为什么有「日期变更线」？"
+    ],
+    "code": "# 时区环球旅行探索台：每 15° = 1 小时\nlon = 116   # 经度（东正西负）\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-190, 0)\ngo_to(190, 0)\npen_up()\nwrite(\"西 180°\", -190, 20, \"blue\", 9)\nwrite(\"0°\", -5, 20, \"blue\", 10)\nwrite(\"东 180°\", 165, 20, \"blue\", 9)\ni = -180\nwhile i < 181:\n    x = i * 1.03\n    pen_down()\n    go_to(x, -6)\n    go_to(x, 6)\n    pen_up()\n    i = i + 45\nx = lon * 1.03\npen_color(\"red\")\npen_down()\ngo_to(x, -30)\ngo_to(x, 40)\npen_up()\nwrite(\"你\", x - 8, 52, \"red\", 11)\nhourDiff = lon / 15\nbjDiff = (lon - 116) / 15\nwrite(\"经度 \" + lon + \"°：地方时≈UTC\" + hourDiff + \" 小时\", -190, 130, \"red\", 12)\nwrite(\"与北京(东八区)差 \" + bjDiff + \" 小时\", -190, 100, \"blue\", 12)\nif lon > 170:\n    write(\"快到日期变更线了！\", -120, -70, \"orange\", 11)\nif lon < -170:\n    write(\"昨天还是今天？跨线换一天\", -140, -70, \"orange\", 11)"
+  }
 }

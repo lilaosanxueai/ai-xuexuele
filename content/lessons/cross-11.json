@@ -138,5 +138,25 @@
     }
   ],
   "textbook": "人教版化学九年级上册",
-  "grade": 9
+  "grade": 9,
+  "lab": {
+    "params": [
+      {
+        "name": "temp",
+        "label": "温度",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "value": 40,
+        "unit": " ℃"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "温度越高，分子「跑」得越快还是慢？",
+      "热水为什么比冷水扩散快？",
+      "分子在动，我们看不见但能感觉到！"
+    ],
+    "code": "# 分子运动会探索台\ntemp = 40   # 温度\n\nhide()\nspeed = temp / 5\nwrite(\"温度 \" + temp + \"℃\", -190, 140, \"red\", 14)\npen_color(\"red\")\npen_down()\ngo_to(-180, -120)\ngo_to(-180 + temp * 1.6, -120)\ngo_to(-180 + temp * 1.6, -95)\ngo_to(-180, -95)\ngo_to(-180, -120)\npen_up()\nwrite(\"温度计\", -178, -85, \"red\", 9)\ni = 0\nwhile i < 10:\n    r1 = random(0, speed * 4)\n    r2 = random(0, speed * 4)\n    x = -60 + i * 14 + r1 - speed * 2\n    y = 40 + r2 - speed * 2\n    pen_color(\"blue\")\n    pen_down()\n    go_to(x, y)\n    go_to(x + 2 + speed / 2, y + 1)\n    pen_up()\n    i = i + 1\nif temp > 70:\n    write(\"分子横冲直撞！\", 60, 80, \"orange\", 12)\nif temp < 25:\n    write(\"分子慢悠悠\", 60, 80, \"green\", 12)\nwrite(\"蓝点=分子，线长=速度\", -120, -60, \"blue\", 10)"
+  }
 }

@@ -124,5 +124,25 @@
   "codeLesson": true,
   "starterCode": "# 细胞大游览\ngo_to(-150, 0)\nsay(\"探针启动！穿过多孔的细胞壁（植物才有）...\")\n\ngo_to(-80, 0)\nsay(\"第一站 细胞膜：门卫！控制进出\")\n\ngo_to(0, 0)\nsay(\"第二站 细胞核：总指挥部！DNA 在里面\")\n\ngo_to(80, 0)\nsay(\"第三站 细胞质：车间！各种反应在这里\")\n\ngo_to(130, 60)\nsay(\"叶绿体（植物专属）：太阳能电池板！\")\n",
   "textbook": "人教版生物学七年级上册",
-  "grade": 7
+  "grade": 7,
+  "lab": {
+    "params": [
+      {
+        "name": "idx",
+        "label": "细胞器编号",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "value": 1,
+        "unit": "（1壁2膜3核4质5泡）"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "细胞核为什么叫「总指挥部」？",
+      "细胞膜和细胞壁谁是「门卫」？",
+      "液泡里装的是什么？"
+    ],
+    "code": "# 细胞大游览探索台\nidx = 1   # 参观站点\n\nhide()\npen_color(\"green\")\npen_down()\ngo_to(-150, 80)\ngo_to(150, 80)\ngo_to(150, -80)\ngo_to(-150, -80)\ngo_to(-150, 80)\npen_up()\nif idx == 1:\n    pen_color(\"green\")\n    pen_down()\n    go_to(-150, 84)\n    go_to(150, 84)\n    go_to(150, 92)\n    go_to(-150, 92)\n    go_to(-150, 84)\n    pen_up()\n    write(\"细胞壁：坚固外壳（植物才有）\", -190, 130, \"green\", 13)\nif idx == 2:\n    write(\"细胞膜：门卫，控制进出\", -190, 130, \"blue\", 13)\nif idx == 3:\n    pen_color(\"red\")\n    pen_down()\n    go_to(-30, 20)\n    go_to(30, 20)\n    go_to(30, -20)\n    go_to(-30, -20)\n    go_to(-30, 20)\n    pen_up()\n    write(\"细胞核：总指挥部（DNA在里）\", -190, 130, \"red\", 13)\nif idx == 4:\n    pen_color(\"orange\")\n    pen_down()\n    go_to(-100, 40)\n    go_to(-70, 40)\n    pen_up()\n    go_to(20, -40)\n    go_to(60, -40)\n    pen_up()\n    write(\"细胞质：流动的工作车间\", -190, 130, \"orange\", 13)\nif idx == 5:\n    pen_color(\"blue\")\n    pen_down()\n    go_to(60, 50)\n    go_to(120, 50)\n    go_to(120, 10)\n    go_to(60, 10)\n    go_to(60, 50)\n    pen_up()\n    write(\"液泡：储水储养分（酸甜汁）\", -190, 130, \"blue\", 13)\nwrite(\"按 1-5 逐站参观\", -190, -110, \"orange\", 11)"
+  }
 }

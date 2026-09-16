@@ -142,5 +142,24 @@
       "answer": 1,
       "explain": "酵母菌在缺氧时把糖转化为酒精并放出 CO₂"
     }
-  ]
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "o2",
+        "label": "氧气供应（0无1有）",
+        "min": 0,
+        "max": 1,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "有氧呼吸和无氧呼吸，谁的 ATP 多？",
+      "剧烈运动时肌肉为什么会「无氧」？",
+      "无氧呼吸的副产物让你哪里酸痛？"
+    ],
+    "code": "# 细胞呼吸发电厂探索台：有氧 vs 无氧\no2 = 1   # 1=有氧 0=无氧\n\nhide()\nwrite(\"同样 1 分子葡萄糖：\", -190, 140, \"blue\", 12)\nif o2 == 1:\n    atp = 30\n    pen_color(\"green\")\n    pen_down()\n    go_to(-150, -100)\n    go_to(-150, -100 + atp * 3)\n    go_to(-60, -100 + atp * 3)\n    go_to(-60, -100)\n    go_to(-150, -100)\n    pen_up()\n    write(\"有氧呼吸：30 ATP\", -150, -125, \"green\", 12)\n    write(\"葡萄糖+O₂→CO₂+水+30ATP（线粒体）\", -190, 105, \"green\", 11)\nif o2 == 0:\n    atp = 2\n    pen_color(\"orange\")\n    pen_down()\n    go_to(20, -100)\n    go_to(20, -100 + atp * 15)\n    go_to(110, -100 + atp * 15)\n    go_to(110, -100)\n    go_to(20, -100)\n    pen_up()\n    write(\"无氧呼吸：2 ATP\", 30, -125, \"orange\", 12)\n    write(\"葡萄糖→乳酸+2ATP（细胞质）\", -190, 105, \"orange\", 11)\nif o2 == 1:\n    write(\"氧气充足=高效发电\", -100, 50, \"green\", 12)\nif o2 == 0:\n    write(\"缺氧应急=乳酸堆积（肌肉酸痛）\", -190, 75, \"red\", 12)\nwrite(\"差 15 倍！深呼吸多重要\", -190, -150, \"red\", 11)"
+  }
 }

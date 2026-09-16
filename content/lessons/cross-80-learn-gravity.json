@@ -142,5 +142,25 @@
     }
   ],
   "textbook": "人教版物理八年级下册",
-  "grade": 8
+  "grade": 8,
+  "lab": {
+    "params": [
+      {
+        "name": "t",
+        "label": "下落时间",
+        "min": 1,
+        "max": 5,
+        "step": 0.5,
+        "value": 3,
+        "unit": " 秒"
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "数据点（红）连成的线像什么函数？",
+      "高度 h=5t²——时间翻倍高度变几倍？",
+      "AI 从数据里「学」到的规律，和课本公式一致！"
+    ],
+    "code": "# AI 学重力探索台：数据归纳 h = 5t²\nt = 3   # 下落时间\n\nhide()\npen_color(\"blue\")\npen_down()\nx = 0\nwhile x < 6.1:\n    go_to(x * 32 - 100, 130 - 5 * x * x * 0.9)\n    x = x + 0.25\npen_up()\ni = 1\nwhile i < 6:\n    pen_color(\"red\")\n    pen_down()\n    go_to(i * 32 - 100, 130 - 5 * i * i * 0.9)\n    pen_up()\n    go_to(i * 32 - 97, 133 - 5 * i * i * 0.9)\n    pen_down()\n    go_to(i * 32 - 103, 127 - 5 * i * i * 0.9)\n    pen_up()\n    i = i + 1\nh = 5 * t * t\nwrite(\"t=\" + t + \"s → h=5×\" + t + \"²=\" + h + \" 米\", -190, 140, \"red\", 12)\nwrite(\"红点=实验数据 蓝线=学到的规律\", -190, 112, \"blue\", 11)\nwrite(\"时间和高度不是正比，是平方！\", -190, -145, \"orange\", 11)"
+  }
 }

@@ -156,5 +156,25 @@
       "explain": "光照、水、空气、养分和适宜温度是生长要素"
     }
   ],
-  "textbook": "人教版生物学（高中）"
+  "textbook": "人教版生物学（高中）",
+  "lab": {
+    "params": [
+      {
+        "name": "days",
+        "label": "生长天数",
+        "min": 1,
+        "max": 30,
+        "step": 1,
+        "value": 10,
+        "unit": " 天"
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "种子发芽需要什么？（水、空气、温度）",
+      "第几天长出第一片真叶？",
+      "生长的速度一样快吗？哪段最快？"
+    ],
+    "code": "# 种子生长探索台\ndays = 10   # 生长天数\n\nhide()\nh = days * 6\nif h > 150:\n    h = 150\npen_color(\"green\")\npen_down()\ngo_to(0, -80)\ngo_to(0, -80 + h)\npen_up()\nstage = \"破土发芽\"\nif days > 6:\n    pen_color(\"green\")\n    pen_down()\n    go_to(0, -80 + h * 0.6)\n    go_to(-30, -80 + h * 0.6 + 18)\n    pen_up()\n    go_to(0, -80 + h * 0.6)\n    pen_down()\n    go_to(30, -80 + h * 0.6 + 18)\n    pen_up()\n    stage = \"长出子叶\"\nif days > 15:\n    pen_color(\"red\")\n    pen_down()\n    go_to(0, -80 + h)\n    go_to(8, -80 + h + 16)\n    pen_up()\n    stage = \"花苞出现\"\nif days > 25:\n    stage = \"开花结果\"\npen_color(\"blue\")\npen_down()\ngo_to(-40, -80)\ngo_to(40, -80)\npen_up()\nwrite(\"第 \" + days + \" 天：\" + stage, -190, 140, \"green\", 13)\nwrite(\"先长根还是先长芽？地下也在忙！\", -190, 110, \"orange\", 10)"
+  }
 }

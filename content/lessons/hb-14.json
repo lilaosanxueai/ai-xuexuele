@@ -142,5 +142,25 @@
       "answer": 2,
       "explain": "n=m/M=88÷44=2 mol"
     }
-  ]
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "m",
+        "label": "水的质量",
+        "min": 9,
+        "max": 90,
+        "step": 9,
+        "value": 18,
+        "unit": " g"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "18 克水是几摩尔？（摩尔质量 18 g/mol）",
+      "质量翻倍，摩尔数翻倍吗？",
+      "1 摩尔 = 6.02×10²³ 个粒子——化学家的「打」"
+    ],
+    "code": "# 物质的量探索台：n = m / M\nm = 18   # 水的质量（克）\n\nhide()\nM = 18\nn = m / M\nparticles = n * 6.02\nwrite(m + \" 克水 = \" + m + \" ÷ 18 = \" + n + \" 摩尔\", -190, 140, \"red\", 14)\nwrite(\"含 \" + particles + \"×10²³ 个水分子\", -190, 108, \"blue\", 13)\ncnt = n\nif cnt > 5:\n    cnt = 5\ni = 0\nwhile i < cnt:\n    x = -120 + i * 55\n    pen_color(\"red\")\n    pen_down()\n    go_to(x, 20)\n    go_to(x + 8, 20)\n    pen_up()\n    pen_color(\"blue\")\n    go_to(x + 16, 34)\n    pen_down()\n    go_to(x + 24, 34)\n    pen_up()\n    pen_color(\"red\")\n    go_to(x + 32, 20)\n    pen_down()\n    go_to(x + 40, 20)\n    pen_up()\n    i = i + 1\nif n > 5:\n    write(\"…共 \" + n + \" 组分子\", 90, 30, \"orange\", 11)\nwrite(\"每个分子 3 个原子（H₂O）\", -150, -50, \"green\", 11)\nwrite(\"1 摩尔 = 一「 gigantic 打」= 6.02×10²³ 个\", -150, -85, \"orange\", 11)"
+  }
 }

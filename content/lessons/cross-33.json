@@ -116,5 +116,24 @@
   "codeLesson": true,
   "starterCode": "# 呼吸作用：细胞在吃饭\nenergy = 0\nfor breath in range(5):\n    say(\"吸入氧气 O2 ...\")\n    wait(0.2)\n    say(\"线粒体：养分 + O2 -> 能量 + CO2 + 水\")\n    energy = energy + 20\n    say(\"呼出 CO2 ... 累计能量 \" + energy + \" 份\")\n    wait(0.3)\n\nsay(\"和光合作用正好相反！一动一静，地球循环\")\n",
   "textbook": "人教版生物学七年级上册",
-  "grade": 7
+  "grade": 7,
+  "lab": {
+    "params": [
+      {
+        "name": "glu",
+        "label": "葡萄糖份数",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "value": 3
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "吸入的氧气去哪了？（帮线粒体「烧」葡萄糖）",
+      "葡萄糖越多，能量越多吗？",
+      "呼吸作用和燃烧的共同点？"
+    ],
+    "code": "# 呼吸作用探索台：细胞在吃饭\nglu = 3   # 葡萄糖份数\n\nhide()\nenergy = glu * 30\npen_color(\"orange\")\npen_down()\ngo_to(-140, -60)\ngo_to(-140, 40)\ngo_to(-100, 40)\ngo_to(-100, -60)\ngo_to(-140, -60)\npen_up()\nwrite(\"葡萄糖\", -138, -80, \"orange\", 9)\npen_color(\"blue\")\npen_down()\ngo_to(-60, -60)\ngo_to(-60, 40)\ngo_to(-20, 40)\ngo_to(-20, -60)\ngo_to(-60, -60)\npen_up()\nwrite(\"氧气\", -50, -80, \"blue\", 9)\npen_color(\"red\")\npen_down()\nxx = -140\ni = 0\nwhile i < glu * 3:\n    xx = xx + 8\n    go_to(xx, -60 + (i + 1) * 90 / (glu * 3))\n    pen_up()\n    pen_down()\n    i = i + 1\npen_up()\nwrite(\"→\", 40, 20, \"red\", 14)\npen_color(\"green\")\npen_down()\ngo_to(120, -60)\ngo_to(120, -60 + energy * 0.8)\ngo_to(170, -60 + energy * 0.8)\ngo_to(170, -60)\ngo_to(120, -60)\npen_up()\nwrite(\"能量\", 130, -80, \"green\", 10)\nwrite(glu + \" 份葡萄糖 → \" + energy + \" 份能量(ATP)\", -190, 130, \"red\", 13)\nwrite(\"+ CO₂ + 水（呼出去的）\", -190, 100, \"blue\", 11)\nwrite(\"线粒体：细胞的发电厂\", -190, -110, \"orange\", 10)"
+  }
 }

@@ -153,5 +153,24 @@
     }
   ],
   "textbook": "人教版生物学七年级上册",
-  "grade": 7
+  "grade": 7,
+  "lab": {
+    "params": [
+      {
+        "name": "light",
+        "label": "光照强度",
+        "min": 0,
+        "max": 3,
+        "step": 0.25,
+        "value": 2
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "没有光（0），植物还能造淀粉吗？",
+      "光越强，产出越多吗？",
+      "光合作用的原料和产品各是什么？"
+    ],
+    "code": "# 光合厨房探索台\nlight = 2   # 光照强度（0=黑夜）\n\nhide()\nstarch = light * 30\npen_color(\"orange\")\npen_down()\ngo_to(-30, -40)\ngo_to(-30, 10)\ngo_to(30, 10)\ngo_to(30, -40)\ngo_to(-30, -40)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(0, 10)\ngo_to(-24, 40)\ngo_to(0, 34)\ngo_to(24, 40)\ngo_to(0, 10)\npen_up()\npen_color(\"yellow\")\npen_down()\nr = 0\nwhile r < 18:\n    ang = r * 20\n    go_to(80 + 18 * cos(ang), 30 + 18 * sin(ang))\n    r = r + 1\npen_up()\nwrite(\"太阳\", 62, 62, \"orange\", 11)\nif light > 0:\n    pen_color(\"red\")\n    pen_down()\n    i = 0\n    while i < light:\n        x = -70 + i * 45\n        go_to(x, 70)\n        go_to(x + 20, 46)\n        pen_up()\n        i = i + 1\nwrite(\"光照 \" + light + \" → 淀粉 \" + starch + \" 份\", -190, 130, \"red\", 13)\nwrite(\"CO₂+水 --光/叶绿体--> 淀粉+O₂\", -190, 100, \"green\", 11)\nif light < 0.1:\n    write(\"黑夜：厨房停工！\", -100, -100, \"orange\", 12)"
+  }
 }
