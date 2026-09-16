@@ -38,6 +38,6 @@ describe('智能学习路径', () => {
 
   it('全部完成推荐重温', () => {
     const r = recommendNext(lessons, P(['a', 'b', 'c', 'd']));
-    expect(r?.reason).toContain('全部通关');
+    expect(r?.reason).toContain('全部学完');
   });
 });

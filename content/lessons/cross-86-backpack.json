@@ -5,52 +5,152 @@
   "title": "整理书包大作战",
   "emoji": "🎒",
   "story": "明天的课程表：语文、数学、美术、体育！书包自己不会整理，得你来当「装备管理员」：按课程表分类、按顺序装包、最后检查一遍。会整理书包的孩子，早晨永远不慌张——这是分类与流程的劳动课！",
-  "goals": ["学会按课程表整理书包", "练习分类与顺序安排"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_costume", "island_play", "island_repeat"],
-  "actor": { "costume": "🎒", "x": -70, "y": 0, "dir": 0 },
-  "targets": [{ "emoji": "🚪", "x": 130, "y": 0 }],
+  "goals": [
+    "学会按课程表整理书包",
+    "练习分类与顺序安排"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_costume",
+    "island_play",
+    "island_repeat"
+  ],
+  "actor": {
+    "costume": "🎒",
+    "x": -70,
+    "y": 0,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "🚪",
+      "x": 130,
+      "y": 0
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "看课程表报计划：说出「明天有语文数学美术体育，我要装四类东西！」",
-      "hintPrompts": ["先看课程表再装包，这是管理员的第一步", "语文书、数学书、彩笔、跳绳——一件不落"],
-      "check": { "type": "say_text" }
+      "hintPrompts": [
+        "先看课程表再装包，这是管理员的第一步",
+        "语文书、数学书、彩笔、跳绳——一件不落"
+      ],
+      "check": {
+        "type": "say_text"
+      }
     },
     {
       "id": "t2",
       "text": "分类装包：装一类换一个造型（📚 课本、✏️ 文具、🎨 美术袋、🤸 跳绳），至少换 3 次",
-      "hintPrompts": ["同类东西放一起，找起来才快", "重的放下面轻的放上面，这是装包小智慧"],
-      "check": { "type": "block_count_min", "block": "island_costume", "count": 3 }
+      "hintPrompts": [
+        "同类东西放一起，找起来才快",
+        "重的放下面轻的放上面，这是装包小智慧"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_costume",
+        "count": 3
+      }
     },
     {
       "id": "t3",
       "text": "按顺序装：每装一类停 1 秒（至少 3 块等待），装得整整齐齐",
-      "hintPrompts": ["一样一样来，不要一股脑塞", "等待就像给自己留的检查时间"],
-      "check": { "type": "block_count_min", "block": "island_wait", "count": 3 }
+      "hintPrompts": [
+        "一样一样来，不要一股脑塞",
+        "等待就像给自己留的检查时间"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_wait",
+        "count": 3
+      }
     },
     {
       "id": "t4",
       "text": "背书包出门：走到门口 🚪，播放出发音效，说「装备齐全，出发！」",
-      "hintPrompts": ["出门前最后拍拍口袋：红领巾戴了吗？水杯带了吗？", "齐活的仪式感：音效一响，明天见！"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "出门前最后拍拍口袋：红领巾戴了吗？水杯带了吗？",
+        "齐活的仪式感：音效一响，明天见！"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：一周五天——把整理流程放进「重复 5 次」，每天的课程表一样吗？怎么改？",
-      "hintPrompts": ["每天课程不同，装备也不同——程序要怎么变？", "真正的管理员会给每天做一张不同的清单"],
-      "check": { "type": "block_used", "block": "island_repeat" },
+      "hintPrompts": [
+        "每天课程不同，装备也不同——程序要怎么变？",
+        "真正的管理员会给每天做一张不同的清单"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_repeat"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第二、三学段（3-6年级）", "module": "身边的算法", "points": ["分类思想", "顺序结构"] },
-  "subject": { "name": "劳动·生活自理", "emoji": "🎒", "points": ["整理书包的方法", "按课程表做准备", "分类与有序放置"] },
+  "curriculum": {
+    "stage": "第二、三学段（3-6年级）",
+    "module": "日常生活劳动",
+    "points": [
+      "整理书包的方法",
+      "按课程表做准备",
+      "分类与有序放置"
+    ]
+  },
+  "subject": {
+    "name": "劳动·生活自理",
+    "emoji": "🎒",
+    "points": [
+      "整理书包的方法",
+      "按课程表做准备",
+      "分类与有序放置"
+    ]
+  },
   "subjectArea": "劳动",
   "gradeBand": "primary",
   "aiIntro": "🎒 装备管理员请就位！明天的课程表就是你的任务清单：分类、排序、装包、检查——四步走完，你就是全班最利索的仔！",
   "celebrate": "书包整理完毕，装备满分！🎒 你用了「分类+流程」两大法宝——它们不仅管书包，还管电脑里的文件、超市里的货架。会整理的孩子，学什么都快！",
   "exercises": [
-    { "q": "整理书包最合理的第一步是？", "options": ["把所有书都塞进去", "先看课程表确定要带什么", "按颜色摆", "让别人帮忙"], "answer": 1, "explain": "先明确需求（课程表），再准备物品——做事有条理的第一步" },
-    { "q": "「分类整理」的好处是？", "options": ["书包更重", "找东西快、不会遗漏", "好看而已", "没有好处"], "answer": 1, "explain": "同类归位便于查找和检查，这是效率的来源" },
-    { "q": "装书包时重物应该？", "options": ["放最上面", "放最下面贴近背部", "随便放", "抱在手里"], "answer": 1, "explain": "重的放下面且贴近背，背起来稳、省力、护脊椎" }
+    {
+      "q": "整理书包最合理的第一步是？",
+      "options": [
+        "把所有书都塞进去",
+        "先看课程表确定要带什么",
+        "按颜色摆",
+        "让别人帮忙"
+      ],
+      "answer": 1,
+      "explain": "先明确需求（课程表），再准备物品——做事有条理的第一步"
+    },
+    {
+      "q": "「分类整理」的好处是？",
+      "options": [
+        "书包更重",
+        "找东西快、不会遗漏",
+        "好看而已",
+        "没有好处"
+      ],
+      "answer": 1,
+      "explain": "同类归位便于查找和检查，这是效率的来源"
+    },
+    {
+      "q": "装书包时重物应该？",
+      "options": [
+        "放最上面",
+        "放最下面贴近背部",
+        "随便放",
+        "抱在手里"
+      ],
+      "answer": 1,
+      "explain": "重的放下面且贴近背，背起来稳、省力、护脊椎"
+    }
   ]
 }

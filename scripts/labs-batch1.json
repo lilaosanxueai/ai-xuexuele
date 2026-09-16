@@ -1,0 +1,218 @@
+{
+  "_说明": "第 17 轮互动实验室首批手工课定义（17 节）。用 scripts 里的 node 注入器写入课程 JSON 的 lab 字段。code 需严守解释器边界：无幂运算(用 x*x)、range 仅整数步长、画图课开头 hide()、坐标范围 x±220/y±160。参数必须是顶层『name = 值 # 注释』赋值。",
+  "labs": {
+    "math-08": {
+      "params": [
+        { "name": "k", "label": "斜率 k", "min": -3, "max": 3, "step": 0.5, "value": 1 },
+        { "name": "b", "label": "截距 b", "min": -8, "max": 8, "step": 1, "value": 0 }
+      ],
+      "grid": true,
+      "explore": [
+        "把 k 调成负数，直线往哪边倒？",
+        "移动 b，直线怎么动？它和 y 轴的交点是多少？",
+        "k=0 时直线是什么样的？还是函数吗？"
+      ],
+      "code": "# 一次函数 y = kx + b 探索台\nk = 1    # 斜率 k\nb = 0    # 截距 b\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-180, k * -6 * 30 + b * 30)\nfor x in range(-6, 7):\n    go_to(x * 30, (k * x + b) * 30)\npen_up()\nwrite(\"y = \" + k + \"x + \" + b, 120, 140, \"blue\", 15)\nwrite(\"k=\" + k + \"  b=\" + b, 120, 120, \"blue\", 12)"
+    },
+    "math-10": {
+      "params": [
+        { "name": "a", "label": "开口系数 a", "min": -3, "max": 3, "step": 0.25, "value": 1 }
+      ],
+      "grid": true,
+      "explore": [
+        "a 变大，抛物线开口变宽还是变窄？",
+        "把 a 调成负数，抛物线怎么了？",
+        "a=0.25 和 a=2 哪个更「瘦」？为什么？"
+      ],
+      "code": "# 二次函数 y = a·x² 探索台\na = 1    # 开口系数 a\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-6 * 30, a * -6 * -6 * 8)\nfor x in range(-6, 7):\n    go_to(x * 30, a * x * x * 8)\npen_up()\nwrite(\"y = \" + a + \"x²\", 130, 140, \"blue\", 15)\nif a > 0:\n    write(\"开口向上\", 130, 118, \"green\", 12)\nif a < 0:\n    write(\"开口向下\", 130, 118, \"red\", 12)\nif a == 0:\n    write(\"a=0 时是直线啦\", 130, 118, \"orange\", 12)"
+    },
+    "math-44": {
+      "params": [
+        { "name": "a", "label": "二次系数 a", "min": 0.25, "max": 2, "step": 0.25, "value": 0.5 },
+        { "name": "b", "label": "一次系数 b", "min": -6, "max": 6, "step": 0.5, "value": 2 },
+        { "name": "c", "label": "常数 c", "min": -6, "max": 6, "step": 1, "value": -3 }
+      ],
+      "grid": true,
+      "explore": [
+        "顶点（图里的最低点/最高点）在哪里？移动 b 它怎么动？",
+        "什么时候顶点是最低点，什么时候是最高点？和 a 什么关系？",
+        "函数的最小值（或最大值）写在了图上，改 c 只改变什么？"
+      ],
+      "code": "# 二次函数 y = ax² + bx + c 与顶点探索台\na = 0.5  # 二次系数 a\nb = 2    # 一次系数 b\nc = -3   # 常数 c\n\nhide()\nvx = -b / (2 * a)\nvy = c - b * b / (4 * a)\npen_color(\"blue\")\npen_down()\nx = -7\ny = a * x * x + b * x + c\ngo_to(x * 25, y * 12)\nwhile x < 7.01:\n    y = a * x * x + b * x + c\n    go_to(x * 25, y * 12)\n    x = x + 0.25\npen_up()\npen_color(\"red\")\nwrite(\"☉顶点(\" + vx + \", \" + vy + \")\", vx * 25, vy * 12 + 18, \"red\", 12)\nwrite(\"y=\" + a + \"x²+\" + b + \"x+\" + c, -170, 145, \"blue\", 13)"
+    },
+    "math-11": {
+      "params": [
+        { "name": "amp", "label": "振幅 A", "min": 10, "max": 120, "step": 10, "value": 60 },
+        { "name": "T", "label": "周期 T（度）", "min": 90, "max": 540, "step": 30, "value": 240 }
+      ],
+      "grid": true,
+      "explore": [
+        "振幅 A 变大，波形的高度怎么变？",
+        "周期 T 变小，波变得密集还是稀疏？",
+        "一个周期内波形走了多少度（横向距离）？数一数"
+      ],
+      "code": "# 正弦波 y = A·sin(360/T · x) 探索台\namp = 60   # 振幅 A\nT = 240    # 周期 T（度）\n\nhide()\npen_color(\"blue\")\npen_down()\nx = -210\ny = amp * sin(360 / T * x)\ngo_to(x, y)\nwhile x < 210:\n    y = amp * sin(360 / T * x)\n    go_to(x, y)\n    x = x + 5\npen_up()\nwrite(\"A=\" + amp + \" T=\" + T, 140, 145, \"blue\", 14)\nwrite(\"最高点 y=\" + amp, 160, amp, \"green\", 11)"
+    },
+    "math-45": {
+      "params": [
+        { "name": "s", "label": "波动幅度", "min": 0, "max": 6, "step": 0.5, "value": 3 }
+      ],
+      "grid": true,
+      "explore": [
+        "两条蓝线的波动幅度 s 不同时，哪组数据更稳定？",
+        "波动幅度变大，数据离红色的平均线（y=8）怎么样？",
+        "生活里「成绩稳定」「投篮手感稳定」说的是什么？"
+      ],
+      "code": "# 方差探索：波动越大越不稳定\ns = 3   # 波动幅度\n\nhide()\npen_color(\"red\")\npen_down()\ngo_to(-180, 8 * 12)\ngo_to(180, 8 * 12)\npen_up()\nwrite(\"平均线 y=8\", 150, 110, \"red\", 12)\npen_color(\"blue\")\npen_down()\nx = -180\ngo_to(x, (8 + s) * 12)\nwhile x < 175:\n    go_to(x, (8 + s) * 12)\n    go_to(x + 25, (8 - s) * 12)\n    go_to(x + 50, (8 + s) * 12)\n    x = x + 50\npen_up()\nwrite(\"波动幅度 s=\" + s, 130, 145, \"blue\", 14)\nif s > 4:\n    write(\"不稳定！\", 150, -40, \"orange\", 13)\nif s < 1.01:\n    write(\"很稳定！\", 150, -40, \"green\", 13)"
+    },
+    "cross-66": {
+      "params": [
+        { "name": "v0", "label": "初速度 v₀", "min": 0, "max": 30, "step": 1, "value": 0, "unit": " 格/秒" },
+        { "name": "a", "label": "加速度 a", "min": -10, "max": 20, "step": 1, "value": 10, "unit": " 格/秒²" }
+      ],
+      "grid": true,
+      "explore": [
+        "a 调大，v-t 直线变得更陡还是更平？这说明什么？",
+        "把 a 调成负数（刹车），速度怎么变？",
+        "v0 和 a 各控制这条直线的什么？"
+      ],
+      "code": "# 匀变速直线运动 v = v0 + a·t 探索台\nv0 = 0    # 初速度\na = 10    # 加速度\n\nhide()\npen_color(\"red\")\npen_down()\ngo_to(-200, -130 + v0 * 8)\nt = 0\nwhile t < 8.01:\n    v = v0 + a * t\n    go_to(-200 + t * 50, -130 + v * 8)\n    t = t + 1\npen_up()\nwrite(\"v-t 图（斜率=a=\" + a + \"）\", 100, 145, \"red\", 13)\nwrite(\"t=8s 时 v=\" + (v0 + a * 8), 100, 125, \"red\", 12)"
+    },
+    "hb-13": {
+      "params": [
+        { "name": "F", "label": "力 F", "min": 10, "max": 100, "step": 5, "value": 20, "unit": " N" },
+        { "name": "m", "label": "质量 m", "min": 1, "max": 20, "step": 1, "value": 4, "unit": " kg" }
+      ],
+      "grid": true,
+      "explore": [
+        "力 F 变大，加速度 a 怎么变？v-t 线呢？",
+        "质量 m 变大，同样的力推起来更难还是更easy？a 怎么变？",
+        "让 F 和 m 同时翻倍，a 变吗？"
+      ],
+      "code": "# 牛顿第二定律 F = m·a 探索台\nF = 20   # 作用力 F（牛）\nm = 4    # 质量 m（千克）\n\nhide()\na = F / m\nwrite(\"F=\" + F + \"N  m=\" + m + \"kg\", -190, 145, \"blue\", 13)\nwrite(\"a = F/m = \" + a + \" m/s²\", -190, 125, \"red\", 14)\npen_color(\"red\")\npen_down()\ngo_to(-200, -130)\nt = 0\nwhile t < 6.01:\n    v = a * t\n    go_to(-200 + t * 60, -130 + v * 10)\n    t = t + 1\npen_up()\nwrite(\"同样 6 秒，速度涨到 \" + a * 6 + \" m/s\", 60, -100, \"red\", 12)"
+    },
+    "cross-97": {
+      "params": [
+        { "name": "rho_obj", "label": "物体密度", "min": 0.2, "max": 3, "step": 0.1, "value": 0.6, "unit": " g/cm³" },
+        { "name": "rho_liq", "label": "液体密度", "min": 0.8, "max": 1.4, "step": 0.05, "value": 1, "unit": " g/cm³" }
+      ],
+      "grid": false,
+      "explore": [
+        "物体密度小于液体密度时，物体是漂还是沉？",
+        "把液体换成「盐水」（密度调到 1.2），原来下沉的物体会怎样？",
+        "物体浸入水中的比例和两个密度的比值有什么关系？"
+      ],
+      "code": "# 浮力与密度探索台：ρ物 vs ρ液 决定沉浮\nrho_obj = 0.6   # 物体密度\nrho_liq = 1     # 液体密度\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-160, 40)\ngo_to(160, 40)\npen_up()\nwrite(\"≈ 水面\", -150, 55, \"blue\", 11)\npen_color(\"red\")\ndepth = 40\nif rho_obj > rho_liq:\n    depth = -20\nif rho_obj == rho_liq:\n    depth = 10\nif rho_obj < rho_liq:\n    part = rho_obj / rho_liq\n    depth = 40 - part * 80\npen_down()\ngo_to(-30, depth + 40)\ngo_to(30, depth + 40)\ngo_to(30, depth - 40)\ngo_to(-30, depth - 40)\ngo_to(-30, depth + 40)\npen_up()\nwrite(\"ρ物=\" + rho_obj + \"  ρ液=\" + rho_liq, -110, 120, \"red\", 13)\nif rho_obj > rho_liq:\n    write(\"下沉：ρ物 > ρ液\", -110, 95, \"orange\", 14)\nif rho_obj < rho_liq:\n    write(\"漂浮：ρ物 < ρ液\", -110, 95, \"green\", 14)\nif rho_obj == rho_liq:\n    write(\"悬浮：ρ物 = ρ液\", -110, 95, \"blue\", 14)\nwrite(\"F浮 = ρ液·g·V = \" + rho_liq * 10 * 100 + \"（单位略）\", -110, -120, \"red\", 12)"
+    },
+    "cross-67": {
+      "params": [
+        { "name": "v0", "label": "水平初速度", "min": 5, "max": 30, "step": 1, "value": 15, "unit": " m/s" }
+      ],
+      "grid": true,
+      "explore": [
+        "v0 变大，小球飞得更远还是更近？轨迹形状变了吗？",
+        "这条轨迹是什么形状？和你学过的哪种函数图像像？",
+        "假如没有重力（想象一下），小球会怎么飞？"
+      ],
+      "code": "# 平抛运动探索台：x = v0·t，y = -5t²\ng = 10  # 重力加速度（固定值）\nv0 = 15  # 水平初速度\n\nhide()\npen_color(\"blue\")\npen_down()\nt = 0\nx = 0\ny = 130\ngo_to(-200, 130)\nwhile y > -155:\n    x = v0 * t * 7\n    y = 130 - 5 * t * t * 7\n    go_to(-200 + x, y)\n    t = t + 0.1\npen_up()\nr = v0 * t\nwrite(\"v0=\" + v0 + \" m/s，飞行 \" + t + \" 秒\", 80, 145, \"blue\", 12)\nwrite(\"水平射程 ≈ \" + r * 7 / 7 + \"×7 格\", 80, 125, \"red\", 12)"
+    },
+    "cross-22": {
+      "params": [
+        { "name": "L1", "label": "左力臂 L₁", "min": 1, "max": 5, "step": 0.5, "value": 2, "unit": " m" },
+        { "name": "m1", "label": "左边物重", "min": 1, "max": 10, "step": 1, "value": 5, "unit": " kg" }
+      ],
+      "grid": true,
+      "explore": [
+        "左边力矩（L₁×物重）比右边大时，杠杆往哪边沉？",
+        "想让两边平衡，左边的重物要移近还是移远？",
+        "右边固定是 2m 挂 5kg，算一算平衡时 L₁ 应该是多少？"
+      ],
+      "code": "# 杠杆平衡探索台：左力矩 = 右力矩？\nL1 = 2   # 左力臂（米）\nm1 = 5   # 左边物重（千克）\n\nhide()\ntorqueL = L1 * m1\ntorqueR = 2 * 5\ndip = torqueL - torqueR\nleftY = 0 - dip * 3\nrightY = 0 + dip * 3\nif leftY < -70:\n    leftY = -70\nif leftY > 70:\n    leftY = 70\nif rightY < -70:\n    rightY = -70\nif rightY > 70:\n    rightY = 70\npen_color(\"red\")\npen_down()\ngo_to(-150, leftY)\ngo_to(150, rightY)\npen_up()\nwrite(\"下沉！左力矩 \" + torqueL + \" > 右力矩 10\", 90, 130, \"orange\", 13)\nif torqueL == torqueR:\n    write(\"平衡！两边力矩都是 \" + torqueL, 90, 130, \"green\", 14)\nif torqueL < torqueR:\n    write(\"右边沉：左力矩 \" + torqueL + \" < 10\", 90, 130, \"blue\", 13)\nwrite(\"左边：\" + L1 + \"m × \" + m1 + \"kg\", -170, -60 + leftY * 0.4, \"red\", 11)\nwrite(\"右边：2m × 5kg（固定）\", 60, -60 + rightY * 0.4, \"red\", 11)\nwrite(\"△ 支点\", -20, 20, \"red\", 12)"
+    },
+    "cross-71": {
+      "params": [
+        { "name": "kf", "label": "正反应速率", "min": 5, "max": 40, "step": 1, "value": 20 },
+        { "name": "kr", "label": "逆反应速率", "min": 1, "max": 20, "step": 1, "value": 5 }
+      ],
+      "grid": true,
+      "explore": [
+        "B 的浓度（红线）最后停在哪个值不再变？这就是「化学平衡」",
+        "正反应速率调大，平衡时 B 更多还是更少？",
+        "两根线交叉的点说明什么？（正逆速率相等）"
+      ],
+      "code": "# 化学平衡探索台：A ⇌ B，看 B 的浓度怎么收敛\nkf = 20   # 正反应速率系数\nkr = 5    # 逆反应速率系数\n\nhide()\nxeq = 100 * kf / (kf + kr)\npen_color(\"blue\")\npen_down()\ncb = 0\nt = 0\ngo_to(-190, -130)\nwhile t < 10.01:\n    cb = cb + (kf * (100 - cb) / 100 - kr * cb / 100)\n    if cb > 100:\n        cb = 100\n    go_to(-190 + t * 38, -130 + cb * 2.4)\n    t = t + 1\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-190, -130 + xeq * 2.4)\ngo_to(180, -130 + xeq * 2.4)\npen_up()\nwrite(\"平衡时 B ≈ \" + xeq + \"%\", 90, -130 + xeq * 2.4 + 18, \"red\", 13)\nwrite(\"kf=\" + kf + \"  kr=\" + kr, -180, 145, \"blue\", 12)"
+    },
+    "cross-28": {
+      "params": [
+        { "name": "T", "label": "水的温度", "min": 0, "max": 100, "step": 5, "value": 20, "unit": " ℃" }
+      ],
+      "grid": true,
+      "explore": [
+        "温度升高，糖能溶得更多还是更少？曲线怎么走？",
+        "在 20℃ 时最多能溶多少克（看标注）？60℃ 呢？",
+        "这条曲线为什么越来越陡？想想分子运动"
+      ],
+      "code": "# 蔗糖溶解度随温度变化探索台\nT = 20   # 当前水温（摄氏度）\n\nhide()\nsol = 180 + (T - 20) * 1.6\npen_color(\"blue\")\npen_down()\nt2 = 0\ngo_to(-200, -130 + (180 + (t2 - 20) * 1.6) * 0.8)\nwhile t2 < 100.01:\n    s2 = 180 + (t2 - 20) * 1.6\n    go_to(-200 + t2 * 4, -130 + s2 * 0.8)\n    t2 = t2 + 10\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-200 + T * 4, -150)\ngo_to(-200 + T * 4, 140)\npen_up()\nwrite(\"T=\" + T + \"℃ 时最多溶 \" + sol + \"g\", 60, 145, \"red\", 13)\nwrite(\"溶解度曲线（蔗糖）\", -180, 120, \"blue\", 12)"
+    },
+    "cross-26": {
+      "params": [
+        { "name": "ph", "label": "溶液 pH", "min": 0, "max": 14, "step": 0.5, "value": 7 }
+      ],
+      "grid": false,
+      "explore": [
+        "pH<7 溶液是什么性？指针落在哪个颜色区？",
+        "pH=7 是什么溶液？指针在哪？",
+        "从 0 拖到 14，溶液从酸性变到？中间经过什么？"
+      ],
+      "code": "# 酸碱 pH 标尺探索台\nph = 7   # 溶液的 pH 值\n\nhide()\ni = 0\nwhile i < 15:\n    px = -196 + i * 27\n    if i < 7:\n        pen_color(\"red\")\n    if i == 7:\n        pen_color(\"green\")\n    if i > 7:\n        pen_color(\"blue\")\n    pen_down()\n    go_to(px, 20)\n    go_to(px + 26, 20)\n    go_to(px + 26, 60)\n    go_to(px, 60)\n    go_to(px, 20)\n    pen_up()\n    write(i, px + 13, 75, \"blue\", 9)\n    i = i + 1\npx2 = -196 + ph * 27\npen_color(\"orange\")\npen_down()\ngo_to(px2, -10)\ngo_to(px2, 70)\npen_up()\nif ph < 6.8:\n    write(\"pH=\" + ph + \"：酸性\", -100, -60, \"red\", 15)\nif ph > 7.2:\n    write(\"pH=\" + ph + \"：碱性\", -100, -60, \"blue\", 15)\nif ph >= 6.8:\n    if ph <= 7.2:\n        write(\"pH=7：中性\", -100, -60, \"green\", 15)"
+    },
+    "cross-72": {
+      "params": [
+        { "name": "n", "label": "豌豆株数", "min": 50, "max": 1000, "step": 50, "value": 200, "unit": " 株" }
+      ],
+      "grid": false,
+      "explore": [
+        "高茎和矮茎的比例接近几比几？",
+        "株数调到很小（50）和很大（1000），哪个更接近 3:1？为什么？",
+        "「随机」和「规律」矛盾吗？"
+      ],
+      "code": "# 孟德尔豌豆 3:1 探索台\nn = 200   # 第二代豌豆株数\n\nhide()\ntall = 0\ni = 0\nwhile i < n:\n    r = random(0, 3)\n    if r < 3:\n        tall = tall + 1\n    i = i + 1\nshort = n - tall\npen_color(\"green\")\npen_down()\ngo_to(-110, -80)\ngo_to(-110, -80 + tall * 160 / n * 3 / 3)\ngo_to(-40, -80 + tall * 160 / n)\ngo_to(-40, -80)\ngo_to(-110, -80)\npen_up()\nwrite(\"高茎 \" + tall + \" 株\", -110, 90, \"green\", 12)\npen_color(\"orange\")\npen_down()\ngo_to(40, -80)\ngo_to(40, -80 + short * 160 / n * 3)\ngo_to(110, -80 + short * 160 / n * 3)\ngo_to(110, -80)\ngo_to(40, -80)\npen_up()\nwrite(\"矮茎 \" + short + \" 株\", 50, 90, \"orange\", 12)\nwrite(\"高:矮 ≈ \" + tall / short, 0, 120, \"red\", 14)\nwrite(\"再跑一次（▶慢速看过程），比例会怎么变？\", -140, -130, \"blue\", 11)"
+    },
+    "cross-34": {
+      "params": [
+        { "name": "p", "label": "显性基因概率", "min": 0, "max": 1, "step": 0.05, "value": 0.5 }
+      ],
+      "grid": false,
+      "explore": [
+        "父母各出一个基因，四种组合（AA/Aa/aA/aa）各占多少？",
+        "哪些组合表现出显性性状？加起来概率是多少？",
+        "p=0.5 时显性:隐性接近几比几？"
+      ],
+      "code": "# 显性与隐性：配对棋盘表探索台\np = 0.5   # 显性基因（大A）出现的概率\n\nhide()\npA = p\npa = 1 - p\nwrite(\"父母各出 1 个基因：\", -180, 130, \"blue\", 13)\nwrite(\"AA: \" + pA * pA + \"  Aa: \" + pA * pa + \"  aA: \" + pa * pA + \"  aa: \" + pa * pa, -180, 105, \"blue\", 12)\ndom = pA * pA + 2 * pA * pa\nrec = pa * pa\nwrite(\"显性表现 = AA+Aa+aA = \" + dom, -180, 60, \"green\", 13)\nwrite(\"隐性表现 = aa = \" + rec, -180, 35, \"orange\", 13)\npen_color(\"green\")\npen_down()\ngo_to(-180, -20)\ngo_to(-180 + dom * 340, -20)\ngo_to(-180 + dom * 340, 15)\ngo_to(-180, 15)\ngo_to(-180, -20)\npen_up()\npen_color(\"orange\")\npen_down()\ngo_to(-180 + dom * 340, -20)\ngo_to(160, -20)\ngo_to(160, 15)\ngo_to(-180 + dom * 340, 15)\ngo_to(-180 + dom * 340, -20)\npen_up()\nwrite(\"绿色=显性  橙色=隐性\", -80, -55, \"red\", 12)\nwrite(\"p=0.5 时显隐性 3:1\", -80, -85, \"red\", 13)"
+    },
+    "cross-73": {
+      "params": [
+        { "name": "beijing_hour", "label": "北京时间", "min": 0, "max": 23, "step": 1, "value": 20, "unit": " 点" }
+      ],
+      "grid": false,
+      "explore": [
+        "北京 20 点时伦敦几点？为什么差 8 小时？",
+        "把时间拖到北京 0 点，纽约还是「昨天」吗？",
+        "往东走时间越来越早还是越晚？"
+      ],
+      "code": "# 环球时钟探索台：拨动北京时间，看世界时间\nbeijing_hour = 20   # 北京时间（点）\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-200, 0)\ngo_to(200, 0)\npen_up()\nwrite(\"0\", -200, 18, \"blue\", 9)\nwrite(\"6\", -105, 18, \"blue\", 9)\nwrite(\"12\", -5, 18, \"blue\", 9)\nwrite(\"18\", 90, 18, \"blue\", 9)\nwrite(\"24\", 192, 18, \"blue\", 9)\njet = beijing_hour - 8\nLondon = jet\nif London < 0:\n    London = London + 24\nNewYork = jet - 5\nif NewYork < 0:\n    NewYork = NewYork + 24\nTokyo = beijing_hour + 1\nif Tokyo > 23:\n    Tokyo = Tokyo - 24\nSydney = beijing_hour + 2\nif Sydney > 23:\n    Sydney = Sydney - 24\nwrite(\"北京 \" + beijing_hour + \" 点\", beijing_hour * 16.5 - 200, -15, \"red\", 11)\nwrite(\"伦敦 \" + London + \" 点\", London * 16.5 - 200, 40, \"blue\", 11)\nwrite(\"纽约 \" + NewYork + \" 点\", NewYork * 16.5 - 200, 65, \"blue\", 11)\nwrite(\"东京 \" + Tokyo + \" 点\", Tokyo * 16.5 - 200, 90, \"blue\", 11)\nwrite(\"悉尼 \" + Sydney + \" 点\", Sydney * 16.5 - 200, 115, \"blue\", 11)\nwrite(\"时间轴（0-24 点）\", -60, -60, \"blue\", 12)"
+    },
+    "cross-16": {
+      "params": [
+        { "name": "deg", "label": "公转角度", "min": 0, "max": 360, "step": 15, "value": 0, "unit": "°" }
+      ],
+      "grid": false,
+      "explore": [
+        "地球绕到不同位置时，北半球是什么季节？（看标注）",
+        "太阳直射点在哪两个位置之间来回移动？",
+        "地球离太阳的距离在一年里变化大吗？四季主要是由什么引起的？"
+      ],
+      "code": "# 地球公转与四季探索台\ndeg = 0   # 地球在公转轨道上的角度（0°=春分）\n\nhide()\npen_color(\"blue\")\npen_down()\nang = 0\ngo_to(120, 0)\nwhile ang < 360.01:\n    go_to(120 * cos(ang), 120 * sin(ang))\n    ang = ang + 10\npen_up()\nwrite(\"☀ 太阳\", -28, 8, \"orange\", 16)\nex = 120 * cos(deg)\ney = 120 * sin(deg)\npen_color(\"green\")\npen_down()\ngo_to(ex - 10, ey + 10)\ngo_to(ex + 10, ey + 10)\ngo_to(ex + 10, ey - 10)\ngo_to(ex - 10, ey - 10)\ngo_to(ex - 10, ey + 10)\npen_up()\nseason = \"春\"\nif deg > 90:\n    season = \"夏\"\nif deg > 180:\n    season = \"秋\"\nif deg > 270:\n    season = \"冬\"\nwrite(\"北半球：\" + season + \"（公转 \" + deg + \"°）\", -150, -140, \"red\", 14)\nwrite(\"🌍=地球  轨道半径恒定→四季不是距离引起的\", -190, 150, \"blue\", 11)"
+    }
+  }
+}

@@ -7,7 +7,7 @@ import Header from '../components/Header.tsx';
 import ExercisePanel from '../components/ExercisePanel.tsx';
 import { SUBJECTS } from '../components/subjectMeta.ts';
 
-/** 错题本：练习里错过的题自动收进来，重练全对就消灭它 */
+/** 错题本：练习里错过的题自动收进来，重练全对就移出 */
 export default function WrongBookScreen() {
   const nav = useNavigate();
   const { current: profile } = useProfileStore();
@@ -58,7 +58,7 @@ export default function WrongBookScreen() {
       .catch(() => {});
     setPracticing(false);
     if (wrongPicks.length === 0 && clears.length > 0) {
-      setCelebrate(`🎉 太棒了！${clears.length} 道错题全部消灭！继续保持！`);
+      setCelebrate(`🎉 太棒了！${clears.length} 道错题全部练对，已移出错题本！`);
     }
   };
 
@@ -77,12 +77,12 @@ export default function WrongBookScreen() {
         <div className="mb-4 flex items-center gap-3">
           <h1 className="text-2xl font-black text-slate-700">📖 错题本</h1>
           {wrongs.length > 0 ? (
-            <span className="rounded-full bg-rose-100 px-3 py-1 text-sm font-bold text-rose-600">还有 {wrongs.length} 道等你消灭</span>
+            <span className="rounded-full bg-rose-100 px-3 py-1 text-sm font-bold text-rose-600">还有 {wrongs.length} 道待重练</span>
           ) : (
-            <span className="rounded-full bg-emerald-100 px-3 py-1 text-sm font-bold text-emerald-600">全部消灭！✨</span>
+            <span className="rounded-full bg-emerald-100 px-3 py-1 text-sm font-bold text-emerald-600">错题清空啦 ✨</span>
           )}
           {(progress?.wrongCleared ?? 0) > 0 && (
-            <span className="rounded-full bg-amber-100 px-3 py-1 text-sm font-bold text-amber-600">累计消灭 {progress?.wrongCleared} 道 🏅</span>
+            <span className="rounded-full bg-amber-100 px-3 py-1 text-sm font-bold text-amber-600">累计练对 {progress?.wrongCleared} 道</span>
           )}
         </div>
 
@@ -90,7 +90,7 @@ export default function WrongBookScreen() {
           <div className="rounded-3xl bg-white/80 p-10 text-center shadow-md">
             <div className="text-6xl">🌟</div>
             <p className="mt-4 text-lg font-bold text-slate-600">
-              {progress?.wrongCleared ? '错题都消灭光啦，太厉害了！' : '还没有错题——去上几课、做做随堂小练吧！'}
+              {progress?.wrongCleared ? '错题都练对啦，太厉害了！' : '还没有错题——去上几课、做做随堂小练吧！'}
             </p>
             <button onClick={() => nav('/map')} className="mt-5 rounded-xl bg-sky-500 px-6 py-2.5 font-bold text-white hover:bg-sky-600">回学科中心 →</button>
           </div>
@@ -100,7 +100,7 @@ export default function WrongBookScreen() {
               onClick={() => setPracticing(true)}
               className="mb-5 w-full rounded-2xl bg-gradient-to-r from-rose-500 to-orange-400 p-4 text-center text-lg font-black text-white shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl"
             >
-              🎯 开始消灭错题（{Math.min(wrongs.length, 20)} 道 · 全对即消灭）
+              🎯 开始重练错题（{Math.min(wrongs.length, 20)} 道 · 全对即移出）
             </button>
 
             {bySubject.map(([area, items]) => {

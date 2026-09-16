@@ -86,10 +86,11 @@
   ],
   "curriculum": {
     "stage": "第四学段（7-9年级）",
-    "module": "身边的算法",
+    "module": "能量",
     "points": [
-      "公式计算与对比",
-      "用数据解释现象"
+      "比热容的概念",
+      "Q=cmΔT 的应用",
+      "水的调节气候作用"
     ]
   },
   "subject": {
@@ -141,5 +142,25 @@
     }
   ],
   "textbook": "人教版物理九年级全一册",
-  "grade": 9
+  "grade": 9,
+  "lab": {
+    "params": [
+      {
+        "name": "q",
+        "label": "晒太阳热量 Q",
+        "min": 1000,
+        "max": 50000,
+        "step": 1000,
+        "value": 8400,
+        "unit": " J"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "同样晒太阳，水和砂石谁升温快？",
+      "热量 Q 变大，两者温差怎么变？",
+      "这就是为什么海边中午沙滩烫脚、海水温凉"
+    ],
+    "code": "# 比热容探索台：同样加热，谁升温快？\nq = 8400   # 吸收的热量（焦耳）\n\nhide()\ndt_water = q / 4200\ndt_sand = q / 900\npen_color(\"blue\")\npen_down()\ngo_to(-130, -100)\ngo_to(-130, -100 + dt_water * 6)\ngo_to(-40, -100 + dt_water * 6)\ngo_to(-40, -100)\ngo_to(-130, -100)\npen_up()\nwrite(\"水 升温 \" + dt_water + \"℃\", -130, 40, \"blue\", 12)\npen_color(\"orange\")\npen_down()\ngo_to(40, -100)\ngo_to(40, -100 + dt_sand * 6)\ngo_to(130, -100 + dt_sand * 6)\ngo_to(130, -100)\ngo_to(40, -100)\npen_up()\nwrite(\"砂石 升温 \" + dt_sand + \"℃\", 40, 80, \"orange\", 12)\nwrite(\"同样吸热 \" + q + \" J：砂石升温是水的 \" + dt_sand / dt_water + \" 倍\", -195, -140, \"red\", 12)"
+  }
 }

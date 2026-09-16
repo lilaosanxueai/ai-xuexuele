@@ -9,12 +9,16 @@ interface Props {
   onCanvasReady?: (canvas: HTMLCanvasElement) => void;
   /** 沉浸模式：canvas 填满父容器并保持 4:3 居中（父容器必须有确定尺寸） */
   fit?: boolean;
+  /** 实验室模式：白底坐标网格 + 轴刻度（替代天空草地背景，画函数图像/曲线用） */
+  grid?: boolean;
 }
 
 /** 小剧场：把 StageState 画到 canvas（中心原点、y 向上） */
-export default function Stage({ stage, onSpriteClick, onCanvasReady, fit = false }: Props) {
+export default function Stage({ stage, onSpriteClick, onCanvasReady, fit = false, grid = false }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const stageRef = useRef(stage);
+  const gridRef = useRef(grid);
+  gridRef.current = grid;
   const wrapRef = useRef<HTMLDivElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
   stageRef.current = stage;
@@ -52,17 +56,21 @@ export default function Stage({ stage, onSpriteClick, onCanvasReady, fit = false
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, STAGE_W, STAGE_H);
 
-      // 背景：天空 + 草地
-      const sky = ctx.createLinearGradient(0, 0, 0, STAGE_H);
-      sky.addColorStop(0, '#bae6fd');
-      sky.addColorStop(0.75, '#e0f2fe');
-      sky.addColorStop(1, '#bbf7d0');
-      ctx.fillStyle = sky;
-      ctx.fillRect(0, 0, STAGE_W, STAGE_H);
-      ctx.fillStyle = '#86efac';
-      ctx.fillRect(0, STAGE_H - 26, STAGE_W, 26);
-
       const toCanvas = (x: number, y: number): [number, number] => [STAGE_W / 2 + x, STAGE_H / 2 - y];
+
+      if (gridRef.current) {
+        drawGrid(ctx, toCanvas);
+      } else {
+        // 背景：天空 + 草地
+        const sky = ctx.createLinearGradient(0, 0, 0, STAGE_H);
+        sky.addColorStop(0, '#bae6fd');
+        sky.addColorStop(0.75, '#e0f2fe');
+        sky.addColorStop(1, '#bbf7d0');
+        ctx.fillStyle = sky;
+        ctx.fillRect(0, 0, STAGE_W, STAGE_H);
+        ctx.fillStyle = '#86efac';
+        ctx.fillRect(0, STAGE_H - 26, STAGE_W, 26);
+      }
 
       // 画笔轨迹（数学动态演示）
       ctx.lineWidth = 3.5;
@@ -75,6 +83,16 @@ export default function Stage({ stage, onSpriteClick, onCanvasReady, fit = false
         ctx.moveTo(ax, ay);
         ctx.lineTo(bx, by);
         ctx.stroke();
+      }
+
+      // 画布文字标注（实验室图表数值/刻度）
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      for (const lb of s.labels) {
+        const [lx, ly] = toCanvas(lb.x, lb.y);
+        ctx.font = `${lb.size}px "PingFang SC", "Microsoft YaHei", sans-serif`;
+        ctx.fillStyle = lb.color;
+        ctx.fillText(lb.text, lx, ly);
       }
 
       // 目标点
@@ -144,6 +162,50 @@ export default function Stage({ stage, onSpriteClick, onCanvasReady, fit = false
       style={{ aspectRatio: '4 / 3' }}
     />
   );
+}
+
+/** 实验室坐标网格：白底 + 40 单位浅网格 + 中心轴 + 整百刻度数字 */
+function drawGrid(ctx: CanvasRenderingContext2D, toCanvas: (x: number, y: number) => [number, number]): void {
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, STAGE_W, STAGE_H);
+  // 浅网格（每 40 单位一格）
+  ctx.strokeStyle = '#e2e8f0';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  for (let x = -STAGE_W / 2 + 40; x < STAGE_W / 2; x += 40) {
+    const [cx] = toCanvas(x, 0);
+    ctx.moveTo(cx, 0);
+    ctx.lineTo(cx, STAGE_H);
+  }
+  for (let y = -STAGE_H / 2 + 40; y < STAGE_H / 2; y += 40) {
+    const [, cy] = toCanvas(0, y);
+    ctx.moveTo(0, cy);
+    ctx.lineTo(STAGE_W, cy);
+  }
+  ctx.stroke();
+  // 中心坐标轴
+  ctx.strokeStyle = '#64748b';
+  ctx.lineWidth = 1.5;
+  const [ox, oy] = toCanvas(0, 0);
+  ctx.beginPath();
+  ctx.moveTo(ox, 0); ctx.lineTo(ox, STAGE_H);
+  ctx.moveTo(0, oy); ctx.lineTo(STAGE_W, oy);
+  ctx.stroke();
+  // 整百刻度数字
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '10px "PingFang SC", "Microsoft YaHei", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  for (let x = -200; x <= 200; x += 100) {
+    if (x === 0) continue;
+    const [cx, cy] = toCanvas(x, 0);
+    ctx.fillText(String(x), cx, cy + 9);
+  }
+  for (let y = -100; y <= 100; y += 50) {
+    if (y === 0) continue;
+    const [cx, cy] = toCanvas(0, y);
+    ctx.fillText(String(y), cx - 14, cy);
+  }
 }
 
 function drawBubble(ctx: CanvasRenderingContext2D, x: number, y: number, text: string): void {

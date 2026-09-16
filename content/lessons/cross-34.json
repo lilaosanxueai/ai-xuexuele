@@ -60,10 +60,10 @@
   ],
   "curriculum": {
     "stage": "第四学段（7-9年级）",
-    "module": "身边的算法",
+    "module": "遗传与进化",
     "points": [
-      "蒙特卡洛模拟",
-      "比例统计"
+      "理解显隐性基因",
+      "用模拟验证 3:1 分离比"
     ]
   },
   "subject": {
@@ -116,5 +116,24 @@
   "codeLesson": true,
   "starterCode": "# 遗传模拟：Aa x Aa 生 100 个娃\naa = 0\nhas_A = 0\nfor kid in range(100):\n    dad = random(1, 2)      # 1=A, 2=a\n    mom = random(1, 2)\n    if dad == 2:\n        if mom == 2:\n            aa = aa + 1     # 隐性纯合：单眼皮\n        else:\n            has_A = has_A + 1\n    else:\n        has_A = has_A + 1\n\nsay(\"单眼皮 aa 约 \" + aa + \" 个（理论 25）\")\nsay(\"双眼皮 约 \" + has_A + \" 个（理论 75）\")\nsay(\"比例接近 3:1 —— 孟德尔分离定律！\")\n",
   "textbook": "人教版生物学八年级下册",
-  "grade": 8
+  "grade": 8,
+  "lab": {
+    "params": [
+      {
+        "name": "p",
+        "label": "显性基因概率",
+        "min": 0,
+        "max": 1,
+        "step": 0.05,
+        "value": 0.5
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "父母各出一个基因，四种组合（AA/Aa/aA/aa）各占多少？",
+      "哪些组合表现出显性性状？加起来概率是多少？",
+      "p=0.5 时显性:隐性接近几比几？"
+    ],
+    "code": "# 显性与隐性：配对棋盘表探索台\np = 0.5   # 显性基因（大A）出现的概率\n\nhide()\npA = p\npa = 1 - p\nwrite(\"父母各出 1 个基因：\", -180, 130, \"blue\", 13)\nwrite(\"AA: \" + pA * pA + \"  Aa: \" + pA * pa + \"  aA: \" + pa * pA + \"  aa: \" + pa * pa, -180, 105, \"blue\", 12)\ndom = pA * pA + 2 * pA * pa\nrec = pa * pa\nwrite(\"显性表现 = AA+Aa+aA = \" + dom, -180, 60, \"green\", 13)\nwrite(\"隐性表现 = aa = \" + rec, -180, 35, \"orange\", 13)\npen_color(\"green\")\npen_down()\ngo_to(-180, -20)\ngo_to(-180 + dom * 340, -20)\ngo_to(-180 + dom * 340, 15)\ngo_to(-180, 15)\ngo_to(-180, -20)\npen_up()\npen_color(\"orange\")\npen_down()\ngo_to(-180 + dom * 340, -20)\ngo_to(160, -20)\ngo_to(160, 15)\ngo_to(-180 + dom * 340, 15)\ngo_to(-180 + dom * 340, -20)\npen_up()\nwrite(\"绿色=显性  橙色=隐性\", -80, -55, \"red\", 12)\nwrite(\"p=0.5 时显隐性 3:1\", -80, -85, \"red\", 13)"
+  }
 }

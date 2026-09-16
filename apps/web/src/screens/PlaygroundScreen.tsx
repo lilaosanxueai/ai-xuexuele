@@ -242,10 +242,10 @@ export default function PlaygroundScreen() {
           </div>
         </div>
 
-        {/* 任务与秘籍 */}
+        {/* 实验步骤与提示 */}
         <div className="mt-6 grid gap-4 lg:grid-cols-2">
           <div className="rounded-3xl bg-white/90 p-4 shadow-md">
-            <h2 className="mb-2 font-bold">🧪 训练师任务 {doneCount}/{TASKS.filter((t) => !t.optional).length}</h2>
+            <h2 className="mb-2 font-bold">🧪 实验步骤 {doneCount}/{TASKS.filter((t) => !t.optional).length}</h2>
             <ul className="space-y-1.5">
               {TASKS.map((t) => {
                 const done = !!taskDone[t.id];
@@ -266,7 +266,7 @@ export default function PlaygroundScreen() {
             </ul>
           </div>
           <div className="rounded-3xl bg-white/90 p-4 shadow-md">
-            <h2 className="mb-2 font-bold">💡 训练师秘籍</h2>
+            <h2 className="mb-2 font-bold">💡 实验小贴士</h2>
             <ul className="space-y-1.5 text-[15px] text-slate-600">
               {TIPS.map((t) => <li key={t}>{t}</li>)}
             </ul>

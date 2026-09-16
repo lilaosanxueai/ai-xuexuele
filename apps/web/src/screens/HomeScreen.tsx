@@ -53,13 +53,13 @@ export default function HomeScreen() {
   return (
     <div className="flex min-h-screen flex-col">
       <div className="text-center pt-16 pb-10">
-        <div className="text-7xl">🏝</div>
+        <div className="text-7xl">📖</div>
         <h1 className="mt-3 text-4xl font-black text-sky-800">AI学学乐</h1>
-        <p className="mt-2 text-slate-500">对标信息科技与数学课程标准的编程学习岛 · 覆盖小学到高中</p>
+        <p className="mt-2 text-slate-500">AI 老师辅导学科学习 · 14 学科 · 覆盖小学到高中</p>
       </div>
 
       <div className="mx-auto w-full max-w-3xl px-6 pb-4">
-        <h2 className="mb-4 text-xl font-bold text-slate-700">今天是谁来玩？</h2>
+        <h2 className="mb-4 text-xl font-bold text-slate-700">今天是谁来学习？</h2>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
           {profiles.map((p) => (
             <div key={p.id} className="group relative">
@@ -69,7 +69,7 @@ export default function HomeScreen() {
               >
                 <div className="text-5xl">{p.avatar}</div>
                 <div className="mt-2 text-lg font-bold">{p.name}</div>
-                <div className="mt-1 text-sm text-sky-600">进去玩 →</div>
+                <div className="mt-1 text-sm text-sky-600">开始学习 →</div>
               </button>
               <button
                 onClick={() => void remove(p)}
@@ -86,7 +86,7 @@ export default function HomeScreen() {
             className="rounded-3xl border-4 border-dashed border-sky-300 bg-white/40 p-6 text-center text-sky-500 transition hover:border-sky-400 hover:bg-white/70"
           >
             <div className="text-5xl">➕</div>
-            <div className="mt-2 text-lg font-bold">新冒险家</div>
+            <div className="mt-2 text-lg font-bold">添加孩子</div>
           </button>
         </div>
       </div>
@@ -98,11 +98,11 @@ export default function HomeScreen() {
       {adding && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" onClick={() => setAdding(false)}>
           <div className="w-full max-w-sm rounded-3xl bg-white p-6 shadow-2xl" onClick={(e) => e.stopPropagation()}>
-            <h3 className="mb-4 text-lg font-black">新的冒险家</h3>
+            <h3 className="mb-4 text-lg font-black">添加孩子</h3>
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="你叫什么名字？"
+              placeholder="孩子叫什么名字？"
               maxLength={12}
               className="w-full rounded-xl border border-slate-300 px-3 py-2 text-lg outline-none focus:border-sky-400"
               autoFocus
@@ -126,7 +126,7 @@ export default function HomeScreen() {
                 disabled={!name.trim()}
                 className="rounded-xl bg-sky-500 px-4 py-2 font-bold text-white hover:bg-sky-600 disabled:opacity-40"
               >
-                开始冒险！
+                开始学习！
               </button>
             </div>
           </div>

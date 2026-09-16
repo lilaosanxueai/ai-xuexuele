@@ -86,10 +86,11 @@
   ],
   "curriculum": {
     "stage": "第四学段（7-9年级）",
-    "module": "身边的算法",
+    "module": "物质",
     "points": [
-      "条件判断的应用",
-      "公式程序化"
+      "阿基米德原理 F浮=ρgV排",
+      "密度与浮沉的关系",
+      "轮船与潜水艇的原理"
     ]
   },
   "subject": {
@@ -141,5 +142,34 @@
     }
   ],
   "textbook": "人教版物理八年级下册",
-  "grade": 8
+  "grade": 8,
+  "lab": {
+    "params": [
+      {
+        "name": "rho_obj",
+        "label": "物体密度",
+        "min": 0.2,
+        "max": 3,
+        "step": 0.1,
+        "value": 0.6,
+        "unit": " g/cm³"
+      },
+      {
+        "name": "rho_liq",
+        "label": "液体密度",
+        "min": 0.8,
+        "max": 1.4,
+        "step": 0.05,
+        "value": 1,
+        "unit": " g/cm³"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "物体密度小于液体密度时，物体是漂还是沉？",
+      "把液体换成「盐水」（密度调到 1.2），原来下沉的物体会怎样？",
+      "物体浸入水中的比例和两个密度的比值有什么关系？"
+    ],
+    "code": "# 浮力与密度探索台：ρ物 vs ρ液 决定沉浮\nrho_obj = 0.6   # 物体密度\nrho_liq = 1     # 液体密度\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-160, 40)\ngo_to(160, 40)\npen_up()\nwrite(\"≈ 水面\", -150, 55, \"blue\", 11)\npen_color(\"red\")\ndepth = 40\nif rho_obj > rho_liq:\n    depth = -20\nif rho_obj == rho_liq:\n    depth = 10\nif rho_obj < rho_liq:\n    part = rho_obj / rho_liq\n    depth = 40 - part * 80\npen_down()\ngo_to(-30, depth + 40)\ngo_to(30, depth + 40)\ngo_to(30, depth - 40)\ngo_to(-30, depth - 40)\ngo_to(-30, depth + 40)\npen_up()\nwrite(\"ρ物=\" + rho_obj + \"  ρ液=\" + rho_liq, -110, 120, \"red\", 13)\nif rho_obj > rho_liq:\n    write(\"下沉：ρ物 > ρ液\", -110, 95, \"orange\", 14)\nif rho_obj < rho_liq:\n    write(\"漂浮：ρ物 < ρ液\", -110, 95, \"green\", 14)\nif rho_obj == rho_liq:\n    write(\"悬浮：ρ物 = ρ液\", -110, 95, \"blue\", 14)\nwrite(\"F浮 = ρ液·g·V = \" + rho_liq * 10 * 100 + \"（单位略）\", -110, -120, \"red\", 12)"
+  }
 }

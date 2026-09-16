@@ -5,53 +5,155 @@
   "title": "do re mi 音阶梯",
   "emoji": "🎵",
   "story": "音乐课上老师弹琴：「do re mi fa sol la xi do——」八个音像台阶一样一级级升高。这个「台阶」有个正式名字：音阶！今天你用「播放声音」积木搭一座会唱歌的梯子，从 do 爬到高音 do，再滑下来——顺便弄明白：为什么有的音高、有的音低？",
-  "goals": ["认识音阶的顺序与高低", "用程序演奏一段完整旋律"],
-  "toolbox": ["island_when_run", "island_say", "island_say_for", "island_wait", "island_move", "island_turn_right", "island_turn_left", "island_costume", "island_play", "island_repeat"],
-  "actor": { "costume": "🎵", "x": -100, "y": -40, "dir": 0 },
-  "targets": [{ "emoji": "🎼", "x": 130, "y": 60 }],
+  "goals": [
+    "认识音阶的顺序与高低",
+    "用程序演奏一段完整旋律"
+  ],
+  "toolbox": [
+    "island_when_run",
+    "island_say",
+    "island_say_for",
+    "island_wait",
+    "island_move",
+    "island_turn_right",
+    "island_turn_left",
+    "island_costume",
+    "island_play",
+    "island_repeat"
+  ],
+  "actor": {
+    "costume": "🎵",
+    "x": -100,
+    "y": -40,
+    "dir": 0
+  },
+  "targets": [
+    {
+      "emoji": "🎼",
+      "x": 130,
+      "y": 60
+    }
+  ],
   "tasks": [
     {
       "id": "t1",
       "text": "第一个音：播放「🎵 do」并说「do——最低的一级台阶」",
-      "hintPrompts": ["「播放声音」积木里能选 do re mi fa sol la xi 和高音 do2", "do 是音阶的起点，像楼梯最下面一级"],
-      "check": { "type": "say_text" }
+      "hintPrompts": [
+        "「播放声音」积木里能选 do re mi fa sol la xi 和高音 do2",
+        "do 是音阶的起点，像楼梯最下面一级"
+      ],
+      "check": {
+        "type": "say_text"
+      }
     },
     {
       "id": "t2",
       "text": "爬梯子：按顺序播放 do → re → mi → fa（至少 4 块播放声音积木），每播一个音移动一步、升高一点",
-      "hintPrompts": ["音越来越高，角色也越走越高——用「移动」表现爬梯子", "每音之间加小等待，听得更清楚"],
-      "check": { "type": "block_count_min", "block": "island_play", "count": 4 }
+      "hintPrompts": [
+        "音越来越高，角色也越走越高——用「移动」表现爬梯子",
+        "每音之间加小等待，听得更清楚"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_play",
+        "count": 4
+      }
     },
     {
       "id": "t3",
       "text": "爬到顶：接着 sol → la → xi → do2（高音 do），走到 🎼 梯子顶端",
-      "hintPrompts": ["do2 是音效列表里的「do（高）」", "八个音全播完，你就爬完了一整座音阶梯！"],
-      "check": { "type": "actor_reach", "targetIndex": 0 }
+      "hintPrompts": [
+        "do2 是音效列表里的「do（高）」",
+        "八个音全播完，你就爬完了一整座音阶梯！"
+      ],
+      "check": {
+        "type": "actor_reach",
+        "targetIndex": 0
+      }
     },
     {
       "id": "t4",
       "text": "滑梯时间：从高音往下滑——do2 → xi → la …… 回到 do，像坐滑梯一样溜下来",
-      "hintPrompts": ["下行音阶：do2 xi la sol fa mi re do", "上行明亮、下行温柔——用耳朵感受区别"],
-      "check": { "type": "block_count_min", "block": "island_wait", "count": 6 }
+      "hintPrompts": [
+        "下行音阶：do2 xi la sol fa mi re do",
+        "上行明亮、下行温柔——用耳朵感受区别"
+      ],
+      "check": {
+        "type": "block_count_min",
+        "block": "island_wait",
+        "count": 6
+      }
     },
     {
       "id": "c1",
       "text": "⭐ 挑战：把上行音阶放进「重复 2 次」，再试着用音阶拼出《小星星》开头「do do sol sol la la sol」",
-      "hintPrompts": ["小星星开头：do do sol sol la la sol——拼拼看！", "拼旋律就像拼积木，音对了歌就出来了"],
-      "check": { "type": "block_used", "block": "island_repeat" },
+      "hintPrompts": [
+        "小星星开头：do do sol sol la la sol——拼拼看！",
+        "拼旋律就像拼积木，音对了歌就出来了"
+      ],
+      "check": {
+        "type": "block_used",
+        "block": "island_repeat"
+      },
       "optional": true
     }
   ],
-  "curriculum": { "stage": "第三学段（5-6年级）", "module": "身边的算法", "points": ["序列与循环", "用序列表达旋律"] },
-  "subject": { "name": "音乐·音阶与旋律", "emoji": "🎵", "points": ["自然大调音阶 do-si", "音的上行与下行", "用音符拼旋律"] },
+  "curriculum": {
+    "stage": "第三学段（5-6年级）",
+    "module": "表现",
+    "points": [
+      "自然大调音阶 do-si",
+      "音的上行与下行",
+      "用音符拼旋律"
+    ]
+  },
+  "subject": {
+    "name": "音乐·音阶与旋律",
+    "emoji": "🎵",
+    "points": [
+      "自然大调音阶 do-si",
+      "音的上行与下行",
+      "用音符拼旋律"
+    ]
+  },
   "subjectArea": "音乐",
   "gradeBand": "primary",
   "aiIntro": "🎵 叮咚——音乐教室开门啦！今天我们不弹琴，用积木「搭」琴：do re mi fa sol la xi do，八个音八级台阶。爬上去、滑下来，你的耳朵会告诉你什么叫「音阶」！",
   "celebrate": "音阶梯搭好啦！🎼 你播放了一整个上行+下行音阶，还挑战了《小星星》——用程序拼旋律，和作曲家的工作只差一首歌的距离！今晚用音阶给爸妈弹（播）一首！",
   "exercises": [
-    { "q": "自然大调音阶的正确顺序是？", "options": ["do mi re fa la sol xi", "do re mi fa sol la xi", "do re mi fa sol xi la", "fa do re mi sol la xi"], "answer": 1, "explain": "do re mi fa sol la xi（do）——从低到高一级级上行" },
-    { "q": "音的高低由什么决定？", "options": ["声音大小", "物体振动的快慢", "播放的音量", "乐器的颜色"], "answer": 1, "explain": "振动越快音越高，振动越慢音越低" },
-    { "q": "《小星星》开头是？", "options": ["do do sol sol la la sol", "mi mi fa fa sol sol mi", "do re mi fa sol la xi", "sol sol do do re re do"], "answer": 0, "explain": "一闪一闪亮晶晶：do do sol sol la la sol～" }
+    {
+      "q": "自然大调音阶的正确顺序是？",
+      "options": [
+        "do mi re fa la sol xi",
+        "do re mi fa sol la xi",
+        "do re mi fa sol xi la",
+        "fa do re mi sol la xi"
+      ],
+      "answer": 1,
+      "explain": "do re mi fa sol la xi（do）——从低到高一级级上行"
+    },
+    {
+      "q": "音的高低由什么决定？",
+      "options": [
+        "声音大小",
+        "物体振动的快慢",
+        "播放的音量",
+        "乐器的颜色"
+      ],
+      "answer": 1,
+      "explain": "振动越快音越高，振动越慢音越低"
+    },
+    {
+      "q": "《小星星》开头是？",
+      "options": [
+        "do do sol sol la la sol",
+        "mi mi fa fa sol sol mi",
+        "do re mi fa sol la xi",
+        "sol sol do do re re do"
+      ],
+      "answer": 0,
+      "explain": "一闪一闪亮晶晶：do do sol sol la la sol～"
+    }
   ],
   "codeLesson": false
 }

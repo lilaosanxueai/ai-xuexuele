@@ -60,10 +60,10 @@
   ],
   "curriculum": {
     "stage": "第四学段（7-9年级）",
-    "module": "身边的算法",
+    "module": "物质的性质与变化",
     "points": [
-      "状态变量",
-      "条件边界"
+      "理解溶解与饱和",
+      "知道温度影响溶解度"
     ]
   },
   "subject": {
@@ -116,5 +116,25 @@
   "codeLesson": true,
   "starterCode": "# 溶解度实验\ntemp = 20\ncapacity = 200    # 20 度能溶 200 克\n\nsugar = 250\nif sugar <= capacity:\n    say(sugar + \" 克全部溶解\")\nelse:\n    say(\"饱和了！只能溶 \" + capacity + \" 克，沉底 \" + (sugar - capacity) + \" 克\")\n\n# 升温到 60 度\ntemp = 60\ncapacity = 400\nsay(\"升温到 60 度：能溶 \" + capacity + \" 克了！\")\nsay(\"温度越高，溶得越多\")\n",
   "textbook": "人教版化学九年级下册",
-  "grade": 9
+  "grade": 9,
+  "lab": {
+    "params": [
+      {
+        "name": "T",
+        "label": "水的温度",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "value": 20,
+        "unit": " ℃"
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "温度升高，糖能溶得更多还是更少？曲线怎么走？",
+      "在 20℃ 时最多能溶多少克（看标注）？60℃ 呢？",
+      "这条曲线为什么越来越陡？想想分子运动"
+    ],
+    "code": "# 蔗糖溶解度随温度变化探索台\nT = 20   # 当前水温（摄氏度）\n\nhide()\nsol = 180 + (T - 20) * 1.6\npen_color(\"blue\")\npen_down()\nt2 = 0\ngo_to(-200, -130 + (180 + (t2 - 20) * 1.6) * 0.8)\nwhile t2 < 100.01:\n    s2 = 180 + (t2 - 20) * 1.6\n    go_to(-200 + t2 * 4, -130 + s2 * 0.8)\n    t2 = t2 + 10\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-200 + T * 4, -150)\ngo_to(-200 + T * 4, 140)\npen_up()\nwrite(\"T=\" + T + \"℃ 时最多溶 \" + sol + \"g\", 60, 145, \"red\", 13)\nwrite(\"溶解度曲线（蔗糖）\", -180, 120, \"blue\", 12)"
+  }
 }

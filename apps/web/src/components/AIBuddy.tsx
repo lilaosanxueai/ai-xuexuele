@@ -6,7 +6,7 @@ import { parseChineseBuild } from '../runtime/nlParser.ts';
 export interface BuddyHandle {
   /** 从任务面板/灵感卡片跳进来提问 */
   askInMode: (mode: BuddyMode, text: string) => void;
-  /** 本地喝彩/提示（不调用大模型，零成本即时反馈） */
+  /** 本地消息（不调用大模型，零成本即时反馈；辅导页复盘引导用它下发） */
   sayLocal: (text: string) => void;
 }
 
@@ -16,7 +16,13 @@ interface Props {
   intro: string;
   defaultMode: BuddyMode;
   getContext: () => ChatContext;
-  /** 本课可用的积木目录（代搭用：大模型只能从这里选积木） */
+  /** 显示哪些模式页签（默认全部；辅导页传 ['explain','hint','review']） */
+  modes?: BuddyMode[];
+  /** 覆盖某模式的快捷提问（辅导页用学科向问题替代默认的编程向问题） */
+  quick?: Partial<Record<BuddyMode, string[]>>;
+  /** 头部副标题（默认「你的 AI 创意搭档」） */
+  subtitle?: string;
+  /** 本课可用的积木目录（代搭用：大模型只能从这里选积木）；不传则隐藏代搭模式 */
   catalog?: BlockCatalogEntry[];
   /** 代搭指令执行回调：由工作台搭上画布 */
   onBuildOps?: (ops: BuildOp[]) => void;
@@ -40,6 +46,14 @@ const QUICK: Record<BuddyMode, string[]> = {
   review: ['看看我的作品！', '哪里可以更好？'],
 };
 
+/** 通用追问（全模式可用）：按钮只显示短标签，点击发送完整问句 */
+const FOLLOWUPS: [emoji: string, label: string, text: string][] = [
+  ['🤔', '为什么', '为什么呀？给我讲讲道理'],
+  ['🔄', '讲简单点', '换个说法再讲一遍，更简单一点'],
+  ['🌰', '举例子', '举个生活中的例子吧'],
+  ['🎯', '考考我', '考考我！出个小问题检验我'],
+];
+
 const BUILD_HELP = '我没能听懂这句话 😅 换个说法试试，比如：\n「帮我搭：说你好，移动100」\n「重复4次{右转90，移动80}」\n「清空画布」';
 
 const URL_RE = /https?:\/\/\S+|www\.\S+/g;
@@ -61,10 +75,13 @@ interface SpeechEventLike {
 }
 
 const AIBuddy = forwardRef<BuddyHandle, Props>(function AIBuddy(
-  { profileId, buddy, intro, defaultMode, getContext, catalog, onBuildOps, getCurrentOps },
+  { profileId, buddy, intro, defaultMode, getContext, modes, quick, subtitle, catalog, onBuildOps, getCurrentOps },
   ref,
 ) {
-  const [mode, setMode] = useState<BuddyMode>(defaultMode);
+  const visibleModes = (modes ?? MODES.map((m) => m.key)).filter(
+    (m) => m !== 'build' || (catalog !== undefined && onBuildOps !== undefined),
+  );
+  const [mode, setMode] = useState<BuddyMode>(visibleModes.includes(defaultMode) ? defaultMode : visibleModes[0] ?? 'explain');
   const [messages, setMessages] = useState<(ChatMessage & { streaming?: boolean })[]>([]);
   const [input, setInput] = useState('');
   const [busy, setBusy] = useState(false);
@@ -213,23 +230,25 @@ const AIBuddy = forwardRef<BuddyHandle, Props>(function AIBuddy(
         <span className="text-3xl">{buddy.emoji}</span>
         <div>
           <div className="text-lg font-bold">{buddy.name}</div>
-          <div className="text-xs text-slate-500">你的 AI 创意搭档</div>
+          <div className="text-xs text-slate-500">{subtitle ?? '你的 AI 创意搭档'}</div>
         </div>
       </div>
 
-      <div className="mb-2 flex flex-wrap gap-1">
-        {MODES.map((m) => (
-          <button
-            key={m.key}
-            onClick={() => setMode(m.key)}
-            className={`rounded-full px-3 py-1 text-sm font-semibold transition ${
-              mode === m.key ? 'bg-amber-400 text-white shadow' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-            }`}
-          >
-            {m.label}
-          </button>
-        ))}
-      </div>
+      {visibleModes.length > 1 && (
+        <div className="mb-2 flex flex-wrap gap-1">
+          {MODES.filter((m) => visibleModes.includes(m.key)).map((m) => (
+            <button
+              key={m.key}
+              onClick={() => setMode(m.key)}
+              className={`rounded-full px-3 py-1 text-sm font-semibold transition ${
+                mode === m.key ? 'bg-amber-400 text-white shadow' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              }`}
+            >
+              {m.label}
+            </button>
+          ))}
+        </div>
+      )}
 
       <div className="min-h-0 flex-1 space-y-2 overflow-y-auto rounded-xl bg-slate-50 p-2">
         {messages.map((msg, i) => (
@@ -249,31 +268,9 @@ const AIBuddy = forwardRef<BuddyHandle, Props>(function AIBuddy(
         <div ref={listEnd} />
       </div>
 
-      {/* Khanmigo 式深挖追问条：把「被动听讲」变成「主动追问」——点一下就往深处挖一层 */}
-      {(mode === 'hint' || mode === 'explain') && (
-        <div className="mt-2 flex flex-wrap gap-1">
-          {[
-            ['🤔', '为什么呀？给我讲讲道理'],
-            ['🔄', '换个说法再讲一遍，更简单一点'],
-            ['🌰', '举个生活中的例子吧'],
-            ['🌉', '这和我们之前学过的什么有关系？'],
-            ['🎯', '考考我！出个小问题检验我'],
-          ].map(([emoji, text]) => (
-            <button
-              key={text}
-              disabled={busy}
-              onClick={() => void send(text)}
-              className="rounded-full border border-violet-300 bg-violet-50 px-2 py-1 text-xs text-violet-700 hover:bg-violet-100 disabled:opacity-50"
-              title={text}
-            >
-              {emoji} {text.slice(0, 8)}
-            </button>
-          ))}
-        </div>
-      )}
-
+      {/* 快捷提问 + 通用追问：同一排同样式，短标签完整可读，点击发送完整问句 */}
       <div className="mt-2 flex flex-wrap gap-1">
-        {QUICK[mode].map((q) => (
+        {(quick?.[mode] ?? QUICK[mode]).map((q) => (
           <button
             key={q}
             disabled={busy}
@@ -281,6 +278,16 @@ const AIBuddy = forwardRef<BuddyHandle, Props>(function AIBuddy(
             className="rounded-full border border-amber-300 bg-amber-50 px-2 py-1 text-xs text-amber-700 hover:bg-amber-100 disabled:opacity-50"
           >
             {q}
+          </button>
+        ))}
+        {FOLLOWUPS.map(([emoji, label, text]) => (
+          <button
+            key={label}
+            disabled={busy}
+            onClick={() => void send(text)}
+            className="rounded-full border border-amber-300 bg-amber-50 px-2 py-1 text-xs text-amber-700 hover:bg-amber-100 disabled:opacity-50"
+          >
+            {emoji} {label}
           </button>
         ))}
       </div>

@@ -1,0 +1,178 @@
+{
+  "_说明": "互动实验室第二批手工课定义（14 节）。注入方式同第一批：node scripts/inject-labs.mjs labs-batch2.json",
+  "labs": {
+    "cross-06": {
+      "params": [
+        { "name": "I", "label": "电流 I", "min": 0.1, "max": 2, "step": 0.1, "value": 0.5, "unit": " A" },
+        { "name": "R", "label": "电阻 R", "min": 1, "max": 50, "step": 1, "value": 10, "unit": " Ω" }
+      ],
+      "grid": false,
+      "explore": [
+        "电流变大，电压怎么变？它们成正比吗？",
+        "电阻变大（更难通过），同样的电流下电压是升还是降？",
+        "把 I×R 算出来和图上标的 U 对一对"
+      ],
+      "code": "# 欧姆定律探索台：U = I × R\nI = 0.5   # 电流（安培）\nR = 10    # 电阻（欧姆）\n\nhide()\nU = I * R\npen_color(\"red\")\npen_down()\ngo_to(-120, -100)\ngo_to(-120, -100 + U * 2)\ngo_to(-60, -100 + U * 2)\ngo_to(-60, -100)\ngo_to(-120, -100)\npen_up()\nwrite(\"U = \" + I + \" × \" + R, 90, 60, \"red\", 14)\nwrite(\"= \" + U + \" V（伏）\", 110, 30, \"red\", 16)\nwrite(\"I=\" + I + \"A  R=\" + R + \"Ω\", 100, 90, \"blue\", 12)\nwrite(\"电压柱\", -90, -125, \"red\", 11)\nif U > 30:\n    write(\"电压很大！小心\", 90, -40, \"orange\", 12)"
+    },
+    "cross-107": {
+      "params": [
+        { "name": "n", "label": "投掷次数", "min": 10, "max": 500, "step": 10, "value": 100, "unit": " 次" }
+      ],
+      "grid": false,
+      "explore": [
+        "三根柱子的比例接近 1:2:1 吗？",
+        "次数调到很少（10 次）和很多（500 次），哪个更接近理论比例？",
+        "「一正一反」最多——想想为什么它概率是 50%？"
+      ],
+      "code": "# 掷 2 枚硬币探索台：看概率的形状\nn = 100   # 投掷次数\n\nhide()\nc0 = 0\nc1 = 0\nc2 = 0\ni = 0\nwhile i < n:\n    a = random(0, 1)\n    b = random(0, 1)\n    if a + b == 0:\n        c0 = c0 + 1\n    if a + b == 1:\n        c1 = c1 + 1\n    if a + b == 2:\n        c2 = c2 + 1\n    i = i + 1\npen_color(\"red\")\npen_down()\ngo_to(-140, -100)\ngo_to(-140, -100 + c0 * 160 / n * 2)\ngo_to(-60, -100 + c0 * 160 / n * 2)\ngo_to(-60, -100)\ngo_to(-140, -100)\npen_up()\nwrite(\"两正 \" + c0, -100, 60, \"red\", 12)\npen_color(\"green\")\npen_down()\ngo_to(-40, -100)\ngo_to(-40, -100 + c1 * 160 / n * 2)\ngo_to(40, -100 + c1 * 160 / n * 2)\ngo_to(40, -100)\ngo_to(-40, -100)\npen_up()\nwrite(\"一正一反 \" + c1, 0, 80, \"green\", 12)\npen_color(\"blue\")\npen_down()\ngo_to(60, -100)\ngo_to(60, -100 + c2 * 160 / n * 2)\ngo_to(140, -100 + c2 * 160 / n * 2)\ngo_to(140, -100)\ngo_to(60, -100)\npen_up()\nwrite(\"两反 \" + c2, 100, 60, \"blue\", 12)\nwrite(\"理论比例 1 : 2 : 1\", -60, -130, \"orange\", 12)"
+    },
+    "cross-74": {
+      "params": [
+        { "name": "n", "label": "模拟局数", "min": 30, "max": 600, "step": 30, "value": 300, "unit": " 局" }
+      ],
+      "grid": false,
+      "explore": [
+        "不换门和换门，谁赢的多？比例大约几比几？",
+        "局数变多，胜率更接近 1/3 和 2/3 吗？",
+        "想不通为什么换门赢面大？问 AI 老师要提示"
+      ],
+      "code": "# 蒙提霍尔三门问题探索台\nn = 300   # 模拟局数\n\nhide()\nstay_win = 0\nswap_win = 0\ni = 0\nwhile i < n:\n    car = random(0, 2)\n    pick = random(0, 2)\n    if pick == car:\n        stay_win = stay_win + 1\n    else:\n        swap_win = swap_win + 1\n    i = i + 1\npen_color(\"orange\")\npen_down()\ngo_to(-130, -100)\ngo_to(-130, -100 + stay_win * 200 / n)\ngo_to(-30, -100 + stay_win * 200 / n)\ngo_to(-30, -100)\ngo_to(-130, -100)\npen_up()\nwrite(\"死守不换 \" + stay_win + \" 局\", -130, 60, \"orange\", 12)\npen_color(\"green\")\npen_down()\ngo_to(30, -100)\ngo_to(30, -100 + swap_win * 200 / n)\ngo_to(130, -100 + swap_win * 200 / n)\ngo_to(130, -100)\ngo_to(30, -100)\npen_up()\nwrite(\"必换 \" + swap_win + \" 局\", 50, 80, \"green\", 12)\nwrite(\"不换胜率 \" + stay_win * 100 / n + \"%，换门胜率 \" + swap_win * 100 / n + \"%\", -170, -135, \"red\", 12)"
+    },
+    "math-47": {
+      "params": [
+        { "name": "rate", "label": "年利率", "min": 1, "max": 20, "step": 1, "value": 5, "unit": "%" }
+      ],
+      "grid": true,
+      "explore": [
+        "复利线（蓝）和单利线（红）什么时候开始拉开差距？",
+        "利率越高，「利滚利」的效果越明显吗？",
+        "30 年后复利比单利多赚多少？（看图上标注）"
+      ],
+      "code": "# 复利 vs 单利探索台：1000 元存 30 年\nrate = 5   # 年利率（%）\n\nhide()\np = 1000\nsimple = 1000\npen_color(\"red\")\npen_down()\ngo_to(-200, -100)\nyear = 0\nwhile year < 30.1:\n    go_to(-200 + year * 13, -100 + simple / 1200 * 200)\n    year = year + 1\n    simple = simple + 1000 * rate / 100\npen_up()\nwrite(\"单利（红）\", 130, -20, \"red\", 11)\np = 1000\npen_color(\"blue\")\npen_down()\ngo_to(-200, -100)\nyear = 0\nwhile year < 30.1:\n    go_to(-200 + year * 13, -100 + p / 1200 * 200)\n    year = year + 1\n    p = p * (1 + rate / 100)\npen_up()\nwrite(\"复利（蓝）\", 130, 120, \"blue\", 11)\nwrite(\"利率 \" + rate + \"%：30 年复利 \" + p + \" 元\", -195, 140, \"blue\", 12)\nwrite(\"单利只有 \" + simple + \" 元\", -95, 160, \"red\", 12)"
+    },
+    "cross-110": {
+      "params": [
+        { "name": "q", "label": "晒太阳热量 Q", "min": 1000, "max": 50000, "step": 1000, "value": 8400, "unit": " J" }
+      ],
+      "grid": false,
+      "explore": [
+        "同样晒太阳，水和砂石谁升温快？",
+        "热量 Q 变大，两者温差怎么变？",
+        "这就是为什么海边中午沙滩烫脚、海水温凉"
+      ],
+      "code": "# 比热容探索台：同样加热，谁升温快？\nq = 8400   # 吸收的热量（焦耳）\n\nhide()\ndt_water = q / 4200\ndt_sand = q / 900\npen_color(\"blue\")\npen_down()\ngo_to(-130, -100)\ngo_to(-130, -100 + dt_water * 6)\ngo_to(-40, -100 + dt_water * 6)\ngo_to(-40, -100)\ngo_to(-130, -100)\npen_up()\nwrite(\"水 升温 \" + dt_water + \"℃\", -130, 40, \"blue\", 12)\npen_color(\"orange\")\npen_down()\ngo_to(40, -100)\ngo_to(40, -100 + dt_sand * 6)\ngo_to(130, -100 + dt_sand * 6)\ngo_to(130, -100)\ngo_to(40, -100)\npen_up()\nwrite(\"砂石 升温 \" + dt_sand + \"℃\", 40, 80, \"orange\", 12)\nwrite(\"同样吸热 \" + q + \" J：砂石升温是水的 \" + dt_sand / dt_water + \" 倍\", -195, -140, \"red\", 12)"
+    },
+    "cross-07": {
+      "params": [
+        { "name": "g", "label": "重力加速度 g", "min": 2, "max": 25, "step": 1, "value": 10, "unit": " m/s²" }
+      ],
+      "grid": true,
+      "explore": [
+        "g 越大（重力越强），小球下落越快还是越慢？曲线呢？",
+        "月亮上 g 只有 1.6，把 g 调到最小看看轨迹",
+        "曲线是直线还是越来越陡？这说明下落是「越来越快」吗？"
+      ],
+      "code": "# 自由落体探索台：h = 150 - ½gt²\ng = 10   # 重力加速度（不同星球不一样！）\n\nhide()\npen_color(\"blue\")\npen_down()\nt = 0\ngo_to(-200, 150)\nwhile t < 5.51:\n    h = 150 - 0.5 * g * t * t\n    if h < -150:\n        h = -150\n    go_to(-200 + t * 70, h)\n    t = t + 0.25\npen_up()\nwrite(\"g=\" + g + \" 时 1 秒末速度 = \" + g + \" m/s\", -180, -130, \"blue\", 12)\nwrite(\"下落轨迹（越陡=越快）\", -180, 140, \"blue\", 12)"
+    },
+    "cross-111": {
+      "params": [
+        { "name": "f", "label": "按压力 F", "min": 1, "max": 50, "step": 1, "value": 10, "unit": " N" }
+      ],
+      "grid": false,
+      "explore": [
+        "同样的力，图钉尖和手指肚的压强差多少倍？",
+        "压力 F 变大，两个压强怎么变？",
+        "为什么书包带做得宽宽的？用 P=F/S 解释"
+      ],
+      "code": "# 压强探索台：P = F / S，面积越小压强越大\nf = 10   # 按压力（牛）\n\nhide()\np_tip = f / 0.000001\np_finger = f / 0.0001\npen_color(\"red\")\npen_down()\ngo_to(-130, -100)\ngo_to(-130, 120)\ngo_to(-50, 120)\ngo_to(-50, -100)\ngo_to(-130, -100)\npen_up()\nwrite(\"图钉尖\", -90, -125, \"red\", 12)\npen_color(\"blue\")\npen_down()\ngo_to(40, -100)\ngo_to(40, -100 + p_finger / 100000000 * 220 * 0.3)\ngo_to(120, -100 + p_finger / 100000000 * 220 * 0.3)\ngo_to(120, -100)\ngo_to(40, -100)\npen_up()\nwrite(\"手指肚\", 80, -125, \"blue\", 12)\nwrite(\"同样按 \" + f + \" 牛：\", -190, 145, \"blue\", 12)\nwrite(\"图钉尖压强 \" + p_tip / 1000000 + \" 百万帕，扎穿墙！\", -190, -140, \"red\", 12)\nwrite(\"手指肚压强 \" + p_finger / 1000000 + \" 百万帕，毫发无伤\", -190, -155, \"blue\", 12)"
+    },
+    "cross-112": {
+      "params": [
+        { "name": "h1", "label": "你的身高", "min": 1.2, "max": 2, "step": 0.1, "value": 1.6, "unit": " m" },
+        { "name": "l1", "label": "你的影长", "min": 1, "max": 4, "step": 0.25, "value": 2, "unit": " m" }
+      ],
+      "grid": false,
+      "explore": [
+        "旗杆影长 15 米不变，你的影长变短时（太阳更高），算出的旗杆高度变吗？",
+        "量出的旗杆高 h2 = 身高×15÷影长，自己算一遍对一对",
+        "为什么两个三角形是相似的？和太阳光有什么关系？"
+      ],
+      "code": "# 影子测旗杆探索台：相似三角形 h1/l1 = h2/l2\nh1 = 1.6   # 你的身高（米）\nl1 = 2     # 你的影长（米）\n\nhide()\nl2 = 15\nh2 = h1 * l2 / l1\npen_color(\"blue\")\npen_down()\ngo_to(-200, -80)\ngo_to(200, -80)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(-160, -80)\ngo_to(-160, -80 + h1 * 40)\ngo_to(-160 + l1 * 14, -80)\ngo_to(-160, -80)\npen_up()\nwrite(\"你：\" + h1 + \"m，影 \" + l1 + \"m\", -195, -60 + h1 * 40, \"green\", 10)\npen_color(\"red\")\npen_down()\ngo_to(100, -80)\ngo_to(100, -80 + h2 * 40)\ngo_to(100 + l2 * 7, -80)\ngo_to(100, -80)\npen_up()\nwrite(\"旗杆：影 15m\", 100, -60 + h2 * 40, \"red\", 10)\nwrite(\"旗杆高 = \" + h1 + \"×15÷\" + l1 + \" = \" + h2 + \" 米\", -190, 130, \"red\", 14)\nwrite(\"太阳光平行 → 三角形相似\", -190, 150, \"orange\", 11)"
+    },
+    "cross-68": {
+      "params": [
+        { "name": "A", "label": "振幅 A", "min": 20, "max": 120, "step": 10, "value": 80 },
+        { "name": "w", "label": "角速度 ω", "min": 10, "max": 90, "step": 5, "value": 36, "unit": " °/s" }
+      ],
+      "grid": true,
+      "explore": [
+        "振幅 A 变大，波的什么变了？",
+        "角速度 ω 变大，波变密集还是稀疏？这叫周期变短",
+        "数一数：波从最高点到下一次最高点走了多少秒？"
+      ],
+      "code": "# 简谐运动探索台：x = A·sin(ωt)\nA = 80   # 振幅\nw = 36   # 角速度（度/秒）\n\nhide()\npen_color(\"green\")\npen_down()\nt = 0\ngo_to(-200, -40 + A * sin(w * t))\nwhile t < 24.1:\n    x = A * sin(w * t)\n    go_to(-200 + t * 16, x)\n    t = t + 0.25\npen_up()\nwrite(\"A=\" + A + \"  ω=\" + w + \"°/s\", -185, 145, \"green\", 13)\nwrite(\"横轴=时间，纵轴=偏离中心的距离\", -185, -140, \"blue\", 11)"
+    },
+    "cross-69": {
+      "params": [
+        { "name": "h0", "label": "起始高度", "min": 40, "max": 150, "step": 10, "value": 100, "unit": " m" }
+      ],
+      "grid": true,
+      "explore": [
+        "蓝色势能线和红色动能线怎么一个降一个升？",
+        "两条线加起来（看绿线）变了吗？这就是机械能守恒",
+        "起始高度变高，总能量的水平线在哪里？"
+      ],
+      "code": "# 机械能守恒探索台：Ep + Ek = 总量不变\nh0 = 100   # 过山车起始高度（米）\n\nhide()\nm = 2\ng = 10\nwrite(\"总机械能 = \" + m * g * h0 + \" J\", -190, 145, \"red\", 13)\npen_color(\"green\")\npen_down()\ngo_to(-200, -120 + m * g * h0 * 0.02)\ngo_to(180, -120 + m * g * h0 * 0.02)\npen_up()\nwrite(\"总能量（不变）\", 90, -120 + m * g * h0 * 0.02 + 15, \"green\", 10)\npen_color(\"blue\")\npen_down()\nh = h0\ngo_to(-200, -120 + m * g * h * 0.02)\nwhile h > 0.1:\n    go_to(-200 + (h0 - h) * 3.5, -120 + m * g * h * 0.02)\n    h = h - 10\npen_up()\nwrite(\"势能 Ep\", -100, 60, \"blue\", 11)\npen_color(\"red\")\npen_down()\nh = h0\ngo_to(-200, -120)\nwhile h > 0.1:\n    ek = m * g * (h0 - h)\n    go_to(-200 + (h0 - h) * 3.5, -120 + ek * 0.02)\n    h = h - 10\npen_up()\nwrite(\"动能 Ek\", 60, 20, \"red\", 11)\nwrite(\"横轴=下落距离：Ep 换 Ek，总量守恒\", -190, -140, \"orange\", 11)"
+    },
+    "cross-118": {
+      "params": [
+        { "name": "r", "label": "轨道半径 r", "min": 40, "max": 130, "step": 5, "value": 110 }
+      ],
+      "grid": false,
+      "explore": [
+        "轨道半径变大，卫星绕一圈的路程变多少？",
+        "看标注的「周期」：半径越大周期（一年）越长还是越短？",
+        "地球同步卫星为什么要飞到特定的半径？"
+      ],
+      "code": "# 卫星轨道探索台：r 越大，绕一圈越慢\nr = 110   # 轨道半径\n\nhide()\npen_color(\"blue\")\npen_down()\na = 0\ngo_to(r, 0)\nwhile a < 360.1:\n    go_to(r * cos(a), r * sin(a))\n    a = a + 10\npen_up()\nwrite(\"地球\", -22, 8, \"orange\", 14)\npen_color(\"red\")\npen_down()\ngo_to(r - 8, 8)\ngo_to(r + 8, 8)\ngo_to(r + 8, -8)\ngo_to(r - 8, -8)\ngo_to(r - 8, 8)\npen_up()\nT = sqrt(r * r * r / 42000)\nwrite(\"r=\" + r + \"，周期 T≈\" + T + \"（相对单位）\", -190, -140, \"red\", 12)\nwrite(\"轨道越长+引力越弱 → 越大越慢\", -190, 145, \"blue\", 11)"
+    },
+    "cross-83": {
+      "params": [
+        { "name": "t", "label": "分界线 t", "min": 0.5, "max": 6, "step": 0.5, "value": 3.5 }
+      ],
+      "grid": true,
+      "explore": [
+        "分界线 t 移动，哪些元素换组了？",
+        "t=3.5 时金属组有谁（钠镁铝）？非金属组呢？",
+        "这就是「聚类」：按性质分数自动分组——AI 分类也是这个道理"
+      ],
+      "code": "# 元素周期律聚类探索台：得分 > t 归金属组\nt = 3.5   # 分界线\n\nhide()\nna = 8\nmg = 6\nal = 5\ns = 2\ncl = 1\nhe = 0\npen_color(\"red\")\npen_down()\ngo_to(-190, -100)\ngo_to(-190, -100 + na * 16)\ngo_to(-150, -100 + na * 16)\ngo_to(-150, -100)\ngo_to(-190, -100)\npen_up()\nwrite(\"钠8\", -170, -120, \"red\", 10)\npen_down()\ngo_to(-130, -100)\ngo_to(-130, -100 + mg * 16)\ngo_to(-90, -100 + mg * 16)\ngo_to(-90, -100)\ngo_to(-130, -100)\npen_up()\nwrite(\"镁6\", -110, -120, \"red\", 10)\npen_down()\ngo_to(-70, -100)\ngo_to(-70, -100 + al * 16)\ngo_to(-30, -100 + al * 16)\ngo_to(-30, -100)\ngo_to(-70, -100)\npen_up()\nwrite(\"铝5\", -50, -120, \"red\", 10)\npen_down()\ngo_to(-10, -100)\ngo_to(-10, -100 + s * 16)\ngo_to(30, -100 + s * 16)\ngo_to(30, -100)\ngo_to(-10, -100)\npen_up()\nwrite(\"硫2\", 10, -120, \"red\", 10)\npen_down()\ngo_to(50, -100)\ngo_to(50, -100 + cl * 16)\ngo_to(90, -100 + cl * 16)\ngo_to(90, -100)\ngo_to(50, -100)\npen_up()\nwrite(\"氯1\", 70, -120, \"red\", 10)\npen_down()\ngo_to(110, -100)\ngo_to(110, -100 + 1)\ngo_to(150, -100 + 1)\ngo_to(150, -100)\ngo_to(110, -100)\npen_up()\nwrite(\"氦0\", 130, -120, \"red\", 10)\npen_color(\"blue\")\npen_down()\ngo_to(-200, -100 + t * 16)\ngo_to(180, -100 + t * 16)\npen_up()\nwrite(\"分界线 t=\" + t, 110, -100 + t * 16 + 16, \"blue\", 12)\nwrite(\"线以上→金属组，线以下→非金属组\", -190, 140, \"blue\", 12)"
+    },
+    "hb-16": {
+      "params": [
+        { "name": "cloud", "label": "云层遮挡", "min": 0, "max": 60, "step": 5, "value": 20, "unit": "（相对值）" },
+        { "name": "back", "label": "大气逆辐射", "min": 0, "max": 100, "step": 5, "value": 60, "unit": "（相对值）" }
+      ],
+      "grid": false,
+      "explore": [
+        "云层遮挡变大，到达地面的太阳辐射怎么变？",
+        "逆辐射（大气的棉被作用）变强，地面净收入怎么变？",
+        "阴天昼夜温差小、晴天昼夜温差大——用这两个参数解释"
+      ],
+      "code": "# 大气受热探索台：太阳→大气→地面→逆辐射\ncloud = 20   # 云层遮挡掉的短波\nback = 60    # 大气逆辐射送还地面\n\nhide()\nsun = 100\nreach = sun - cloud\nnet = reach + back\npen_color(\"orange\")\npen_down()\ngo_to(-180, -100)\ngo_to(-180, 100)\ngo_to(-100, 100)\ngo_to(-100, -100)\ngo_to(-180, -100)\npen_up()\nwrite(\"太阳 \" + sun, -165, -125, \"orange\", 10)\npen_color(\"red\")\npen_down()\ngo_to(-60, -100)\ngo_to(-60, -100 + reach)\ngo_to(20, -100 + reach)\ngo_to(20, -100)\ngo_to(-60, -100)\npen_up()\nwrite(\"到地面 \" + reach, -55, -125, \"red\", 10)\npen_color(\"blue\")\npen_down()\ngo_to(60, -100)\ngo_to(60, -100 + back)\ngo_to(140, -100 + back)\ngo_to(140, -100)\ngo_to(60, -100)\npen_up()\nwrite(\"逆辐射 \" + back, 75, -125, \"blue\", 10)\nwrite(\"地面净收入 = \" + reach + \" + \" + back + \" = \" + net, -180, 140, \"red\", 13)\nwrite(\"棉被越厚（逆辐射越强）→ 晚上越暖和\", -180, 155, \"blue\", 11)"
+    },
+    "math-30": {
+      "params": [
+        { "name": "s", "label": "两数之和 x+y", "min": 2, "max": 20, "step": 1, "value": 10 },
+        { "name": "d", "label": "两数之差 x-y", "min": -10, "max": 10, "step": 1, "value": 2 }
+      ],
+      "grid": true,
+      "explore": [
+        "两条直线的交点坐标是多少？和图上标注的 x、y 对一对",
+        "移动 s（和），交点怎么动？",
+        "方程组的解，就是两条直线的什么？"
+      ],
+      "code": "# 二元一次方程组探索台：交点即解\ns = 10   # 两数之和（x+y=s）\nd = 2    # 两数之差（x-y=d）\n\nhide()\nx = (s + d) / 2\ny = (s - d) / 2\npen_color(\"blue\")\npen_down()\nxp = -6\nwhile xp < 6.01:\n    go_to(xp * 25, (s - xp) * 25)\n    xp = xp + 0.5\npen_up()\nwrite(\"x+y=\" + s, 120, 120, \"blue\", 12)\npen_color(\"red\")\npen_down()\nxp = -6\ngo_to(xp * 25, (xp - d) * 25)\nwhile xp < 6.01:\n    go_to(xp * 25, (xp - d) * 25)\n    xp = xp + 0.5\npen_up()\nwrite(\"x-y=\" + d, 120, -120, \"red\", 12)\npen_color(\"green\")\npen_down()\ngo_to(x * 25 - 6, y * 25)\ngo_to(x * 25 + 6, y * 25)\npen_up()\nwrite(\"解：x=\" + x + \" y=\" + y, x * 25 - 40, y * 25 + 20, \"green\", 13)"
+    }
+  }
+}

@@ -86,10 +86,11 @@
   ],
   "curriculum": {
     "stage": "高中·物理（衔接课）",
-    "module": "身边的算法",
+    "module": "运动和相互作用",
     "points": [
-      "用循环模拟物理过程",
-      "公式程序化与图像化"
+      "匀变速直线运动 v=v₀+at",
+      "v-t 图像与斜率",
+      "加速度的物理意义"
     ]
   },
   "subject": {
@@ -141,5 +142,34 @@
     }
   ],
   "textbook": "人教版物理必修第一册",
-  "grade": 10
+  "grade": 10,
+  "lab": {
+    "params": [
+      {
+        "name": "v0",
+        "label": "初速度 v₀",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "value": 0,
+        "unit": " 格/秒"
+      },
+      {
+        "name": "a",
+        "label": "加速度 a",
+        "min": -10,
+        "max": 20,
+        "step": 1,
+        "value": 10,
+        "unit": " 格/秒²"
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "a 调大，v-t 直线变得更陡还是更平？这说明什么？",
+      "把 a 调成负数（刹车），速度怎么变？",
+      "v0 和 a 各控制这条直线的什么？"
+    ],
+    "code": "# 匀变速直线运动 v = v0 + a·t 探索台\nv0 = 0    # 初速度\na = 10    # 加速度\n\nhide()\npen_color(\"red\")\npen_down()\ngo_to(-200, -130 + v0 * 8)\nt = 0\nwhile t < 8.01:\n    v = v0 + a * t\n    go_to(-200 + t * 50, -130 + v * 8)\n    t = t + 1\npen_up()\nwrite(\"v-t 图（斜率=a=\" + a + \"）\", 100, 145, \"red\", 13)\nwrite(\"t=8s 时 v=\" + (v0 + a * 8), 100, 125, \"red\", 12)"
+  }
 }

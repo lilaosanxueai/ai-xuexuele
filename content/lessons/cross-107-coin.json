@@ -86,10 +86,11 @@
   ],
   "curriculum": {
     "stage": "高中·概率（衔接课）",
-    "module": "身边的算法",
+    "module": "统计与概率",
     "points": [
-      "随机模拟与频率统计",
-      "用列举法求概率"
+      "列举法求概率",
+      "二项分布的 1:2:1 直觉",
+      "大数定律"
     ]
   },
   "subject": {
@@ -141,5 +142,25 @@
     }
   ],
   "textbook": "人教版数学九年级上册",
-  "grade": 9
+  "grade": 9,
+  "lab": {
+    "params": [
+      {
+        "name": "n",
+        "label": "投掷次数",
+        "min": 10,
+        "max": 500,
+        "step": 10,
+        "value": 100,
+        "unit": " 次"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "三根柱子的比例接近 1:2:1 吗？",
+      "次数调到很少（10 次）和很多（500 次），哪个更接近理论比例？",
+      "「一正一反」最多——想想为什么它概率是 50%？"
+    ],
+    "code": "# 掷 2 枚硬币探索台：看概率的形状\nn = 100   # 投掷次数\n\nhide()\nc0 = 0\nc1 = 0\nc2 = 0\ni = 0\nwhile i < n:\n    a = random(0, 1)\n    b = random(0, 1)\n    if a + b == 0:\n        c0 = c0 + 1\n    if a + b == 1:\n        c1 = c1 + 1\n    if a + b == 2:\n        c2 = c2 + 1\n    i = i + 1\npen_color(\"red\")\npen_down()\ngo_to(-140, -100)\ngo_to(-140, -100 + c0 * 160 / n * 2)\ngo_to(-60, -100 + c0 * 160 / n * 2)\ngo_to(-60, -100)\ngo_to(-140, -100)\npen_up()\nwrite(\"两正 \" + c0, -100, 60, \"red\", 12)\npen_color(\"green\")\npen_down()\ngo_to(-40, -100)\ngo_to(-40, -100 + c1 * 160 / n * 2)\ngo_to(40, -100 + c1 * 160 / n * 2)\ngo_to(40, -100)\ngo_to(-40, -100)\npen_up()\nwrite(\"一正一反 \" + c1, 0, 80, \"green\", 12)\npen_color(\"blue\")\npen_down()\ngo_to(60, -100)\ngo_to(60, -100 + c2 * 160 / n * 2)\ngo_to(140, -100 + c2 * 160 / n * 2)\ngo_to(140, -100)\ngo_to(60, -100)\npen_up()\nwrite(\"两反 \" + c2, 100, 60, \"blue\", 12)\nwrite(\"理论比例 1 : 2 : 1\", -60, -130, \"orange\", 12)"
+  }
 }

@@ -8,7 +8,7 @@ interface Props {
   onAskHint: (taskText: string, hintPrompts: string[]) => void;
 }
 
-/** 探险日志：不说「目标/任务」，只记录你们的探索与发现（校验器在暗中点亮发现） */
+/** 练习要点清单：跟着要点做，做对的会自动打勾 */
 export default function TaskPanel({ lesson, taskDone, ideaHint, onToggleManual, onAskHint }: Props) {
   const required = lesson.tasks.filter((t) => !t.optional);
   const challenges = lesson.tasks.filter((t) => t.optional);
@@ -42,7 +42,7 @@ export default function TaskPanel({ lesson, taskDone, ideaHint, onToggleManual, 
       </div>
 
       <div className="flex items-center gap-2">
-        <span className="text-sm font-bold text-violet-600">✨ 探险发现</span>
+        <span className="text-sm font-bold text-violet-600">📋 练习要点</span>
         <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-slate-100">
           <div
             className="h-full rounded-full bg-violet-400 transition-all"
@@ -61,8 +61,8 @@ export default function TaskPanel({ lesson, taskDone, ideaHint, onToggleManual, 
       {challenges.length > 0 && (
         <>
           <div className="mt-1 flex items-center gap-2 border-t border-dashed border-slate-200 pt-3">
-            <span className="font-bold text-amber-500">⭐ 隐藏关卡</span>
-            <span className="text-xs text-slate-400">找到就是AI学学乐高手 {challengeDone}/{challenges.length}</span>
+            <span className="font-bold text-amber-500">⭐ 挑战</span>
+            <span className="text-xs text-slate-400">选做 · 已完成 {challengeDone}/{challenges.length}</span>
           </div>
           <ol className="space-y-2">
             {challenges.map((t) => (
@@ -72,7 +72,7 @@ export default function TaskPanel({ lesson, taskDone, ideaHint, onToggleManual, 
         </>
       )}
 
-      <p className="mt-auto text-xs text-slate-400">做着做着，「发现」会自己亮起来——那是你学会的证明 ✨</p>
+      <p className="mt-auto text-xs text-slate-400">跟着要点练习，做到的会自动打勾 ✅</p>
     </div>
   );
 }
@@ -114,7 +114,7 @@ function TaskItem({ task, done, onToggleManual, onAskHint }: {
           onClick={() => onAskHint(task.text, task.hintPrompts)}
           className="mt-1 ml-8 rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-700 hover:bg-amber-100"
         >
-          💡 给我一点灵感
+          💡 卡住了？问 AI
         </button>
       )}
     </li>

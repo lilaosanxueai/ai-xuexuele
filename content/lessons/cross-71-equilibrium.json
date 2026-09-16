@@ -86,10 +86,11 @@
   ],
   "curriculum": {
     "stage": "高中·化学（衔接课）",
-    "module": "身边的算法",
+    "module": "物质的性质与变化",
     "points": [
-      "迭代模拟收敛过程",
-      "用速率差表示净变化"
+      "化学平衡的建立过程",
+      "动态平衡的特征",
+      "条件改变与平衡移动"
     ]
   },
   "subject": {
@@ -141,5 +142,32 @@
     }
   ],
   "textbook": "人教版化学选择性必修1 化学反应原理",
-  "grade": 11
+  "grade": 11,
+  "lab": {
+    "params": [
+      {
+        "name": "kf",
+        "label": "正反应速率",
+        "min": 5,
+        "max": 40,
+        "step": 1,
+        "value": 20
+      },
+      {
+        "name": "kr",
+        "label": "逆反应速率",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "value": 5
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "B 的浓度（红线）最后停在哪个值不再变？这就是「化学平衡」",
+      "正反应速率调大，平衡时 B 更多还是更少？",
+      "两根线交叉的点说明什么？（正逆速率相等）"
+    ],
+    "code": "# 化学平衡探索台：A ⇌ B，看 B 的浓度怎么收敛\nkf = 20   # 正反应速率系数\nkr = 5    # 逆反应速率系数\n\nhide()\nxeq = 100 * kf / (kf + kr)\npen_color(\"blue\")\npen_down()\ncb = 0\nt = 0\ngo_to(-190, -130)\nwhile t < 10.01:\n    cb = cb + (kf * (100 - cb) / 100 - kr * cb / 100)\n    if cb > 100:\n        cb = 100\n    go_to(-190 + t * 38, -130 + cb * 2.4)\n    t = t + 1\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-190, -130 + xeq * 2.4)\ngo_to(180, -130 + xeq * 2.4)\npen_up()\nwrite(\"平衡时 B ≈ \" + xeq + \"%\", 90, -130 + xeq * 2.4 + 18, \"red\", 13)\nwrite(\"kf=\" + kf + \"  kr=\" + kr, -180, 145, \"blue\", 12)"
+  }
 }

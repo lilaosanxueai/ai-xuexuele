@@ -82,9 +82,10 @@
   ],
   "curriculum": {
     "stage": "第一学段（1-2年级）",
-    "module": "身边的算法",
+    "module": "听说活动",
     "points": [
-      "循环结构"
+      "one~ten",
+      "数字问答 How many"
     ]
   },
   "subject": {

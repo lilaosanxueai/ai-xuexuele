@@ -86,10 +86,11 @@
   ],
   "curriculum": {
     "stage": "高中·物理（衔接课）",
-    "module": "身边的算法",
+    "module": "能量",
     "points": [
-      "用程序验证守恒定律",
-      "逐点计算与数据观察"
+      "机械能守恒定律",
+      "动能 ½mv² 与势能 mgh 的转化",
+      "守恒思想"
     ]
   },
   "subject": {
@@ -141,5 +142,25 @@
     }
   ],
   "textbook": "人教版物理八年级下册",
-  "grade": 8
+  "grade": 8,
+  "lab": {
+    "params": [
+      {
+        "name": "h0",
+        "label": "起始高度",
+        "min": 40,
+        "max": 150,
+        "step": 10,
+        "value": 100,
+        "unit": " m"
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "蓝色势能线和红色动能线怎么一个降一个升？",
+      "两条线加起来（看绿线）变了吗？这就是机械能守恒",
+      "起始高度变高，总能量的水平线在哪里？"
+    ],
+    "code": "# 机械能守恒探索台：Ep + Ek = 总量不变\nh0 = 100   # 过山车起始高度（米）\n\nhide()\nm = 2\ng = 10\nwrite(\"总机械能 = \" + m * g * h0 + \" J\", -190, 145, \"red\", 13)\npen_color(\"green\")\npen_down()\ngo_to(-200, -120 + m * g * h0 * 0.02)\ngo_to(180, -120 + m * g * h0 * 0.02)\npen_up()\nwrite(\"总能量（不变）\", 90, -120 + m * g * h0 * 0.02 + 15, \"green\", 10)\npen_color(\"blue\")\npen_down()\nh = h0\ngo_to(-200, -120 + m * g * h * 0.02)\nwhile h > 0.1:\n    go_to(-200 + (h0 - h) * 3.5, -120 + m * g * h * 0.02)\n    h = h - 10\npen_up()\nwrite(\"势能 Ep\", -100, 60, \"blue\", 11)\npen_color(\"red\")\npen_down()\nh = h0\ngo_to(-200, -120)\nwhile h > 0.1:\n    ek = m * g * (h0 - h)\n    go_to(-200 + (h0 - h) * 3.5, -120 + ek * 0.02)\n    h = h - 10\npen_up()\nwrite(\"动能 Ek\", 60, 20, \"red\", 11)\nwrite(\"横轴=下落距离：Ep 换 Ek，总量守恒\", -190, -140, \"orange\", 11)"
+  }
 }

@@ -26,7 +26,7 @@ export function recommendNext(
   // 1) 继续进行中的课：有草稿/做过任务但未完成
   const inProgress = byOrder.find((l) => !done(l.id) && (hasDraft(l.id) || hasPartialTasks(l, progress)));
   if (inProgress) {
-    return toRec(inProgress, '继续上次的学习，做完它就点亮一个新知识点 ✨');
+    return toRec(inProgress, '继续上次的学习，把它学完 📖');
   }
 
   // 2) 薄弱学科优先：完成率最低且仍有未完成课程的学科
@@ -46,11 +46,11 @@ export function recommendNext(
 
   // 3) 顺序推进：第一个未完成的
   const next = byOrder.find((l) => !done(l.id));
-  if (next) return toRec(next, '按学习路径的下一站，出发 🚀');
+  if (next) return toRec(next, '按学习路径的下一课，继续加油 🚀');
 
   // 4) 全部完成：推荐重温
   const last = byOrder[byOrder.length - 1];
-  return toRec(last, '全部通关！挑喜欢的课重温，或去 AI 实验室探索 🎉');
+  return toRec(last, '全部学完啦！挑喜欢的课复习，或去问 AI 老师新问题 🎉');
 }
 
 function hasPartialTasks(l: Lesson, progress: ProfileProgress | null): boolean {

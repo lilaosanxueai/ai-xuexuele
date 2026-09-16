@@ -121,7 +121,7 @@ function ProgressTab({ profileId }: { profileId: string }) {
       <div className="overflow-hidden rounded-2xl bg-white/80">
         <table className="w-full text-left">
           <thead className="bg-slate-100 text-sm text-slate-500">
-            <tr><th className="p-3">课程</th><th className="p-3">状态</th><th className="p-3">任务完成</th><th className="p-3">通关时间</th></tr>
+            <tr><th className="p-3">课程</th><th className="p-3">状态</th><th className="p-3">要点完成</th><th className="p-3">完成时间</th></tr>
           </thead>
           <tbody>
             {lessons.map((l) => {
@@ -130,7 +130,7 @@ function ProgressTab({ profileId }: { profileId: string }) {
               return (
                 <tr key={l.id} className="border-t border-slate-100">
                   <td className="p-3 font-semibold">{l.emoji} {l.title}</td>
-                  <td className="p-3">{lp?.status === 'completed' ? '✅ 已通关' : lp ? '⏳ 进行中' : '—'}</td>
+                  <td className="p-3">{lp?.status === 'completed' ? '✅ 已完成' : lp ? '⏳ 进行中' : '—'}</td>
                   <td className="p-3">{done}/{l.tasks.length}</td>
                   <td className="p-3 text-sm text-slate-400">{lp?.completedAt ? new Date(lp.completedAt).toLocaleString('zh-CN') : ''}</td>
                 </tr>
@@ -160,12 +160,12 @@ function ReportTab({ profileId }: { profileId: string }) {
   const streak = calcStreak(progress?.dailyUsage ?? {});
   const doneCount = lessons.filter((l) => done(l.id)).length;
 
-  // 知识点覆盖：已完成课的知识点打勾（按模块分组展示）
+  // 知识点覆盖：已完成课的知识点打勾（按 学科 × 课标模块 分组展示）
   const byModule = new Map<string, { point: string; lesson: Lesson; done: boolean }[]>();
   for (const l of lessons) {
     if (!l.curriculum) continue;
     for (const p of l.curriculum.points) {
-      const key = `${l.curriculum.stage} · ${l.curriculum.module}`;
+      const key = `${l.subjectArea ?? '信息科技'} · ${l.curriculum.module}（${l.curriculum.stage}）`;
       if (!byModule.has(key)) byModule.set(key, []);
       byModule.get(key)!.push({ point: p, lesson: l, done: done(l.id) });
     }
@@ -193,27 +193,24 @@ function ReportTab({ profileId }: { profileId: string }) {
     (bySubject[key] ??= []).push(l);
   }
 
-  // 跨学科覆盖：编程 × 学科（交叉学院 + 数学岛）
+  // 跨学科实践课程：学科 × 编程演示双标注的课程
   const crossLessons = lessons.filter((l) => l.subject);
-  const crossDone = crossLessons.filter((l) => done(l.id));
-  const mathLessons = lessons.filter((l) => l.island === 'math');
-  const mathDone = mathLessons.filter((l) => done(l.id));
 
   return (
     <div>
       <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
         <StatCard label="累计学习" value={`${totalMin} 分钟`} emoji="⏰" />
         <StatCard label="连续天数" value={`${streak} 天`} emoji="🔥" />
-        <StatCard label="课程通关" value={`${doneCount}/${lessons.length}`} emoji="🏁" />
+        <StatCard label="课程完成" value={`${doneCount}/${lessons.length}`} emoji="🏁" />
         <StatCard label="创作作品" value={`${projects.length} 个`} emoji="🖼" />
         <StatCard label="随堂练习" value={exTotal ? `${Math.round((exCorrect / exTotal) * 100)}%` : '—'} emoji="📝" />
-        <StatCard label="错题消灭" value={wrongItems.length + wrongCleared > 0 ? `${wrongCleared}/${wrongItems.length + wrongCleared}` : '—'} emoji="📖" />
+        <StatCard label="错题练对" value={wrongItems.length + wrongCleared > 0 ? `${wrongCleared}/${wrongItems.length + wrongCleared}` : '—'} emoji="📖" />
       </div>
 
       {/* 错题本：薄弱知识点一目了然 */}
       {wrongItems.length > 0 && (
         <div className="mb-4 rounded-2xl bg-white/80 p-5">
-          <h3 className="mb-3 font-black">📖 待消灭的错题（按学科）</h3>
+          <h3 className="mb-3 font-black">📖 待重练的错题（按学科）</h3>
           <div className="grid gap-2 sm:grid-cols-2">
             {wrongBySubject.map(([area, items]) => (
               <div key={area} className="flex items-center gap-2 text-sm">
@@ -225,7 +222,7 @@ function ReportTab({ profileId }: { profileId: string }) {
               </div>
             ))}
           </div>
-          <p className="mt-2 text-xs text-slate-400">错题会在孩子的错题本里等待重练，重练全对自动消灭（累计已消灭 {wrongCleared} 道）</p>
+          <p className="mt-2 text-xs text-slate-400">错题会在孩子的错题本里等待重练，重练全对自动移出（累计已练对 {wrongCleared} 道）</p>
         </div>
       )}
 
@@ -250,7 +247,7 @@ function ReportTab({ profileId }: { profileId: string }) {
       <div className="rounded-2xl bg-white/80 p-5">
         <div className="mb-3 flex items-center justify-between">
           <h3 className="font-black">📗 课标知识点覆盖</h3>
-          <span className="text-xs text-slate-400">对标《义务教育信息科技课程标准（2022年版）》</span>
+          <span className="text-xs text-slate-400">按学科课标模块分组 · 绿色为已完成</span>
         </div>
         {[...byModule.entries()].map(([mod, points]) => (
           <div key={mod} className="mb-4">
@@ -259,7 +256,7 @@ function ReportTab({ profileId }: { profileId: string }) {
               {points.map((p) => (
                 <span
                   key={p.point + p.lesson.id}
-                  title={`${p.lesson.title}${p.done ? ' · 已通关' : ' · 未完成'}`}
+                  title={`${p.lesson.title}${p.done ? ' · 已完成' : ' · 未完成'}`}
                   className={`rounded-full px-3 py-1 text-sm font-semibold ${
                     p.done ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-400'
                   }`}
@@ -271,22 +268,15 @@ function ReportTab({ profileId }: { profileId: string }) {
           </div>
         ))}
         <p className="mt-2 text-xs leading-relaxed text-slate-400">
-          绿色 ✓ 为已通关课程覆盖的知识点。2025 年秋季起多地中小学开设 AI 通识课（每年级不少于 8 课时），
+          绿色 ✓ 为已完成课程覆盖的知识点。2025 年秋季起多地中小学开设 AI 通识课（每年级不少于 8 课时），
           AI学学乐可作为课内的家庭动手补充：同样的知识点，这里全部通过「自己做出来」来学会。
         </p>
       </div>
 
       {crossLessons.length > 0 && (
         <div className="mt-4 rounded-2xl bg-rose-50/80 p-5">
-          {mathLessons.length > 0 && (
-            <div className="mb-3 flex flex-wrap gap-2 rounded-xl bg-sky-100/80 p-3">
-              <span className="text-sm font-black text-sky-800">📐 数学岛</span>
-              <span className="text-sm text-sky-700">小学馆 {mathLessons.filter((l) => l.order <= 22 && done(l.id)).length}/{mathLessons.filter((l) => l.order <= 22).length} · 初中馆 {mathLessons.filter((l) => l.order > 22 && l.order <= 30 && done(l.id)).length}/{mathLessons.filter((l) => l.order > 22 && l.order <= 30).length} · 高中馆 {mathLessons.filter((l) => l.order > 30 && done(l.id)).length}/{mathLessons.filter((l) => l.order > 30).length}</span>
-              <span className="ml-auto text-xs text-sky-500">覆盖数与代数 · 图形与几何 · 统计与概率 · 函数 · 三角函数（2022 版课标 + 高中衔接）</span>
-            </div>
-          )}
           <div className="mb-3 flex items-center justify-between">
-            <h3 className="font-black text-rose-700">🎓 跨学科主题学习（编程 × 学科）</h3>
+            <h3 className="font-black text-rose-700">🎓 跨学科实践课程（学科 × 编程演示）</h3>
             <span className="text-xs text-rose-400">新课标要求：每学期不少于 10% 课时的跨学科主题学习</span>
           </div>
           <div className="grid gap-2 sm:grid-cols-2">
@@ -314,7 +304,7 @@ function ReportTab({ profileId }: { profileId: string }) {
             ))}
           </div>
           <p className="mt-3 text-xs leading-relaxed text-rose-400">
-            已完成 {crossDone.length}/{crossLessons.length} 个跨学科项目——每个项目同时点亮一门学科的知识点和编程本领。
+            已完成 {crossLessons.filter((l) => done(l.id)).length}/{crossLessons.length} 个跨学科实践——每个课程同时覆盖一门学科的知识点和编程演示。
           </p>
         </div>
       )}
@@ -439,7 +429,7 @@ function SettingsTab({ pin }: { pin: string }) {
             onChange={(e) => setSettings({ ...settings, limits: { ...settings.limits, hardStop: e.target.checked } })}
             className="h-4 w-4 accent-emerald-600"
           />
-          <span><b>到时锁定</b>：达到每日时长后锁定创作，需要家长 PIN 解锁（当天有效）。不勾选则只提醒不锁定</span>
+          <span><b>到时锁定</b>：达到每日时长后锁定使用，需要家长 PIN 解锁（当天有效）。不勾选则只提醒不锁定</span>
         </label>
       </div>
 

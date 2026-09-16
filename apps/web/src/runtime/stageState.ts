@@ -7,9 +7,9 @@ export const STAGE_H = 360;
 const BOUND_X = STAGE_W / 2 - 20;
 const BOUND_Y = STAGE_H / 2 - 20;
 
-/** 运行速度三档：慢（看清楚每一步）/ 正常 / 快。乘在所有停顿时长上 */
-export type RunSpeed = 'slow' | 'normal' | 'fast';
-const SPEED_FACTOR: Record<RunSpeed, number> = { slow: 2.5, normal: 1, fast: 0.4 };
+/** 运行速度四档：慢（看清楚每一步）/ 正常 / 快 / 瞬时（实验室实时重绘用）。乘在所有停顿时长上 */
+export type RunSpeed = 'slow' | 'normal' | 'fast' | 'instant';
+const SPEED_FACTOR: Record<RunSpeed, number> = { slow: 2.5, normal: 1, fast: 0.4, instant: 0 };
 let runSpeed: RunSpeed = 'normal';
 
 export function setRunSpeed(s: RunSpeed): void { runSpeed = s; }
@@ -19,8 +19,11 @@ export interface StageTargetState extends StageTarget { reached: boolean }
 
 /** 画笔轨迹线段（数学动态演示用） */
 export interface PenLine { x1: number; y1: number; x2: number; y2: number; color: string }
+/** 画布文字标注（实验室图表数值/刻度用） */
+export interface StageLabel { x: number; y: number; text: string; color: string; size: number }
 const PEN_COLORS: Record<string, string> = { blue: '#1d4ed8', red: '#dc2626', green: '#16a34a', orange: '#ea580c', '蓝': '#1d4ed8', '红': '#dc2626', '绿': '#16a34a', '橙': '#ea580c' };
 const MAX_PEN_LINES = 2000;
+const MAX_LABELS = 120;
 
 /** 小剧场状态机：角色状态 + 命令 API + 运行证据（供关卡校验） */
 export class StageState {
@@ -39,6 +42,8 @@ export class StageState {
   /** 画笔：落下后移动会留下轨迹 */
   pen = { down: false, color: '#1d4ed8' };
   penLines: PenLine[] = [];
+  /** 画布文字标注（write 命令写入） */
+  labels: StageLabel[] = [];
 
   /** 运行证据（跨多次运行累积，通关校验用） */
   saidTexts: string[] = [];
@@ -53,6 +58,7 @@ export class StageState {
     this.keysHeld.clear();
     this.pen.down = false;
     this.penLines = [];
+    this.labels = [];
   }
 
   private reachCheck(): void {
@@ -129,6 +135,12 @@ export class StageState {
     penDown: async () => { this.pen.down = true; await scaled(30); },
     penUp: async () => { this.pen.down = false; await scaled(30); },
     penColor: async (c: string) => { this.pen.color = PEN_COLORS[String(c)] ?? PEN_COLORS.blue; await scaled(30); },
+    write: async (text: string, x: number, y: number, color?: string, size?: number) => {
+      if (this.labels.length < MAX_LABELS) {
+        this.labels.push({ text: String(text).slice(0, 40), x, y, color: color ? (PEN_COLORS[String(color)] ?? String(color)) : '#1e293b', size: Math.max(9, Math.min(24, size ?? 13)) });
+      }
+      await scaled(30);
+    },
     random: (from: number, to: number): number => {
       const lo = Math.min(from, to), hi = Math.max(from, to);
       return Math.floor(Math.random() * (hi - lo + 1)) + lo;

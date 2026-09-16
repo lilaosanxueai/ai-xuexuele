@@ -61,9 +61,10 @@
   ],
   "curriculum": {
     "stage": "第四学段（7年级）",
-    "module": "身边的算法",
+    "module": "数与代数",
     "points": [
-      "消元法的程序化"
+      "掌握代入/加减消元法",
+      "理解方程组的解"
     ]
   },
   "subject": {
@@ -123,5 +124,32 @@
     }
   ],
   "textbook": "人教版数学七年级下册",
-  "grade": 7
+  "grade": 7,
+  "lab": {
+    "params": [
+      {
+        "name": "s",
+        "label": "两数之和 x+y",
+        "min": 2,
+        "max": 20,
+        "step": 1,
+        "value": 10
+      },
+      {
+        "name": "d",
+        "label": "两数之差 x-y",
+        "min": -10,
+        "max": 10,
+        "step": 1,
+        "value": 2
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "两条直线的交点坐标是多少？和图上标注的 x、y 对一对",
+      "移动 s（和），交点怎么动？",
+      "方程组的解，就是两条直线的什么？"
+    ],
+    "code": "# 二元一次方程组探索台：交点即解\ns = 10   # 两数之和（x+y=s）\nd = 2    # 两数之差（x-y=d）\n\nhide()\nx = (s + d) / 2\ny = (s - d) / 2\npen_color(\"blue\")\npen_down()\nxp = -6\nwhile xp < 6.01:\n    go_to(xp * 25, (s - xp) * 25)\n    xp = xp + 0.5\npen_up()\nwrite(\"x+y=\" + s, 120, 120, \"blue\", 12)\npen_color(\"red\")\npen_down()\nxp = -6\ngo_to(xp * 25, (xp - d) * 25)\nwhile xp < 6.01:\n    go_to(xp * 25, (xp - d) * 25)\n    xp = xp + 0.5\npen_up()\nwrite(\"x-y=\" + d, 120, -120, \"red\", 12)\npen_color(\"green\")\npen_down()\ngo_to(x * 25 - 6, y * 25)\ngo_to(x * 25 + 6, y * 25)\npen_up()\nwrite(\"解：x=\" + x + \" y=\" + y, x * 25 - 40, y * 25 + 20, \"green\", 13)"
+  }
 }

@@ -86,10 +86,11 @@
   ],
   "curriculum": {
     "stage": "高中·化学反应原理（衔接课）",
-    "module": "身边的算法",
+    "module": "物质的组成与结构",
     "points": [
-      "阈值分组（聚类）",
-      "边界样本与参数敏感性"
+      "元素周期律与族的概念",
+      "聚类思想：按性质相似分组",
+      "两性元素的边界特性"
     ]
   },
   "subject": {
@@ -140,5 +141,24 @@
       "explain": "边界样本离分界线近，参数稍变就可能换组——机器学习的重要难题"
     }
   ],
-  "textbook": "人教版化学（高中）"
+  "textbook": "人教版化学（高中）",
+  "lab": {
+    "params": [
+      {
+        "name": "t",
+        "label": "分界线 t",
+        "min": 0.5,
+        "max": 6,
+        "step": 0.5,
+        "value": 3.5
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "分界线 t 移动，哪些元素换组了？",
+      "t=3.5 时金属组有谁（钠镁铝）？非金属组呢？",
+      "这就是「聚类」：按性质分数自动分组——AI 分类也是这个道理"
+    ],
+    "code": "# 元素周期律聚类探索台：得分 > t 归金属组\nt = 3.5   # 分界线\n\nhide()\nna = 8\nmg = 6\nal = 5\ns = 2\ncl = 1\nhe = 0\npen_color(\"red\")\npen_down()\ngo_to(-190, -100)\ngo_to(-190, -100 + na * 16)\ngo_to(-150, -100 + na * 16)\ngo_to(-150, -100)\ngo_to(-190, -100)\npen_up()\nwrite(\"钠8\", -170, -120, \"red\", 10)\npen_down()\ngo_to(-130, -100)\ngo_to(-130, -100 + mg * 16)\ngo_to(-90, -100 + mg * 16)\ngo_to(-90, -100)\ngo_to(-130, -100)\npen_up()\nwrite(\"镁6\", -110, -120, \"red\", 10)\npen_down()\ngo_to(-70, -100)\ngo_to(-70, -100 + al * 16)\ngo_to(-30, -100 + al * 16)\ngo_to(-30, -100)\ngo_to(-70, -100)\npen_up()\nwrite(\"铝5\", -50, -120, \"red\", 10)\npen_down()\ngo_to(-10, -100)\ngo_to(-10, -100 + s * 16)\ngo_to(30, -100 + s * 16)\ngo_to(30, -100)\ngo_to(-10, -100)\npen_up()\nwrite(\"硫2\", 10, -120, \"red\", 10)\npen_down()\ngo_to(50, -100)\ngo_to(50, -100 + cl * 16)\ngo_to(90, -100 + cl * 16)\ngo_to(90, -100)\ngo_to(50, -100)\npen_up()\nwrite(\"氯1\", 70, -120, \"red\", 10)\npen_down()\ngo_to(110, -100)\ngo_to(110, -100 + 1)\ngo_to(150, -100 + 1)\ngo_to(150, -100)\ngo_to(110, -100)\npen_up()\nwrite(\"氦0\", 130, -120, \"red\", 10)\npen_color(\"blue\")\npen_down()\ngo_to(-200, -100 + t * 16)\ngo_to(180, -100 + t * 16)\npen_up()\nwrite(\"分界线 t=\" + t, 110, -100 + t * 16 + 16, \"blue\", 12)\nwrite(\"线以上→金属组，线以下→非金属组\", -190, 140, \"blue\", 12)"
+  }
 }

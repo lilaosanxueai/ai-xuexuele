@@ -82,9 +82,10 @@
   ],
   "curriculum": {
     "stage": "第二学段（3-6年级）",
-    "module": "身边的算法",
+    "module": "词汇与句型",
     "points": [
-      "循环结构"
+      "星期表达",
+      "What day is it today?"
     ]
   },
   "subject": {

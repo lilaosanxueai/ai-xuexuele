@@ -86,10 +86,11 @@
   ],
   "curriculum": {
     "stage": "高中·生物（衔接课）",
-    "module": "身边的算法",
+    "module": "遗传与进化",
     "points": [
-      "随机模拟与统计",
-      "用计数器验证概率规律"
+      "孟德尔分离定律",
+      "显性与隐性性状",
+      "3:1 比例与大数定律"
     ]
   },
   "subject": {
@@ -141,5 +142,25 @@
     }
   ],
   "textbook": "人教版生物学必修2 遗传与进化",
-  "grade": 11
+  "grade": 11,
+  "lab": {
+    "params": [
+      {
+        "name": "n",
+        "label": "豌豆株数",
+        "min": 50,
+        "max": 1000,
+        "step": 50,
+        "value": 200,
+        "unit": " 株"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "高茎和矮茎的比例接近几比几？",
+      "株数调到很小（50）和很大（1000），哪个更接近 3:1？为什么？",
+      "「随机」和「规律」矛盾吗？"
+    ],
+    "code": "# 孟德尔豌豆 3:1 探索台\nn = 200   # 第二代豌豆株数\n\nhide()\ntall = 0\ni = 0\nwhile i < n:\n    r = random(0, 3)\n    if r < 3:\n        tall = tall + 1\n    i = i + 1\nshort = n - tall\npen_color(\"green\")\npen_down()\ngo_to(-110, -80)\ngo_to(-110, -80 + tall * 160 / n * 3 / 3)\ngo_to(-40, -80 + tall * 160 / n)\ngo_to(-40, -80)\ngo_to(-110, -80)\npen_up()\nwrite(\"高茎 \" + tall + \" 株\", -110, 90, \"green\", 12)\npen_color(\"orange\")\npen_down()\ngo_to(40, -80)\ngo_to(40, -80 + short * 160 / n * 3)\ngo_to(110, -80 + short * 160 / n * 3)\ngo_to(110, -80)\ngo_to(40, -80)\npen_up()\nwrite(\"矮茎 \" + short + \" 株\", 50, 90, \"orange\", 12)\nwrite(\"高:矮 ≈ \" + tall / short, 0, 120, \"red\", 14)\nwrite(\"再跑一次（▶慢速看过程），比例会怎么变？\", -140, -130, \"blue\", 11)"
+  }
 }

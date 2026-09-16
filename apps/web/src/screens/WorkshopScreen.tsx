@@ -14,14 +14,13 @@ import { ALL_BLOCK_TYPES, BLOCK_LABELS } from '../blocks/definitions.ts';
 import { StageState, setRunSpeed, getRunSpeed, type RunSpeed } from '../runtime/stageState.ts';
 import { playSound, isMuted, setMuted } from '../runtime/sounds.ts';
 import { Executor } from '../runtime/executor.ts';
-import { evaluateTasks, requiredTasksDone, type RunEvidence } from '../runtime/validators.ts';
+import { evaluateTasks, type RunEvidence } from '../runtime/validators.ts';
 import { recognizer } from '../ml/recognizer.ts';
 import { parsePy, PyRunner } from '../runtime/pyinterp.ts';
 import { pyStageApi } from '../runtime/pyBridge.ts';
 import { workspaceToPython } from '../blocks/python.ts';
 import { applyBuildOps, buildCatalog, sanitizeOps, workspaceToOps } from '../runtime/builder.ts';
 import ExercisePanel from '../components/ExercisePanel.tsx';
-import { guideRespond, newGuideState, type GuideState } from '../runtime/guideBrain.ts';
 
 export interface WorkshopMode {
   kind: 'lesson' | 'freeplay';
@@ -49,14 +48,7 @@ const IDEAS = [
   { emoji: '🧠', title: 'AI 手势控制实验', desc: '训练模型后用「当 AI 认出」控制角色（信息科技·AI）' },
 ];
 
-const SPEED_LABEL: Record<RunSpeed, string> = { slow: '🐢 慢速', normal: '▶ 常速', fast: '🐇 快速' };
-
-/** 任务完成喝彩：夸努力和方法，不夸聪明（教育设计的经典原则） */
-const CHEERS = [
-  (t: string) => `🎉 又完成一步！「${t}」被你搞定了——你刚才自己动手试的那几下特别关键！`,
-  (t: string) => `✅ 漂亮！我注意到你刚才调整了积木再试了一次，这就叫「试错精神」，创作者都靠它！`,
-  (t: string) => `💪 帅啊！「${t}」完成！遇到卡点你没有放弃，这一点我最佩服！`,
-];
+const SPEED_LABEL: Record<RunSpeed, string> = { slow: '🐢 慢速', normal: '▶ 常速', fast: '🐇 快速', instant: '⚡ 瞬时' };
 
 export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
   const nav = useNavigate();
@@ -70,9 +62,6 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
   const [blockTotal, setBlockTotal] = useState(0);
   const [running, setRunning] = useState(false);
   const [taskDone, setTaskDone] = useState<Record<string, boolean>>({});
-  const [lessonCompleted, setLessonCompleted] = useState(false);
-  const [celebrate, setCelebrate] = useState(false);
-  const [nextLessons, setNextLessons] = useState<Lesson[]>([]);
   const [buddyOpen, setBuddyOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -108,20 +97,10 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
   const codeDraftTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const mountTimeRef = useRef(Date.now());
   const lastRestRef = useRef(Date.now());
-  const guideRef = useRef<GuideState>(newGuideState());
-  const lastActivityRef = useRef(Date.now());
-  const hadBlocksRef = useRef(false);
   const [ideaHint, setIdeaHint] = useState<string | null>(null);
 
-  const sayGuide = useCallback((ev: Parameters<typeof guideRespond>[0]) => {
-    const line = guideRespond(ev, guideRef.current);
-    if (line) buddyRef.current?.sayLocal(line);
-  }, []);
   const taskDoneRef = useRef(taskDone);
   taskDoneRef.current = taskDone;
-  const completedRef = useRef(lessonCompleted);
-  completedRef.current = lessonCompleted;
-  const cheerIdx = useRef(0);
   const draftTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   // ---------- 加载课程与设置 ----------
@@ -158,7 +137,6 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
           const lp = p.lessons[l.id];
           if (lp) {
             setTaskDone(Object.fromEntries(Object.entries(lp.tasks).map(([k, v]) => [k, v.done])));
-            setLessonCompleted(lp.status === 'completed');
           }
           setDraftXml(p.lessonDrafts?.[l.id] ?? null);
           const savedCode = p.lessonCodes?.[l.id];
@@ -187,62 +165,21 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
     };
   }, []);
 
-  const maybeComplete = useCallback((next: Record<string, boolean>) => {
-    if (!lesson || lesson.tasks.length === 0) return;
-    if (!requiredTasksDone(lesson.tasks, next) || completedRef.current) return;
-    setLessonCompleted(true);
-    setCelebrate(true);
-    if (profile) {
-      void api.updateProgress(profile.id, {
-        lessonId: lesson.id, tasks: next, completed: true,
-        draft: wsApiRef.current?.getXml(),
-      }).catch(() => {});
-    }
-    // 通关复盘三问（元认知）：AI 伙伴主动引导回顾——把「学完就跑」变成「学完想一想」
-    buddyRef.current?.sayLocal(
-      `🎓 复盘时间！三个问题（不用打字，心里答或说给爸妈听）：\n` +
-      `① 今天这课最重要的一点是什么？\n` +
-      `② 它让你想起了之前学过的什么？\n` +
-      `③ 生活里哪里能用到它？\n` +
-      `想聊聊就点下面的追问按钮，我陪你把理解加深一层！`,
-    );
-    // 延伸推荐：同学科 / 知识点相关的未完成课（扩展广度）
-    void api.lessons().then((all) => {
-      const scored = all
-        .filter((l) => l.id !== lesson.id)
-        .map((l) => {
-          let s = 0;
-          if ((l.subjectArea ?? '信息科技') === (lesson.subjectArea ?? '信息科技')) s += 5;
-          const shared = (l.curriculum?.points ?? []).filter((p) => lesson.curriculum?.points?.includes(p)).length;
-          s += shared * 3;
-          if (l.grade != null && lesson.grade != null && Math.abs(l.grade - lesson.grade) <= 1) s += 2;
-          return { l, s };
-        })
-        .filter((x) => x.s > 0)
-        .sort((a, b) => b.s - a.s)
-        .slice(0, 2)
-        .map((x) => x.l);
-      setNextLessons(scored);
-    }).catch(() => {});
+  /** 要点完成情况变化 → 静默上报 tasks（家长端进度可见；练习页不再有"通关"概念，完成状态由辅导页随堂练标记） */
+  const saveTaskStates = useCallback((next: Record<string, boolean>) => {
+    if (!lesson || !profile) return;
+    void api.updateProgress(profile.id, { lessonId: lesson.id, tasks: next }).catch(() => {});
   }, [lesson, profile]);
 
   const revalidate = useCallback((hasRun: boolean) => {
     if (!lesson || lesson.tasks.length === 0) return;
     const next = evaluateTasks(lesson.tasks, collectEvidence(hasRun), taskDoneRef.current);
-    // 新亮起的必做任务 → 伙伴本地喝彩（不耗 token）。先在 setState 外算好，避免副作用塞进 updater
-    const newly = lesson.tasks.find(
-      (t) => !t.optional && next[t.id] && !taskDoneRef.current[t.id],
-    );
-    if (newly) {
-      buddyRef.current?.sayLocal(CHEERS[cheerIdx.current % CHEERS.length](newly.text.slice(0, 22)));
-      cheerIdx.current++;
+    const changed = lesson.tasks.some((t) => next[t.id] !== taskDoneRef.current[t.id]);
+    if (changed) {
+      setTaskDone(next);
+      saveTaskStates(next);
     }
-    setTaskDone((prev) => {
-      const changed = lesson.tasks.some((t) => next[t.id] !== prev[t.id]);
-      return changed ? next : prev;
-    });
-    maybeComplete(next);
-  }, [lesson, collectEvidence, maybeComplete]);
+  }, [lesson, collectEvidence, saveTaskStates]);
 
   /** 事件（按键/点击/AI识别）按当前模式路由到积木执行器或 Python 运行器 */
   const fireHat = useCallback((kind: 'key' | 'click' | 'recognized', arg?: string) => {
@@ -270,8 +207,6 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
       void pyRunnerRef.current.run(() => {
         setRunning(false);
         revalidate(true);
-        lastActivityRef.current = Date.now();
-        sayGuide({ type: 'first-run', ok: !pyRunnerRef.current?.lastError });
         if (pyRunnerRef.current?.lastError) setToast(`程序出了点小问题：${pyRunnerRef.current.lastError}`);
       });
       return;
@@ -282,8 +217,6 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
     void exec.run(() => {
       setRunning(false);
       revalidate(true);
-      lastActivityRef.current = Date.now();
-      sayGuide({ type: 'first-run', ok: !exec.lastError });
       if (exec.lastError) setToast(`程序出了点小问题：${exec.lastError}`);
     });
   };
@@ -329,14 +262,9 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
   // ---------- 工作区变化：校验 + 草稿自动保存 ----------
   const handleWorkspaceChange = useCallback(() => {
     revalidate(false);
-    lastActivityRef.current = Date.now();
     const counts = wsApiRef.current?.getBlockCounts() ?? {};
     const total = Object.values(counts).reduce((a, b) => a + b, 0);
     setBlockTotal(total);
-    if (total > 0 && !hadBlocksRef.current) {
-      hadBlocksRef.current = true;
-      sayGuide({ type: 'first-block' });
-    }
     if (!lesson || !profile || !wsApiRef.current) return;
     // 立即快照 XML：防抖等待期间 workspace 可能被销毁（切课/关页）
     const xml = wsApiRef.current.getXml();
@@ -402,20 +330,6 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
     }, 60_000);
     return () => clearInterval(timer);
   }, [profile, settings.limits.dailyMinutes, settings.limits.hardStop]);
-
-  // 发呆观察：45 秒无活动，伙伴轻轻开口（画布空时换开场引导）
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (running || locked) return;
-      const idleMs = Date.now() - lastActivityRef.current;
-      if (idleMs < 45_000) return;
-      const counts = wsApiRef.current?.getBlockCounts() ?? {};
-      const total = Object.values(counts).reduce((a, b) => a + b, 0);
-      sayGuide(total === 0 && !codeMode ? { type: 'empty-stage' } : { type: 'idle', seconds: Math.round(idleMs / 1000) });
-      lastActivityRef.current = Date.now(); // 说完重置，避免连续打扰
-    }, 15_000);
-    return () => clearInterval(timer);
-  }, [running, locked, codeMode, sayGuide]);
 
   const unlockWithPin = async () => {
     const r = await api.verifyPin(pinInput).catch(() => ({ ok: false }));
@@ -502,7 +416,6 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
     if (!safe.length) return;
     void applyBuildOps(ws, safe, { animate: true }).then(() => {
       revalidate(false);
-      lastActivityRef.current = Date.now();
     }).catch(() => {
       setToast('代搭时出了一点小问题，再试一次？');
     });
@@ -622,13 +535,11 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
     <div className="flex h-screen flex-col overflow-hidden bg-gradient-to-b from-sky-100 via-sky-50 to-emerald-50">
       {/* 顶部悬浮条 */}
       <header className="z-30 flex items-center gap-2 border-b border-white/60 bg-white/70 px-3 py-2 backdrop-blur">
-        <button onClick={() => nav('/map')} className="rounded-xl bg-white/80 px-3 py-1.5 font-bold shadow-sm hover:bg-white">← 地图</button>
+        <button onClick={() => nav('/map')} className="rounded-xl bg-white/80 px-3 py-1.5 font-bold shadow-sm hover:bg-white">← 返回</button>
         <h1 className="truncate text-lg font-black">{lesson.emoji} {lesson.title}</h1>
         {requiredTasks.length > 0 && (
-          <span className={`shrink-0 rounded-full px-3 py-1 text-sm font-bold ${
-            requiredTasksDone(lesson.tasks, taskDone) ? 'bg-violet-500 text-white' : 'bg-violet-100 text-violet-700'
-          }`}>
-            ✨ 发现 {requiredTasks.filter((t) => taskDone[t.id]).length}/{requiredTasks.length}
+          <span className="shrink-0 rounded-full bg-violet-100 px-3 py-1 text-sm font-bold text-violet-700">
+            📋 要点 {requiredTasks.filter((t) => taskDone[t.id]).length}/{requiredTasks.length}
           </span>
         )}
         <div className="ml-auto flex shrink-0 items-center gap-1.5">
@@ -683,7 +594,7 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
             {currentTask ? (
               <>
                 <div className="text-xs font-bold tracking-wide text-violet-500">
-                  🎯 当前任务 · 第 {currentIdx + 1} 步 / 共 {requiredTasks.length} 步
+                  📋 当前要点 · 第 {currentIdx + 1} 项 / 共 {requiredTasks.length} 项
                 </div>
                 <div className="mt-1.5 text-xl font-black leading-snug text-slate-800">{currentTask.text}</div>
                 <div className="mt-3 flex gap-2">
@@ -712,7 +623,7 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
                       onToggleManual={(id) => {
                         const next = { ...taskDoneRef.current, [id]: !taskDoneRef.current[id] };
                         setTaskDone(next);
-                        maybeComplete(next);
+                        saveTaskStates(next);
                       }}
                       onAskHint={(text) => {
                         setBuddyOpen(true);
@@ -724,10 +635,10 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
               </>
             ) : (
               <div className="text-center">
-                <div className="text-3xl">🌟</div>
-                <div className="mt-1 text-lg font-black text-violet-600">全部发现都点亮啦！</div>
-                <div className="mt-1 text-sm text-slate-500">点 ▶ 再玩一次，或回地图解锁下一课</div>
-                <button onClick={() => nav('/map')} className="mt-3 rounded-xl bg-emerald-500 px-4 py-2 font-bold text-white hover:bg-emerald-600">回到地图 🏝</button>
+                <div className="text-3xl">✅</div>
+                <div className="mt-1 text-lg font-black text-violet-600">要点全部完成</div>
+                <div className="mt-1 text-sm text-slate-500">点 ▶ 再运行一次，或去做随堂小练</div>
+                <button onClick={() => nav(`/tutor/${lesson.id}`)} className="mt-3 rounded-xl bg-amber-400 px-4 py-2 font-bold text-white hover:bg-amber-500">📝 去做随堂小练</button>
               </div>
             )}
           </div>
@@ -769,7 +680,7 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
           </span>
         </div>
 
-        {/* AI 伙伴浮动面板：始终挂载，收起时滑出（喝彩/引导语仍会进对话记录） */}
+        {/* AI 伙伴浮动面板：始终挂载，收起时滑出（消息仍会进对话记录） */}
         <div
           className={`absolute bottom-24 right-3 top-3 z-30 w-[22rem] max-w-[calc(100%-1.5rem)] transition-all duration-300 ${
             buddyOpen ? 'translate-x-0 opacity-100' : 'pointer-events-none translate-x-8 opacity-0'
@@ -934,60 +845,6 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
         </Modal>
       )}
 
-      {/* 通关庆祝 */}
-      {celebrate && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-          <div className="w-full max-w-md rounded-3xl bg-white p-8 text-center shadow-2xl">
-            <div className="mb-2 text-6xl">🌟</div>
-            <h2 className="mb-2 text-2xl font-black text-violet-600">新本领 GET！</h2>
-            <p className="mb-3 whitespace-pre-wrap text-slate-600">{lesson.celebrate}</p>
-            {lesson.curriculum ? (
-              <div className="mb-6 rounded-2xl bg-emerald-50 p-3 text-left">
-                <div className="mb-1.5 text-sm font-bold text-emerald-700">
-                  📗 本课解锁的课本知识（{lesson.curriculum.stage}·{lesson.curriculum.module}）
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {lesson.curriculum.points.map((p) => (
-                    <span key={p} className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-emerald-700 shadow-sm">✓ {p}</span>
-                  ))}
-                </div>
-              </div>
-            ) : <p className="mb-6" />}
-            {/* 下一步探险：知识图谱式延伸推荐（同学科/知识点相关/相邻年级） */}
-            {nextLessons.length > 0 && (
-              <div className="mb-5 rounded-2xl bg-violet-50 p-3 text-left">
-                <div className="mb-1.5 text-sm font-bold text-violet-700">🔍 下一步探险（和这课最有关系）</div>
-                <div className="space-y-1.5">
-                  {nextLessons.map((nl) => (
-                    <button
-                      key={nl.id}
-                      onClick={() => { setCelebrate(false); nav(`/lesson/${nl.id}`); }}
-                      className="flex w-full items-center gap-2 rounded-xl bg-white px-3 py-2 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-                    >
-                      <span className="text-2xl">{nl.emoji}</span>
-                      <span className="min-w-0 flex-1">
-                        <span className="block truncate text-sm font-bold text-slate-800">{nl.title}</span>
-                        <span className="block truncate text-xs text-slate-400">
-                          {nl.subject?.name ?? nl.subjectArea}{nl.grade != null ? ` · ${nl.grade}年级` : ''}
-                        </span>
-                      </span>
-                      <span className="shrink-0 text-violet-400">去 →</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-            <div className="flex justify-center gap-3">
-              {lesson.exercises && lesson.exercises.length > 0 && (
-                <button onClick={() => { setCelebrate(false); setQuizOpen(true); }} className="rounded-xl bg-amber-400 px-4 py-2 font-bold text-white hover:bg-amber-500">📝 随堂小练</button>
-              )}
-              <button onClick={() => setCelebrate(false)} className="rounded-xl bg-slate-200 px-4 py-2 font-bold hover:bg-slate-300">再改进一下</button>
-              <button onClick={() => nav('/map')} className="rounded-xl bg-emerald-500 px-4 py-2 font-bold text-white hover:bg-emerald-600">回到地图 🏝</button>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* 随堂小练 */}
       {quizOpen && lesson.exercises && profile && (
         <ExercisePanel
@@ -1008,6 +865,7 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
             });
             void api.updateProgress(profile.id, {
               lessonId: lesson.id,
+              completed: true,
               exercise: { correct, total: lesson.exercises!.length },
               wrongAdds,
             }).catch(() => {});
@@ -1021,7 +879,7 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
           <div className="text-7xl">🌌</div>
           <h2 className="text-2xl font-black">眼睛小休息</h2>
           <p className="max-w-sm text-center leading-relaxed opacity-80">
-            抬起头，看看窗外<b>最远</b>的地方，眨眨眼～ {restCountdown} 秒后继续冒险
+            抬起头，看看窗外<b>最远</b>的地方，眨眨眼～ {restCountdown} 秒后继续
           </p>
           <div className="text-5xl font-black tabular-nums">{restCountdown}</div>
           <button onClick={() => setRestOverlay(false)} className="rounded-xl bg-white/20 px-5 py-2 font-bold hover:bg-white/30">我休息好了</button>
@@ -1032,8 +890,8 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
       {locked && (
         <div className="fixed inset-0 z-[70] flex flex-col items-center justify-center gap-4 bg-slate-900/95 p-6 text-white">
           <div className="text-7xl">🌙</div>
-          <h2 className="text-2xl font-black">今天的创作时间用完啦</h2>
-          <p className="max-w-sm text-center text-white/70">作品都保存好了。早点休息，明天的小岛还有新冒险等你！</p>
+          <h2 className="text-2xl font-black">今天的学习时间用完啦</h2>
+          <p className="max-w-sm text-center text-white/70">作品都保存好了。早点休息，明天继续学！</p>
           <div className="mt-2 flex gap-2">
             <input
               type="password"

@@ -61,9 +61,10 @@
   ],
   "curriculum": {
     "stage": "第四学段（8年级）",
-    "module": "数据与编码",
+    "module": "统计与概率",
     "points": [
-      "多序列对比可视化"
+      "理解方差的意义",
+      "会计算简单方差"
     ]
   },
   "subject": {
@@ -123,5 +124,24 @@
     }
   ],
   "textbook": "人教版数学八年级下册",
-  "grade": 8
+  "grade": 8,
+  "lab": {
+    "params": [
+      {
+        "name": "s",
+        "label": "波动幅度",
+        "min": 0,
+        "max": 6,
+        "step": 0.5,
+        "value": 3
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "两条蓝线的波动幅度 s 不同时，哪组数据更稳定？",
+      "波动幅度变大，数据离红色的平均线（y=8）怎么样？",
+      "生活里「成绩稳定」「投篮手感稳定」说的是什么？"
+    ],
+    "code": "# 方差探索：波动越大越不稳定\ns = 3   # 波动幅度\n\nhide()\npen_color(\"red\")\npen_down()\ngo_to(-180, 8 * 12)\ngo_to(180, 8 * 12)\npen_up()\nwrite(\"平均线 y=8\", 150, 110, \"red\", 12)\npen_color(\"blue\")\npen_down()\nx = -180\ngo_to(x, (8 + s) * 12)\nwhile x < 175:\n    go_to(x, (8 + s) * 12)\n    go_to(x + 25, (8 - s) * 12)\n    go_to(x + 50, (8 + s) * 12)\n    x = x + 50\npen_up()\nwrite(\"波动幅度 s=\" + s, 130, 145, \"blue\", 14)\nif s > 4:\n    write(\"不稳定！\", 150, -40, \"orange\", 13)\nif s < 1.01:\n    write(\"很稳定！\", 150, -40, \"green\", 13)"
+  }
 }

@@ -82,9 +82,10 @@
   ],
   "curriculum": {
     "stage": "第三学段（7-9年级）",
-    "module": "过程与控制",
+    "module": "表现",
     "points": [
-      "循环与延时"
+      "节拍概念",
+      "BPM 与速度"
     ]
   },
   "subject": {

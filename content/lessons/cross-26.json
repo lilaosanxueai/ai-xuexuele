@@ -60,10 +60,10 @@
   ],
   "curriculum": {
     "stage": "第四学段（7-9年级）",
-    "module": "身边的算法",
+    "module": "物质的性质与变化",
     "points": [
-      "分段判断",
-      "数值映射"
+      "掌握 pH 与酸碱性的关系",
+      "理解中和反应"
     ]
   },
   "subject": {
@@ -116,5 +116,24 @@
   "codeLesson": true,
   "starterCode": "# pH 判断机\nph = 2\nif ph < 7:\n    say(\"pH \" + ph + \" 酸性！像柠檬一样酸\")\nif ph == 7:\n    say(\"pH 7 中性，纯净的水\")\nif ph > 7:\n    say(\"pH \" + ph + \" 碱性！像肥皂水滑滑的\")\n\n# 中和反应：胃酸 + 胃药\nsay(\"胃酸过多？喝碱性胃药 -> 中和！\")\nsay(\"酸 + 碱 -> 盐 + 水，pH 回到 7\")\n",
   "textbook": "人教版化学九年级下册",
-  "grade": 9
+  "grade": 9,
+  "lab": {
+    "params": [
+      {
+        "name": "ph",
+        "label": "溶液 pH",
+        "min": 0,
+        "max": 14,
+        "step": 0.5,
+        "value": 7
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "pH<7 溶液是什么性？指针落在哪个颜色区？",
+      "pH=7 是什么溶液？指针在哪？",
+      "从 0 拖到 14，溶液从酸性变到？中间经过什么？"
+    ],
+    "code": "# 酸碱 pH 标尺探索台\nph = 7   # 溶液的 pH 值\n\nhide()\ni = 0\nwhile i < 15:\n    px = -196 + i * 27\n    if i < 7:\n        pen_color(\"red\")\n    if i == 7:\n        pen_color(\"green\")\n    if i > 7:\n        pen_color(\"blue\")\n    pen_down()\n    go_to(px, 20)\n    go_to(px + 26, 20)\n    go_to(px + 26, 60)\n    go_to(px, 60)\n    go_to(px, 20)\n    pen_up()\n    write(i, px + 13, 75, \"blue\", 9)\n    i = i + 1\npx2 = -196 + ph * 27\npen_color(\"orange\")\npen_down()\ngo_to(px2, -10)\ngo_to(px2, 70)\npen_up()\nif ph < 6.8:\n    write(\"pH=\" + ph + \"：酸性\", -100, -60, \"red\", 15)\nif ph > 7.2:\n    write(\"pH=\" + ph + \"：碱性\", -100, -60, \"blue\", 15)\nif ph >= 6.8:\n    if ph <= 7.2:\n        write(\"pH=7：中性\", -100, -60, \"green\", 15)"
+  }
 }

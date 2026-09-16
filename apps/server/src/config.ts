@@ -21,7 +21,7 @@ export interface AppConfig {
 
 function defaults(): AppConfig {
   return {
-    llm: { baseURL: 'https://open.bigmodel.cn/api/paas/v4', apiKey: '', model: 'glm-4.6', maxTokens: 400 },
+    llm: { baseURL: 'https://open.bigmodel.cn/api/paas/v4', apiKey: '', model: 'glm-4.6', maxTokens: 800 },
     server: { host: '127.0.0.1', port: 8787 },
     parentPin: '1234',
   };

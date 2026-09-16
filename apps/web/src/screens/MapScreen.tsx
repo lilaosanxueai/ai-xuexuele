@@ -6,7 +6,7 @@ import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
 import { SUBJECTS, SUBJECT_STYLE } from '../components/subjectMeta.ts';
 import { recommendNext } from '../runtime/recommend.ts';
-import DailyQuestBar from '../components/DailyQuestBar.tsx';
+import { calcStreak } from '../utils/streak.ts';
 
 /** 学科中心：以「学科 × 学段」组织全部课程（对标课表结构） */
 export default function MapScreen() {
@@ -43,25 +43,23 @@ export default function MapScreen() {
       <main className="mx-auto w-full max-w-5xl flex-1 px-6 pb-10">
         {/* 学习概览 + 智能推荐 */}
         <div className="mb-6 rounded-3xl bg-white/80 p-5 shadow-md">
-          <div className="mb-3">
-            <DailyQuestBar progress={progress} />
-          </div>
           <div className="mb-3 flex flex-wrap items-center gap-3 text-sm text-slate-500">
-            <span className="rounded-full bg-white px-3 py-1 shadow-sm">今日学习 {todayMin} 分钟</span>
+            <span className="rounded-full bg-orange-50 px-3 py-1 font-bold text-orange-500">🔥 连续学习 {calcStreak(progress?.dailyUsage ?? {})} 天</span>
+            <span className="rounded-full bg-white px-3 py-1 shadow-sm">今日 {todayMin} 分钟</span>
             <span className="rounded-full bg-white px-3 py-1 shadow-sm">已学 {doneCount}/{lessons.length} 课</span>
             {(progress?.wrongBook?.length ?? 0) > 0 && (
               <button
                 onClick={() => nav('/wrongbook')}
                 className="rounded-full bg-rose-100 px-3 py-1 font-bold text-rose-600 shadow-sm transition hover:bg-rose-200"
               >
-                📖 错题本 · {progress!.wrongBook!.length} 道等你消灭
+                📖 错题本 · {progress!.wrongBook!.length} 道待重练
               </button>
             )}
             <span className="ml-auto text-xs text-slate-400">覆盖 3-9 年级 + 高中衔接 · 对标课程标准</span>
           </div>
           {rec && (
             <button
-              onClick={() => nav(`/lesson/${rec.lessonId}`)}
+              onClick={() => nav(`/tutor/${rec.lessonId}`)}
               className="flex w-full items-center gap-4 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-500 p-4 text-left text-white shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl"
             >
               <div className="text-4xl">{rec.emoji}</div>
@@ -113,8 +111,16 @@ export default function MapScreen() {
           })}
         </div>
 
-        {/* AI 实验室 + 口算 + 证书 */}
+        {/* AI 答疑 + AI 实验室 + 口算 */}
         <section className="mt-6 grid gap-4 md:grid-cols-3">
+          <button
+            onClick={() => nav('/ask')}
+            className="rounded-3xl bg-gradient-to-br from-indigo-400 to-violet-500 p-6 text-center text-white shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
+          >
+            <div className="text-5xl">💬</div>
+            <div className="mt-2 text-xl font-black">问 AI 老师</div>
+            <div className="mt-1 text-xs opacity-90">作业不会做、知识点没听懂，什么学科都可以问</div>
+          </button>
           <button
             onClick={() => nav('/playground')}
             className="rounded-3xl bg-gradient-to-br from-pink-400 to-rose-500 p-6 text-center text-white shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
@@ -129,15 +135,7 @@ export default function MapScreen() {
           >
             <div className="text-5xl">⚡</div>
             <div className="mt-2 text-xl font-black">口算训练器</div>
-            <div className="mt-1 text-xs opacity-90">60 秒限时闯关 · 五档年级难度 · 连击加倍 · 错题自动重练</div>
-          </button>
-          <button
-            onClick={() => nav('/certificate')}
-            className="rounded-3xl bg-gradient-to-br from-amber-300 to-yellow-500 p-6 text-center text-amber-950 shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
-          >
-            <div className="text-5xl">🏆</div>
-            <div className="mt-2 text-xl font-black">结业证书</div>
-            <div className="mt-1 text-xs opacity-80">完成信息科技学习路线（8 课）即可领取 · 可打印</div>
+            <div className="mt-1 text-xs opacity-90">60 秒限时练习 · 五档年级难度 · 错题自动重练</div>
           </button>
         </section>
       </main>

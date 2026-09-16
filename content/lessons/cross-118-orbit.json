@@ -86,10 +86,11 @@
   ],
   "curriculum": {
     "stage": "高中·万有引力（衔接课）",
-    "module": "身边的算法",
+    "module": "运动和相互作用",
     "points": [
-      "三角函数画圆",
-      "参数化轨道模拟"
+      "万有引力定律",
+      "卫星的圆周运动原理",
+      "轨道高度与周期的关系"
     ]
   },
   "subject": {
@@ -141,5 +142,24 @@
     }
   ],
   "textbook": "人教版物理必修第二册",
-  "grade": 10
+  "grade": 10,
+  "lab": {
+    "params": [
+      {
+        "name": "r",
+        "label": "轨道半径 r",
+        "min": 40,
+        "max": 130,
+        "step": 5,
+        "value": 110
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "轨道半径变大，卫星绕一圈的路程变多少？",
+      "看标注的「周期」：半径越大周期（一年）越长还是越短？",
+      "地球同步卫星为什么要飞到特定的半径？"
+    ],
+    "code": "# 卫星轨道探索台：r 越大，绕一圈越慢\nr = 110   # 轨道半径\n\nhide()\npen_color(\"blue\")\npen_down()\na = 0\ngo_to(r, 0)\nwhile a < 360.1:\n    go_to(r * cos(a), r * sin(a))\n    a = a + 10\npen_up()\nwrite(\"地球\", -22, 8, \"orange\", 14)\npen_color(\"red\")\npen_down()\ngo_to(r - 8, 8)\ngo_to(r + 8, 8)\ngo_to(r + 8, -8)\ngo_to(r - 8, -8)\ngo_to(r - 8, 8)\npen_up()\nT = sqrt(r * r * r / 42000)\nwrite(\"r=\" + r + \"，周期 T≈\" + T + \"（相对单位）\", -190, -140, \"red\", 12)\nwrite(\"轨道越长+引力越弱 → 越大越慢\", -190, 145, \"blue\", 11)"
+  }
 }

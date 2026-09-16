@@ -54,7 +54,7 @@ function genQuestion(level: LevelKey): MQ {
   }
 }
 
-/** 60 秒限时口算闯关：连击计分，错题可重练 */
+/** 60 秒限时口算练习：五档年级题库，答错的题自动进入重练 */
 export default function MentalMathScreen() {
   const nav = useNavigate();
   const { current: profile } = useProfileStore();
@@ -63,9 +63,6 @@ export default function MentalMathScreen() {
   const [input, setInput] = useState('');
   const [feedback, setFeedback] = useState<'none' | 'ok' | 'bad'>('none');
   const [timeLeft, setTimeLeft] = useState(60);
-  const [score, setScore] = useState(0);
-  const [streak, setStreak] = useState(0);
-  const [bestStreak, setBestStreak] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
   const [wrongs, setWrongs] = useState<MQ[]>([]);
   const [finished, setFinished] = useState(false);
@@ -82,17 +79,13 @@ export default function MentalMathScreen() {
     return () => clearTimeout(t);
   }, [level, timeLeft, finished]);
 
-  // 本地最佳记录
-  const bestKey = `mentalmath-best-${level ?? ''}`;
-  const best = level ? Number(localStorage.getItem(bestKey) ?? 0) : 0;
-
   const start = (lv: LevelKey) => {
     setLevel(lv);
     setQ(genQuestion(lv));
     setInput('');
     setFeedback('none');
     setTimeLeft(60);
-    setScore(0); setStreak(0); setBestStreak(0); setCorrectCount(0);
+    setCorrectCount(0);
     wrongsRef.current = []; setWrongs([]);
     retryQueue.current = []; setRetryMode(false);
     setFinished(false);
@@ -108,7 +101,7 @@ export default function MentalMathScreen() {
     setTimeLeft(60);   // 重练也要重置计时：否则 effect 里 timeLeft<=0 立即 finish，重练秒退
     setQ(retryQueue.current[0]);
     setInput(''); setFeedback('none');
-    setCorrectCount(0); setStreak(0);
+    setCorrectCount(0);
     setTimeout(() => inputRef.current?.focus(), 100);
   };
 
@@ -137,7 +130,6 @@ export default function MentalMathScreen() {
         exercise: { correct: correctCount, total: correctCount + wrongsRef.current.length },
       }).catch(() => {});
     }
-    if (score > best) localStorage.setItem(bestKey, String(score));
   };
 
   const submit = () => {
@@ -147,13 +139,10 @@ export default function MentalMathScreen() {
     if (ok) {
       setFeedback('ok');
       setCorrectCount((c) => c + 1);
-      setStreak((s) => { const ns = s + 1; setBestStreak((b) => Math.max(b, ns)); return ns; });
-      setScore((s) => s + 10 + streak * 2);
       setTimeout(() => nextQuestion(null), 350);
     } else {
       setFeedback('bad');
       wrongsRef.current.push(q);
-      setStreak(0);
       setTimeout(() => nextQuestion(null), 900);
     }
   };
@@ -164,7 +153,7 @@ export default function MentalMathScreen() {
         <Header />
         <main className="mx-auto w-full max-w-3xl flex-1 px-6 pb-10">
           <h1 className="text-2xl font-black text-slate-700">⚡ 口算训练器</h1>
-          <p className="mb-5 mt-1 text-sm text-slate-500">60 秒限时闯关 · 连击加倍 · 答错的题自动进入重练</p>
+          <p className="mb-5 mt-1 text-sm text-slate-500">60 秒限时练习 · 五档年级难度 · 答错的题自动进入重练</p>
           <div className="grid gap-3 sm:grid-cols-2">
             {LEVELS.map((l) => (
               <button
@@ -205,7 +194,7 @@ export default function MentalMathScreen() {
               <div className="rounded-2xl bg-rose-50 p-3"><div className="text-xl font-black text-rose-600">{wrongs.length}</div><div className="text-slate-500">仍错</div></div>
               <div className="rounded-2xl bg-amber-50 p-3"><div className="text-xl font-black text-amber-600">{acc}%</div><div className="text-slate-500">正确率</div></div>
             </div>
-            {!retryMode && <p className="mt-3 text-sm text-slate-500">得分 {score} · 最长连击 {bestStreak} 🔥{score > 0 && best > 0 && score > best ? ' · 新纪录！' : ''}</p>}
+            {!retryMode && <p className="mt-3 text-sm text-slate-500">60 秒共答对 {correctCount} 题</p>}
             {wrongs.length > 0 ? (
               <>
                 <div className="mt-4 rounded-2xl bg-slate-50 p-4 text-left">
@@ -222,12 +211,12 @@ export default function MentalMathScreen() {
                 </button>
               </>
             ) : total === 0 ? (
-              <p className="mt-4 rounded-2xl bg-slate-50 p-3 text-sm font-bold text-slate-500">这局一题都没答完——再来一次，这次快一点 💪</p>
+              <p className="mt-4 rounded-2xl bg-slate-50 p-3 text-sm font-bold text-slate-500">这次一题都没答完——再来一次，这次快一点 💪</p>
             ) : (
               <p className="mt-4 rounded-2xl bg-emerald-50 p-3 text-sm font-bold text-emerald-700">全对！一个错题都没有 🎉</p>
             )}
             <div className="mt-4 flex gap-2">
-              <button onClick={() => start(level)} className="flex-1 rounded-xl bg-sky-500 px-4 py-2.5 font-bold text-white hover:bg-sky-600">再来一局</button>
+              <button onClick={() => start(level)} className="flex-1 rounded-xl bg-sky-500 px-4 py-2.5 font-bold text-white hover:bg-sky-600">再练一次</button>
               <button onClick={() => setLevel(null)} className="flex-1 rounded-xl bg-slate-200 px-4 py-2.5 font-bold text-slate-600 hover:bg-slate-300">换年级</button>
             </div>
           </div>
@@ -243,8 +232,7 @@ export default function MentalMathScreen() {
         {/* 顶部状态 */}
         <div className="mb-3 flex w-full items-center gap-2 text-sm">
           <span className="rounded-full bg-white/85 px-3 py-1 font-bold text-slate-600 shadow-sm">{levelMeta.emoji} {levelMeta.name}</span>
-          <span className="rounded-full bg-white/85 px-3 py-1 font-bold text-slate-600 shadow-sm">得分 {score}</span>
-          {streak >= 3 && <span className="animate-pulse rounded-full bg-orange-100 px-3 py-1 font-bold text-orange-600 shadow-sm">🔥 连击 {streak}</span>}
+          <span className="rounded-full bg-white/85 px-3 py-1 font-bold text-slate-600 shadow-sm">已答对 {correctCount}</span>
           <span className={`ml-auto rounded-full px-3 py-1 font-black shadow-sm ${timeLeft <= 10 ? 'animate-pulse bg-rose-500 text-white' : 'bg-white/85 text-slate-600'}`}>⏱ {timeLeft}s</span>
         </div>
         {/* 计时条 */}
@@ -255,7 +243,7 @@ export default function MentalMathScreen() {
         {/* 题目 */}
         <div className={`w-full rounded-3xl p-10 text-center shadow-xl transition ${feedback === 'ok' ? 'bg-emerald-400' : feedback === 'bad' ? 'bg-rose-400' : 'bg-white/90'}`}>
           <div className={`text-5xl font-black tracking-wide ${feedback !== 'none' ? 'text-white' : 'text-slate-800'}`}>{q?.text}</div>
-          {feedback === 'ok' && <div className="mt-2 text-lg font-bold text-white">✓ 正确！+{10 + streak * 2}</div>}
+          {feedback === 'ok' && <div className="mt-2 text-lg font-bold text-white">✓ 正确！</div>}
           {feedback === 'bad' && <div className="mt-2 text-lg font-bold text-white">✗ 应该是 {q?.answer}</div>}
         </div>
 
@@ -274,7 +262,7 @@ export default function MentalMathScreen() {
           />
           <button type="submit" className="rounded-2xl bg-sky-500 px-6 text-xl font-black text-white hover:bg-sky-600">确认</button>
         </form>
-        <button onClick={() => nav('/map')} className="mt-6 text-sm text-slate-400 hover:text-slate-600">不练了，回地图</button>
+        <button onClick={() => nav('/map')} className="mt-6 text-sm text-slate-400 hover:text-slate-600">不练了，回学习中心</button>
       </main>
     </div>
   );

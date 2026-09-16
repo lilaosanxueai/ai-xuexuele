@@ -61,9 +61,10 @@
   ],
   "curriculum": {
     "stage": "第四学段（9年级）",
-    "module": "身边的算法",
+    "module": "数与代数",
     "points": [
-      "参数扫描"
+      "掌握二次函数顶点与最值",
+      "理解配方法"
     ]
   },
   "subject": {
@@ -123,5 +124,40 @@
     }
   ],
   "textbook": "人教版数学九年级上册",
-  "grade": 9
+  "grade": 9,
+  "lab": {
+    "params": [
+      {
+        "name": "a",
+        "label": "二次系数 a",
+        "min": 0.25,
+        "max": 2,
+        "step": 0.25,
+        "value": 0.5
+      },
+      {
+        "name": "b",
+        "label": "一次系数 b",
+        "min": -6,
+        "max": 6,
+        "step": 0.5,
+        "value": 2
+      },
+      {
+        "name": "c",
+        "label": "常数 c",
+        "min": -6,
+        "max": 6,
+        "step": 1,
+        "value": -3
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "顶点（图里的最低点/最高点）在哪里？移动 b 它怎么动？",
+      "什么时候顶点是最低点，什么时候是最高点？和 a 什么关系？",
+      "函数的最小值（或最大值）写在了图上，改 c 只改变什么？"
+    ],
+    "code": "# 二次函数 y = ax² + bx + c 与顶点探索台\na = 0.5  # 二次系数 a\nb = 2    # 一次系数 b\nc = -3   # 常数 c\n\nhide()\nvx = -b / (2 * a)\nvy = c - b * b / (4 * a)\npen_color(\"blue\")\npen_down()\nx = -7\ny = a * x * x + b * x + c\ngo_to(x * 25, y * 12)\nwhile x < 7.01:\n    y = a * x * x + b * x + c\n    go_to(x * 25, y * 12)\n    x = x + 0.25\npen_up()\npen_color(\"red\")\nwrite(\"☉顶点(\" + vx + \", \" + vy + \")\", vx * 25, vy * 12 + 18, \"red\", 12)\nwrite(\"y=\" + a + \"x²+\" + b + \"x+\" + c, -170, 145, \"blue\", 13)"
+  }
 }

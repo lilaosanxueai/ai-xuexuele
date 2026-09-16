@@ -62,9 +62,10 @@
   ],
   "curriculum": {
     "stage": "第四学段（7-9年级）",
-    "module": "身边的算法",
+    "module": "图形与几何",
     "points": [
-      "数学函数 sqrt"
+      "勾股定理",
+      "用计算验证几何"
     ]
   },
   "subject": {

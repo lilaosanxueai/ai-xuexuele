@@ -19,6 +19,7 @@ const CMD_MAP: Record<string, (stage: StageState, args: (number | string | boole
   pen_down: (s) => s.api.penDown(),
   pen_up: (s) => s.api.penUp(),
   pen_color: (s, a) => s.api.penColor(String(a[0])),
+  write: (s, a) => s.api.write(String(a[0] ?? ''), Number(a[1]), Number(a[2]), a[3] !== undefined ? String(a[3]) : undefined, a[4] !== undefined ? Number(a[4]) : undefined),
 };
 
 export function pyStageApi(stage: StageState): PyStageApi {

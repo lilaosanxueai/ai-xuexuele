@@ -6,9 +6,10 @@ export default function Header() {
   const nav = useNavigate();
   return (
     <header className="flex items-center gap-2 px-4 py-3">
-      <Link to="/map" className="text-2xl font-black text-sky-700">🏝 AI学学乐</Link>
+      <Link to="/map" className="text-2xl font-black text-sky-700">📖 AI学学乐</Link>
       <nav className="ml-6 flex gap-1">
-        <NavLink to="/map">🗺 学习地图</NavLink>
+        <NavLink to="/map">📚 学习中心</NavLink>
+        <NavLink to="/ask">💬 问 AI</NavLink>
         <NavLink to="/gallery">🖼 作品墙</NavLink>
       </nav>
       <div className="ml-auto flex items-center gap-2">

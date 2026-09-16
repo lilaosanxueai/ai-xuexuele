@@ -62,9 +62,11 @@
   ],
   "curriculum": {
     "stage": "第四学段（7-9年级）衔接高中地理",
-    "module": "过程与控制",
+    "module": "地球与地图",
     "points": [
-      "三角函数模拟轨道"
+      "地球公转",
+      "四季与节气成因",
+      "轨道是圆周运动"
     ]
   },
   "subject": {
@@ -125,5 +127,25 @@
     }
   ],
   "textbook": "人教版地理七年级上册",
-  "grade": 7
+  "grade": 7,
+  "lab": {
+    "params": [
+      {
+        "name": "deg",
+        "label": "公转角度",
+        "min": 0,
+        "max": 360,
+        "step": 15,
+        "value": 0,
+        "unit": "°"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "地球绕到不同位置时，北半球是什么季节？（看标注）",
+      "太阳直射点在哪两个位置之间来回移动？",
+      "地球离太阳的距离在一年里变化大吗？四季主要是由什么引起的？"
+    ],
+    "code": "# 地球公转与四季探索台\ndeg = 0   # 地球在公转轨道上的角度（0°=春分）\n\nhide()\npen_color(\"blue\")\npen_down()\nang = 0\ngo_to(120, 0)\nwhile ang < 360.01:\n    go_to(120 * cos(ang), 120 * sin(ang))\n    ang = ang + 10\npen_up()\nwrite(\"☀ 太阳\", -28, 8, \"orange\", 16)\nex = 120 * cos(deg)\ney = 120 * sin(deg)\npen_color(\"green\")\npen_down()\ngo_to(ex - 10, ey + 10)\ngo_to(ex + 10, ey + 10)\ngo_to(ex + 10, ey - 10)\ngo_to(ex - 10, ey - 10)\ngo_to(ex - 10, ey + 10)\npen_up()\nseason = \"春\"\nif deg > 90:\n    season = \"夏\"\nif deg > 180:\n    season = \"秋\"\nif deg > 270:\n    season = \"冬\"\nwrite(\"北半球：\" + season + \"（公转 \" + deg + \"°）\", -150, -140, \"red\", 14)\nwrite(\"🌍=地球  轨道半径恒定→四季不是距离引起的\", -190, 150, \"blue\", 11)"
+  }
 }

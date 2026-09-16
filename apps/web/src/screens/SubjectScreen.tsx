@@ -6,9 +6,12 @@ import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
 import { SUBJECTS, SUBJECT_STYLE } from '../components/subjectMeta.ts';
 
-/** 学科页：该学科按学段分组的全部课程，含课标标注 */
+/** 学科页：该学科按学段分组的全部课程，含课标标注。理科动态演示课进互动实验室，其余进辅导页 */
 const BAND_ORDER = ['primary', 'junior', 'senior'] as const;
 const BAND_LABEL: Record<string, string> = { primary: '小学', junior: '初中', senior: '高中衔接' };
+/** 理科五科（先做内容动态化 + 动态互动） */
+const LAB_SUBJECTS = new Set(['数学', '物理', '化学', '生物', '地理']);
+const isLabLesson = (l: Lesson) => LAB_SUBJECTS.has(l.subjectArea ?? '') && !!(l.lab || l.starterCode);
 
 export default function SubjectScreen() {
   const nav = useNavigate();
@@ -65,13 +68,14 @@ export default function SubjectScreen() {
                 return (
                   <button
                     key={l.id}
-                    onClick={() => nav(`/lesson/${l.id}`)}
+                    onClick={() => nav(isLabLesson(l) ? `/lab/${l.id}` : `/tutor/${l.id}`)}
                     className={`flex w-full items-center gap-3 rounded-2xl bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${isDone ? `ring-2 ${style.ring}` : ''}`}
                   >
                     <div className="text-3xl">{l.emoji}</div>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
                         <span className="truncate font-bold text-slate-800">{l.title}</span>
+                        {isLabLesson(l) && <span className="shrink-0 rounded-full bg-violet-100 px-2 py-0.5 text-xs font-bold text-violet-700">🔬 互动实验</span>}
                         {l.codeLesson && <span className="shrink-0 rounded-full bg-slate-800 px-2 py-0.5 text-xs font-bold text-white">Python</span>}
                         {l.grade != null && <span className="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-bold text-amber-700">{l.grade}年级</span>}
                       </div>

@@ -62,9 +62,10 @@
   ],
   "curriculum": {
     "stage": "高中·函数（衔接课）",
-    "module": "身边的算法",
+    "module": "图形与几何",
     "points": [
-      "数学函数 sin/cos"
+      "正弦函数图像",
+      "振幅与周期"
     ]
   },
   "subject": {
@@ -124,5 +125,32 @@
     }
   ],
   "textbook": "人教A版数学必修第一册",
-  "grade": 10
+  "grade": 10,
+  "lab": {
+    "params": [
+      {
+        "name": "amp",
+        "label": "振幅 A",
+        "min": 10,
+        "max": 120,
+        "step": 10,
+        "value": 60
+      },
+      {
+        "name": "T",
+        "label": "周期 T（度）",
+        "min": 90,
+        "max": 540,
+        "step": 30,
+        "value": 240
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "振幅 A 变大，波形的高度怎么变？",
+      "周期 T 变小，波变得密集还是稀疏？",
+      "一个周期内波形走了多少度（横向距离）？数一数"
+    ],
+    "code": "# 正弦波 y = A·sin(360/T · x) 探索台\namp = 60   # 振幅 A\nT = 240    # 周期 T（度）\n\nhide()\npen_color(\"blue\")\npen_down()\nx = -210\ny = amp * sin(360 / T * x)\ngo_to(x, y)\nwhile x < 210:\n    y = amp * sin(360 / T * x)\n    go_to(x, y)\n    x = x + 5\npen_up()\nwrite(\"A=\" + amp + \" T=\" + T, 140, 145, \"blue\", 14)\nwrite(\"最高点 y=\" + amp, 160, amp, \"green\", 11)"
+  }
 }

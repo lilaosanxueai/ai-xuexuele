@@ -82,9 +82,10 @@
   ],
   "curriculum": {
     "stage": "第一学段（1-2年级）",
-    "module": "身边的算法",
+    "module": "词汇与句型",
     "points": [
-      "顺序结构"
+      "常见颜色单词",
+      "What color is it?"
     ]
   },
   "subject": {

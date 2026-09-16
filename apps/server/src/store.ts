@@ -75,12 +75,6 @@ export function mergeProgress(profileId: string, patch: {
   wrongClears?: string[];
 }): ProfileProgress {
   const cur = getProgress(profileId);
-  // ---- 每日任务：跨天惰性重置 ----
-  const today = new Date().toISOString().slice(0, 10);
-  if (cur.questDate !== today) {
-    cur.questDate = today;
-    cur.questDone = {};
-  }
   if (patch.lessonId) {
     const lp = cur.lessons[patch.lessonId] ?? { status: 'in_progress' as const, tasks: {} };
     if (patch.tasks) {
@@ -91,10 +85,6 @@ export function mergeProgress(profileId: string, patch: {
     if (patch.completed && lp.status !== 'completed') {
       lp.status = 'completed';
       lp.completedAt = new Date().toISOString();
-      // 每日任务①：首次通关 +50 XP
-      cur.questDone = cur.questDone ?? {};
-      cur.questDone.lesson = true;
-      cur.xp = (cur.xp ?? 0) + 50;
     }
     cur.lessons[patch.lessonId] = lp;
     if (typeof patch.draft === 'string' && patch.draft.length <= 300_000) {
@@ -107,11 +97,6 @@ export function mergeProgress(profileId: string, patch: {
     if (patch.exercise && patch.exercise.total > 0 && patch.exercise.total <= 50) {
       cur.exercises = cur.exercises ?? {};
       cur.exercises[patch.lessonId] = { correct: Math.max(0, Math.round(patch.exercise.correct)), total: Math.round(patch.exercise.total) };
-      // 每日任务②：答对题数累计（今日上限 5 计入任务；XP 每题 +10、每日上限 50）
-      const gained = Math.max(0, Math.round(patch.exercise.correct));
-      cur.questDone = cur.questDone ?? {};
-      cur.questDone.quiz = Math.min(5, (cur.questDone.quiz ?? 0) + gained);
-      cur.xp = (cur.xp ?? 0) + Math.min(50, gained * 10);
     }
   }
   if (patch.minutesDelta && patch.minutesDelta > 0) {
@@ -148,22 +133,6 @@ export function mergeProgress(profileId: string, patch: {
   }
   writeJson(progressFile(profileId), cur);
   return cur;
-}
-
-/** 每日任务③：与 AI 伙伴交流一次（+5 XP，每日任务计数上限 2 次） */
-export function addQuestChat(profileId: string): void {
-  if (!validId(profileId)) return;
-  const cur = getProgress(profileId);
-  const today = new Date().toISOString().slice(0, 10);
-  if (cur.questDate !== today) {
-    cur.questDate = today;
-    cur.questDone = {};
-  }
-  cur.questDone = cur.questDone ?? {};
-  if ((cur.questDone.chat ?? 0) >= 2) return;
-  cur.questDone.chat = (cur.questDone.chat ?? 0) + 1;
-  cur.xp = (cur.xp ?? 0) + 5;
-  writeJson(progressFile(profileId), cur);
 }
 
 // ---------- 作品 ----------

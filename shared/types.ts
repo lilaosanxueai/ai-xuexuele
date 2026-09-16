@@ -87,6 +87,34 @@ export interface Lesson {
   textbook?: string;
   aiIntro: string;
   celebrate: string;
+  /** 互动实验室定义（理科动态演示课）：参数滑块 + 探索问题；缺省时 LabScreen 自动从 starterCode 提取参数 */
+  lab?: LabDef;
+}
+
+/** 互动实验室：内容动态化 + 动态互动（PhET/GeoGebra 式参数探索） */
+export interface LabDef {
+  /** 可调参数（滑块）；name 需与演示代码里的顶层赋值变量名一致，运行时注入替换 */
+  params: LabParam[];
+  /** 舞台显示坐标网格（画函数图像/曲线时开） */
+  grid?: boolean;
+  /** 探索问题（引导孩子做"实验"） */
+  explore?: string[];
+  /** 演示代码（缺省用 starterCode） */
+  code?: string;
+}
+
+export interface LabParam {
+  /** 变量名（与代码顶层赋值一致） */
+  name: string;
+  /** 滑块中文标签 */
+  label: string;
+  min: number;
+  max: number;
+  step: number;
+  /** 初始值 */
+  value: number;
+  /** 滑块单位显示（如 m/s、kg） */
+  unit?: string;
 }
 
 export interface TaskState {
@@ -115,12 +143,6 @@ export interface ProfileProgress {
   wrongBook?: WrongItem[];
   /** 已消灭的错题总数（成长记录） */
   wrongCleared?: number;
-  /** 学习经验值（Duolingo 式激励）：通关+50、答对一题+10、与伙伴交流+5 */
-  xp?: number;
-  /** 每日任务打卡日（YYYY-MM-DD，跨天自动重置） */
-  questDate?: string;
-  /** 今日任务进度：通关 1 课 / 答对 5 题 / 与伙伴交流 2 次 */
-  questDone?: { lesson?: boolean; quiz?: number; chat?: number };
 }
 
 /** 错题本条目：题目快照 + 错误历史 */
@@ -197,17 +219,31 @@ export interface ChatMessage {
   ts?: string;
 }
 
-/** 客户端发给服务端的对话上下文摘要（积木清单等，省 token 且不含敏感内容） */
+/** 客户端发给服务端的对话上下文摘要（课程/学科信息，省 token 且不含敏感内容） */
 export interface ChatContext {
-  screen: 'lesson' | 'freeplay';
+  screen: 'lesson' | 'freeplay' | 'tutor' | 'ask' | 'lab';
   lessonTitle?: string;
   lessonGoals?: string[];
   currentTask?: string;
   hintPrompts?: string[];
-  blockCounts: Record<string, number>;
+  blockCounts?: Record<string, number>;
   runOk?: boolean;
   lastError?: string;
   projectTitle?: string;
+  /** tutor 模式：本课课标模块（如「数与代数」「阅读与鉴赏」） */
+  curriculumModule?: string;
+  /** tutor 模式：本课课标知识点 */
+  curriculumPoints?: string[];
+  /** tutor 模式：教材版本（如「人教版物理必修第一册」） */
+  textbook?: string;
+  /** tutor 模式：年级 1-12 */
+  grade?: number;
+  /** tutor 模式：学科（如「物理」） */
+  subjectArea?: string;
+  /** tutor 模式：课文引入/内容摘要（含课文原文的课让 AI 知道课本内容） */
+  lessonStory?: string;
+  /** lab 模式：当前参数值文本（如「a=10（加速度）、v0=0（初速度）」） */
+  labParams?: string;
 }
 
 export interface BuddySettings {

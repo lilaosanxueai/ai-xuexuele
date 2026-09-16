@@ -4,17 +4,25 @@ import HomeScreen from './screens/HomeScreen.tsx';
 import MapScreen from './screens/MapScreen.tsx';
 import GalleryScreen from './screens/GalleryScreen.tsx';
 import ParentScreen from './screens/ParentScreen.tsx';
-import CertificateScreen from './screens/CertificateScreen.tsx';
 import SubjectScreen from './screens/SubjectScreen.tsx';
+import AskScreen from './screens/AskScreen.tsx';
+import TutorScreen from './screens/TutorScreen.tsx';
+import LabScreen from './screens/LabScreen.tsx';
 
-// 重页面懒加载：进课程才下载 Blockly（776KB），进实验室才下载摄像头识别模块——
-// 地图/首页首屏显著变快，平板上尤其明显
+// 重页面懒加载：进练习才下载 Blockly（776KB），进实验室才下载摄像头识别模块——
+// 首页/辅导页首屏显著变快，平板上尤其明显
 const WorkshopScreen = lazy(() => import('./screens/WorkshopScreen.tsx'));
 const PlaygroundScreen = lazy(() => import('./screens/PlaygroundScreen.tsx'));
 const WrongBookScreen = lazy(() => import('./screens/WrongBookScreen.tsx'));
 const MentalMathScreen = lazy(() => import('./screens/MentalMathScreen.tsx'));
 
-function LessonRoute() {
+/** 旧书签 /lesson/:id 重定向到辅导页（学习主入口） */
+function LegacyLessonRoute() {
+  const { id } = useParams();
+  return <Navigate to={`/tutor/${id ?? ''}`} replace />;
+}
+
+function PracticeRoute() {
   const { id } = useParams();
   if (!id) return <Navigate to="/map" replace />;
   return <WorkshopScreen mode={{ kind: 'lesson', lessonId: id }} />;
@@ -23,8 +31,8 @@ function LessonRoute() {
 function Loading() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-3 bg-slate-50">
-      <div className="text-5xl animate-bounce">🏝</div>
-      <div className="text-sm font-bold text-slate-400">马上就好，正在打开工具箱…</div>
+      <div className="text-5xl animate-bounce">📖</div>
+      <div className="text-sm font-bold text-slate-400">马上就好，正在打开这一课…</div>
     </div>
   );
 }
@@ -36,11 +44,14 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomeScreen />} />
           <Route path="/map" element={<MapScreen />} />
-          <Route path="/lesson/:id" element={<LessonRoute />} />
+          <Route path="/tutor/:id" element={<TutorScreen />} />
+          <Route path="/lab/:id" element={<LabScreen />} />
+          <Route path="/lesson/:id" element={<LegacyLessonRoute />} />
+          <Route path="/practice/:id" element={<PracticeRoute />} />
+          <Route path="/ask" element={<AskScreen />} />
           <Route path="/freeplay" element={<WorkshopScreen mode={{ kind: 'freeplay' }} />} />
           <Route path="/gallery" element={<GalleryScreen />} />
           <Route path="/parent" element={<ParentScreen />} />
-          <Route path="/certificate" element={<CertificateScreen />} />
           <Route path="/wrongbook" element={<WrongBookScreen />} />
           <Route path="/mentalmath" element={<MentalMathScreen />} />
           <Route path="/playground" element={<PlaygroundScreen />} />

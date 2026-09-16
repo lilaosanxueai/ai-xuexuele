@@ -86,10 +86,11 @@
   ],
   "curriculum": {
     "stage": "高中·物理（衔接课）",
-    "module": "身边的算法",
+    "module": "运动和相互作用",
     "points": [
-      "周期现象的程序表达",
-      "参数对波形的影响"
+      "简谐运动 x=A·sin(ωt)",
+      "振幅与周期",
+      "振动图像与正弦函数"
     ]
   },
   "subject": {
@@ -141,5 +142,33 @@
     }
   ],
   "textbook": "人教版物理选择性必修第一册",
-  "grade": 11
+  "grade": 11,
+  "lab": {
+    "params": [
+      {
+        "name": "A",
+        "label": "振幅 A",
+        "min": 20,
+        "max": 120,
+        "step": 10,
+        "value": 80
+      },
+      {
+        "name": "w",
+        "label": "角速度 ω",
+        "min": 10,
+        "max": 90,
+        "step": 5,
+        "value": 36,
+        "unit": " °/s"
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "振幅 A 变大，波的什么变了？",
+      "角速度 ω 变大，波变密集还是稀疏？这叫周期变短",
+      "数一数：波从最高点到下一次最高点走了多少秒？"
+    ],
+    "code": "# 简谐运动探索台：x = A·sin(ωt)\nA = 80   # 振幅\nw = 36   # 角速度（度/秒）\n\nhide()\npen_color(\"green\")\npen_down()\nt = 0\ngo_to(-200, -40 + A * sin(w * t))\nwhile t < 24.1:\n    x = A * sin(w * t)\n    go_to(-200 + t * 16, x)\n    t = t + 0.25\npen_up()\nwrite(\"A=\" + A + \"  ω=\" + w + \"°/s\", -185, 145, \"green\", 13)\nwrite(\"横轴=时间，纵轴=偏离中心的距离\", -185, -140, \"blue\", 11)"
+  }
 }

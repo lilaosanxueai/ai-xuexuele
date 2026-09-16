@@ -62,9 +62,10 @@
   ],
   "curriculum": {
     "stage": "第四学段（7-9年级）",
-    "module": "身边的算法",
+    "module": "数与代数",
     "points": [
-      "表达式参数化"
+      "二次函数图像",
+      "系数与开口"
     ]
   },
   "subject": {
@@ -124,5 +125,24 @@
     }
   ],
   "textbook": "人教版数学九年级上册",
-  "grade": 9
+  "grade": 9,
+  "lab": {
+    "params": [
+      {
+        "name": "a",
+        "label": "开口系数 a",
+        "min": -3,
+        "max": 3,
+        "step": 0.25,
+        "value": 1
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "a 变大，抛物线开口变宽还是变窄？",
+      "把 a 调成负数，抛物线怎么了？",
+      "a=0.25 和 a=2 哪个更「瘦」？为什么？"
+    ],
+    "code": "# 二次函数 y = a·x² 探索台\na = 1    # 开口系数 a\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-6 * 30, a * -6 * -6 * 8)\nfor x in range(-6, 7):\n    go_to(x * 30, a * x * x * 8)\npen_up()\nwrite(\"y = \" + a + \"x²\", 130, 140, \"blue\", 15)\nif a > 0:\n    write(\"开口向上\", 130, 118, \"green\", 12)\nif a < 0:\n    write(\"开口向下\", 130, 118, \"red\", 12)\nif a == 0:\n    write(\"a=0 时是直线啦\", 130, 118, \"orange\", 12)"
+  }
 }

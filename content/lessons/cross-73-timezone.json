@@ -86,10 +86,11 @@
   ],
   "curriculum": {
     "stage": "高中·地理（衔接课）",
-    "module": "身边的算法",
+    "module": "地球与地图",
     "points": [
-      "取模与跨日边界处理",
-      "条件判断的实际应用"
+      "时区划分与区时计算",
+      "东西时差与日界线",
+      "跨日边界处理"
     ]
   },
   "subject": {
@@ -141,5 +142,25 @@
     }
   ],
   "textbook": "人教版地理七年级上册",
-  "grade": 7
+  "grade": 7,
+  "lab": {
+    "params": [
+      {
+        "name": "beijing_hour",
+        "label": "北京时间",
+        "min": 0,
+        "max": 23,
+        "step": 1,
+        "value": 20,
+        "unit": " 点"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "北京 20 点时伦敦几点？为什么差 8 小时？",
+      "把时间拖到北京 0 点，纽约还是「昨天」吗？",
+      "往东走时间越来越早还是越晚？"
+    ],
+    "code": "# 环球时钟探索台：拨动北京时间，看世界时间\nbeijing_hour = 20   # 北京时间（点）\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-200, 0)\ngo_to(200, 0)\npen_up()\nwrite(\"0\", -200, 18, \"blue\", 9)\nwrite(\"6\", -105, 18, \"blue\", 9)\nwrite(\"12\", -5, 18, \"blue\", 9)\nwrite(\"18\", 90, 18, \"blue\", 9)\nwrite(\"24\", 192, 18, \"blue\", 9)\njet = beijing_hour - 8\nLondon = jet\nif London < 0:\n    London = London + 24\nNewYork = jet - 5\nif NewYork < 0:\n    NewYork = NewYork + 24\nTokyo = beijing_hour + 1\nif Tokyo > 23:\n    Tokyo = Tokyo - 24\nSydney = beijing_hour + 2\nif Sydney > 23:\n    Sydney = Sydney - 24\nwrite(\"北京 \" + beijing_hour + \" 点\", beijing_hour * 16.5 - 200, -15, \"red\", 11)\nwrite(\"伦敦 \" + London + \" 点\", London * 16.5 - 200, 40, \"blue\", 11)\nwrite(\"纽约 \" + NewYork + \" 点\", NewYork * 16.5 - 200, 65, \"blue\", 11)\nwrite(\"东京 \" + Tokyo + \" 点\", Tokyo * 16.5 - 200, 90, \"blue\", 11)\nwrite(\"悉尼 \" + Sydney + \" 点\", Sydney * 16.5 - 200, 115, \"blue\", 11)\nwrite(\"时间轴（0-24 点）\", -60, -60, \"blue\", 12)"
+  }
 }

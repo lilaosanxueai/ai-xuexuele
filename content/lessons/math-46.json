@@ -61,9 +61,10 @@
   ],
   "curriculum": {
     "stage": "高中·三角函数（衔接课）",
-    "module": "过程与控制",
+    "module": "数与代数",
     "points": [
-      "多函数同图叠加"
+      "理解相位与相位差",
+      "认识 sin/cos 的关系"
     ]
   },
   "subject": {
