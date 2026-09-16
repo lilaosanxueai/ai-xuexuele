@@ -133,10 +133,10 @@
     ],
     "grid": true,
     "explore": [
-      "g 越大（重力越强），小球下落越快还是越慢？曲线呢？",
-      "月亮上 g 只有 1.6，把 g 调到最小看看轨迹",
-      "曲线是直线还是越来越陡？这说明下落是「越来越快」吗？"
+      "轨迹越陡=下落越快，g 控制陡峭程度",
+      "把 g 调到 1.6（月亮），轨迹变得怎么样？",
+      "小球（具象）停在轨迹末端——它此刻的速度最大"
     ],
-    "code": "# 自由落体探索台：h = 150 - ½gt²\ng = 10   # 重力加速度（不同星球不一样！）\n\nhide()\npen_color(\"blue\")\npen_down()\nt = 0\ngo_to(-200, 150)\nwhile t < 5.51:\n    h = 150 - 0.5 * g * t * t\n    if h < -150:\n        h = -150\n    go_to(-200 + t * 70, h)\n    t = t + 0.25\npen_up()\nwrite(\"g=\" + g + \" 时 1 秒末速度 = \" + g + \" m/s\", -180, -130, \"blue\", 12)\nwrite(\"下落轨迹（越陡=越快）\", -180, 140, \"blue\", 12)"
+    "code": "# 自由落体·双视图：轨迹线 + 末端小球\ng = 10   # 重力加速度\n\nhide()\npen_color(\"blue\")\npen_down()\ntt = 0\nlastX = -200\nlastY = 130\nwhile tt < 5.01:\n    h = 130 - 0.5 * g * tt * tt\n    if h < -140:\n        h = -140\n    lastX = -200 + tt * 70\n    lastY = h\n    go_to(lastX, lastY)\n    tt = tt + 0.2\npen_up()\ncostume(\"⚽\")\nshow()\ngo_to(lastX, lastY)\nwrite(\"g=\" + g + \"：1秒末速度 \" + g + \" m/s\", -180, -125, \"red\", 12)\nwrite(\"⚽ 的位置=此刻下落位置（速度最大）\", -180, 145, \"blue\", 10)"
   }
 }

@@ -139,5 +139,33 @@
     }
   ],
   "codeLesson": false,
-  "textbook": "冀人版科学（小学）"
+  "textbook": "冀人版科学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "surface",
+        "label": "表面类型",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1,
+        "unit": "（1冰2木3毯）"
+      },
+      {
+        "name": "v0",
+        "label": "初速度",
+        "min": 5,
+        "max": 30,
+        "step": 1,
+        "value": 20
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "同一初速度，三种表面上小车滑多远？",
+      "摩擦越大滑得越？",
+      "冰面上为什么难刹车？"
+    ],
+    "code": "# 摩擦力大比拼探索台\nsurface = 1   # 1=冰面 2=木地板 3=毛毯\nv0 = 20       # 初速度\n\nhide()\nd = v0 * 7 / surface\ny = 50 - (surface - 1) * 55\npen_color(\"blue\")\npen_down()\ngo_to(-190, y - 30)\ngo_to(190, y - 30)\npen_up()\ncol = \"blue\"\nif surface == 1:\n    col = \"blue\"\nif surface == 2:\n    col = \"green\"\nif surface == 3:\n    col = \"red\"\npen_color(col)\npen_down()\ngo_to(-180, y)\ngo_to(-180 + d, y)\npen_up()\nwrite(\"🚗\", -190, y, \"red\", 16)\nsname = \"冰面（摩擦小）\"\nif surface == 2:\n    sname = \"木地板（摩擦中）\"\nif surface == 3:\n    sname = \"毛毯（摩擦大）\"\nwrite(sname + \"：滑 \" + d + \" 格\", -190, 140, \"red\", 12)\nwrite(\"初速度 \" + v0, -190, 112, \"blue\", 11)"
+  }
 }

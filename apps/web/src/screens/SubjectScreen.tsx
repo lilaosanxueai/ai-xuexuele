@@ -9,8 +9,8 @@ import { SUBJECTS, SUBJECT_STYLE } from '../components/subjectMeta.ts';
 /** 学科页：该学科按学段分组的全部课程，含课标标注。理科动态演示课进互动实验室，其余进辅导页 */
 const BAND_ORDER = ['primary', 'junior', 'senior'] as const;
 const BAND_LABEL: Record<string, string> = { primary: '小学', junior: '初中', senior: '高中衔接' };
-/** 理科五科（先做内容动态化 + 动态互动） */
-const LAB_SUBJECTS = new Set(['数学', '物理', '化学', '生物', '地理']);
+/** 理科五科 + 科学（内容动态化 + 动态互动先行） */
+const LAB_SUBJECTS = new Set(['数学', '物理', '化学', '生物', '地理', '科学']);
 const isLabLesson = (l: Lesson) => LAB_SUBJECTS.has(l.subjectArea ?? '') && !!(l.lab || l.starterCode);
 
 export default function SubjectScreen() {

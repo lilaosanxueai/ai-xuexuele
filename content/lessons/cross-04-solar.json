@@ -146,5 +146,25 @@
       "explain": "公转周期=绕日一圈；地球约 365 天"
     }
   ],
-  "textbook": "冀人版科学（小学）"
+  "textbook": "冀人版科学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "planet",
+        "label": "行星编号",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "value": 3,
+        "unit": "（1水2金3地4火5木）"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "离太阳越近的行星，绕一圈越快还是越慢？",
+      "地球是第几条轨道？一年绕一圈",
+      "为什么水星「跑得最快」？"
+    ],
+    "code": "# 太阳系运转探索台\nplanet = 3   # 行星编号\n\nhide()\ni = 1\nwhile i < 6:\n    r = 25 + i * 22\n    pen_color(\"blue\")\n    if i == planet:\n        pen_color(\"red\")\n    pen_down()\n    a = 0\n    go_to(r, 0)\n    while a < 360.1:\n        go_to(r * cos(a), r * sin(a))\n        a = a + 15\n    pen_up()\n    i = i + 1\nwrite(\"☀ 太阳\", -24, 8, \"orange\", 13)\nr2 = 25 + planet * 22\nx = r2 * cos(60)\ny = r2 * sin(60)\npen_color(\"green\")\npen_down()\ngo_to(x - 5, y + 5)\ngo_to(x + 5, y + 5)\ngo_to(x + 5, y - 5)\ngo_to(x - 5, y - 5)\ngo_to(x - 5, y + 5)\npen_up()\nname = \"地球\"\nif planet == 1:\n    name = \"水星（88天绕一圈）\"\nif planet == 2:\n    name = \"金星（225天）\"\nif planet == 4:\n    name = \"火星（687天）\"\nif planet == 5:\n    name = \"木星（12年！）\"\nwrite(\"选中：\" + name, -190, 145, \"red\", 12)\nwrite(\"越近越快，越远越慢\", -190, -150, \"orange\", 10)"
+  }
 }

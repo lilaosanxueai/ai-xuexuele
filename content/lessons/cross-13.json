@@ -168,6 +168,14 @@
       "为什么顶级捕食者最少？",
       "鹰要长 1 公斤，大约需要多少公斤草？"
     ],
-    "code": "# 食物链能量金字塔探索台\nchain = 3   # 食物链级数\n\nhide()\nnames = \"草→兔→狐→鹰→虎\"\nenergy = 10000\ni = 0\nwhile i < chain:\n    w = energy / 100\n    if w < 12:\n        w = 12\n    x = 160 - i * 55\n    y = -90 + i * 55\n    pen_color(\"green\")\n    if i > 0:\n        pen_color(\"orange\")\n    if i > 2:\n        pen_color(\"red\")\n    pen_down()\n    go_to(x - w / 2, y)\n    go_to(x + w / 2, y)\n    go_to(x + w / 2 - 8, y + 42)\n    go_to(x - w / 2 + 8, y + 42)\n    go_to(x - w / 2, y)\n    pen_up()\n    energy = energy / 10\n    i = i + 1\nwrite(names, -190, 140, \"blue\", 12)\nwrite(\"每级只传 10% 能量\", -190, 112, \"red\", 12)\nif chain >= 4:\n    write(\"顶级捕食者能量极少→数量最少\", -190, 85, \"orange\", 11)"
+    "code": "# 食物链能量金字塔探索台\nchain = 3   # 食物链级数\n\nhide()\nnames = \"草→兔→狐→鹰→虎\"\nenergy = 10000\ni = 0\nwhile i < chain:\n    w = energy / 100\n    if w < 12:\n        w = 12\n    x = 160 - i * 55\n    y = -90 + i * 55\n    pen_color(\"green\")\n    if i > 0:\n        pen_color(\"orange\")\n    if i > 2:\n        pen_color(\"red\")\n    pen_down()\n    go_to(x - w / 2, y)\n    go_to(x + w / 2, y)\n    go_to(x + w / 2 - 8, y + 42)\n    go_to(x - w / 2 + 8, y + 42)\n    go_to(x - w / 2, y)\n    pen_up()\n    energy = energy / 10\n    i = i + 1\nwrite(names, -190, 140, \"blue\", 12)\nwrite(\"每级只传 10% 能量\", -190, 112, \"red\", 12)\nif chain >= 4:\n    write(\"顶级捕食者能量极少→数量最少\", -190, 85, \"orange\", 11)",
+    "challenges": [
+      {
+        "text": "搭出 5 级食物链（草→…→虎）",
+        "params": {
+          "chain": 5
+        }
+      }
+    ]
   }
 }

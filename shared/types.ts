@@ -101,6 +101,16 @@ export interface LabDef {
   explore?: string[];
   /** 演示代码（缺省用 starterCode） */
   code?: string;
+  /** 滑块变化时图形补间变形，连续过渡（默认开；掷骰/抽样等随机类课设 false 防闪烁） */
+  animate?: boolean;
+  /** 实验挑战：把参数调到目标值即达成（目标值须为 step 的整数倍） */
+  challenges?: LabChallenge[];
+}
+
+export interface LabChallenge {
+  text: string;
+  /** 目标参数值（可同时约束多个） */
+  params: Record<string, number>;
 }
 
 export interface LabParam {
@@ -244,6 +254,8 @@ export interface ChatContext {
   lessonStory?: string;
   /** lab 模式：当前参数值文本（如「a=10（加速度）、v0=0（初速度）」） */
   labParams?: string;
+  /** lab 模式：孩子最近的参数操作描述（AI 观察员用，如「把加速度从10调到20」） */
+  labOps?: string;
 }
 
 export interface BuddySettings {

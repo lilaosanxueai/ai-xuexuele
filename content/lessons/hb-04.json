@@ -152,5 +152,24 @@
       "answer": 2,
       "explain": "壤土既保水又透气还肥沃，最适合作物生长"
     }
-  ]
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "water",
+        "label": "含水量",
+        "min": 0,
+        "max": 3,
+        "step": 0.5,
+        "value": 1.5
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "砂土、黏土、壤土摸起来有什么不同？",
+      "含水量很高时，土壤变成什么样？",
+      "哪种土最适合种菜？"
+    ],
+    "code": "# 土壤小侦探探索台\nwater = 1.5   # 含水量\n\nhide()\nsand = 100 - water * 20\npen_color(\"orange\")\npen_down()\ngo_to(-170, -80)\ngo_to(-170, -80 + sand)\ngo_to(-110, -80 + sand)\ngo_to(-110, -80)\ngo_to(-170, -80)\npen_up()\nwrite(\"砂粒 \" + (60 - water * 10), -158, -100, \"orange\", 9)\npen_color(\"red\")\npen_down()\ngo_to(-100, -80)\ngo_to(-100, -80 + 20 + water * 10)\ngo_to(-40, -80 + 20 + water * 10)\ngo_to(-40, -80)\ngo_to(-100, -80)\npen_up()\nwrite(\"黏粒 \" + 20, -85, -100, \"red\", 9)\npen_color(\"blue\")\npen_down()\nh2 = water * 25\nif h2 > 75:\n    h2 = 75\ngo_to(-30, -80)\ngo_to(-30, -80 + h2)\ngo_to(30, -80 + h2)\ngo_to(30, -80)\ngo_to(-30, -80)\npen_up()\nwrite(\"水 \" + water, -18, -100, \"blue\", 9)\ntype = \"壤土（最好种菜！）\"\nif water > 2.5:\n    type = \"太湿成泥了！\"\nif water < 0.5:\n    type = \"太干，植物喝不到水\"\nwrite(\"含水量 \" + water + \" → \" + type, -190, 140, \"red\", 12)\nwrite(\"砂+黏+水+腐殖质=土壤\", -190, 112, \"green\", 10)"
+  }
 }

@@ -153,5 +153,24 @@
       "explain": "轨道与列车磁极同名相斥，斥力托起车身消除摩擦"
     }
   ],
-  "textbook": "冀人版科学（小学）"
+  "textbook": "冀人版科学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "power",
+        "label": "磁力强度",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "value": 3
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "磁力越大，能把回形针从多远吸过来？",
+      "距离多远就吸不动了？",
+      "磁铁隔着纸还能吸吗？（回家试试）"
+    ],
+    "code": "# 磁铁的力量探索台\npower = 3   # 磁力强度\n\nhide()\npen_color(\"red\")\npen_down()\ngo_to(-140, 0)\ngo_to(-100, 0)\ngo_to(-100, 20)\ngo_to(-140, 20)\ngo_to(-140, 0)\npen_up()\nwrite(\"N\", -126, 8, \"blue\", 11)\npen_color(\"blue\")\npen_down()\ngo_to(-100, 0)\ngo_to(-60, 0)\ngo_to(-60, 20)\ngo_to(-100, 20)\ngo_to(-100, 0)\npen_up()\nwrite(\"S\", -85, 8, \"blue\", 11)\ndist = 140 - power * 18\npen_color(\"green\")\npen_down()\ngo_to(-60 + 6, 8)\ngo_to(dist, 8)\npen_up()\nwrite(\"📎\", dist - 12, 8, \"green\", 16)\nwrite(\"磁力 \" + power + \"：隔 \" + (dist + 60) + \" 格也能吸住！\", -190, 140, \"red\", 12)\nif power > 4:\n    write(\"强磁铁：危险！别靠近电脑和手表\", -190, 112, \"orange\", 10)\nwrite(\"磁力随距离变弱\", -190, -60, \"blue\", 10)"
+  }
 }

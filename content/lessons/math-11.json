@@ -151,6 +151,14 @@
       "周期 T 变小，波变得密集还是稀疏？",
       "一个周期内波形走了多少度（横向距离）？数一数"
     ],
-    "code": "# 正弦波 y = A·sin(360/T · x) 探索台\namp = 60   # 振幅 A\nT = 240    # 周期 T（度）\n\nhide()\npen_color(\"blue\")\npen_down()\nx = -210\ny = amp * sin(360 / T * x)\ngo_to(x, y)\nwhile x < 210:\n    y = amp * sin(360 / T * x)\n    go_to(x, y)\n    x = x + 5\npen_up()\nwrite(\"A=\" + amp + \" T=\" + T, 140, 145, \"blue\", 14)\nwrite(\"最高点 y=\" + amp, 160, amp, \"green\", 11)"
+    "code": "# 正弦波 y = A·sin(360/T · x) 探索台\namp = 60   # 振幅 A\nT = 240    # 周期 T（度）\n\nhide()\npen_color(\"blue\")\npen_down()\nx = -210\ny = amp * sin(360 / T * x)\ngo_to(x, y)\nwhile x < 210:\n    y = amp * sin(360 / T * x)\n    go_to(x, y)\n    x = x + 5\npen_up()\nwrite(\"A=\" + amp + \" T=\" + T, 140, 145, \"blue\", 14)\nwrite(\"最高点 y=\" + amp, 160, amp, \"green\", 11)",
+    "challenges": [
+      {
+        "text": "让振幅达到最大 120",
+        "params": {
+          "amp": 120
+        }
+      }
+    ]
   }
 }

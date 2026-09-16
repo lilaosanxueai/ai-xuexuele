@@ -160,10 +160,10 @@
     ],
     "grid": true,
     "explore": [
-      "路程 = 速度 × 时间，拖滑块验证",
-      "速度翻倍，路程怎么变？时间翻倍呢？",
-      "想 10 秒走 100 米，速度要多少？"
+      "上面是 s-t 折线，下面是小车实际位置——对得上吗？",
+      "速度越大，折线越陡、小车越远？",
+      "路程 = 速度 × 时间，看图验证"
     ],
-    "code": "# 行程实验室：s = v × t\nv = 8   # 速度（米/秒）\nt = 5   # 时间（秒）\n\nhide()\ns = v * t\npen_color(\"blue\")\npen_down()\ngo_to(-190, 0)\ngo_to(-190 + s * 4, 0)\npen_up()\nwrite(\"出发\", -196, 22, \"blue\", 10)\nwrite(\"到达\", -190 + s * 4 - 20, 22, \"red\", 10)\ni = 1\nwhile i <= t:\n    write(\"\" + i, -190 + i * v * 4, -20, \"green\", 9)\n    i = i + 1\nwrite(\"s = \" + v + \" × \" + t + \" = \" + s + \" 米\", -190, 120, \"red\", 14)\nwrite(\"绿点是每秒走到的位置\", -190, 95, \"green\", 10)"
+    "code": "# 行程实验室·双视图：上面画 s-t 图，下面小车跑\nv = 8   # 速度\nt = 5   # 时间\n\nhide()\ns = v * t\npen_color(\"green\")\npen_down()\ni = 0\ngo_to(-180, 10)\nwhile i < t + 0.1:\n    go_to(-180 + i * v * 3.4, 10 + i * v * 1.1)\n    i = i + 0.5\npen_up()\nwrite(\"s-t 图（时间→路程）\", -180, 145, \"green\", 11)\ni = 1\nwhile i < t + 0.5:\n    write(\"\" + i, -180 + i * v * 3.4, 0, \"green\", 8)\n    i = i + 1\npen_color(\"blue\")\npen_down()\ngo_to(-190, -90)\ngo_to(190, -90)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-180, -70)\ngo_to(-180 + s * 3.4, -70)\npen_up()\ncostume(\"🚗\")\nshow()\ngo_to(-180 + s * 3.4 - 14, -82)\nwrite(\"s=\" + v + \"×\" + t + \"=\" + s + \" 米\", -180, -120, \"red\", 13)\nwrite(\"小车停在 \" + s + \" 米处！\", -180, -145, \"blue\", 11)"
   }
 }

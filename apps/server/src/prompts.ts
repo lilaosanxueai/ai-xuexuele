@@ -68,7 +68,9 @@ function contextBlock(ctx: ChatContext): string {
     if (ctx.curriculumModule) lines.push(`课标模块：${ctx.curriculumModule}`);
     if (ctx.curriculumPoints?.length) lines.push(`本课知识点：${ctx.curriculumPoints.join('；')}`);
     if (ctx.labParams) lines.push(`孩子当前的参数设置：${ctx.labParams}`);
+    if (ctx.labOps) lines.push(`孩子最近的操作：${ctx.labOps}`);
     lines.push('【辅导方式】孩子正在拖动参数观察图像/演示的变化。引导他自己观察规律："你觉得 X 变大时 Y 怎么变了？为什么会这样？"——先让他猜，再解释原理；不要直接报结论。孩子说出发现时给予具体肯定，并把发现与课本知识点联系起来。');
+    lines.push('【观察员职责】你能看到孩子的操作记录：如果他在反复试同一个方向（比如一直调大某个参数），点破这个行为本身（"你在系统地做实验，这叫控制变量法！"）；如果他乱调一气，建议他一次只改一个参数再观察。');
   } else if (ctx.screen === 'ask') {
     lines.push('【自由答疑】孩子没有指定课程，可能在问任何学科的问题。先判断题目属于哪个学科、大概哪个年级，按孩子的年龄讲。');
   } else if (ctx.screen === 'lesson' && ctx.lessonTitle) {

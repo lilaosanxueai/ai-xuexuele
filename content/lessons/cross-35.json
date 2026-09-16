@@ -139,5 +139,24 @@
     }
   ],
   "codeLesson": false,
-  "textbook": "冀人版科学（小学）"
+  "textbook": "冀人版科学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "w",
+        "label": "遮挡物宽度",
+        "min": 10,
+        "max": 80,
+        "step": 5,
+        "value": 30
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "遮挡物越宽，影子越大还是越小？",
+      "想让影子正好挡住整个门，要调多宽？",
+      "影子和物体的形状有什么关系？"
+    ],
+    "code": "# 光与影探索台\nw = 30   # 遮挡物宽度\n\nhide()\nwrite(\"💡\", -12, 110, \"orange\", 16)\npen_color(\"green\")\npen_down()\ngo_to(0 - w / 2, 30)\ngo_to(w / 2, 30)\ngo_to(w / 2, 55)\ngo_to(0 - w / 2, 55)\ngo_to(0 - w / 2, 30)\npen_up()\nsw = w * 2.2\npen_color(\"blue\")\npen_down()\ngo_to(0 - sw / 2, -80)\ngo_to(sw / 2, -80)\ngo_to(sw / 2, -100)\ngo_to(0 - sw / 2, -100)\ngo_to(0 - sw / 2, -80)\npen_up()\nwrite(\"物体宽 \" + w + \"，影子宽 \" + sw, -190, 140, \"red\", 12)\nwrite(\"离光越近，影子越大（放大的自己）\", -190, 112, \"blue\", 10)\npen_color(\"yellow\")\npen_down()\ngo_to(-w / 2, 105)\ngo_to(0 - sw / 2, -78)\npen_up()\npen_down()\ngo_to(w / 2, 105)\ngo_to(sw / 2, -78)\npen_up()"
+  }
 }

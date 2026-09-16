@@ -79,11 +79,39 @@ export default function LabScreen() {
   const [quizDone, setQuizDone] = useState(false);
   const [explored, setExplored] = useState<Record<number, boolean>>({});
   const [toast, setToast] = useState<string | null>(null);
+  const [challengeDone, setChallengeDone] = useState<Record<number, boolean>>({});
 
   const stageRef = useRef(new StageState());
   const runnerRef = useRef<PyRunner | null>(null);
   const buddyRef = useRef<BuddyHandle>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  /** 补间动画：当前插值中的参数值（重绘用），滑块显示值是目标值 */
+  const tweenValsRef = useRef<Record<string, number> | null>(null);
+  const tweenRafRef = useRef(0);
+  /** AI 观察员：最近的参数操作记录（name/label/from/to） */
+  const opsRef = useRef<{ name: string; label: string; from: number; to: number }[]>([]);
+  const opsCountRef = useRef(0);
+  const guidedRef = useRef(false);
+  const valuesRef = useRef(values);
+  valuesRef.current = values;
+
+  /** 实验挑战达成检测：参数到位（浮点容差）即亮 */
+  useEffect(() => {
+    const chs = lesson?.lab?.challenges;
+    if (!chs?.length) return;
+    chs.forEach((ch, i) => {
+      if (challengeDone[i]) return;
+      const hit = Object.entries(ch.params).every(
+        ([k, target]) => Math.abs((values[k] ?? NaN) - target) < 1e-9,
+      );
+      if (hit) {
+        setChallengeDone((prev) => ({ ...prev, [i]: true }));
+        setToast(`🎯 挑战达成：${ch.text}`);
+        buddyRef.current?.sayLocal(`🎯 挑战达成！「${ch.text}」——你用实验做到了，把这个道理想给爸妈听一遍，会更牢固。`);
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values, lesson]);
 
   // 参数定义：lab.params 优先，否则自动提取
   const baseCode = useMemo(() => lesson?.lab?.code ?? lesson?.starterCode ?? '', [lesson]);
@@ -103,7 +131,11 @@ export default function LabScreen() {
       setLesson(l);
       setValues(Object.fromEntries((l.lab?.params ?? autoParams(l.lab?.code ?? l.starterCode ?? '')).map((p) => [p.name, p.value])));
     }).catch(() => nav('/map'));
-    return () => { runnerRef.current?.stop(); setRunSpeed('normal'); };
+    return () => {
+      runnerRef.current?.stop();
+      cancelAnimationFrame(tweenRafRef.current);
+      setRunSpeed('normal');
+    };
   }, [id, profile, nav]);
 
   /** 跑一遍演示：清舞台 → 注入参数 → 解析运行。speed='instant' 用于滑块实时重绘 */
@@ -135,14 +167,58 @@ export default function LabScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lesson, baseCode]);
 
-  /** 滑块变动：防抖 80ms 瞬时重绘 */
+  /**
+   * 滑块变动：记录操作（AI 观察员用）→ 目标值立即生效于滑块显示；
+   * 图形用补间动画连续变形（随机类课直接跳变防闪烁）。拖动中防抖 120ms。
+   */
   const onParamChange = (name: string, v: number) => {
-    setValues((prev) => {
-      const next = { ...prev, [name]: v };
-      clearTimeout(debounceRef.current);
-      debounceRef.current = setTimeout(() => runLab(baseCode, next, 'instant'), 80);
-      return next;
-    });
+    const p = params.find((x) => x.name === name);
+    const from = values[name] ?? v;
+    setValues((prev) => ({ ...prev, [name]: v }));
+    // 记录操作（合并同一参数的连续拖动）
+    const ops = opsRef.current;
+    const last = ops[ops.length - 1];
+    if (last && last.name === name) {
+      last.to = v;
+    } else {
+      ops.push({ name, label: p?.label ?? name, from, to: v });
+      if (ops.length > 6) ops.shift();
+    }
+    opsCountRef.current++;
+    clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      // AI 观察员：探索满 5 次且未引导过 → 伙伴主动开口（本地零成本）
+      if (opsCountRef.current >= 5 && !guidedRef.current) {
+        guidedRef.current = true;
+        buddyRef.current?.sayLocal('👀 我注意到你已经调了好几组参数——发现什么规律了吗？说出来或点 💬 问我，我帮你把发现变成结论！');
+      }
+      const animate = lesson?.lab?.animate !== false;
+      if (!animate) {
+        tweenValsRef.current = null;
+        runLab(baseCode, { ...valuesRef.current }, 'instant');
+        return;
+      }
+      // 补间：从当前插值（或上一目标）平滑过渡到新目标
+      const startVals: Record<string, number> = { ...(tweenValsRef.current ?? valuesRef.current) };
+      const targetVals: Record<string, number> = { ...valuesRef.current };
+      const startT = performance.now();
+      cancelAnimationFrame(tweenRafRef.current);
+      const DURATION = 320;
+      const step = () => {
+        const t = Math.min(1, (performance.now() - startT) / DURATION);
+        const ease = 1 - Math.pow(1 - t, 3);
+        const cur: Record<string, number> = {};
+        for (const k of Object.keys(targetVals)) {
+          const a = startVals[k] ?? targetVals[k];
+          cur[k] = a + (targetVals[k] - a) * ease;
+        }
+        tweenValsRef.current = cur;
+        runLab(baseCode, cur, 'instant');
+        if (t < 1) tweenRafRef.current = requestAnimationFrame(step);
+        else tweenValsRef.current = null;
+      };
+      tweenRafRef.current = requestAnimationFrame(step);
+    }, 120);
   };
 
   useEffect(() => {
@@ -168,6 +244,7 @@ export default function LabScreen() {
     grade: lesson.grade,
     subjectArea: lesson.subjectArea,
     labParams: params.map((p) => `${p.label}=${values[p.name]}${p.unit ?? ''}`).join('、'),
+    labOps: opsRef.current.map((o) => `把${o.label}从${Math.round(o.from * 100) / 100}调到${Math.round(o.to * 100) / 100}`).join('；'),
   });
 
   return (
@@ -258,6 +335,25 @@ export default function LabScreen() {
               </p>
             )}
           </div>
+          {(lesson.lab?.challenges?.length ?? 0) > 0 && (
+            <div className="rounded-2xl bg-white p-3 shadow-sm">
+              <div className="mb-2 text-sm font-black text-slate-700">🎯 实验挑战</div>
+              <ul className="space-y-2">
+                {lesson.lab!.challenges!.map((ch, i) => (
+                  <li
+                    key={i}
+                    className={`flex items-start gap-2 rounded-xl border p-2 text-[13px] leading-snug transition ${
+                      challengeDone[i] ? 'border-amber-400 bg-amber-50' : 'border-dashed border-slate-300 bg-white'
+                    }`}
+                  >
+                    <span className={`mt-0.5 shrink-0 ${challengeDone[i] ? '' : 'opacity-40'}`}>{challengeDone[i] ? '🏅' : '🎯'}</span>
+                    <span className={challengeDone[i] ? 'font-bold text-amber-700' : 'text-slate-600'}>{ch.text}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-2 text-[11px] text-slate-400">把参数调到要求的样子，达成会自己亮</p>
+            </div>
+          )}
         </aside>
 
         {/* 右：舞台（实时重绘） */}

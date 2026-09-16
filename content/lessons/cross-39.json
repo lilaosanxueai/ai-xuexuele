@@ -139,5 +139,24 @@
     }
   ],
   "codeLesson": false,
-  "textbook": "冀人版科学（小学）"
+  "textbook": "冀人版科学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "food",
+        "label": "食物编号",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "米饭面条主要提供哪类营养？",
+      "肉蛋奶呢？蔬果呢？",
+      "一顿饭要「彩虹搭配」才均衡！"
+    ],
+    "code": "# 营养家族分类探索台\nfood = 1   # 食物编号\n\nhide()\nname = \"\"\nnutri = \"\"\ngroup = \"\"\nif food == 1:\n    name = \"🍚 米饭面条\"\n    nutri = \"碳水化合物\"\n    group = \"供能主力\"\nif food == 2:\n    name = \"🥩 肉蛋奶豆\"\n    nutri = \"蛋白质\"\n    group = \"长身体修组织\"\nif food == 3:\n    name = \"🥑 坚果植物油\"\n    nutri = \"脂肪\"\n    group = \"储备能量\"\nif food == 4:\n    name = \"🥬 蔬菜水果\"\n    nutri = \"维生素+矿物质\"\n    group = \"身体调节剂\"\nif food == 5:\n    name = \"🍞 全谷物\"\n    nutri = \"膳食纤维\"\n    group = \"肠道清道夫\"\nif food == 6:\n    name = \"💧 水\"\n    nutri = \"不是营养但最重要\"\n    group = \"占体重 60%\"\nwrite(name, -150, 110, \"red\", 15)\nwrite(\"营养：\" + nutri, -150, 60, \"blue\", 13)\nwrite(\"作用：\" + group, -150, 15, \"green\", 12)\nwrite(\"六大营养素都要吃，偏食会长不高！\", -150, -60, \"orange\", 11)"
+  }
 }

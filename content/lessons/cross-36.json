@@ -138,5 +138,25 @@
     }
   ],
   "codeLesson": false,
-  "textbook": "冀人版科学（小学）"
+  "textbook": "冀人版科学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "mode",
+        "label": "磁极组合",
+        "min": 1,
+        "max": 2,
+        "step": 1,
+        "value": 1,
+        "unit": "（1异2同）"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "异极相吸——两块磁铁会怎么样？",
+      "换成同极呢？试试看！",
+      "指南针为什么总指南北？"
+    ],
+    "code": "# 磁极的奥秘探索台\nmode = 1   # 1=异极相对 2=同极相对\n\nhide()\ngap = 90\nif mode == 2:\n    gap = 150\nl1 = \"N\"\nr1 = \"S\"\nif mode == 2:\n    r1 = \"N\"\npen_color(\"red\")\npen_down()\ngo_to(-gap - 40, -15)\ngo_to(-gap, -15)\ngo_to(-gap, 15)\ngo_to(-gap - 40, 15)\ngo_to(-gap - 40, -15)\npen_up()\nwrite(l1, -gap - 28, 0, \"blue\", 12)\npen_color(\"blue\")\npen_down()\ngo_to(-gap, -15)\ngo_to(-gap + 40, -15)\ngo_to(-gap + 40, 15)\ngo_to(-gap, 15)\ngo_to(-gap, -15)\npen_up()\nwrite(\"S\", -gap + 12, 0, \"blue\", 12)\npen_color(\"blue\")\npen_down()\ngo_to(gap - 40, -15)\ngo_to(gap, -15)\ngo_to(gap, 15)\ngo_to(gap - 40, 15)\ngo_to(gap - 40, -15)\npen_up()\nwrite(r1, gap - 28, 0, \"blue\", 12)\npen_color(\"red\")\npen_down()\ngo_to(gap, -15)\ngo_to(gap + 40, -15)\ngo_to(gap + 40, 15)\ngo_to(gap, 15)\ngo_to(gap, -15)\npen_up()\nwrite(\"S\", gap + 12, 0, \"blue\", 12)\nif mode == 1:\n    pen_color(\"green\")\n    pen_down()\n    go_to(-gap + 44, 30)\n    go_to(gap - 44, 30)\n    pen_up()\n    write(\"←相互吸引→\", -45, 42, \"green\", 11)\n    write(\"异极相吸！\", -190, 140, \"green\", 13)\nif mode == 2:\n    pen_color(\"orange\")\n    pen_down()\n    go_to(-gap + 44, 30)\n    go_to(-gap + 60, 38)\n    pen_up()\n    go_to(-gap + 44, 30)\n    pen_down()\n    go_to(-gap + 60, 22)\n    pen_up()\n    go_to(gap - 44, 30)\n    pen_down()\n    go_to(gap - 60, 38)\n    pen_up()\n    go_to(gap - 44, 30)\n    pen_down()\n    go_to(gap - 60, 22)\n    pen_up()\n    write(\"同极相斥！\", -190, 140, \"red\", 13)"
+  }
 }

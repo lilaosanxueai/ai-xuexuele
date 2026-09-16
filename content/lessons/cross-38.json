@@ -141,5 +141,25 @@
     }
   ],
   "codeLesson": false,
-  "textbook": "冀人版科学（小学）"
+  "textbook": "冀人版科学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "temp",
+        "label": "气温",
+        "min": -10,
+        "max": 40,
+        "step": 1,
+        "value": 25,
+        "unit": " ℃"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "气温低于 0℃，会发生什么天气？",
+      "30℃ 以上是什么感觉？",
+      "今天的气温是多少？你来播报！"
+    ],
+    "code": "# 天气播报探索台（气温版）\ntemp = 25   # 气温\n\nhide()\nh = temp + 10\nif h > 100:\n    h = 100\npen_color(\"blue\")\npen_down()\ngo_to(-30, -100)\ngo_to(-30, 80)\ngo_to(-16, 80)\ngo_to(-16, -100)\ngo_to(-30, -100)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-27, -95)\ngo_to(-19, -95)\ngo_to(-19, -95 + h * 1.7)\ngo_to(-27, -95 + h * 1.7)\ngo_to(-27, -95)\npen_up()\nicon = \"☀\"\ndesc = \"温暖舒适\"\nif temp < 0:\n    icon = \"❄\"\n    desc = \"冰点以下，注意保暖防滑\"\nif temp > 33:\n    icon = \"🔥\"\n    desc = \"高温预警，防暑多喝水\"\nif temp > 27:\n    if temp <= 33:\n        icon = \"🌞\"\n        desc = \"比较热，适合游泳\"\nwrite(icon, 60, 40, \"red\", 34)\nwrite(\"气温 \" + temp + \"℃\", -190, 140, \"red\", 14)\nwrite(desc, -190, 105, \"green\", 12)\nwrite(\"水银柱越高温度越高\", -100, -130, \"blue\", 10)"
+  }
 }

@@ -170,6 +170,22 @@
       "把液体换成「盐水」（密度调到 1.2），原来下沉的物体会怎样？",
       "物体浸入水中的比例和两个密度的比值有什么关系？"
     ],
-    "code": "# 浮力与密度探索台：ρ物 vs ρ液 决定沉浮\nrho_obj = 0.6   # 物体密度\nrho_liq = 1     # 液体密度\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-160, 40)\ngo_to(160, 40)\npen_up()\nwrite(\"≈ 水面\", -150, 55, \"blue\", 11)\npen_color(\"red\")\ndepth = 40\nif rho_obj > rho_liq:\n    depth = -20\nif rho_obj == rho_liq:\n    depth = 10\nif rho_obj < rho_liq:\n    part = rho_obj / rho_liq\n    depth = 40 - part * 80\npen_down()\ngo_to(-30, depth + 40)\ngo_to(30, depth + 40)\ngo_to(30, depth - 40)\ngo_to(-30, depth - 40)\ngo_to(-30, depth + 40)\npen_up()\nwrite(\"ρ物=\" + rho_obj + \"  ρ液=\" + rho_liq, -110, 120, \"red\", 13)\nif rho_obj > rho_liq:\n    write(\"下沉：ρ物 > ρ液\", -110, 95, \"orange\", 14)\nif rho_obj < rho_liq:\n    write(\"漂浮：ρ物 < ρ液\", -110, 95, \"green\", 14)\nif rho_obj == rho_liq:\n    write(\"悬浮：ρ物 = ρ液\", -110, 95, \"blue\", 14)\nwrite(\"F浮 = ρ液·g·V = \" + rho_liq * 10 * 100 + \"（单位略）\", -110, -120, \"red\", 12)"
+    "code": "# 浮力与密度探索台：ρ物 vs ρ液 决定沉浮\nrho_obj = 0.6   # 物体密度\nrho_liq = 1     # 液体密度\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-160, 40)\ngo_to(160, 40)\npen_up()\nwrite(\"≈ 水面\", -150, 55, \"blue\", 11)\npen_color(\"red\")\ndepth = 40\nif rho_obj > rho_liq:\n    depth = -20\nif rho_obj == rho_liq:\n    depth = 10\nif rho_obj < rho_liq:\n    part = rho_obj / rho_liq\n    depth = 40 - part * 80\npen_down()\ngo_to(-30, depth + 40)\ngo_to(30, depth + 40)\ngo_to(30, depth - 40)\ngo_to(-30, depth - 40)\ngo_to(-30, depth + 40)\npen_up()\nwrite(\"ρ物=\" + rho_obj + \"  ρ液=\" + rho_liq, -110, 120, \"red\", 13)\nif rho_obj > rho_liq:\n    write(\"下沉：ρ物 > ρ液\", -110, 95, \"orange\", 14)\nif rho_obj < rho_liq:\n    write(\"漂浮：ρ物 < ρ液\", -110, 95, \"green\", 14)\nif rho_obj == rho_liq:\n    write(\"悬浮：ρ物 = ρ液\", -110, 95, \"blue\", 14)\nwrite(\"F浮 = ρ液·g·V = \" + rho_liq * 10 * 100 + \"（单位略）\", -110, -120, \"red\", 12)",
+    "challenges": [
+      {
+        "text": "让木块（密度 0.6）沉底：把液体密度调到 0.5",
+        "params": {
+          "rho_obj": 0.6,
+          "rho_liq": 0.5
+        }
+      },
+      {
+        "text": "悬浮：物体密度=液体密度=1.0",
+        "params": {
+          "rho_obj": 1,
+          "rho_liq": 1
+        }
+      }
+    ]
   }
 }

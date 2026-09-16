@@ -166,10 +166,10 @@
     ],
     "grid": true,
     "explore": [
-      "力 F 变大，加速度 a 怎么变？v-t 线呢？",
-      "质量 m 变大，同样的力推起来更难还是更easy？a 怎么变？",
-      "让 F 和 m 同时翻倍，a 变吗？"
+      "上面的 v-t 线越陡=加速越猛（a=F/m）",
+      "下面小车跑的距离由 a 决定——图和车联动！",
+      "F 和 m 同时翻倍，小车跑得变吗？"
     ],
-    "code": "# 牛顿第二定律 F = m·a 探索台\nF = 20   # 作用力 F（牛）\nm = 4    # 质量 m（千克）\n\nhide()\na = F / m\nwrite(\"F=\" + F + \"N  m=\" + m + \"kg\", -190, 145, \"blue\", 13)\nwrite(\"a = F/m = \" + a + \" m/s²\", -190, 125, \"red\", 14)\npen_color(\"red\")\npen_down()\ngo_to(-200, -130)\nt = 0\nwhile t < 6.01:\n    v = a * t\n    go_to(-200 + t * 60, -130 + v * 10)\n    t = t + 1\npen_up()\nwrite(\"同样 6 秒，速度涨到 \" + a * 6 + \" m/s\", 60, -100, \"red\", 12)"
+    "code": "# 牛顿第二定律·双视图：v-t 图 + 小车位移\nF = 20   # 作用力\nm = 4    # 质量\n\nhide()\na = F / m\nwrite(\"F=\" + F + \"N m=\" + m + \"kg → a=\" + a + \" m/s²\", -190, 145, \"red\", 12)\npen_color(\"red\")\npen_down()\ngo_to(-200, 30)\ntt = 0\nwhile tt < 6.01:\n    go_to(-200 + tt * 60, 30 + a * tt * 8)\n    tt = tt + 1\npen_up()\nwrite(\"v-t 图\", 130, 40, \"red\", 10)\npen_color(\"blue\")\npen_down()\ngo_to(-190, -100)\ngo_to(190, -100)\npen_up()\nd2 = a * 25 * 1.4\nif d2 > 370:\n    d2 = 370\npen_color(\"orange\")\npen_down()\ngo_to(-180, -82)\ngo_to(-180 + d2, -82)\npen_up()\ncostume(\"🚙\")\nshow()\ngo_to(-180 + d2 - 14, -94)\nwrite(\"6 秒小车跑 \" + a * 25 + \" 米\", -180, -125, \"blue\", 11)"
   }
 }

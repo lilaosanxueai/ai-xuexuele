@@ -150,6 +150,22 @@
       "关掉氧气：蜡烛为什么会灭？（盖杯子实验）",
       "灭火的原理就是拆掉三要素之一！"
     ],
-    "code": "# 燃烧三要素探索台\nfuel = 1     # 可燃物\noxygen = 1   # 氧气\nhot = 1      # 达到着火点\n\nhide()\nwrite(\"可燃物 \" + fuel + \"  氧气 \" + oxygen + \"  着火点 \" + hot, -190, 140, \"blue\", 12)\nif fuel == 1:\n    if oxygen == 1:\n        if hot == 1:\n            pen_color(\"red\")\n            pen_down()\n            go_to(0, -60)\n            go_to(-30, 10)\n            go_to(0, 70)\n            go_to(30, 10)\n            go_to(0, -60)\n            pen_up()\n            pen_color(\"orange\")\n            pen_down()\n            go_to(0, -50)\n            go_to(-15, 5)\n            go_to(0, 45)\n            go_to(15, 5)\n            go_to(0, -50)\n            pen_up()\n            write(\"🔥 燃烧！三要素齐了\", -80, 105, \"red\", 14)\nif fuel == 0:\n    write(\"没有可燃物，烧不起来\", -80, 105, \"orange\", 13)\nif oxygen == 0:\n    write(\"隔绝氧气→火灭（盖杯子）\", -80, 105, \"blue\", 13)\nif hot == 0:\n    write(\"没到着火点，点不着\", -80, 105, \"green\", 13)\npen_color(\"blue\")\npen_down()\ngo_to(-40, -60)\ngo_to(40, -60)\ngo_to(40, -75)\ngo_to(-40, -75)\ngo_to(-40, -60)\npen_up()\nwrite(\"蜡烛\", -18, -95, \"blue\", 10)"
+    "code": "# 燃烧三要素探索台\nfuel = 1     # 可燃物\noxygen = 1   # 氧气\nhot = 1      # 达到着火点\n\nhide()\nwrite(\"可燃物 \" + fuel + \"  氧气 \" + oxygen + \"  着火点 \" + hot, -190, 140, \"blue\", 12)\nif fuel == 1:\n    if oxygen == 1:\n        if hot == 1:\n            pen_color(\"red\")\n            pen_down()\n            go_to(0, -60)\n            go_to(-30, 10)\n            go_to(0, 70)\n            go_to(30, 10)\n            go_to(0, -60)\n            pen_up()\n            pen_color(\"orange\")\n            pen_down()\n            go_to(0, -50)\n            go_to(-15, 5)\n            go_to(0, 45)\n            go_to(15, 5)\n            go_to(0, -50)\n            pen_up()\n            write(\"🔥 燃烧！三要素齐了\", -80, 105, \"red\", 14)\nif fuel == 0:\n    write(\"没有可燃物，烧不起来\", -80, 105, \"orange\", 13)\nif oxygen == 0:\n    write(\"隔绝氧气→火灭（盖杯子）\", -80, 105, \"blue\", 13)\nif hot == 0:\n    write(\"没到着火点，点不着\", -80, 105, \"green\", 13)\npen_color(\"blue\")\npen_down()\ngo_to(-40, -60)\ngo_to(40, -60)\ngo_to(40, -75)\ngo_to(-40, -75)\ngo_to(-40, -60)\npen_up()\nwrite(\"蜡烛\", -18, -95, \"blue\", 10)",
+    "challenges": [
+      {
+        "text": "隔绝氧气灭火：把氧气调成 0",
+        "params": {
+          "oxygen": 0
+        }
+      },
+      {
+        "text": "重新点燃：恢复三要素全 1",
+        "params": {
+          "fuel": 1,
+          "oxygen": 1,
+          "hot": 1
+        }
+      }
+    ]
   }
 }

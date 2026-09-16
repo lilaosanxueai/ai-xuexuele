@@ -154,5 +154,24 @@
       "explain": "97.5% 是海水；淡水中大部分封存在冰川和深层地下，可直接用的极少"
     }
   ],
-  "textbook": "冀人版科学（小学）"
+  "textbook": "冀人版科学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "sun",
+        "label": "阳光强度",
+        "min": 0,
+        "max": 3,
+        "step": 0.5,
+        "value": 2
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "太阳越猛，蒸发越快吗？云里攒的水呢？",
+      "没有太阳（0），水循环还转得动吗？",
+      "背一背：蒸发→云→降水→汇流→回到大海"
+    ],
+    "code": "# 水循环探索台\nsun = 2   # 阳光强度\n\nhide()\nwrite(\"☀\", -150, 90, \"orange\", 20)\nevap = sun * 10\npen_color(\"blue\")\npen_down()\ngo_to(-100, 40)\ngo_to(-100, 40 - sun * 10)\npen_up()\nwrite(\"蒸发 \" + evap + \" 份\", -160, 20, \"blue\", 10)\npen_down()\ngo_to(-100, 40 - sun * 10)\ngo_to(-20, 40 - sun * 10)\npen_up()\npen_color(\"green\")\npen_down()\ncloud = 20 + sun * 25\ngo_to(-60, 95)\ngo_to(-20, 95)\ngo_to(-5, 80)\ngo_to(-75, 80)\ngo_to(-60, 95)\npen_up()\nwrite(\"云（攒水 \" + cloud + \"）\", -78, 110, \"green\", 10)\npen_color(\"blue\")\npen_down()\ni = 0\nwhile i < 3:\n    x = -50 + i * 18\n    go_to(x, 78)\n    go_to(x - 4, 66)\n    pen_up()\n    pen_down()\n    i = i + 1\npen_up()\nwrite(\"降水\", -60, 55, \"blue\", 10)\npen_down()\ngo_to(-120, -70)\ngo_to(120, -70)\ngo_to(120, -95)\ngo_to(-120, -95)\ngo_to(-120, -70)\npen_up()\nwrite(\"大海 →（汇流回到起点）\", -115, -85, \"blue\", 10)\nwrite(\"阳光 \" + sun + \"：蒸发 \" + evap + \" 份 → 云变厚 → 雨更多\", -190, 140, \"red\", 11)\nif sun < 0.1:\n    write(\"没有太阳：循环停摆！\", -100, -130, \"orange\", 12)"
+  }
 }

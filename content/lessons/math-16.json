@@ -160,6 +160,16 @@
       "x=(c−b)÷a——移项和系数化 1 的公式",
       "把 c 改大 5，解 x 怎么变？"
     ],
-    "code": "# 一元一次方程探索台：ax + b = c\na = 2   # 系数\nb = 3   # 常数\nc = 11  # 右边\n\nhide()\nx = (c - b) / a\npen_color(\"blue\")\npen_down()\ngo_to(-190, 0)\ngo_to(190, 0)\npen_up()\ngo_to(x * 22, 0)\npen_color(\"red\")\npen_down()\ngo_to(x * 22, 30)\npen_up()\nwrite(\"x=\" + x, x * 22 - 16, 45, \"red\", 14)\nwrite(a + \"x + \" + b + \" = \" + c, -190, 120, \"blue\", 13)\nwrite(\"x = (\" + c + \"−\" + b + \")÷\" + a + \" = \" + x, -190, 90, \"red\", 13)\nwrite(\"验证：\" + a + \"×\" + x + \"+\" + b + \" = \" + (a * x + b), -190, -70, \"green\", 12)"
+    "code": "# 一元一次方程探索台：ax + b = c\na = 2   # 系数\nb = 3   # 常数\nc = 11  # 右边\n\nhide()\nx = (c - b) / a\npen_color(\"blue\")\npen_down()\ngo_to(-190, 0)\ngo_to(190, 0)\npen_up()\ngo_to(x * 22, 0)\npen_color(\"red\")\npen_down()\ngo_to(x * 22, 30)\npen_up()\nwrite(\"x=\" + x, x * 22 - 16, 45, \"red\", 14)\nwrite(a + \"x + \" + b + \" = \" + c, -190, 120, \"blue\", 13)\nwrite(\"x = (\" + c + \"−\" + b + \")÷\" + a + \" = \" + x, -190, 90, \"red\", 13)\nwrite(\"验证：\" + a + \"×\" + x + \"+\" + b + \" = \" + (a * x + b), -190, -70, \"green\", 12)",
+    "challenges": [
+      {
+        "text": "调出方程 2x+3=11 的解 x=4（提示：调 c）",
+        "params": {
+          "a": 2,
+          "b": 3,
+          "c": 11
+        }
+      }
+    ]
   }
 }

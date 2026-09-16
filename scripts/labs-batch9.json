@@ -1,0 +1,243 @@
+{
+  "_说明": "第九批：科学 12 节（积木课原创）+ 双视图示范 3 节（具象角色+抽象图形同屏）+ 挑战/防闪烁补丁。注入：node scripts/inject-labs.mjs labs-batch9.json",
+  "labs": {
+    "cross-04": {
+      "params": [
+        { "name": "planet", "label": "行星编号", "min": 1, "max": 5, "step": 1, "value": 3, "unit": "（1水2金3地4火5木）" }
+      ],
+      "grid": false,
+      "explore": [
+        "离太阳越近的行星，绕一圈越快还是越慢？",
+        "地球是第几条轨道？一年绕一圈",
+        "为什么水星「跑得最快」？"
+      ],
+      "code": "# 太阳系运转探索台\nplanet = 3   # 行星编号\n\nhide()\ni = 1\nwhile i < 6:\n    r = 25 + i * 22\n    pen_color(\"blue\")\n    if i == planet:\n        pen_color(\"red\")\n    pen_down()\n    a = 0\n    go_to(r, 0)\n    while a < 360.1:\n        go_to(r * cos(a), r * sin(a))\n        a = a + 15\n    pen_up()\n    i = i + 1\nwrite(\"☀ 太阳\", -24, 8, \"orange\", 13)\nr2 = 25 + planet * 22\nx = r2 * cos(60)\ny = r2 * sin(60)\npen_color(\"green\")\npen_down()\ngo_to(x - 5, y + 5)\ngo_to(x + 5, y + 5)\ngo_to(x + 5, y - 5)\ngo_to(x - 5, y - 5)\ngo_to(x - 5, y + 5)\npen_up()\nname = \"地球\"\nif planet == 1:\n    name = \"水星（88天绕一圈）\"\nif planet == 2:\n    name = \"金星（225天）\"\nif planet == 4:\n    name = \"火星（687天）\"\nif planet == 5:\n    name = \"木星（12年！）\"\nwrite(\"选中：\" + name, -190, 145, \"red\", 12)\nwrite(\"越近越快，越远越慢\", -190, -150, \"orange\", 10)"
+    },
+    "cross-115": {
+      "params": [
+        { "name": "sun", "label": "阳光强度", "min": 0, "max": 3, "step": 0.5, "value": 2 }
+      ],
+      "grid": false,
+      "explore": [
+        "太阳越猛，蒸发越快吗？云里攒的水呢？",
+        "没有太阳（0），水循环还转得动吗？",
+        "背一背：蒸发→云→降水→汇流→回到大海"
+      ],
+      "code": "# 水循环探索台\nsun = 2   # 阳光强度\n\nhide()\nwrite(\"☀\", -150, 90, \"orange\", 20)\nevap = sun * 10\npen_color(\"blue\")\npen_down()\ngo_to(-100, 40)\ngo_to(-100, 40 - sun * 10)\npen_up()\nwrite(\"蒸发 \" + evap + \" 份\", -160, 20, \"blue\", 10)\npen_down()\ngo_to(-100, 40 - sun * 10)\ngo_to(-20, 40 - sun * 10)\npen_up()\npen_color(\"green\")\npen_down()\ncloud = 20 + sun * 25\ngo_to(-60, 95)\ngo_to(-20, 95)\ngo_to(-5, 80)\ngo_to(-75, 80)\ngo_to(-60, 95)\npen_up()\nwrite(\"云（攒水 \" + cloud + \"）\", -78, 110, \"green\", 10)\npen_color(\"blue\")\npen_down()\ni = 0\nwhile i < 3:\n    x = -50 + i * 18\n    go_to(x, 78)\n    go_to(x - 4, 66)\n    pen_up()\n    pen_down()\n    i = i + 1\npen_up()\nwrite(\"降水\", -60, 55, \"blue\", 10)\npen_down()\ngo_to(-120, -70)\ngo_to(120, -70)\ngo_to(120, -95)\ngo_to(-120, -95)\ngo_to(-120, -70)\npen_up()\nwrite(\"大海 →（汇流回到起点）\", -115, -85, \"blue\", 10)\nwrite(\"阳光 \" + sun + \"：蒸发 \" + evap + \" 份 → 云变厚 → 雨更多\", -190, 140, \"red\", 11)\nif sun < 0.1:\n    write(\"没有太阳：循环停摆！\", -100, -130, \"orange\", 12)"
+    },
+    "cross-116": {
+      "params": [
+        { "name": "power", "label": "磁力强度", "min": 1, "max": 5, "step": 1, "value": 3 }
+      ],
+      "grid": true,
+      "explore": [
+        "磁力越大，能把回形针从多远吸过来？",
+        "距离多远就吸不动了？",
+        "磁铁隔着纸还能吸吗？（回家试试）"
+      ],
+      "code": "# 磁铁的力量探索台\npower = 3   # 磁力强度\n\nhide()\npen_color(\"red\")\npen_down()\ngo_to(-140, 0)\ngo_to(-100, 0)\ngo_to(-100, 20)\ngo_to(-140, 20)\ngo_to(-140, 0)\npen_up()\nwrite(\"N\", -126, 8, \"blue\", 11)\npen_color(\"blue\")\npen_down()\ngo_to(-100, 0)\ngo_to(-60, 0)\ngo_to(-60, 20)\ngo_to(-100, 20)\ngo_to(-100, 0)\npen_up()\nwrite(\"S\", -85, 8, \"blue\", 11)\ndist = 140 - power * 18\npen_color(\"green\")\npen_down()\ngo_to(-60 + 6, 8)\ngo_to(dist, 8)\npen_up()\nwrite(\"📎\", dist - 12, 8, \"green\", 16)\nwrite(\"磁力 \" + power + \"：隔 \" + (dist + 60) + \" 格也能吸住！\", -190, 140, \"red\", 12)\nif power > 4:\n    write(\"强磁铁：危险！别靠近电脑和手表\", -190, 112, \"orange\", 10)\nwrite(\"磁力随距离变弱\", -190, -60, \"blue\", 10)"
+    },
+    "cross-127": {
+      "params": [
+        { "name": "amp", "label": "振动幅度", "min": 1, "max": 5, "step": 1, "value": 3 }
+      ],
+      "grid": true,
+      "explore": [
+        "振动越大，声音越大还是越小？",
+        "不振动还有声音吗？",
+        "声音是空气被「推」出来的波"
+      ],
+      "code": "# 声音的产生探索台：音叉振动\namp = 3   # 振动幅度\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-15, -80)\ngo_to(-15, 60)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(15, -80)\ngo_to(15, 60)\npen_up()\npen_color(\"orange\")\npen_down()\nx = 40\nyo = 0\ni = 0\nwhile x < 190:\n    y = amp * 12 * sin(x * 4)\n    go_to(x, y)\n    x = x + 3\npen_up()\nwrite(\"振动 \" + amp + \" → 音量 \" + amp, -190, 140, \"red\", 13)\nwrite(\"音叉振动推开空气 → 声波传到耳朵\", -190, 112, \"blue\", 10)\nif amp > 4:\n    write(\"太吵啦！保护听力\", -100, -120, \"orange\", 11)\nif amp < 1.1:\n    write(\"几乎不动：没有声音\", -100, -120, \"green\", 11)"
+    },
+    "cross-128": {
+      "params": [
+        { "name": "lx", "label": "光源位置", "min": -100, "max": 100, "step": 10, "value": -60 }
+      ],
+      "grid": true,
+      "explore": [
+        "光源移动，影子往哪边跑？",
+        "影子和光源的方向为什么总相反？",
+        "光走直线——不拐弯！"
+      ],
+      "code": "# 光的直线传播探索台：影子剧场\nlx = -60   # 光源横位置\n\nhide()\nwrite(\"💡\", lx - 10, 100, \"orange\", 18)\npen_color(\"yellow\")\npen_down()\ngo_to(lx, 92)\ngo_to(-20, 20)\ngo_to(-20, -60)\npen_up()\ngo_to(lx, 92)\npen_down()\ngo_to(20, 24)\ngo_to(20, -64)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(-15, 20)\ngo_to(15, 20)\ngo_to(15, -60)\ngo_to(-15, -60)\ngo_to(-15, 20)\npen_up()\npen_color(\"blue\")\npen_down()\ngo_to(-190, -80)\ngo_to(190, -80)\npen_up()\nshadowL = 20\nshadowR = -20 + (-20 - lx) * 0.9\nif shadowR > 185:\n    shadowR = 185\npen_color(\"blue\")\npen_down()\ngo_to(shadowL, -70)\ngo_to(shadowR, -70)\ngo_to(shadowR, -92)\ngo_to(shadowL, -92)\ngo_to(shadowL, -70)\npen_up()\nwrite(\"影子\", (shadowL + shadowR) / 2 - 12, -110, \"blue\", 10)\nwrite(\"光沿直线传播 → 影子与光反向\", -190, 140, \"red\", 11)\nif lx > 60:\n    write(\"光源在右边，影子跑到左边！\", -190, 112, \"orange\", 10)"
+    },
+    "cross-35": {
+      "params": [
+        { "name": "w", "label": "遮挡物宽度", "min": 10, "max": 80, "step": 5, "value": 30 }
+      ],
+      "grid": false,
+      "explore": [
+        "遮挡物越宽，影子越大还是越小？",
+        "想让影子正好挡住整个门，要调多宽？",
+        "影子和物体的形状有什么关系？"
+      ],
+      "code": "# 光与影探索台\nw = 30   # 遮挡物宽度\n\nhide()\nwrite(\"💡\", -12, 110, \"orange\", 16)\npen_color(\"green\")\npen_down()\ngo_to(0 - w / 2, 30)\ngo_to(w / 2, 30)\ngo_to(w / 2, 55)\ngo_to(0 - w / 2, 55)\ngo_to(0 - w / 2, 30)\npen_up()\nsw = w * 2.2\npen_color(\"blue\")\npen_down()\ngo_to(0 - sw / 2, -80)\ngo_to(sw / 2, -80)\ngo_to(sw / 2, -100)\ngo_to(0 - sw / 2, -100)\ngo_to(0 - sw / 2, -80)\npen_up()\nwrite(\"物体宽 \" + w + \"，影子宽 \" + sw, -190, 140, \"red\", 12)\nwrite(\"离光越近，影子越大（放大的自己）\", -190, 112, \"blue\", 10)\npen_color(\"yellow\")\npen_down()\ngo_to(-w / 2, 105)\ngo_to(0 - sw / 2, -78)\npen_up()\npen_down()\ngo_to(w / 2, 105)\ngo_to(sw / 2, -78)\npen_up()"
+    },
+    "cross-36": {
+      "params": [
+        { "name": "mode", "label": "磁极组合", "min": 1, "max": 2, "step": 1, "value": 1, "unit": "（1异2同）" }
+      ],
+      "grid": false,
+      "explore": [
+        "异极相吸——两块磁铁会怎么样？",
+        "换成同极呢？试试看！",
+        "指南针为什么总指南北？"
+      ],
+      "code": "# 磁极的奥秘探索台\nmode = 1   # 1=异极相对 2=同极相对\n\nhide()\ngap = 90\nif mode == 2:\n    gap = 150\nl1 = \"N\"\nr1 = \"S\"\nif mode == 2:\n    r1 = \"N\"\npen_color(\"red\")\npen_down()\ngo_to(-gap - 40, -15)\ngo_to(-gap, -15)\ngo_to(-gap, 15)\ngo_to(-gap - 40, 15)\ngo_to(-gap - 40, -15)\npen_up()\nwrite(l1, -gap - 28, 0, \"blue\", 12)\npen_color(\"blue\")\npen_down()\ngo_to(-gap, -15)\ngo_to(-gap + 40, -15)\ngo_to(-gap + 40, 15)\ngo_to(-gap, 15)\ngo_to(-gap, -15)\npen_up()\nwrite(\"S\", -gap + 12, 0, \"blue\", 12)\npen_color(\"blue\")\npen_down()\ngo_to(gap - 40, -15)\ngo_to(gap, -15)\ngo_to(gap, 15)\ngo_to(gap - 40, 15)\ngo_to(gap - 40, -15)\npen_up()\nwrite(r1, gap - 28, 0, \"blue\", 12)\npen_color(\"red\")\npen_down()\ngo_to(gap, -15)\ngo_to(gap + 40, -15)\ngo_to(gap + 40, 15)\ngo_to(gap, 15)\ngo_to(gap, -15)\npen_up()\nwrite(\"S\", gap + 12, 0, \"blue\", 12)\nif mode == 1:\n    pen_color(\"green\")\n    pen_down()\n    go_to(-gap + 44, 30)\n    go_to(gap - 44, 30)\n    pen_up()\n    write(\"←相互吸引→\", -45, 42, \"green\", 11)\n    write(\"异极相吸！\", -190, 140, \"green\", 13)\nif mode == 2:\n    pen_color(\"orange\")\n    pen_down()\n    go_to(-gap + 44, 30)\n    go_to(-gap + 60, 38)\n    pen_up()\n    go_to(-gap + 44, 30)\n    pen_down()\n    go_to(-gap + 60, 22)\n    pen_up()\n    go_to(gap - 44, 30)\n    pen_down()\n    go_to(gap - 60, 38)\n    pen_up()\n    go_to(gap - 44, 30)\n    pen_down()\n    go_to(gap - 60, 22)\n    pen_up()\n    write(\"同极相斥！\", -190, 140, \"red\", 13)"
+    },
+    "cross-37": {
+      "params": [
+        { "name": "surface", "label": "表面类型", "min": 1, "max": 3, "step": 1, "value": 1, "unit": "（1冰2木3毯）" },
+        { "name": "v0", "label": "初速度", "min": 5, "max": 30, "step": 1, "value": 20 }
+      ],
+      "grid": true,
+      "explore": [
+        "同一初速度，三种表面上小车滑多远？",
+        "摩擦越大滑得越？",
+        "冰面上为什么难刹车？"
+      ],
+      "code": "# 摩擦力大比拼探索台\nsurface = 1   # 1=冰面 2=木地板 3=毛毯\nv0 = 20       # 初速度\n\nhide()\nd = v0 * 7 / surface\ny = 50 - (surface - 1) * 55\npen_color(\"blue\")\npen_down()\ngo_to(-190, y - 30)\ngo_to(190, y - 30)\npen_up()\ncol = \"blue\"\nif surface == 1:\n    col = \"blue\"\nif surface == 2:\n    col = \"green\"\nif surface == 3:\n    col = \"red\"\npen_color(col)\npen_down()\ngo_to(-180, y)\ngo_to(-180 + d, y)\npen_up()\nwrite(\"🚗\", -190, y, \"red\", 16)\nsname = \"冰面（摩擦小）\"\nif surface == 2:\n    sname = \"木地板（摩擦中）\"\nif surface == 3:\n    sname = \"毛毯（摩擦大）\"\nwrite(sname + \"：滑 \" + d + \" 格\", -190, 140, \"red\", 12)\nwrite(\"初速度 \" + v0, -190, 112, \"blue\", 11)"
+    },
+    "cross-38": {
+      "params": [
+        { "name": "temp", "label": "气温", "min": -10, "max": 40, "step": 1, "value": 25, "unit": " ℃" }
+      ],
+      "grid": false,
+      "explore": [
+        "气温低于 0℃，会发生什么天气？",
+        "30℃ 以上是什么感觉？",
+        "今天的气温是多少？你来播报！"
+      ],
+      "code": "# 天气播报探索台（气温版）\ntemp = 25   # 气温\n\nhide()\nh = temp + 10\nif h > 100:\n    h = 100\npen_color(\"blue\")\npen_down()\ngo_to(-30, -100)\ngo_to(-30, 80)\ngo_to(-16, 80)\ngo_to(-16, -100)\ngo_to(-30, -100)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-27, -95)\ngo_to(-19, -95)\ngo_to(-19, -95 + h * 1.7)\ngo_to(-27, -95 + h * 1.7)\ngo_to(-27, -95)\npen_up()\nicon = \"☀\"\ndesc = \"温暖舒适\"\nif temp < 0:\n    icon = \"❄\"\n    desc = \"冰点以下，注意保暖防滑\"\nif temp > 33:\n    icon = \"🔥\"\n    desc = \"高温预警，防暑多喝水\"\nif temp > 27:\n    if temp <= 33:\n        icon = \"🌞\"\n        desc = \"比较热，适合游泳\"\nwrite(icon, 60, 40, \"red\", 34)\nwrite(\"气温 \" + temp + \"℃\", -190, 140, \"red\", 14)\nwrite(desc, -190, 105, \"green\", 12)\nwrite(\"水银柱越高温度越高\", -100, -130, \"blue\", 10)"
+    },
+    "cross-39": {
+      "params": [
+        { "name": "food", "label": "食物编号", "min": 1, "max": 6, "step": 1, "value": 1 }
+      ],
+      "grid": false,
+      "explore": [
+        "米饭面条主要提供哪类营养？",
+        "肉蛋奶呢？蔬果呢？",
+        "一顿饭要「彩虹搭配」才均衡！"
+      ],
+      "code": "# 营养家族分类探索台\nfood = 1   # 食物编号\n\nhide()\nname = \"\"\nnutri = \"\"\ngroup = \"\"\nif food == 1:\n    name = \"🍚 米饭面条\"\n    nutri = \"碳水化合物\"\n    group = \"供能主力\"\nif food == 2:\n    name = \"🥩 肉蛋奶豆\"\n    nutri = \"蛋白质\"\n    group = \"长身体修组织\"\nif food == 3:\n    name = \"🥑 坚果植物油\"\n    nutri = \"脂肪\"\n    group = \"储备能量\"\nif food == 4:\n    name = \"🥬 蔬菜水果\"\n    nutri = \"维生素+矿物质\"\n    group = \"身体调节剂\"\nif food == 5:\n    name = \"🍞 全谷物\"\n    nutri = \"膳食纤维\"\n    group = \"肠道清道夫\"\nif food == 6:\n    name = \"💧 水\"\n    nutri = \"不是营养但最重要\"\n    group = \"占体重 60%\"\nwrite(name, -150, 110, \"red\", 15)\nwrite(\"营养：\" + nutri, -150, 60, \"blue\", 13)\nwrite(\"作用：\" + group, -150, 15, \"green\", 12)\nwrite(\"六大营养素都要吃，偏食会长不高！\", -150, -60, \"orange\", 11)"
+    },
+    "cross-59": {
+      "params": [
+        { "name": "n", "label": "训练样本数", "min": 5, "max": 50, "step": 5, "value": 15, "unit": " 张" }
+      ],
+      "grid": true,
+      "explore": [
+        "样本越多，AI 认得越准吗？",
+        "5 张样本和 50 张，准确率差多少？",
+        "这就是「数据是 AI 的食物」"
+      ],
+      "code": "# AI 自然观察家探索台：样本量 → 准确率\nn = 15   # 训练样本数\n\nhide()\nacc = 50 + n\nif acc > 98:\n    acc = 98\npen_color(\"blue\")\npen_down()\nxx = -180\ni = 5\nwhile i < 55:\n    a2 = 50 + i\n    if a2 > 98:\n        a2 = 98\n    go_to(-180 + (i - 5) * 7, -110 + a2 * 2)\n    i = i + 5\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-180 + (n - 5) * 7, -110)\ngo_to(-180 + (n - 5) * 7, -110 + acc * 2)\npen_up()\nwrite(\"样本 \" + n + \" 张 → 准确率约 \" + acc + \"%\", -190, 140, \"red\", 13)\nwrite(\"喂得越多，认得越准——但永远到不了 100%\", -190, 112, \"orange\", 10)\nwrite(\"红柱=你当前的样本量\", -190, -145, \"green\", 10)"
+    },
+    "hb-04": {
+      "params": [
+        { "name": "water", "label": "含水量", "min": 0, "max": 3, "step": 0.5, "value": 1.5 }
+      ],
+      "grid": false,
+      "explore": [
+        "砂土、黏土、壤土摸起来有什么不同？",
+        "含水量很高时，土壤变成什么样？",
+        "哪种土最适合种菜？"
+      ],
+      "code": "# 土壤小侦探探索台\nwater = 1.5   # 含水量\n\nhide()\nsand = 100 - water * 20\npen_color(\"orange\")\npen_down()\ngo_to(-170, -80)\ngo_to(-170, -80 + sand)\ngo_to(-110, -80 + sand)\ngo_to(-110, -80)\ngo_to(-170, -80)\npen_up()\nwrite(\"砂粒 \" + (60 - water * 10), -158, -100, \"orange\", 9)\npen_color(\"red\")\npen_down()\ngo_to(-100, -80)\ngo_to(-100, -80 + 20 + water * 10)\ngo_to(-40, -80 + 20 + water * 10)\ngo_to(-40, -80)\ngo_to(-100, -80)\npen_up()\nwrite(\"黏粒 \" + 20, -85, -100, \"red\", 9)\npen_color(\"blue\")\npen_down()\nh2 = water * 25\nif h2 > 75:\n    h2 = 75\ngo_to(-30, -80)\ngo_to(-30, -80 + h2)\ngo_to(30, -80 + h2)\ngo_to(30, -80)\ngo_to(-30, -80)\npen_up()\nwrite(\"水 \" + water, -18, -100, \"blue\", 9)\ntype = \"壤土（最好种菜！）\"\nif water > 2.5:\n    type = \"太湿成泥了！\"\nif water < 0.5:\n    type = \"太干，植物喝不到水\"\nwrite(\"含水量 \" + water + \" → \" + type, -190, 140, \"red\", 12)\nwrite(\"砂+黏+水+腐殖质=土壤\", -190, 112, \"green\", 10)"
+    },
+    "math-04": {
+      "params": [
+        { "name": "v", "label": "速度", "min": 1, "max": 20, "step": 1, "value": 8, "unit": " 米/秒" },
+        { "name": "t", "label": "时间", "min": 1, "max": 10, "step": 1, "value": 5, "unit": " 秒" }
+      ],
+      "grid": true,
+      "explore": [
+        "上面是 s-t 折线，下面是小车实际位置——对得上吗？",
+        "速度越大，折线越陡、小车越远？",
+        "路程 = 速度 × 时间，看图验证"
+      ],
+      "code": "# 行程实验室·双视图：上面画 s-t 图，下面小车跑\nv = 8   # 速度\nt = 5   # 时间\n\nhide()\ns = v * t\npen_color(\"green\")\npen_down()\ni = 0\ngo_to(-180, 10)\nwhile i < t + 0.1:\n    go_to(-180 + i * v * 3.4, 10 + i * v * 1.1)\n    i = i + 0.5\npen_up()\nwrite(\"s-t 图（时间→路程）\", -180, 145, \"green\", 11)\ni = 1\nwhile i < t + 0.5:\n    write(\"\" + i, -180 + i * v * 3.4, 0, \"green\", 8)\n    i = i + 1\npen_color(\"blue\")\npen_down()\ngo_to(-190, -90)\ngo_to(190, -90)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-180, -70)\ngo_to(-180 + s * 3.4, -70)\npen_up()\ncostume(\"🚗\")\nshow()\ngo_to(-180 + s * 3.4 - 14, -82)\nwrite(\"s=\" + v + \"×\" + t + \"=\" + s + \" 米\", -180, -120, \"red\", 13)\nwrite(\"小车停在 \" + s + \" 米处！\", -180, -145, \"blue\", 11)"
+    },
+    "cross-07": {
+      "params": [
+        { "name": "g", "label": "重力加速度 g", "min": 2, "max": 25, "step": 1, "value": 10, "unit": " m/s²" }
+      ],
+      "grid": true,
+      "explore": [
+        "轨迹越陡=下落越快，g 控制陡峭程度",
+        "把 g 调到 1.6（月亮），轨迹变得怎么样？",
+        "小球（具象）停在轨迹末端——它此刻的速度最大"
+      ],
+      "code": "# 自由落体·双视图：轨迹线 + 末端小球\ng = 10   # 重力加速度\n\nhide()\npen_color(\"blue\")\npen_down()\ntt = 0\nlastX = -200\nlastY = 130\nwhile tt < 5.01:\n    h = 130 - 0.5 * g * tt * tt\n    if h < -140:\n        h = -140\n    lastX = -200 + tt * 70\n    lastY = h\n    go_to(lastX, lastY)\n    tt = tt + 0.2\npen_up()\ncostume(\"⚽\")\nshow()\ngo_to(lastX, lastY)\nwrite(\"g=\" + g + \"：1秒末速度 \" + g + \" m/s\", -180, -125, \"red\", 12)\nwrite(\"⚽ 的位置=此刻下落位置（速度最大）\", -180, 145, \"blue\", 10)"
+    },
+    "hb-13": {
+      "params": [
+        { "name": "F", "label": "力 F", "min": 10, "max": 100, "step": 5, "value": 20, "unit": " N" },
+        { "name": "m", "label": "质量 m", "min": 1, "max": 20, "step": 1, "value": 4, "unit": " kg" }
+      ],
+      "grid": true,
+      "explore": [
+        "上面的 v-t 线越陡=加速越猛（a=F/m）",
+        "下面小车跑的距离由 a 决定——图和车联动！",
+        "F 和 m 同时翻倍，小车跑得变吗？"
+      ],
+      "code": "# 牛顿第二定律·双视图：v-t 图 + 小车位移\nF = 20   # 作用力\nm = 4    # 质量\n\nhide()\na = F / m\nwrite(\"F=\" + F + \"N m=\" + m + \"kg → a=\" + a + \" m/s²\", -190, 145, \"red\", 12)\npen_color(\"red\")\npen_down()\ngo_to(-200, 30)\ntt = 0\nwhile tt < 6.01:\n    go_to(-200 + tt * 60, 30 + a * tt * 8)\n    tt = tt + 1\npen_up()\nwrite(\"v-t 图\", 130, 40, \"red\", 10)\npen_color(\"blue\")\npen_down()\ngo_to(-190, -100)\ngo_to(190, -100)\npen_up()\nd2 = a * 25 * 1.4\nif d2 > 370:\n    d2 = 370\npen_color(\"orange\")\npen_down()\ngo_to(-180, -82)\ngo_to(-180 + d2, -82)\npen_up()\ncostume(\"🚙\")\nshow()\ngo_to(-180 + d2 - 14, -94)\nwrite(\"6 秒小车跑 \" + a * 25 + \" 米\", -180, -125, \"blue\", 11)"
+    }
+  },
+  "patches": {
+    "_说明": "挑战定义与防闪烁补丁（浅合并到已有 lab）",
+    "math-10": {
+      "challenges": [
+        { "text": "把 a 调成 -1：让抛物线开口向下", "params": { "a": -1 } },
+        { "text": "把 a 调成 2：让开口变窄", "params": { "a": 2 } }
+      ]
+    },
+    "math-16": {
+      "challenges": [
+        { "text": "调出方程 2x+3=11 的解 x=4（提示：调 c）", "params": { "a": 2, "b": 3, "c": 11 } }
+      ]
+    },
+    "cross-66": {
+      "challenges": [
+        { "text": "让 8 秒末速度达到 160：调 v0 和 a 的组合", "params": { "v0": 0, "a": 20 } },
+        { "text": "调成刹车：v0=30 且 a=-10", "params": { "v0": 30, "a": -10 } }
+      ]
+    },
+    "cross-97": {
+      "challenges": [
+        { "text": "让木块（密度 0.6）沉底：把液体密度调到 0.5", "params": { "rho_obj": 0.6, "rho_liq": 0.5 } },
+        { "text": "悬浮：物体密度=液体密度=1.0", "params": { "rho_obj": 1, "rho_liq": 1 } }
+      ]
+    },
+    "cross-13": {
+      "challenges": [
+        { "text": "搭出 5 级食物链（草→…→虎）", "params": { "chain": 5 } }
+      ]
+    },
+    "cross-25": {
+      "challenges": [
+        { "text": "隔绝氧气灭火：把氧气调成 0", "params": { "oxygen": 0 } },
+        { "text": "重新点燃：恢复三要素全 1", "params": { "fuel": 1, "oxygen": 1, "hot": 1 } }
+      ]
+    },
+    "math-11": {
+      "challenges": [
+        { "text": "让振幅达到最大 120", "params": { "amp": 120 } }
+      ]
+    },
+    "cross-22": {
+      "challenges": [
+        { "text": "让杠杆平衡（左边力矩=10）", "params": { "L1": 2, "m1": 5 } }
+      ]
+    },
+    "cross-107": { "animate": false },
+    "cross-74": { "animate": false },
+    "cross-72": { "animate": false },
+    "math-33": { "animate": false },
+    "math-14": { "animate": false },
+    "math-40": { "animate": false },
+    "math-50": { "animate": false },
+    "cross-59": { "animate": false }
+  }
+}
