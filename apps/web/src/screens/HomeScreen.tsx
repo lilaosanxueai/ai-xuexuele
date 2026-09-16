@@ -13,6 +13,9 @@ export default function HomeScreen() {
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState(AVATARS[0]);
   const [adding, setAdding] = useState(false);
+  const [deleting, setDeleting] = useState<Profile | null>(null);
+  const [pin, setPin] = useState('');
+  const [pinError, setPinError] = useState('');
 
   const refresh = () => api.profiles().then(setProfiles).catch(() => {});
   useEffect(() => { void refresh(); }, []);
@@ -36,14 +39,11 @@ export default function HomeScreen() {
     enter(p);
   };
 
-  const remove = async (p: Profile) => {
-    if (!confirm(`确定删除「${p.name}」吗？ TA 的学习进度、作品和对话记录都会一起删除。`)) return;
-    const pin = window.prompt('请输入家长 PIN 确认删除：');
-    if (!pin) return;
+  const remove = async (p: Profile, pin: string) => {
     try {
       await api.deleteProfile(p.id, pin);
     } catch {
-      window.alert('PIN 不正确，没有删除。');
+      setPinError('PIN 不正确，没有删除。');
       return;
     }
     if (current?.id === p.id) setCurrent(null);
@@ -72,7 +72,7 @@ export default function HomeScreen() {
                 <div className="mt-1 text-sm text-sky-600">开始学习 →</div>
               </button>
               <button
-                onClick={() => void remove(p)}
+                onClick={() => { setDeleting(p); setPin(''); setPinError(''); }}
                 className="absolute -right-2 -top-2 hidden h-7 w-7 items-center justify-center rounded-full bg-rose-500 text-white shadow group-hover:flex"
                 title="删除角色"
               >
@@ -127,6 +127,37 @@ export default function HomeScreen() {
                 className="rounded-xl bg-sky-500 px-4 py-2 font-bold text-white hover:bg-sky-600 disabled:opacity-40"
               >
                 开始学习！
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {deleting && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" onClick={() => setDeleting(null)}>
+          <div className="w-full max-w-sm rounded-3xl bg-white p-6 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <h3 className="text-lg font-black">删除「{deleting.name}」</h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600">
+              TA 的学习进度、作品和对话记录都会一起删除。请家长输入 PIN 确认：
+            </p>
+            <input
+              value={pin}
+              onChange={(e) => { setPin(e.target.value); setPinError(''); }}
+              type="password"
+              inputMode="numeric"
+              maxLength={8}
+              placeholder="家长 PIN"
+              className={`mt-3 w-full rounded-xl border px-3 py-2 text-lg tracking-widest outline-none focus:border-rose-400 ${pinError ? 'border-rose-400' : 'border-slate-300'}`}
+              autoFocus
+            />
+            {pinError && <div className="mt-2 text-sm font-bold text-rose-500">{pinError}</div>}
+            <div className="mt-5 flex justify-end gap-2">
+              <button onClick={() => setDeleting(null)} className="rounded-xl bg-slate-200 px-4 py-2 font-bold hover:bg-slate-300">取消</button>
+              <button
+                onClick={() => void remove(deleting, pin)}
+                disabled={!pin.trim()}
+                className="rounded-xl bg-rose-500 px-4 py-2 font-bold text-white hover:bg-rose-600 disabled:opacity-40"
+              >
+                删除
               </button>
             </div>
           </div>

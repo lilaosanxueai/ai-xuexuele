@@ -21,6 +21,7 @@ import { pyStageApi } from '../runtime/pyBridge.ts';
 import { workspaceToPython } from '../blocks/python.ts';
 import { applyBuildOps, buildCatalog, sanitizeOps, workspaceToOps } from '../runtime/builder.ts';
 import ExercisePanel from '../components/ExercisePanel.tsx';
+import ConfirmDialog from '../components/ConfirmDialog.tsx';
 
 export interface WorkshopMode {
   kind: 'lesson' | 'freeplay';
@@ -69,6 +70,7 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
   const [saveOpen, setSaveOpen] = useState(false);
   const [saveTitle, setSaveTitle] = useState('');
   const [toast, setToast] = useState<string | null>(null);
+  const [regenConfirmOpen, setRegenConfirmOpen] = useState(false);
   const [codeOpen, setCodeOpen] = useState(false);
   const [speed, setSpeed] = useState<RunSpeed>(getRunSpeed());
   const [muted, setMutedState] = useState(isMuted());
@@ -243,7 +245,6 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
   };
 
   const regenerateFromBlocks = () => {
-    if (!confirm('用积木重新生成代码？当前改过的代码会被覆盖。')) return;
     const ws = wsApiRef.current?.workspace;
     setCodeText((ws ? workspaceToPython(ws) : '') || 'say("你好，Python！")\n');
     setCodeError(null);
@@ -720,7 +721,7 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
           </button>
           {codeMode ? (
             !lesson.codeLesson && (
-              <ToolBtn title="用积木重新生成代码（会覆盖当前代码）" onClick={regenerateFromBlocks}>⟲ 从积木重新生成</ToolBtn>
+              <ToolBtn title="用积木重新生成代码（会覆盖当前代码）" onClick={() => setRegenConfirmOpen(true)}>⟲ 从积木重新生成</ToolBtn>
             )
           ) : (
             <>
@@ -914,6 +915,17 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
         <div className="fixed bottom-4 left-1/2 z-50 -translate-x-1/2 rounded-2xl bg-slate-800/90 px-5 py-3 text-white shadow-xl">
           {toast}
         </div>
+      )}
+
+      {regenConfirmOpen && (
+        <ConfirmDialog
+          title="用积木重新生成代码？"
+          message="当前改过的代码会被覆盖。"
+          confirmText="重新生成"
+          danger
+          onConfirm={regenerateFromBlocks}
+          onClose={() => setRegenConfirmOpen(false)}
+        />
       )}
     </div>
   );

@@ -30,8 +30,13 @@ start.bat
 - 家长中心 PIN 默认 `1234`（务必修改）；平板同 WiFi：`server.host` 改 `"0.0.0.0"`
 - **孩子数据全在 `data/`（gitignore，永不入库）——勿删**
 
-## 本地相对上游的增量（2026-09-15，未提交）
+## 本地相对上游的增量（持续更新）
 
+1. **原生弹窗全部替换为应用风格弹窗（2026-09-17，第 19 轮）**：
+   - 新组件 `components/ConfirmDialog.tsx`（圆角卡片+遮罩，与全站弹窗同视觉，danger 红色确认钮）
+   - HomeScreen 删除角色：原「confirm + window.prompt 输 PIN + alert 报错」三连原生弹窗 → 单个应用内弹窗（警示文案 + PIN 密码框 + 红字内联报错；PIN 为空时删除钮禁用）
+   - GalleryScreen 删除作品、WorkshopScreen「从积木重新生成」的原生 confirm → ConfirmDialog；全应用已无 window.confirm/prompt/alert
+   - 验证：tsc + vite build（dist 已含新弹窗，8787 生产服务生效）+ 64 测试；浏览器实测弹窗打开/错 PIN 内联报错不关窗/取消关闭
 1. **互动实验室升级：过程动画 + AI 观察员 + 实验挑战 + 科学 12 课（2026-09-16，第 18 轮）**：
    - **参数补间动画（tween）**：滑块变化时图形 320ms ease-out 连续变形（LabScreen rAF 补间循环，每帧 instant 重跑）；`lab.animate:false` 关闭——随机类课（cross-107/74/72/59、math-33/14/40/50 共 8 节）直接跳变防结果闪烁
    - **AI 观察员**：LabScreen 记录最近 6 条参数操作（同参数连续拖动合并）注入 ChatContext.labOps；prompts lab 分支新增【观察员职责】；探索满 5 次未引导过 → 伙伴 sayLocal 主动开口（本地零成本，每课一次）

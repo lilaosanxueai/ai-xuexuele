@@ -6,6 +6,7 @@ import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
 import Stage from '../components/Stage.tsx';
+import ConfirmDialog from '../components/ConfirmDialog.tsx';
 import { StageState } from '../runtime/stageState.ts';
 import { Executor } from '../runtime/executor.ts';
 import { parsePy, PyRunner } from '../runtime/pyinterp.ts';
@@ -19,6 +20,7 @@ export default function GalleryScreen() {
   const { current: profile } = useProfileStore();
   const [projects, setProjects] = useState<Project[]>([]);
   const [playing, setPlaying] = useState<Project | null>(null);
+  const [removing, setRemoving] = useState<Project | null>(null);
 
   const refresh = () => profile && void api.projects(profile.id).then(setProjects).catch(() => {});
   useEffect(() => {
@@ -28,7 +30,6 @@ export default function GalleryScreen() {
   }, [profile]);
 
   const remove = async (p: Project) => {
-    if (!confirm(`删除作品《${p.title}》？`)) return;
     await api.deleteProject(profile!.id, p.id);
     refresh();
   };
@@ -74,7 +75,7 @@ export default function GalleryScreen() {
                     >
                       {(p.likes ?? []).includes(profile.id) ? '❤️' : '🤍'} {(p.likes ?? []).length || ''}
                     </button>
-                    <button onClick={() => void remove(p)} className="rounded-xl bg-slate-200 px-2 py-1.5 text-sm text-slate-500 hover:bg-rose-100 hover:text-rose-600" title="删除">🗑</button>
+                    <button onClick={() => setRemoving(p)} className="rounded-xl bg-slate-200 px-2 py-1.5 text-sm text-slate-500 hover:bg-rose-100 hover:text-rose-600" title="删除">🗑</button>
                   </div>
                 </div>
               </div>
@@ -83,6 +84,16 @@ export default function GalleryScreen() {
         )}
       </main>
       {playing && <Player project={playing} onClose={() => setPlaying(null)} />}
+      {removing && (
+        <ConfirmDialog
+          title={`删除作品《${removing.title}》？`}
+          message="删除后无法恢复，确定要删除吗？"
+          confirmText="删除"
+          danger
+          onConfirm={() => void remove(removing)}
+          onClose={() => setRemoving(null)}
+        />
+      )}
     </div>
   );
 }
