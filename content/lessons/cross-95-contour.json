@@ -142,5 +142,25 @@
     }
   ],
   "textbook": "人教版地理七年级上册",
-  "grade": 7
+  "grade": 7,
+  "lab": {
+    "params": [
+      {
+        "name": "peak",
+        "label": "山的海拔",
+        "min": 100,
+        "max": 500,
+        "step": 50,
+        "value": 400,
+        "unit": " m"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "最里圈是山顶还是山脚？",
+      "山越高（海拔大），圈的层数怎么变？",
+      "等高线密集的地方，坡是陡还是缓？"
+    ],
+    "code": "# 等高线探索台：把山一层层切给你看\npeak = 400   # 山的海拔（米）\n\nhide()\nlayers = peak / 100\ni = 1\nwhile i <= layers:\n    sz = 15 + i * 30\n    pen_color(\"blue\")\n    pen_down()\n    go_to(0 - sz / 2, 0 + sz / 2)\n    go_to(sz / 2, sz / 2)\n    go_to(sz / 2, 0 - sz / 2)\n    go_to(0 - sz / 2, 0 - sz / 2)\n    go_to(0 - sz / 2, 0 + sz / 2)\n    pen_up()\n    write(peak - (layers - i) * 100 + \"m\", sz / 2 + 12, 0 - sz / 2 + 6, \"blue\", 9)\n    i = i + 1\nwrite(\"海拔 \" + peak + \" 米，切了 \" + layers + \" 层\", -190, 150, \"red\", 13)\nwrite(\"从上看：同一条线上高度相同\", -190, 128, \"blue\", 11)\nwrite(\"圈越密=坡越陡\", -190, 106, \"orange\", 11)"
+  }
 }

@@ -142,5 +142,24 @@
     }
   ],
   "textbook": "人教版化学九年级上册",
-  "grade": 9
+  "grade": 9,
+  "lab": {
+    "params": [
+      {
+        "name": "w",
+        "label": "H₂O 的系数",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "系数调到几的时候，两边原子数相等？",
+      "H 原子左边有 4 个，每个 H₂O 贡献几个 H？",
+      "配平的本质是什么？（原子种类和数目都不变）"
+    ],
+    "code": "# 配平探索台：2H₂ + O₂ = ?H₂O\nw = 1   # H₂O 前面的系数（调成几能配平？）\n\nhide()\nlh = 2 * 2\nlo = 2\nrh = w * 2\nro = w\nwrite(\"H₂ + O₂ = \" + w + \"H₂O 配平检查：\", -190, 140, \"blue\", 12)\npen_color(\"blue\")\npen_down()\ngo_to(-150, -110)\ngo_to(-150, -110 + lh * 20)\ngo_to(-90, -110 + lh * 20)\ngo_to(-90, -110)\ngo_to(-150, -110)\npen_up()\nwrite(\"左H \" + lh, -140, -130, \"blue\", 11)\npen_down()\ngo_to(-60, -110)\ngo_to(-60, -110 + rh * 20)\ngo_to(0, -110 + rh * 20)\ngo_to(0, -110)\ngo_to(-60, -110)\npen_up()\nwrite(\"右H \" + rh, -50, -130, \"blue\", 11)\npen_color(\"red\")\npen_down()\ngo_to(40, -110)\ngo_to(40, -110 + lo * 20)\ngo_to(100, -110 + lo * 20)\ngo_to(100, -110)\ngo_to(40, -110)\npen_up()\nwrite(\"左O \" + lo, 50, -130, \"red\", 11)\npen_down()\ngo_to(130, -110)\ngo_to(130, -110 + ro * 20)\ngo_to(190, -110 + ro * 20)\ngo_to(190, -110)\ngo_to(130, -110)\npen_up()\nwrite(\"右O \" + ro, 140, -130, \"red\", 11)\nif lh == rh:\n    if lo == ro:\n        write(\"✓ 配平成功！原子守恒\", -80, 100, \"green\", 14)\nif lh != rh:\n    write(\"✗ 氢不守恒，再调系数\", -80, 100, \"orange\", 13)\nif lo != ro:\n    write(\"✗ 氧不守恒，再调系数\", -80, 75, \"orange\", 13)"
+  }
 }

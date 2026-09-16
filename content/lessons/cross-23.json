@@ -116,5 +116,34 @@
   "codeLesson": true,
   "starterCode": "# 串联与并联\nr1 = 3\nr2 = 3\n\nseries = r1 + r2\nparallel = 1 / (1 / r1 + 1 / r2)\n\nsay(\"串联：R = \" + series + \" 欧姆\")\nsay(\"并联：R = \" + parallel + \" 欧姆\")\nsay(\"并联总电阻更小——电流多了一条路！\")\n",
   "textbook": "人教版物理九年级全一册",
-  "grade": 9
+  "grade": 9,
+  "lab": {
+    "params": [
+      {
+        "name": "r1",
+        "label": "电阻 R₁",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "value": 3,
+        "unit": " Ω"
+      },
+      {
+        "name": "r2",
+        "label": "电阻 R₂",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "value": 3,
+        "unit": " Ω"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "串联总电阻和 R₁+R₂ 什么关系？",
+      "并联总电阻比 R₁、R₂ 都小还是都大？",
+      "为什么并联电阻反而变小？（电流多了一条路）"
+    ],
+    "code": "# 串并联电阻探索台\nr1 = 3   # 电阻一\nr2 = 3   # 电阻二\n\nhide()\nseries = r1 + r2\nparallel = 1 / (1 / r1 + 1 / r2)\npen_color(\"red\")\npen_down()\ngo_to(-150, -100)\ngo_to(-150, -100 + series * 18)\ngo_to(-60, -100 + series * 18)\ngo_to(-60, -100)\ngo_to(-150, -100)\npen_up()\nwrite(\"串联 \" + series + \"Ω\", -150, -125, \"red\", 12)\npen_color(\"blue\")\npen_down()\ngo_to(40, -100)\ngo_to(40, -100 + parallel * 18)\ngo_to(130, -100 + parallel * 18)\ngo_to(130, -100)\ngo_to(40, -100)\npen_up()\nwrite(\"并联 \" + parallel + \"Ω\", 50, -125, \"blue\", 12)\nwrite(\"R1=\" + r1 + \"Ω  R2=\" + r2 + \"Ω\", -60, 130, \"blue\", 13)\nwrite(\"并联总电阻比任何一个都小！\", -90, 150, \"orange\", 12)"
+  }
 }

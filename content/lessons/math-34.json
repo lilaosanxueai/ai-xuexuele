@@ -117,5 +117,24 @@
     }
   ],
   "textbook": "人教A版数学选择性必修第二册",
-  "grade": 11
+  "grade": 11,
+  "lab": {
+    "params": [
+      {
+        "name": "x0",
+        "label": "切点横坐标 x₀",
+        "min": -4,
+        "max": 4,
+        "step": 0.5,
+        "value": 2
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "红线（切线）刚碰到抛物线的那个点在哪？",
+      "x₀ 左右移动，切线斜率（图上标注）怎么变？",
+      "x₀=0 时切线是什么样的？斜率是多少？"
+    ],
+    "code": "# 导数探索台：y = x² 在 x₀ 处的切线\nx0 = 2   # 切点横坐标\n\nhide()\npen_color(\"blue\")\npen_down()\nx = -5\ngo_to(x * 25, x * x * 6)\nwhile x < 5.01:\n    go_to(x * 25, x * x * 6)\n    x = x + 0.25\npen_up()\nslope = 2 * x0\npen_color(\"red\")\npen_down()\nx = x0 - 2.5\ngo_to(x * 25, x0 * x0 * 6 + slope * (x - x0) * 25)\nwhile x < x0 + 2.51:\n    y = x0 * x0 * 6 + slope * (x - x0) * 25\n    go_to(x * 25, y)\n    x = x + 0.25\npen_up()\nwrite(\"切点(\" + x0 + \", \" + x0 * x0 + \")\", x0 * 25 - 40, x0 * x0 * 6 + 22, \"green\", 11)\nwrite(\"切线斜率 = 2×\" + x0 + \" = \" + slope, -190, 140, \"red\", 13)\nwrite(\"斜率就是导数：x₀ 越大越陡\", -190, -140, \"blue\", 11)"
+  }
 }

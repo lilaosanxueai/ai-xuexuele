@@ -127,5 +127,24 @@
     }
   ],
   "textbook": "人教版数学九年级下册",
-  "grade": 9
+  "grade": 9,
+  "lab": {
+    "params": [
+      {
+        "name": "k",
+        "label": "比例系数 k",
+        "min": 40,
+        "max": 400,
+        "step": 20,
+        "value": 180
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "x 变大时 y 怎么变？曲线离坐标轴怎么样？",
+      "k 变大，双曲线往哪边移动？",
+      "x 和 y 相乘总是等于多少？"
+    ],
+    "code": "# 反比例函数 y = k / x 探索台\nk = 180   # 比例系数\n\nhide()\npen_color(\"blue\")\npen_down()\nx = 1\ny = k / x\ngo_to(x * 16, y / 2.2)\nwhile x < 13.1:\n    y = k / x\n    go_to(x * 16, y / 2.2)\n    x = x + 0.5\npen_up()\npen_down()\nx = -1\ny = k / x\ngo_to(x * 16, y / 2.2)\nwhile x > -13.1:\n    y = k / x\n    go_to(x * 16, y / 2.2)\n    x = x - 0.5\npen_up()\nwrite(\"y = \" + k + \"/x\", 120, 140, \"blue\", 14)\nwrite(\"x·y 恒等于 \" + k, 120, 115, \"red\", 12)"
+  }
 }

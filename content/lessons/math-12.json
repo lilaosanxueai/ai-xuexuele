@@ -124,5 +124,25 @@
     }
   ],
   "textbook": "人教A版数学必修第一册",
-  "grade": 10
+  "grade": 10,
+  "lab": {
+    "params": [
+      {
+        "name": "n",
+        "label": "棋盘格数",
+        "min": 5,
+        "max": 20,
+        "step": 1,
+        "value": 10,
+        "unit": " 格"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "每多一格，麦粒数怎么变？（翻倍！）",
+      "20 格时麦粒数是多少？数一数有几位数",
+      "为什么说「指数爆炸」？和一格一格加有什么不同？"
+    ],
+    "code": "# 国王的麦粒探索台：每格翻倍\nn = 10   # 棋盘格数\n\nhide()\np = 1\ni = 0\nwhile i < n:\n    p = p * 2\n    col = 40 + i * 16\n    h = p / p * 10 + i * 7\n    if h > 150:\n        h = 150\n    pen_color(\"blue\")\n    pen_down()\n    go_to(col - 200, -120)\n    go_to(col - 200, -120 + h)\n    go_to(col - 188, -120 + h)\n    go_to(col - 188, -120)\n    go_to(col - 200, -120)\n    pen_up()\n    i = i + 1\nwrite(\"第 \" + n + \" 格 = \" + p + \" 粒\", -190, 130, \"red\", 13)\nwrite(\"柱子越高=麦粒越多（每格翻倍）\", -190, 150, \"blue\", 11)"
+  }
 }

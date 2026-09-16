@@ -142,5 +142,25 @@
     }
   ],
   "textbook": "人教版物理八年级上册",
-  "grade": 8
+  "grade": 8,
+  "lab": {
+    "params": [
+      {
+        "name": "t_ms",
+        "label": "回声时间",
+        "min": 50,
+        "max": 1000,
+        "step": 50,
+        "value": 300,
+        "unit": " ms"
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "回声时间越长，障碍物越远还是越近？",
+      "为什么距离要除以 2？（声音跑了个来回）",
+      "1000 毫秒才听到回声，距离是多少米？"
+    ],
+    "code": "# 回声测距探索台：d = v·t ÷ 2\nt_ms = 300   # 回声时间（毫秒）\n\nhide()\nv = 340\nd = v * t_ms / 1000 / 2\npen_color(\"blue\")\npen_down()\ngo_to(-180, 0)\ngo_to(-180 + d * 1.1, 0)\npen_up()\nwrite(\"蝙蝠\", -195, 20, \"blue\", 11)\nwrite(\"障碍物\", -180 + d * 1.1 - 30, 25, \"red\", 11)\npen_color(\"red\")\npen_down()\ngo_to(-180 + d * 1.1, -15)\ngo_to(-180 + d * 1.1, 15)\npen_up()\nwrite(\"声速340m/s，\" + t_ms + \"ms 回声\", -195, 120, \"blue\", 12)\nwrite(\"距离 = 340×\" + t_ms / 1000 + \"÷2 = \" + d + \" 米\", -195, 95, \"red\", 14)\nwrite(\"去程+回程 = 声音跑了两趟！\", -195, -60, \"orange\", 11)"
+  }
 }

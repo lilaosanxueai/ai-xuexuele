@@ -116,5 +116,33 @@
   "codeLesson": true,
   "starterCode": "# 惯性滑行实验：三段表面（摩擦越来越小）\nd1 = 60      # 毛毯上：摩擦大，滑 60 步\nd2 = 120     # 木地板：摩擦中，滑 120 步\nd3 = 200     # 冰面上：摩擦小，滑 200 步\n\ngo_to(-150, 60)\nsay(\"毛毯上滑行 \" + d1 + \" 步\")\nmove(d1)\nwait(0.5)\n\ngo_to(-150, 0)\nsay(\"木地板上滑行 \" + d2 + \" 步\")\nmove(d2)\nwait(0.5)\n\ngo_to(-150, -60)\nsay(\"冰面上滑行 \" + d3 + \" 步\")\nmove(d3)\nwait(0.5)\n\nsay(\"摩擦越小，滑得越远！\")\nsay(\"如果没有摩擦——永远滑下去！\")\n",
   "textbook": "人教版物理八年级下册",
-  "grade": 8
+  "grade": 8,
+  "lab": {
+    "params": [
+      {
+        "name": "v0",
+        "label": "初速度",
+        "min": 10,
+        "max": 40,
+        "step": 2,
+        "value": 20
+      },
+      {
+        "name": "fric",
+        "label": "摩擦档位",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1,
+        "unit": "（1冰 2木 3毯）"
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "初速度越大，滑得越远还是越近？",
+      "摩擦档 1（冰面）→3（毛毯），滑行距离怎么变？",
+      "如果完全没有摩擦（理想情况），会滑多远？这就是牛顿第一定律"
+    ],
+    "code": "# 惯性滑行探索台：摩擦吃掉了滑行距离\nv0 = 10    # 初速度\nfric = 1   # 摩擦档位（1=冰面 2=木地板 3=毛毯）\n\nhide()\nd = v0 * 9 / fric\nif d > 400:\n    d = 400\npen_color(\"blue\")\npen_down()\ngo_to(-200, 60)\ngo_to(-200 + d / 2, 60)\npen_up()\nwrite(\"冰面(摩擦1)：滑 \" + v0 * 9 / 1 / 2 + \" 格\", -195, 78, \"blue\", 11)\npen_color(\"green\")\npen_down()\ngo_to(-200, 0)\ngo_to(-200 + v0 * 9 / 2 / 2, 0)\npen_up()\nwrite(\"木地板(摩擦2)：滑 \" + v0 * 9 / 2 / 2 + \" 格\", -195, 18, \"green\", 11)\npen_color(\"red\")\npen_down()\ngo_to(-200, -60)\ngo_to(-200 + v0 * 9 / 3 / 2, -60)\npen_up()\nwrite(\"毛毯(摩擦3)：滑 \" + v0 * 9 / 3 / 2 + \" 格\", -195, -42, \"red\", 11)\nwrite(\"初速度 \" + v0 + \"：摩擦越小滑得越远，无摩擦=永远滑下去\", -195, 130, \"orange\", 11)"
+  }
 }

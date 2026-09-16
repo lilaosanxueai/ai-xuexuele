@@ -142,5 +142,34 @@
     }
   ],
   "textbook": "人教版物理八年级下册",
-  "grade": 8
+  "grade": 8,
+  "lab": {
+    "params": [
+      {
+        "name": "h",
+        "label": "楼高",
+        "min": 5,
+        "max": 30,
+        "step": 1,
+        "value": 15,
+        "unit": " m"
+      },
+      {
+        "name": "m",
+        "label": "你的体重",
+        "min": 20,
+        "max": 80,
+        "step": 5,
+        "value": 35,
+        "unit": " kg"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "楼越高，做的功越多吗？功率呢？",
+      "体重变重，做功和功率怎么变？",
+      "爸爸体重是你两倍但用时更长——谁的功率大？（看标注）"
+    ],
+    "code": "# 功与功率探索台：W = mgh，P = W/t\nh = 15   # 楼高（米）\nm = 35   # 你的体重（千克）\n\nhide()\ng = 10\nw1 = m * g * h\np1 = w1 / 30\nm2 = 70\nw2 = m2 * g * h\np2 = w2 / 45\npen_color(\"blue\")\npen_down()\ngo_to(-150, -100)\ngo_to(-150, -100 + w1 / 12)\ngo_to(-60, -100 + w1 / 12)\ngo_to(-60, -100)\ngo_to(-150, -100)\npen_up()\nwrite(\"你做功 \" + w1 + \" J\", -145, -125, \"blue\", 11)\npen_color(\"red\")\npen_down()\ngo_to(20, -100)\ngo_to(20, -100 + w2 / 12)\ngo_to(110, -100 + w2 / 12)\ngo_to(110, -100)\ngo_to(20, -100)\npen_up()\nwrite(\"爸爸做功 \" + w2 + \" J\", 30, -125, \"red\", 11)\nwrite(\"楼高 \" + h + \"m，体重 \" + m + \"kg\", -190, 140, \"blue\", 12)\nwrite(\"你的功率 \" + p1 + \" W，爸爸 \" + p2 + \" W\", -190, 115, \"red\", 13)\nif p1 > p2:\n    write(\"你爬得更快，功率更大！\", -60, -150, \"green\", 12)\nif p1 < p2:\n    write(\"爸爸功率更大！\", -60, -150, \"green\", 12)"
+  }
 }

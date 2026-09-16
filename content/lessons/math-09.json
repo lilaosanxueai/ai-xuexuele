@@ -125,5 +125,32 @@
     }
   ],
   "textbook": "人教版数学八年级下册",
-  "grade": 8
+  "grade": 8,
+  "lab": {
+    "params": [
+      {
+        "name": "a",
+        "label": "直角边 a",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "value": 3
+      },
+      {
+        "name": "b",
+        "label": "直角边 b",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "value": 4
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "a=3、b=4 时斜边 c 是多少？换成 a=b=5 呢？",
+      "两条直角边同时变长，斜边增长得更快还是更慢？",
+      "验证：a² + b² 是不是永远等于 c²？"
+    ],
+    "code": "# 勾股定理探索台：a² + b² = c²\na = 3   # 直角边 a\nb = 4   # 直角边 b\n\nhide()\nc = sqrt(a * a + b * b)\npen_color(\"blue\")\npen_down()\ngo_to(-150, -80)\ngo_to(-150 + a * 26, -80)\ngo_to(-150, -80 + b * 26)\ngo_to(-150, -80)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-150 + a * 26, -80)\ngo_to(-150, -80 + b * 26)\npen_up()\nwrite(\"a=\" + a + \" b=\" + b + \" → c=\" + c, 40, 130, \"red\", 14)\nwrite(\"a²+b² = \" + a * a + \"+\" + b * b + \" = \" + a * a + b * b, 40, 105, \"blue\", 12)\nwrite(\"c² = \" + c * c, 40, 80, \"blue\", 12)"
+  }
 }

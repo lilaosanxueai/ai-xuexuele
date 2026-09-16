@@ -142,5 +142,25 @@
     }
   ],
   "textbook": "人教版物理八年级上册",
-  "grade": 8
+  "grade": 8,
+  "lab": {
+    "params": [
+      {
+        "name": "u",
+        "label": "物距 u",
+        "min": 2,
+        "max": 40,
+        "step": 1,
+        "value": 25,
+        "unit": " cm"
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "u>2f（20cm）时成什么像？照相机原理！",
+      "把物体移到 f 和 2f 之间（10-20cm），像怎么变？",
+      "u<f（10cm 以内）时呢？放大镜！"
+    ],
+    "code": "# 凸透镜成像探索台（焦距 f=10cm）\nu = 25   # 物距（厘米）\n\nhide()\nf = 10\nwrite(\"焦距 f=10cm，物体在 \" + u + \"cm 处\", -190, 140, \"blue\", 12)\npen_color(\"blue\")\npen_down()\ngo_to(-190, 0)\ngo_to(190, 0)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(0, -110)\ngo_to(0, 110)\npen_up()\nwrite(\"透镜\", -20, 118, \"red\", 11)\nxobj = 0 - u * 8\nif xobj < -195:\n    xobj = -195\npen_color(\"green\")\npen_down()\ngo_to(xobj, -40)\ngo_to(xobj, 40)\npen_up()\nwrite(\"物体\", xobj - 20, 48, \"green\", 11)\nif u > 20:\n    write(\"u>2f：倒立缩小的实像（照相机）\", -100, -130, \"orange\", 13)\nif u <= 20:\n    if u > 10:\n        write(\"f<u<2f：倒立放大的实像（投影仪）\", -110, -130, \"orange\", 13)\nif u <= 10:\n    write(\"u<f：正立放大的虚像（放大镜）\", -100, -130, \"red\", 13)"
+  }
 }

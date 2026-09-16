@@ -116,5 +116,25 @@
     }
   ],
   "textbook": "人教版数学九年级下册",
-  "grade": 9
+  "grade": 9,
+  "lab": {
+    "params": [
+      {
+        "name": "angle",
+        "label": "锐角 θ",
+        "min": 10,
+        "max": 80,
+        "step": 5,
+        "value": 30,
+        "unit": "°"
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "θ 变大，对边变长还是变短？邻边呢？",
+      "对边÷斜边（sin θ）随着 θ 怎么变？",
+      "θ=45° 时对边和邻边有什么关系？"
+    ],
+    "code": "# 锐角三角函数探索台：sin/cos/tan\nangle = 30   # 锐角 θ（度）\n\nhide()\nhyp = 130\nopp = hyp * sin(angle)\nadj = hyp * cos(angle)\npen_color(\"blue\")\npen_down()\ngo_to(-160, -90)\ngo_to(-160 + adj, -90)\ngo_to(-160 + adj, -90 + opp)\ngo_to(-160, -90)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-160, -90)\ngo_to(-160 + adj, -90 + opp)\npen_up()\nwrite(\"θ=\" + angle + \"°\", -160 + adj - 25, -90 - 18, \"red\", 12)\nwrite(\"对边=\" + opp, 60, 60, \"red\", 11)\nwrite(\"邻边=\" + adj, 60, 40, \"blue\", 11)\nwrite(\"sin=\" + sin(angle) + \" cos=\" + cos(angle), 40, 130, \"blue\", 12)\nwrite(\"tan=\" + sin(angle) / cos(angle), 40, 105, \"red\", 12)"
+  }
 }

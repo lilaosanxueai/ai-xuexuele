@@ -142,5 +142,25 @@
     }
   ],
   "textbook": "人教版生物学必修2 遗传与进化",
-  "grade": 11
+  "grade": 11,
+  "lab": {
+    "params": [
+      {
+        "name": "mut",
+        "label": "突变率",
+        "min": 0,
+        "max": 50,
+        "step": 5,
+        "value": 10,
+        "unit": "%"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "突变率 0% 时，新链和母链完全配对吗？",
+      "突变率升高，错误的碱基怎么变？",
+      "DNA 复制那么精确，为什么还会发生突变和进化？"
+    ],
+    "code": "# DNA 复制与突变探索台：A-T、C-G 配对\nmut = 10   # 突变率（%）\n\nhide()\nn = 16\ni = 0\nwrong = 0\nwhile i < n:\n    base = random(0, 3)\n    pair = 1 - base\n    if base == 2:\n        pair = 3\n    if base == 3:\n        pair = 2\n    r = random(0, 99)\n    if r < mut:\n        pair = random(0, 3)\n        wrong = wrong + 1\n    y = 140 - i * 18\n    pen_color(\"blue\")\n    pen_down()\n    go_to(-100, y)\n    go_to(-60, y)\n    pen_up()\n    pen_color(\"green\")\n    pen_down()\n    go_to(60, y)\n    go_to(100, y)\n    pen_up()\n    i = i + 1\nwrite(\"母链(蓝) ←配对→ 新链(绿)\", -95, 155, \"blue\", 10)\nwrite(\"突变率 \" + mut + \"%：16 个碱基错了 \" + wrong + \" 个\", -190, -60, \"red\", 13)\nwrite(\"A配T、C配G——错配就是突变\", -190, -85, \"orange\", 11)"
+  }
 }
