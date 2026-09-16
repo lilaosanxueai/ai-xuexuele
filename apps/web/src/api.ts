@@ -2,8 +2,10 @@ import type { BlockCatalogEntry, BuddyMode, BuildOp, ChatContext, ChatMessage, L
 
 async function req<T>(url: string, init?: RequestInit): Promise<T> {
   const resp = await fetch(url, {
-    headers: { 'Content-Type': 'application/json', ...(init?.headers ?? {}) },
+    // headers 放在 ...init 之后合并：否则自定义 header（如 x-parent-pin）会把 Content-Type 覆盖掉，
+    // 服务端 express.json() 解析不到 body（改 PIN/保存设置会报「格式不对」）
     ...init,
+    headers: { 'Content-Type': 'application/json', ...(init?.headers as Record<string, string> | undefined) },
   });
   if (!resp.ok) {
     const body = await resp.json().catch(() => ({}));
@@ -33,6 +35,8 @@ export const api = {
   saveSettings: (s: Settings, pin: string) =>
     req<Settings>('/api/settings', { method: 'PUT', body: JSON.stringify(s), headers: { 'x-parent-pin': pin } }),
   verifyPin: (pin: string) => req<{ ok: boolean }>('/api/verify-pin', { method: 'POST', body: JSON.stringify({ pin }) }),
+  changePin: (pin: string, newPin: string) =>
+    req<{ ok: boolean }>('/api/pin', { method: 'PUT', body: JSON.stringify({ pin: newPin }), headers: { 'x-parent-pin': pin } }),
   playground: (profileId: string) => req<PlaygroundModel>(`/api/playground/${profileId}`),
   savePlayground: (profileId: string, model: PlaygroundModel) =>
     req<PlaygroundModel>(`/api/playground/${profileId}`, { method: 'POST', body: JSON.stringify(model) }),

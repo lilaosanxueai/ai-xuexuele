@@ -149,6 +149,7 @@ export default function HomeScreen() {
               className={`mt-3 w-full rounded-xl border px-3 py-2 text-lg tracking-widest outline-none focus:border-rose-400 ${pinError ? 'border-rose-400' : 'border-slate-300'}`}
               autoFocus
             />
+            <p className="mt-1.5 text-[11px] text-slate-400">没改过？默认 PIN 是 1234（进「🛡 家长入口」可以修改）</p>
             {pinError && <div className="mt-2 text-sm font-bold text-rose-500">{pinError}</div>}
             <div className="mt-5 flex justify-end gap-2">
               <button onClick={() => setDeleting(null)} className="rounded-xl bg-slate-200 px-4 py-2 font-bold hover:bg-slate-300">取消</button>

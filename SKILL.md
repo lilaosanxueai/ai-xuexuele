@@ -32,6 +32,13 @@ start.bat
 
 ## 本地相对上游的增量（持续更新）
 
+1. **家长 PIN 全链路补全（2026-09-17，第 21 轮，源自用户「我没设置过 PIN」反馈）**：
+   - 背景：出厂默认 PIN「1234」（config.ts），但没有任何界面告诉用户，家长面板也没有改 PIN 入口（只能手改 data/config.json）
+   - **首页删除角色弹窗**加提示：「没改过？默认 PIN 是 1234（进家长入口可以修改）」
+   - **家长面板设置页新增「🔑 家长 PIN」**：输新 PIN（4-8 位数字）→ 需当前 PIN 验证 → 持久化到 data/config.json（保留 llm/server 字段）；成功后同步 sessionStorage（避免后续接口 403）；SettingsTab 改用 sessionStorage 最新值防 prop 过期
+   - 服务端：`PUT /api/pin`（requirePin 验旧 PIN + 4-8 位数字校验）；config.ts 新增 setParentPin（运行时 + 文件双更新）
+   - **顺带修复潜伏 bug**：api.ts req() 里 `...init` 展开在 headers 之后，自定义 header（x-parent-pin）会把 Content-Type 覆盖掉 → 带 PIN 的 POST/PUT（保存设置/改 PIN）服务端 express.json() 收不到 body。headers 移到 ...init 之后合并修复
+   - 验证：tsc + build + 64 测试；浏览器全流程实测 UI 改 PIN 1234→2468→1234 往返（config.json 持久化、旧 PIN 失效、sessionStorage 同步、llm key 等其他配置保留）、删除弹窗提示显示。注意：测试发现 8787 有旧代码残留进程抢占端口（TaskStop 杀不掉 node 子进程），排查时先 `netstat -ano | findstr 8787` + taskkill
 1. **实验室交互双升级：悬停坐标读数 + 实验记录单（2026-09-17，第 20 轮）**：
    - **悬停坐标读数**：Stage 新 `coords` prop——网格实验室里鼠标悬停画布显示十字虚线 + 光标点 + (x, y) 标签（rAF 内用 ref 绘制零重渲染，坐标取整）；cursor 变 crosshair；LabScreen 在 `lab.grid` 开启的课自动启用（读函数图像/运动曲线刚需，非网格情景课不显示）
    - **实验记录单**：LabScreen 左栏新卡片「📝 实验记录单」——textarea（300 字，占位引导「动什么参数→看到什么→结论」），1.5s 防抖自动保存（ProfileProgress 新 `labNotes: Record<lessonId,string>`，服务端 routes/store 支持 `labNote` ≤2000 字校验），换课/重开自动恢复

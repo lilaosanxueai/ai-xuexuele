@@ -19,7 +19,7 @@ export default function ParentScreen() {
       sessionStorage.setItem('island-pin', pin);
       setVerified(true);
     } else {
-      setError('PIN 不对，再试试（默认 1234，可在 data/config.json 修改）');
+      setError('PIN 不对，再试试（默认 1234，进入后在「设置」页可以修改）');
     }
   };
 
@@ -374,14 +374,31 @@ function ChatsTab({ profileId, pin }: { profileId: string; pin: string }) {  con
 function SettingsTab({ pin }: { pin: string }) {
   const [settings, setSettings] = useState<Settings | null>(null);
   const [saved, setSaved] = useState(false);
+  const [newPin, setNewPin] = useState('');
+  const [pinMsg, setPinMsg] = useState('');
 
   useEffect(() => { void api.settings().then(setSettings); }, []);
   if (!settings) return <p className="text-slate-400">加载中…</p>;
 
+  // 改过 PIN 后 sessionStorage 里才是最新值（prop 可能是旧值）
+  const curPin = sessionStorage.getItem('island-pin') ?? pin;
+
   const save = async () => {
-    await api.saveSettings(settings, pin);
+    await api.saveSettings(settings, curPin);
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
+  };
+
+  const changePin = async () => {
+    if (!/^\d{4,8}$/.test(newPin)) { setPinMsg('新 PIN 需要是 4-8 位数字'); return; }
+    try {
+      await api.changePin(curPin, newPin);
+      sessionStorage.setItem('island-pin', newPin);
+      setNewPin('');
+      setPinMsg('PIN 已修改 ✓');
+    } catch (e) {
+      setPinMsg(e instanceof Error ? e.message : '修改失败，再试试');
+    }
   };
 
   return (
@@ -446,6 +463,30 @@ function SettingsTab({ pin }: { pin: string }) {
             </button>
           ))}
         </div>
+      </div>
+
+      <div>
+        <h3 className="mb-3 font-black">🔑 家长 PIN</h3>
+        <div className="flex flex-wrap items-center gap-2">
+          <input
+            type="password"
+            inputMode="numeric"
+            maxLength={8}
+            value={newPin}
+            onChange={(e) => { setNewPin(e.target.value.replace(/\D/g, '')); setPinMsg(''); }}
+            placeholder="新 PIN（4-8 位数字）"
+            className="w-44 rounded-xl border border-slate-300 px-3 py-2 tracking-widest outline-none focus:border-sky-400"
+          />
+          <button
+            onClick={() => void changePin()}
+            disabled={newPin.length < 4}
+            className="rounded-xl bg-slate-700 px-4 py-2 font-bold text-white hover:bg-slate-800 disabled:opacity-40"
+          >
+            修改 PIN
+          </button>
+          {pinMsg && <span className={`text-sm font-bold ${pinMsg.includes('✓') ? 'text-emerald-600' : 'text-rose-500'}`}>{pinMsg}</span>}
+        </div>
+        <p className="mt-1 text-xs text-slate-400">删除角色、解锁超时、看对话记录都会用到这个 PIN（默认 1234）</p>
       </div>
 
       <div className="flex items-center gap-3">

@@ -1,7 +1,7 @@
 import { Router, type Request, type Response } from 'express';
 import type { BlockCatalogEntry, BuddyMode, BuildOp, ChatContext, ChatMessage, PlaygroundModel, Settings } from '@shared/types.ts';
 import type { AppConfig } from './config.ts';
-import { llmConfigured } from './config.ts';
+import { llmConfigured, setParentPin } from './config.ts';
 import * as store from './store.ts';
 import { loadLessons, findLesson } from './lessons.ts';
 import { completeChat, streamChat, type LlmMessage } from './llm.ts';
@@ -115,6 +115,15 @@ export function buildRouter(cfg: AppConfig): Router {
   });
   r.post('/verify-pin', (req, res) => {
     res.json({ ok: String(req.body?.pin ?? '') === cfg.parentPin });
+  });
+
+  // 修改家长 PIN（需旧 PIN 验证），持久化到 data/config.json
+  r.put('/pin', (req, res) => {
+    if (!requirePin(req, res)) return;
+    const pin = String(req.body?.pin ?? '');
+    if (!/^\d{4,8}$/.test(pin)) return res.status(400).json({ error: '新 PIN 需要是 4-8 位数字' });
+    setParentPin(cfg, pin);
+    res.json({ ok: true });
   });
 
   // ---------- AI 对话（SSE 流式） ----------

@@ -54,6 +54,18 @@ export function llmConfigured(cfg: AppConfig): boolean {
   return k.length > 0 && !k.includes('在这里填');
 }
 
+/** 修改家长 PIN：更新运行时配置并持久化到 data/config.json（保留 llm/server 等已有字段） */
+export function setParentPin(cfg: AppConfig, pin: string): void {
+  const file = path.join(DATA_DIR, 'config.json');
+  let raw: Record<string, unknown> = { llm: cfg.llm, server: cfg.server };
+  try {
+    raw = { ...raw, ...(JSON.parse(fs.readFileSync(file, 'utf-8')) as Record<string, unknown>) };
+  } catch { /* 无配置文件或解析失败：用运行时配置重建 */ }
+  raw.parentPin = pin;
+  fs.writeFileSync(file, JSON.stringify(raw, null, 2), 'utf-8');
+  cfg.parentPin = pin;
+}
+
 export function ensureDirs(): void {
   for (const dir of [DATA_DIR, LESSONS_DIR,
     path.join(DATA_DIR, 'progress'), path.join(DATA_DIR, 'projects'), path.join(DATA_DIR, 'chatlogs')]) {
