@@ -32,6 +32,11 @@ start.bat
 
 ## 本地相对上游的增量（持续更新）
 
+1. **实验室交互双升级：悬停坐标读数 + 实验记录单（2026-09-17，第 20 轮）**：
+   - **悬停坐标读数**：Stage 新 `coords` prop——网格实验室里鼠标悬停画布显示十字虚线 + 光标点 + (x, y) 标签（rAF 内用 ref 绘制零重渲染，坐标取整）；cursor 变 crosshair；LabScreen 在 `lab.grid` 开启的课自动启用（读函数图像/运动曲线刚需，非网格情景课不显示）
+   - **实验记录单**：LabScreen 左栏新卡片「📝 实验记录单」——textarea（300 字，占位引导「动什么参数→看到什么→结论」），1.5s 防抖自动保存（ProfileProgress 新 `labNotes: Record<lessonId,string>`，服务端 routes/store 支持 `labNote` ≤2000 字校验），换课/重开自动恢复
+   - **AI 点评闭环**：「🔍 让 AI 老师看看」按钮 → 打开伙伴窗自动发送点评请求；ChatContext 新 `labNote` 注入上下文，prompts lab 分支新增【点评记录单】（引用原话肯定→指出可改进→教现象/数据/结论写法，不替孩子重写）；快捷提问加「帮我看看实验记录单」
+   - 验证：tsc + build + 64 测试；浏览器实测记录单自动保存到服务端 labNotes、AI 点评消息发送、十字光标生效（十字线绘制因后台标签页 rAF 冻结无法像素验证，前台正常——与第 18 轮同环境限制）
 1. **原生弹窗全部替换为应用风格弹窗（2026-09-17，第 19 轮）**：
    - 新组件 `components/ConfirmDialog.tsx`（圆角卡片+遮罩，与全站弹窗同视觉，danger 红色确认钮）
    - HomeScreen 删除角色：原「confirm + window.prompt 输 PIN + alert 报错」三连原生弹窗 → 单个应用内弹窗（警示文案 + PIN 密码框 + 红字内联报错；PIN 为空时删除钮禁用）

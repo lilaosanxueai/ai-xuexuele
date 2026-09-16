@@ -70,6 +70,8 @@ export function mergeProgress(profileId: string, patch: {
   minutesDelta?: number;
   draft?: string;
   code?: string;
+  /** 实验记录单内容（≤2000 字） */
+  labNote?: string;
   exercise?: { correct: number; total: number };
   wrongAdds?: WrongItem[];
   wrongClears?: string[];
@@ -93,6 +95,10 @@ export function mergeProgress(profileId: string, patch: {
     if (typeof patch.code === 'string' && patch.code.length <= 100_000) {
       cur.lessonCodes = cur.lessonCodes ?? {};
       cur.lessonCodes[patch.lessonId] = patch.code;
+    }
+    if (typeof patch.labNote === 'string' && patch.labNote.length <= 2000) {
+      cur.labNotes = cur.labNotes ?? {};
+      cur.labNotes[patch.lessonId] = patch.labNote;
     }
     if (patch.exercise && patch.exercise.total > 0 && patch.exercise.total <= 50) {
       cur.exercises = cur.exercises ?? {};

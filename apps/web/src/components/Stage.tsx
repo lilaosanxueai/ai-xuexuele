@@ -11,14 +11,19 @@ interface Props {
   fit?: boolean;
   /** 实验室模式：白底坐标网格 + 轴刻度（替代天空草地背景，画函数图像/曲线用） */
   grid?: boolean;
+  /** 悬停坐标读数：显示十字线 + 光标处 (x, y)（grid 实验室读图用） */
+  coords?: boolean;
 }
 
 /** 小剧场：把 StageState 画到 canvas（中心原点、y 向上） */
-export default function Stage({ stage, onSpriteClick, onCanvasReady, fit = false, grid = false }: Props) {
+export default function Stage({ stage, onSpriteClick, onCanvasReady, fit = false, grid = false, coords = false }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const stageRef = useRef(stage);
   const gridRef = useRef(grid);
   gridRef.current = grid;
+  const coordsRef = useRef(coords);
+  coordsRef.current = coords;
+  const mouseRef = useRef({ x: 0, y: 0, in: false });
   const wrapRef = useRef<HTMLDivElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
   stageRef.current = stage;
@@ -95,6 +100,44 @@ export default function Stage({ stage, onSpriteClick, onCanvasReady, fit = false
         ctx.fillText(lb.text, lx, ly);
       }
 
+      // 悬停坐标读数（实验室读图）：十字虚线 + 光标点 + (x, y) 标签
+      const m = mouseRef.current;
+      if (gridRef.current && coordsRef.current && m.in) {
+        const [mx, my] = toCanvas(m.x, m.y);
+        ctx.save();
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 1;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.moveTo(mx, 0); ctx.lineTo(mx, STAGE_H);
+        ctx.moveTo(0, my); ctx.lineTo(STAGE_W, my);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = '#0284c7';
+        ctx.beginPath();
+        ctx.arc(mx, my, 3, 0, Math.PI * 2);
+        ctx.fill();
+        // 标签：白底小圆角 + 坐标文字，靠近光标并防出界
+        const label = `(${m.x}, ${m.y})`;
+        ctx.font = 'bold 12px "PingFang SC", "Microsoft YaHei", sans-serif';
+        const tw = ctx.measureText(label).width + 12;
+        const th = 20;
+        const lx = Math.max(4, Math.min(STAGE_W - tw - 4, mx + 12));
+        const ly = Math.max(4, Math.min(STAGE_H - th - 4, my - 26));
+        ctx.fillStyle = 'rgba(255,255,255,0.92)';
+        ctx.strokeStyle = '#7dd3fc';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.roundRect(lx, ly, tw, th, 8);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = '#0369a1';
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(label, lx + 6, ly + th / 2);
+        ctx.restore();
+      }
+
       // 目标点
       ctx.font = '30px serif';
       ctx.textAlign = 'center';
@@ -140,6 +183,18 @@ export default function Stage({ stage, onSpriteClick, onCanvasReady, fit = false
     if (Math.hypot(px - sx, py - sy) < 45) onSpriteClick();
   };
 
+  // 悬停坐标读数：client 坐标 → 舞台坐标（中心原点、y 向上，取整便于读数）
+  const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    if (!coordsRef.current) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const rect = canvas.getBoundingClientRect();
+    const px = ((e.clientX - rect.left) / rect.width) * STAGE_W;
+    const py = ((e.clientY - rect.top) / rect.height) * STAGE_H;
+    mouseRef.current = { x: Math.round(px - STAGE_W / 2), y: Math.round(STAGE_H / 2 - py), in: true };
+  };
+  const handleMouseLeave = () => { mouseRef.current = { ...mouseRef.current, in: false }; };
+
   if (fit) {
     return (
       <div ref={wrapRef} className="flex h-full w-full items-center justify-center">
@@ -147,7 +202,9 @@ export default function Stage({ stage, onSpriteClick, onCanvasReady, fit = false
           <canvas
             ref={canvasRef}
             onClick={handleClick}
-            className="h-full w-full rounded-2xl border-4 border-white shadow-xl cursor-pointer"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            className={`h-full w-full rounded-2xl border-4 border-white shadow-xl ${coords ? 'cursor-crosshair' : 'cursor-pointer'}`}
           />
         </div>
       </div>
@@ -158,7 +215,9 @@ export default function Stage({ stage, onSpriteClick, onCanvasReady, fit = false
     <canvas
       ref={canvasRef}
       onClick={handleClick}
-      className="w-full rounded-2xl border-4 border-white shadow-md cursor-pointer"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className={`w-full rounded-2xl border-4 border-white shadow-md ${coords ? 'cursor-crosshair' : 'cursor-pointer'}`}
       style={{ aspectRatio: '4 / 3' }}
     />
   );

@@ -49,7 +49,7 @@ export function buildRouter(cfg: AppConfig): Router {
   // ---------- 进度 ----------
   r.get('/progress/:profileId', (req, res) => res.json(store.getProgress(req.params.profileId)));
   r.put('/progress/:profileId', (req, res) => {
-    const { lessonId, tasks, completed, minutesDelta, draft, code, exercise, wrongAdds, wrongClears } = req.body ?? {};
+    const { lessonId, tasks, completed, minutesDelta, draft, code, exercise, wrongAdds, wrongClears, labNote } = req.body ?? {};
     if (minutesDelta != null && (typeof minutesDelta !== 'number' || minutesDelta > 5)) {
       return res.status(400).json({ error: 'minutesDelta 每次最多 5 分钟' });
     }
@@ -59,7 +59,10 @@ export function buildRouter(cfg: AppConfig): Router {
     if (code != null && typeof code !== 'string') {
       return res.status(400).json({ error: 'code 需要是字符串' });
     }
-    res.json(store.mergeProgress(req.params.profileId, { lessonId, tasks, completed, minutesDelta, draft, code, exercise, wrongAdds, wrongClears }));
+    if (labNote != null && (typeof labNote !== 'string' || labNote.length > 2000)) {
+      return res.status(400).json({ error: 'labNote 需要是 2000 字以内的文字' });
+    }
+    res.json(store.mergeProgress(req.params.profileId, { lessonId, tasks, completed, minutesDelta, draft, code, exercise, wrongAdds, wrongClears, labNote }));
   });
 
   // ---------- 作品 ----------

@@ -147,6 +147,8 @@ export interface ProfileProgress {
   lessonDrafts: Record<string, string>;
   /** 每课的 Python 代码草稿（代码模式），离开后自动恢复 */
   lessonCodes: Record<string, string>;
+  /** 每课的实验记录单（实验室模式下孩子的观察笔记） */
+  labNotes?: Record<string, string>;
   /** 随堂练习成绩：lessonId -> {correct, total} */
   exercises?: Record<string, { correct: number; total: number }>;
   /** 错题本（练习答错的题自动收进来，重练全对后消灭） */
@@ -256,6 +258,8 @@ export interface ChatContext {
   labParams?: string;
   /** lab 模式：孩子最近的参数操作描述（AI 观察员用，如「把加速度从10调到20」） */
   labOps?: string;
+  /** lab 模式：孩子实验记录单内容（AI 点评观察笔记用） */
+  labNote?: string;
 }
 
 export interface BuddySettings {

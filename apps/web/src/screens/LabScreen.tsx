@@ -20,7 +20,7 @@ import { pyStageApi } from '../runtime/pyBridge.ts';
 
 /** 实验室场景的快捷提问（替代默认的编程向问题） */
 const LAB_QUICK: Partial<Record<'explain' | 'hint', string[]>> = {
-  explain: ['我拖动参数后看到了变化，为什么？', '这个知识点在课本里怎么讲？'],
+  explain: ['我拖动参数后看到了变化，为什么？', '这个知识点在课本里怎么讲？', '帮我看看实验记录单写得怎么样'],
   hint: ['我不知道该观察什么', '给我一点探索提示'],
 };
 
@@ -80,6 +80,10 @@ export default function LabScreen() {
   const [explored, setExplored] = useState<Record<number, boolean>>({});
   const [toast, setToast] = useState<string | null>(null);
   const [challengeDone, setChallengeDone] = useState<Record<number, boolean>>({});
+  /** 实验记录单：观察笔记（自动保存到进度，AI 可点评） */
+  const [labNote, setLabNote] = useState('');
+  const [noteSaved, setNoteSaved] = useState(true);
+  const noteTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const stageRef = useRef(new StageState());
   const runnerRef = useRef<PyRunner | null>(null);
@@ -124,12 +128,14 @@ export default function LabScreen() {
     if (!profile) { nav('/'); return; }
     setQuizDone(false);
     setExplored({});
+    setLabNote('');
     void api.settings().then(setSettings).catch(() => {});
     void api.lessons().then((all) => {
       const l = all.find((x) => x.id === id) ?? null;
       if (!l || !(l.lab || l.starterCode)) { nav(l ? `/tutor/${id}` : '/map'); return; }
       setLesson(l);
       setValues(Object.fromEntries((l.lab?.params ?? autoParams(l.lab?.code ?? l.starterCode ?? '')).map((p) => [p.name, p.value])));
+      void api.progress(profile.id).then((p) => setLabNote(p.labNotes?.[l.id] ?? '')).catch(() => {});
     }).catch(() => nav('/map'));
     return () => {
       runnerRef.current?.stop();
@@ -227,6 +233,29 @@ export default function LabScreen() {
     return () => clearTimeout(t);
   }, [toast]);
 
+  /** 记录单输入：1.5s 防抖自动保存到进度 */
+  const onNoteChange = (text: string) => {
+    setLabNote(text);
+    setNoteSaved(false);
+    clearTimeout(noteTimer.current);
+    noteTimer.current = setTimeout(() => {
+      if (!profile || !lesson) return;
+      void api.updateProgress(profile.id, { lessonId: lesson.id, labNote: text.slice(0, 2000) })
+        .then(() => setNoteSaved(true))
+        .catch(() => {});
+    }, 1500);
+  };
+
+  /** 让 AI 点评记录单：打开伙伴窗并发送点评请求（记录内容会随上下文带给 AI） */
+  const askAiToReview = () => {
+    if (!labNote.trim()) {
+      setToast('先在记录单里写下你的发现，再让 AI 老师看～');
+      return;
+    }
+    setBuddyOpen(true);
+    buddyRef.current?.askInMode('explain', '请点评我的实验记录单：我的发现对不对？哪里可以写得更像科学家？');
+  };
+
   if (!profile || !lesson) {
     return <div className="flex min-h-screen items-center justify-center text-slate-400">正在搭建实验室…</div>;
   }
@@ -245,6 +274,7 @@ export default function LabScreen() {
     subjectArea: lesson.subjectArea,
     labParams: params.map((p) => `${p.label}=${values[p.name]}${p.unit ?? ''}`).join('、'),
     labOps: opsRef.current.map((o) => `把${o.label}从${Math.round(o.from * 100) / 100}调到${Math.round(o.to * 100) / 100}`).join('；'),
+    labNote: labNote.trim() || undefined,
   });
 
   return (
@@ -335,6 +365,31 @@ export default function LabScreen() {
               </p>
             )}
           </div>
+          <div className="rounded-2xl bg-white p-3 shadow-sm">
+            <div className="mb-2 flex items-center justify-between">
+              <div className="text-sm font-black text-slate-700">📝 实验记录单</div>
+              <span className={`text-[11px] ${noteSaved ? 'text-emerald-500' : 'text-amber-500'}`}>
+                {noteSaved ? '✓ 已保存' : '保存中…'}
+              </span>
+            </div>
+            <textarea
+              value={labNote}
+              onChange={(e) => onNoteChange(e.target.value)}
+              rows={5}
+              maxLength={300}
+              placeholder={'像科学家一样记录：\n我动了什么参数 → 看到了什么变化 → 我的结论是…'}
+              className="w-full resize-none rounded-xl border border-slate-200 p-2 text-[13px] leading-relaxed outline-none focus:border-sky-400"
+            />
+            <div className="mt-1 flex items-center justify-between">
+              <span className="text-[11px] text-slate-400">{labNote.length}/300</span>
+              <button
+                onClick={askAiToReview}
+                className="rounded-xl bg-sky-100 px-3 py-1.5 text-xs font-bold text-sky-700 transition hover:bg-sky-200"
+              >
+                🔍 让 AI 老师看看
+              </button>
+            </div>
+          </div>
           {(lesson.lab?.challenges?.length ?? 0) > 0 && (
             <div className="rounded-2xl bg-white p-3 shadow-sm">
               <div className="mb-2 text-sm font-black text-slate-700">🎯 实验挑战</div>
@@ -356,9 +411,9 @@ export default function LabScreen() {
           )}
         </aside>
 
-        {/* 右：舞台（实时重绘） */}
+        {/* 右：舞台（实时重绘；网格课开悬停坐标读数） */}
         <div className={`min-w-0 flex-1 p-4 transition-all duration-300 ${buddyOpen ? 'pr-[22.5rem]' : ''}`}>
-          <Stage fit grid={lesson.lab?.grid ?? false} stage={stageRef.current} />
+          <Stage fit grid={lesson.lab?.grid ?? false} coords={lesson.lab?.grid ?? false} stage={stageRef.current} />
         </div>
 
         {/* AI 辅导浮窗 */}
