@@ -141,5 +141,32 @@
       "explain": "训练=根据错误逐步调整权重与偏置，让输出接近目标"
     }
   ],
-  "textbook": "人教A版数学（高中）"
+  "textbook": "人教A版数学（高中）",
+  "lab": {
+    "params": [
+      {
+        "name": "w1",
+        "label": "输入①权重",
+        "min": -2,
+        "max": 2,
+        "step": 0.25,
+        "value": 1
+      },
+      {
+        "name": "w2",
+        "label": "输入②权重",
+        "min": -2,
+        "max": 2,
+        "step": 0.25,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "总分 = ①×权重1 + ②×权重2，谁得分高就「亮」谁",
+      "把权重①调成负数，评委①变成「扣分项」",
+      "神经元就是这样给证据打分做决定的！"
+    ],
+    "code": "# 神经元探索台：加权打分器\nw1 = 1   # 输入一权重\nw2 = 1   # 输入二权重\n\nhide()\nin1 = 3\nin2 = 2\nscore = in1 * w1 + in2 * w2\npen_color(\"blue\")\npen_down()\ngo_to(-170, -100)\ngo_to(-170, -100 + in1 * 30)\ngo_to(-110, -100 + in1 * 30)\ngo_to(-110, -100)\ngo_to(-170, -100)\npen_up()\nwrite(\"① \" + in1, -155, -125, \"blue\", 11)\npen_color(\"green\")\npen_down()\ngo_to(-70, -100)\ngo_to(-70, -100 + in2 * 30)\ngo_to(-10, -100 + in2 * 30)\ngo_to(-10, -100)\ngo_to(-70, -100)\npen_up()\nwrite(\"② \" + in2, -55, -125, \"green\", 11)\npen_color(\"red\")\npen_down()\ngo_to(60, -100)\nif score > 0:\n    go_to(60, -100 + score * 15)\n    go_to(170, -100 + score * 15)\nif score <= 0:\n    go_to(60, -100)\n    go_to(170, -100)\ngo_to(170, -100)\ngo_to(60, -100)\npen_up()\nwrite(\"总分 \" + score, 90, -125, \"red\", 12)\nwrite(\"①×\" + w1 + \" + ②×\" + w2 + \" = \" + score, -190, 140, \"red\", 13)\nif score > 0:\n    write(\"输出：亮！（得分>0）\", -190, 112, \"green\", 12)\nif score <= 0:\n    write(\"输出：灭（得分≤0）\", -190, 112, \"orange\", 12)"
+  }
 }

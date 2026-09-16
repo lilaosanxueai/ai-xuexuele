@@ -155,5 +155,25 @@
       "answer": 1,
       "explain": "1 平方千米 = 1000000 平方米 = 100 公顷"
     }
-  ]
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "mu",
+        "label": "边长（米）",
+        "min": 10,
+        "max": 200,
+        "step": 10,
+        "value": 100,
+        "unit": " m"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "1 公顷 = 10000 平方米，这块地是几公顷？",
+      "边长 100 米的正方形正好 1 公顷",
+      "边长翻倍，面积变几倍？"
+    ],
+    "code": "# 公顷广场探索台\nmu = 100   # 正方形边长（米）\n\nhide()\narea = mu * mu\nhect = area / 10000\nsize = mu / 200 * 150\npen_color(\"blue\")\npen_down()\ngo_to(-size / 2, -size / 2)\ngo_to(size / 2, -size / 2)\ngo_to(size / 2, size / 2)\ngo_to(-size / 2, size / 2)\ngo_to(-size / 2, -size / 2)\npen_up()\nwrite(\"边长 \" + mu + \" m\", -size / 2 + 10, -size / 2 - 20, \"blue\", 11)\nwrite(\"面积 = \" + mu + \"×\" + mu + \" = \" + area + \" m²\", -190, 140, \"red\", 13)\nwrite(\"= \" + hect + \" 公顷\", -190, 112, \"green\", 13)\nif hect == 1:\n    write(\"正好 1 公顷！\", 60, 100, \"green\", 12)\nif hect > 1:\n    write(\"比 1 公顷大\", 60, 100, \"orange\", 11)"
+  }
 }

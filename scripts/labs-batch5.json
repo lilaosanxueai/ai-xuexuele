@@ -1,0 +1,216 @@
+{
+  "_说明": "互动实验室第五批：数学·图形与几何 + 统计概率（17 节）。注入：node scripts/inject-labs.mjs labs-batch5.json",
+  "labs": {
+    "math-05": {
+      "params": [
+        { "name": "r", "label": "步数（距离）", "min": 20, "max": 160, "step": 10, "value": 100 },
+        { "name": "deg", "label": "方向角", "min": 0, "max": 350, "step": 10, "value": 40, "unit": "°" }
+      ],
+      "grid": true,
+      "explore": [
+        "宝藏（红点）的位置由什么决定？距离+方向",
+        "方向角变 90°，红点跑到哪去了？",
+        "这就是极坐标：(r, θ) 一个距离一个角定位"
+      ],
+      "code": "# 极坐标寻宝探索台：距离 r + 方向 θ\nr = 100   # 走多远\ndeg = 40  # 朝哪个方向（度）\n\nhide()\nx = r * sin(deg)\ny = r * cos(deg)\npen_color(\"blue\")\npen_down()\ngo_to(0, 0)\ngo_to(x, y)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(x - 6, y + 6)\ngo_to(x + 6, y + 6)\ngo_to(x + 6, y - 6)\ngo_to(x - 6, y - 6)\ngo_to(x - 6, y + 6)\npen_up()\nwrite(\"起点\", -22, -18, \"blue\", 10)\nwrite(\"宝藏\", x - 18, y + 20, \"red\", 11)\nwrite(\"r=\" + r + \" θ=\" + deg + \"°\", -190, 140, \"blue\", 13)\nwrite(\"直角坐标：(\" + x + \", \" + y + \")\", -190, 112, \"red\", 12)\nwrite(\"x=r·sinθ  y=r·cosθ\", -190, -130, \"orange\", 11)"
+    },
+    "math-06": {
+      "params": [
+        { "name": "sides", "label": "边数", "min": 3, "max": 24, "step": 1, "value": 6 }
+      ],
+      "grid": false,
+      "explore": [
+        "边数越多，「多边形」越像什么？",
+        "24 边形的周长和圆周长差多少？",
+        "祖冲之就是这样用多边形逼近圆算出 π 的"
+      ],
+      "code": "# 割圆术探索台：正多边形逼近圆\nsides = 6   # 边数\n\nhide()\nR = 120\npen_color(\"blue\")\npen_down()\ni = 0\ngo_to(R, 0)\nwhile i < sides:\n    ang = (i + 1) * 360 / sides\n    go_to(R * cos(ang), R * sin(ang))\n    i = i + 1\npen_up()\nper = 2 * sides * R * sin(180 / sides)\npi_est = per / (2 * R)\nwrite(\"正\" + sides + \"边形 → π ≈ \" + pi_est, -190, 140, \"red\", 14)\nwrite(\"真实 π = 3.14159…\", -190, 112, \"blue\", 11)\nif sides >= 20:\n    write(\"几乎就是圆了！\", -190, 84, \"green\", 12)\nif sides <= 4:\n    write(\"还差得远，加边！\", -190, 84, \"orange\", 12)"
+    },
+    "math-13": {
+      "params": [
+        { "name": "w", "label": "长", "min": 2, "max": 10, "step": 1, "value": 6, "unit": " 格" },
+        { "name": "h", "label": "宽", "min": 2, "max": 8, "step": 1, "value": 4, "unit": " 格" }
+      ],
+      "grid": true,
+      "explore": [
+        "绕图形一周走了几格？周长=(长+宽)×2",
+        "长或宽变化，周长怎么变？",
+        "周长和面积的差别是什么？"
+      ],
+      "code": "# 周长侦探探索台\nw = 6   # 长\nh = 4   # 宽\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-120, -70)\ngo_to(-120 + w * 30, -70)\ngo_to(-120 + w * 30, -70 + h * 30)\ngo_to(-120, -70 + h * 30)\ngo_to(-120, -70)\npen_up()\nwrite(\"长\" + w, -120 + w * 15, -92, \"blue\", 11)\nwrite(\"宽\" + h, -148, -70 + h * 15, \"blue\", 11)\nwrite(\"周长 = (\" + w + \"+\" + h + \")×2 = \" + (w + h) * 2, -120, 120, \"red\", 14)\nwrite(\"面积 = \" + w + \"×\" + h + \" = \" + w * h, -120, 92, \"green\", 12)"
+    },
+    "math-23": {
+      "params": [
+        { "name": "w", "label": "横向格数", "min": 2, "max": 10, "step": 1, "value": 5 },
+        { "name": "h", "label": "纵向格数", "min": 2, "max": 8, "step": 1, "value": 4 }
+      ],
+      "grid": true,
+      "explore": [
+        "数一数：格子图里共有几个小正方形？",
+        "面积 = 横格数 × 纵格数，拖滑块验证",
+        "每行几个 × 有几行 = 总数（乘法的面积意义）"
+      ],
+      "code": "# 数格子算面积探索台\nw = 5   # 横向格数\nh = 4   # 纵向格数\n\nhide()\ni = 0\nwhile i < w:\n    j = 0\n    while j < h:\n        x = -150 + i * 28\n        y = 70 - j * 28\n        pen_color(\"blue\")\n        pen_down()\n        go_to(x, y)\n        go_to(x + 24, y)\n        go_to(x + 24, y - 24)\n        go_to(x, y - 24)\n        go_to(x, y)\n        pen_up()\n        j = j + 1\n    i = i + 1\nwrite(w + \" × \" + h + \" = \" + w * h + \" 个格子\", -190, 130, \"red\", 14)\nwrite(\"面积就是数格子！\", -190, 102, \"blue\", 11)"
+    },
+    "math-24": {
+      "params": [
+        { "name": "w", "label": "宽度", "min": 2, "max": 8, "step": 1, "value": 4, "unit": " 格" }
+      ],
+      "grid": true,
+      "explore": [
+        "Λ（倒 V）左右两边对称吗？",
+        "宽度变奇数/偶数，顶点位置有什么不同？",
+        "对称轴在哪里？（x=0 那条竖线）"
+      ],
+      "code": "# 轴对称 Λ 探索台\nw = 4   # 半宽\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(0 - w * 25, -80)\ngo_to(0, 60)\ngo_to(w * 25, -80)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(0, 80)\ngo_to(0, -100)\npen_up()\nwrite(\"对称轴\", 12, 80, \"red\", 11)\nwrite(\"左(\" + (0 - w * 25) + \") ←→ 右(\" + w * 25 + \")\", -100, 120, \"blue\", 12)\nwrite(\"左右离对称轴一样远\", -100, 95, \"green\", 11)"
+    },
+    "math-25": {
+      "params": [
+        { "name": "dx", "label": "平移距离", "min": -8, "max": 8, "step": 1, "value": 4, "unit": " 格" },
+        { "name": "rot", "label": "旋转角度", "min": 0, "max": 180, "step": 15, "value": 45, "unit": "°" }
+      ],
+      "grid": true,
+      "explore": [
+        "蓝色原图和红色新图形：是平移了还是旋转了？",
+        "只调平移，图形大小形状变吗？",
+        "只调旋转呢？图形绕着谁转？"
+      ],
+      "code": "# 平移与旋转探索台\ndx = 4    # 平移\nrot = 45  # 旋转（度）\n\nhide()\nx1 = -100\ny1 = -40\nx2 = -20\ny2 = 40\npen_color(\"blue\")\npen_down()\ngo_to(x1, y1)\ngo_to(x2, y2)\ngo_to(x2, y1)\ngo_to(x1, y1)\npen_up()\nrx1 = x1 * cos(rot) - y1 * sin(rot)\nry1 = x1 * sin(rot) + y1 * cos(rot)\nrx2 = x2 * cos(rot) - y2 * sin(rot)\nry2 = x2 * sin(rot) + y2 * cos(rot)\nrx3 = x2 * cos(rot) - y1 * sin(rot)\nry3 = x2 * sin(rot) + y1 * cos(rot)\npen_color(\"red\")\npen_down()\ngo_to(rx1 + dx * 18, ry1)\ngo_to(rx2 + dx * 18, ry2)\ngo_to(rx3 + dx * 18, ry3)\ngo_to(rx1 + dx * 18, ry1)\npen_up()\nwrite(\"蓝=原图 红=变换后\", -190, 140, \"blue\", 12)\nwrite(\"平移 \" + dx + \" 格 + 旋转 \" + rot + \"°\", -190, 112, \"red\", 12)\nwrite(\"形状大小不变——只改位置和方向\", -190, -130, \"orange\", 11)"
+    },
+    "math-29": {
+      "params": [
+        { "name": "ang1", "label": "角①", "min": 20, "max": 120, "step": 5, "value": 60, "unit": "°" },
+        { "name": "ang2", "label": "角②", "min": 20, "max": 120, "step": 5, "value": 70, "unit": "°" }
+      ],
+      "grid": true,
+      "explore": [
+        "角③自动是多少？三个角加起来呢？",
+        "不管怎么拖，内角和变吗？",
+        "四边形的内角和会是多少？（猜一猜再问 AI）"
+      ],
+      "code": "# 三角形内角和探索台\nang1 = 60   # 角①\nang2 = 70   # 角②\n\nhide()\nang3 = 180 - ang1 - ang2\nA = 130 * sin(90 - ang1)\nB = 130 * cos(90 - ang1)\npen_color(\"blue\")\npen_down()\ngo_to(-110, -60)\ngo_to(110, -60)\ngo_to(A, B)\ngo_to(-110, -60)\npen_up()\nwrite(\"①\" + ang1 + \"°\", -70, -45, \"red\", 12)\nwrite(\"②\" + ang2 + \"°\", 40, -45, \"green\", 12)\nwrite(\"③\" + ang3 + \"°\", -15, B - 25, \"orange\", 12)\nwrite(ang1 + \"+\" + ang2 + \"+\" + ang3 + \" = \" + (ang1 + ang2 + ang3) + \"°\", -150, 130, \"red\", 14)\nwrite(\"内角和永远是 180°！\", -150, 102, \"green\", 12)"
+    },
+    "math-38": {
+      "params": [
+        { "name": "kind", "label": "三角形类型", "min": 1, "max": 3, "step": 1, "value": 1, "unit": "（1锐2直3钝）" }
+      ],
+      "grid": true,
+      "explore": [
+        "三个角都小于 90° 是什么三角形？",
+        "有一个角正好 90° 呢？大于 90° 呢？",
+        "直角三角形里藏着勾股定理！"
+      ],
+      "code": "# 三角形家族探索台\nkind = 1   # 1=锐角 2=直角 3=钝角\n\nhide()\nif kind == 1:\n    write(\"锐角三角形：三个角都 < 90°\", -190, 140, \"blue\", 12)\n    pen_color(\"blue\")\n    pen_down()\n    go_to(-90, -60)\n    go_to(90, -60)\n    go_to(-20, 70)\n    go_to(-90, -60)\n    pen_up()\nif kind == 2:\n    write(\"直角三角形：有一个角 = 90°\", -190, 140, \"red\", 12)\n    pen_color(\"blue\")\n    pen_down()\n    go_to(-90, -60)\n    go_to(90, -60)\n    go_to(-90, 70)\n    go_to(-90, -60)\n    pen_up()\n    pen_color(\"red\")\n    pen_down()\n    go_to(-90, -40)\n    go_to(-70, -40)\n    go_to(-70, -60)\n    pen_up()\nif kind == 3:\n    write(\"钝角三角形：有一个角 > 90°\", -190, 140, \"orange\", 12)\n    pen_color(\"blue\")\n    pen_down()\n    go_to(-90, -60)\n    go_to(90, -60)\n    go_to(-160, 30)\n    go_to(-90, -60)\n    pen_up()\nwrite(\"按形状给三角形分家族\", -190, -130, \"green\", 11)"
+    },
+    "math-39": {
+      "params": [
+        { "name": "w", "label": "底边", "min": 3, "max": 10, "step": 1, "value": 8, "unit": " 格" },
+        { "name": "h", "label": "高", "min": 3, "max": 8, "step": 1, "value": 5, "unit": " 格" }
+      ],
+      "grid": true,
+      "explore": [
+        "平行四边形面积 = 底 × 高，拖滑块验证",
+        "红色虚线：割下来补到另一边，变成什么图形？",
+        "割补前后面积变吗？"
+      ],
+      "code": "# 割补法探索台：平行四边形 → 长方形\nw = 8   # 底\nh = 5   # 高\n\nhide()\nskew = 2\npen_color(\"blue\")\npen_down()\ngo_to(-140, -70)\ngo_to(-140 + w * 26, -70)\ngo_to(-140 + w * 26 - skew * 26, -70 + h * 26)\ngo_to(-140 - skew * 26, -70 + h * 26)\ngo_to(-140, -70)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-140 + w * 26 - skew * 26, -70 + h * 26)\ngo_to(-140 + w * 26 - skew * 26, -70)\ngo_to(-140 + w * 26, -70)\npen_up()\nwrite(\"面积 = \" + w + \"×\" + h + \" = \" + w * h, -190, 130, \"red\", 14)\nwrite(\"红三角割下补到左边 → 长方形\", -190, 102, \"green\", 11)\nwrite(\"底=\" + w + \" 高=\" + h, -190, 74, \"blue\", 11)"
+    },
+    "math-42": {
+      "params": [
+        { "name": "a", "label": "边长 a", "min": 2, "max": 7, "step": 1, "value": 4 }
+      ],
+      "grid": true,
+      "explore": [
+        "大正方形面积 (a+b)² 拆成哪四块？",
+        "两个 a×b 的长方形 + a² + b²",
+        "所以 (a+b)² = a² + 2ab + b²！"
+      ],
+      "code": "# 完全平方公式探索台：(a+4)² 的面积证明\na = 4   # 边长 a（b 固定为 4）\n\nhide()\nb = 4\npen_color(\"blue\")\npen_down()\ngo_to(-150, -80)\ngo_to(-150 + a * 24, -80)\ngo_to(-150 + a * 24, -80 + a * 24)\ngo_to(-150, -80 + a * 24)\ngo_to(-150, -80)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(-150 + a * 24, -80)\ngo_to(-150 + a * 24 + b * 24, -80)\ngo_to(-150 + a * 24 + b * 24, -80 + b * 24)\ngo_to(-150 + a * 24, -80 + b * 24)\ngo_to(-150 + a * 24, -80)\npen_up()\npen_color(\"orange\")\npen_down()\ngo_to(-150 + a * 24, -80 + b * 24)\ngo_to(-150 + a * 24 + b * 24, -80 + b * 24)\ngo_to(-150 + a * 24 + b * 24, -80 + a * 24 + b * 24)\ngo_to(-150 + a * 24, -80 + a * 24 + b * 24)\ngo_to(-150 + a * 24, -80 + b * 24)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-150, -80 + a * 24)\ngo_to(-150 + a * 24, -80 + a * 24)\ngo_to(-150 + a * 24, -80 + a * 24 + b * 24)\ngo_to(-150, -80 + a * 24 + b * 24)\ngo_to(-150, -80 + a * 24)\npen_up()\nwrite(\"(\" + a + \"+\" + b + \")² = \" + a * a + \"+2×\" + a * b + \"+\" + b * b + \" = \" + (a + b) * (a + b), -190, 140, \"red\", 12)\nwrite(\"四块拼出大正方形！\", -190, 112, \"blue\", 11)"
+    },
+    "math-18": {
+      "params": [
+        { "name": "r", "label": "半径 r", "min": 1, "max": 6, "step": 0.5, "value": 3 }
+      ],
+      "grid": true,
+      "explore": [
+        "圆的面积 = πr²，拖半径验证",
+        "半径翻倍，面积变几倍？",
+        "把圆切成小扇形拼成「长方形」，宽是 r 长是 πr"
+      ],
+      "code": "# 圆的面积探索台：S = πr²\nr = 3   # 半径\n\nhide()\npen_color(\"blue\")\npen_down()\ni = 0\ngo_to(r * 25, 0)\nwhile i < 72:\n    ang = (i + 1) * 5\n    go_to(r * 25 * cos(ang), r * 25 * sin(ang))\n    i = i + 1\npen_up()\nS = 3.14159 * r * r\npen_color(\"red\")\npen_down()\ngo_to(r * 25 * cos(45), r * 25 * sin(45))\ngo_to(0, 0)\npen_up()\nwrite(\"r\", r * 12 * cos(45), r * 12 * sin(45), \"red\", 12)\nwrite(\"r=\" + r + \" → 面积=π×\" + r + \"²=\" + S, -190, 140, \"red\", 13)\nwrite(\"半径×2 → 面积×4（² 的威力）\", -190, 112, \"orange\", 11)"
+    },
+    "math-14": {
+      "params": [
+        { "name": "n", "label": "掷骰次数", "min": 20, "max": 600, "step": 20, "value": 120, "unit": " 次" }
+      ],
+      "grid": false,
+      "explore": [
+        "六根柱子差不多高吗？哪个面出现的次数最多？",
+        "次数越多，六根柱子越均匀还是越乱？",
+        "每个面的理论概率是几分之几？"
+      ],
+      "code": "# 掷骰子统计探索台\nn = 120   # 掷的次数\n\nhide()\nc1 = 0\nc2 = 0\nc3 = 0\nc4 = 0\nc5 = 0\nc6 = 0\ni = 0\nwhile i < n:\n    f = random(1, 6)\n    if f == 1:\n        c1 = c1 + 1\n    if f == 2:\n        c2 = c2 + 1\n    if f == 3:\n        c3 = c3 + 1\n    if f == 4:\n        c4 = c4 + 1\n    if f == 5:\n        c5 = c5 + 1\n    if f == 6:\n        c6 = c6 + 1\n    i = i + 1\ni = 1\nwhile i < 7:\n    if i == 1:\n        cnt = c1\n    if i == 2:\n        cnt = c2\n    if i == 3:\n        cnt = c3\n    if i == 4:\n        cnt = c4\n    if i == 5:\n        cnt = c5\n    if i == 6:\n        cnt = c6\n    x = -160 + i * 44\n    pen_color(\"blue\")\n    pen_down()\n    go_to(x, -100)\n    go_to(x, -100 + cnt * 150 / n * 6)\n    go_to(x + 28, -100 + cnt * 150 / n * 6)\n    go_to(x + 28, -100)\n    go_to(x, -100)\n    pen_up()\n    write(\"\" + i, x + 14, -118, \"red\", 10)\n    write(\"\" + cnt, x + 14, -100 + cnt * 150 / n * 6 + 14, \"blue\", 9)\n    i = i + 1\nwrite(\"掷 \" + n + \" 次：每面理论 \" + n / 6 + \" 次\", -190, 140, \"red\", 12)\nwrite(\"次数越多越均匀！\", -190, 112, \"green\", 11)"
+    },
+    "math-26": {
+      "params": [
+        { "name": "spread", "label": "波动幅度", "min": 0, "max": 4, "step": 0.5, "value": 2 }
+      ],
+      "grid": true,
+      "explore": [
+        "红色平均线总在哪个位置？",
+        "波动越大，数据离平均线怎么样？",
+        "「平均水平」和「波动大小」是两件事"
+      ],
+      "code": "# 平均数探索台\nspread = 2   # 波动幅度\n\nhide()\npen_color(\"red\")\npen_down()\ngo_to(-170, 40)\ngo_to(170, 40)\npen_up()\nwrite(\"平均线 y=40\", 110, 55, \"red\", 10)\ni = 0\nwhile i < 10:\n    x = -160 + i * 34\n    if i < 5:\n        v = 40 + spread * (10 - i * 2)\n    if i >= 5:\n        v = 40 - spread * (10 - (i - 5) * 4 - 5)\n    pen_color(\"blue\")\n    pen_down()\n    go_to(x, 40)\n    go_to(x, v)\n    pen_up()\n    i = i + 1\nwrite(\"波动幅度 \" + spread, -190, 140, \"blue\", 13)\nif spread > 3:\n    write(\"忽高忽低，平均线最稳\", -190, 112, \"orange\", 11)\nif spread < 0.6:\n    write(\"大家都一样平\", -190, 112, \"green\", 11)"
+    },
+    "math-33": {
+      "params": [
+        { "name": "n", "label": "掷的次数", "min": 60, "max": 600, "step": 60, "value": 300, "unit": " 次" }
+      ],
+      "grid": false,
+      "explore": [
+        "「开出 6」的频率接近 16.7% 吗？",
+        "次数少和次数多，哪个更接近理论值？",
+        "频率稳定在概率附近——大数定律"
+      ],
+      "code": "# 频率估计概率探索台（掷出 6 的频率）\nn = 300   # 掷的次数\n\nhide()\ncount = 0\ni = 0\nwhile i < n:\n    if random(1, 6) == 6:\n        count = count + 1\n    i = i + 1\nfreq = count * 100 / n\npen_color(\"blue\")\npen_down()\ngo_to(-140, -100)\ngo_to(-140, -100 + freq * 2)\ngo_to(-20, -100 + freq * 2)\ngo_to(-20, -100)\ngo_to(-140, -100)\npen_up()\nwrite(\"实测频率 \" + freq + \"%\", -120, -125, \"blue\", 12)\npen_color(\"red\")\npen_down()\ngo_to(-140, -100 + 16.7 * 2)\ngo_to(140, -100 + 16.7 * 2)\npen_up()\nwrite(\"理论 1/6≈16.7%\", 20, -100 + 16.7 * 2 + 14, \"red\", 11)\nwrite(\"掷 \" + n + \" 次，开出 6 共 \" + count + \" 次\", -190, 140, \"red\", 13)\ndiff = freq - 16.7\nif diff > 0:\n    diff = diff\nwrite(\"与理论差 \" + diff + \" 个百分点\", -190, 112, \"orange\", 11)"
+    },
+    "math-40": {
+      "params": [
+        { "name": "n", "label": "掷骰次数", "min": 30, "max": 300, "step": 30, "value": 120, "unit": " 次" }
+      ],
+      "grid": false,
+      "explore": [
+        "柱状图哪根最高？都差不多高吗？",
+        "次数加多，柱子高度差别变大还是变小？",
+        "统计图让数据一眼看清"
+      ],
+      "code": "# 掷骰子画统计图探索台\nn = 120   # 掷的次数\n\nhide()\nc1 = 0\nc2 = 0\nc3 = 0\nc4 = 0\nc5 = 0\nc6 = 0\ni = 0\nwhile i < n:\n    f = random(1, 6)\n    if f == 1:\n        c1 = c1 + 1\n    if f == 2:\n        c2 = c2 + 1\n    if f == 3:\n        c3 = c3 + 1\n    if f == 4:\n        c4 = c4 + 1\n    if f == 5:\n        c5 = c5 + 1\n    if f == 6:\n        c6 = c6 + 1\n    i = i + 1\nmaxc = n / 2 + 1\ni = 1\nwhile i < 7:\n    if i == 1:\n        cnt = c1\n    if i == 2:\n        cnt = c2\n    if i == 3:\n        cnt = c3\n    if i == 4:\n        cnt = c4\n    if i == 5:\n        cnt = c5\n    if i == 6:\n        cnt = c6\n    x = -160 + i * 44\n    h = cnt * 160 / maxc\n    pen_color(\"blue\")\n    pen_down()\n    go_to(x, -100)\n    go_to(x, -100 + h)\n    go_to(x + 28, -100 + h)\n    go_to(x + 28, -100)\n    go_to(x, -100)\n    pen_up()\n    write(\"\" + cnt, x + 14, -100 + h + 13, \"blue\", 9)\n    i = i + 1\nwrite(\"n=\" + n + \" 的柱状图\", -190, 140, \"red\", 12)"
+    },
+    "math-50": {
+      "params": [
+        { "name": "n", "label": "抛硬币对数", "min": 5, "max": 60, "step": 5, "value": 20, "unit": " 组" }
+      ],
+      "grid": false,
+      "explore": [
+        "三种结果的比例接近 1:2:1 吗？",
+        "画树状图：第一枚 正/反 分两支，第二枚再分——共几条路？",
+        "「一正一反」为什么占一半？"
+      ],
+      "code": "# 两枚硬币概率树探索台\nn = 20   # 抛的组数\n\nhide()\nc0 = 0\nc1 = 0\nc2 = 0\ni = 0\nwhile i < n:\n    a = random(0, 1)\n    b = random(0, 1)\n    if a + b == 0:\n        c0 = c0 + 1\n    if a + b == 1:\n        c1 = c1 + 1\n    if a + b == 2:\n        c2 = c2 + 1\n    i = i + 1\npen_color(\"red\")\npen_down()\ngo_to(-150, -100)\ngo_to(-150, -100 + c0 * 160 / n * 2)\ngo_to(-70, -100 + c0 * 160 / n * 2)\ngo_to(-70, -100)\ngo_to(-150, -100)\npen_up()\nwrite(\"两正 \" + c0, -140, 40, \"red\", 11)\npen_color(\"green\")\npen_down()\ngo_to(-50, -100)\ngo_to(-50, -100 + c1 * 160 / n * 2)\ngo_to(30, -100 + c1 * 160 / n * 2)\ngo_to(30, -100)\ngo_to(-50, -100)\npen_up()\nwrite(\"一正一反 \" + c1, -40, 80, \"green\", 11)\npen_color(\"blue\")\npen_down()\ngo_to(50, -100)\ngo_to(50, -100 + c2 * 160 / n * 2)\ngo_to(130, -100 + c2 * 160 / n * 2)\ngo_to(130, -100)\ngo_to(50, -100)\npen_up()\nwrite(\"两反 \" + c2, 60, 40, \"blue\", 11)\nwrite(\"理论 1:2:1（中间是两头之和）\", -180, 140, \"orange\", 12)"
+    },
+    "cross-02": {
+      "params": [
+        { "name": "sides", "label": "正多边形边数", "min": 3, "max": 12, "step": 1, "value": 6 },
+        { "name": "copies", "label": "旋转复制份数", "min": 3, "max": 12, "step": 1, "value": 6 }
+      ],
+      "grid": false,
+      "explore": [
+        "旋转拼出的图案像万花筒吗？",
+        "份数变多，图案更繁还是更简？",
+        "美丽图案=一个图形+旋转对称"
+      ],
+      "code": "# 万花筒探索台：旋转的正多边形\nsides = 6    # 边数\ncopies = 6   # 复制份数\n\nhide()\nk = 0\nwhile k < copies:\n    rot = k * 360 / copies\n    pen_color(\"blue\")\n    if k == 0:\n        pen_color(\"red\")\n    pen_down()\n    i = 0\n    go_to(90 * cos(rot), 90 * sin(rot))\n    while i < sides:\n        ang = rot + (i + 1) * 360 / sides\n        go_to(90 * cos(ang), 90 * sin(ang))\n        i = i + 1\n    pen_up()\n    k = k + 1\nwrite(\"正\" + sides + \"边形 × 旋转\" + copies + \" 份\", -190, 150, \"red\", 12)"
+    }
+  }
+}

@@ -126,5 +126,40 @@
     }
   ],
   "textbook": "人教版数学七年级上册",
-  "grade": 7
+  "grade": 7,
+  "lab": {
+    "params": [
+      {
+        "name": "a",
+        "label": "系数 a",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "value": 2
+      },
+      {
+        "name": "b",
+        "label": "常数 b",
+        "min": -8,
+        "max": 8,
+        "step": 1,
+        "value": 3
+      },
+      {
+        "name": "c",
+        "label": "右边 c",
+        "min": -12,
+        "max": 20,
+        "step": 1,
+        "value": 11
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "方程的解 x 是几？拖滑块后看标注",
+      "x=(c−b)÷a——移项和系数化 1 的公式",
+      "把 c 改大 5，解 x 怎么变？"
+    ],
+    "code": "# 一元一次方程探索台：ax + b = c\na = 2   # 系数\nb = 3   # 常数\nc = 11  # 右边\n\nhide()\nx = (c - b) / a\npen_color(\"blue\")\npen_down()\ngo_to(-190, 0)\ngo_to(190, 0)\npen_up()\ngo_to(x * 22, 0)\npen_color(\"red\")\npen_down()\ngo_to(x * 22, 30)\npen_up()\nwrite(\"x=\" + x, x * 22 - 16, 45, \"red\", 14)\nwrite(a + \"x + \" + b + \" = \" + c, -190, 120, \"blue\", 13)\nwrite(\"x = (\" + c + \"−\" + b + \")÷\" + a + \" = \" + x, -190, 90, \"red\", 13)\nwrite(\"验证：\" + a + \"×\" + x + \"+\" + b + \" = \" + (a * x + b), -190, -70, \"green\", 12)"
+  }
 }

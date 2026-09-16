@@ -118,5 +118,32 @@
     }
   ],
   "textbook": "人教版数学九年级上册",
-  "grade": 9
+  "grade": 9,
+  "lab": {
+    "params": [
+      {
+        "name": "b",
+        "label": "系数 b",
+        "min": -8,
+        "max": 8,
+        "step": 1,
+        "value": -5
+      },
+      {
+        "name": "c",
+        "label": "常数 c",
+        "min": -8,
+        "max": 8,
+        "step": 1,
+        "value": 6
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "判别式 Δ=b²−4ac 大于 0 时有几个根？",
+      "拖 c 让 Δ 变成 0，两个根怎么了？",
+      "Δ<0 时抛物线和 x 轴还有交点吗？"
+    ],
+    "code": "# 二次方程探索台：y = x² + bx + c（a=1）\nb = -5   # 一次系数\nc = 6    # 常数\n\nhide()\na = 1\nd = b * b - 4 * a * c\nx1 = (0 - b + sqrt(d)) / (2 * a)\nx2 = (0 - b - sqrt(d)) / (2 * a)\npen_color(\"blue\")\npen_down()\nx = -6\ngo_to(x * 22, (x * x + b * x + c) * 12)\nwhile x < 6.01:\n    go_to(x * 22, (x * x + b * x + c) * 12)\n    x = x + 0.25\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(-190, 0)\ngo_to(190, 0)\npen_up()\nwrite(\"Δ = \" + d, -180, 140, \"orange\", 13)\nif d > 0:\n    write(\"两个根 x₁=\" + x1 + \" x₂=\" + x2, -180, 112, \"red\", 13)\n    write(\"x=\" + x1, x1 * 22 - 14, -22, \"red\", 11)\n    write(\"x=\" + x2, x2 * 22 - 14, -22, \"red\", 11)\nif d == 0:\n    write(\"Δ=0：两个根重合 x=\" + x1, -180, 112, \"red\", 13)\nif d < 0:\n    write(\"Δ<0：没有实数根（碰不到 x 轴）\", -180, 112, \"red\", 13)"
+  }
 }

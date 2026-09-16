@@ -136,5 +136,34 @@
       "explain": "只改一个参数观察结果变化——参数实验的科学方法"
     }
   ],
-  "textbook": "冀教版数学（小学）"
+  "textbook": "冀教版数学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "v",
+        "label": "速度",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "value": 8,
+        "unit": " 米/秒"
+      },
+      {
+        "name": "t",
+        "label": "时间",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "value": 5,
+        "unit": " 秒"
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "路程 = 速度 × 时间，拖滑块验证",
+      "速度翻倍，路程怎么变？时间翻倍呢？",
+      "想 10 秒走 100 米，速度要多少？"
+    ],
+    "code": "# 行程实验室：s = v × t\nv = 8   # 速度（米/秒）\nt = 5   # 时间（秒）\n\nhide()\ns = v * t\npen_color(\"blue\")\npen_down()\ngo_to(-190, 0)\ngo_to(-190 + s * 4, 0)\npen_up()\nwrite(\"出发\", -196, 22, \"blue\", 10)\nwrite(\"到达\", -190 + s * 4 - 20, 22, \"red\", 10)\ni = 1\nwhile i <= t:\n    write(\"\" + i, -190 + i * v * 4, -20, \"green\", 9)\n    i = i + 1\nwrite(\"s = \" + v + \" × \" + t + \" = \" + s + \" 米\", -190, 120, \"red\", 14)\nwrite(\"绿点是每秒走到的位置\", -190, 95, \"green\", 10)"
+  }
 }

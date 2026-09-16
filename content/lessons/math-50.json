@@ -115,5 +115,25 @@
   ],
   "codeLesson": true,
   "starterCode": "# 两枚硬币：枚举 + 模拟\nsay(\"四种结果：正正 正反 反正 反反\")\nsay(\"两正概率 = 1/4 = 25%\")\n\ncount = 0\nfor i in range(100):\n    a = random(1, 2)\n    b = random(1, 2)\n    if a == 1:\n        if b == 1:\n            count = count + 1\nsay(\"100 次模拟中两正出现 \" + count + \" 次\")\n",
-  "textbook": "人教版数学（初中）"
+  "textbook": "人教版数学（初中）",
+  "lab": {
+    "params": [
+      {
+        "name": "n",
+        "label": "抛硬币对数",
+        "min": 5,
+        "max": 60,
+        "step": 5,
+        "value": 20,
+        "unit": " 组"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "三种结果的比例接近 1:2:1 吗？",
+      "画树状图：第一枚 正/反 分两支，第二枚再分——共几条路？",
+      "「一正一反」为什么占一半？"
+    ],
+    "code": "# 两枚硬币概率树探索台\nn = 20   # 抛的组数\n\nhide()\nc0 = 0\nc1 = 0\nc2 = 0\ni = 0\nwhile i < n:\n    a = random(0, 1)\n    b = random(0, 1)\n    if a + b == 0:\n        c0 = c0 + 1\n    if a + b == 1:\n        c1 = c1 + 1\n    if a + b == 2:\n        c2 = c2 + 1\n    i = i + 1\npen_color(\"red\")\npen_down()\ngo_to(-150, -100)\ngo_to(-150, -100 + c0 * 160 / n * 2)\ngo_to(-70, -100 + c0 * 160 / n * 2)\ngo_to(-70, -100)\ngo_to(-150, -100)\npen_up()\nwrite(\"两正 \" + c0, -140, 40, \"red\", 11)\npen_color(\"green\")\npen_down()\ngo_to(-50, -100)\ngo_to(-50, -100 + c1 * 160 / n * 2)\ngo_to(30, -100 + c1 * 160 / n * 2)\ngo_to(30, -100)\ngo_to(-50, -100)\npen_up()\nwrite(\"一正一反 \" + c1, -40, 80, \"green\", 11)\npen_color(\"blue\")\npen_down()\ngo_to(50, -100)\ngo_to(50, -100 + c2 * 160 / n * 2)\ngo_to(130, -100 + c2 * 160 / n * 2)\ngo_to(130, -100)\ngo_to(50, -100)\npen_up()\nwrite(\"两反 \" + c2, 60, 40, \"blue\", 11)\nwrite(\"理论 1:2:1（中间是两头之和）\", -180, 140, \"orange\", 12)"
+  }
 }

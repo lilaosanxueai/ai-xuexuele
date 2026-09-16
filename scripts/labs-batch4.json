@@ -1,0 +1,234 @@
+{
+  "_说明": "互动实验室第四批：数学·数与代数（16 节：代码课精修 + 积木课原创演示代码）。注入：node scripts/inject-labs.mjs labs-batch4.json",
+  "labs": {
+    "math-01": {
+      "params": [
+        { "name": "start", "label": "起点", "min": -8, "max": 8, "step": 1, "value": -3 },
+        { "name": "delta", "label": "加（+）减（−）", "min": -10, "max": 10, "step": 1, "value": 5 }
+      ],
+      "grid": true,
+      "explore": [
+        "加上正数往哪边跳？加上负数呢？",
+        "起点 -3 加 5 到达几？减 5 呢？",
+        "什么时候会跳过 0？0 是正负的分界"
+      ],
+      "code": "# 数轴加减探索台\nstart = -3   # 起点\ndelta = 5     # 加减的数\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-200, 0)\ngo_to(200, 0)\npen_up()\ngo_to(start * 20, 0)\npen_color(\"red\")\npen_down()\ngo_to((start + delta) * 20, 0)\npen_up()\nwrite(\"起点\", start * 20, 22, \"blue\", 11)\nwrite(\"\" + start, start * 20, -22, \"blue\", 12)\nwrite(\"到达 \" + (start + delta), (start + delta) * 20 - 20, 42, \"red\", 14)\nif delta >= 0:\n    write(\"向右跳 \" + delta + \" 格（加正数）\", -190, 120, \"green\", 12)\nif delta < 0:\n    write(\"向左跳 \" + 0 - delta + \" 格（加负数=减）\", -190, 120, \"orange\", 12)"
+    },
+    "math-02": {
+      "params": [
+        { "name": "a", "label": "每跳格数", "min": 1, "max": 9, "step": 1, "value": 3 },
+        { "name": "b", "label": "跳的次数", "min": 1, "max": 9, "step": 1, "value": 4 }
+      ],
+      "grid": false,
+      "explore": [
+        "一共跳了几个格？a×b 算一算对一对",
+        "交换 a 和 b（跳 3 次每次 4 格），总数变吗？这就是乘法交换律",
+        "格子图里每行几个、共几行？"
+      ],
+      "code": "# 跳格子乘法探索台：a × b\na = 3   # 每次跳几格\nb = 4   # 跳几次\n\nhide()\ncol = 0\nrow = 0\ni = 0\nwhile i < a * b:\n    x = -180 + (i - row * b) * 24\n    y = 60 - row * 26\n    pen_color(\"blue\")\n    pen_down()\n    go_to(x, y)\n    go_to(x + 20, y)\n    go_to(x + 20, y - 20)\n    go_to(x, y - 20)\n    go_to(x, y)\n    pen_up()\n    if i - row * b == b - 1:\n        row = row + 1\n    i = i + 1\nwrite(\"每行 \" + b + \" 格 × \" + a + \" 行 = \" + a * b, -190, 100, \"red\", 14)\nwrite(\"乘法就是数格子！\", -190, 130, \"blue\", 12)"
+    },
+    "math-03": {
+      "params": [
+        { "name": "folds", "label": "对折次数", "min": 0, "max": 8, "step": 1, "value": 3, "unit": " 次" }
+      ],
+      "grid": true,
+      "explore": [
+        "每对折一次，剩下的厚度是原来的一半还是一倍？",
+        "对折 8 次后剩几分之几？",
+        "反过来看：一张纸展开几次能变回原来大小？"
+      ],
+      "code": "# 对折魔法探索台：每次减半\nfolds = 3   # 对折次数\n\nhide()\nleft = 1\ni = 0\nwhile i < folds:\n    left = left / 2\n    i = i + 1\nwrite(\"对折 \" + folds + \" 次：剩 \" + left, -190, 140, \"red\", 13)\npen_color(\"blue\")\npen_down()\ngo_to(-160, -80)\ngo_to(-160 + 150, -80)\ngo_to(-160 + 150, -80 + left * 200)\ngo_to(-160, -80 + left * 200)\ngo_to(-160, -80)\npen_up()\nwrite(\"剩余 \" + left, -60, -60 + left * 200, \"blue\", 11)\npen_color(\"green\")\npen_down()\ngo_to(-160, -80 + left * 200)\ngo_to(-10, -80 + left * 200)\npen_up()\nwrite(\"1/2 的 \" + folds + \" 次方\", -140, 120, \"green\", 11)\nif folds > 6:\n    write(\"已经很薄了！再折就看不见啦\", -40, -120, \"orange\", 11)"
+    },
+    "math-04": {
+      "params": [
+        { "name": "v", "label": "速度", "min": 1, "max": 20, "step": 1, "value": 8, "unit": " 米/秒" },
+        { "name": "t", "label": "时间", "min": 1, "max": 10, "step": 1, "value": 5, "unit": " 秒" }
+      ],
+      "grid": true,
+      "explore": [
+        "路程 = 速度 × 时间，拖滑块验证",
+        "速度翻倍，路程怎么变？时间翻倍呢？",
+        "想 10 秒走 100 米，速度要多少？"
+      ],
+      "code": "# 行程实验室：s = v × t\nv = 8   # 速度（米/秒）\nt = 5   # 时间（秒）\n\nhide()\ns = v * t\npen_color(\"blue\")\npen_down()\ngo_to(-190, 0)\ngo_to(-190 + s * 4, 0)\npen_up()\nwrite(\"出发\", -196, 22, \"blue\", 10)\nwrite(\"到达\", -190 + s * 4 - 20, 22, \"red\", 10)\ni = 1\nwhile i <= t:\n    write(\"\" + i, -190 + i * v * 4, -20, \"green\", 9)\n    i = i + 1\nwrite(\"s = \" + v + \" × \" + t + \" = \" + s + \" 米\", -190, 120, \"red\", 14)\nwrite(\"绿点是每秒走到的位置\", -190, 95, \"green\", 10)"
+    },
+    "math-21": {
+      "params": [
+        { "name": "total", "label": "总数量", "min": 2, "max": 30, "step": 1, "value": 12 },
+        { "name": "each", "label": "每组几个", "min": 2, "max": 6, "step": 1, "value": 4 }
+      ],
+      "grid": false,
+      "explore": [
+        "能正好分完吗？什么时候有剩余？",
+        "12 个分 4 个一组，分几组？换成 5 个一组呢？",
+        "除法就是「分组」：总 数 ÷ 每组 = 组数……余数"
+      ],
+      "code": "# 除法分组探索台\ntotal = 12   # 总数量\neach = 4     # 每组几个\n\nhide()\ngroups = total / each\nrem = total - groups * each\ni = 0\nwhile i < total:\n    col = i - (i / each) * each\n    row = i / each\n    x = -180 + col * 26\n    y = 70 - row * 30\n    pen_color(\"blue\")\n    pen_down()\n    go_to(x, y)\n    go_to(x + 20, y)\n    go_to(x + 20, y - 20)\n    go_to(x, y - 20)\n    go_to(x, y)\n    pen_up()\n    i = i + 1\nwrite(total + \" 个 ÷ 每组 \" + each + \" = \" + groups + \" 组\", -190, 130, \"red\", 13)\nif rem > 0:\n    write(\"还剩 \" + rem + \" 个分不完整\", -190, 105, \"orange\", 12)\nif rem == 0:\n    write(\"正好分完，没有余数！\", -190, 105, \"green\", 12)"
+    },
+    "math-22": {
+      "params": [
+        { "name": "shift", "label": "小数点移动", "min": -3, "max": 3, "step": 1, "value": 1, "unit": " 位" }
+      ],
+      "grid": false,
+      "explore": [
+        "小数点右移一位，数字变大还是变小？几倍？",
+        "左移两位呢？",
+        "0.右移 3 位变成什么？左移 3 位呢？"
+      ],
+      "code": "# 小数点大冒险探索台\nshift = 1   # 小数点移动位数（右正左负）\n\nhide()\nbase = 2.5\nval = base\ni = 0\nwhile i < shift:\n    val = val * 10\n    i = i + 1\ni = 0\nwhile i > shift:\n    val = val / 10\n    i = i - 1\nwrite(\"原数 \" + base, -100, 120, \"blue\", 14)\nwrite(\"→ 小数点\" , -100, 85, \"orange\", 12)\nif shift > 0:\n    write(\"右移 \" + shift + \" 位\", -30, 85, \"red\", 13)\nif shift < 0:\n    write(\"左移 \" + 0 - shift + \" 位\", -30, 85, \"red\", 13)\nif shift == 0:\n    write(\"不动\", -30, 85, \"red\", 13)\nwrite(\"= \" + val, -100, 40, \"red\", 16)\nwrite(\"右移×10 左移÷10\", -90, -30, \"green\", 12)"
+    },
+    "math-36": {
+      "params": [
+        { "name": "n1", "label": "第一段分子", "min": 1, "max": 5, "step": 1, "value": 1 },
+        { "name": "n2", "label": "第二段分子", "min": 1, "max": 5, "step": 1, "value": 1 }
+      ],
+      "grid": true,
+      "explore": [
+        "两段拼起来一共几分之几？（分母都是 4）",
+        "分子相加、分母不变——为什么？",
+        "拼满 1（到达数轴上的 4/4）需要几段？"
+      ],
+      "code": "# 分数加法探索台（分母固定为 4）\nn1 = 1   # 第一段：n1/4\nn2 = 1   # 第二段：n2/4\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-160, 20)\ngo_to(-160 + n1 * 40, 20)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(-160 + n1 * 40, 20)\ngo_to(-160 + (n1 + n2) * 40, 20)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-160 + 160, 35)\ngo_to(-160 + 160, 5)\npen_up()\nwrite(\"1（4/4）\", -160 + 160 - 24, 48, \"red\", 10)\nwrite(n1 + \"/4\", -160 + n1 * 20, -18, \"blue\", 12)\nwrite(n2 + \"/4\", -160 + n1 * 40 + n2 * 20, -18, \"green\", 12)\ntotal = n1 + n2\nwrite(n1 + \"/4 + \" + n2 + \"/4 = \" + total + \"/4\", -190, 120, \"red\", 14)\nwrite(\"分子相加，分母不变\", -190, 95, \"orange\", 11)\nif total >= 4:\n    write(\"拼满了 1 还多！\", 40, 150, \"green\", 11)"
+    },
+    "math-37": {
+      "params": [
+        { "name": "a", "label": "宽 a", "min": 1, "max": 6, "step": 1, "value": 3 },
+        { "name": "b", "label": "高 b", "min": 1, "max": 6, "step": 1, "value": 4 }
+      ],
+      "grid": true,
+      "explore": [
+        "大长方形的面积怎么算？（a+b）×c",
+        "切成两块分别算再相加 a×c+b×c，一样吗？",
+        "这就是乘法分配律：面积证明！"
+      ],
+      "code": "# 乘法分配律探索台：(a+b)×c 的面积证明\na = 3   # 左块宽\nb = 4   # 右块宽\n\nhide()\nc = 5\npen_color(\"blue\")\npen_down()\ngo_to(-150, -90)\ngo_to(-150 + a * 22, -90)\ngo_to(-150 + a * 22, -90 + c * 22)\ngo_to(-150, -90 + c * 22)\ngo_to(-150, -90)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(-150 + a * 22, -90)\ngo_to(-150 + (a + b) * 22, -90)\ngo_to(-150 + (a + b) * 22, -90 + c * 22)\ngo_to(-150 + a * 22, -90 + c * 22)\ngo_to(-150 + a * 22, -90)\npen_up()\nwrite(\"a=\" + a, -150 + a * 11, -108, \"blue\", 11)\nwrite(\"b=\" + b, -150 + a * 22 + b * 11, -108, \"green\", 11)\nwrite(\"c=\" + c, -168, -90 + c * 11, \"red\", 11)\nwrite(\"(\" + a + \"+\" + b + \")×\" + c + \" = \" + (a + b) * c, -190, 130, \"red\", 13)\nwrite(a + \"×\" + c + \"+\" + b + \"×\" + c + \" = \" + a * c + \"+\" + b * c + \" = \" + (a * c + b * c), -190, 105, \"blue\", 12)"
+    },
+    "math-07": {
+      "params": [
+        { "name": "a", "label": "字母 a 的值", "min": -10, "max": 10, "step": 1, "value": 3 },
+        { "name": "b", "label": "字母 b 的值", "min": -10, "max": 10, "step": 1, "value": 5 }
+      ],
+      "grid": false,
+      "explore": [
+        "同一个式子 a+b，字母取值不同答案一样吗？",
+        "a=b 时 2a 和 a+b 相等吗？",
+        "字母表示数：式子是「装数的袋子」"
+      ],
+      "code": "# 代数式探索台：字母是会变的数\na = 3   # 字母 a\nb = 5   # 字母 b\n\nhide()\nwrite(\"a=\" + a + \"  b=\" + b, -150, 130, \"blue\", 14)\nwrite(\"a + b = \" + (a + b), -150, 85, \"red\", 15)\nwrite(\"a × b = \" + a * b, -150, 50, \"red\", 15)\nwrite(\"2a = \" + 2 * a + \"（= a+a）\", -150, 15, \"green\", 13)\nwrite(\"a²= \" + a * a, 40, 15, \"green\", 13)\nif a == b:\n    write(\"a=b 时：2a = a+b = \" + 2 * a, -150, -40, \"orange\", 12)\nif a != b:\n    write(\"a≠b 时：2a=\" + 2 * a + \" ≠ a+b=\" + a + b, -150, -40, \"orange\", 12)\nwrite(\"换一组值试试，式子不变、答案变\", -150, -80, \"blue\", 11)"
+    },
+    "math-16": {
+      "params": [
+        { "name": "a", "label": "系数 a", "min": 1, "max": 5, "step": 1, "value": 2 },
+        { "name": "b", "label": "常数 b", "min": -8, "max": 8, "step": 1, "value": 3 },
+        { "name": "c", "label": "右边 c", "min": -12, "max": 20, "step": 1, "value": 11 }
+      ],
+      "grid": true,
+      "explore": [
+        "方程的解 x 是几？拖滑块后看标注",
+        "x=(c−b)÷a——移项和系数化 1 的公式",
+        "把 c 改大 5，解 x 怎么变？"
+      ],
+      "code": "# 一元一次方程探索台：ax + b = c\na = 2   # 系数\nb = 3   # 常数\nc = 11  # 右边\n\nhide()\nx = (c - b) / a\npen_color(\"blue\")\npen_down()\ngo_to(-190, 0)\ngo_to(190, 0)\npen_up()\ngo_to(x * 22, 0)\npen_color(\"red\")\npen_down()\ngo_to(x * 22, 30)\npen_up()\nwrite(\"x=\" + x, x * 22 - 16, 45, \"red\", 14)\nwrite(a + \"x + \" + b + \" = \" + c, -190, 120, \"blue\", 13)\nwrite(\"x = (\" + c + \"−\" + b + \")÷\" + a + \" = \" + x, -190, 90, \"red\", 13)\nwrite(\"验证：\" + a + \"×\" + x + \"+\" + b + \" = \" + (a * x + b), -190, -70, \"green\", 12)"
+    },
+    "math-17": {
+      "params": [
+        { "name": "b", "label": "系数 b", "min": -8, "max": 8, "step": 1, "value": -5 },
+        { "name": "c", "label": "常数 c", "min": -8, "max": 8, "step": 1, "value": 6 }
+      ],
+      "grid": true,
+      "explore": [
+        "判别式 Δ=b²−4ac 大于 0 时有几个根？",
+        "拖 c 让 Δ 变成 0，两个根怎么了？",
+        "Δ<0 时抛物线和 x 轴还有交点吗？"
+      ],
+      "code": "# 二次方程探索台：y = x² + bx + c（a=1）\nb = -5   # 一次系数\nc = 6    # 常数\n\nhide()\na = 1\nd = b * b - 4 * a * c\nx1 = (0 - b + sqrt(d)) / (2 * a)\nx2 = (0 - b - sqrt(d)) / (2 * a)\npen_color(\"blue\")\npen_down()\nx = -6\ngo_to(x * 22, (x * x + b * x + c) * 12)\nwhile x < 6.01:\n    go_to(x * 22, (x * x + b * x + c) * 12)\n    x = x + 0.25\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(-190, 0)\ngo_to(190, 0)\npen_up()\nwrite(\"Δ = \" + d, -180, 140, \"orange\", 13)\nif d > 0:\n    write(\"两个根 x₁=\" + x1 + \" x₂=\" + x2, -180, 112, \"red\", 13)\n    write(\"x=\" + x1, x1 * 22 - 14, -22, \"red\", 11)\n    write(\"x=\" + x2, x2 * 22 - 14, -22, \"red\", 11)\nif d == 0:\n    write(\"Δ=0：两个根重合 x=\" + x1, -180, 112, \"red\", 13)\nif d < 0:\n    write(\"Δ<0：没有实数根（碰不到 x 轴）\", -180, 112, \"red\", 13)"
+    },
+    "math-19": {
+      "params": [
+        { "name": "n", "label": "加到几", "min": 5, "max": 100, "step": 5, "value": 100, "unit": "" }
+      ],
+      "grid": true,
+      "explore": [
+        "1 加到 n，循环算和高斯公式一样快吗？答案相同吗？",
+        "首项+尾项 = 1+n，乘 n 再除 2——梯形面积的理解",
+        "n 变大，和增长得有多快？"
+      ],
+      "code": "# 高斯求和探索台：1+2+…+n\nn = 100   # 加到几\n\nhide()\ngauss = n * (n + 1) / 2\npen_color(\"blue\")\npen_down()\ngo_to(-180, -100)\ngo_to(-180, -100 + n * 2)\ngo_to(-180 + 150, -100 + n * 2)\ngo_to(-180 + 150, -100)\npen_up()\nwrite(\"1\", -190, -100 + 20, \"blue\", 10)\nwrite(n, -30, -100 + n * 2 + 12, \"blue\", 10)\nwrite(\"高斯公式 n(n+1)/2：\", -190, 140, \"blue\", 12)\nwrite(\"1+2+…+\" + n + \" = \" + gauss, -190, 112, \"red\", 14)\nwrite(\"想象成梯形面积：(1+\" + n + \")×\" + n + \"÷2\", -190, -70, \"green\", 11)"
+    },
+    "math-20": {
+      "params": [
+        { "name": "goal", "label": "目标数", "min": 100, "max": 1000000, "step": 100, "value": 1000000 }
+      ],
+      "grid": true,
+      "explore": [
+        "指数选手每次翻倍，到一百万只要几步？",
+        "加法选手每次加 1000，到一百万要多少步？（比较标注）",
+        "为什么指数增长「爆炸」？"
+      ],
+      "code": "# 三种增长大赛跑探索台\ngoal = 1000000   # 目标数\n\nhide()\np = 1\nsteps = 0\nwhile p < goal:\n    p = p * 2\n    steps = steps + 1\npen_color(\"red\")\npen_down()\ngo_to(-180, -110)\nxx = -180\ni = 0\nv = 1\nwhile i < steps:\n    v = v * 2\n    xx = xx + 190 / steps\n    go_to(xx, -110 + v / goal * 200)\n    i = i + 1\npen_up()\nwrite(\"指数翻倍：\" + steps + \" 步到 \" + goal, -190, 140, \"red\", 13)\naddSteps = goal / 1000\npen_color(\"blue\")\npen_down()\ngo_to(-180, -110)\nxx = -180\ni = 0\nwhile i < steps:\n    xx = xx + 190 / steps\n    go_to(xx, -110 + (xx + 180) / 190 * 100 / 10)\n    i = i + 1\npen_up()\nwrite(\"每次+1000：要 \" + addSteps + \" 步（差 \" + addSteps / steps + \" 倍）\", -190, 112, \"blue\", 12)"
+    },
+    "math-27": {
+      "params": [
+        { "name": "price", "label": "原价", "min": 20, "max": 500, "step": 10, "value": 200, "unit": " 元" },
+        { "name": "discount", "label": "折扣", "min": 1, "max": 9, "step": 0.5, "value": 8, "unit": " 折" }
+      ],
+      "grid": false,
+      "explore": [
+        "打折后实付多少？（看标注）",
+        "折扣每低 1 折，便宜多少？",
+        "「打 8 折」= 付原价的百分之几？"
+      ],
+      "code": "# 打折计算器探索台\nprice = 200     # 原价\ndiscount = 8    # 折扣（8=八折）\n\nhide()\npay = price * discount / 10\npen_color(\"blue\")\npen_down()\ngo_to(-160, -100)\ngo_to(-160, -100 + price / 4)\ngo_to(-80, -100 + price / 4)\ngo_to(-80, -100)\ngo_to(-160, -100)\npen_up()\nwrite(\"原价 \" + price, -150, -125, \"blue\", 11)\npen_color(\"red\")\npen_down()\ngo_to(-20, -100)\ngo_to(-20, -100 + pay / 4)\ngo_to(60, -100 + pay / 4)\ngo_to(60, -100)\ngo_to(-20, -100)\npen_up()\nwrite(\"实付 \" + pay, -5, -125, \"red\", 11)\nwrite(price + \" 元打 \" + discount + \" 折 = \" + pay + \" 元\", -190, 130, \"red\", 14)\nwrite(\"省了 \" + (price - pay) + \" 元（\" + (10 - discount) * 10 + \"%）\", -190, 102, \"green\", 12)"
+    },
+    "math-28": {
+      "params": [
+        { "name": "total", "label": "总量", "min": 20, "max": 200, "step": 10, "value": 100, "unit": " 元" },
+        { "name": "ra", "label": "甲的份数", "min": 1, "max": 5, "step": 1, "value": 2 },
+        { "name": "rb", "label": "乙的份数", "min": 1, "max": 5, "step": 1, "value": 3 }
+      ],
+      "grid": false,
+      "explore": [
+        "甲和乙各分多少？（看标注）",
+        "份数比 2:3，分到的钱也是 2:3 吗？",
+        "总量变多，比例变吗？"
+      ],
+      "code": "# 按比例分配探索台\ntotal = 100   # 总量\nra = 2        # 甲的份数\nrb = 3        # 乙的份数\n\nhide()\na = total * ra / (ra + rb)\nb = total * rb / (ra + rb)\npen_color(\"blue\")\npen_down()\ngo_to(-170, -100)\ngo_to(-170, -100 + a / total * 180)\ngo_to(-20, -100 + a / total * 180)\ngo_to(-20, -100)\ngo_to(-170, -100)\npen_up()\nwrite(\"甲 \" + a, -130, -125, \"blue\", 11)\npen_color(\"green\")\npen_down()\ngo_to(0, -100)\ngo_to(0, -100 + b / total * 180)\ngo_to(150, -100 + b / total * 180)\ngo_to(150, -100)\ngo_to(0, -100)\npen_up()\nwrite(\"乙 \" + b, 60, -125, \"green\", 11)\nwrite(total + \" 按 \" + ra + \":\" + rb + \" 分：甲 \" + a + \" 乙 \" + b, -190, 130, \"red\", 13)\nwrite(\"甲/乙 = \" + a / b + \"（还是 \" + ra + \":\" + rb + \"）\", -190, 102, \"orange\", 11)"
+    },
+    "math-31": {
+      "params": [
+        { "name": "rhs", "label": "右边数字", "min": 2, "max": 15, "step": 1, "value": 8 }
+      ],
+      "grid": true,
+      "explore": [
+        "x+2<rhs 的解有哪些？（绿点标出的数）",
+        "解集到哪个数为止？边界那个数是解吗？",
+        "不等式的解是一大片，方程的解只有一个"
+      ],
+      "code": "# 不等式解集探索台：x + 2 < rhs\nrhs = 8   # 右边的数\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-190, 0)\ngo_to(190, 0)\npen_up()\nx = -3\nwhile x < rhs - 2 + 0.1:\n    pen_color(\"green\")\n    go_to(x * 22, 0)\n    pen_down()\n    go_to(x * 22, 18)\n    pen_up()\n    x = x + 1\npen_color(\"red\")\npen_down()\ngo_to((rhs - 2) * 22, 25)\ngo_to((rhs - 2) * 22, -10)\npen_up()\nwrite(\"x=\" + (rhs - 2) + \" 不是解（<不能带等号）\", (rhs - 2) * 22 - 60, 45, \"red\", 10)\nwrite(\"x + 2 < \" + rhs + \" 的解集：x < \" + (rhs - 2), -190, 120, \"blue\", 13)\nwrite(\"绿色都是解——一整片！\", -190, 92, \"green\", 11)"
+    },
+    "math-41": {
+      "params": [
+        { "name": "x", "label": "x 的值", "min": -10, "max": 10, "step": 1, "value": 10 }
+      ],
+      "grid": false,
+      "explore": [
+        "3x+2x 和 5x 相等吗？换任何 x 都相等吗？",
+        "3x+2y 为什么不能合并成 5xy？",
+        "「同类」才能合并：字母完全相同"
+      ],
+      "code": "# 合并同类项探索台\nx = 10   # x 的取值\n\nhide()\ny = 1\nwrite(\"x=\" + x, -170, 140, \"blue\", 13)\nwrite(\"3x + 2x = \" + (3 * x + 2 * x), -170, 95, \"red\", 15)\nwrite(\"5x = \" + 5 * x, -170, 60, \"red\", 15)\nif 3 * x + 2 * x == 5 * x:\n    write(\"✓ 相等：同类项可以合并\", -170, 20, \"green\", 12)\nwrite(\"3x + 2y = \" + (3 * x + 2 * y), -170, -30, \"orange\", 13)\nwrite(\"5xy = \" + 5 * x * y, -170, -65, \"orange\", 13)\nif 3 * x + 2 * y != 5 * x * y:\n    write(\"✗ 不相等：x 和 y 不是同类项！\", -170, -110, \"red\", 12)"
+    },
+    "math-49": {
+      "params": [
+        { "name": "x", "label": "代入 x", "min": -5, "max": 8, "step": 1, "value": 3 }
+      ],
+      "grid": false,
+      "explore": [
+        "左右两边代入后相等吗？换 x 试试都相等？",
+        "(x+2)(x+3) 展开后是什么？",
+        "因式分解 ↔ 整式乘法，互为逆过程"
+      ],
+      "code": "# 因式分解验证探索台：(x+2)(x+3) = x²+5x+6\nx = 3   # 代入验证的值\n\nhide()\nleft = (x + 2) * (x + 3)\nright = x * x + 5 * x + 6\nwrite(\"x = \" + x, -150, 140, \"blue\", 13)\nwrite(\"左：(x+2)(x+3) = \" + left, -150, 95, \"red\", 14)\nwrite(\"右：x²+5x+6 = \" + right, -150, 58, \"red\", 14)\nif left == right:\n    write(\"✓ 恒等！换成任何 x 都相等\", -150, 10, \"green\", 13)\nif left != right:\n    write(\"✗ 不相等？\", -150, 10, \"orange\", 13)\nwrite(\"乘开：(x+2)(x+3) = x²+5x+6\", -150, -45, \"blue\", 12)\nwrite(\"分解：x²+5x+6 = (x+2)(x+3)\", -150, -80, \"orange\", 12)"
+    }
+  }
+}

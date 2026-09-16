@@ -142,5 +142,32 @@
     }
   ],
   "textbook": "人教A版数学必修第二册",
-  "grade": 10
+  "grade": 10,
+  "lab": {
+    "params": [
+      {
+        "name": "a1",
+        "label": "第一次距离",
+        "min": 20,
+        "max": 150,
+        "step": 10,
+        "value": 100
+      },
+      {
+        "name": "a2",
+        "label": "第二次距离",
+        "min": 20,
+        "max": 150,
+        "step": 10,
+        "value": 60
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "蓝色+红色两段接力，总位移（绿色虚线）从起点指向哪？",
+      "两次行走的长度之和，和总位移哪个长？（三角形两边之和>第三边）",
+      "向量加法：首尾相接，三角形法则"
+    ],
+    "code": "# 向量加法探索台：三角形法则\na1 = 100   # 第一次走\na2 = 60    # 第二次走\n\nhide()\nx1 = a1 * cos(30)\ny1 = a1 * sin(30)\nx2 = x1 + a2 * cos(-40)\ny2 = y1 + a2 * sin(-40)\npen_color(\"blue\")\npen_down()\ngo_to(-80, -70)\ngo_to(-80 + x1, -70 + y1)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-80 + x1, -70 + y1)\ngo_to(-80 + x2, -70 + y2)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(-80, -70)\ngo_to(-80 + x2, -70 + y2)\npen_up()\nwrite(\"①\", -80 + x1 / 2 - 18, -70 + y1 / 2, \"blue\", 11)\nwrite(\"②\", -80 + (x1 + x2) / 2 + 10, -70 + (y1 + y2) / 2, \"red\", 11)\nwrite(\"和向量（起点→终点）\", -80 + x2 / 2 - 60, -70 + y2 / 2 - 25, \"green\", 10)\nd = sqrt(x2 * x2 + y2 * y2)\nwrite(\"|①|+|②|=\" + a1 + \"+\" + a2 + \" > |和|=\" + d, -190, 140, \"red\", 12)\nwrite(\"首尾相接：三角形法则\", -190, 112, \"blue\", 11)"
+  }
 }

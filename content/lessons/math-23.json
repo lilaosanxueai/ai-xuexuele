@@ -138,5 +138,32 @@
       "explain": "割补与凑整：估算不规则图形面积的基本功"
     }
   ],
-  "textbook": "冀教版数学（小学）"
+  "textbook": "冀教版数学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "w",
+        "label": "横向格数",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "value": 5
+      },
+      {
+        "name": "h",
+        "label": "纵向格数",
+        "min": 2,
+        "max": 8,
+        "step": 1,
+        "value": 4
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "数一数：格子图里共有几个小正方形？",
+      "面积 = 横格数 × 纵格数，拖滑块验证",
+      "每行几个 × 有几行 = 总数（乘法的面积意义）"
+    ],
+    "code": "# 数格子算面积探索台\nw = 5   # 横向格数\nh = 4   # 纵向格数\n\nhide()\ni = 0\nwhile i < w:\n    j = 0\n    while j < h:\n        x = -150 + i * 28\n        y = 70 - j * 28\n        pen_color(\"blue\")\n        pen_down()\n        go_to(x, y)\n        go_to(x + 24, y)\n        go_to(x + 24, y - 24)\n        go_to(x, y - 24)\n        go_to(x, y)\n        pen_up()\n        j = j + 1\n    i = i + 1\nwrite(w + \" × \" + h + \" = \" + w * h + \" 个格子\", -190, 130, \"red\", 14)\nwrite(\"面积就是数格子！\", -190, 102, \"blue\", 11)"
+  }
 }

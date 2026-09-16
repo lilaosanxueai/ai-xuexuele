@@ -144,5 +144,32 @@
       "explain": "x=100 在右侧，y=50 在上方——右上方！"
     }
   ],
-  "textbook": "冀教版数学（小学）"
+  "textbook": "冀教版数学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "tx",
+        "label": "宝藏横坐标 x",
+        "min": -8,
+        "max": 8,
+        "step": 1,
+        "value": 5
+      },
+      {
+        "name": "ty",
+        "label": "宝藏纵坐标 y",
+        "min": -5,
+        "max": 5,
+        "step": 1,
+        "value": 3
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "宝藏藏在哪里？用坐标 (x, y) 报出它的位置",
+      "横坐标变负数，宝藏跑到哪边？",
+      "坐标就是「第几列第几行」的精确说法"
+    ],
+    "code": "# 坐标小侦探探索台\ntx = 5   # 宝藏 x\nty = 3   # 宝藏 y\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-190, ty * 30)\ngo_to(190, ty * 30)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(tx * 30, -150)\ngo_to(tx * 30, 150)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(tx * 30 - 8, ty * 30 + 8)\ngo_to(tx * 30 + 8, ty * 30 + 8)\ngo_to(tx * 30 + 8, ty * 30 - 8)\ngo_to(tx * 30 - 8, ty * 30 - 8)\ngo_to(tx * 30 - 8, ty * 30 + 8)\npen_up()\nwrite(\"宝藏 (\" + tx + \", \" + ty + \")\", tx * 30 - 30, ty * 30 + 26, \"red\", 12)\nwrite(\"蓝线=y\" + ty, -180, ty * 30 + 16, \"blue\", 9)\nwrite(\"绿线=x\" + tx, tx * 30 + 22, -140, \"green\", 9)\nwrite(\"先横后纵，交叉点就是宝藏！\", -190, 150, \"orange\", 11)"
+  }
 }

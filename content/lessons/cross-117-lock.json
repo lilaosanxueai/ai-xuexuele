@@ -142,5 +142,33 @@
     }
   ],
   "textbook": "人教A版数学选择性必修第三册",
-  "grade": 12
+  "grade": 12,
+  "lab": {
+    "params": [
+      {
+        "name": "n",
+        "label": "密码位数",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "value": 4,
+        "unit": " 位"
+      },
+      {
+        "name": "base",
+        "label": "每位选项数",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "value": 10
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "密码组合数 = 选项数^位数，拖滑块看总数",
+      "位数 +1，组合数变几倍？",
+      "这就是为什么长密码更难破解！"
+    ],
+    "code": "# 密码锁的数学探索台：组合数 = base^n\nn = 4     # 密码位数\nbase = 10 # 每位选项数\n\ntotal = 1\ni = 0\nwhile i < n:\n    total = total * base\n    pen_color(\"blue\")\n    pen_down()\n    x = -170 + i * 42\n    h = total / 100\n    if h > 150:\n        h = 150\n    go_to(x, -100)\n    go_to(x, -100 + h)\n    go_to(x + 32, -100 + h)\n    go_to(x + 32, -100)\n    go_to(x, -100)\n    pen_up()\n    i = i + 1\nhide()\nwrite(\"每位 \" + base + \" 选，\" + n + \" 位密码：\", -190, 140, \"blue\", 12)\nwrite(\"共 \" + total + \" 种组合\", -190, 112, \"red\", 13)\nwrite(\"每加一位 → ×\" + base, -190, 84, \"orange\", 11)"
+  }
 }

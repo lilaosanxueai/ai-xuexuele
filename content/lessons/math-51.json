@@ -115,5 +115,25 @@
   ],
   "codeLesson": true,
   "starterCode": "# 单位换算器\nsay(\"1.5 小时 = \" + 1.5 * 60 + \" 分钟\")\nsay(\"3.5 千米 = \" + 3.5 * 1000 + \" 米\")\nsay(\"2.5 千克 = \" + 2.5 * 1000 + \" 克\")\n",
-  "textbook": "冀教版数学（小学）"
+  "textbook": "冀教版数学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "hours",
+        "label": "小时数",
+        "min": 0.5,
+        "max": 6,
+        "step": 0.5,
+        "value": 1.5,
+        "unit": " 时"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "1.5 小时等于多少分钟？换算对吗？",
+      "0.5 小时是 30 分钟——半点怎么算？",
+      "时→分乘 60，分→秒也乘 60"
+    ],
+    "code": "# 时分秒换算探索台\nhours = 1.5   # 小时数\n\nhide()\nmins = hours * 60\nsecs = mins * 60\npen_color(\"blue\")\npen_down()\ngo_to(-170, -100)\ngo_to(-170, -100 + hours * 40)\ngo_to(-90, -100 + hours * 40)\ngo_to(-90, -100)\ngo_to(-170, -100)\npen_up()\nwrite(hours + \" 时\", -160, -125, \"blue\", 11)\npen_color(\"green\")\npen_down()\ngo_to(-40, -100)\ngo_to(-40, -100 + mins / 9)\ngo_to(40, -100 + mins / 9)\ngo_to(40, -100)\ngo_to(-40, -100)\npen_up()\nwrite(mins + \" 分\", -25, -125, \"green\", 11)\npen_color(\"red\")\npen_down()\ngo_to(90, -100)\ngo_to(90, -100 + mins / 9)\ngo_to(170, -100 + mins / 9)\ngo_to(170, -100)\ngo_to(90, -100)\npen_up()\nwrite(secs / 60 + \" 分\", 110, -125, \"red\", 11)\nwrite(hours + \" 时 = \" + mins + \" 分 = \" + secs + \" 秒\", -190, 140, \"red\", 13)\nwrite(\"相邻单位进率 60\", -190, 112, \"orange\", 11)"
+  }
 }

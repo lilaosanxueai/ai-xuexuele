@@ -140,5 +140,32 @@
       "explain": "分母不同要先通分"
     }
   ],
-  "textbook": "冀教版数学（小学）"
+  "textbook": "冀教版数学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "n1",
+        "label": "第一段分子",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "value": 1
+      },
+      {
+        "name": "n2",
+        "label": "第二段分子",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "两段拼起来一共几分之几？（分母都是 4）",
+      "分子相加、分母不变——为什么？",
+      "拼满 1（到达数轴上的 4/4）需要几段？"
+    ],
+    "code": "# 分数加法探索台（分母固定为 4）\nn1 = 1   # 第一段：n1/4\nn2 = 1   # 第二段：n2/4\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-160, 20)\ngo_to(-160 + n1 * 40, 20)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(-160 + n1 * 40, 20)\ngo_to(-160 + (n1 + n2) * 40, 20)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-160 + 160, 35)\ngo_to(-160 + 160, 5)\npen_up()\nwrite(\"1（4/4）\", -160 + 160 - 24, 48, \"red\", 10)\nwrite(n1 + \"/4\", -160 + n1 * 20, -18, \"blue\", 12)\nwrite(n2 + \"/4\", -160 + n1 * 40 + n2 * 20, -18, \"green\", 12)\ntotal = n1 + n2\nwrite(n1 + \"/4 + \" + n2 + \"/4 = \" + total + \"/4\", -190, 120, \"red\", 14)\nwrite(\"分子相加，分母不变\", -190, 95, \"orange\", 11)\nif total >= 4:\n    write(\"拼满了 1 还多！\", 40, 150, \"green\", 11)"
+  }
 }

@@ -117,5 +117,24 @@
       "explain": "化圆为方：分割拼补推出 S=πr²"
     }
   ],
-  "textbook": "人教版数学（初中）"
+  "textbook": "人教版数学（初中）",
+  "lab": {
+    "params": [
+      {
+        "name": "r",
+        "label": "半径 r",
+        "min": 1,
+        "max": 6,
+        "step": 0.5,
+        "value": 3
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "圆的面积 = πr²，拖半径验证",
+      "半径翻倍，面积变几倍？",
+      "把圆切成小扇形拼成「长方形」，宽是 r 长是 πr"
+    ],
+    "code": "# 圆的面积探索台：S = πr²\nr = 3   # 半径\n\nhide()\npen_color(\"blue\")\npen_down()\ni = 0\ngo_to(r * 25, 0)\nwhile i < 72:\n    ang = (i + 1) * 5\n    go_to(r * 25 * cos(ang), r * 25 * sin(ang))\n    i = i + 1\npen_up()\nS = 3.14159 * r * r\npen_color(\"red\")\npen_down()\ngo_to(r * 25 * cos(45), r * 25 * sin(45))\ngo_to(0, 0)\npen_up()\nwrite(\"r\", r * 12 * cos(45), r * 12 * sin(45), \"red\", 12)\nwrite(\"r=\" + r + \" → 面积=π×\" + r + \"²=\" + S, -190, 140, \"red\", 13)\nwrite(\"半径×2 → 面积×4（² 的威力）\", -190, 112, \"orange\", 11)"
+  }
 }

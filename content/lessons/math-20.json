@@ -125,5 +125,24 @@
       "explain": "每圈 ×2：循环内乘法累积=指数增长"
     }
   ],
-  "textbook": "人教A版数学（高中）"
+  "textbook": "人教A版数学（高中）",
+  "lab": {
+    "params": [
+      {
+        "name": "goal",
+        "label": "目标数",
+        "min": 100,
+        "max": 1000000,
+        "step": 100,
+        "value": 1000000
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "指数选手每次翻倍，到一百万只要几步？",
+      "加法选手每次加 1000，到一百万要多少步？（比较标注）",
+      "为什么指数增长「爆炸」？"
+    ],
+    "code": "# 三种增长大赛跑探索台\ngoal = 1000000   # 目标数\n\nhide()\np = 1\nsteps = 0\nwhile p < goal:\n    p = p * 2\n    steps = steps + 1\npen_color(\"red\")\npen_down()\ngo_to(-180, -110)\nxx = -180\ni = 0\nv = 1\nwhile i < steps:\n    v = v * 2\n    xx = xx + 190 / steps\n    go_to(xx, -110 + v / goal * 200)\n    i = i + 1\npen_up()\nwrite(\"指数翻倍：\" + steps + \" 步到 \" + goal, -190, 140, \"red\", 13)\naddSteps = goal / 1000\npen_color(\"blue\")\npen_down()\ngo_to(-180, -110)\nxx = -180\ni = 0\nwhile i < steps:\n    xx = xx + 190 / steps\n    go_to(xx, -110 + (xx + 180) / 190 * 100 / 10)\n    i = i + 1\npen_up()\nwrite(\"每次+1000：要 \" + addSteps + \" 步（差 \" + addSteps / steps + \" 倍）\", -190, 112, \"blue\", 12)"
+  }
 }

@@ -116,5 +116,32 @@
     }
   ],
   "textbook": "人教版数学七年级上册",
-  "grade": 7
+  "grade": 7,
+  "lab": {
+    "params": [
+      {
+        "name": "a",
+        "label": "字母 a 的值",
+        "min": -10,
+        "max": 10,
+        "step": 1,
+        "value": 3
+      },
+      {
+        "name": "b",
+        "label": "字母 b 的值",
+        "min": -10,
+        "max": 10,
+        "step": 1,
+        "value": 5
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "同一个式子 a+b，字母取值不同答案一样吗？",
+      "a=b 时 2a 和 a+b 相等吗？",
+      "字母表示数：式子是「装数的袋子」"
+    ],
+    "code": "# 代数式探索台：字母是会变的数\na = 3   # 字母 a\nb = 5   # 字母 b\n\nhide()\nwrite(\"a=\" + a + \"  b=\" + b, -150, 130, \"blue\", 14)\nwrite(\"a + b = \" + (a + b), -150, 85, \"red\", 15)\nwrite(\"a × b = \" + a * b, -150, 50, \"red\", 15)\nwrite(\"2a = \" + 2 * a + \"（= a+a）\", -150, 15, \"green\", 13)\nwrite(\"a²= \" + a * a, 40, 15, \"green\", 13)\nif a == b:\n    write(\"a=b 时：2a = a+b = \" + 2 * a, -150, -40, \"orange\", 12)\nif a != b:\n    write(\"a≠b 时：2a=\" + 2 * a + \" ≠ a+b=\" + a + b, -150, -40, \"orange\", 12)\nwrite(\"换一组值试试，式子不变、答案变\", -150, -80, \"blue\", 11)"
+  }
 }

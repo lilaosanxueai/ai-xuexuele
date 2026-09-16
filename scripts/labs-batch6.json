@@ -1,0 +1,207 @@
+{
+  "_说明": "互动实验室第六批（数学收官）：高中数学/AI数学/剩余几何统计（17 节）。注入：node scripts/inject-labs.mjs labs-batch6.json",
+  "labs": {
+    "math-35": {
+      "params": [
+        { "name": "q", "label": "公比 q", "min": 0.5, "max": 2, "step": 0.1, "value": 0.5 }
+      ],
+      "grid": true,
+      "explore": [
+        "q<1 时项越来越小，加起来会超过 2 吗？（首项为 1）",
+        "q=1 时和是多少？q>1 呢？",
+        "无限项相加居然有确定的和——收敛"
+      ],
+      "code": "# 等比数列求和探索台（首项 a1=1）\nq = 0.5   # 公比\n\nhide()\nsum = 0\nterm = 1\nx = -190\npen_color(\"blue\")\npen_down()\ngo_to(x, 0)\ni = 0\nwhile i < 10:\n    sum = sum + term\n    x = x + 20\n    go_to(x, sum * 90)\n    term = term * q\n    i = i + 1\npen_up()\nif q < 1:\n    inf = 1 / (1 - q)\n    write(\"q=\" + q + \"：无限项和 → \" + inf, -190, 140, \"red\", 13)\nif q == 1:\n    write(\"q=1：每项都是 1，和越来越大\", -190, 140, \"orange\", 12)\nif q > 1:\n    write(\"q>1：越加越大，不收敛！\", -190, 140, \"red\", 12)\nwrite(\"前 10 项和 = \" + sum, -190, 112, \"blue\", 12)"
+    },
+    "math-46": {
+      "params": [
+        { "name": "phase", "label": "相位差", "min": 0, "max": 180, "step": 15, "value": 90, "unit": "°" }
+      ],
+      "grid": true,
+      "explore": [
+        "两条波的形状一样吗？只是错开了？",
+        "相位差 0° 时完全重合，180° 时呢？",
+        "sin 和 cos 的相位差是多少度？"
+      ],
+      "code": "# 相位差探索台：两列波的赛跑\nphase = 90   # 相位差（度）\n\nhide()\npen_color(\"blue\")\npen_down()\nx = -200\ngo_to(x, 60 * sin(x))\nwhile x < 200:\n    go_to(x, 60 * sin(x))\n    x = x + 5\npen_up()\npen_color(\"red\")\npen_down()\nx = -200\ngo_to(x, 60 * sin(x + phase))\nwhile x < 200:\n    go_to(x, 60 * sin(x + phase))\n    x = x + 5\npen_up()\nwrite(\"相位差 \" + phase + \"°\", -190, 140, \"red\", 13)\nif phase == 0:\n    write(\"完全重合！\", -190, 112, \"green\", 12)\nif phase == 180:\n    write(\"正好相反！一个上一个下\", -190, 112, \"orange\", 12)\nwrite(\"蓝波 x°，红波 x+\" + phase + \"°\", -190, -130, \"blue\", 11)"
+    },
+    "math-48": {
+      "params": [
+        { "name": "ra", "label": "长半轴 a", "min": 40, "max": 130, "step": 5, "value": 120 },
+        { "name": "rb", "label": "短半轴 b", "min": 40, "max": 130, "step": 5, "value": 80 }
+      ],
+      "grid": true,
+      "explore": [
+        "a=b 时椭圆变成了什么图形？",
+        "a 比 b 大越多，椭圆越扁？",
+        "行星轨道就是椭圆——太阳在其中一个焦点上"
+      ],
+      "code": "# 椭圆探索台：x=a·cosθ, y=b·sinθ\nra = 120   # 长半轴\nrb = 80    # 短半轴\n\nhide()\npen_color(\"blue\")\npen_down()\ni = 0\ngo_to(ra, 0)\nwhile i < 36:\n    ang = (i + 1) * 10\n    go_to(ra * cos(ang), rb * sin(ang))\n    i = i + 1\npen_up()\nc = sqrt(ra * ra - rb * rb)\npen_color(\"red\")\npen_down()\ngo_to(-c - 5, 5)\ngo_to(-c + 5, 5)\ngo_to(-c + 5, -5)\ngo_to(-c - 5, -5)\ngo_to(-c - 5, 5)\ngo_to(c - 5, 5)\ngo_to(c + 5, 5)\ngo_to(c + 5, -5)\ngo_to(c - 5, -5)\ngo_to(c - 5, 5)\npen_up()\nwrite(\"焦点\", -20, -22, \"red\", 10)\nwrite(\"a=\" + ra + \" b=\" + rb, -190, 140, \"blue\", 13)\nif ra == rb:\n    write(\"a=b：变成正圆！\", -190, 112, \"green\", 12)\nif ra != rb:\n    write(\"焦点距离 c=√(a²-b²)=\" + c, -190, 112, \"red\", 12)"
+    },
+    "math-51": {
+      "params": [
+        { "name": "hours", "label": "小时数", "min": 0.5, "max": 6, "step": 0.5, "value": 1.5, "unit": " 时" }
+      ],
+      "grid": false,
+      "explore": [
+        "1.5 小时等于多少分钟？换算对吗？",
+        "0.5 小时是 30 分钟——半点怎么算？",
+        "时→分乘 60，分→秒也乘 60"
+      ],
+      "code": "# 时分秒换算探索台\nhours = 1.5   # 小时数\n\nhide()\nmins = hours * 60\nsecs = mins * 60\npen_color(\"blue\")\npen_down()\ngo_to(-170, -100)\ngo_to(-170, -100 + hours * 40)\ngo_to(-90, -100 + hours * 40)\ngo_to(-90, -100)\ngo_to(-170, -100)\npen_up()\nwrite(hours + \" 时\", -160, -125, \"blue\", 11)\npen_color(\"green\")\npen_down()\ngo_to(-40, -100)\ngo_to(-40, -100 + mins / 9)\ngo_to(40, -100 + mins / 9)\ngo_to(40, -100)\ngo_to(-40, -100)\npen_up()\nwrite(mins + \" 分\", -25, -125, \"green\", 11)\npen_color(\"red\")\npen_down()\ngo_to(90, -100)\ngo_to(90, -100 + mins / 9)\ngo_to(170, -100 + mins / 9)\ngo_to(170, -100)\ngo_to(90, -100)\npen_up()\nwrite(secs / 60 + \" 分\", 110, -125, \"red\", 11)\nwrite(hours + \" 时 = \" + mins + \" 分 = \" + secs + \" 秒\", -190, 140, \"red\", 13)\nwrite(\"相邻单位进率 60\", -190, 112, \"orange\", 11)"
+    },
+    "cross-102": {
+      "params": [
+        { "name": "a1", "label": "第一次距离", "min": 20, "max": 150, "step": 10, "value": 100 },
+        { "name": "a2", "label": "第二次距离", "min": 20, "max": 150, "step": 10, "value": 60 }
+      ],
+      "grid": true,
+      "explore": [
+        "蓝色+红色两段接力，总位移（绿色虚线）从起点指向哪？",
+        "两次行走的长度之和，和总位移哪个长？（三角形两边之和>第三边）",
+        "向量加法：首尾相接，三角形法则"
+      ],
+      "code": "# 向量加法探索台：三角形法则\na1 = 100   # 第一次走\na2 = 60    # 第二次走\n\nhide()\nx1 = a1 * cos(30)\ny1 = a1 * sin(30)\nx2 = x1 + a2 * cos(-40)\ny2 = y1 + a2 * sin(-40)\npen_color(\"blue\")\npen_down()\ngo_to(-80, -70)\ngo_to(-80 + x1, -70 + y1)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-80 + x1, -70 + y1)\ngo_to(-80 + x2, -70 + y2)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(-80, -70)\ngo_to(-80 + x2, -70 + y2)\npen_up()\nwrite(\"①\", -80 + x1 / 2 - 18, -70 + y1 / 2, \"blue\", 11)\nwrite(\"②\", -80 + (x1 + x2) / 2 + 10, -70 + (y1 + y2) / 2, \"red\", 11)\nwrite(\"和向量（起点→终点）\", -80 + x2 / 2 - 60, -70 + y2 / 2 - 25, \"green\", 10)\nd = sqrt(x2 * x2 + y2 * y2)\nwrite(\"|①|+|②|=\" + a1 + \"+\" + a2 + \" > |和|=\" + d, -190, 140, \"red\", 12)\nwrite(\"首尾相接：三角形法则\", -190, 112, \"blue\", 11)"
+    },
+    "cross-103": {
+      "params": [
+        { "name": "mag1", "label": "地震 A 震级", "min": 1, "max": 9, "step": 0.5, "value": 5 },
+        { "name": "mag2", "label": "地震 B 震级", "min": 1, "max": 9, "step": 0.5, "value": 7 }
+      ],
+      "grid": false,
+      "explore": [
+        "震级差 2 级，能量差多少倍？（31.6×31.6≈1000 倍）",
+        "每差 1 级能量差约 31.6 倍",
+        "对数让「天文数字」变成「小台阶」"
+      ],
+      "code": "# 对数：地震能量阶梯探索台\nmag1 = 5   # 地震 A 震级\nmag2 = 7   # 地震 B 震级\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-150, -100 + mag1 * 24)\ngo_to(-70, -100 + mag1 * 24)\npen_up()\nwrite(\"A: \" + mag1 + \" 级\", -145, -100 + mag1 * 24 + 16, \"blue\", 11)\npen_color(\"red\")\npen_down()\ngo_to(-20, -100 + mag2 * 24)\ngo_to(60, -100 + mag2 * 24)\npen_up()\nwrite(\"B: \" + mag2 + \" 级\", -15, -100 + mag2 * 24 + 16, \"red\", 11)\ndm = mag2 - mag1\nratio = 1\ni = 0\nwhile i < dm:\n    ratio = ratio * 31.6\n    i = i + 1\nif dm < 0:\n    ratio = 1\nwrite(\"震级差 \" + dm + \" 级\", -190, 140, \"orange\", 12)\nif dm > 0:\n    write(\"B 的能量是 A 的 \" + ratio + \" 倍！\", -190, 112, \"red\", 13)\nif dm == 0:\n    write(\"能量相同\", -190, 112, \"green\", 12)\nif dm < 0:\n    write(\"把 B 调大些看能量差\", -190, 112, \"blue\", 11)"
+    },
+    "cross-117": {
+      "params": [
+        { "name": "n", "label": "密码位数", "min": 1, "max": 8, "step": 1, "value": 4, "unit": " 位" },
+        { "name": "base", "label": "每位选项数", "min": 2, "max": 10, "step": 1, "value": 10 }
+      ],
+      "grid": false,
+      "explore": [
+        "密码组合数 = 选项数^位数，拖滑块看总数",
+        "位数 +1，组合数变几倍？",
+        "这就是为什么长密码更难破解！"
+      ],
+      "code": "# 密码锁的数学探索台：组合数 = base^n\nn = 4     # 密码位数\nbase = 10 # 每位选项数\n\ntotal = 1\ni = 0\nwhile i < n:\n    total = total * base\n    pen_color(\"blue\")\n    pen_down()\n    x = -170 + i * 42\n    h = total / 100\n    if h > 150:\n        h = 150\n    go_to(x, -100)\n    go_to(x, -100 + h)\n    go_to(x + 32, -100 + h)\n    go_to(x + 32, -100)\n    go_to(x, -100)\n    pen_up()\n    i = i + 1\nhide()\nwrite(\"每位 \" + base + \" 选，\" + n + \" 位密码：\", -190, 140, \"blue\", 12)\nwrite(\"共 \" + total + \" 种组合\", -190, 112, \"red\", 13)\nwrite(\"每加一位 → ×\" + base, -190, 84, \"orange\", 11)"
+    },
+    "cross-77": {
+      "params": [
+        { "name": "k", "label": "直线斜率 k", "min": -2, "max": 2, "step": 0.25, "value": 1 },
+        { "name": "b", "label": "截距 b", "min": -5, "max": 5, "step": 1, "value": 1 }
+      ],
+      "grid": true,
+      "explore": [
+        "红色数据点大致排在一条线上吗？",
+        "蓝色直线（你调的 k 和 b）穿过点的中间了吗？",
+        "AI 的「学习」就是找最贴合数据的 k 和 b！"
+      ],
+      "code": "# 线性回归探索台：给数据配一条线\nk = 1   # 斜率\nb = 1   # 截距\n\nhide()\npts_y1 = 12\npts_y2 = 38\npts_y3 = 42\npts_y4 = 70\npts_y5 = 88\npen_color(\"red\")\npen_down()\ngo_to(-160, pts_y1)\npen_up()\ngo_to(-160, pts_y1)\npen_down()\ngo_to(-158, pts_y1)\npen_up()\ngo_to(-80, pts_y2)\npen_down()\ngo_to(-78, pts_y2)\npen_up()\ngo_to(0, pts_y3)\npen_down()\ngo_to(2, pts_y3)\npen_up()\ngo_to(80, pts_y4)\npen_down()\ngo_to(82, pts_y4)\npen_up()\ngo_to(160, pts_y5)\npen_down()\ngo_to(162, pts_y5)\npen_up()\npen_color(\"blue\")\npen_down()\ngo_to(-190, k * -80 / 2 + b * 10)\ngo_to(190, k * 80 / 2 + b * 10)\npen_up()\nerr1 = pts_y1 - (k * -80 / 2 + b * 10)\nerr5 = pts_y5 - (k * 80 / 2 + b * 10)\ncost = err1 * err1 + err5 * err5\nwrite(\"你的直线 y=\" + k + \"x+\" + b, -190, 140, \"blue\", 12)\nwrite(\"误差平方和 = \" + cost, -190, 112, \"red\", 12)\nwrite(\"调 k 和 b 让误差最小！\", -190, 84, \"orange\", 11)"
+    },
+    "cross-78": {
+      "params": [
+        { "name": "k", "label": "分界线斜率", "min": -2, "max": 2, "step": 0.25, "value": 1 },
+        { "name": "b", "label": "分界线截距", "min": -4, "max": 4, "step": 1, "value": 0 }
+      ],
+      "grid": true,
+      "explore": [
+        "移动直线，能把红点蓝点分开吗？",
+        "「一条线分两个世界」需要什么条件？",
+        "这就是分类的数学：找一条分界线"
+      ],
+      "code": "# 分类边界探索台\nk = 1   # 分界线斜率\nb = 0   # 分界线截距\n\nhide()\npen_color(\"red\")\npen_down()\ngo_to(-140, 80)\npen_up()\ngo_to(-100, 60)\npen_down()\ngo_to(-98, 60)\npen_up()\ngo_to(-120, 40)\npen_down()\ngo_to(-118, 40)\npen_up()\npen_color(\"blue\")\ngo_to(100, -50)\npen_down()\ngo_to(102, -50)\npen_up()\ngo_to(140, -70)\npen_down()\ngo_to(142, -70)\npen_up()\ngo_to(120, -90)\npen_down()\ngo_to(122, -90)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(-190, k * -90 / 2 + b * 20)\ngo_to(190, k * 90 / 2 + b * 20)\npen_up()\nred_side = 80 - (k * -70 / 2 + b * 20)\nblue_side = -50 - (k * 70 / 2 + b * 20)\nif red_side > 0:\n    if blue_side < 0:\n        write(\"✓ 分开了！红上蓝下\", -190, 140, \"green\", 12)\nif red_side < 0:\n    write(\"✗ 红点在分界线下方\", -190, 140, \"orange\", 12)\nif blue_side > 0:\n    write(\"✗ 蓝点在分界线上方\", -190, 112, \"orange\", 12)\nwrite(\"调 k 和 b 试试\", -190, -130, \"blue\", 11)"
+    },
+    "cross-79": {
+      "params": [
+        { "name": "w1", "label": "输入①权重", "min": -2, "max": 2, "step": 0.25, "value": 1 },
+        { "name": "w2", "label": "输入②权重", "min": -2, "max": 2, "step": 0.25, "value": 1 }
+      ],
+      "grid": false,
+      "explore": [
+        "总分 = ①×权重1 + ②×权重2，谁得分高就「亮」谁",
+        "把权重①调成负数，评委①变成「扣分项」",
+        "神经元就是这样给证据打分做决定的！"
+      ],
+      "code": "# 神经元探索台：加权打分器\nw1 = 1   # 输入一权重\nw2 = 1   # 输入二权重\n\nhide()\nin1 = 3\nin2 = 2\nscore = in1 * w1 + in2 * w2\npen_color(\"blue\")\npen_down()\ngo_to(-170, -100)\ngo_to(-170, -100 + in1 * 30)\ngo_to(-110, -100 + in1 * 30)\ngo_to(-110, -100)\ngo_to(-170, -100)\npen_up()\nwrite(\"① \" + in1, -155, -125, \"blue\", 11)\npen_color(\"green\")\npen_down()\ngo_to(-70, -100)\ngo_to(-70, -100 + in2 * 30)\ngo_to(-10, -100 + in2 * 30)\ngo_to(-10, -100)\ngo_to(-70, -100)\npen_up()\nwrite(\"② \" + in2, -55, -125, \"green\", 11)\npen_color(\"red\")\npen_down()\ngo_to(60, -100)\nif score > 0:\n    go_to(60, -100 + score * 15)\n    go_to(170, -100 + score * 15)\nif score <= 0:\n    go_to(60, -100)\n    go_to(170, -100)\ngo_to(170, -100)\ngo_to(60, -100)\npen_up()\nwrite(\"总分 \" + score, 90, -125, \"red\", 12)\nwrite(\"①×\" + w1 + \" + ②×\" + w2 + \" = \" + score, -190, 140, \"red\", 13)\nif score > 0:\n    write(\"输出：亮！（得分>0）\", -190, 112, \"green\", 12)\nif score <= 0:\n    write(\"输出：灭（得分≤0）\", -190, 112, \"orange\", 12)"
+    },
+    "hb-12": {
+      "params": [
+        { "name": "nA", "label": "A 班人数", "min": 10, "max": 40, "step": 2, "value": 30 },
+        { "name": "nB", "label": "B 班人数", "min": 10, "max": 40, "step": 2, "value": 24 }
+      ],
+      "grid": false,
+      "explore": [
+        "两个圈 overlap 的部分是什么？（既参加 A 又参加 B）",
+        "总数 = A + B − 重叠，拖滑块验证",
+        "这就是容斥原理：别把人算两遍！"
+      ],
+      "code": "# 容斥原理探索台：|A∪B| = |A|+|B|−|A∩B|\nnA = 30   # A 集合人数\nnB = 24   # B 集合人数\n\nhide()\nboth = nA + nB - 40\nif both < 2:\n    both = 2\nif both > nA:\n    both = nA\nif both > nB:\n    both = nB\npen_color(\"red\")\npen_down()\ni = 0\ngo_to(-40, 70)\nwhile i < 36:\n    ang = (i + 1) * 10\n    go_to(-40 + 80 * cos(ang), 70 * sin(ang))\n    i = i + 1\npen_up()\npen_color(\"blue\")\npen_down()\ni = 0\ngo_to(40, 70)\nwhile i < 36:\n    ang = (i + 1) * 10\n    go_to(40 + 80 * cos(ang), 70 * sin(ang))\n    i = i + 1\npen_up()\nwrite(\"A \" + nA, -110, 60, \"red\", 12)\nwrite(\"B \" + nB, 95, 60, \"blue\", 12)\nwrite(\"重叠 \" + both, -14, 0, \"green\", 12)\nunion = nA + nB - both\nwrite(\"至少参加一个：\" + nA + \"+\" + nB + \"−\" + both + \" = \" + union, -190, 140, \"red\", 13)\nwrite(\"重叠部分被算了两次，要减一次\", -190, 112, \"orange\", 11)"
+    },
+    "cross-05": {
+      "params": [
+        { "name": "red", "label": "红色区域份数", "min": 0, "max": 8, "step": 1, "value": 2 },
+        { "name": "blue", "label": "蓝色区域份数", "min": 0, "max": 8, "step": 1, "value": 6 }
+      ],
+      "grid": false,
+      "explore": [
+        "红色占转盘几分之几？中奖概率就是它",
+        "红+蓝=8 份固定，红色份数变多概率怎么变？",
+        "概率 = 目标份数 ÷ 总份数"
+      ],
+      "code": "# 幸运大转盘探索台\nred = 2    # 红色份数\nblue = 6   # 蓝色份数\n\nhide()\ntotal = red + blue\nwrite(\"红 \" + red + \" 份 + 蓝 \" + blue + \" 份 = \" + total + \" 份\", -190, 140, \"red\", 13)\nif total == 0:\n    write(\"转盘空了！加份数\", -100, 100, \"orange\", 12)\nif total > 0:\n    prob = red * 100 / total\n    pen_color(\"red\")\n    pen_down()\n    go_to(0, 0)\n    i = 0\n    while i < red:\n        ang0 = i * 360 / total\n        ang1 = (i + 1) * 360 / total\n        go_to(110 * cos(ang0), 110 * sin(ang0))\n        j = ang0\n        while j < ang1:\n            j = j + 5\n            go_to(110 * cos(j), 110 * sin(j))\n        go_to(0, 0)\n        i = i + 1\n    pen_up()\n    write(\"中奖概率 \" + red + \"/\" + total + \" = \" + prob + \"%\", -190, 110, \"red\", 14)"
+    },
+    "cross-121": {
+      "params": [
+        { "name": "ss", "label": "边长比例", "min": 0.5, "max": 1.5, "step": 0.1, "value": 1 }
+      ],
+      "grid": true,
+      "explore": [
+        "蓝三角形放大/缩小后还能和红三角形重合吗？",
+        "比例=1 时完全重合——这就是「全等」",
+        "比例≠1 时形状相同、大小不同——这是「相似」"
+      ],
+      "code": "# 全等三角形探索台\ncross_121_ss = 1\nss = 1   # 缩放比例\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-110, -60)\ngo_to(0, -60)\ngo_to(-55, 50)\ngo_to(-110, -60)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(60, -60)\ngo_to(60 + 110 * ss, -60)\ngo_to(60 + 55 * ss, -60 + 110 * ss)\ngo_to(60, -60)\npen_up()\nwrite(\"蓝（固定）\", -130, -85, \"blue\", 10)\nwrite(\"红（可缩放）\", 60, -85, \"red\", 10)\nif ss == 1:\n    write(\"比例=1：完全重合 → 全等！\", -150, 130, \"green\", 13)\nif ss != 1:\n    write(\"比例=\" + ss + \"：形状同、大小异 → 相似\", -150, 130, \"orange\", 13)\nwrite(\"全等是相似的特例（比例=1）\", -150, 102, \"blue\", 11)"
+    },
+    "cross-122": {
+      "params": [
+        { "name": "n", "label": "推倒几块", "min": 0, "max": 12, "step": 1, "value": 5 }
+      ],
+      "grid": false,
+      "explore": [
+        "推倒第 1 块，后面为什么全倒？",
+        "每一块倒下都会推倒下一块——「传递」",
+        "数学归纳法：验证起点 + 验证传递 = 全部成立"
+      ],
+      "code": "# 多米诺与数学归纳法探索台\nn = 5   # 推倒几块\n\nhide()\ni = 0\nwhile i < 12:\n    x = -170 + i * 28\n    if i < n:\n        pen_color(\"red\")\n        pen_down()\n        go_to(x, -70)\n        go_to(x + 10, -95)\n        pen_up()\n    if i >= n:\n        pen_color(\"blue\")\n        pen_down()\n        go_to(x, -95)\n        go_to(x, -70)\n        go_to(x + 10, -70)\n        go_to(x + 10, -95)\n        go_to(x, -95)\n        pen_up()\n    i = i + 1\nwrite(\"推倒 \" + n + \" 块（红）\", -190, 130, \"red\", 13)\nwrite(\"还立着 \" + 12 - n + \" 块（蓝）\", -20, 130, \"blue\", 13)\nif n == 12:\n    write(\"全倒了！推 1 块 = 推所有块\", -190, 100, \"green\", 13)\nif n == 0:\n    write(\"一块都不推，一块都不倒\", -190, 100, \"orange\", 12)\nwrite(\"起点+传递 = 归纳法\", -190, -130, \"orange\", 11)"
+    },
+    "extra-01": {
+      "params": [
+        { "name": "tx", "label": "宝藏横坐标 x", "min": -8, "max": 8, "step": 1, "value": 5 },
+        { "name": "ty", "label": "宝藏纵坐标 y", "min": -5, "max": 5, "step": 1, "value": 3 }
+      ],
+      "grid": true,
+      "explore": [
+        "宝藏藏在哪里？用坐标 (x, y) 报出它的位置",
+        "横坐标变负数，宝藏跑到哪边？",
+        "坐标就是「第几列第几行」的精确说法"
+      ],
+      "code": "# 坐标小侦探探索台\ntx = 5   # 宝藏 x\nty = 3   # 宝藏 y\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-190, ty * 30)\ngo_to(190, ty * 30)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(tx * 30, -150)\ngo_to(tx * 30, 150)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(tx * 30 - 8, ty * 30 + 8)\ngo_to(tx * 30 + 8, ty * 30 + 8)\ngo_to(tx * 30 + 8, ty * 30 - 8)\ngo_to(tx * 30 - 8, ty * 30 - 8)\ngo_to(tx * 30 - 8, ty * 30 + 8)\npen_up()\nwrite(\"宝藏 (\" + tx + \", \" + ty + \")\", tx * 30 - 30, ty * 30 + 26, \"red\", 12)\nwrite(\"蓝线=y\" + ty, -180, ty * 30 + 16, \"blue\", 9)\nwrite(\"绿线=x\" + tx, tx * 30 + 22, -140, \"green\", 9)\nwrite(\"先横后纵，交叉点就是宝藏！\", -190, 150, \"orange\", 11)"
+    },
+    "hb-02": {
+      "params": [
+        { "name": "mu", "label": "边长（米）", "min": 10, "max": 200, "step": 10, "value": 100, "unit": " m" }
+      ],
+      "grid": false,
+      "explore": [
+        "1 公顷 = 10000 平方米，这块地是几公顷？",
+        "边长 100 米的正方形正好 1 公顷",
+        "边长翻倍，面积变几倍？"
+      ],
+      "code": "# 公顷广场探索台\nmu = 100   # 正方形边长（米）\n\nhide()\narea = mu * mu\nhect = area / 10000\nsize = mu / 200 * 150\npen_color(\"blue\")\npen_down()\ngo_to(-size / 2, -size / 2)\ngo_to(size / 2, -size / 2)\ngo_to(size / 2, size / 2)\ngo_to(-size / 2, size / 2)\ngo_to(-size / 2, -size / 2)\npen_up()\nwrite(\"边长 \" + mu + \" m\", -size / 2 + 10, -size / 2 - 20, \"blue\", 11)\nwrite(\"面积 = \" + mu + \"×\" + mu + \" = \" + area + \" m²\", -190, 140, \"red\", 13)\nwrite(\"= \" + hect + \" 公顷\", -190, 112, \"green\", 13)\nif hect == 1:\n    write(\"正好 1 公顷！\", 60, 100, \"green\", 12)\nif hect > 1:\n    write(\"比 1 公顷大\", 60, 100, \"orange\", 11)"
+    }
+  }
+}

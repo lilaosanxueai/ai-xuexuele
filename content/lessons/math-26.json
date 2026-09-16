@@ -115,5 +115,24 @@
       "explain": "总和 450 ÷ 5 = 90"
     }
   ],
-  "textbook": "冀教版数学（小学）"
+  "textbook": "冀教版数学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "spread",
+        "label": "波动幅度",
+        "min": 0,
+        "max": 4,
+        "step": 0.5,
+        "value": 2
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "红色平均线总在哪个位置？",
+      "波动越大，数据离平均线怎么样？",
+      "「平均水平」和「波动大小」是两件事"
+    ],
+    "code": "# 平均数探索台\nspread = 2   # 波动幅度\n\nhide()\npen_color(\"red\")\npen_down()\ngo_to(-170, 40)\ngo_to(170, 40)\npen_up()\nwrite(\"平均线 y=40\", 110, 55, \"red\", 10)\ni = 0\nwhile i < 10:\n    x = -160 + i * 34\n    if i < 5:\n        v = 40 + spread * (10 - i * 2)\n    if i >= 5:\n        v = 40 - spread * (10 - (i - 5) * 4 - 5)\n    pen_color(\"blue\")\n    pen_down()\n    go_to(x, 40)\n    go_to(x, v)\n    pen_up()\n    i = i + 1\nwrite(\"波动幅度 \" + spread, -190, 140, \"blue\", 13)\nif spread > 3:\n    write(\"忽高忽低，平均线最稳\", -190, 112, \"orange\", 11)\nif spread < 0.6:\n    write(\"大家都一样平\", -190, 112, \"green\", 11)"
+  }
 }

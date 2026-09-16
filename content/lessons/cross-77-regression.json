@@ -142,5 +142,32 @@
     }
   ],
   "textbook": "人教A版数学必修第二册",
-  "grade": 10
+  "grade": 10,
+  "lab": {
+    "params": [
+      {
+        "name": "k",
+        "label": "直线斜率 k",
+        "min": -2,
+        "max": 2,
+        "step": 0.25,
+        "value": 1
+      },
+      {
+        "name": "b",
+        "label": "截距 b",
+        "min": -5,
+        "max": 5,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "红色数据点大致排在一条线上吗？",
+      "蓝色直线（你调的 k 和 b）穿过点的中间了吗？",
+      "AI 的「学习」就是找最贴合数据的 k 和 b！"
+    ],
+    "code": "# 线性回归探索台：给数据配一条线\nk = 1   # 斜率\nb = 1   # 截距\n\nhide()\npts_y1 = 12\npts_y2 = 38\npts_y3 = 42\npts_y4 = 70\npts_y5 = 88\npen_color(\"red\")\npen_down()\ngo_to(-160, pts_y1)\npen_up()\ngo_to(-160, pts_y1)\npen_down()\ngo_to(-158, pts_y1)\npen_up()\ngo_to(-80, pts_y2)\npen_down()\ngo_to(-78, pts_y2)\npen_up()\ngo_to(0, pts_y3)\npen_down()\ngo_to(2, pts_y3)\npen_up()\ngo_to(80, pts_y4)\npen_down()\ngo_to(82, pts_y4)\npen_up()\ngo_to(160, pts_y5)\npen_down()\ngo_to(162, pts_y5)\npen_up()\npen_color(\"blue\")\npen_down()\ngo_to(-190, k * -80 / 2 + b * 10)\ngo_to(190, k * 80 / 2 + b * 10)\npen_up()\nerr1 = pts_y1 - (k * -80 / 2 + b * 10)\nerr5 = pts_y5 - (k * 80 / 2 + b * 10)\ncost = err1 * err1 + err5 * err5\nwrite(\"你的直线 y=\" + k + \"x+\" + b, -190, 140, \"blue\", 12)\nwrite(\"误差平方和 = \" + cost, -190, 112, \"red\", 12)\nwrite(\"调 k 和 b 让误差最小！\", -190, 84, \"orange\", 11)"
+  }
 }

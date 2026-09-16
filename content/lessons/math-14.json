@@ -130,5 +130,25 @@
     }
   ],
   "textbook": "人教版数学九年级上册",
-  "grade": 9
+  "grade": 9,
+  "lab": {
+    "params": [
+      {
+        "name": "n",
+        "label": "掷骰次数",
+        "min": 20,
+        "max": 600,
+        "step": 20,
+        "value": 120,
+        "unit": " 次"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "六根柱子差不多高吗？哪个面出现的次数最多？",
+      "次数越多，六根柱子越均匀还是越乱？",
+      "每个面的理论概率是几分之几？"
+    ],
+    "code": "# 掷骰子统计探索台\nn = 120   # 掷的次数\n\nhide()\nc1 = 0\nc2 = 0\nc3 = 0\nc4 = 0\nc5 = 0\nc6 = 0\ni = 0\nwhile i < n:\n    f = random(1, 6)\n    if f == 1:\n        c1 = c1 + 1\n    if f == 2:\n        c2 = c2 + 1\n    if f == 3:\n        c3 = c3 + 1\n    if f == 4:\n        c4 = c4 + 1\n    if f == 5:\n        c5 = c5 + 1\n    if f == 6:\n        c6 = c6 + 1\n    i = i + 1\ni = 1\nwhile i < 7:\n    if i == 1:\n        cnt = c1\n    if i == 2:\n        cnt = c2\n    if i == 3:\n        cnt = c3\n    if i == 4:\n        cnt = c4\n    if i == 5:\n        cnt = c5\n    if i == 6:\n        cnt = c6\n    x = -160 + i * 44\n    pen_color(\"blue\")\n    pen_down()\n    go_to(x, -100)\n    go_to(x, -100 + cnt * 150 / n * 6)\n    go_to(x + 28, -100 + cnt * 150 / n * 6)\n    go_to(x + 28, -100)\n    go_to(x, -100)\n    pen_up()\n    write(\"\" + i, x + 14, -118, \"red\", 10)\n    write(\"\" + cnt, x + 14, -100 + cnt * 150 / n * 6 + 14, \"blue\", 9)\n    i = i + 1\nwrite(\"掷 \" + n + \" 次：每面理论 \" + n / 6 + \" 次\", -190, 140, \"red\", 12)\nwrite(\"次数越多越均匀！\", -190, 112, \"green\", 11)"
+  }
 }

@@ -142,5 +142,32 @@
       "explain": "跳了几组=商；总格数=被除数，每组步数=除数"
     }
   ],
-  "textbook": "冀教版数学（小学）"
+  "textbook": "冀教版数学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "total",
+        "label": "总数量",
+        "min": 2,
+        "max": 30,
+        "step": 1,
+        "value": 12
+      },
+      {
+        "name": "each",
+        "label": "每组几个",
+        "min": 2,
+        "max": 6,
+        "step": 1,
+        "value": 4
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "能正好分完吗？什么时候有剩余？",
+      "12 个分 4 个一组，分几组？换成 5 个一组呢？",
+      "除法就是「分组」：总 数 ÷ 每组 = 组数……余数"
+    ],
+    "code": "# 除法分组探索台\ntotal = 12   # 总数量\neach = 4     # 每组几个\n\nhide()\ngroups = total / each\nrem = total - groups * each\ni = 0\nwhile i < total:\n    col = i - (i / each) * each\n    row = i / each\n    x = -180 + col * 26\n    y = 70 - row * 30\n    pen_color(\"blue\")\n    pen_down()\n    go_to(x, y)\n    go_to(x + 20, y)\n    go_to(x + 20, y - 20)\n    go_to(x, y - 20)\n    go_to(x, y)\n    pen_up()\n    i = i + 1\nwrite(total + \" 个 ÷ 每组 \" + each + \" = \" + groups + \" 组\", -190, 130, \"red\", 13)\nif rem > 0:\n    write(\"还剩 \" + rem + \" 个分不完整\", -190, 105, \"orange\", 12)\nif rem == 0:\n    write(\"正好分完，没有余数！\", -190, 105, \"green\", 12)"
+  }
 }

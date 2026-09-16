@@ -134,5 +134,25 @@
       "explain": "两边之和>第三边（两边之差<第三边）——能否构成三角形的判据"
     }
   ],
-  "textbook": "冀教版数学（小学）"
+  "textbook": "冀教版数学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "kind",
+        "label": "三角形类型",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1,
+        "unit": "（1锐2直3钝）"
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "三个角都小于 90° 是什么三角形？",
+      "有一个角正好 90° 呢？大于 90° 呢？",
+      "直角三角形里藏着勾股定理！"
+    ],
+    "code": "# 三角形家族探索台\nkind = 1   # 1=锐角 2=直角 3=钝角\n\nhide()\nif kind == 1:\n    write(\"锐角三角形：三个角都 < 90°\", -190, 140, \"blue\", 12)\n    pen_color(\"blue\")\n    pen_down()\n    go_to(-90, -60)\n    go_to(90, -60)\n    go_to(-20, 70)\n    go_to(-90, -60)\n    pen_up()\nif kind == 2:\n    write(\"直角三角形：有一个角 = 90°\", -190, 140, \"red\", 12)\n    pen_color(\"blue\")\n    pen_down()\n    go_to(-90, -60)\n    go_to(90, -60)\n    go_to(-90, 70)\n    go_to(-90, -60)\n    pen_up()\n    pen_color(\"red\")\n    pen_down()\n    go_to(-90, -40)\n    go_to(-70, -40)\n    go_to(-70, -60)\n    pen_up()\nif kind == 3:\n    write(\"钝角三角形：有一个角 > 90°\", -190, 140, \"orange\", 12)\n    pen_color(\"blue\")\n    pen_down()\n    go_to(-90, -60)\n    go_to(90, -60)\n    go_to(-160, 30)\n    go_to(-90, -60)\n    pen_up()\nwrite(\"按形状给三角形分家族\", -190, -130, \"green\", 11)"
+  }
 }

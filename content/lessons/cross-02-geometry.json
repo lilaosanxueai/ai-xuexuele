@@ -150,5 +150,32 @@
       "explain": "同一图形按固定角度旋转重复，就形成万花筒般的旋转对称"
     }
   ],
-  "textbook": "冀教版数学（小学）"
+  "textbook": "冀教版数学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "sides",
+        "label": "正多边形边数",
+        "min": 3,
+        "max": 12,
+        "step": 1,
+        "value": 6
+      },
+      {
+        "name": "copies",
+        "label": "旋转复制份数",
+        "min": 3,
+        "max": 12,
+        "step": 1,
+        "value": 6
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "旋转拼出的图案像万花筒吗？",
+      "份数变多，图案更繁还是更简？",
+      "美丽图案=一个图形+旋转对称"
+    ],
+    "code": "# 万花筒探索台：旋转的正多边形\nsides = 6    # 边数\ncopies = 6   # 复制份数\n\nhide()\nk = 0\nwhile k < copies:\n    rot = k * 360 / copies\n    pen_color(\"blue\")\n    if k == 0:\n        pen_color(\"red\")\n    pen_down()\n    i = 0\n    go_to(90 * cos(rot), 90 * sin(rot))\n    while i < sides:\n        ang = rot + (i + 1) * 360 / sides\n        go_to(90 * cos(ang), 90 * sin(ang))\n        i = i + 1\n    pen_up()\n    k = k + 1\nwrite(\"正\" + sides + \"边形 × 旋转\" + copies + \" 份\", -190, 150, \"red\", 12)"
+  }
 }

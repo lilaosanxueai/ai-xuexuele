@@ -140,5 +140,34 @@
       "explain": "直线位移=平移；turn（转向）对应旋转"
     }
   ],
-  "textbook": "冀教版数学（小学）"
+  "textbook": "冀教版数学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "dx",
+        "label": "平移距离",
+        "min": -8,
+        "max": 8,
+        "step": 1,
+        "value": 4,
+        "unit": " 格"
+      },
+      {
+        "name": "rot",
+        "label": "旋转角度",
+        "min": 0,
+        "max": 180,
+        "step": 15,
+        "value": 45,
+        "unit": "°"
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "蓝色原图和红色新图形：是平移了还是旋转了？",
+      "只调平移，图形大小形状变吗？",
+      "只调旋转呢？图形绕着谁转？"
+    ],
+    "code": "# 平移与旋转探索台\ndx = 4    # 平移\nrot = 45  # 旋转（度）\n\nhide()\nx1 = -100\ny1 = -40\nx2 = -20\ny2 = 40\npen_color(\"blue\")\npen_down()\ngo_to(x1, y1)\ngo_to(x2, y2)\ngo_to(x2, y1)\ngo_to(x1, y1)\npen_up()\nrx1 = x1 * cos(rot) - y1 * sin(rot)\nry1 = x1 * sin(rot) + y1 * cos(rot)\nrx2 = x2 * cos(rot) - y2 * sin(rot)\nry2 = x2 * sin(rot) + y2 * cos(rot)\nrx3 = x2 * cos(rot) - y1 * sin(rot)\nry3 = x2 * sin(rot) + y1 * cos(rot)\npen_color(\"red\")\npen_down()\ngo_to(rx1 + dx * 18, ry1)\ngo_to(rx2 + dx * 18, ry2)\ngo_to(rx3 + dx * 18, ry3)\ngo_to(rx1 + dx * 18, ry1)\npen_up()\nwrite(\"蓝=原图 红=变换后\", -190, 140, \"blue\", 12)\nwrite(\"平移 \" + dx + \" 格 + 旋转 \" + rot + \"°\", -190, 112, \"red\", 12)\nwrite(\"形状大小不变——只改位置和方向\", -190, -130, \"orange\", 11)"
+  }
 }

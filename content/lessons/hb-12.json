@@ -142,5 +142,32 @@
       "answer": 1,
       "explain": "A 的元素全在 B 里（子集），交集才是 A 自己"
     }
-  ]
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "nA",
+        "label": "A 班人数",
+        "min": 10,
+        "max": 40,
+        "step": 2,
+        "value": 30
+      },
+      {
+        "name": "nB",
+        "label": "B 班人数",
+        "min": 10,
+        "max": 40,
+        "step": 2,
+        "value": 24
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "两个圈 overlap 的部分是什么？（既参加 A 又参加 B）",
+      "总数 = A + B − 重叠，拖滑块验证",
+      "这就是容斥原理：别把人算两遍！"
+    ],
+    "code": "# 容斥原理探索台：|A∪B| = |A|+|B|−|A∩B|\nnA = 30   # A 集合人数\nnB = 24   # B 集合人数\n\nhide()\nboth = nA + nB - 40\nif both < 2:\n    both = 2\nif both > nA:\n    both = nA\nif both > nB:\n    both = nB\npen_color(\"red\")\npen_down()\ni = 0\ngo_to(-40, 70)\nwhile i < 36:\n    ang = (i + 1) * 10\n    go_to(-40 + 80 * cos(ang), 70 * sin(ang))\n    i = i + 1\npen_up()\npen_color(\"blue\")\npen_down()\ni = 0\ngo_to(40, 70)\nwhile i < 36:\n    ang = (i + 1) * 10\n    go_to(40 + 80 * cos(ang), 70 * sin(ang))\n    i = i + 1\npen_up()\nwrite(\"A \" + nA, -110, 60, \"red\", 12)\nwrite(\"B \" + nB, 95, 60, \"blue\", 12)\nwrite(\"重叠 \" + both, -14, 0, \"green\", 12)\nunion = nA + nB - both\nwrite(\"至少参加一个：\" + nA + \"+\" + nB + \"−\" + both + \" = \" + union, -190, 140, \"red\", 13)\nwrite(\"重叠部分被算了两次，要减一次\", -190, 112, \"orange\", 11)"
+  }
 }

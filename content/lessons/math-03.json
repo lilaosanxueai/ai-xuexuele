@@ -142,5 +142,25 @@
       "explain": "平均分成几份，每份就是几分之一"
     }
   ],
-  "textbook": "冀教版数学（小学）"
+  "textbook": "冀教版数学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "folds",
+        "label": "对折次数",
+        "min": 0,
+        "max": 8,
+        "step": 1,
+        "value": 3,
+        "unit": " 次"
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "每对折一次，剩下的厚度是原来的一半还是一倍？",
+      "对折 8 次后剩几分之几？",
+      "反过来看：一张纸展开几次能变回原来大小？"
+    ],
+    "code": "# 对折魔法探索台：每次减半\nfolds = 3   # 对折次数\n\nhide()\nleft = 1\ni = 0\nwhile i < folds:\n    left = left / 2\n    i = i + 1\nwrite(\"对折 \" + folds + \" 次：剩 \" + left, -190, 140, \"red\", 13)\npen_color(\"blue\")\npen_down()\ngo_to(-160, -80)\ngo_to(-160 + 150, -80)\ngo_to(-160 + 150, -80 + left * 200)\ngo_to(-160, -80 + left * 200)\ngo_to(-160, -80)\npen_up()\nwrite(\"剩余 \" + left, -60, -60 + left * 200, \"blue\", 11)\npen_color(\"green\")\npen_down()\ngo_to(-160, -80 + left * 200)\ngo_to(-10, -80 + left * 200)\npen_up()\nwrite(\"1/2 的 \" + folds + \" 次方\", -140, 120, \"green\", 11)\nif folds > 6:\n    write(\"已经很薄了！再折就看不见啦\", -40, -120, \"orange\", 11)"
+  }
 }

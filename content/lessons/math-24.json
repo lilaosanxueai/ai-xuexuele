@@ -137,5 +137,25 @@
       "explain": "A 有竖直对称轴；Z、N、S 是中心对称"
     }
   ],
-  "textbook": "冀教版数学（小学）"
+  "textbook": "冀教版数学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "w",
+        "label": "宽度",
+        "min": 2,
+        "max": 8,
+        "step": 1,
+        "value": 4,
+        "unit": " 格"
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "Λ（倒 V）左右两边对称吗？",
+      "宽度变奇数/偶数，顶点位置有什么不同？",
+      "对称轴在哪里？（x=0 那条竖线）"
+    ],
+    "code": "# 轴对称 Λ 探索台\nw = 4   # 半宽\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(0 - w * 25, -80)\ngo_to(0, 60)\ngo_to(w * 25, -80)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(0, 80)\ngo_to(0, -100)\npen_up()\nwrite(\"对称轴\", 12, 80, \"red\", 11)\nwrite(\"左(\" + (0 - w * 25) + \") ←→ 右(\" + w * 25 + \")\", -100, 120, \"blue\", 12)\nwrite(\"左右离对称轴一样远\", -100, 95, \"green\", 11)"
+  }
 }

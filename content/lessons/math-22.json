@@ -140,5 +140,25 @@
       "explain": "右移一位×10，左移一位÷10——位值的魔力"
     }
   ],
-  "textbook": "冀教版数学（小学）"
+  "textbook": "冀教版数学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "shift",
+        "label": "小数点移动",
+        "min": -3,
+        "max": 3,
+        "step": 1,
+        "value": 1,
+        "unit": " 位"
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "小数点右移一位，数字变大还是变小？几倍？",
+      "左移两位呢？",
+      "0.右移 3 位变成什么？左移 3 位呢？"
+    ],
+    "code": "# 小数点大冒险探索台\nshift = 1   # 小数点移动位数（右正左负）\n\nhide()\nbase = 2.5\nval = base\ni = 0\nwhile i < shift:\n    val = val * 10\n    i = i + 1\ni = 0\nwhile i > shift:\n    val = val / 10\n    i = i - 1\nwrite(\"原数 \" + base, -100, 120, \"blue\", 14)\nwrite(\"→ 小数点\" , -100, 85, \"orange\", 12)\nif shift > 0:\n    write(\"右移 \" + shift + \" 位\", -30, 85, \"red\", 13)\nif shift < 0:\n    write(\"左移 \" + 0 - shift + \" 位\", -30, 85, \"red\", 13)\nif shift == 0:\n    write(\"不动\", -30, 85, \"red\", 13)\nwrite(\"= \" + val, -100, 40, \"red\", 16)\nwrite(\"右移×10 左移÷10\", -90, -30, \"green\", 12)"
+  }
 }

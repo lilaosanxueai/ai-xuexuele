@@ -116,5 +116,24 @@
   "codeLesson": true,
   "starterCode": "# 因式分解验证：(x+2)(x+3) = x^2+5x+6 ?\nx = 10\nleft = (x + 2) * (x + 3)\nright = x * x + 5 * x + 6\nsay(\"左边 = \" + left + \"，右边 = \" + right)\n\nif left == right:\n    say(\"分解正确！\")\n",
   "textbook": "人教版数学八年级上册",
-  "grade": 8
+  "grade": 8,
+  "lab": {
+    "params": [
+      {
+        "name": "x",
+        "label": "代入 x",
+        "min": -5,
+        "max": 8,
+        "step": 1,
+        "value": 3
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "左右两边代入后相等吗？换 x 试试都相等？",
+      "(x+2)(x+3) 展开后是什么？",
+      "因式分解 ↔ 整式乘法，互为逆过程"
+    ],
+    "code": "# 因式分解验证探索台：(x+2)(x+3) = x²+5x+6\nx = 3   # 代入验证的值\n\nhide()\nleft = (x + 2) * (x + 3)\nright = x * x + 5 * x + 6\nwrite(\"x = \" + x, -150, 140, \"blue\", 13)\nwrite(\"左：(x+2)(x+3) = \" + left, -150, 95, \"red\", 14)\nwrite(\"右：x²+5x+6 = \" + right, -150, 58, \"red\", 14)\nif left == right:\n    write(\"✓ 恒等！换成任何 x 都相等\", -150, 10, \"green\", 13)\nif left != right:\n    write(\"✗ 不相等？\", -150, 10, \"orange\", 13)\nwrite(\"乘开：(x+2)(x+3) = x²+5x+6\", -150, -45, \"blue\", 12)\nwrite(\"分解：x²+5x+6 = (x+2)(x+3)\", -150, -80, \"orange\", 12)"
+  }
 }

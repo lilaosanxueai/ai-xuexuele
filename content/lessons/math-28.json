@@ -115,5 +115,41 @@
       "explain": "1cm×100000=100000cm=1km"
     }
   ],
-  "textbook": "冀教版数学（小学）"
+  "textbook": "冀教版数学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "total",
+        "label": "总量",
+        "min": 20,
+        "max": 200,
+        "step": 10,
+        "value": 100,
+        "unit": " 元"
+      },
+      {
+        "name": "ra",
+        "label": "甲的份数",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "value": 2
+      },
+      {
+        "name": "rb",
+        "label": "乙的份数",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "value": 3
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "甲和乙各分多少？（看标注）",
+      "份数比 2:3，分到的钱也是 2:3 吗？",
+      "总量变多，比例变吗？"
+    ],
+    "code": "# 按比例分配探索台\ntotal = 100   # 总量\nra = 2        # 甲的份数\nrb = 3        # 乙的份数\n\nhide()\na = total * ra / (ra + rb)\nb = total * rb / (ra + rb)\npen_color(\"blue\")\npen_down()\ngo_to(-170, -100)\ngo_to(-170, -100 + a / total * 180)\ngo_to(-20, -100 + a / total * 180)\ngo_to(-20, -100)\ngo_to(-170, -100)\npen_up()\nwrite(\"甲 \" + a, -130, -125, \"blue\", 11)\npen_color(\"green\")\npen_down()\ngo_to(0, -100)\ngo_to(0, -100 + b / total * 180)\ngo_to(150, -100 + b / total * 180)\ngo_to(150, -100)\ngo_to(0, -100)\npen_up()\nwrite(\"乙 \" + b, 60, -125, \"green\", 11)\nwrite(total + \" 按 \" + ra + \":\" + rb + \" 分：甲 \" + a + \" 乙 \" + b, -190, 130, \"red\", 13)\nwrite(\"甲/乙 = \" + a / b + \"（还是 \" + ra + \":\" + rb + \"）\", -190, 102, \"orange\", 11)"
+  }
 }

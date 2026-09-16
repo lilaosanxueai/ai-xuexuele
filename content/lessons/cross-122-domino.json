@@ -153,5 +153,24 @@
     }
   ],
   "textbook": "人教A版数学选择性必修第二册",
-  "grade": 11
+  "grade": 11,
+  "lab": {
+    "params": [
+      {
+        "name": "n",
+        "label": "推倒几块",
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "value": 5
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "推倒第 1 块，后面为什么全倒？",
+      "每一块倒下都会推倒下一块——「传递」",
+      "数学归纳法：验证起点 + 验证传递 = 全部成立"
+    ],
+    "code": "# 多米诺与数学归纳法探索台\nn = 5   # 推倒几块\n\nhide()\ni = 0\nwhile i < 12:\n    x = -170 + i * 28\n    if i < n:\n        pen_color(\"red\")\n        pen_down()\n        go_to(x, -70)\n        go_to(x + 10, -95)\n        pen_up()\n    if i >= n:\n        pen_color(\"blue\")\n        pen_down()\n        go_to(x, -95)\n        go_to(x, -70)\n        go_to(x + 10, -70)\n        go_to(x + 10, -95)\n        go_to(x, -95)\n        pen_up()\n    i = i + 1\nwrite(\"推倒 \" + n + \" 块（红）\", -190, 130, \"red\", 13)\nwrite(\"还立着 \" + 12 - n + \" 块（蓝）\", -20, 130, \"blue\", 13)\nif n == 12:\n    write(\"全倒了！推 1 块 = 推所有块\", -190, 100, \"green\", 13)\nif n == 0:\n    write(\"一块都不推，一块都不倒\", -190, 100, \"orange\", 12)\nwrite(\"起点+传递 = 归纳法\", -190, -130, \"orange\", 11)"
+  }
 }

@@ -124,5 +124,32 @@
   "codeLesson": true,
   "starterCode": "# 椭圆：压扁的圆（横半径 160，纵半径 110）\npen_color(\"blue\")\npen_down()\nfor i in range(37):\n    t = i * 10\n    go_to(cos(t) * 160, sin(t) * 110)\npen_up()\ngo_to(0, 110)   # 登上椭圆顶点\n\nsay(\"椭圆画好了！地球的轨道就是它\")\n",
   "textbook": "人教A版数学选择性必修第一册",
-  "grade": 11
+  "grade": 11,
+  "lab": {
+    "params": [
+      {
+        "name": "ra",
+        "label": "长半轴 a",
+        "min": 40,
+        "max": 130,
+        "step": 5,
+        "value": 120
+      },
+      {
+        "name": "rb",
+        "label": "短半轴 b",
+        "min": 40,
+        "max": 130,
+        "step": 5,
+        "value": 80
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "a=b 时椭圆变成了什么图形？",
+      "a 比 b 大越多，椭圆越扁？",
+      "行星轨道就是椭圆——太阳在其中一个焦点上"
+    ],
+    "code": "# 椭圆探索台：x=a·cosθ, y=b·sinθ\nra = 120   # 长半轴\nrb = 80    # 短半轴\n\nhide()\npen_color(\"blue\")\npen_down()\ni = 0\ngo_to(ra, 0)\nwhile i < 36:\n    ang = (i + 1) * 10\n    go_to(ra * cos(ang), rb * sin(ang))\n    i = i + 1\npen_up()\nc = sqrt(ra * ra - rb * rb)\npen_color(\"red\")\npen_down()\ngo_to(-c - 5, 5)\ngo_to(-c + 5, 5)\ngo_to(-c + 5, -5)\ngo_to(-c - 5, -5)\ngo_to(-c - 5, 5)\ngo_to(c - 5, 5)\ngo_to(c + 5, 5)\ngo_to(c + 5, -5)\ngo_to(c - 5, -5)\ngo_to(c - 5, 5)\npen_up()\nwrite(\"焦点\", -20, -22, \"red\", 10)\nwrite(\"a=\" + ra + \" b=\" + rb, -190, 140, \"blue\", 13)\nif ra == rb:\n    write(\"a=b：变成正圆！\", -190, 112, \"green\", 12)\nif ra != rb:\n    write(\"焦点距离 c=√(a²-b²)=\" + c, -190, 112, \"red\", 12)"
+  }
 }

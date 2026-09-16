@@ -116,5 +116,24 @@
     }
   ],
   "textbook": "人教A版数学选择性必修第二册",
-  "grade": 11
+  "grade": 11,
+  "lab": {
+    "params": [
+      {
+        "name": "q",
+        "label": "公比 q",
+        "min": 0.5,
+        "max": 2,
+        "step": 0.1,
+        "value": 0.5
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "q<1 时项越来越小，加起来会超过 2 吗？（首项为 1）",
+      "q=1 时和是多少？q>1 呢？",
+      "无限项相加居然有确定的和——收敛"
+    ],
+    "code": "# 等比数列求和探索台（首项 a1=1）\nq = 0.5   # 公比\n\nhide()\nsum = 0\nterm = 1\nx = -190\npen_color(\"blue\")\npen_down()\ngo_to(x, 0)\ni = 0\nwhile i < 10:\n    sum = sum + term\n    x = x + 20\n    go_to(x, sum * 90)\n    term = term * q\n    i = i + 1\npen_up()\nif q < 1:\n    inf = 1 / (1 - q)\n    write(\"q=\" + q + \"：无限项和 → \" + inf, -190, 140, \"red\", 13)\nif q == 1:\n    write(\"q=1：每项都是 1，和越来越大\", -190, 140, \"orange\", 12)\nif q > 1:\n    write(\"q>1：越加越大，不收敛！\", -190, 140, \"red\", 12)\nwrite(\"前 10 项和 = \" + sum, -190, 112, \"blue\", 12)"
+  }
 }

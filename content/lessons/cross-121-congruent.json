@@ -152,5 +152,24 @@
     }
   ],
   "textbook": "人教版数学八年级上册",
-  "grade": 8
+  "grade": 8,
+  "lab": {
+    "params": [
+      {
+        "name": "ss",
+        "label": "边长比例",
+        "min": 0.5,
+        "max": 1.5,
+        "step": 0.1,
+        "value": 1
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "蓝三角形放大/缩小后还能和红三角形重合吗？",
+      "比例=1 时完全重合——这就是「全等」",
+      "比例≠1 时形状相同、大小不同——这是「相似」"
+    ],
+    "code": "# 全等三角形探索台\ncross_121_ss = 1\nss = 1   # 缩放比例\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-110, -60)\ngo_to(0, -60)\ngo_to(-55, 50)\ngo_to(-110, -60)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(60, -60)\ngo_to(60 + 110 * ss, -60)\ngo_to(60 + 55 * ss, -60 + 110 * ss)\ngo_to(60, -60)\npen_up()\nwrite(\"蓝（固定）\", -130, -85, \"blue\", 10)\nwrite(\"红（可缩放）\", 60, -85, \"red\", 10)\nif ss == 1:\n    write(\"比例=1：完全重合 → 全等！\", -150, 130, \"green\", 13)\nif ss != 1:\n    write(\"比例=\" + ss + \"：形状同、大小异 → 相似\", -150, 130, \"orange\", 13)\nwrite(\"全等是相似的特例（比例=1）\", -150, 102, \"blue\", 11)"
+  }
 }

@@ -124,5 +124,25 @@
     }
   ],
   "textbook": "人教A版数学必修第一册",
-  "grade": 10
+  "grade": 10,
+  "lab": {
+    "params": [
+      {
+        "name": "phase",
+        "label": "相位差",
+        "min": 0,
+        "max": 180,
+        "step": 15,
+        "value": 90,
+        "unit": "°"
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "两条波的形状一样吗？只是错开了？",
+      "相位差 0° 时完全重合，180° 时呢？",
+      "sin 和 cos 的相位差是多少度？"
+    ],
+    "code": "# 相位差探索台：两列波的赛跑\nphase = 90   # 相位差（度）\n\nhide()\npen_color(\"blue\")\npen_down()\nx = -200\ngo_to(x, 60 * sin(x))\nwhile x < 200:\n    go_to(x, 60 * sin(x))\n    x = x + 5\npen_up()\npen_color(\"red\")\npen_down()\nx = -200\ngo_to(x, 60 * sin(x + phase))\nwhile x < 200:\n    go_to(x, 60 * sin(x + phase))\n    x = x + 5\npen_up()\nwrite(\"相位差 \" + phase + \"°\", -190, 140, \"red\", 13)\nif phase == 0:\n    write(\"完全重合！\", -190, 112, \"green\", 12)\nif phase == 180:\n    write(\"正好相反！一个上一个下\", -190, 112, \"orange\", 12)\nwrite(\"蓝波 x°，红波 x+\" + phase + \"°\", -190, -130, \"blue\", 11)"
+  }
 }

@@ -150,5 +150,32 @@
       "explain": "单次随机不可测，大量重复呈现规律（频率稳定）"
     }
   ],
-  "textbook": "冀教版数学（小学）"
+  "textbook": "冀教版数学（小学）",
+  "lab": {
+    "params": [
+      {
+        "name": "red",
+        "label": "红色区域份数",
+        "min": 0,
+        "max": 8,
+        "step": 1,
+        "value": 2
+      },
+      {
+        "name": "blue",
+        "label": "蓝色区域份数",
+        "min": 0,
+        "max": 8,
+        "step": 1,
+        "value": 6
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "红色占转盘几分之几？中奖概率就是它",
+      "红+蓝=8 份固定，红色份数变多概率怎么变？",
+      "概率 = 目标份数 ÷ 总份数"
+    ],
+    "code": "# 幸运大转盘探索台\nred = 2    # 红色份数\nblue = 6   # 蓝色份数\n\nhide()\ntotal = red + blue\nwrite(\"红 \" + red + \" 份 + 蓝 \" + blue + \" 份 = \" + total + \" 份\", -190, 140, \"red\", 13)\nif total == 0:\n    write(\"转盘空了！加份数\", -100, 100, \"orange\", 12)\nif total > 0:\n    prob = red * 100 / total\n    pen_color(\"red\")\n    pen_down()\n    go_to(0, 0)\n    i = 0\n    while i < red:\n        ang0 = i * 360 / total\n        ang1 = (i + 1) * 360 / total\n        go_to(110 * cos(ang0), 110 * sin(ang0))\n        j = ang0\n        while j < ang1:\n            j = j + 5\n            go_to(110 * cos(j), 110 * sin(j))\n        go_to(0, 0)\n        i = i + 1\n    pen_up()\n    write(\"中奖概率 \" + red + \"/\" + total + \" = \" + prob + \"%\", -190, 110, \"red\", 14)"
+  }
 }
