@@ -14,10 +14,13 @@ export default function WrongBookScreen() {
   const [progress, setProgress] = useState<ProfileProgress | null>(null);
   const [practicing, setPracticing] = useState(false);
   const [celebrate, setCelebrate] = useState<string | null>(null);
+  const [labIds, setLabIds] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     if (!profile) { nav('/'); return; }
     void api.progress(profile.id).then(setProgress).catch(() => setProgress(null));
+    // 实验课跳 /lab、辅导课跳 /tutor——「看讲解」直达对应课程
+    void api.lessons().then((ls) => setLabIds(new Set(ls.filter((l) => l.lab || l.starterCode).map((l) => l.id)))).catch(() => {});
   }, [profile, nav]);
 
   const wrongs = progress?.wrongBook ?? [];
@@ -126,6 +129,13 @@ export default function WrongBookScreen() {
                               来自《{w.lessonTitle}》· {new Date(w.lastWrongAt).toLocaleDateString('zh-CN')}
                             </div>
                           </div>
+                          <button
+                            onClick={() => nav(labIds.has(w.lessonId) ? `/lab/${w.lessonId}` : `/tutor/${w.lessonId}`)}
+                            className="mt-0.5 shrink-0 rounded-xl bg-sky-50 px-2.5 py-1.5 text-xs font-bold text-sky-700 transition hover:bg-sky-100"
+                            title="回到这一课的课本讲解"
+                          >
+                            📖 看讲解
+                          </button>
                         </div>
                       </div>
                     ))}

@@ -169,7 +169,10 @@ export default function TutorScreen() {
         {/* 右：有课本讲解时，讲解正文是主区（可脱离 AI 自学）；否则主区为 AI 对话 */}
       {lesson.teach ? (
         <section className="min-h-[70vh] overflow-y-auto rounded-2xl bg-slate-50 p-4 shadow-md lg:h-[calc(100vh-7.5rem)]">
-          <TeachPanel teach={lesson.teach} />
+          <TeachPanel
+            teach={lesson.teach}
+            onFinish={lesson.exercises?.length ? () => setQuizOpen(true) : undefined}
+          />
         </section>
       ) : (
         <section className="min-h-[70vh] overflow-hidden rounded-2xl bg-white/80 shadow-md lg:h-[calc(100vh-7.5rem)]">

@@ -4,7 +4,7 @@ import type { Teach } from '@shared/types.ts';
  * 教材级讲解面板（自学正文）：概念精讲 + 例题分步 + 易错点。
  * 像课本一页：定义准确、步骤完整，孩子不需要 AI 也能自己学懂。
  */
-export default function TeachPanel({ teach, compact = false }: { teach: Teach; compact?: boolean }) {
+export default function TeachPanel({ teach, compact = false, onFinish }: { teach: Teach; compact?: boolean; onFinish?: () => void }) {
   return (
     <div className={compact ? 'space-y-4' : 'space-y-5'}>
       {/* 概念精讲 */}
@@ -70,6 +70,18 @@ export default function TeachPanel({ teach, compact = false }: { teach: Teach; c
           </ul>
         </section>
       ) : null}
+
+      {/* 读完讲解 → 随堂测（自学闭环的衔接） */}
+      {onFinish && (
+        <div className="flex justify-center pt-2">
+          <button
+            onClick={onFinish}
+            className="rounded-2xl bg-emerald-500 px-8 py-3 text-base font-black text-white shadow-md transition hover:-translate-y-0.5 hover:bg-emerald-600"
+          >
+            我读完了，开始随堂小练 →
+          </button>
+        </div>
+      )}
     </div>
   );
 }

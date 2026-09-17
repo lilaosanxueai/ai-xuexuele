@@ -513,7 +513,10 @@ export default function LabScreen() {
               <button onClick={() => setTeachOpen(false)} className="rounded-xl bg-slate-100 px-3 py-1.5 text-sm font-bold text-slate-600 hover:bg-slate-200">✕ 关闭</button>
             </div>
             <div className="overflow-y-auto p-4">
-              <TeachPanel teach={lesson.teach} />
+              <TeachPanel
+                teach={lesson.teach}
+                onFinish={lesson.exercises?.length ? () => { setTeachOpen(false); setQuizOpen(true); } : undefined}
+              />
             </div>
           </div>
         </div>
