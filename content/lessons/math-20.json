@@ -146,5 +146,32 @@
     ],
     "code": "# 三种增长大赛跑探索台\ngoal = 1000000   # 目标数\n\nhide()\np = 1\nsteps = 0\nwhile p < goal:\n    p = p * 2\n    steps = steps + 1\npen_color(\"red\")\npen_down()\ngo_to(-180, -110)\nxx = -180\ni = 0\nv = 1\nwhile i < steps:\n    v = v * 2\n    xx = xx + 190 / steps\n    go_to(xx, -110 + v / goal * 200)\n    i = i + 1\npen_up()\nwrite(\"指数翻倍：\" + steps + \" 步到 \" + goal, -190, 140, \"red\", 13)\naddSteps = goal / 1000\npen_color(\"blue\")\npen_down()\ngo_to(-180, -110)\nxx = -180\ni = 0\nwhile i < steps:\n    xx = xx + 190 / steps\n    go_to(xx, -110 + (xx + 180) / 190 * 100 / 10)\n    i = i + 1\npen_up()\nwrite(\"每次+1000：要 \" + addSteps + \" 步（差 \" + addSteps / steps + \" 倍）\", -190, 112, \"blue\", 12)"
   },
-  "grade": 10
+  "grade": 10,
+  "teach": {
+    "sections": [
+      {
+        "title": "三种增长方式",
+        "body": "【直线（匀速）、指数（加速翻倍）、对数（先快后慢）】\n同样的\"步数\"，后期大小：指数 > 直线 > 对数。\n对数增长像\"砍价\"：一开始降很多，越到后面每步降得越少。"
+      },
+      {
+        "title": "量级比较",
+        "body": "指数与直线比：x=10 时 2¹⁰=1024 远超 10x=100；x=3 时 8 < 30——前期直线可能领先。\n理解\"谁先谁后\"要看区间，不是永远。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "甲每天进步 10（直线），乙每天翻倍（指数）。第 1 天和第 10 天谁多？（都从 10 开始累计）",
+        "steps": [
+          "第 1 天：甲 10，乙 10——相同",
+          "甲第 10 天累计：10×10 = 100",
+          "乙第 10 天：10×2⁹ = 5120",
+          "前期接近，后期指数遥遥领先"
+        ],
+        "tip": "指数的反超点是关键——过了一个点就再也追不上"
+      }
+    ],
+    "mistakes": [
+      "认为指数永远最大——小区间内直线或对数可能领先，比较要指明范围"
+    ]
+  }
 }

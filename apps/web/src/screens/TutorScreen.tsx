@@ -7,6 +7,7 @@ import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
 import AIBuddy, { type BuddyHandle } from '../components/AIBuddy.tsx';
 import ExercisePanel from '../components/ExercisePanel.tsx';
+import TeachPanel from '../components/TeachPanel.tsx';
 
 /** 学科辅导场景的快捷提问（替代默认的编程向问题） */
 const TUTOR_QUICK: Partial<Record<'explain' | 'hint' | 'review', string[]>> = {
@@ -28,6 +29,7 @@ export default function TutorScreen() {
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
   const [quizOpen, setQuizOpen] = useState(false);
   const [quizDone, setQuizDone] = useState(false);
+  const [buddyOpen, setBuddyOpen] = useState(false);
   const buddyRef = useRef<BuddyHandle>(null);
 
   useEffect(() => {
@@ -86,13 +88,23 @@ export default function TutorScreen() {
       <main className="mx-auto grid w-full max-w-6xl flex-1 gap-4 p-4 lg:grid-cols-[320px_1fr]">
         {/* 左：本课导学 */}
         <aside className="space-y-3">
-          <button
-            onClick={() => buddyRef.current?.askInMode('explain', `请给我讲讲《${lesson.title}》这一课：我要学什么？最重要的知识点是什么？`)}
-            className="w-full rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-500 p-4 text-left text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            <div className="text-base font-black">📖 让 AI 老师讲讲这一课</div>
-            <div className="mt-0.5 text-xs opacity-85">听不懂就追问，随时可以换种讲法</div>
-          </button>
+          {lesson.teach ? (
+            <button
+              onClick={() => setBuddyOpen(true)}
+              className="w-full rounded-2xl bg-white p-4 text-left shadow-sm ring-1 ring-slate-200 transition hover:ring-sky-300"
+            >
+              <div className="text-base font-black text-slate-700">💬 看完讲解还有疑问？</div>
+              <div className="mt-0.5 text-xs text-slate-500">点这里问老师（讲解正文在右边，先自己读）</div>
+            </button>
+          ) : (
+            <button
+              onClick={() => buddyRef.current?.askInMode('explain', `请给我讲讲《${lesson.title}》这一课：我要学什么？最重要的知识点是什么？`)}
+              className="w-full rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-500 p-4 text-left text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
+            >
+              <div className="text-base font-black">📖 让 AI 老师讲讲这一课</div>
+              <div className="mt-0.5 text-xs opacity-85">听不懂就追问，随时可以换种讲法</div>
+            </button>
+          )}
 
           <div className="rounded-2xl bg-white p-4 shadow-sm">
             <div className="mb-2 text-sm font-black text-slate-700">🎯 学习目标</div>
@@ -154,7 +166,12 @@ export default function TutorScreen() {
           </div>
         </aside>
 
-        {/* 右：AI 老师对话（主区） */}
+        {/* 右：有课本讲解时，讲解正文是主区（可脱离 AI 自学）；否则主区为 AI 对话 */}
+      {lesson.teach ? (
+        <section className="min-h-[70vh] overflow-y-auto rounded-2xl bg-slate-50 p-4 shadow-md lg:h-[calc(100vh-7.5rem)]">
+          <TeachPanel teach={lesson.teach} />
+        </section>
+      ) : (
         <section className="min-h-[70vh] overflow-hidden rounded-2xl bg-white/80 shadow-md lg:h-[calc(100vh-7.5rem)]">
           <AIBuddy
             ref={buddyRef}
@@ -168,7 +185,29 @@ export default function TutorScreen() {
             getContext={getContext}
           />
         </section>
+      )}
       </main>
+
+      {/* 讲解课的 AI 答疑浮窗（讲解为主、AI 为辅） */}
+      {lesson.teach && (
+        <div
+          className={`fixed bottom-4 right-4 top-20 z-40 w-[22rem] max-w-[calc(100vw-2rem)] transition-all duration-300 ${
+            buddyOpen ? 'translate-x-0 opacity-100' : 'pointer-events-none translate-x-8 opacity-0'
+          }`}
+        >
+          <AIBuddy
+            ref={buddyRef}
+            profileId={profile.id}
+            buddy={settings.buddy}
+            intro={lesson.aiIntro || `我是${settings.buddy.name}。先读右边的讲解，哪里没看懂就问我！`}
+            defaultMode="explain"
+            modes={['explain', 'hint', 'review']}
+            quick={TUTOR_QUICK}
+            subtitle="答疑老师"
+            getContext={getContext}
+          />
+        </div>
+      )}
 
       {/* 随堂小练：做完即记录完成（无庆祝），错题自动进错题本 */}
       {quizOpen && lesson.exercises && profile && (

@@ -145,5 +145,31 @@
       "sin 和 cos 的相位差是多少度？"
     ],
     "code": "# 相位差探索台：两列波的赛跑\nphase = 90   # 相位差（度）\n\nhide()\npen_color(\"blue\")\npen_down()\nx = -200\ngo_to(x, 60 * sin(x))\nwhile x < 200:\n    go_to(x, 60 * sin(x))\n    x = x + 5\npen_up()\npen_color(\"red\")\npen_down()\nx = -200\ngo_to(x, 60 * sin(x + phase))\nwhile x < 200:\n    go_to(x, 60 * sin(x + phase))\n    x = x + 5\npen_up()\nwrite(\"相位差 \" + phase + \"°\", -190, 140, \"red\", 13)\nif phase == 0:\n    write(\"完全重合！\", -190, 112, \"green\", 12)\nif phase == 180:\n    write(\"正好相反！一个上一个下\", -190, 112, \"orange\", 12)\nwrite(\"蓝波 x°，红波 x+\" + phase + \"°\", -190, -130, \"blue\", 11)"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "相位",
+        "body": "【相位决定波形\"从哪里开始\"：y = sin(x + φ) 中的 φ 是初相位】\nφ > 0 图像向左移，φ < 0 向右移。\n相位差 90° = 错开四分之一周期。"
+      },
+      {
+        "title": "相位差 180°：反相",
+        "body": "【sin(x) 与 sin(x + 180°) = −sin(x)：波峰对波谷】\n两列反相波叠加相互抵消——降噪耳机就是这个原理（发出反相声波抵消噪音）。\n相位差 0° 则完全同步，叠加增强。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "y = sin(x + 90°) 等于什么？它和 y = cos x 什么关系？",
+        "steps": [
+          "sin(x + 90°) = cos x",
+          "两条曲线完全重合",
+          "正弦左移 90° 就是余弦——它们相位差 90°"
+        ],
+        "tip": "sin 和 cos 是同一条波浪线的两个\"起点\""
+      }
+    ],
+    "mistakes": [
+      "相位差与振幅混淆：相位是\"错开多少\"，振幅是\"波动多大\""
+    ]
   }
 }

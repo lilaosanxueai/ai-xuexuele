@@ -138,5 +138,31 @@
     ],
     "code": "# 时分秒换算探索台\nhours = 1.5   # 小时数\n\nhide()\nmins = hours * 60\nsecs = mins * 60\npen_color(\"blue\")\npen_down()\ngo_to(-170, -100)\ngo_to(-170, -100 + hours * 40)\ngo_to(-90, -100 + hours * 40)\ngo_to(-90, -100)\ngo_to(-170, -100)\npen_up()\nwrite(hours + \" 时\", -160, -125, \"blue\", 11)\npen_color(\"green\")\npen_down()\ngo_to(-40, -100)\ngo_to(-40, -100 + mins / 9)\ngo_to(40, -100 + mins / 9)\ngo_to(40, -100)\ngo_to(-40, -100)\npen_up()\nwrite(mins + \" 分\", -25, -125, \"green\", 11)\npen_color(\"red\")\npen_down()\ngo_to(90, -100)\ngo_to(90, -100 + mins / 9)\ngo_to(170, -100 + mins / 9)\ngo_to(170, -100)\ngo_to(90, -100)\npen_up()\nwrite(secs / 60 + \" 分\", 110, -125, \"red\", 11)\nwrite(hours + \" 时 = \" + mins + \" 分 = \" + secs + \" 秒\", -190, 140, \"red\", 13)\nwrite(\"相邻单位进率 60\", -190, 112, \"orange\", 11)"
   },
-  "grade": 3
+  "grade": 3,
+  "teach": {
+    "sections": [
+      {
+        "title": "时间单位",
+        "body": "【1 时 = 60 分，1 分 = 60 秒】\n时间是 60 进制，不是 100 进制。\n1.5 时 = 1 时 30 分 = 90 分。"
+      },
+      {
+        "title": "长度与质量单位",
+        "body": "【1 千米 = 1000 米，1 米 = 100 厘米；1 千克 = 1000 克】\n大化小乘进率，小化大除以进率。\n3 千米 = 3000 米；500 克 = 0.5 千克。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "一场电影从 8:40 放到 10:10，放映了多长时间？",
+        "steps": [
+          "先看整时：从 8 点多到 10 点多，跨了 1 个整小时（9:40）",
+          "再看分：8:40 → 9:40 是 60 分；9:40 → 10:10 是 30 分",
+          "一共 1 时 30 分"
+        ],
+        "tip": "分段计算时间不容易错"
+      }
+    ],
+    "mistakes": [
+      "1.5 小时算成 1 小时 50 分——0.5 时是 30 分（60 的一半），不是 50 分"
+    ]
+  }
 }

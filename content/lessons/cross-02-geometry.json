@@ -175,5 +175,31 @@
     ],
     "code": "# 万花筒探索台：旋转的正多边形\nsides = 6    # 边数\ncopies = 6   # 复制份数\n\nhide()\nk = 0\nwhile k < copies:\n    rot = k * 360 / copies\n    pen_color(\"blue\")\n    if k == 0:\n        pen_color(\"red\")\n    pen_down()\n    i = 0\n    go_to(90 * cos(rot), 90 * sin(rot))\n    while i < sides:\n        ang = rot + (i + 1) * 360 / sides\n        go_to(90 * cos(ang), 90 * sin(ang))\n        i = i + 1\n    pen_up()\n    k = k + 1\nwrite(\"正\" + sides + \"边形 × 旋转\" + copies + \" 份\", -190, 150, \"red\", 12)"
   },
-  "grade": 5
+  "grade": 5,
+  "teach": {
+    "sections": [
+      {
+        "title": "正多边形",
+        "body": "【每条边都相等、每个角也都相等的多边形叫正多边形】\n正三角形（等边三角形）、正方形、正五边形、正六边形都是正多边形。"
+      },
+      {
+        "title": "外角和为什么是 360°",
+        "body": "【任何多边形的外角和都是 360°】\n想象你沿着多边形走一圈回到起点：你转过的角度加起来正好是一整圈，也就是 360°。\n所以正 n 边形每个外角 = 360° ÷ n。正六边形每个外角 = 360° ÷ 6 = 60°。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "正五边形每个外角是多少度？",
+        "steps": [
+          "外角和是 360°",
+          "正五边形有 5 个相等的外角",
+          "360° ÷ 5 = 72°"
+        ],
+        "tip": "边数越多，每个外角越小，图形越接近圆"
+      }
+    ],
+    "mistakes": [
+      "把外角和当成 180°——内角和才与边数有关，外角和永远是 360°"
+    ]
+  }
 }

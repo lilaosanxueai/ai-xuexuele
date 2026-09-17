@@ -170,5 +170,31 @@
     ],
     "code": "# 除法分组探索台\ntotal = 12   # 总数量\neach = 4     # 每组几个\n\nhide()\ngroups = total / each\nrem = total - groups * each\ni = 0\nwhile i < total:\n    col = i - (i / each) * each\n    row = i / each\n    x = -180 + col * 26\n    y = 70 - row * 30\n    pen_color(\"blue\")\n    pen_down()\n    go_to(x, y)\n    go_to(x + 20, y)\n    go_to(x + 20, y - 20)\n    go_to(x, y - 20)\n    go_to(x, y)\n    pen_up()\n    i = i + 1\nwrite(total + \" 个 ÷ 每组 \" + each + \" = \" + groups + \" 组\", -190, 130, \"red\", 13)\nif rem > 0:\n    write(\"还剩 \" + rem + \" 个分不完整\", -190, 105, \"orange\", 12)\nif rem == 0:\n    write(\"正好分完，没有余数！\", -190, 105, \"green\", 12)"
   },
-  "grade": 2
+  "grade": 2,
+  "teach": {
+    "sections": [
+      {
+        "title": "除法的两种含义",
+        "body": "【平均分：12 颗糖分给 4 人，每人几颗？12 ÷ 4 = 3】\n【包含除：12 颗糖每 3 颗装一袋，能装几袋？12 ÷ 3 = 4】\n同一个算式，可以讲两个故事——都在问\"每份多少\"或\"有几份\"。"
+      },
+      {
+        "title": "除法与乘法互逆",
+        "body": "【除法是乘法的逆运算】\n因为 3 × 4 = 12，所以 12 ÷ 3 = 4，12 ÷ 4 = 3。\n忘了除法算式，可以想乘法口诀：（ ）× 4 = 12？三四十二，括号里是 3。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "24 个同学排队，每 6 人一队，能排几队？",
+        "steps": [
+          "这是\"包含除\"：看 24 里有几个 6",
+          "列式：24 ÷ 6",
+          "四六二十四，能排 4 队"
+        ],
+        "tip": "分不清用乘还是除？想清楚\"已知什么、求什么\""
+      }
+    ],
+    "mistakes": [
+      "\"每 6 人一队\"列成 6 ÷ 24——总数永远做被除数（在除号前面）"
+    ]
+  }
 }

@@ -89,6 +89,31 @@ export interface Lesson {
   celebrate: string;
   /** 互动实验室定义（理科动态演示课）：参数滑块 + 探索问题；缺省时 LabScreen 自动从 starterCode 提取参数 */
   lab?: LabDef;
+  /** 教材级讲解（自学正文）：概念精讲 + 例题分步 + 易错点；有此字段时课程可脱离 AI 完整自学 */
+  teach?: Teach;
+}
+
+/** 讲解章节：标题 + 正文（正文按 \n 分段） */
+export interface TeachSection {
+  title: string;
+  body: string;
+}
+
+/** 典型例题：题目 + 分步解答 + 一句点拨 */
+export interface TeachExample {
+  q: string;
+  steps: string[];
+  tip?: string;
+}
+
+/** 教材级自学讲解 */
+export interface Teach {
+  /** 概念精讲（是什么 / 为什么 / 怎么用） */
+  sections: TeachSection[];
+  /** 例题精讲（带完整步骤，像课本例题） */
+  examples: TeachExample[];
+  /** 易错点提醒 */
+  mistakes?: string[];
 }
 
 /** 互动实验室：内容动态化 + 动态互动（PhET/GeoGebra 式参数探索） */

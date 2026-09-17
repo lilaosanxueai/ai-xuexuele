@@ -138,5 +138,31 @@
       "θ=45° 时对边和邻边有什么关系？"
     ],
     "code": "# 锐角三角函数探索台：sin/cos/tan\nangle = 30   # 锐角 θ（度）\n\nhide()\nhyp = 130\nopp = hyp * sin(angle)\nadj = hyp * cos(angle)\npen_color(\"blue\")\npen_down()\ngo_to(-160, -90)\ngo_to(-160 + adj, -90)\ngo_to(-160 + adj, -90 + opp)\ngo_to(-160, -90)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-160, -90)\ngo_to(-160 + adj, -90 + opp)\npen_up()\nwrite(\"θ=\" + angle + \"°\", -160 + adj - 25, -90 - 18, \"red\", 12)\nwrite(\"对边=\" + opp, 60, 60, \"red\", 11)\nwrite(\"邻边=\" + adj, 60, 40, \"blue\", 11)\nwrite(\"sin=\" + sin(angle) + \" cos=\" + cos(angle), 40, 130, \"blue\", 12)\nwrite(\"tan=\" + sin(angle) / cos(angle), 40, 105, \"red\", 12)"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "锐角三角函数",
+        "body": "【在直角三角形中，sin、cos、tan 都是\"边的比\"】\nsin A = 对边/斜边；cos A = 邻边/斜边；tan A = 对边/邻边。\n它们只与角的大小有关，与三角形大小无关。"
+      },
+      {
+        "title": "特殊角必须背熟",
+        "body": "【sin30° = 1/2，cos60° = 1/2，sin45° = cos45° = √2/2】\n互余角关系：sin A = cos(90° − A)。\n30°、45°、60° 的三角函数值来自两个特殊三角形。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "直角三角形中，角 A = 30°，斜边长 10，求 A 的对边。",
+        "steps": [
+          "对边 = 斜边 × sin A",
+          "= 10 × sin30°",
+          "= 10 × 1/2 = 5"
+        ],
+        "tip": "先写\"对边/斜边\"的式子，再代数"
+      }
+    ],
+    "mistakes": [
+      "sin 和 cos 用反：30° 角的对边用 cos 算——对边配 sin，邻边配 cos"
+    ]
   }
 }

@@ -155,5 +155,31 @@
       "这就是容斥原理：别把人算两遍！"
     ],
     "code": "# 容斥原理探索台：|A∪B| = |A|+|B|−|A∩B|\nnA = 30   # A 集合人数\nnB = 24   # B 集合人数\n\nhide()\nboth = nA + nB - 40\nif both < 2:\n    both = 2\nif both > nA:\n    both = nA\nif both > nB:\n    both = nB\npen_color(\"red\")\npen_down()\ni = 0\ngo_to(-40, 70)\nwhile i < 36:\n    ang = (i + 1) * 10\n    go_to(-40 + 80 * cos(ang), 70 * sin(ang))\n    i = i + 1\npen_up()\npen_color(\"blue\")\npen_down()\ni = 0\ngo_to(40, 70)\nwhile i < 36:\n    ang = (i + 1) * 10\n    go_to(40 + 80 * cos(ang), 70 * sin(ang))\n    i = i + 1\npen_up()\nwrite(\"A \" + nA, -110, 60, \"red\", 12)\nwrite(\"B \" + nB, 95, 60, \"blue\", 12)\nwrite(\"重叠 \" + both, -14, 0, \"green\", 12)\nunion = nA + nB - both\nwrite(\"至少参加一个：\" + nA + \"+\" + nB + \"−\" + both + \" = \" + union, -190, 140, \"red\", 13)\nwrite(\"重叠部分被算了两次，要减一次\", -190, 112, \"orange\", 11)"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "交集与并集",
+        "body": "【A∩B：同时属于 A 和 B 的元素（公共部分）】【A∪B：属于 A 或 B 的元素（合起来）】\n口诀：交集取\"都\"，并集取\"或\"。"
+      },
+      {
+        "title": "容斥原理",
+        "body": "【|A∪B| = |A| + |B| − |A∩B|】\n直接相加会把公共部分算两次，所以要减去交集。\n例：|A|=5、|B|=3、|A∩B|=1，则 |A∪B| = 5+3−1 = 7。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "班里 30 人，参加数学小组 15 人，英语小组 12 人，两组都参加 5 人。两组都不参加的有几人？",
+        "steps": [
+          "至少参加一组：15 + 12 − 5 = 22 人（容斥原理）",
+          "都不参加：30 − 22",
+          "= 8 人"
+        ],
+        "tip": "\"至少参加一个\"= 并集大小，先算它再求补集"
+      }
+    ],
+    "mistakes": [
+      "两个小组人数直接相加当并集——重复的人被算了两次"
+    ]
   }
 }

@@ -14,7 +14,7 @@ const SUBJECT_KEYWORD = {
   '艺术': ['美术', '艺术', '美育'], '信息科技': ['信息科技', '信息'],
 };
 
-const issues = { structural: [], stage: [], curriculum: [], textbook: [], lab: [], exercise: [], duplicate: [] };
+const issues = { structural: [], stage: [], curriculum: [], textbook: [], lab: [], exercise: [], duplicate: [], teach: [] };
 const lessons = [];
 for (const f of fs.readdirSync(DIR)) {
   if (!f.endsWith('.json')) continue;
@@ -120,6 +120,21 @@ for (const l of lessons) {
       if (typeof q.answer !== 'number' || q.answer < 0 || q.answer >= (q.options?.length ?? 0)) add('exercise', `${t} answer=${q.answer} 非法`);
       if (!q.explain?.trim()) add('exercise', `${t} 缺解析`);
     }
+  }
+
+  // ---- H 讲解层（已有 teach 的学科必须齐全且结构完整） ----
+  const TEACH_REQUIRED = new Set(['数学']);
+  if (l.teach) {
+    if (!Array.isArray(l.teach.sections) || l.teach.sections.length < 2) add('teach', 'sections 少于 2 节');
+    for (const [i, sec] of (l.teach.sections ?? []).entries()) {
+      if (!sec.title?.trim() || !sec.body?.trim() || sec.body.trim().length < 20) add('teach', `第${i + 1}节正文过短或缺失`);
+    }
+    if (!Array.isArray(l.teach.examples) || l.teach.examples.length === 0) add('teach', '缺例题');
+    for (const [i, exa] of (l.teach.examples ?? []).entries()) {
+      if (!exa.q?.trim() || (exa.steps ?? []).length < 2) add('teach', `例题${i + 1} 步骤少于 2 步`);
+    }
+  } else if (TEACH_REQUIRED.has(l.subjectArea)) {
+    add('teach', '该学科课程缺教材级讲解（teach）');
   }
 
   // ---- G 重复 ----

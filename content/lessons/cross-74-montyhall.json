@@ -149,5 +149,32 @@
     ],
     "code": "# 蒙提霍尔三门问题探索台\nn = 300   # 模拟局数\n\nhide()\nstay_win = 0\nswap_win = 0\ni = 0\nwhile i < n:\n    car = random(0, 2)\n    pick = random(0, 2)\n    if pick == car:\n        stay_win = stay_win + 1\n    else:\n        swap_win = swap_win + 1\n    i = i + 1\npen_color(\"orange\")\npen_down()\ngo_to(-130, -100)\ngo_to(-130, -100 + stay_win * 200 / n)\ngo_to(-30, -100 + stay_win * 200 / n)\ngo_to(-30, -100)\ngo_to(-130, -100)\npen_up()\nwrite(\"死守不换 \" + stay_win + \" 局\", -130, 60, \"orange\", 12)\npen_color(\"green\")\npen_down()\ngo_to(30, -100)\ngo_to(30, -100 + swap_win * 200 / n)\ngo_to(130, -100 + swap_win * 200 / n)\ngo_to(130, -100)\ngo_to(30, -100)\npen_up()\nwrite(\"必换 \" + swap_win + \" 局\", 50, 80, \"green\", 12)\nwrite(\"不换胜率 \" + stay_win * 100 / n + \"%，换门胜率 \" + swap_win * 100 / n + \"%\", -170, -135, \"red\", 12)",
     "animate": false
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "蒙提霍尔问题",
+        "body": "【三扇门后有一辆车两只羊：选门后主持人（知道答案）开一扇羊门，换门胜率 2/3】\n直觉觉得\"剩两扇门，五五开\"——错了。\n关键是主持人的行为携带信息：他永远避开车。"
+      },
+      {
+        "title": "为什么换门划算",
+        "body": "初选中车的概率 1/3：此时换门必输。\n初选中羊的概率 2/3：主持人只能开另一只羊，换门必胜。\n所以换门胜率 = 2/3。把三门想象成\"一门 vs 另外两门打包\"更直观。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "为什么主持人开门不是\"随机开\"？",
+        "steps": [
+          "若随机开，可能开出车，游戏失效",
+          "题目设定他\"知道并避开\"车",
+          "这个规则把 2/3 的概率集中到剩下那扇门",
+          "若真是随机开门且开出羊，换与不换才是各 1/2"
+        ],
+        "tip": "概率题的条件变了，答案就变——读清规则"
+      }
+    ],
+    "mistakes": [
+      "把主持人\"有信息的选择\"当成\"随机开门\"来算概率"
+    ]
   }
 }

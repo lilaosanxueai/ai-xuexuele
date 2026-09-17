@@ -169,5 +169,31 @@
     ],
     "code": "# 平移与旋转探索台\ndx = 4    # 平移\nrot = 45  # 旋转（度）\n\nhide()\nx1 = -100\ny1 = -40\nx2 = -20\ny2 = 40\npen_color(\"blue\")\npen_down()\ngo_to(x1, y1)\ngo_to(x2, y2)\ngo_to(x2, y1)\ngo_to(x1, y1)\npen_up()\nrx1 = x1 * cos(rot) - y1 * sin(rot)\nry1 = x1 * sin(rot) + y1 * cos(rot)\nrx2 = x2 * cos(rot) - y2 * sin(rot)\nry2 = x2 * sin(rot) + y2 * cos(rot)\nrx3 = x2 * cos(rot) - y1 * sin(rot)\nry3 = x2 * sin(rot) + y1 * cos(rot)\npen_color(\"red\")\npen_down()\ngo_to(rx1 + dx * 18, ry1)\ngo_to(rx2 + dx * 18, ry2)\ngo_to(rx3 + dx * 18, ry3)\ngo_to(rx1 + dx * 18, ry1)\npen_up()\nwrite(\"蓝=原图 红=变换后\", -190, 140, \"blue\", 12)\nwrite(\"平移 \" + dx + \" 格 + 旋转 \" + rot + \"°\", -190, 112, \"red\", 12)\nwrite(\"形状大小不变——只改位置和方向\", -190, -130, \"orange\", 11)"
   },
-  "grade": 2
+  "grade": 2,
+  "teach": {
+    "sections": [
+      {
+        "title": "平移",
+        "body": "【图形沿直线移动、方向和大小都不变，这种运动叫平移】\n电梯上下、推拉窗左右，都是平移。\n平移只改变位置，不改变形状、大小和方向。"
+      },
+      {
+        "title": "旋转",
+        "body": "【图形绕一个点转动，这种运动叫旋转】\n风车、摩天轮、钟表指针都在旋转。\n旋转三要素：绕哪个点（旋转中心）、往哪边转（顺时针/逆时针）、转多少度。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "下面的运动是平移还是旋转？①国旗上升 ②风扇转动 ③滑滑梯",
+        "steps": [
+          "国旗上升：沿直线上移——平移",
+          "风扇转动：绕中心转——旋转",
+          "滑滑梯：沿斜面直线下滑——平移"
+        ],
+        "tip": "判断标准：绕点转是旋转，沿线走是平移"
+      }
+    ],
+    "mistakes": [
+      "认为斜着移动就不是平移——沿任何直线移动都是平移"
+    ]
+  }
 }

@@ -152,5 +152,31 @@
       "行星轨道就是椭圆——太阳在其中一个焦点上"
     ],
     "code": "# 椭圆探索台：x=a·cosθ, y=b·sinθ\nra = 120   # 长半轴\nrb = 80    # 短半轴\n\nhide()\npen_color(\"blue\")\npen_down()\ni = 0\ngo_to(ra, 0)\nwhile i < 36:\n    ang = (i + 1) * 10\n    go_to(ra * cos(ang), rb * sin(ang))\n    i = i + 1\npen_up()\nc = sqrt(ra * ra - rb * rb)\npen_color(\"red\")\npen_down()\ngo_to(-c - 5, 5)\ngo_to(-c + 5, 5)\ngo_to(-c + 5, -5)\ngo_to(-c - 5, -5)\ngo_to(-c - 5, 5)\ngo_to(c - 5, 5)\ngo_to(c + 5, 5)\ngo_to(c + 5, -5)\ngo_to(c - 5, -5)\ngo_to(c - 5, 5)\npen_up()\nwrite(\"焦点\", -20, -22, \"red\", 10)\nwrite(\"a=\" + ra + \" b=\" + rb, -190, 140, \"blue\", 13)\nif ra == rb:\n    write(\"a=b：变成正圆！\", -190, 112, \"green\", 12)\nif ra != rb:\n    write(\"焦点距离 c=√(a²-b²)=\" + c, -190, 112, \"red\", 12)"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "椭圆",
+        "body": "【到两个定点（焦点）的距离之和为定值的点的轨迹】\n标准方程 x²/a² + y²/b² = 1：a 是横半轴，b 是纵半轴。\na = b 时就是圆。"
+      },
+      {
+        "title": "椭圆与生活",
+        "body": "地球公转轨道是椭圆（开普勒第一定律），太阳在焦点上。\n压扁的方向看 a、b 哪个小：横 160 纵 110 的椭圆是\"纵向压扁\"。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "椭圆 x²/100 + y²/36 = 1 的横半轴、纵半轴各是多少？",
+        "steps": [
+          "a² = 100，a = 10（横半轴）",
+          "b² = 36，b = 6（纵半轴）",
+          "a > b，横向长纵向扁"
+        ],
+        "tip": "分母开平方就是半轴长，谁大沿谁长"
+      }
+    ],
+    "mistakes": [
+      "把 a、b 当直径——它们是半轴（从中心到边）"
+    ]
   }
 }

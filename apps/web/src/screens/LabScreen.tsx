@@ -8,6 +8,7 @@ import Header from '../components/Header.tsx';
 import Stage from '../components/Stage.tsx';
 import AIBuddy, { type BuddyHandle } from '../components/AIBuddy.tsx';
 import ExercisePanel from '../components/ExercisePanel.tsx';
+import TeachPanel from '../components/TeachPanel.tsx';
 import { StageState, setRunSpeed } from '../runtime/stageState.ts';
 import { parsePy, PyRunner } from '../runtime/pyinterp.ts';
 import { pyStageApi } from '../runtime/pyBridge.ts';
@@ -77,6 +78,7 @@ export default function LabScreen() {
   const [buddyOpen, setBuddyOpen] = useState(false);
   const [quizOpen, setQuizOpen] = useState(false);
   const [quizDone, setQuizDone] = useState(false);
+  const [teachOpen, setTeachOpen] = useState(false);
   const [explored, setExplored] = useState<Record<number, boolean>>({});
   const [toast, setToast] = useState<string | null>(null);
   const [challengeDone, setChallengeDone] = useState<Record<number, boolean>>({});
@@ -315,6 +317,15 @@ export default function LabScreen() {
           <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-bold text-slate-500">{bandText}</span>
           {lesson.textbook && <span className="hidden rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-700 sm:inline">📚 {lesson.textbook}</span>}
           <div className="ml-auto flex items-center gap-1.5">
+            {lesson.teach && (
+              <button
+                onClick={() => setTeachOpen(true)}
+                className="rounded-xl bg-sky-600 px-3 py-1.5 text-sm font-bold text-white shadow-sm transition hover:bg-sky-700"
+                title="概念精讲 + 例题分步 + 易错点（像课本一样自己学）"
+              >
+                📖 课本讲解
+              </button>
+            )}
             {lesson.exercises?.length ? (
               <button onClick={() => setQuizOpen(true)} className={`rounded-xl px-3 py-1.5 text-sm font-bold shadow-sm ${quizDone ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-400 text-white hover:bg-amber-500'}`}>
                 {quizDone ? '✅ 随堂小练' : '📝 随堂小练'}
@@ -491,6 +502,21 @@ export default function LabScreen() {
             }).catch(() => {});
           }}
         />
+      )}
+
+      {/* 课本讲解（教材级自学正文） */}
+      {teachOpen && lesson.teach && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 p-4" onClick={() => setTeachOpen(false)}>
+          <div className="flex max-h-[88vh] w-full max-w-3xl flex-col overflow-hidden rounded-3xl bg-slate-50 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between border-b bg-white px-5 py-3">
+              <h2 className="text-base font-black text-slate-800">📖 课本讲解 · {lesson.title}</h2>
+              <button onClick={() => setTeachOpen(false)} className="rounded-xl bg-slate-100 px-3 py-1.5 text-sm font-bold text-slate-600 hover:bg-slate-200">✕ 关闭</button>
+            </div>
+            <div className="overflow-y-auto p-4">
+              <TeachPanel teach={lesson.teach} />
+            </div>
+          </div>
+        </div>
       )}
 
       {toast && (

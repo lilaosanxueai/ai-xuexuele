@@ -155,5 +155,31 @@
     ],
     "code": "# 分类边界探索台\nk = 1   # 分界线斜率\nb = 0   # 分界线截距\n\nhide()\npen_color(\"red\")\npen_down()\ngo_to(-140, 80)\npen_up()\ngo_to(-100, 60)\npen_down()\ngo_to(-98, 60)\npen_up()\ngo_to(-120, 40)\npen_down()\ngo_to(-118, 40)\npen_up()\npen_color(\"blue\")\ngo_to(100, -50)\npen_down()\ngo_to(102, -50)\npen_up()\ngo_to(140, -70)\npen_down()\ngo_to(142, -70)\npen_up()\ngo_to(120, -90)\npen_down()\ngo_to(122, -90)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(-190, k * -90 / 2 + b * 20)\ngo_to(190, k * 90 / 2 + b * 20)\npen_up()\nred_side = 80 - (k * -70 / 2 + b * 20)\nblue_side = -50 - (k * 70 / 2 + b * 20)\nif red_side > 0:\n    if blue_side < 0:\n        write(\"✓ 分开了！红上蓝下\", -190, 140, \"green\", 12)\nif red_side < 0:\n    write(\"✗ 红点在分界线下方\", -190, 140, \"orange\", 12)\nif blue_side > 0:\n    write(\"✗ 蓝点在分界线上方\", -190, 112, \"orange\", 12)\nwrite(\"调 k 和 b 试试\", -190, -130, \"blue\", 11)"
   },
-  "grade": 10
+  "grade": 10,
+  "teach": {
+    "sections": [
+      {
+        "title": "分类边界",
+        "body": "【分类器在平面上画一条线（或曲面），线两侧分属两类】\n点在哪一侧，就判成哪类。\n判断方法：把点坐标代入直线方程，看结果的正负号。"
+      },
+      {
+        "title": "训练与梯度下降",
+        "body": "AI 学分类：预测 → 比较错误 → 微调参数 → 再来。\n每次微调的方向让错误变小——像下山时每步都往低处走（梯度下降）。\n好的边界让两类点离线都尽量远。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "边界直线 y = x。点 (10, 5) 在直线哪一侧？",
+        "steps": [
+          "代入 x=10：线上 y = 10",
+          "点的 y = 5 < 10",
+          "点在直线下方"
+        ],
+        "tip": "比较\"点的高度\"和\"线在该处的高度\"即可"
+      }
+    ],
+    "mistakes": [
+      "认为一条线能分开任何数据——异或（XOR）型数据必须用曲线或多条线"
+    ]
+  }
 }
