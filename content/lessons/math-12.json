@@ -144,6 +144,6 @@
       "20 格时麦粒数是多少？数一数有几位数",
       "为什么说「指数爆炸」？和一格一格加有什么不同？"
     ],
-    "code": "# 国王的麦粒探索台：每格翻倍\nn = 10   # 棋盘格数\n\nhide()\np = 1\ni = 0\nwhile i < n:\n    p = p * 2\n    col = 40 + i * 16\n    h = p / p * 10 + i * 7\n    if h > 150:\n        h = 150\n    pen_color(\"blue\")\n    pen_down()\n    go_to(col - 200, -120)\n    go_to(col - 200, -120 + h)\n    go_to(col - 188, -120 + h)\n    go_to(col - 188, -120)\n    go_to(col - 200, -120)\n    pen_up()\n    i = i + 1\nwrite(\"第 \" + n + \" 格 = \" + p + \" 粒\", -190, 130, \"red\", 13)\nwrite(\"柱子越高=麦粒越多（每格翻倍）\", -190, 150, \"blue\", 11)"
+    "code": "# 国王的麦粒探索台：每格翻倍\nn = 10   # 棋盘格数\n\nhide()\np = 1\ni = 0\nwhile i < n:\n    p = p * 2\n    h = 12 + i * 8\n    if h > 150:\n        h = 150\n    x = -200 + i * 20\n    col = \"#bfdbfe\"\n    if i > 3:\n        col = \"#60a5fa\"\n    if i > 7:\n        col = \"#3b82f6\"\n    if i > 11:\n        col = \"#1d4ed8\"\n    if i > 15:\n        col = \"#1e3a8a\"\n    fill_rect(x + 8, -110 + h / 2, 14, h, col)\n    i = i + 1\nfill_rect(-210, -118, 420, 8, \"#64748b\")\nwrite(\"第 \" + n + \" 格 = \" + p + \" 粒麦子！\", -190, 140, \"#dc2626\", 13)\nwrite(\"第 1 格 1 粒、第 2 格 2 粒、每格翻倍\", -190, 115, \"#1d4ed8\", 11)\nwrite(\"柱子早早顶到天：这就是指数爆炸\", -190, -150, \"#ea580c\", 11)"
   }
 }

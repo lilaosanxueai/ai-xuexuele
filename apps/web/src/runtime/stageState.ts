@@ -21,9 +21,17 @@ export interface StageTargetState extends StageTarget { reached: boolean }
 export interface PenLine { x1: number; y1: number; x2: number; y2: number; color: string }
 /** 画布文字标注（实验室图表数值/刻度用） */
 export interface StageLabel { x: number; y: number; text: string; color: string; size: number }
+/** 填充图形（实验室视觉升级：实心块/柱、圆、圆环） */
+export interface StageShape {
+  kind: 'rect' | 'circle' | 'ring';
+  /** rect 用中心坐标 + 宽高；circle/ring 用圆心 + 半径 */
+  x: number; y: number; w?: number; h?: number; r?: number;
+  color: string;
+}
 const PEN_COLORS: Record<string, string> = { blue: '#1d4ed8', red: '#dc2626', green: '#16a34a', orange: '#ea580c', '蓝': '#1d4ed8', '红': '#dc2626', '绿': '#16a34a', '橙': '#ea580c' };
 const MAX_PEN_LINES = 2000;
 const MAX_LABELS = 120;
+const MAX_SHAPES = 500;
 
 /** 小剧场状态机：角色状态 + 命令 API + 运行证据（供关卡校验） */
 export class StageState {
@@ -44,6 +52,8 @@ export class StageState {
   penLines: PenLine[] = [];
   /** 画布文字标注（write 命令写入） */
   labels: StageLabel[] = [];
+  /** 填充图形（fill_rect/circle/ring 命令写入） */
+  shapes: StageShape[] = [];
 
   /** 运行证据（跨多次运行累积，通关校验用） */
   saidTexts: string[] = [];
@@ -59,6 +69,7 @@ export class StageState {
     this.pen.down = false;
     this.penLines = [];
     this.labels = [];
+    this.shapes = [];
   }
 
   private reachCheck(): void {
@@ -138,6 +149,24 @@ export class StageState {
     write: async (text: string, x: number, y: number, color?: string, size?: number) => {
       if (this.labels.length < MAX_LABELS) {
         this.labels.push({ text: String(text).slice(0, 40), x, y, color: color ? (PEN_COLORS[String(color)] ?? String(color)) : '#1e293b', size: Math.max(9, Math.min(24, size ?? 13)) });
+      }
+      await scaled(30);
+    },
+    fillRect: async (x: number, y: number, w: number, h: number, color: string) => {
+      if (this.shapes.length < MAX_SHAPES && w > 0 && h > 0) {
+        this.shapes.push({ kind: 'rect', x, y, w: Math.min(w, STAGE_W), h: Math.min(h, STAGE_H), color: PEN_COLORS[String(color)] ?? String(color) });
+      }
+      await scaled(30);
+    },
+    circle: async (x: number, y: number, r: number, color: string) => {
+      if (this.shapes.length < MAX_SHAPES && r > 0) {
+        this.shapes.push({ kind: 'circle', x, y, r: Math.min(r, STAGE_W / 2), color: PEN_COLORS[String(color)] ?? String(color) });
+      }
+      await scaled(30);
+    },
+    ring: async (x: number, y: number, r: number, color: string) => {
+      if (this.shapes.length < MAX_SHAPES && r > 0) {
+        this.shapes.push({ kind: 'ring', x, y, r: Math.min(r, STAGE_W / 2), color: PEN_COLORS[String(color)] ?? String(color) });
       }
       await scaled(30);
     },

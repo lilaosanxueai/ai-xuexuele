@@ -38,10 +38,21 @@ export interface Program {
 
 interface Line { no: number; indent: number; text: string }
 
+/** 剥行内注释：引号里的 #（如颜色 "#fbbf24"）不算注释 */
+function stripComment(raw: string): string {
+  let inStr = false;
+  for (let i = 0; i < raw.length; i++) {
+    const ch = raw[i];
+    if (ch === '"') inStr = !inStr;
+    else if (ch === '#' && !inStr) return raw.slice(0, i);
+  }
+  return raw;
+}
+
 function toLines(src: string): Line[] {
   const out: Line[] = [];
   src.split('\n').forEach((raw, i) => {
-    const noComment = raw.replace(/#.*$/, '');
+    const noComment = stripComment(raw);
     if (!noComment.trim()) return;
     const indent = noComment.match(/^ */)![0].length;
     out.push({ no: i + 1, indent, text: noComment.trim() });
@@ -51,7 +62,8 @@ function toLines(src: string): Line[] {
 
 const COMMANDS = new Set([
   'move', 'turn_right', 'turn_left', 'go_to', 'bounce', 'say', 'say_for', 'costume',
-  'change_size', 'show', 'hide', 'play', 'wait', 'pen_down', 'pen_up', 'pen_color', 'write',
+  'change_size', 'show', 'hide', 'play', 'wait', 'pen_down', 'pen_up', 'pen_color',
+  'write', 'fill_rect', 'circle', 'ring',
 ]);
 const FUNCS = new Set(['touching_edge', 'key_down', 'recognize', 'random', 'range', 'sin', 'cos', 'sqrt', 'abs', 'eq', 'print']);
 

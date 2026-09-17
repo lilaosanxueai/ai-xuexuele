@@ -139,6 +139,6 @@
       "把 g 调到 1.6（月亮），轨迹变得怎么样？",
       "小球（具象）停在轨迹末端——它此刻的速度最大"
     ],
-    "code": "# 自由落体·双视图：轨迹线 + 末端小球\ng = 10   # 重力加速度\n\nhide()\npen_color(\"blue\")\npen_down()\ntt = 0\nlastX = -200\nlastY = 130\nwhile tt < 5.01:\n    h = 130 - 0.5 * g * tt * tt\n    if h < -140:\n        h = -140\n    lastX = -200 + tt * 70\n    lastY = h\n    go_to(lastX, lastY)\n    tt = tt + 0.2\npen_up()\ncostume(\"⚽\")\nshow()\ngo_to(lastX, lastY)\nwrite(\"g=\" + g + \"：1秒末速度 \" + g + \" m/s\", -180, -125, \"red\", 12)\nwrite(\"⚽ 的位置=此刻下落位置（速度最大）\", -180, 145, \"blue\", 10)"
+    "code": "# 自由落体·双视图：轨迹 + 小球 + 速度箭头\ng = 10   # 重力加速度\n\nhide()\n# 高塔\nfill_rect(-218, 60, 24, 150, \"#94a3b8\")\nfill_rect(-218, 134, 30, 8, \"#64748b\")\n# 轨迹曲线\npen_color(\"#1d4ed8\")\npen_down()\ntt = 0\nlastX = -200\nlastY = 130\ngo_to(-200, 130)\nwhile tt < 5.01:\n    h = 130 - 5 * g * tt * tt\n    if h < -150:\n        h = -150\n    lastX = -200 + tt * 70\n    lastY = h\n    go_to(lastX, lastY)\n    tt = tt + 0.2\npen_up()\n# 地面\nfill_rect(0, -158, 460, 8, \"#4d7c0f\")\n# 落点小球（大球+阴影）\ncircle(lastX, lastY, 10, \"#f97316\")\nfill_rect(lastX, -150, 26, 4, \"#00000033\")\n# 速度箭头：长度 ∝ g\nfill_rect(lastX + 16, lastY + 30 - g, 8, g, \"#dc2626\")\nwrite(\"g = \" + g, -150, 150, \"#dc2626\", 13)\nwrite(\"1 秒末速度 = \" + g + \" m/s（箭头越长越快）\", -150, 125, \"#ea580c\", 11)\nwrite(\"越重的地方（g 大）掉得越快\", -150, -125, \"#1d4ed8\", 11)"
   }
 }

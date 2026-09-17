@@ -77,6 +77,27 @@ export default function Stage({ stage, onSpriteClick, onCanvasReady, fit = false
         ctx.fillRect(0, STAGE_H - 26, STAGE_W, 26);
       }
 
+      // 填充图形（实验室视觉：实心块/柱、圆、圆环）——网格之上、线条之下
+      for (const sh of s.shapes) {
+        const [cx, cy] = toCanvas(sh.x, sh.y);
+        if (sh.kind === 'rect') {
+          const w = sh.w ?? 0, h = sh.h ?? 0;
+          ctx.fillStyle = sh.color;
+          ctx.fillRect(cx - w / 2, cy - h / 2, w, h);
+        } else if (sh.kind === 'circle') {
+          ctx.beginPath();
+          ctx.arc(cx, cy, sh.r ?? 0, 0, Math.PI * 2);
+          ctx.fillStyle = sh.color;
+          ctx.fill();
+        } else {
+          ctx.beginPath();
+          ctx.arc(cx, cy, sh.r ?? 0, 0, Math.PI * 2);
+          ctx.strokeStyle = sh.color;
+          ctx.lineWidth = 2.5;
+          ctx.stroke();
+        }
+      }
+
       // 画笔轨迹（数学动态演示）
       ctx.lineWidth = 3.5;
       ctx.lineCap = 'round';

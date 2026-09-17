@@ -146,6 +146,6 @@
       "看标注的「周期」：半径越大周期（一年）越长还是越短？",
       "地球同步卫星为什么要飞到特定的半径？"
     ],
-    "code": "# 卫星轨道探索台：r 越大，绕一圈越慢\nr = 110   # 轨道半径\n\nhide()\npen_color(\"blue\")\npen_down()\na = 0\ngo_to(r, 0)\nwhile a < 360.1:\n    go_to(r * cos(a), r * sin(a))\n    a = a + 10\npen_up()\nwrite(\"地球\", -22, 8, \"orange\", 14)\npen_color(\"red\")\npen_down()\ngo_to(r - 8, 8)\ngo_to(r + 8, 8)\ngo_to(r + 8, -8)\ngo_to(r - 8, -8)\ngo_to(r - 8, 8)\npen_up()\nT = sqrt(r * r * r / 42000)\nwrite(\"r=\" + r + \"，周期 T≈\" + T + \"（相对单位）\", -190, -140, \"red\", 12)\nwrite(\"轨道越长+引力越弱 → 越大越慢\", -190, 145, \"blue\", 11)"
+    "code": "# 卫星轨道探索台：r 越大，绕一圈越慢\nr = 110   # 轨道半径\n\nhide()\n# 地球（蓝球 + 大气光环）\ncircle(0, 0, 26, \"#3b82f6\")\ncircle(-8, 8, 9, \"#22c55e\")\ncircle(10, -6, 7, \"#22c55e\")\nring(0, 0, 31, \"#93c5fd\")\n# 轨道\nring(0, 0, r, \"#94a3b8\")\n# 卫星（轨道 45° 处）\nsx = r * cos(45)\nsy = r * sin(45)\ncircle(sx, sy, 6, \"#dc2626\")\nfill_rect(sx + 8, sy + 8, 16, 4, \"#64748b\")\nfill_rect(sx + 8, sy - 8, 16, 4, \"#64748b\")\n# 引力箭头（指向地心）与速度箭头（切线方向）\nfill_rect(sx - 16, sy - 3, 14, 6, \"#f59e0b\")\nwrite(\"引力\", sx - 34, sy + 12, \"#b45309\", 9)\nfill_rect(sx + 4, sy + 14, 6, 16, \"#16a34a\")\nwrite(\"速度\", sx + 12, sy + 26, \"#15803d\", 9)\n# 周期对比条：近轨道短、远轨道长\nfill_rect(-100, -130, 60, 12, \"#e2e8f0\")\nw = r\nfill_rect(-130, -130, w, 12, \"#3b82f6\")\nwrite(\"轨道周期（条越长=绕一圈越久）\", -100, -118, \"#64748b\", 10)\nwrite(\"r = \" + r, 60, 130, \"#dc2626\", 13)\nwrite(\"引力提供向心力：近处快、远处慢\", -190, 150, \"#1d4ed8\", 11)"
   }
 }

@@ -137,7 +137,7 @@
       "次数少和次数多，哪个更接近理论值？",
       "频率稳定在概率附近——大数定律"
     ],
-    "code": "# 频率估计概率探索台（掷出 6 的频率）\nn = 300   # 掷的次数\n\nhide()\ncount = 0\ni = 0\nwhile i < n:\n    if random(1, 6) == 6:\n        count = count + 1\n    i = i + 1\nfreq = count * 100 / n\npen_color(\"blue\")\npen_down()\ngo_to(-140, -100)\ngo_to(-140, -100 + freq * 2)\ngo_to(-20, -100 + freq * 2)\ngo_to(-20, -100)\ngo_to(-140, -100)\npen_up()\nwrite(\"实测频率 \" + freq + \"%\", -120, -125, \"blue\", 12)\npen_color(\"red\")\npen_down()\ngo_to(-140, -100 + 16.7 * 2)\ngo_to(140, -100 + 16.7 * 2)\npen_up()\nwrite(\"理论 1/6≈16.7%\", 20, -100 + 16.7 * 2 + 14, \"red\", 11)\nwrite(\"掷 \" + n + \" 次，开出 6 共 \" + count + \" 次\", -190, 140, \"red\", 13)\ndiff = freq - 16.7\nif diff > 0:\n    diff = diff\nwrite(\"与理论差 \" + diff + \" 个百分点\", -190, 112, \"orange\", 11)",
+    "code": "# 频率估计概率探索台（掷出 6 的频率）\nn = 300   # 掷的次数\n\nhide()\ncount = 0\ni = 0\nwhile i < n:\n    if random(1, 6) == 6:\n        count = count + 1\n    i = i + 1\nfreq = count * 100 / n\n# 主柱：实测频率（高度 1 格 = 1%）\nfill_rect(-90, -100 + freq * 2.4, 120, freq * 4.8, \"#3b82f6\")\nwrite(\"开出 6 共 \" + count + \" 次\", -150, 130, \"#dc2626\", 14)\nwrite(\"实测频率 \" + freq + \" %\", -150, 100, \"#1d4ed8\", 14)\n# 理论线 1/6 ≈ 16.7%（红色虚线段拼成）\ni = 0\nwhile i < 8:\n    fill_rect(-160 + i * 44, -100 + 16.7 * 4.8, 24, 4, \"#dc2626\")\n    i = i + 1\nwrite(\"理论概率 1/6 ≈ 16.7%\", -150, -100 + 16.7 * 4.8 + 18, \"#dc2626\", 12)\n# 底轴\nfill_rect(0, -116, 400, 6, \"#94a3b8\")\nwrite(\"掷 \" + n + \" 次：柱子越高=出 6 越多\", -190, 158, \"#0f172a\", 12)\nwrite(\"掷得越多，柱子越贴近红线（大数定律）\", -190, -150, \"#16a34a\", 11)",
     "animate": false
   }
 }

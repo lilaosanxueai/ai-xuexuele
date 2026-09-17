@@ -154,7 +154,7 @@
       "距离多远就吸不动了？",
       "磁铁隔着纸还能吸吗？（回家试试）"
     ],
-    "code": "# 磁铁的力量探索台\npower = 3   # 磁力强度\n\nhide()\npen_color(\"red\")\npen_down()\ngo_to(-140, 0)\ngo_to(-100, 0)\ngo_to(-100, 20)\ngo_to(-140, 20)\ngo_to(-140, 0)\npen_up()\nwrite(\"N\", -126, 8, \"blue\", 11)\npen_color(\"blue\")\npen_down()\ngo_to(-100, 0)\ngo_to(-60, 0)\ngo_to(-60, 20)\ngo_to(-100, 20)\ngo_to(-100, 0)\npen_up()\nwrite(\"S\", -85, 8, \"blue\", 11)\ndist = 140 - power * 18\npen_color(\"green\")\npen_down()\ngo_to(-60 + 6, 8)\ngo_to(dist, 8)\npen_up()\nwrite(\"📎\", dist - 12, 8, \"green\", 16)\nwrite(\"磁力 \" + power + \"：隔 \" + (dist + 60) + \" 格也能吸住！\", -190, 140, \"red\", 12)\nif power > 4:\n    write(\"强磁铁：危险！别靠近电脑和手表\", -190, 112, \"orange\", 10)\nwrite(\"磁力随距离变弱\", -190, -60, \"blue\", 10)"
+    "code": "# 磁铁的力量探索台\npower = 3   # 磁力强度\n\nhide()\n# 条形磁铁（红 N + 蓝 S，实心）\nfill_rect(-160, 10, 80, 44, \"#dc2626\")\nfill_rect(-80, 10, 80, 44, \"#1d4ed8\")\nwrite(\"N\", -140, 30, \"#ffffff\", 15)\nwrite(\"S\", -60, 30, \"#ffffff\", 15)\n# 磁场线（右端半圆弧）\ni = 0\nwhile i < power:\n    ring(-80, 32, 30 + i * 26, \"#94a3b8\")\n    i = i + 1\n# 回形针（距离 = 磁力强度决定）\ndist = 150 - power * 24\nwrite(\"📎\", dist - 10, 24, \"#475569\", 20)\n# 吸力箭头\nfill_rect(dist - 46, 28, 30, 7, \"#16a34a\")\nwrite(\"吸！越强的磁铁隔越远也能吸住\", -190, 150, \"#dc2626\", 12)\nwrite(\"磁力 \" + power + \" 级：隔 \" + dist + \" 格吸住回形针\", -190, 122, \"#15803d\", 12)\nif power > 3:\n    write(\"强磁铁：小心电脑、手机和手表！\", -190, 96, \"#ea580c\", 11)\nif power < 2:\n    write(\"弱磁铁：要贴得很近才吸得住\", -190, 96, \"#0369a1\", 11)\nwrite(\"磁力随距离迅速变弱（弧线=磁场）\", -190, -60, \"#64748b\", 10)"
   },
   "grade": 2
 }

@@ -32,6 +32,46 @@ start.bat
 
 ## 本地相对上游的增量（持续更新）
 
+1. **实验室视觉大升级：填充图形引擎 + 22 节招牌实验重画（2026-09-17，第 24 轮，用户反馈「动态演示效果太差」）**：
+   - **引擎新增 3 个图形原语**（照第 17 轮 write 的四层模式）：`fill_rect(x,y,w,h,color)` 实心矩形（中心坐标+宽高）、`circle(x,y,r,color)` 实心圆、`ring(x,y,r,color)` 圆环——pyinterp COMMANDS + pyBridge CMD_MAP + stageState shapes(MAX 500) + Stage 渲染（网格之上、画笔线之下）；此前实验只能用细线+文字，柱状图是线框、水缸是一圈线
+   - **顺带修解释器 bug**：行内注释剥离 `#.*---
+name: creative-island
+description: AI学学乐（原 AI 创意岛）— 面向中小学生的 AI 编程学习应用（积木编程+Python+AI 伙伴+AI 训练场，学科×学段架构，本地自用，数据全部在本机）。当用户提到 creative-island、创意岛、ai-xuexuele、学学乐、孩子的编程学习、积木编程、启动创意岛时触发。
+version: "3.0.0"
+icon: "🏝"
+metadata:
+  source: "https://github.com/lilaosanxueai/ai-xuexuele"
+  installed_by: "github-installer"
+  installed_at: "2026-09-06T17:43:00.705159"
+  updated_at: "2026-09-07"
+---
+
+# 🏝 AI学学乐（原「AI 创意岛」，上游已更名）
+
+> 上游仓库已从 creative-island 更名为 [lilaosanxueai/ai-xuexuele](https://github.com/lilaosanxueai/ai-xuexuele)，本地 remote 已同步。应用更名为「AI学学乐」，端口仍是 8787。
+
+## 简介
+
+面向中小学生的 **AI 学科辅导**应用（本地自用）：以 AI 老师讲解对话为中心的学习主线（辅导页=导学卡+AI 对话+随堂小练+错题重练闭环），226 门课程覆盖 14 个学科（含教材/课标标注、678 道带解析随堂题），编程积木 + Python 代码模式降为可选「动手演示」层，另有 AI 答疑页 + AI 训练场 + 口算训练器。所有数据仅存本机。
+
+## 启动
+
+```bat
+cd /d C:\Users\10166\.agents\skills\creative-island
+start.bat
+```
+
+- 浏览器访问 **http://127.0.0.1:8787**；开发模式 `start-dev.bat`；测试 `npm test`（vitest，64 用例）
+- AI 伙伴：编辑 `data/config.json` 填 OpenAI 兼容 apiKey（默认智谱 GLM 模板；DeepSeek 换 baseURL `https://api.deepseek.com` + `deepseek-chat`），不填则离线替身模式
+- 家长中心 PIN 默认 `1234`（务必修改）；平板同 WiFi：`server.host` 改 `"0.0.0.0"`
+- **孩子数据全在 `data/`（gitignore，永不入库）——勿删**
+
+## 本地相对上游的增量（持续更新）
+
+ 会把引号内的 #（十六进制颜色 "#fbbf24"）当注释拦腰截断 → stripComment 改为引号感知扫描
+   - **22 节招牌实验演示全部重画**（`scripts/visual-upgrade-r24.mjs`，只换 lab.code，params/grid/explore/challenges 原样保留）：浮力（玻璃缸+水体+橙色木块+力箭头+浸入比例计）、太阳系（发光太阳+光环+五颗实心行星+选中红轨道）、万有引力（蓝地球+大气环+卫星+引力/速度箭头+周期条）、平抛（轨迹+整秒影子球+落点篮球）、自由落体（高塔+地面+速度箭头）、过山车（轨道+车厢+能量账本条）、pH（15 色彩虹标尺+指示标+试管）、溶解度（烧杯+糖粒沉底+曲线）、配平（原子珠柱）、原子分子三层楼、孟德尔（豌豆柱）、水循环（海+太阳光环+云+雨滴）、时区（24 刻度圆盘+五城市）、磁铁（红蓝条磁+磁场弧+回形针）、对数能量阶梯、音叉声波、指数麦粒、频率柱、掷骰子柱状图×2、高斯阶梯、平均数柱
+   - 新工具 `scripts/test-labcode.ts`：全部实验课 lab.code 用真实解释器解析测试（148/148 通过，与 test-startercode 并列的防回归门）
+   - 验证：148+102 解析 / 64 测试 / audit 0 / validate 0 错 0 警 / tsc+build；浏览器逐课打开 22 节无错误 + 像素级采样确认新图形真实渲染（水体 1.6 万像素、木块、太阳、彩虹标尺、柱状图均命中）
 1. **课程内容级修理：实验任务体系重构 + 678 题逐题人工审校（2026-09-17，第 23 轮，用户反馈数据修复「不行，不够」）**：
    - **实验室任务体系重构**：148 节理科实验课的 tasks 还是积木时代产物（走到码头/说口令），实验室模式永远完不成 → 家长面板永远 0/N。`scripts/lab-tasks.mjs` 重写为实验原生要点：探索问题(e*)+实验挑战(c*,选做)+随堂练(quiz)，各配提示词；LabScreen 实时上报（勾探索/达成挑战/完成随堂练）+ 进度恢复（重开课自动勾回）；TutorScreen 随堂练完成即点亮全部必做要点——14 学科进度统计全部真实可动
    - **678 题逐题人工审校**（原计划用配置 LLM 批量审，发现 apiKey 一直是占位符「在这里填…」——**AI 伙伴从装好起一直在离线替身模式**，改逐题人工审）：数学201/物化123/生地科120/文科234 全部审完
