@@ -154,5 +154,31 @@
     }
   ],
   "textbook": "人教PEP英语三年级上册",
-  "grade": 3
+  "grade": 3,
+  "teach": {
+    "sections": [
+      {
+        "title": "数字歌",
+        "body": "【One, two, three, four, five, …ten】\n倒着数是火箭发射倒数：Ten, nine, eight… one, lift off!\n唱歌+拍手，节奏帮助记忆。"
+      },
+      {
+        "title": "数字与数量对应",
+        "body": "伸出手指边数边说：one finger, two fingers…\n\"几 + and + 几\"：two and three is five.\n生活数学英语两不误。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "听口令做动作：Show me five!（用手势表示 5）",
+        "steps": [
+          "听懂数字 five",
+          "伸出五根手指",
+          "可以进阶：Show me three and four!"
+        ],
+        "tip": "TPR 全身反应法：听→做→说，记忆最深"
+      }
+    ],
+    "mistakes": [
+      "four 与 five 混读——four 是 /fɔː/，five 是 /faɪv/"
+    ]
+  }
 }

@@ -137,5 +137,31 @@
       "p=0.5 时显性:隐性接近几比几？"
     ],
     "code": "# 显性与隐性：配对棋盘表探索台\np = 0.5   # 显性基因（大A）出现的概率\n\nhide()\npA = p\npa = 1 - p\nwrite(\"父母各出 1 个基因：\", -180, 130, \"blue\", 13)\nwrite(\"AA: \" + pA * pA + \"  Aa: \" + pA * pa + \"  aA: \" + pa * pA + \"  aa: \" + pa * pa, -180, 105, \"blue\", 12)\ndom = pA * pA + 2 * pA * pa\nrec = pa * pa\nwrite(\"显性表现 = AA+Aa+aA = \" + dom, -180, 60, \"green\", 13)\nwrite(\"隐性表现 = aa = \" + rec, -180, 35, \"orange\", 13)\npen_color(\"green\")\npen_down()\ngo_to(-180, -20)\ngo_to(-180 + dom * 340, -20)\ngo_to(-180 + dom * 340, 15)\ngo_to(-180, 15)\ngo_to(-180, -20)\npen_up()\npen_color(\"orange\")\npen_down()\ngo_to(-180 + dom * 340, -20)\ngo_to(160, -20)\ngo_to(160, 15)\ngo_to(-180 + dom * 340, 15)\ngo_to(-180 + dom * 340, -20)\npen_up()\nwrite(\"绿色=显性  橙色=隐性\", -80, -55, \"red\", 12)\nwrite(\"p=0.5 时显隐性 3:1\", -80, -85, \"red\", 13)"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "显性与隐性",
+        "body": "【显性基因（大写 A）控制显性性状；隐性性状需要两个隐性基因（aa）同时存在】\nAa 表现显性性状（A 说了算）。\n基因成对存在，一个来自父方一个来自母方。"
+      },
+      {
+        "title": "3:1 的由来",
+        "body": "Aa × Aa 的后代：AA、Aa、aA、aa 各占 1/4。\n前三份表现显性、最后一份隐性——显:隐 = 3:1。\n隐性性状不是\"消失\"，只是被掩盖。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "父母都能卷舌（Aa），孩子不卷舌的概率是多少？",
+        "steps": [
+          "Aa × Aa 的组合：AA、Aa、aA、aa",
+          "不卷舌是隐性 aa，占 1/4",
+          "概率 25%"
+        ],
+        "tip": "先写父母基因型，再列四种组合"
+      }
+    ],
+    "mistakes": [
+      "认为\"父母没有的性状孩子一定没有\"——隐性基因可以隔代传递"
+    ]
   }
 }

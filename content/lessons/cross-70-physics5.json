@@ -147,5 +147,31 @@
       "折射率越大，光在介质中跑得越慢"
     ],
     "code": "# 折射定律探索台：n1·sinθ1 = n2·sinθ2（入射 45°）\nn2 = 1.5   # 介质折射率\n\nhide()\nn1 = 1\ninc = 45\nsinr = n1 * sin(inc) / n2\npen_color(\"blue\")\npen_down()\ngo_to(-170 * sin(inc), 150 * cos(inc))\ngo_to(0, 0)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(0, 0)\ni = 0\nwhile i < 150:\n    go_to(sinr * i, 0 - i)\n    i = i + 10\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(0, 130)\ngo_to(0, -130)\npen_up()\npen_color(\"blue\")\npen_down()\ngo_to(-190, 0)\ngo_to(190, 0)\npen_up()\nif n2 == 1:\n    write(\"n=1：不发生折射（同种介质）\", -190, 140, \"green\", 12)\nif n2 > 1:\n    write(\"n=\" + n2 + \"：折射角正弦 = \" + sinr, -190, 140, \"red\", 12)\nif n2 > 2:\n    write(\"钻石级折射：光被「拽」得很弯\", -190, 112, \"orange\", 11)"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "折射定律",
+        "body": "【n₁·sinθ₁ = n₂·sinθ₂：介质越密，sin 角越小（角越小）】\n空气→水折射角变小；水→空气折射角变大。\n光路可逆：沿折射光路反向入射，必沿原入射光路射出。"
+      },
+      {
+        "title": "全反射",
+        "body": "【光从密介质射向疏介质，入射角超过临界角时，光全部反射回密介质】\n水的临界角约 48.75°。\n光纤通信就是靠不断全反射，把光\"困\"在纤芯里传输。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "潜水员在水下看岸上的路灯，看到的位置比实际高还是低？",
+        "steps": [
+          "灯光从空气进入水，折射角小于入射角",
+          "进入人眼的光线\"抬高\"了光源的视位置",
+          "看到的位置比实际偏高"
+        ],
+        "tip": "水看岸上偏高、岸上看水底偏浅，方向记住一对就行"
+      }
+    ],
+    "mistakes": [
+      "认为全反射发生在\"空气→水\"——只有从密介质射向疏介质才可能全反射"
+    ]
   }
 }

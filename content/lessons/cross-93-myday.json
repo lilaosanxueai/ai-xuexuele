@@ -154,5 +154,32 @@
     }
   ],
   "textbook": "人教版英语七年级上册",
-  "grade": 7
+  "grade": 7,
+  "teach": {
+    "sections": [
+      {
+        "title": "一般现在时作息",
+        "body": "【I get up at seven. 用动词原形描述日常】\n主语是 he/she/it 时动词加 s/es：He goes to school at eight.\n钟点前用 at。"
+      },
+      {
+        "title": "频率词",
+        "body": "【always 总是 > usually 通常 > often 常常 > sometimes 有时 > never 从不】\n频率词放在动词前：I always brush my teeth.\n用作息表练习：I get up / have breakfast / go to school。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "翻译：\"她每天七点起床。\"",
+        "steps": [
+          "主语 she → 动词加 s",
+          "起床 get up → gets up",
+          "七点 at seven",
+          "She gets up at seven every day."
+        ],
+        "tip": "三单口诀：he/she/it，动词穿鞋（加 s）"
+      }
+    ],
+    "mistakes": [
+      "She get up（漏 s）——三单动词必须加 s/es"
+    ]
+  }
 }

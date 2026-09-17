@@ -148,5 +148,31 @@
       "DNA 复制那么精确，为什么还会发生突变和进化？"
     ],
     "code": "# DNA 复制与突变探索台：A-T、C-G 配对\nmut = 10   # 突变率（%）\n\nhide()\nn = 14\n# 两条骨架（灰色竖条）\nfill_rect(-110, 0, 8, 270, \"#94a3b8\")\nfill_rect(110, 0, 8, 270, \"#94a3b8\")\ni = 0\nwrong = 0\nwhile i < n:\n    base = random(0, 3)\n    pair = 1 - base\n    if base == 2:\n        pair = 3\n    if base == 3:\n        pair = 2\n    r = random(0, 99)\n    if r < mut:\n        pair = random(0, 3)\n        wrong = wrong + 1\n    y = 128 - i * 19\n    # 碱基颜色：A红 T橙 C蓝 G青；左边=母链，右边=新链\n    cl = \"#ef4444\"\n    if base == 1:\n        cl = \"#f97316\"\n    if base == 2:\n        cl = \"#3b82f6\"\n    if base == 3:\n        cl = \"#22d3ee\"\n    cr = \"#f97316\"\n    if pair == 0:\n        cr = \"#ef4444\"\n    if pair == 2:\n        cr = \"#22d3ee\"\n    if pair == 3:\n        cr = \"#3b82f6\"\n    fill_rect(-60, y, 90, 12, cl)\n    fill_rect(60, y, 90, 12, cr)\n    i = i + 1\nwrite(\"母链（左）→ 配对 → 新链（右）\", -85, 152, \"#475569\", 10)\nwrite(\"红A配橙T　蓝C配青G\", -60, -150, \"#475569\", 10)\nwrite(\"突变率 \" + mut + \"%：14 个碱基错了 \" + wrong + \" 个\", -190, -120, \"#dc2626\", 13)\nif wrong > 0:\n    write(\"错配=突变：大多数无害，少数改变性状\", -190, -95, \"#ea580c\", 11)\nif wrong == 0:\n    write(\"这次完美复制，一个都没错！\", -190, -95, \"#16a34a\", 12)"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "DNA 双螺旋",
+        "body": "【DNA 由两条链反向盘绕成双螺旋；基本单位是脱氧核苷酸】\n碱基互补配对：A 配 T、C 配 G。\nDNA 上有遗传效应的片段叫基因。"
+      },
+      {
+        "title": "复制与突变",
+        "body": "【复制：以母链为模板按互补规则合成新链（半保留复制）】\n复制偶尔出错就是突变：多数中性，少数有害，极少数有利。\n突变为进化提供原材料，由环境筛选。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "一条链的碱基序列是 AATGC，另一条链对应序列是什么？",
+        "steps": [
+          "配对规则：A对T、T对A、G对C、C对G",
+          "A→T，A→T，T→A，G→C，C→G",
+          "互补链是 TTACG"
+        ],
+        "tip": "互补配对就是\"照镜子\"：A 镜像 T，G 镜像 C"
+      }
+    ],
+    "mistakes": [
+      "认为突变都是有害的——多数中性，有利与否由环境决定"
+    ]
   }
 }

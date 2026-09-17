@@ -154,5 +154,31 @@
       "answer": 1,
       "explain": "knee 膝盖，两只用 knees（复数）"
     }
-  ]
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "身体部位",
+        "body": "【head 头 nose 鼻子 mouth 嘴 eyes 眼睛 ears 耳朵 arms 手臂 hands 手 legs 腿 knees 膝盖 feet 脚】\n成对部位用复数：eyes、ears、knees、feet。\nfoot 的复数是 feet（不规则）。"
+      },
+      {
+        "title": "Touch your… 祈使句",
+        "body": "【Touch your head! 摸摸你的头】\n祈使句以动词开头，省略主语 you。\n边说边做，反应游戏最好玩。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "\"摸摸你的膝盖\"怎么说？",
+        "steps": [
+          "摸：Touch your…",
+          "膝盖（两只）：knees",
+          "Touch your knees!"
+        ],
+        "tip": "身体部位歌：Head, shoulders, knees and toes!"
+      }
+    ],
+    "mistakes": [
+      "Touch your knee 说成 Touch your knee`s——两只膝盖用复数 knees"
+    ]
+  }
 }

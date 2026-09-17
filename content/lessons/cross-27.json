@@ -137,5 +137,31 @@
       "氢和氦在第 1 周期，钠在第几周期？"
     ],
     "code": "# 元素周期表前 10 号探索台\nnum = 1   # 原子序数\n\nhide()\n# 10 块元素瓷砖（按类别着色，选中变红）\ni = 1\nwhile i < 11:\n    col = i - (i / 5) * 5\n    row = i / 5\n    x = -130 + col * 56\n    y = 60 - row * 66\n    tile = \"#94a3b8\"\n    if i < 3:\n        tile = \"#5eead4\"\n    if i == 2:\n        tile = \"#c4b5fd\"\n    if i == 5:\n        tile = \"#fdba74\"\n    if i == 6:\n        tile = \"#a3a3a3\"\n    if i == 7:\n        tile = \"#5eead4\"\n    if i == 8:\n        tile = \"#fca5a5\"\n    if i == 9:\n        tile = \"#c4b5fd\"\n    if i == 10:\n        tile = \"#c4b5fd\"\n    if i == num:\n        tile = \"#dc2626\"\n    fill_rect(x + 24, y - 26, 48, 52, tile)\n    write(i, x + 24, y - 8, \"#ffffff\", 12)\n    i = i + 1\n# 元素名片\nname = \"\"\nif num == 1:\n    name = \"氢 H：宇宙最多\"\nif num == 2:\n    name = \"氦 He：气球安全气\"\nif num == 3:\n    name = \"锂 Li：电池心脏\"\nif num == 4:\n    name = \"铍 Be：轻而硬\"\nif num == 5:\n    name = \"硼 B：洗涤剂\"\nif num == 6:\n    name = \"碳 C：钻石铅笔芯\"\nif num == 7:\n    name = \"氮 N：空气 78%\"\nif num == 8:\n    name = \"氧 O：生命之气\"\nif num == 9:\n    name = \"氟 F：牙膏防蛀\"\nif num == 10:\n    name = \"氖 Ne：霓虹灯\"\nwrite(name, -190, 145, \"#dc2626\", 13)\nwrite(num + \" 号\", -190, 120, \"#0f172a\", 14)\nwrite(\"红=选中｜青=非金属 紫稀有灰金属\", -200, -140, \"#64748b\", 10)\nwrite(\"原子序数 = 质子数 = 核外电子数\", -200, -155, \"#1d4ed8\", 10)"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "元素与原子序数",
+        "body": "【元素是具有相同质子数的一类原子的总称】\n原子序数 = 质子数 = 核外电子数（原子中）。\n前 10 号口诀：氢氦锂铍硼，碳氮氧氟氖。"
+      },
+      {
+        "title": "周期表的结构",
+        "body": "【周期表按原子序数排列：行叫周期，列叫族】\n同族元素最外层电子数相同，化学性质相似。\n金属在左下，非金属在右上，稀有气体在最右一列。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "原子序数为 8 的元素是什么？它的一个原子有几个质子、几个电子？",
+        "steps": [
+          "第 8 号是氧（O）",
+          "原子序数 = 质子数 = 8",
+          "原子中电子数 = 质子数 = 8"
+        ],
+        "tip": "查周期表三步：找序数、看位置、读名称"
+      }
+    ],
+    "mistakes": [
+      "把原子序数当质量——序数数的是质子，不是\"重量\""
+    ]
   }
 }

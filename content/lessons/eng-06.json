@@ -136,5 +136,32 @@
     }
   ],
   "textbook": "人教版英语（初中）",
-  "grade": 7
+  "grade": 7,
+  "teach": {
+    "sections": [
+      {
+        "title": "自我介绍",
+        "body": "【My name is…（名字）I am … years old.（年龄）I like…（爱好）】\n三句连起来就是一段完整自我介绍。\nI am 也可缩写成 I'm。"
+      },
+      {
+        "title": "like 的用法",
+        "body": "【I like + 名词 / doing】\nI like fish. / I like swimming.\n喜欢做某事常用 -ing 形式。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "把三句连成自我介绍：Lily、10 岁、喜欢画画。",
+        "steps": [
+          "名字：My name is Lily.",
+          "年龄：I am ten years old.",
+          "爱好：I like drawing.",
+          "连起来大声说一遍"
+        ],
+        "tip": "名字首字母大写：Lily 不是 lily"
+      }
+    ],
+    "mistakes": [
+      "I am ten year old（year 漏 s）——years old 固定搭配"
+    ]
+  }
 }

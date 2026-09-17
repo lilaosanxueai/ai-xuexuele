@@ -154,5 +154,31 @@
   ],
   "codeLesson": false,
   "textbook": "人教PEP英语（三年级起点）",
-  "grade": 3
+  "grade": 3,
+  "teach": {
+    "sections": [
+      {
+        "title": "高频实物词",
+        "body": "【apple 苹果、book 书、pen 笔、bag 书包、cat 猫、dog 狗、sun 太阳】\n名词是句子的\"砖块\"，先攒名词。\n看物说词：扫视房间，见什么说什么。"
+      },
+      {
+        "title": "a / an 的选择",
+        "body": "【元音音开头用 an：an apple；辅音音开头用 a：a book】\nan apple、an orange；a pen、a bag。\n看\"发音\"不看\"字母\"：an hour（h 不发音）。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "选 a 还是 an：___ apple、___ book、___ orange",
+        "steps": [
+          "apple 元音音开头 → an apple",
+          "book 辅音音开头 → a book",
+          "orange 元音音开头 → an orange"
+        ],
+        "tip": "读出声判断：张口音（a e i o u 开头）用 an"
+      }
+    ],
+    "mistakes": [
+      "见字母 u 就用 a uniform——u 发 /juː/ 辅音音，用 a"
+    ]
+  }
 }

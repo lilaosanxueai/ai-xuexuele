@@ -155,5 +155,31 @@
       "光合作用的原料和产品各是什么？"
     ],
     "code": "# 光合厨房探索台\nlight = 2   # 光照强度（0=黑夜）\n\nhide()\nstarch = light * 30\npen_color(\"orange\")\npen_down()\ngo_to(-30, -40)\ngo_to(-30, 10)\ngo_to(30, 10)\ngo_to(30, -40)\ngo_to(-30, -40)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(0, 10)\ngo_to(-24, 40)\ngo_to(0, 34)\ngo_to(24, 40)\ngo_to(0, 10)\npen_up()\npen_color(\"yellow\")\npen_down()\nr = 0\nwhile r < 18:\n    ang = r * 20\n    go_to(80 + 18 * cos(ang), 30 + 18 * sin(ang))\n    r = r + 1\npen_up()\nwrite(\"太阳\", 62, 62, \"orange\", 11)\nif light > 0:\n    pen_color(\"red\")\n    pen_down()\n    i = 0\n    while i < light:\n        x = -70 + i * 45\n        go_to(x, 70)\n        go_to(x + 20, 46)\n        pen_up()\n        i = i + 1\nwrite(\"光照 \" + light + \" → 淀粉 \" + starch + \" 份\", -190, 130, \"red\", 13)\nwrite(\"CO₂+水 --光/叶绿体--> 淀粉+O₂\", -190, 100, \"green\", 11)\nif light < 0.1:\n    write(\"黑夜：厨房停工！\", -100, -100, \"orange\", 12)"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "光合作用的本质",
+        "body": "【绿色植物通过光能，把 CO₂ 和水合成有机物并储存能量】\n叶绿体是\"厨房\"，光能是\"火\"，CO₂ 和水是\"食材\"，有机物和氧气是\"菜品\"。\n一切食物链的能量源头都在这里。"
+      },
+      {
+        "title": "我们吃的是什么",
+        "body": "米饭的淀粉、水果的糖，都是植物光合作用的产物。\n能量顺着\"阳光→植物→动物→我们\"流动。\n所以课本说：万物生长靠太阳。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "早餐吃的一片面包，能量最初来自哪里？",
+        "steps": [
+          "面包来自小麦（面粉）",
+          "小麦的淀粉由光合作用制造",
+          "能量最初来自阳光"
+        ],
+        "tip": "追问\"最初\"就是追问能量源头：太阳"
+      }
+    ],
+    "mistakes": [
+      "认为能量来自土壤——土壤只提供水和无机盐，能量来自阳光"
+    ]
   }
 }

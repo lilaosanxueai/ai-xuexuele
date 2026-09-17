@@ -153,5 +153,31 @@
     }
   ],
   "textbook": "人教PEP英语三年级上册",
-  "grade": 3
+  "grade": 3,
+  "teach": {
+    "sections": [
+      {
+        "title": "家庭成员",
+        "body": "【father 爸爸 mother 妈妈 brother 兄弟 sister 姐妹 grandfather 爷爷/外公 grandmother 奶奶/外婆】\ngrand- 前缀表示\"上一辈\"。\ncousin 表兄弟姐妹（不分父母系）。"
+      },
+      {
+        "title": "This is… 介绍句型",
+        "body": "【This is my mother. 这是我妈妈】\n介绍身边的人用 This is + 称谓。\n回答介绍：Nice to meet you!"
+      }
+    ],
+    "examples": [
+      {
+        "q": "看全家福介绍爷爷，该说哪句？",
+        "steps": [
+          "介绍句型：This is my…",
+          "爷爷：grandfather",
+          "This is my grandfather."
+        ],
+        "tip": "介绍谁就 This is + 谁"
+      }
+    ],
+    "mistakes": [
+      "说 I am grandfather——介绍别人用 This is，不是 I am"
+    ]
+  }
 }

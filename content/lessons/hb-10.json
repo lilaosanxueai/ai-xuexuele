@@ -154,5 +154,31 @@
       "answer": 0,
       "explain": "shouldn't = 不应该；stay up late 熬夜"
     }
-  ]
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "What's the matter? 问诊",
+        "body": "【What's the matter? 怎么了 — I have a headache. 我头疼】\nhave a + 病症：headache 头疼、fever 发烧、cold 感冒。\nstomachache 胃疼（拼写长，多写几遍）。"
+      },
+      {
+        "title": "should 提建议",
+        "body": "【You should drink more water. 你该多喝水】\nshould + 动词原形；否定 shouldn't。\nYou shouldn't stay up late. 你不该熬夜。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "同学牙疼，给他两条建议。",
+        "steps": [
+          "牙疼：I have a toothache.",
+          "建议1：You should see a dentist.",
+          "建议2：You shouldn't eat too much candy."
+        ],
+        "tip": "should 后面永远接动词原形"
+      }
+    ],
+    "mistakes": [
+      "You should to drink——should 后不加 to"
+    ]
+  }
 }

@@ -158,5 +158,32 @@
     ],
     "code": "# 光的直线传播探索台：影子剧场\nlx = -60   # 光源横位置\n\nhide()\nwrite(\"💡\", lx - 10, 100, \"orange\", 18)\npen_color(\"yellow\")\npen_down()\ngo_to(lx, 92)\ngo_to(-20, 20)\ngo_to(-20, -60)\npen_up()\ngo_to(lx, 92)\npen_down()\ngo_to(20, 24)\ngo_to(20, -64)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(-15, 20)\ngo_to(15, 20)\ngo_to(15, -60)\ngo_to(-15, -60)\ngo_to(-15, 20)\npen_up()\npen_color(\"blue\")\npen_down()\ngo_to(-190, -80)\ngo_to(190, -80)\npen_up()\nshadowL = 20\nshadowR = -20 + (-20 - lx) * 0.9\nif shadowR > 185:\n    shadowR = 185\npen_color(\"blue\")\npen_down()\ngo_to(shadowL, -70)\ngo_to(shadowR, -70)\ngo_to(shadowR, -92)\ngo_to(shadowL, -92)\ngo_to(shadowL, -70)\npen_up()\nwrite(\"影子\", (shadowL + shadowR) / 2 - 12, -110, \"blue\", 10)\nwrite(\"光沿直线传播 → 影子与光反向\", -190, 140, \"red\", 11)\nif lx > 60:\n    write(\"光源在右边，影子跑到左边！\", -190, 112, \"orange\", 10)"
   },
-  "grade": 3
+  "grade": 3,
+  "teach": {
+    "sections": [
+      {
+        "title": "光的直线传播",
+        "body": "【光在均匀介质中沿直线传播】\n影子的形成：光被不透明物体挡住，后面出现暗区。\n小孔成像：光沿直线穿过小孔，上下颠倒成倒立的像。"
+      },
+      {
+        "title": "光与影的实验",
+        "body": "改变光源位置、物体距离，观察影子大小变化。\n物体离光越近，影子越大（光线更发散地被挡住）。\n影剧、皮影戏都是直线传播的艺术应用。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "小孔成像为什么是倒立的？",
+        "steps": [
+          "物体上部的光沿直线穿过小孔",
+          "落在屏的下部",
+          "下部的光落在屏的上部",
+          "上下交换，形成倒立实像"
+        ],
+        "tip": "画两条交叉光线，倒像一目了然"
+      }
+    ],
+    "mistakes": [
+      "认为小孔成像\"像是缩小的影子\"——它是真实光线会聚成的倒立实像"
+    ]
+  }
 }

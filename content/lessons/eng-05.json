@@ -136,5 +136,31 @@
     }
   ],
   "textbook": "人教PEP英语（三年级起点）",
-  "grade": 3
+  "grade": 3,
+  "teach": {
+    "sections": [
+      {
+        "title": "颜色单词",
+        "body": "【red 红、blue 蓝、green 绿、yellow 黄、orange 橙、purple 紫、black 黑、white 白】\norange 既指橙色也指橙子——一词多义。\n配实物记忆最牢。"
+      },
+      {
+        "title": "What color...? 句型",
+        "body": "【What color is it? — It is red.】\n问颜色固定用 What color。\n答句：It is / They are + 颜色。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "看图问答：天空是什么颜色？",
+        "steps": [
+          "问：What color is the sky?",
+          "答：It is blue.",
+          "It 指代 the sky"
+        ],
+        "tip": "问单样东西用 is；问 several things 用 are"
+      }
+    ],
+    "mistakes": [
+      "How color（错）——问颜色固定 What color"
+    ]
+  }
 }

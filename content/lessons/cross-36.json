@@ -160,5 +160,31 @@
     ],
     "code": "# 磁极的奥秘探索台\nmode = 1   # 1=异极相对 2=同极相对\n\nhide()\ngap = 90\nif mode == 2:\n    gap = 150\nl1 = \"N\"\nr1 = \"S\"\nif mode == 2:\n    r1 = \"N\"\npen_color(\"red\")\npen_down()\ngo_to(-gap - 40, -15)\ngo_to(-gap, -15)\ngo_to(-gap, 15)\ngo_to(-gap - 40, 15)\ngo_to(-gap - 40, -15)\npen_up()\nwrite(l1, -gap - 28, 0, \"blue\", 12)\npen_color(\"blue\")\npen_down()\ngo_to(-gap, -15)\ngo_to(-gap + 40, -15)\ngo_to(-gap + 40, 15)\ngo_to(-gap, 15)\ngo_to(-gap, -15)\npen_up()\nwrite(\"S\", -gap + 12, 0, \"blue\", 12)\npen_color(\"blue\")\npen_down()\ngo_to(gap - 40, -15)\ngo_to(gap, -15)\ngo_to(gap, 15)\ngo_to(gap - 40, 15)\ngo_to(gap - 40, -15)\npen_up()\nwrite(r1, gap - 28, 0, \"blue\", 12)\npen_color(\"red\")\npen_down()\ngo_to(gap, -15)\ngo_to(gap + 40, -15)\ngo_to(gap + 40, 15)\ngo_to(gap, 15)\ngo_to(gap, -15)\npen_up()\nwrite(\"S\", gap + 12, 0, \"blue\", 12)\nif mode == 1:\n    pen_color(\"green\")\n    pen_down()\n    go_to(-gap + 44, 30)\n    go_to(gap - 44, 30)\n    pen_up()\n    write(\"←相互吸引→\", -45, 42, \"green\", 11)\n    write(\"异极相吸！\", -190, 140, \"green\", 13)\nif mode == 2:\n    pen_color(\"orange\")\n    pen_down()\n    go_to(-gap + 44, 30)\n    go_to(-gap + 60, 38)\n    pen_up()\n    go_to(-gap + 44, 30)\n    pen_down()\n    go_to(-gap + 60, 22)\n    pen_up()\n    go_to(gap - 44, 30)\n    pen_down()\n    go_to(gap - 60, 38)\n    pen_up()\n    go_to(gap - 44, 30)\n    pen_down()\n    go_to(gap - 60, 22)\n    pen_up()\n    write(\"同极相斥！\", -190, 140, \"red\", 13)"
   },
-  "grade": 2
+  "grade": 2,
+  "teach": {
+    "sections": [
+      {
+        "title": "磁铁的两极",
+        "body": "【磁铁有 N 极和 S 极；同名磁极相斥，异名磁极相吸】\n磁铁两端磁性最强，中间最弱。\n任何磁铁都有两个极，掰断后每段仍是完整磁铁。"
+      },
+      {
+        "title": "磁铁能吸什么",
+        "body": "【磁铁能吸引铁、钴、镍等铁磁性物质】\n不能吸铜、铝、塑料、木头。\n\"磁铁吸所有金属\"是错的——铜铝就不吸。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "两根条形磁铁靠近：一端吸引，掉头后排斥。为什么？",
+        "steps": [
+          "吸引：靠近的是异名磁极（N 对 S）",
+          "掉头后同名磁极相对（N 对 N）",
+          "同名相斥"
+        ],
+        "tip": "先假设再验证——多试几次找规律"
+      }
+    ],
+    "mistakes": [
+      "认为磁铁能吸所有金属——只吸铁钴镍"
+    ]
+  }
 }

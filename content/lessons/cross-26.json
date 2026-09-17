@@ -137,5 +137,31 @@
       "从 0 拖到 14，溶液从酸性变到？中间经过什么？"
     ],
     "code": "# 酸碱 pH 标尺探索台\nph = 7   # 溶液的 pH 值\n\nhide()\n# 彩虹色标尺（15 段实心块）\ni = 0\nwhile i < 15:\n    px = -196 + i * 27\n    col = \"#dc2626\"\n    if i == 1:\n        col = \"#ef4444\"\n    if i == 2:\n        col = \"#f87171\"\n    if i == 3:\n        col = \"#fb923c\"\n    if i == 4:\n        col = \"#fbbf24\"\n    if i == 5:\n        col = \"#facc15\"\n    if i == 6:\n        col = \"#a3e635\"\n    if i == 7:\n        col = \"#22c55e\"\n    if i == 8:\n        col = \"#2dd4bf\"\n    if i == 9:\n        col = \"#38bdf8\"\n    if i == 10:\n        col = \"#60a5fa\"\n    if i == 11:\n        col = \"#3b82f6\"\n    if i == 12:\n        col = \"#4f46e5\"\n    if i == 13:\n        col = \"#7c3aed\"\n    if i == 14:\n        col = \"#9333ea\"\n    fill_rect(px + 13, 40, 26, 40, col)\n    write(i, px + 13, 72, \"#475569\", 9)\n    i = i + 1\n# 指示三角 + 试管\npx2 = -196 + ph * 27\nfill_rect(px2, -4, 10, 14, \"#f97316\")\nfill_rect(px2, 52, 10, 20, \"#f97316\")\nfill_rect(-40, -110, 24, 90, \"#e2e8f0\")\nmycol = \"#22c55e\"\nif ph < 6.8:\n    mycol = \"#dc2626\"\nif ph > 7.2:\n    mycol = \"#4f46e5\"\nfill_rect(-40, -105, 18, 55, mycol)\nwrite(\"pH = \" + ph, 90, -80, mycol, 20)\nif ph < 6.8:\n    write(\"酸性：数值越小越酸\", 30, -40, \"#dc2626\", 13)\nif ph > 7.2:\n    write(\"碱性：数值越大越碱\", 30, -40, \"#4f46e5\", 13)\nif ph >= 6.8:\n    if ph <= 7.2:\n        write(\"中性（纯水）\", 30, -40, \"#16a34a\", 13)"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "酸碱性与 pH",
+        "body": "【pH < 7 酸性；pH = 7 中性；pH > 7 碱性】\npH 越小酸性越强，越大碱性越强。\n测定 pH 最常用的方法是 pH 试纸（玻璃棒蘸取待测液滴在试纸上，比色卡对照）。"
+      },
+      {
+        "title": "中和反应",
+        "body": "【酸 + 碱 → 盐 + 水】\n胃酸过多服含氢氧化铝的药、酸性土壤撒熟石灰，都是中和反应的应用。\n中和的过程中 pH 向 7 靠近。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "把 pH=3 的溶液不断加水稀释，pH 会怎么变？能超过 7 吗？",
+        "steps": [
+          "加水稀释，酸性减弱",
+          "pH 从 3 向 7 靠近",
+          "但永远不能等于或超过 7——水也是中性的"
+        ],
+        "tip": "稀释只是\"冲淡\"，酸性溶液不会变碱性"
+      }
+    ],
+    "mistakes": [
+      "认为稀释能\"冲过头\"变碱——无限稀释只能无限接近 7"
+    ]
   }
 }

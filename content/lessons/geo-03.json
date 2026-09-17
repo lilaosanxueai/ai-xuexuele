@@ -161,5 +161,31 @@
     "code": "# 地图方位探索台\nheading = 90   # 行进方向（度）\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(0, -100)\ngo_to(0, 100)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-100, 0)\ngo_to(100, 0)\npen_up()\nwrite(\"北 N\", -12, 118, \"blue\", 13)\nwrite(\"南 S\", -12, -122, \"blue\", 12)\nwrite(\"西 W\", -128, -8, \"red\", 12)\nwrite(\"东 E\", 112, -8, \"red\", 12)\nx = 130 * cos(heading)\ny = 130 * sin(heading)\npen_color(\"green\")\npen_down()\ngo_to(0, 0)\ngo_to(x, y)\npen_up()\ndir = \"东\"\nif heading == 0:\n    dir = \"北\"\nif heading == 180:\n    dir = \"南\"\nif heading == 270:\n    dir = \"西\"\nif heading > 0:\n    if heading < 90:\n        dir = \"东北\"\nif heading > 90:\n    if heading < 180:\n        dir = \"东南\"\nif heading > 180:\n    if heading < 270:\n        dir = \"西南\"\nif heading > 270:\n    dir = \"西北\"\nwrite(\"朝 \" + heading + \"° 走 = \" + dir + \"方向\", -190, 140, \"green\", 13)\nwrite(\"上北下南，左西右东\", -190, 112, \"orange\", 10)"
   },
   "grade": 4,
-  "textbook": "冀人版科学（小学）"
+  "textbook": "冀人版科学（小学）",
+  "teach": {
+    "sections": [
+      {
+        "title": "地图上的方向",
+        "body": "【上北下南、左西右东——没有指向标的地图默认这样判读】\n有指向标时，以指向标箭头为北。\n经纬网地图：经线指示南北，纬线指示东西。"
+      },
+      {
+        "title": "在野外辨方向",
+        "body": "指南针（地磁指北）、太阳（中午偏南）、北极星（夜晚正北）。\n面向北：背后是南，右手是东，左手是西。\n先定一个方向，其余依次排开。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "地图上小明家在学校的左上方，是学校的什么方向？",
+        "steps": [
+          "左上方 = 西 + 北",
+          "更精确说是西北方向",
+          "上北下南左西右东：左=西，上=北"
+        ],
+        "tip": "先按\"上下左右\"翻译成\"北南西东\"，再组合"
+      }
+    ],
+    "mistakes": [
+      "把\"左西右东\"记反——口诀\"上北下南左西右东\"连着背"
+    ]
+  }
 }

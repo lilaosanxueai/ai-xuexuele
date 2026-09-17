@@ -157,5 +157,31 @@
   ],
   "codeLesson": false,
   "grade": 2,
-  "textbook": "人音版音乐（小学）"
+  "textbook": "人音版音乐（小学）",
+  "teach": {
+    "sections": [
+      {
+        "title": "音阶的上行与下行",
+        "body": "【do re mi fa sol la xi do 是上行；反过来是下行】\n上行给人\"升起、明亮\"感，下行\"降落、安详\"感。\n旋律就是音高的上上下下。"
+      },
+      {
+        "title": "小星星的音高",
+        "body": "【一闪一闪亮晶晶 = do do sol sol la la sol】\n先重复（do do），再跳进（do→sol）。\n学唱先分手：读节奏 → 唱音名 → 配词。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "\"do do sol sol\"后面接什么？",
+        "steps": [
+          "歌词：一闪一闪 亮晶晶",
+          "对应：do do sol sol la la sol",
+          "晶=la，晶=sol"
+        ],
+        "tip": "先唱准音名再填词，音准更稳"
+      }
+    ],
+    "mistakes": [
+      "把 sol 和 xi 混淆——梭（sol）是第 5 级，西（xi）是第 7 级"
+    ]
+  }
 }

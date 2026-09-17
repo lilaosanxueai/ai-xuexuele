@@ -136,5 +136,31 @@
     }
   ],
   "textbook": "人教PEP英语（三年级起点）",
-  "grade": 3
+  "grade": 3,
+  "teach": {
+    "sections": [
+      {
+        "title": "数字与 How many",
+        "body": "【How many + 复数名词…? 问数量】\nHow many apples? Three.\n回答可以直接说数字。"
+      },
+      {
+        "title": "one 到 ten 的听与说",
+        "body": "three 与 tree 发音相近：th 咬舌！\nsix 与 seven 开头都是 s，注意区分。\n报数游戏：one, two, three…轮流接龙。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "用 How many 提问：\"你有几本书？\"（book → books）",
+        "steps": [
+          "问数量用 How many",
+          "名词用复数 books",
+          "How many books do you have?"
+        ],
+        "tip": "How many 后面的名词必须加 s（复数）"
+      }
+    ],
+    "mistakes": [
+      "How many book（漏 s）——可数名词复数不能忘"
+    ]
+  }
 }

@@ -156,5 +156,31 @@
       "叶脉是叶子的「水管公路」"
     ],
     "code": "# 叶脉侦探探索台\nkind = 1   # 1=网状脉 2=平行脉 3=叉状脉\n\nhide()\npen_color(\"green\")\npen_down()\ni = 0\ngo_to(0, -110)\nwhile i < 36:\n    ang = (i + 1) * 10\n    if ang < 90:\n        go_to(85 * cos(ang - 90), -110 + 105 * sin(ang))\n    if ang >= 270:\n        go_to(85 * cos(ang - 90), -110 + 105 * sin(ang))\n    if ang >= 90:\n        if ang < 270:\n            go_to(70 * cos(ang + 90), -110 - 40 * sin(ang - 90))\n    i = i + 1\npen_up()\nif kind == 1:\n    pen_color(\"red\")\n    pen_down()\n    go_to(0, -110)\n    go_to(0, 20)\n    pen_up()\n    j = 1\n    while j < 5:\n        y = -100 + j * 24\n        pen_down()\n        go_to(-10, y + 14)\n        go_to(0, y)\n        go_to(10, y + 14)\n        pen_up()\n        j = j + 1\n    write(\"网状脉：互相交错成网\", -190, 130, \"red\", 12)\nif kind == 2:\n    pen_color(\"red\")\n    pen_down()\n    j = 0\n    while j < 7:\n        x = -54 + j * 18\n        go_to(x, -100)\n        go_to(x, 10)\n        pen_up()\n        j = j + 1\n    write(\"平行脉：条条平行到顶尖\", -190, 130, \"red\", 12)\nif kind == 3:\n    pen_color(\"red\")\n    pen_down()\n    go_to(0, -110)\n    go_to(0, -20)\n    go_to(-30, 30)\n    pen_up()\n    go_to(0, -20)\n    pen_down()\n    go_to(30, 30)\n    pen_up()\n    go_to(0, -20)\n    pen_down()\n    go_to(0, 60)\n    pen_up()\n    write(\"叉状脉：像分叉的树枝（银杏）\", -190, 130, \"red\", 12)"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "叶脉的类型",
+        "body": "【网状脉：叶脉交错成网（双子叶植物，如桃、杨）；平行脉：叶脉平行排列（单子叶植物，如水稻、玉米）】\n叶脉是\"叶片的血管\"，输导水分和养分。\n看叶脉是野外快速判断植物类群的线索。"
+      },
+      {
+        "title": "观察与描述方法",
+        "body": "科学观察要如实、有序、抓特征：颜色、形状、边缘、叶脉。\n描述用可检验的语言（\"边缘有锯齿\"），不用模糊评价（\"挺好看\"）。\n记录越具体，比较越可靠。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "一片叶子叶脉平行排列，它更可能是什么植物？",
+        "steps": [
+          "平行脉是单子叶植物的特征",
+          "水稻、小麦、玉米都是单子叶",
+          "可能是禾谷类植物"
+        ],
+        "tip": "叶脉类型 + 花基数（3 或 4/5）互相印证"
+      }
+    ],
+    "mistakes": [
+      "见\"叶子细长\"就判平行脉——看叶脉走向，不看叶形"
+    ]
   }
 }

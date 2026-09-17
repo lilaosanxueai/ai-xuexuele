@@ -116,5 +116,31 @@
     }
   ],
   "textbook": "人教PEP英语（三年级起点）",
-  "grade": 3
+  "grade": 3,
+  "teach": {
+    "sections": [
+      {
+        "title": "数字 1-10",
+        "body": "【one two three four five six seven eight nine ten】\n特别注意拼写的：three（thr）、eight（eigh）、nine。\n用手势边比边说，身体记忆最牢。"
+      },
+      {
+        "title": "13-19 的规律",
+        "body": "【-teen 结尾：thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen】\n注意特殊拼写：thirteen、fifteen（不是 threeteen/fiveteen）。\n整十是 -ty：twenty, thirty, forty。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "\"十五\"用英语怎么说？拼一拼。",
+        "steps": [
+          "15 = fifteen",
+          "five → fif + teen",
+          "f-i-f-t-e-e-n"
+        ],
+        "tip": "five 变 fifteen、twelve 变 twelve+two=t twenty，变化处最容易错"
+      }
+    ],
+    "mistakes": [
+      "fifteen 拼成 fiveteen——five 要先变成 fif"
+    ]
+  }
 }

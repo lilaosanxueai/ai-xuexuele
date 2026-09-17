@@ -136,5 +136,31 @@
     }
   ],
   "textbook": "人教版英语（初中）",
-  "grade": 7
+  "grade": 7,
+  "teach": {
+    "sections": [
+      {
+        "title": "星期的表达",
+        "body": "【Monday Tuesday Wednesday Thursday Friday Saturday Sunday】\n首字母必须大写。\n周末 = weekend（Saturday + Sunday）。"
+      },
+      {
+        "title": "What day...? 句型",
+        "body": "【What day is it today? — It's Monday.】\n问星期用 What day。\n国际惯例 Sunday 是一周第一天，中国习惯 Monday 开始。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "翻译：\"星期六你做什么？\"（do homework）",
+        "steps": [
+          "问星期几做的事：What do you do on Saturday?",
+          "回答：I do my homework.",
+          "星期前用介词 on"
+        ],
+        "tip": "on + 星期；at + 钟点——两个介词分清"
+      }
+    ],
+    "mistakes": [
+      "星期小写（monday）——星期名首字母永远大写"
+    ]
+  }
 }

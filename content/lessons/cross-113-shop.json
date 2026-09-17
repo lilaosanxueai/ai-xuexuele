@@ -154,5 +154,32 @@
     }
   ],
   "textbook": "人教版英语七年级上册",
-  "grade": 7
+  "grade": 7,
+  "teach": {
+    "sections": [
+      {
+        "title": "购物句型",
+        "body": "【How much is it? 问价格；I'd like…, please. 表达想买】\nHow much 问\"多少钱\"；How many 问\"多少个\"。\nI'd like = I would like，比 I want 更礼貌。"
+      },
+      {
+        "title": "礼貌用语",
+        "body": "【Here you are. 给你。— Thank you.】\nCan I help you? 店员招呼；I'm just looking. 随便看看。\n购物对话：招呼→问价→决定→付款→道谢。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "排序购物对话：A. Here you are. B. How much is it? C. Can I help you? D. I'd like a pen.",
+        "steps": [
+          "店员先招呼：C",
+          "顾客说出需求：D",
+          "问价：B",
+          "付款拿货：A"
+        ],
+        "tip": "对话排序找\"谁先开口\"和问答配对"
+      }
+    ],
+    "mistakes": [
+      "问价用 How many——价格不可数，用 How much"
+    ]
+  }
 }

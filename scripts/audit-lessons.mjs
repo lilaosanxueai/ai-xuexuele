@@ -122,8 +122,8 @@ for (const l of lessons) {
     }
   }
 
-  // ---- H 讲解层（已有 teach 的学科必须齐全且结构完整） ----
-  const TEACH_REQUIRED = new Set(['数学']);
+  // ---- H 讲解层（全部学科必须齐全且结构完整） ----
+  const TEACH_REQUIRED = new Set(['数学', '物理', '化学', '生物', '地理', '科学', '语文', '英语', '信息科技', '音乐', '道德与法治', '艺术', '劳动', '体育与健康']);
   if (l.teach) {
     if (!Array.isArray(l.teach.sections) || l.teach.sections.length < 2) add('teach', 'sections 少于 2 节');
     for (const [i, sec] of (l.teach.sections ?? []).entries()) {

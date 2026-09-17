@@ -156,5 +156,31 @@
   ],
   "codeLesson": false,
   "textbook": "人教PEP英语三年级上册",
-  "grade": 3
+  "grade": 3,
+  "teach": {
+    "sections": [
+      {
+        "title": "彩虹七色",
+        "body": "【red 红橙 orange 黄 yellow 绿 green 蓝 blue 靛 indigo 紫 purple】\n彩虹外圈红、内圈紫。\n颜色 + 名词：red apple、blue sky（颜色在名词前）。"
+      },
+      {
+        "title": "The sky is blue. 句型",
+        "body": "【主语 + is + 颜色：描述物体颜色】\nThe sky is blue. 天空是蓝色的。\n复数：The apples are red.（is 变 are）。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "翻译：\"彩虹是多彩的。\"（rainbow）",
+        "steps": [
+          "主语 the rainbow",
+          "多彩的：colorful",
+          "The rainbow is colorful."
+        ],
+        "tip": "先找主语和 be 动词，颜色/形容词放后面"
+      }
+    ],
+    "mistakes": [
+      "说 blue the sky——英文语序是\"颜色+名词\"：the blue sky"
+    ]
+  }
 }
