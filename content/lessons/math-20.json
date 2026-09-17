@@ -1,7 +1,7 @@
 {
   "id": "math-20",
   "island": "math",
-  "order": 34,
+  "order": 42,
   "title": "三种增长大赛跑",
   "emoji": "🏁",
   "story": "从 1 到一百万：每次 +1 要走一百万步；每次 ×2 只要 20 步；那每次「翻 10 倍」呢？只要 6 步！线性、指数、对数——三种增长速度决定了算法的快慢、复利的疯狂、地震震级的差距。程序跑一遍，亲身感受量级碾压。",
@@ -144,5 +144,6 @@
       "为什么指数增长「爆炸」？"
     ],
     "code": "# 三种增长大赛跑探索台\ngoal = 1000000   # 目标数\n\nhide()\np = 1\nsteps = 0\nwhile p < goal:\n    p = p * 2\n    steps = steps + 1\npen_color(\"red\")\npen_down()\ngo_to(-180, -110)\nxx = -180\ni = 0\nv = 1\nwhile i < steps:\n    v = v * 2\n    xx = xx + 190 / steps\n    go_to(xx, -110 + v / goal * 200)\n    i = i + 1\npen_up()\nwrite(\"指数翻倍：\" + steps + \" 步到 \" + goal, -190, 140, \"red\", 13)\naddSteps = goal / 1000\npen_color(\"blue\")\npen_down()\ngo_to(-180, -110)\nxx = -180\ni = 0\nwhile i < steps:\n    xx = xx + 190 / steps\n    go_to(xx, -110 + (xx + 180) / 190 * 100 / 10)\n    i = i + 1\npen_up()\nwrite(\"每次+1000：要 \" + addSteps + \" 步（差 \" + addSteps / steps + \" 倍）\", -190, 112, \"blue\", 12)"
-  }
+  },
+  "grade": 10
 }

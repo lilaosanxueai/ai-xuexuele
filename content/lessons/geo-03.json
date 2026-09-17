@@ -1,7 +1,7 @@
 {
   "id": "geo-03",
   "island": "cross",
-  "order": 109,
+  "order": 124,
   "title": "地图方位侦查兵",
   "emoji": "🧭",
   "story": "上北下南左西右东——地图的铁律！让角色在舞台上走方位：向北、向东、再转向南……走一遍，方位感就在脚下长出来了。",
@@ -161,5 +161,7 @@
       "180° 呢？270° 呢？"
     ],
     "code": "# 地图方位探索台\nheading = 90   # 行进方向（度）\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(0, -100)\ngo_to(0, 100)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-100, 0)\ngo_to(100, 0)\npen_up()\nwrite(\"北 N\", -12, 118, \"blue\", 13)\nwrite(\"南 S\", -12, -122, \"blue\", 12)\nwrite(\"西 W\", -128, -8, \"red\", 12)\nwrite(\"东 E\", 112, -8, \"red\", 12)\nx = 130 * cos(heading)\ny = 130 * sin(heading)\npen_color(\"green\")\npen_down()\ngo_to(0, 0)\ngo_to(x, y)\npen_up()\ndir = \"东\"\nif heading == 0:\n    dir = \"北\"\nif heading == 180:\n    dir = \"南\"\nif heading == 270:\n    dir = \"西\"\nif heading > 0:\n    if heading < 90:\n        dir = \"东北\"\nif heading > 90:\n    if heading < 180:\n        dir = \"东南\"\nif heading > 180:\n    if heading < 270:\n        dir = \"西南\"\nif heading > 270:\n    dir = \"西北\"\nwrite(\"朝 \" + heading + \"° 走 = \" + dir + \"方向\", -190, 140, \"green\", 13)\nwrite(\"上北下南，左西右东\", -190, 112, \"orange\", 10)"
-  }
+  },
+  "grade": 4,
+  "textbook": "冀人版科学（小学）"
 }

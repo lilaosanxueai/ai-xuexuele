@@ -1,7 +1,7 @@
 {
   "id": "cross-78",
   "island": "cross",
-  "order": 139,
+  "order": 158,
   "title": "分类的数学：一条线分开两个世界",
   "emoji": "♟",
   "story": "AI 认猫认狗、判断 spam 邮件、医生看片子——本质上都在做同一件事：在数据中间画一条线，线这边是 A，线那边是 B！这条线叫「分类边界」。今天给你 6 个点（两个班级的「同学」），你来调出那条完美分界线——亲手体验 AI 分类的数学灵魂！",
@@ -168,5 +168,6 @@
       "这就是分类的数学：找一条分界线"
     ],
     "code": "# 分类边界探索台\nk = 1   # 分界线斜率\nb = 0   # 分界线截距\n\nhide()\npen_color(\"red\")\npen_down()\ngo_to(-140, 80)\npen_up()\ngo_to(-100, 60)\npen_down()\ngo_to(-98, 60)\npen_up()\ngo_to(-120, 40)\npen_down()\ngo_to(-118, 40)\npen_up()\npen_color(\"blue\")\ngo_to(100, -50)\npen_down()\ngo_to(102, -50)\npen_up()\ngo_to(140, -70)\npen_down()\ngo_to(142, -70)\npen_up()\ngo_to(120, -90)\npen_down()\ngo_to(122, -90)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(-190, k * -90 / 2 + b * 20)\ngo_to(190, k * 90 / 2 + b * 20)\npen_up()\nred_side = 80 - (k * -70 / 2 + b * 20)\nblue_side = -50 - (k * 70 / 2 + b * 20)\nif red_side > 0:\n    if blue_side < 0:\n        write(\"✓ 分开了！红上蓝下\", -190, 140, \"green\", 12)\nif red_side < 0:\n    write(\"✗ 红点在分界线下方\", -190, 140, \"orange\", 12)\nif blue_side > 0:\n    write(\"✗ 蓝点在分界线上方\", -190, 112, \"orange\", 12)\nwrite(\"调 k 和 b 试试\", -190, -130, \"blue\", 11)"
-  }
+  },
+  "grade": 10
 }

@@ -167,5 +167,6 @@
       "什么时候会跳过 0？0 是正负的分界"
     ],
     "code": "# 数轴加减探索台\nstart = -3   # 起点\ndelta = 5     # 加减的数\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-200, 0)\ngo_to(200, 0)\npen_up()\ngo_to(start * 20, 0)\npen_color(\"red\")\npen_down()\ngo_to((start + delta) * 20, 0)\npen_up()\nwrite(\"起点\", start * 20, 22, \"blue\", 11)\nwrite(\"\" + start, start * 20, -22, \"blue\", 12)\nwrite(\"到达 \" + (start + delta), (start + delta) * 20 - 20, 42, \"red\", 14)\nif delta >= 0:\n    write(\"向右跳 \" + delta + \" 格（加正数）\", -190, 120, \"green\", 12)\nif delta < 0:\n    write(\"向左跳 \" + 0 - delta + \" 格（加负数=减）\", -190, 120, \"orange\", 12)"
-  }
+  },
+  "grade": 1
 }

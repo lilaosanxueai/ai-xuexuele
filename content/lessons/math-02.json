@@ -168,5 +168,6 @@
       "格子图里每行几个、共几行？"
     ],
     "code": "# 跳格子乘法探索台：a × b\na = 3   # 每次跳几格\nb = 4   # 跳几次\n\nhide()\ncol = 0\nrow = 0\ni = 0\nwhile i < a * b:\n    x = -180 + (i - row * b) * 24\n    y = 60 - row * 26\n    pen_color(\"blue\")\n    pen_down()\n    go_to(x, y)\n    go_to(x + 20, y)\n    go_to(x + 20, y - 20)\n    go_to(x, y - 20)\n    go_to(x, y)\n    pen_up()\n    if i - row * b == b - 1:\n        row = row + 1\n    i = i + 1\nwrite(\"每行 \" + b + \" 格 × \" + a + \" 行 = \" + a * b, -190, 100, \"red\", 14)\nwrite(\"乘法就是数格子！\", -190, 130, \"blue\", 12)"
-  }
+  },
+  "grade": 2
 }

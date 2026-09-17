@@ -1,7 +1,7 @@
 {
   "id": "cross-36",
   "island": "cross",
-  "order": 88,
+  "order": 96,
   "title": "磁铁的奥秘",
   "emoji": "🧲",
   "story": "磁铁有两极：N 和 S。它们有个铁律：同名极相斥（推开！）、异名极相吸（贴贴！）。指南针就是靠地球这个大磁铁指路的。让两块磁铁相遇：同极相撞就后退，异极靠近就吸上——规律演出来！",
@@ -158,5 +158,6 @@
       "指南针为什么总指南北？"
     ],
     "code": "# 磁极的奥秘探索台\nmode = 1   # 1=异极相对 2=同极相对\n\nhide()\ngap = 90\nif mode == 2:\n    gap = 150\nl1 = \"N\"\nr1 = \"S\"\nif mode == 2:\n    r1 = \"N\"\npen_color(\"red\")\npen_down()\ngo_to(-gap - 40, -15)\ngo_to(-gap, -15)\ngo_to(-gap, 15)\ngo_to(-gap - 40, 15)\ngo_to(-gap - 40, -15)\npen_up()\nwrite(l1, -gap - 28, 0, \"blue\", 12)\npen_color(\"blue\")\npen_down()\ngo_to(-gap, -15)\ngo_to(-gap + 40, -15)\ngo_to(-gap + 40, 15)\ngo_to(-gap, 15)\ngo_to(-gap, -15)\npen_up()\nwrite(\"S\", -gap + 12, 0, \"blue\", 12)\npen_color(\"blue\")\npen_down()\ngo_to(gap - 40, -15)\ngo_to(gap, -15)\ngo_to(gap, 15)\ngo_to(gap - 40, 15)\ngo_to(gap - 40, -15)\npen_up()\nwrite(r1, gap - 28, 0, \"blue\", 12)\npen_color(\"red\")\npen_down()\ngo_to(gap, -15)\ngo_to(gap + 40, -15)\ngo_to(gap + 40, 15)\ngo_to(gap, 15)\ngo_to(gap, -15)\npen_up()\nwrite(\"S\", gap + 12, 0, \"blue\", 12)\nif mode == 1:\n    pen_color(\"green\")\n    pen_down()\n    go_to(-gap + 44, 30)\n    go_to(gap - 44, 30)\n    pen_up()\n    write(\"←相互吸引→\", -45, 42, \"green\", 11)\n    write(\"异极相吸！\", -190, 140, \"green\", 13)\nif mode == 2:\n    pen_color(\"orange\")\n    pen_down()\n    go_to(-gap + 44, 30)\n    go_to(-gap + 60, 38)\n    pen_up()\n    go_to(-gap + 44, 30)\n    pen_down()\n    go_to(-gap + 60, 22)\n    pen_up()\n    go_to(gap - 44, 30)\n    pen_down()\n    go_to(gap - 60, 38)\n    pen_up()\n    go_to(gap - 44, 30)\n    pen_down()\n    go_to(gap - 60, 22)\n    pen_up()\n    write(\"同极相斥！\", -190, 140, \"red\", 13)"
-  }
+  },
+  "grade": 2
 }

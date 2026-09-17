@@ -1,7 +1,7 @@
 {
   "id": "cross-128",
   "island": "cross",
-  "order": 191,
+  "order": 209,
   "title": "光的直线传播：影子剧场",
   "emoji": "🔦",
   "story": "影子里藏着一条大道理：光沿直线传播！正因为光不会拐弯，身体背后才会留下影子；也正因为光走直线，排队的同学看齐只要看后脑勺、日食月食才会如约而至。今天你用程序开一场「影子剧场」，把这条直线照出来！",
@@ -172,5 +172,6 @@
       "光走直线——不拐弯！"
     ],
     "code": "# 光的直线传播探索台：影子剧场\nlx = -60   # 光源横位置\n\nhide()\nwrite(\"💡\", lx - 10, 100, \"orange\", 18)\npen_color(\"yellow\")\npen_down()\ngo_to(lx, 92)\ngo_to(-20, 20)\ngo_to(-20, -60)\npen_up()\ngo_to(lx, 92)\npen_down()\ngo_to(20, 24)\ngo_to(20, -64)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(-15, 20)\ngo_to(15, 20)\ngo_to(15, -60)\ngo_to(-15, -60)\ngo_to(-15, 20)\npen_up()\npen_color(\"blue\")\npen_down()\ngo_to(-190, -80)\ngo_to(190, -80)\npen_up()\nshadowL = 20\nshadowR = -20 + (-20 - lx) * 0.9\nif shadowR > 185:\n    shadowR = 185\npen_color(\"blue\")\npen_down()\ngo_to(shadowL, -70)\ngo_to(shadowR, -70)\ngo_to(shadowR, -92)\ngo_to(shadowL, -92)\ngo_to(shadowL, -70)\npen_up()\nwrite(\"影子\", (shadowL + shadowR) / 2 - 12, -110, \"blue\", 10)\nwrite(\"光沿直线传播 → 影子与光反向\", -190, 140, \"red\", 11)\nif lx > 60:\n    write(\"光源在右边，影子跑到左边！\", -190, 112, \"orange\", 10)"
-  }
+  },
+  "grade": 3
 }

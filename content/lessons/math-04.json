@@ -165,5 +165,6 @@
       "路程 = 速度 × 时间，看图验证"
     ],
     "code": "# 行程实验室·双视图：上面画 s-t 图，下面小车跑\nv = 8   # 速度\nt = 5   # 时间\n\nhide()\ns = v * t\npen_color(\"green\")\npen_down()\ni = 0\ngo_to(-180, 10)\nwhile i < t + 0.1:\n    go_to(-180 + i * v * 3.4, 10 + i * v * 1.1)\n    i = i + 0.5\npen_up()\nwrite(\"s-t 图（时间→路程）\", -180, 145, \"green\", 11)\ni = 1\nwhile i < t + 0.5:\n    write(\"\" + i, -180 + i * v * 3.4, 0, \"green\", 8)\n    i = i + 1\npen_color(\"blue\")\npen_down()\ngo_to(-190, -90)\ngo_to(190, -90)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-180, -70)\ngo_to(-180 + s * 3.4, -70)\npen_up()\ncostume(\"🚗\")\nshow()\ngo_to(-180 + s * 3.4 - 14, -82)\nwrite(\"s=\" + v + \"×\" + t + \"=\" + s + \" 米\", -180, -120, \"red\", 13)\nwrite(\"小车停在 \" + s + \" 米处！\", -180, -145, \"blue\", 11)"
-  }
+  },
+  "grade": 4
 }

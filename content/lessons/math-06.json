@@ -156,5 +156,6 @@
       "祖冲之就是这样用多边形逼近圆算出 π 的"
     ],
     "code": "# 割圆术探索台：正多边形逼近圆\nsides = 6   # 边数\n\nhide()\nR = 120\npen_color(\"blue\")\npen_down()\ni = 0\ngo_to(R, 0)\nwhile i < sides:\n    ang = (i + 1) * 360 / sides\n    go_to(R * cos(ang), R * sin(ang))\n    i = i + 1\npen_up()\nper = 2 * sides * R * sin(180 / sides)\npi_est = per / (2 * R)\nwrite(\"正\" + sides + \"边形 → π ≈ \" + pi_est, -190, 140, \"red\", 14)\nwrite(\"真实 π = 3.14159…\", -190, 112, \"blue\", 11)\nif sides >= 20:\n    write(\"几乎就是圆了！\", -190, 84, \"green\", 12)\nif sides <= 4:\n    write(\"还差得远，加边！\", -190, 84, \"orange\", 12)"
-  }
+  },
+  "grade": 6
 }

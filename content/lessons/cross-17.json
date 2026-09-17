@@ -1,7 +1,7 @@
 {
   "id": "cross-17",
   "island": "cross",
-  "order": 38,
+  "order": 46,
   "title": "纬度带探险",
   "emoji": "🧭",
   "story": "舞台的竖线就是经线！从赤道出发一路向北：赤道最热、北回归线是热带的北边界、北极圈里全是冰雪。让探险家走三站，每一站都是地球上一条真实的纬线。",
@@ -115,7 +115,7 @@
     }
   ],
   "subjectArea": "地理",
-  "gradeBand": "senior",
+  "gradeBand": "junior",
   "exercises": [
     {
       "q": "赤道的纬度是？",

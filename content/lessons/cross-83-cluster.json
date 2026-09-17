@@ -1,7 +1,7 @@
 {
   "id": "cross-83",
   "island": "cross",
-  "order": 144,
+  "order": 163,
   "title": "周期律：最早的「聚类算法」",
   "emoji": "🧬",
   "story": "门捷列夫把 63 种元素按性质排队，性质相似的排成一列——他其实做了一次「聚类」：把相似的东西归成堆！今天 AI 的聚类算法干的是同一件事。你用「性质数值」给 6 位元素代表分组，调出那条完美的「性质分界线」，看化学史和人工智能如何在思想深处相遇！",
@@ -160,5 +160,6 @@
       "这就是「聚类」：按性质分数自动分组——AI 分类也是这个道理"
     ],
     "code": "# 元素周期律聚类探索台：得分 > t 归金属组\nt = 3.5   # 分界线\n\nhide()\nna = 8\nmg = 6\nal = 5\ns = 2\ncl = 1\nhe = 0\npen_color(\"red\")\npen_down()\ngo_to(-190, -100)\ngo_to(-190, -100 + na * 16)\ngo_to(-150, -100 + na * 16)\ngo_to(-150, -100)\ngo_to(-190, -100)\npen_up()\nwrite(\"钠8\", -170, -120, \"red\", 10)\npen_down()\ngo_to(-130, -100)\ngo_to(-130, -100 + mg * 16)\ngo_to(-90, -100 + mg * 16)\ngo_to(-90, -100)\ngo_to(-130, -100)\npen_up()\nwrite(\"镁6\", -110, -120, \"red\", 10)\npen_down()\ngo_to(-70, -100)\ngo_to(-70, -100 + al * 16)\ngo_to(-30, -100 + al * 16)\ngo_to(-30, -100)\ngo_to(-70, -100)\npen_up()\nwrite(\"铝5\", -50, -120, \"red\", 10)\npen_down()\ngo_to(-10, -100)\ngo_to(-10, -100 + s * 16)\ngo_to(30, -100 + s * 16)\ngo_to(30, -100)\ngo_to(-10, -100)\npen_up()\nwrite(\"硫2\", 10, -120, \"red\", 10)\npen_down()\ngo_to(50, -100)\ngo_to(50, -100 + cl * 16)\ngo_to(90, -100 + cl * 16)\ngo_to(90, -100)\ngo_to(50, -100)\npen_up()\nwrite(\"氯1\", 70, -120, \"red\", 10)\npen_down()\ngo_to(110, -100)\ngo_to(110, -100 + 1)\ngo_to(150, -100 + 1)\ngo_to(150, -100)\ngo_to(110, -100)\npen_up()\nwrite(\"氦0\", 130, -120, \"red\", 10)\npen_color(\"blue\")\npen_down()\ngo_to(-200, -100 + t * 16)\ngo_to(180, -100 + t * 16)\npen_up()\nwrite(\"分界线 t=\" + t, 110, -100 + t * 16 + 16, \"blue\", 12)\nwrite(\"线以上→金属组，线以下→非金属组\", -190, 140, \"blue\", 12)"
-  }
+  },
+  "grade": 10
 }

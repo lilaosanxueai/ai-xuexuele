@@ -1,7 +1,7 @@
 {
   "id": "cross-59",
   "island": "cross",
-  "order": 117,
+  "order": 136,
   "title": "AI 自然观察家",
   "emoji": "🌿",
   "story": "科学家走进森林，第一件事不是做实验，而是观察、记录。今天你就是自然观察家：捡两样自然物（树叶、石头、贝壳……），教 AI 认识它们，再让机器人帮你写「观察日志」。达尔文的笔记本，今天换成你的程序！",
@@ -172,5 +172,6 @@
     ],
     "code": "# AI 自然观察家探索台：样本量 → 准确率\nn = 15   # 训练样本数\n\nhide()\nacc = 50 + n\nif acc > 98:\n    acc = 98\npen_color(\"blue\")\npen_down()\nxx = -180\ni = 5\nwhile i < 55:\n    a2 = 50 + i\n    if a2 > 98:\n        a2 = 98\n    go_to(-180 + (i - 5) * 7, -110 + a2 * 2)\n    i = i + 5\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-180 + (n - 5) * 7, -110)\ngo_to(-180 + (n - 5) * 7, -110 + acc * 2)\npen_up()\nwrite(\"样本 \" + n + \" 张 → 准确率约 \" + acc + \"%\", -190, 140, \"red\", 13)\nwrite(\"喂得越多，认得越准——但永远到不了 100%\", -190, 112, \"orange\", 10)\nwrite(\"红柱=你当前的样本量\", -190, -145, \"green\", 10)",
     "animate": false
-  }
+  },
+  "grade": 3
 }

@@ -1,7 +1,7 @@
 {
   "id": "cross-39",
   "island": "cross",
-  "order": 91,
+  "order": 99,
   "title": "营养家族分类",
   "emoji": "🥗",
   "story": "身体需要四大营养家族：蛋白质（长身体的砖头：肉蛋奶）、糖类（供能量：米面薯）、脂肪（储备能源：油坚果）、维生素（守护健康：果蔬）。没有一种食物什么都含——所以要不挑食！程序当营养师：报食物，你来归类！",
@@ -158,5 +158,6 @@
       "一顿饭要「彩虹搭配」才均衡！"
     ],
     "code": "# 营养家族分类探索台\nfood = 1   # 食物编号\n\nhide()\nname = \"\"\nnutri = \"\"\ngroup = \"\"\nif food == 1:\n    name = \"🍚 米饭面条\"\n    nutri = \"碳水化合物\"\n    group = \"供能主力\"\nif food == 2:\n    name = \"🥩 肉蛋奶豆\"\n    nutri = \"蛋白质\"\n    group = \"长身体修组织\"\nif food == 3:\n    name = \"🥑 坚果植物油\"\n    nutri = \"脂肪\"\n    group = \"储备能量\"\nif food == 4:\n    name = \"🥬 蔬菜水果\"\n    nutri = \"维生素+矿物质\"\n    group = \"身体调节剂\"\nif food == 5:\n    name = \"🍞 全谷物\"\n    nutri = \"膳食纤维\"\n    group = \"肠道清道夫\"\nif food == 6:\n    name = \"💧 水\"\n    nutri = \"不是营养但最重要\"\n    group = \"占体重 60%\"\nwrite(name, -150, 110, \"red\", 15)\nwrite(\"营养：\" + nutri, -150, 60, \"blue\", 13)\nwrite(\"作用：\" + group, -150, 15, \"green\", 12)\nwrite(\"六大营养素都要吃，偏食会长不高！\", -150, -60, \"orange\", 11)"
-  }
+  },
+  "grade": 2
 }

@@ -1,7 +1,7 @@
 {
   "id": "math-23",
   "island": "math",
-  "order": 43,
+  "order": 51,
   "title": "数格子算面积",
   "emoji": "🟦",
   "story": "周长是「走一圈」，面积是「铺满格子」！横着 4 格、竖着 4 格，一共要铺 4×4=16 块地砖。让角色像扫地机器人一样一排排扫过去，数它扫了几块地。",
@@ -165,5 +165,6 @@
       "每行几个 × 有几行 = 总数（乘法的面积意义）"
     ],
     "code": "# 数格子算面积探索台\nw = 5   # 横向格数\nh = 4   # 纵向格数\n\nhide()\ni = 0\nwhile i < w:\n    j = 0\n    while j < h:\n        x = -150 + i * 28\n        y = 70 - j * 28\n        pen_color(\"blue\")\n        pen_down()\n        go_to(x, y)\n        go_to(x + 24, y)\n        go_to(x + 24, y - 24)\n        go_to(x, y - 24)\n        go_to(x, y)\n        pen_up()\n        j = j + 1\n    i = i + 1\nwrite(w + \" × \" + h + \" = \" + w * h + \" 个格子\", -190, 130, \"red\", 14)\nwrite(\"面积就是数格子！\", -190, 102, \"blue\", 11)"
-  }
+  },
+  "grade": 3
 }

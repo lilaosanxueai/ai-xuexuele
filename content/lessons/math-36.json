@@ -1,7 +1,7 @@
 {
   "id": "math-36",
   "island": "math",
-  "order": 56,
+  "order": 64,
   "title": "分数加法：数轴拼段",
   "emoji": "🧩",
   "story": "1/4 加 2/4 等于几？别背规则——把数轴分成 4 段，先走 1 段再走 2 段，落点就是 3/4！同分母分数加法：分母不变，分子相加。落笔画出来，分数看得见。",
@@ -167,5 +167,6 @@
       "拼满 1（到达数轴上的 4/4）需要几段？"
     ],
     "code": "# 分数加法探索台（分母固定为 4）\nn1 = 1   # 第一段：n1/4\nn2 = 1   # 第二段：n2/4\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-160, 20)\ngo_to(-160 + n1 * 40, 20)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(-160 + n1 * 40, 20)\ngo_to(-160 + (n1 + n2) * 40, 20)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-160 + 160, 35)\ngo_to(-160 + 160, 5)\npen_up()\nwrite(\"1（4/4）\", -160 + 160 - 24, 48, \"red\", 10)\nwrite(n1 + \"/4\", -160 + n1 * 20, -18, \"blue\", 12)\nwrite(n2 + \"/4\", -160 + n1 * 40 + n2 * 20, -18, \"green\", 12)\ntotal = n1 + n2\nwrite(n1 + \"/4 + \" + n2 + \"/4 = \" + total + \"/4\", -190, 120, \"red\", 14)\nwrite(\"分子相加，分母不变\", -190, 95, \"orange\", 11)\nif total >= 4:\n    write(\"拼满了 1 还多！\", 40, 150, \"green\", 11)"
-  }
+  },
+  "grade": 5
 }

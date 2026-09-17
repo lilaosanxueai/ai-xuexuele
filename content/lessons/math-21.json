@@ -1,7 +1,7 @@
 {
   "id": "math-21",
   "island": "math",
-  "order": 41,
+  "order": 49,
   "title": "除法：分组跳格子",
   "emoji": "➗",
   "story": "除法是乘法的反向：180 里面有几个 60？让青蛙从 0 出发，每次跳 60，跳几次正好到 180？数一数「重复」的次数——那就是 180÷60 的答案！",
@@ -169,5 +169,6 @@
       "除法就是「分组」：总 数 ÷ 每组 = 组数……余数"
     ],
     "code": "# 除法分组探索台\ntotal = 12   # 总数量\neach = 4     # 每组几个\n\nhide()\ngroups = total / each\nrem = total - groups * each\ni = 0\nwhile i < total:\n    col = i - (i / each) * each\n    row = i / each\n    x = -180 + col * 26\n    y = 70 - row * 30\n    pen_color(\"blue\")\n    pen_down()\n    go_to(x, y)\n    go_to(x + 20, y)\n    go_to(x + 20, y - 20)\n    go_to(x, y - 20)\n    go_to(x, y)\n    pen_up()\n    i = i + 1\nwrite(total + \" 个 ÷ 每组 \" + each + \" = \" + groups + \" 组\", -190, 130, \"red\", 13)\nif rem > 0:\n    write(\"还剩 \" + rem + \" 个分不完整\", -190, 105, \"orange\", 12)\nif rem == 0:\n    write(\"正好分完，没有余数！\", -190, 105, \"green\", 12)"
-  }
+  },
+  "grade": 2
 }

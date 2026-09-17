@@ -1,7 +1,7 @@
 {
   "id": "math-38",
   "island": "math",
-  "order": 58,
+  "order": 66,
   "title": "三角形家族大点兵",
   "emoji": "🔺",
   "story": "三角形三兄弟：锐角三角形（三个角都小于 90°）、直角三角形（有一个 90°）、钝角三角形（有一个大于 90°）。还有等腰（两边相等）和等边（三边相等）！落笔画出家族全家福。",
@@ -154,5 +154,6 @@
       "直角三角形里藏着勾股定理！"
     ],
     "code": "# 三角形家族探索台\nkind = 1   # 1=锐角 2=直角 3=钝角\n\nhide()\nif kind == 1:\n    write(\"锐角三角形：三个角都 < 90°\", -190, 140, \"blue\", 12)\n    pen_color(\"blue\")\n    pen_down()\n    go_to(-90, -60)\n    go_to(90, -60)\n    go_to(-20, 70)\n    go_to(-90, -60)\n    pen_up()\nif kind == 2:\n    write(\"直角三角形：有一个角 = 90°\", -190, 140, \"red\", 12)\n    pen_color(\"blue\")\n    pen_down()\n    go_to(-90, -60)\n    go_to(90, -60)\n    go_to(-90, 70)\n    go_to(-90, -60)\n    pen_up()\n    pen_color(\"red\")\n    pen_down()\n    go_to(-90, -40)\n    go_to(-70, -40)\n    go_to(-70, -60)\n    pen_up()\nif kind == 3:\n    write(\"钝角三角形：有一个角 > 90°\", -190, 140, \"orange\", 12)\n    pen_color(\"blue\")\n    pen_down()\n    go_to(-90, -60)\n    go_to(90, -60)\n    go_to(-160, 30)\n    go_to(-90, -60)\n    pen_up()\nwrite(\"按形状给三角形分家族\", -190, -130, \"green\", 11)"
-  }
+  },
+  "grade": 4
 }

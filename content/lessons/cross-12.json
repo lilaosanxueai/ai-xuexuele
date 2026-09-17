@@ -1,7 +1,7 @@
 {
   "id": "cross-12",
   "island": "cross",
-  "order": 33,
+  "order": 39,
   "title": "一颗种子的生长",
   "emoji": "🌱",
   "story": "从种子到开花结果，植物的一生要闯几关？阳光、水、时间，缺一不可。让种子 🌱 慢慢长大：每过一关换一个造型、长大一圈——生命周期就是一段有条件的程序。",
@@ -176,5 +176,6 @@
       "生长的速度一样快吗？哪段最快？"
     ],
     "code": "# 种子生长探索台\ndays = 10   # 生长天数\n\nhide()\nh = days * 6\nif h > 150:\n    h = 150\npen_color(\"green\")\npen_down()\ngo_to(0, -80)\ngo_to(0, -80 + h)\npen_up()\nstage = \"破土发芽\"\nif days > 6:\n    pen_color(\"green\")\n    pen_down()\n    go_to(0, -80 + h * 0.6)\n    go_to(-30, -80 + h * 0.6 + 18)\n    pen_up()\n    go_to(0, -80 + h * 0.6)\n    pen_down()\n    go_to(30, -80 + h * 0.6 + 18)\n    pen_up()\n    stage = \"长出子叶\"\nif days > 15:\n    pen_color(\"red\")\n    pen_down()\n    go_to(0, -80 + h)\n    go_to(8, -80 + h + 16)\n    pen_up()\n    stage = \"花苞出现\"\nif days > 25:\n    stage = \"开花结果\"\npen_color(\"blue\")\npen_down()\ngo_to(-40, -80)\ngo_to(40, -80)\npen_up()\nwrite(\"第 \" + days + \" 天：\" + stage, -190, 140, \"green\", 13)\nwrite(\"先长根还是先长芽？地下也在忙！\", -190, 110, \"orange\", 10)"
-  }
+  },
+  "grade": 10
 }

@@ -1,7 +1,7 @@
 {
   "id": "cross-35",
   "island": "cross",
-  "order": 87,
+  "order": 95,
   "title": "光与影实验",
   "emoji": "🌗",
   "story": "同一个人，中午影子短、傍晚影子长——太阳位置决定了影子的长度！光的直线传播遇到障碍物就留下影子。画三根影子验证规律：太阳越高、影子越短。古人就是用这个发明了日晷！",
@@ -158,5 +158,6 @@
       "影子和物体的形状有什么关系？"
     ],
     "code": "# 光与影探索台\nw = 30   # 遮挡物宽度\n\nhide()\nwrite(\"💡\", -12, 110, \"orange\", 16)\npen_color(\"green\")\npen_down()\ngo_to(0 - w / 2, 30)\ngo_to(w / 2, 30)\ngo_to(w / 2, 55)\ngo_to(0 - w / 2, 55)\ngo_to(0 - w / 2, 30)\npen_up()\nsw = w * 2.2\npen_color(\"blue\")\npen_down()\ngo_to(0 - sw / 2, -80)\ngo_to(sw / 2, -80)\ngo_to(sw / 2, -100)\ngo_to(0 - sw / 2, -100)\ngo_to(0 - sw / 2, -80)\npen_up()\nwrite(\"物体宽 \" + w + \"，影子宽 \" + sw, -190, 140, \"red\", 12)\nwrite(\"离光越近，影子越大（放大的自己）\", -190, 112, \"blue\", 10)\npen_color(\"yellow\")\npen_down()\ngo_to(-w / 2, 105)\ngo_to(0 - sw / 2, -78)\npen_up()\npen_down()\ngo_to(w / 2, 105)\ngo_to(sw / 2, -78)\npen_up()"
-  }
+  },
+  "grade": 1
 }

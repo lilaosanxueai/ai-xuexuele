@@ -1,7 +1,7 @@
 {
   "id": "cross-10",
   "island": "cross",
-  "order": 31,
+  "order": 35,
   "title": "水的三态旅行",
   "emoji": "💧",
   "story": "冰、水、水蒸气——同一个 H₂O 的三种模样！温度就是那把变形钥匙：0°C 融化，100°C 沸腾。让小水滴去「加热炉」旅行一遭，用造型切换演出三态变化，条件一到，立刻变身。",
@@ -177,5 +177,6 @@
       "超过 100 呢？（四处乱飞=气态水蒸气）"
     ],
     "code": "# 水的三态探索台\ntemp = 20   # 温度\n\nhide()\nstate = \"液态水\"\nspread = 26\nif temp < 0:\n    state = \"固态冰\"\n    spread = 14\nif temp > 100:\n    state = \"气态水蒸气\"\n    spread = 46\ni = 0\nwhile i < 12:\n    col = i - (i / 4) * 4\n    row = i / 4\n    x = -spread * 1.5 + col * spread\n    y = 40 - row * spread\n    pen_color(\"blue\")\n    pen_down()\n    go_to(x, y)\n    go_to(x + 3, y)\n    pen_up()\n    i = i + 1\nwrite(temp + \"℃ → \" + state, -190, 140, \"red\", 14)\nif temp < 0:\n    write(\"分子手拉手排排站（固定形状）\", -190, 112, \"blue\", 11)\nif temp > 100:\n    write(\"分子自由飞翔（充满整个空间）\", -190, 112, \"orange\", 11)\nif temp >= 0:\n    if temp <= 100:\n        write(\"分子可以滑动（随容器形状）\", -190, 112, \"green\", 11)\nwrite(\"温度=分子运动的剧烈程度\", -190, -140, \"green\", 10)"
-  }
+  },
+  "grade": 10
 }

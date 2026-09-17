@@ -1,7 +1,7 @@
 {
   "id": "cross-116",
   "island": "cross",
-  "order": 179,
+  "order": 197,
   "title": "磁铁的秘密力量",
   "emoji": "🧲",
   "story": "看不见、摸不着，却能隔着桌面拉动回形针——磁力是物质世界的隐形魔法！磁铁有个铁规矩：只吸铁、钴、镍，别的免谈；还有个脾气：同极相斥、异极相吸，见面就分手或就抱住。今天你当「磁力侦探」，把这两条规律演出来！",
@@ -172,5 +172,6 @@
       "磁铁隔着纸还能吸吗？（回家试试）"
     ],
     "code": "# 磁铁的力量探索台\npower = 3   # 磁力强度\n\nhide()\npen_color(\"red\")\npen_down()\ngo_to(-140, 0)\ngo_to(-100, 0)\ngo_to(-100, 20)\ngo_to(-140, 20)\ngo_to(-140, 0)\npen_up()\nwrite(\"N\", -126, 8, \"blue\", 11)\npen_color(\"blue\")\npen_down()\ngo_to(-100, 0)\ngo_to(-60, 0)\ngo_to(-60, 20)\ngo_to(-100, 20)\ngo_to(-100, 0)\npen_up()\nwrite(\"S\", -85, 8, \"blue\", 11)\ndist = 140 - power * 18\npen_color(\"green\")\npen_down()\ngo_to(-60 + 6, 8)\ngo_to(dist, 8)\npen_up()\nwrite(\"📎\", dist - 12, 8, \"green\", 16)\nwrite(\"磁力 \" + power + \"：隔 \" + (dist + 60) + \" 格也能吸住！\", -190, 140, \"red\", 12)\nif power > 4:\n    write(\"强磁铁：危险！别靠近电脑和手表\", -190, 112, \"orange\", 10)\nwrite(\"磁力随距离变弱\", -190, -60, \"blue\", 10)"
-  }
+  },
+  "grade": 2
 }

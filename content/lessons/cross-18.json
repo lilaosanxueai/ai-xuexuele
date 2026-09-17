@@ -1,7 +1,7 @@
 {
   "id": "cross-18",
   "island": "cross",
-  "order": 39,
+  "order": 47,
   "title": "质量守恒验证器",
   "emoji": "⚖️",
   "story": "2H₂ + O₂ = 2H₂O——方程式凭什么成立？因为反应前后原子一个不多一个不少（质量守恒定律）！用变量数一数两边的氢原子和氧原子：左边=右边，配平成功；不等，就得调整系数。",
@@ -81,7 +81,7 @@
   "codeLesson": true,
   "starterCode": "# 质量守恒验证：2H2 + O2 = 2H2O\nh_left = 2 * 2     # 2 个 H2，每个 2 个氢原子\no_left = 2         # 1 个 O2，2 个氧原子\nh_right = 2 * 2    # 2 个 H2O，每个 2 个氢\no_right = 2        # 2 个 H2O，每个 1 个氧\n\nsay(\"H: 左边 \" + h_left + \" 个 vs 右边 \" + h_right + \" 个\")\nsay(\"O: 左边 \" + o_left + \" 个 vs 右边 \" + o_right + \" 个\")\n\nif h_left == h_right:\n    say(\"氢原子守恒，配平正确！\")\n",
   "subjectArea": "化学",
-  "gradeBand": "senior",
+  "gradeBand": "junior",
   "exercises": [
     {
       "q": "质量守恒定律：化学反应前后总质量？",

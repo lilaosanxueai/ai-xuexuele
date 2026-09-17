@@ -1,7 +1,7 @@
 {
   "id": "mus-02",
   "island": "cross",
-  "order": 112,
+  "order": 130,
   "title": "音阶爬楼梯",
   "emoji": "🎵",
   "story": "do re mi fa sol la xi do——音阶像楼梯，一级比一级高！你的角色一边放音阶一边往上走：耳朵听音高，眼睛看高度，音乐理论变成看得见的台阶。",
@@ -141,5 +141,7 @@
       "answer": 2,
       "explain": "do re mi fa sol——fa 的下一个是 sol。"
     }
-  ]
+  ],
+  "grade": 2,
+  "textbook": "人音版音乐（小学）"
 }

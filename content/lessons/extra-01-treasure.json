@@ -171,5 +171,6 @@
       "坐标就是「第几列第几行」的精确说法"
     ],
     "code": "# 坐标小侦探探索台\ntx = 5   # 宝藏 x\nty = 3   # 宝藏 y\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-190, ty * 30)\ngo_to(190, ty * 30)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(tx * 30, -150)\ngo_to(tx * 30, 150)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(tx * 30 - 8, ty * 30 + 8)\ngo_to(tx * 30 + 8, ty * 30 + 8)\ngo_to(tx * 30 + 8, ty * 30 - 8)\ngo_to(tx * 30 - 8, ty * 30 - 8)\ngo_to(tx * 30 - 8, ty * 30 + 8)\npen_up()\nwrite(\"宝藏 (\" + tx + \", \" + ty + \")\", tx * 30 - 30, ty * 30 + 26, \"red\", 12)\nwrite(\"蓝线=y\" + ty, -180, ty * 30 + 16, \"blue\", 9)\nwrite(\"绿线=x\" + tx, tx * 30 + 22, -140, \"green\", 9)\nwrite(\"先横后纵，交叉点就是宝藏！\", -190, 150, \"orange\", 11)"
-  }
+  },
+  "grade": 4
 }

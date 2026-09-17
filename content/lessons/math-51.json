@@ -1,7 +1,7 @@
 {
   "id": "math-51",
   "island": "math",
-  "order": 71,
+  "order": 79,
   "title": "时分秒与单位换算",
   "emoji": "⏰",
   "story": "1.5 小时是多少分钟？3 公里是多少米？单位换算是应用题的地基：大变小乘进率，小变大除进率。写个「单位换算器」：时分秒、千米米、千克克——输入数值，答案秒出，换算进率刻进脑子。",
@@ -135,5 +135,6 @@
       "时→分乘 60，分→秒也乘 60"
     ],
     "code": "# 时分秒换算探索台\nhours = 1.5   # 小时数\n\nhide()\nmins = hours * 60\nsecs = mins * 60\npen_color(\"blue\")\npen_down()\ngo_to(-170, -100)\ngo_to(-170, -100 + hours * 40)\ngo_to(-90, -100 + hours * 40)\ngo_to(-90, -100)\ngo_to(-170, -100)\npen_up()\nwrite(hours + \" 时\", -160, -125, \"blue\", 11)\npen_color(\"green\")\npen_down()\ngo_to(-40, -100)\ngo_to(-40, -100 + mins / 9)\ngo_to(40, -100 + mins / 9)\ngo_to(40, -100)\ngo_to(-40, -100)\npen_up()\nwrite(mins + \" 分\", -25, -125, \"green\", 11)\npen_color(\"red\")\npen_down()\ngo_to(90, -100)\ngo_to(90, -100 + mins / 9)\ngo_to(170, -100 + mins / 9)\ngo_to(170, -100)\ngo_to(90, -100)\npen_up()\nwrite(secs / 60 + \" 分\", 110, -125, \"red\", 11)\nwrite(hours + \" 时 = \" + mins + \" 分 = \" + secs + \" 秒\", -190, 140, \"red\", 13)\nwrite(\"相邻单位进率 60\", -190, 112, \"orange\", 11)"
-  }
+  },
+  "grade": 3
 }

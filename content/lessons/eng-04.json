@@ -1,7 +1,7 @@
 {
   "id": "eng-04",
   "island": "cross",
-  "order": 105,
+  "order": 115,
   "title": "数字报数员",
   "emoji": "🔢",
   "story": "one, two, three, go! 你的角色今天当报数员：从 one 报到 ten，边报边往前走一步——数字和英语同时装进脑袋。",
@@ -135,5 +135,6 @@
       "explain": "How many 问数量，How old 问年龄。"
     }
   ],
-  "textbook": "人教PEP英语（三年级起点）"
+  "textbook": "人教PEP英语（三年级起点）",
+  "grade": 3
 }

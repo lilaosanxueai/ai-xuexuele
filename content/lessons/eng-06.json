@@ -1,7 +1,7 @@
 {
   "id": "eng-06",
   "island": "cross",
-  "order": 106,
+  "order": 118,
   "title": "自我介绍机器人",
   "emoji": "🤖",
   "story": "Hello! My name is... 你的英语第一句话从这里开始！让机器人替你做一段三句式自我介绍：名字、年龄、爱好——学会这个句型，走到哪儿都能交朋友。",
@@ -135,5 +135,6 @@
       "explain": "I like + 事物/doing，表达喜欢什么。"
     }
   ],
-  "textbook": "人教版英语（初中）"
+  "textbook": "人教版英语（初中）",
+  "grade": 7
 }

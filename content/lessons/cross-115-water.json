@@ -1,7 +1,7 @@
 {
   "id": "cross-115",
   "island": "cross",
-  "order": 178,
+  "order": 196,
   "title": "一滴水的旅行：水循环",
   "emoji": "💧",
   "story": "你杯子里的水，可能恐龙喝过！水在地球上旅行了几十亿年：太阳晒→蒸发上天→聚成云→遇冷下雨→汇成河→流回大海→再蒸发……这个圆圈叫水循环，它永不休息，也永不停靠——今天你演一滴水，走完这趟旅行！",
@@ -173,5 +173,6 @@
       "背一背：蒸发→云→降水→汇流→回到大海"
     ],
     "code": "# 水循环探索台\nsun = 2   # 阳光强度\n\nhide()\nwrite(\"☀\", -150, 90, \"orange\", 20)\nevap = sun * 10\npen_color(\"blue\")\npen_down()\ngo_to(-100, 40)\ngo_to(-100, 40 - sun * 10)\npen_up()\nwrite(\"蒸发 \" + evap + \" 份\", -160, 20, \"blue\", 10)\npen_down()\ngo_to(-100, 40 - sun * 10)\ngo_to(-20, 40 - sun * 10)\npen_up()\npen_color(\"green\")\npen_down()\ncloud = 20 + sun * 25\ngo_to(-60, 95)\ngo_to(-20, 95)\ngo_to(-5, 80)\ngo_to(-75, 80)\ngo_to(-60, 95)\npen_up()\nwrite(\"云（攒水 \" + cloud + \"）\", -78, 110, \"green\", 10)\npen_color(\"blue\")\npen_down()\ni = 0\nwhile i < 3:\n    x = -50 + i * 18\n    go_to(x, 78)\n    go_to(x - 4, 66)\n    pen_up()\n    pen_down()\n    i = i + 1\npen_up()\nwrite(\"降水\", -60, 55, \"blue\", 10)\npen_down()\ngo_to(-120, -70)\ngo_to(120, -70)\ngo_to(120, -95)\ngo_to(-120, -95)\ngo_to(-120, -70)\npen_up()\nwrite(\"大海 →（汇流回到起点）\", -115, -85, \"blue\", 10)\nwrite(\"阳光 \" + sun + \"：蒸发 \" + evap + \" 份 → 云变厚 → 雨更多\", -190, 140, \"red\", 11)\nif sun < 0.1:\n    write(\"没有太阳：循环停摆！\", -100, -130, \"orange\", 12)"
-  }
+  },
+  "grade": 3
 }

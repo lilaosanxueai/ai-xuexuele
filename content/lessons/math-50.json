@@ -1,7 +1,7 @@
 {
   "id": "math-50",
   "island": "math",
-  "order": 70,
+  "order": 78,
   "title": "两枚硬币：概率树状图",
   "emoji": "🥈",
   "story": "抛两枚硬币，两枚都是正面的概率是多少？别猜——列树状图：第一枚正/反，每支再分第二枚正/反，共 4 种等可能结果，「两正」只占 1 种——1/4！再用程序抛 100 次验证：频率确实约 25%。",
@@ -136,5 +136,6 @@
     ],
     "code": "# 两枚硬币概率树探索台\nn = 20   # 抛的组数\n\nhide()\nc0 = 0\nc1 = 0\nc2 = 0\ni = 0\nwhile i < n:\n    a = random(0, 1)\n    b = random(0, 1)\n    if a + b == 0:\n        c0 = c0 + 1\n    if a + b == 1:\n        c1 = c1 + 1\n    if a + b == 2:\n        c2 = c2 + 1\n    i = i + 1\npen_color(\"red\")\npen_down()\ngo_to(-150, -100)\ngo_to(-150, -100 + c0 * 160 / n * 2)\ngo_to(-70, -100 + c0 * 160 / n * 2)\ngo_to(-70, -100)\ngo_to(-150, -100)\npen_up()\nwrite(\"两正 \" + c0, -140, 40, \"red\", 11)\npen_color(\"green\")\npen_down()\ngo_to(-50, -100)\ngo_to(-50, -100 + c1 * 160 / n * 2)\ngo_to(30, -100 + c1 * 160 / n * 2)\ngo_to(30, -100)\ngo_to(-50, -100)\npen_up()\nwrite(\"一正一反 \" + c1, -40, 80, \"green\", 11)\npen_color(\"blue\")\npen_down()\ngo_to(50, -100)\ngo_to(50, -100 + c2 * 160 / n * 2)\ngo_to(130, -100 + c2 * 160 / n * 2)\ngo_to(130, -100)\ngo_to(50, -100)\npen_up()\nwrite(\"两反 \" + c2, 60, 40, \"blue\", 11)\nwrite(\"理论 1:2:1（中间是两头之和）\", -180, 140, \"orange\", 12)",
     "animate": false
-  }
+  },
+  "grade": 9
 }

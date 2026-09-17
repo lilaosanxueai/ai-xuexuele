@@ -1,7 +1,7 @@
 {
   "id": "cross-16",
   "island": "cross",
-  "order": 37,
+  "order": 45,
   "title": "地球公转与四季",
   "emoji": "🌍",
   "story": "地球绕太阳转一圈 = 一年，转过四个关键位置 = 春夏秋冬！用 cos 和 sin 让地球沿圆形轨道飞行，每飞过 90° 就报一个节气——高中三角函数落地地理课，转一圈你就懂了四季怎么来的。",
@@ -90,7 +90,7 @@
   "codeLesson": true,
   "starterCode": "# 地球公转与四季：轨道半径 130\nfor i in range(37):\n    angle = i * 10\n    go_to(cos(angle) * 130, sin(angle) * 130)\n    wait(0.1)\n    if i == 9:\n        say(\"夏至！北半球直射北回归线\")\n    if i == 18:\n        say(\"秋分！阳光直射赤道\")\n    if i == 27:\n        say(\"冬至！北半球阳光最斜\")\n",
   "subjectArea": "地理",
-  "gradeBand": "senior",
+  "gradeBand": "junior",
   "exercises": [
     {
       "q": "地球公转产生了？",

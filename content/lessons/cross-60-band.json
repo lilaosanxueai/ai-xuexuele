@@ -1,7 +1,7 @@
 {
   "id": "cross-60",
   "island": "cross",
-  "order": 118,
+  "order": 137,
   "title": "AI 乐器点名",
   "emoji": "🥁",
   "story": "乐队开演前要点名！鼓——到！铃——到！今天你是指挥：教 AI 认两种「乐器」（用手比划或画出来都行），它认出哪个，你的舞台就奏响哪个音。一场由你指挥、由 AI 演奏的音乐会，马上开始！",
@@ -152,5 +152,7 @@
       "explain": "「当 AI 认出」事件积木触发后面的播放动作"
     }
   ],
-  "codeLesson": false
+  "codeLesson": false,
+  "grade": 2,
+  "textbook": "人音版音乐（小学）"
 }

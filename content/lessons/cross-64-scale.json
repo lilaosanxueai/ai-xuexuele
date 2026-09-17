@@ -1,7 +1,7 @@
 {
   "id": "cross-64",
   "island": "cross",
-  "order": 122,
+  "order": 141,
   "title": "do re mi 音阶梯",
   "emoji": "🎵",
   "story": "音乐课上老师弹琴：「do re mi fa sol la xi do——」八个音像台阶一样一级级升高。这个「台阶」有个正式名字：音阶！今天你用「播放声音」积木搭一座会唱歌的梯子，从 do 爬到高音 do，再滑下来——顺便弄明白：为什么有的音高、有的音低？",
@@ -155,5 +155,7 @@
       "explain": "一闪一闪亮晶晶：do do sol sol la la sol～"
     }
   ],
-  "codeLesson": false
+  "codeLesson": false,
+  "grade": 2,
+  "textbook": "人音版音乐（小学）"
 }

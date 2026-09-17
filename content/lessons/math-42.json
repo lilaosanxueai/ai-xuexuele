@@ -1,7 +1,7 @@
 {
   "id": "math-42",
   "island": "math",
-  "order": 62,
+  "order": 70,
   "title": "完全平方：面积证明",
   "emoji": "🟦",
   "story": "(a+b)² = a² + 2ab + b²——死记容易错（漏掉 2ab）！画一个大正方形，边长 (a+b)，切三刀分成四块：大方 a²、小方 b²、两个长方 ab——面积加起来就是公式本身。几何证明，画出来就永远忘不了。",
@@ -142,5 +142,6 @@
       "所以 (a+b)² = a² + 2ab + b²！"
     ],
     "code": "# 完全平方公式探索台：(a+4)² 的面积证明\na = 4   # 边长 a（b 固定为 4）\n\nhide()\nb = 4\npen_color(\"blue\")\npen_down()\ngo_to(-150, -80)\ngo_to(-150 + a * 24, -80)\ngo_to(-150 + a * 24, -80 + a * 24)\ngo_to(-150, -80 + a * 24)\ngo_to(-150, -80)\npen_up()\npen_color(\"green\")\npen_down()\ngo_to(-150 + a * 24, -80)\ngo_to(-150 + a * 24 + b * 24, -80)\ngo_to(-150 + a * 24 + b * 24, -80 + b * 24)\ngo_to(-150 + a * 24, -80 + b * 24)\ngo_to(-150 + a * 24, -80)\npen_up()\npen_color(\"orange\")\npen_down()\ngo_to(-150 + a * 24, -80 + b * 24)\ngo_to(-150 + a * 24 + b * 24, -80 + b * 24)\ngo_to(-150 + a * 24 + b * 24, -80 + a * 24 + b * 24)\ngo_to(-150 + a * 24, -80 + a * 24 + b * 24)\ngo_to(-150 + a * 24, -80 + b * 24)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(-150, -80 + a * 24)\ngo_to(-150 + a * 24, -80 + a * 24)\ngo_to(-150 + a * 24, -80 + a * 24 + b * 24)\ngo_to(-150, -80 + a * 24 + b * 24)\ngo_to(-150, -80 + a * 24)\npen_up()\nwrite(\"(\" + a + \"+\" + b + \")² = \" + a * a + \"+2×\" + a * b + \"+\" + b * b + \" = \" + (a + b) * (a + b), -190, 140, \"red\", 12)\nwrite(\"四块拼出大正方形！\", -190, 112, \"blue\", 11)"
-  }
+  },
+  "grade": 8
 }

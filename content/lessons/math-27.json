@@ -1,7 +1,7 @@
 {
   "id": "math-27",
   "island": "math",
-  "order": 47,
+  "order": 55,
   "title": "百分数：打折计算器",
   "emoji": "💰",
   "story": "商场大喊「全场 8 折」！8 折 = 付原价的 80% = 原价 × 0.8。用 Python 写个打折计算器：输入原价，立刻算出要付多少钱——以后逛街你比收银员算得快。",
@@ -144,5 +144,6 @@
       "「打 8 折」= 付原价的百分之几？"
     ],
     "code": "# 打折计算器探索台\nprice = 200     # 原价\ndiscount = 8    # 折扣（8=八折）\n\nhide()\npay = price * discount / 10\npen_color(\"blue\")\npen_down()\ngo_to(-160, -100)\ngo_to(-160, -100 + price / 4)\ngo_to(-80, -100 + price / 4)\ngo_to(-80, -100)\ngo_to(-160, -100)\npen_up()\nwrite(\"原价 \" + price, -150, -125, \"blue\", 11)\npen_color(\"red\")\npen_down()\ngo_to(-20, -100)\ngo_to(-20, -100 + pay / 4)\ngo_to(60, -100 + pay / 4)\ngo_to(60, -100)\ngo_to(-20, -100)\npen_up()\nwrite(\"实付 \" + pay, -5, -125, \"red\", 11)\nwrite(price + \" 元打 \" + discount + \" 折 = \" + pay + \" 元\", -190, 130, \"red\", 14)\nwrite(\"省了 \" + (price - pay) + \" 元（\" + (10 - discount) * 10 + \"%）\", -190, 102, \"green\", 12)"
-  }
+  },
+  "grade": 6
 }

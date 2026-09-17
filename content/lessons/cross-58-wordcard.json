@@ -1,7 +1,7 @@
 {
   "id": "cross-58",
   "island": "cross",
-  "order": 116,
+  "order": 135,
   "title": "AI 单词闪卡",
   "emoji": "🃏",
   "story": "Show and tell 时间！你做过单词卡吗？今天升级版：把单词卡教给 AI，它认出哪张，你的角色就大声喊出英文单词——Apple! Book! 这是全世界只有你能做的「AI 英语闪卡」，还能顺便教爸妈念！",
@@ -153,5 +153,6 @@
     }
   ],
   "codeLesson": false,
-  "textbook": "人教PEP英语（三年级起点）"
+  "textbook": "人教PEP英语（三年级起点）",
+  "grade": 3
 }

@@ -1,7 +1,7 @@
 {
   "id": "eng-05",
   "island": "cross",
-  "order": 105.5,
+  "order": 116,
   "title": "颜色变变秀",
   "emoji": "🎨",
   "story": "红色的苹果 red apple、绿色的小草 green grass……你的角色是变色龙！每换一个造型就说一个颜色单词——颜色和单词一起变出来。",
@@ -135,5 +135,6 @@
       "explain": "color 是颜色——这句问的是颜色。"
     }
   ],
-  "textbook": "人教PEP英语（三年级起点）"
+  "textbook": "人教PEP英语（三年级起点）",
+  "grade": 3
 }

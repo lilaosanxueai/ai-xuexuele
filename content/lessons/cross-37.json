@@ -1,7 +1,7 @@
 {
   "id": "cross-37",
   "island": "cross",
-  "order": 89,
+  "order": 97,
   "title": "摩擦力大比拼",
   "emoji": "🧊",
   "story": "冰面溜、地毯涩——同样的力气，滑的距离天差地别！这就是摩擦力：表面越粗糙，摩擦越大，走得越近。让小车在三种表面滑行：冰面（滑最远）、木地板（中等）、地毯（最近）——对比实验一目了然。",
@@ -167,5 +167,6 @@
       "冰面上为什么难刹车？"
     ],
     "code": "# 摩擦力大比拼探索台\nsurface = 1   # 1=冰面 2=木地板 3=毛毯\nv0 = 20       # 初速度\n\nhide()\nd = v0 * 7 / surface\ny = 50 - (surface - 1) * 55\npen_color(\"blue\")\npen_down()\ngo_to(-190, y - 30)\ngo_to(190, y - 30)\npen_up()\ncol = \"blue\"\nif surface == 1:\n    col = \"blue\"\nif surface == 2:\n    col = \"green\"\nif surface == 3:\n    col = \"red\"\npen_color(col)\npen_down()\ngo_to(-180, y)\ngo_to(-180 + d, y)\npen_up()\nwrite(\"🚗\", -190, y, \"red\", 16)\nsname = \"冰面（摩擦小）\"\nif surface == 2:\n    sname = \"木地板（摩擦中）\"\nif surface == 3:\n    sname = \"毛毯（摩擦大）\"\nwrite(sname + \"：滑 \" + d + \" 格\", -190, 140, \"red\", 12)\nwrite(\"初速度 \" + v0, -190, 112, \"blue\", 11)"
-  }
+  },
+  "grade": 3
 }

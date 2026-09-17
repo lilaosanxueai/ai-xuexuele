@@ -1,7 +1,7 @@
 {
   "id": "math-22",
   "island": "math",
-  "order": 42,
+  "order": 50,
   "title": "小数点大冒险",
   "emoji": "▪",
   "story": "0.5 是多少？比 1 小、比 0 大——它住在数轴的两个整数之间！让角色走 2.5 步 ×4 次：半格半格地走，正好走完 10 格。小数就是「不够一格也要走」的数。",
@@ -160,5 +160,6 @@
       "0.右移 3 位变成什么？左移 3 位呢？"
     ],
     "code": "# 小数点大冒险探索台\nshift = 1   # 小数点移动位数（右正左负）\n\nhide()\nbase = 2.5\nval = base\ni = 0\nwhile i < shift:\n    val = val * 10\n    i = i + 1\ni = 0\nwhile i > shift:\n    val = val / 10\n    i = i - 1\nwrite(\"原数 \" + base, -100, 120, \"blue\", 14)\nwrite(\"→ 小数点\" , -100, 85, \"orange\", 12)\nif shift > 0:\n    write(\"右移 \" + shift + \" 位\", -30, 85, \"red\", 13)\nif shift < 0:\n    write(\"左移 \" + 0 - shift + \" 位\", -30, 85, \"red\", 13)\nif shift == 0:\n    write(\"不动\", -30, 85, \"red\", 13)\nwrite(\"= \" + val, -100, 40, \"red\", 16)\nwrite(\"右移×10 左移÷10\", -90, -30, \"green\", 12)"
-  }
+  },
+  "grade": 3
 }

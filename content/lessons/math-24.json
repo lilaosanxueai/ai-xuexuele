@@ -1,7 +1,7 @@
 {
   "id": "math-24",
   "island": "math",
-  "order": 44,
+  "order": 52,
   "title": "轴对称：走一个 Λ",
   "emoji": "🦋",
   "story": "蝴蝶为什么美？因为左右两边一模一样——轴对称！走一个「Λ」形：左半边怎么走，右半边就镜像怎么走（角度一正一反）。走对了，图形天然对称。",
@@ -157,5 +157,6 @@
       "对称轴在哪里？（x=0 那条竖线）"
     ],
     "code": "# 轴对称 Λ 探索台\nw = 4   # 半宽\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(0 - w * 25, -80)\ngo_to(0, 60)\ngo_to(w * 25, -80)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(0, 80)\ngo_to(0, -100)\npen_up()\nwrite(\"对称轴\", 12, 80, \"red\", 11)\nwrite(\"左(\" + (0 - w * 25) + \") ←→ 右(\" + w * 25 + \")\", -100, 120, \"blue\", 12)\nwrite(\"左右离对称轴一样远\", -100, 95, \"green\", 11)"
-  }
+  },
+  "grade": 2
 }

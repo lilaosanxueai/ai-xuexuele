@@ -1,7 +1,7 @@
 {
   "id": "cross-127",
   "island": "cross",
-  "order": 190,
+  "order": 208,
   "title": "声音是怎样产生的",
   "emoji": "🎵",
   "story": "说话时摸摸喉咙——麻麻的在振动！声音不是凭空来的，它来自物体不停歇的振动：喉咙的声带、敲响的鼓面、拔动的琴弦。振动停，声音停。今天你先做「人体实验」，再用程序把看不见的振动演出来！",
@@ -171,5 +171,6 @@
       "声音是空气被「推」出来的波"
     ],
     "code": "# 声音的产生探索台：音叉振动\namp = 3   # 振动幅度\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-15, -80)\ngo_to(-15, 60)\npen_up()\npen_color(\"red\")\npen_down()\ngo_to(15, -80)\ngo_to(15, 60)\npen_up()\npen_color(\"orange\")\npen_down()\nx = 40\nyo = 0\ni = 0\nwhile x < 190:\n    y = amp * 12 * sin(x * 4)\n    go_to(x, y)\n    x = x + 3\npen_up()\nwrite(\"振动 \" + amp + \" → 音量 \" + amp, -190, 140, \"red\", 13)\nwrite(\"音叉振动推开空气 → 声波传到耳朵\", -190, 112, \"blue\", 10)\nif amp > 4:\n    write(\"太吵啦！保护听力\", -100, -120, \"orange\", 11)\nif amp < 1.1:\n    write(\"几乎不动：没有声音\", -100, -120, \"green\", 11)"
-  }
+  },
+  "grade": 4
 }
