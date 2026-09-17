@@ -157,7 +157,7 @@
       "想让影子正好挡住整个门，要调多宽？",
       "影子和物体的形状有什么关系？"
     ],
-    "code": "# 光与影探索台\nw = 30   # 遮挡物宽度\n\nhide()\nwrite(\"💡\", -12, 110, \"orange\", 16)\npen_color(\"green\")\npen_down()\ngo_to(0 - w / 2, 30)\ngo_to(w / 2, 30)\ngo_to(w / 2, 55)\ngo_to(0 - w / 2, 55)\ngo_to(0 - w / 2, 30)\npen_up()\nsw = w * 2.2\npen_color(\"blue\")\npen_down()\ngo_to(0 - sw / 2, -80)\ngo_to(sw / 2, -80)\ngo_to(sw / 2, -100)\ngo_to(0 - sw / 2, -100)\ngo_to(0 - sw / 2, -80)\npen_up()\nwrite(\"物体宽 \" + w + \"，影子宽 \" + sw, -190, 140, \"red\", 12)\nwrite(\"离光越近，影子越大（放大的自己）\", -190, 112, \"blue\", 10)\npen_color(\"yellow\")\npen_down()\ngo_to(-w / 2, 105)\ngo_to(0 - sw / 2, -78)\npen_up()\npen_down()\ngo_to(w / 2, 105)\ngo_to(sw / 2, -78)\npen_up()"
+    "code": "# 光与影探索台\nw = 30   # 遮挡物宽度\n\nhide()\n# 灯 + 光线边界\nwrite(\"💡\", -12, 108, \"#f59e0b\", 18)\n# 遮挡物（实心深绿块）\nfill_rect(0, 42, w, 26, \"#166534\")\n# 光线（灯到物体顶再到影子边）\npen_color(\"#fde047\")\npen_down()\ngo_to(-w / 2, 100)\ngo_to(0 - w, -66)\npen_up()\npen_down()\ngo_to(w / 2, 100)\ngo_to(w, -66)\npen_up()\n# 地面 + 影子（实心深灰）\nfill_rect(0, -100, 480, 12, \"#a8a29e\")\nsw = w * 2\nfill_rect(0, -90, sw, 10, \"#44403c\")\nwrite(\"物体宽 \" + w + \"，影子宽 \" + sw, -190, 145, \"#dc2626\", 12)\nwrite(\"光是直线传播：被挡住的地方才有影子\", -190, 120, \"#1d4ed8\", 11)\nwrite(\"离灯越近，影子越大\", -190, -130, \"#64748b\", 10)"
   },
   "grade": 1
 }

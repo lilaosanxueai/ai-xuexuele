@@ -167,7 +167,7 @@
       "把 a 调成负数，抛物线怎么了？",
       "a=0.25 和 a=2 哪个更「瘦」？为什么？"
     ],
-    "code": "# 二次函数 y = a·x² 探索台\na = 1    # 开口系数 a\n\nhide()\npen_color(\"blue\")\npen_down()\ngo_to(-6 * 30, a * -6 * -6 * 8)\nfor x in range(-6, 7):\n    go_to(x * 30, a * x * x * 8)\npen_up()\nwrite(\"y = \" + a + \"x²\", 130, 140, \"blue\", 15)\nif a > 0:\n    write(\"开口向上\", 130, 118, \"green\", 12)\nif a < 0:\n    write(\"开口向下\", 130, 118, \"red\", 12)\nif a == 0:\n    write(\"a=0 时是直线啦\", 130, 118, \"orange\", 12)",
+    "code": "# 二次函数 y = a·x² 探索台\na = 1    # 开口系数 a\n\nhide()\ncol = \"#16a34a\"\nif a < 0:\n    col = \"#dc2626\"\nif a == 0:\n    col = \"#ea580c\"\npen_color(col)\npen_down()\ngo_to(-6 * 30, a * -6 * -6 * 8)\nfor x in range(-6, 7):\n    go_to(x * 30, a * x * x * 8)\npen_up()\nif a != 0:\n    # 曲线上的滚动球（在 x=3 处）+ 顶点大圆点\n    circle(3 * 30, a * 3 * 3 * 8, 10, \"#f97316\")\n    circle(0, 0, 6, \"#1d4ed8\")\nwrite(\"y = \" + a + \"x²\", 120, 140, col, 15)\nif a > 0:\n    write(\"开口向上（笑脸碗）\", 100, 116, \"#15803d\", 12)\nif a < 0:\n    write(\"开口向下（雨伞顶）\", 100, 116, \"#dc2626\", 12)\nif a == 0:\n    write(\"a=0 时变成直线啦\", 100, 116, \"#ea580c\", 12)\nif a != 0:\n    write(\"|a| 越大碗越瘦、越小越胖\", -190, -140, \"#64748b\", 10)\nif a != 0:\n    write(\"橙球在曲线上：x=3 时 y=\" + a * 9, -190, -155, \"#c2410c\", 10)",
     "challenges": [
       {
         "text": "把 a 调成 -1：让抛物线开口向下",

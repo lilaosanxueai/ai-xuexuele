@@ -155,6 +155,6 @@
       "角速度 ω 变大，波变密集还是稀疏？这叫周期变短",
       "数一数：波从最高点到下一次最高点走了多少秒？"
     ],
-    "code": "# 简谐运动探索台：x = A·sin(ωt)\nA = 80   # 振幅\nw = 36   # 角速度（度/秒）\n\nhide()\npen_color(\"green\")\npen_down()\nt = 0\ngo_to(-200, -40 + A * sin(w * t))\nwhile t < 24.1:\n    x = A * sin(w * t)\n    go_to(-200 + t * 16, x)\n    t = t + 0.25\npen_up()\nwrite(\"A=\" + A + \"  ω=\" + w + \"°/s\", -185, 145, \"green\", 13)\nwrite(\"横轴=时间，纵轴=偏离中心的距离\", -185, -140, \"blue\", 11)"
+    "code": "# 简谐运动探索台：x = A·sin(ωt)\nA = 80   # 振幅\nw = 36   # 角速度（度/秒）\n\nhide()\n# 秋千：横梁 + 吊绳 + 摆到最大角的座椅\nfill_rect(-60, 140, 120, 8, \"#7c2d12\")\ncircle(0, 136, 5, \"#334155\")\nang = A / 2\nbx = 120 * sin(ang)\nby = 136 - 120 * cos(ang)\npen_color(\"#7c2d12\")\npen_down()\ngo_to(0, 136)\ngo_to(bx, by)\npen_up()\nfill_rect(bx, by - 8, 30, 12, \"#f59e0b\")\n# 中间与另一侧的\"影子\"秋千\nbx0 = 0\nby0 = 16\nfill_rect(bx0 - 15, by0 - 8, 30, 12, \"#fde68a\")\nbx2 = 0 - bx\nfill_rect(bx2 - 15, by0 - 8, 30, 12, \"#fed7aa\")\n# 振动曲线（x-t 图）+ 圆点\npen_color(\"#16a34a\")\npen_down()\nt = 0\ngo_to(-200, -60 + A * sin(w * t) / 2)\nwhile t < 24.1:\n    x = A * sin(w * t)\n    go_to(-200 + t * 16, -60 + x / 2)\n    t = t + 0.25\npen_up()\nt = 0\nwhile t < 24:\n    circle(-200 + t * 16, -60 + A * sin(w * t) / 2, 3, \"#ea580c\")\n    t = t + 6\nwrite(\"A=\" + A + \"（摆得越远）  ω=\" + w + \"（摆得越快）\", -190, 118, \"#16a34a\", 12)\nwrite(\"横轴=时间，纵轴=偏离中心的距离\", -190, -130, \"#1d4ed8\", 11)\nwrite(\"秋千、弹簧、声音振动都是简谐运动\", -190, -150, \"#64748b\", 10)"
   }
 }

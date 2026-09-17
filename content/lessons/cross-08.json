@@ -157,6 +157,6 @@
       "波形密 = 音调高还是低？",
       "慢摇（低频）像什么声音？快摇（高频）呢？"
     ],
-    "code": "# 音调与频率探索台\nfreq = 3   # 振动频率\n\nhide()\npen_color(\"blue\")\npen_down()\nx = -190\nyo = 0\ni = 0\nwhile x < 190:\n    seg = 360 / freq * (x + 190) / 380 * freq\n    y = 60 * sin(x * freq)\n    go_to(x, y)\n    x = x + 4\npen_up()\nwrite(\"频率 \" + freq, -190, 140, \"red\", 13)\nif freq > 8:\n    write(\"波形密集 → 音调高（尖细）\", -190, 112, \"orange\", 12)\nif freq < 4:\n    write(\"波形稀疏 → 音调低（低沉）\", -190, 112, \"green\", 12)\nif freq >= 4:\n    if freq <= 8:\n        write(\"中等音调\", -190, 112, \"blue\", 12)\nwrite(\"横轴=距离，看波的疏密！\", -190, -140, \"blue\", 10)"
+    "code": "# 音调与频率探索台\nfreq = 3   # 振动频率\n\nhide()\n# 音箱（发出声音的盒子）\nfill_rect(-215, 0, 26, 60, \"#475569\")\ncircle(-215, 10, 8, \"#94a3b8\")\ncircle(-215, -16, 4, \"#64748b\")\n# 声波：曲线 + 波峰圆点\npen_color(\"#1d4ed8\")\npen_down()\nx = -190\ngo_to(-190, 60 * sin(x * freq))\nwhile x < 200:\n    go_to(x, 60 * sin(x * freq))\n    x = x + 4\npen_up()\nx = -190\nwhile x < 195:\n    circle(x, 60 * sin(x * freq), 4, \"#f97316\")\n    x = x + 20\n# 中轴线\nfill_rect(0, 0, 400, 2, \"#e2e8f0\")\nwrite(\"频率 \" + freq + \" 次/拍\", -190, 145, \"#dc2626\", 14)\nif freq > 8:\n    write(\"波形密集 → 音调高（尖细）\", -190, 115, \"#ea580c\", 12)\nif freq < 4:\n    write(\"波形稀疏 → 音调低（低沉）\", -190, 115, \"#16a34a\", 12)\nif freq >= 4:\n    if freq <= 8:\n        write(\"中等音调\", -190, 115, \"#1d4ed8\", 12)\nwrite(\"振动越快，音调越高\", -190, -130, \"#64748b\", 11)"
   }
 }

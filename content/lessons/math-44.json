@@ -159,6 +159,6 @@
       "什么时候顶点是最低点，什么时候是最高点？和 a 什么关系？",
       "函数的最小值（或最大值）写在了图上，改 c 只改变什么？"
     ],
-    "code": "# 二次函数 y = ax² + bx + c 与顶点探索台\na = 0.5  # 二次系数 a\nb = 2    # 一次系数 b\nc = -3   # 常数 c\n\nhide()\nvx = -b / (2 * a)\nvy = c - b * b / (4 * a)\npen_color(\"blue\")\npen_down()\nx = -7\ny = a * x * x + b * x + c\ngo_to(x * 25, y * 12)\nwhile x < 7.01:\n    y = a * x * x + b * x + c\n    go_to(x * 25, y * 12)\n    x = x + 0.25\npen_up()\npen_color(\"red\")\nwrite(\"☉顶点(\" + vx + \", \" + vy + \")\", vx * 25, vy * 12 + 18, \"red\", 12)\nwrite(\"y=\" + a + \"x²+\" + b + \"x+\" + c, -170, 145, \"blue\", 13)"
+    "code": "# 二次函数 y = ax² + bx + c 与顶点探索台\na = 0.5  # 二次系数 a\nb = 2    # 一次系数 b\nc = -3   # 常数 c\n\nhide()\nvx = -b / (2 * a)\nvy = c - b * b / (4 * a)\npen_color(\"#1d4ed8\")\npen_down()\nx = -7\ny = a * x * x + b * x + c\ngo_to(x * 25, y * 12)\nwhile x < 7.01:\n    y = a * x * x + b * x + c\n    go_to(x * 25, y * 12)\n    x = x + 0.25\npen_up()\n# 顶点（大红点）+ 对称轴（红色虚线）\ncircle(vx * 25, vy * 12, 9, \"#dc2626\")\ni = 0\nwhile i < 12:\n    fill_rect(vx * 25, -150 + i * 26, 4, 16, \"#f87171\")\n    i = i + 1\n# 从顶点投到两轴的参考虚线\ni = 0\nwhile i < 6:\n    fill_rect(vx * 25 + i * 7, vy * 12 - 2, 5, 4, \"#fca5a5\")\n    i = i + 1\nif a > 0:\n    write(\"顶点是最低点（最小值）\", -190, 150, \"#15803d\", 12)\nif a < 0:\n    write(\"顶点是最高点（最大值）\", -190, 150, \"#dc2626\", 12)\nwrite(\"对称轴 x = -b/2a（红虚线）\", -190, 128, \"#ea580c\", 11)\nwrite(\"y = \" + a + \"x² + \" + b + \"x + \" + c, -190, -150, \"#1d4ed8\", 12)\nwrite(\"红点=顶点：最值就发生在它身上\", -190, -128, \"#64748b\", 10)"
   }
 }

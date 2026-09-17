@@ -147,6 +147,6 @@
       "山越高（海拔大），圈的层数怎么变？",
       "等高线密集的地方，坡是陡还是缓？"
     ],
-    "code": "# 等高线探索台：把山一层层切给你看\npeak = 400   # 山的海拔（米）\n\nhide()\nlayers = peak / 100\ni = 1\nwhile i <= layers:\n    sz = 15 + i * 30\n    pen_color(\"blue\")\n    pen_down()\n    go_to(0 - sz / 2, 0 + sz / 2)\n    go_to(sz / 2, sz / 2)\n    go_to(sz / 2, 0 - sz / 2)\n    go_to(0 - sz / 2, 0 - sz / 2)\n    go_to(0 - sz / 2, 0 + sz / 2)\n    pen_up()\n    write(peak - (layers - i) * 100 + \"m\", sz / 2 + 12, 0 - sz / 2 + 6, \"blue\", 9)\n    i = i + 1\nwrite(\"海拔 \" + peak + \" 米，切了 \" + layers + \" 层\", -190, 150, \"red\", 13)\nwrite(\"从上看：同一条线上高度相同\", -190, 128, \"blue\", 11)\nwrite(\"圈越密=坡越陡\", -190, 106, \"orange\", 11)"
+    "code": "# 等高线探索台：把山一层层切给你看\npeak = 400   # 山的海拔（米）\n\nhide()\nlayers = peak / 100\n# 俯视：一圈圈实心等高线（由外到内颜色随高度变浅）\ni = layers\nwhile i > 0:\n    r = 15 + i * 30\n    col = \"#4d7c0f\"\n    if i == 2:\n        col = \"#a16207\"\n    if i == 3:\n        col = \"#d6d3d1\"\n    if i == 4:\n        col = \"#f5f5f4\"\n    if i == 5:\n        col = \"#ffffff\"\n    circle(0, 0, r, col)\n    ring(0, 0, r, \"#78350f\")\n    i = i - 1\nwrite(\"⛰\", 0, 4, \"#0f172a\", 13)\nwrite(\"海拔 \" + peak + \" 米，切了 \" + layers + \" 层\", -190, 152, \"#dc2626\", 13)\nwrite(\"从天上看：同一圈上高度相同\", -190, 130, \"#1d4ed8\", 11)\nwrite(\"圈挤在一起=坡陡，圈疏=坡缓\", -190, 108, \"#ea580c\", 11)\nwrite(\"绿色山脚→雪白山顶\", -190, -150, \"#64748b\", 10)"
   }
 }
