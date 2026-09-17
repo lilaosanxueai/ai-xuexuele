@@ -34,48 +34,47 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "平移：用「移到 x:100」把方块滑到终点——注意：它朝向没变！说「平移：位置变，方向不变」",
-      "hintPrompts": [
-        "移到是瞬移，但代表平移的效果"
-      ],
-      "check": {
-        "type": "actor_reach",
-        "targetIndex": 0
-      }
-    },
-    {
-      "id": "t2",
-      "text": "再走一个平移：从终点再「移动」一段（保持朝向不变）",
-      "hintPrompts": [
-        "移动不转向=纯平移"
-      ],
-      "check": {
-        "type": "say_text"
-      }
-    },
-    {
-      "id": "t3",
-      "text": "旋转：回到中心，重复 4 次 { 右转 90 }——原地转了一整圈！说「旋转：方向变，位置不变」",
-      "hintPrompts": [
-        "4×90=360，转满一圈"
-      ],
-      "check": {
-        "type": "block_count_min",
-        "block": "island_turn_right",
-        "count": 4
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：先平移再旋转的组合动作：走到旗子再转一圈鞠躬",
-      "hintPrompts": [
-        "组合运动=两种基本运动的叠加"
-      ],
+      "id": "e0",
+      "text": "探索：蓝色原图和红色新图形：是平移了还是旋转了？",
       "check": {
         "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：只调平移，图形大小形状变吗？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：只调旋转呢？图形绕着谁转？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

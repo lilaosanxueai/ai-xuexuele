@@ -17,46 +17,47 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "运行：画出椭圆（横半径 160、纵半径 110），角色登上椭圆顶点靶点",
-      "hintPrompts": [
-        "go_to(cos(t)*160, sin(t)*110)：横用 160、纵用 110 就是椭圆"
-      ],
-      "check": {
-        "type": "actor_reach",
-        "targetIndex": 0
-      }
-    },
-    {
-      "id": "t2",
-      "text": "变胖实验：把 110 改成 150（更接近 160）——椭圆越来越圆！",
-      "hintPrompts": [
-        "a 和 b 越接近越圆，相等就是正圆"
-      ],
-      "check": {
-        "type": "manual"
-      }
-    },
-    {
-      "id": "t3",
-      "text": "说出现实：「地球绕太阳的轨道就是椭圆！」",
-      "hintPrompts": [
-        "开普勒第一定律"
-      ],
-      "check": {
-        "type": "say_text"
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：竖椭圆：横 110 纵 160——站起来变瘦高个",
-      "hintPrompts": [
-        "交换两个数字"
-      ],
+      "id": "e0",
+      "text": "探索：a=b 时椭圆变成了什么图形？",
       "check": {
         "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：a 比 b 大越多，椭圆越扁？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：行星轨道就是椭圆——太阳在其中一个焦点上",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

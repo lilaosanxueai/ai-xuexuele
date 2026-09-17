@@ -17,47 +17,59 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "运行代码：机器人沿正弦波滑行，冲上波峰靶点（t=90° 时 sin=1，y=120）",
-      "hintPrompts": [
-        "落笔画出正弦波：山峰山谷交替的波浪",
-        "每 30° 走一步，y=sin(t)×120 就是波的高度"
-      ],
-      "check": {
-        "type": "actor_reach",
-        "targetIndex": 0
-      }
-    },
-    {
-      "id": "t2",
-      "text": "改振幅：sin(t)*120 改成 sin(t)*60——波变矮了（振幅减半）",
-      "hintPrompts": [
-        "前面的 120 控制波峰多高"
-      ],
-      "check": {
-        "type": "manual"
-      }
-    },
-    {
-      "id": "t3",
-      "text": "验证周期：从波峰到下一个波峰，正好 12 步 = 360°——周期性！",
-      "hintPrompts": [
-        "30° × 12 = 360°，一个周期"
-      ],
-      "check": {
-        "type": "manual"
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：画 cos 波（cos(t)*120），它和 sin 是双胞胎",
-      "hintPrompts": [
-        "cos 就是提前 90° 的 sin"
-      ],
+      "id": "e0",
+      "text": "探索：振幅 A 变大，波形的高度怎么变？",
       "check": {
         "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：周期 T 变小，波变得密集还是稀疏？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：一个周期内波形走了多少度（横向距离）？数一数",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "c0",
+      "text": "挑战：让振幅达到最大 120",
+      "check": {
+        "type": "manual"
+      },
+      "optional": true,
+      "hintPrompts": [
+        "只调挑战要求的参数，其他保持不变",
+        "注意滑块的步长，慢慢逼近目标值"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

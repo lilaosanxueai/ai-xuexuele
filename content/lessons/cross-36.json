@@ -40,46 +40,47 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "相吸实验：拿着 S 极靠近 N 极——移动贴近并说「异名极相吸！」",
-      "hintPrompts": [
-        "N-S 见面就贴贴"
-      ],
-      "check": {
-        "type": "block_used",
-        "block": "island_move"
-      }
-    },
-    {
-      "id": "t2",
-      "text": "相斥实验：翻转磁极 N 靠 N——角色后退说「同名极相斥！」（换方向移动）",
-      "hintPrompts": [
-        "同极互推"
-      ],
-      "check": {
-        "type": "say_text"
-      }
-    },
-    {
-      "id": "t3",
-      "text": "说原理：「指南针的磁针被地球大磁铁吸引——永远指南北！」",
-      "hintPrompts": [
-        "地球是个大磁铁"
-      ],
-      "check": {
-        "type": "manual"
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：磁悬浮列车为什么能浮起来？（同极相斥的推力托起列车）",
-      "hintPrompts": [
-        "相斥力的超级应用"
-      ],
+      "id": "e0",
+      "text": "探索：异极相吸——两块磁铁会怎么样？",
       "check": {
         "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：换成同极呢？试试看！",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：指南针为什么总指南北？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

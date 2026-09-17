@@ -200,6 +200,8 @@ export default function TutorScreen() {
               lessonId: lesson.id,
               completed: true,
               exercise: { correct, total: lesson.exercises!.length },
+              // 辅导课的要点是导学与讨论（manual），随堂练通过即视为全部达成，家长端进度不再永远 0/N
+              tasks: Object.fromEntries(lesson.tasks.filter((t) => !t.optional).map((t) => [t.id, true])),
               wrongAdds,
             }).catch(() => {});
           }}

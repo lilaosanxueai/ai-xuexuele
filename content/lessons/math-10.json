@@ -17,47 +17,71 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "运行 y=x²：机器人沿抛物线滑行，经过靶点（x=4 时数学值 y=16，缩放后到达）",
-      "hintPrompts": [
-        "落笔画出抛物线：开口向上的一串弯",
-        "代码里 y 用了 x*x*6 的缩放，纯数学是 y=x²"
-      ],
-      "check": {
-        "type": "actor_reach",
-        "targetIndex": 0
-      }
-    },
-    {
-      "id": "t2",
-      "text": "把系数变小（x*x*3）：抛物线变胖了还是变瘦了？",
-      "hintPrompts": [
-        "系数越小越胖（开口越大）"
-      ],
-      "check": {
-        "type": "manual"
-      }
-    },
-    {
-      "id": "t3",
-      "text": "加负号（-x*x*6）：开口翻转朝下——像喷泉！",
-      "hintPrompts": [
-        "y=-x²，开口朝下"
-      ],
-      "check": {
-        "type": "manual"
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：y=x²*6+30（向上平移），想想它控制什么？",
-      "hintPrompts": [
-        "上下平移——相当于 y=ax²+c 里的 c"
-      ],
+      "id": "e0",
+      "text": "探索：a 变大，抛物线开口变宽还是变窄？",
       "check": {
         "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：把 a 调成负数，抛物线怎么了？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：a=0.25 和 a=2 哪个更「瘦」？为什么？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "c0",
+      "text": "挑战：把 a 调成 -1：让抛物线开口向下",
+      "check": {
+        "type": "manual"
+      },
+      "optional": true,
+      "hintPrompts": [
+        "只调挑战要求的参数，其他保持不变",
+        "注意滑块的步长，慢慢逼近目标值"
+      ]
+    },
+    {
+      "id": "c1",
+      "text": "挑战：把 a 调成 2：让开口变窄",
+      "check": {
+        "type": "manual"
+      },
+      "optional": true,
+      "hintPrompts": [
+        "只调挑战要求的参数，其他保持不变",
+        "注意滑块的步长，慢慢逼近目标值"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

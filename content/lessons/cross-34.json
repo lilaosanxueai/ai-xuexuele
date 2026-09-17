@@ -17,45 +17,47 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "运行：Aa×Aa 的爸妈生 100 个娃——AA 约 25、Aa 约 50、aa 约 25",
-      "hintPrompts": [
-        "1:2:1 的基因型比"
-      ],
-      "check": {
-        "type": "say_text"
-      }
-    },
-    {
-      "id": "t2",
-      "text": "数表现型：双眼皮（AA+Aa）约 75，单眼皮（aa）约 25——3:1！",
-      "hintPrompts": [
-        "孟德尔分离定律"
-      ],
-      "check": {
-        "type": "manual"
-      }
-    },
-    {
-      "id": "t3",
-      "text": "说原理：「显性基因盖住隐性——只要有一个 A 就是双眼皮」",
-      "hintPrompts": [
-        "aa 才表现隐性性状"
-      ],
-      "check": {
-        "type": "manual"
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：AA×aa 的孩子全是 Aa——为什么全是双眼皮？（每个孩子必得一个 A）",
-      "hintPrompts": [
-        "纯显×纯隐=全杂合"
-      ],
+      "id": "e0",
+      "text": "探索：父母各出一个基因，四种组合（AA/Aa/aA/aa）各占多少？",
       "check": {
         "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：哪些组合表现出显性性状？加起来概率是多少？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：p=0.5 时显性:隐性接近几比几？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

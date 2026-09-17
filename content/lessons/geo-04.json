@@ -35,46 +35,47 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "大本营报到：运行程序，登山队从海拔 -100（山脚）出发",
-      "hintPrompts": [
-        "y=-100 是起点"
-      ],
-      "check": {
-        "type": "say_text"
-      }
-    },
-    {
-      "id": "t2",
-      "text": "爬到山腰：程序在中途报「海拔升高！山腰到了」",
-      "hintPrompts": [
-        "y 逐步变大"
-      ],
-      "check": {
-        "type": "say_text"
-      }
-    },
-    {
-      "id": "t3",
-      "text": "登顶：到达山顶旗子处，报「8848 米！登顶成功!」",
-      "hintPrompts": [
-        "旗子就是山顶"
-      ],
-      "check": {
-        "type": "actor_reach",
-        "targetIndex": 0
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：让登山速度慢下来（等待变长），体会「越高越难爬」",
-      "hintPrompts": [
-        "真实登山也是越往上越慢"
-      ],
+      "id": "e0",
+      "text": "探索：海拔 0 米在哪？（不是地面，是海平面！）",
       "check": {
         "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：你的海拔越高，气温越？（每升 100 米降 0.6℃）",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：8848 米的珠峰顶是什么温度带？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

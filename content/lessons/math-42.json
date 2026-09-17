@@ -17,46 +17,47 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "运行动画：画出边长 5 的大正方形（a=3, b=2），红线切出 a 和 b 的分界",
-      "hintPrompts": [
-        "大正方形边长 = a+b = 5"
-      ],
-      "check": {
-        "type": "actor_reach",
-        "targetIndex": 0
-      }
-    },
-    {
-      "id": "t2",
-      "text": "数值验证：(3+2)² = 25；3²+2×3×2+2² = 9+12+4 = 25 ✓",
-      "hintPrompts": [
-        "两个算法都到 25"
-      ],
-      "check": {
-        "type": "say_text"
-      }
-    },
-    {
-      "id": "t3",
-      "text": "说出公式：「(a+b)² = a² + 2ab + b²——大正方形 = 大块 + 两条长块 + 小块」",
-      "hintPrompts": [
-        "几何图就是证明"
-      ],
-      "check": {
-        "type": "manual"
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：平方差 (a+b)(a-b) = a²-b²？设 a=5 b=3 验证 = 16",
-      "hintPrompts": [
-        "(5+3)(5-3)=16, 25-9=16 ✓"
-      ],
+      "id": "e0",
+      "text": "探索：大正方形面积 (a+b)² 拆成哪四块？",
       "check": {
         "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：两个 a×b 的长方形 + a² + b²",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：所以 (a+b)² = a² + 2ab + b²！",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

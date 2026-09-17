@@ -17,46 +17,47 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "运行：画出蓝 sin 波和红 cos 波（同图）",
-      "hintPrompts": [
-        "两条波一样高（振幅同）一样长（周期同）"
-      ],
-      "check": {
-        "type": "say_text"
-      }
-    },
-    {
-      "id": "t2",
-      "text": "找相位差：红 cos 先到第一个波峰（90°）——说「cos 比 sin 提前 90°」",
-      "hintPrompts": [
-        "提前的这 90° 就是相位差"
-      ],
-      "check": {
-        "type": "actor_reach",
-        "targetIndex": 0
-      }
-    },
-    {
-      "id": "t3",
-      "text": "验证恒等式：程序算 sin(90) 和 cos(0)——都是 1！sin(x+90)=cos(x)",
-      "hintPrompts": [
-        "平移 90° 后完全重合"
-      ],
-      "check": {
-        "type": "manual"
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：把 cos 的振幅改小（×0.5），波形变成「矮胖双胞胎」",
-      "hintPrompts": [
-        "振幅和相位是波的两个独立旋钮"
-      ],
+      "id": "e0",
+      "text": "探索：两条波的形状一样吗？只是错开了？",
       "check": {
         "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：相位差 0° 时完全重合，180° 时呢？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：sin 和 cos 的相位差是多少度？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

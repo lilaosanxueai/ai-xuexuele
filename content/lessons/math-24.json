@@ -37,49 +37,47 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "左半边：从底往上走斜线（右转 30 度后移动 150）——这是 Λ 的左边一半",
-      "hintPrompts": [
-        "先「🖊 落笔」再走 Λ——画出来的形状左右对称，一眼验证！",
-        "先转向再走，走出左斜坡"
-      ],
-      "check": {
-        "type": "block_used",
-        "block": "island_move"
-      }
-    },
-    {
-      "id": "t2",
-      "text": "右半边：到顶后左转 60 度再移动 150 落下来——Λ 完成！左右角度正好相反（30 对 30）",
-      "hintPrompts": [
-        "左 30 右 30，方向相反、大小相等——对称！"
-      ],
-      "check": {
-        "type": "block_count_min",
-        "block": "island_turn_right",
-        "count": 1
-      }
-    },
-    {
-      "id": "t3",
-      "text": "宣布对称：说「轴对称图形：对称轴两边完全重合！」",
-      "hintPrompts": [
-        "把 Λ 沿竖直轴折叠，两边会重合"
-      ],
-      "check": {
-        "type": "say_text"
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：走一个 M 形（两个 Λ 连起来）或 W 形——对称世家",
-      "hintPrompts": [
-        "M 有竖直对称轴，W 也一样"
-      ],
+      "id": "e0",
+      "text": "探索：Λ（倒 V）左右两边对称吗？",
       "check": {
         "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：宽度变奇数/偶数，顶点位置有什么不同？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：对称轴在哪里？（x=0 那条竖线）",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

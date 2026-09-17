@@ -32,49 +32,47 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "第一站·赤道 🌊：移到赤道（y=-100 的位置），说「赤道最热，阳光直射！」",
-      "hintPrompts": [
-        "「移到 y:-100」——舞台竖轴就是纬度"
-      ],
+      "id": "e0",
+      "text": "探索：纬度越高（越靠近极地），气温越？",
       "check": {
-        "type": "actor_reach",
-        "targetIndex": 0
-      }
-    },
-    {
-      "id": "t2",
-      "text": "第二站·北回归线 🌴（y=0）：说「热带的北边界，北纬 23.5°！」",
-      "hintPrompts": [
-        "回归线附近沙漠多——撒哈拉就在这"
-      ],
-      "check": {
-        "type": "actor_reach",
-        "targetIndex": 1
-      }
-    },
-    {
-      "id": "t3",
-      "text": "第三站·北极圈 ❄️（y=100）：说「极昼极夜出现的地方，北纬 66.5°！」",
-      "hintPrompts": [
-        "夏天太阳不落、冬天太阳不升"
-      ],
-      "check": {
-        "type": "actor_reach",
-        "targetIndex": 2
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：一口气从赤道走到北极圈，每站配不同造型（🌴→🍂→❄️）表现气候变冷",
-      "hintPrompts": [
-        "越走越北越冷——纬度决定气候"
-      ],
-      "check": {
-        "type": "block_used",
-        "block": "island_costume"
+        "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：40°N 属于哪个温度带？（北温带）",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：赤道（0°）和两极，谁的太阳光更「正」？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

@@ -17,46 +17,59 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "运行程序：解出 2x+3=11 的根 x=4，并说「x = 4」",
-      "hintPrompts": [
-        "x = (c - b) / a：(11-3)/2 = 4"
-      ],
-      "check": {
-        "type": "say_text"
-      }
-    },
-    {
-      "id": "t2",
-      "text": "验根：机器人走到数轴 4×30=120 的位置，命中靶心 🎯——方程解对了！",
-      "hintPrompts": [
-        "把 x 代回去走到对应点，位置对=根对"
-      ],
-      "check": {
-        "type": "actor_reach",
-        "targetIndex": 0
-      }
-    },
-    {
-      "id": "t3",
-      "text": "换一道：3x - 2 = 10（a=3, b=-2, c=10），先心算（x=4）再改程序验证",
-      "hintPrompts": [
-        "负号要写：b = -2；x=(10-(-2))/3=(10+2)/3=4"
-      ],
-      "check": {
-        "type": "manual"
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：5x + 2 = 17，x=？运行验证你的答案",
-      "hintPrompts": [
-        "(17-2)/5 = 3"
-      ],
+      "id": "e0",
+      "text": "探索：方程的解 x 是几？拖滑块后看标注",
       "check": {
         "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：x=(c−b)÷a——移项和系数化 1 的公式",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：把 c 改大 5，解 x 怎么变？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "c0",
+      "text": "挑战：调出方程 2x+3=11 的解 x=4（提示：调 c）",
+      "check": {
+        "type": "manual"
+      },
+      "optional": true,
+      "hintPrompts": [
+        "只调挑战要求的参数，其他保持不变",
+        "注意滑块的步长，慢慢逼近目标值"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

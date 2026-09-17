@@ -37,60 +37,47 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "出发是冰：小冰晶 ❄️ 从左边出发（它现在是固态）",
-      "hintPrompts": [
-        "「当开始」→ 面向加热炉移动"
-      ],
-      "check": {
-        "type": "block_used",
-        "block": "island_when_run"
-      }
-    },
-    {
-      "id": "t2",
-      "text": "走到加热炉 🔥 边上（0°C 到了！）",
-      "hintPrompts": [
-        "移到炉子附近（100,0）"
-      ],
-      "check": {
-        "type": "actor_reach",
-        "targetIndex": 0
-      }
-    },
-    {
-      "id": "t3",
-      "text": "第一次变身：等待 1 秒（升温到 0°C）→ 变成 💧，说「融化！0 度」",
-      "hintPrompts": [
-        "「等待 1」+「变成 💧」+「说」"
-      ],
-      "check": {
-        "type": "block_used_any",
-        "blocks": [
-          "island_costume"
-        ]
-      }
-    },
-    {
-      "id": "t4",
-      "text": "第二次变身：再等 2 秒（升到 100°C）→ 变成 ♨️，说「沸腾！100 度」",
-      "hintPrompts": [
-        "造型再换一次，台词跟上"
-      ],
-      "check": {
-        "type": "say_text"
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：降温之旅——从 ♨️ 开始走回左边，依次变回 💧 和 ❄️（凝固与凝华）",
-      "hintPrompts": [
-        "反过来演一遍：放热与吸热方向相反"
-      ],
+      "id": "e0",
+      "text": "探索：温度低于 0 时分子怎么排？（挤在一起=固态冰）",
       "check": {
         "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：0-100 之间呢？（可以滑动=液态水）",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：超过 100 呢？（四处乱飞=气态水蒸气）",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

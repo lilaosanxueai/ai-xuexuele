@@ -17,45 +17,47 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "运行：3x+2x 用 x=10 验证——30+20=50=5×10 ✓",
-      "hintPrompts": [
-        "数值代入是验证代数式的万能法"
-      ],
-      "check": {
-        "type": "say_text"
-      }
-    },
-    {
-      "id": "t2",
-      "text": "反例：3x+2y 能合并吗？设 x=10, y=1——3x+2y=32，而 5xy=50——不等！不能合并",
-      "hintPrompts": [
-        "不同字母=不同水果，不能混装"
-      ],
-      "check": {
-        "type": "manual"
-      }
-    },
-    {
-      "id": "t3",
-      "text": "进阶：3x²+2x 能合并吗？（x=10：300+20=320 ≠ 5x²=500——次数不同也不行！）",
-      "hintPrompts": [
-        "x 和 x² 是不同的项"
-      ],
-      "check": {
-        "type": "manual"
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：化简 2a+3b+4a-b = 6a+2b，设 a=2 b=5 验证两边都等于 22",
-      "hintPrompts": [
-        "同类的各自合并"
-      ],
+      "id": "e0",
+      "text": "探索：3x+2x 和 5x 相等吗？换任何 x 都相等吗？",
       "check": {
         "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：3x+2y 为什么不能合并成 5xy？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：「同类」才能合并：字母完全相同",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

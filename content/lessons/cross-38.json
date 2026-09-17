@@ -40,49 +40,47 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "随机抽天气：用「随机数 1~4」决定今天什么天（1晴 2多云 3雨 4雪）",
-      "hintPrompts": [
-        "随机数当骰子用"
-      ],
+      "id": "e0",
+      "text": "探索：气温低于 0℃，会发生什么天气？",
       "check": {
-        "type": "block_used",
-        "block": "island_random"
-      }
-    },
-    {
-      "id": "t2",
-      "text": "换装播报：抽到雨就「变成 🌧」并说「今天有雨，出门带伞！」",
-      "hintPrompts": [
-        "造型对应天气"
-      ],
-      "check": {
-        "type": "block_used",
-        "block": "island_costume"
-      }
-    },
-    {
-      "id": "t3",
-      "text": "连续播报：重复 4 次，每次随机新天气（永远重复+等待）",
-      "hintPrompts": [
-        "像真的天气台一样"
-      ],
-      "check": {
-        "type": "block_used",
-        "block": "island_repeat"
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：加「如果随机=1 那么说紫外线强注意防晒」（条件播报）",
-      "hintPrompts": [
-        "条件+随机组合"
-      ],
-      "check": {
-        "type": "block_used",
-        "block": "island_if"
+        "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：30℃ 以上是什么感觉？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：今天的气温是多少？你来播报！",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

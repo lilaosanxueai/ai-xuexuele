@@ -37,49 +37,47 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "从低到高：按顺序播放 do re mi fa sol la xi do（高），听音调一路升高",
-      "hintPrompts": [
-        "声音分类里 🎵do 到 do（高）按频率排好了"
-      ],
-      "check": {
-        "type": "block_count_min",
-        "block": "island_play",
-        "count": 6
-      }
-    },
-    {
-      "id": "t2",
-      "text": "对比实验：先播 do（262 赫兹）再说「262」；再播高音 do（523 赫兹）再说「523」——频率翻倍，音调高八度",
-      "hintPrompts": [
-        "523 正好是 262 的两倍——这就是「高八度」的物理本质！"
-      ],
-      "check": {
-        "type": "say_text"
-      }
-    },
-    {
-      "id": "t3",
-      "text": "橡皮筋效应：用「等待」控制节奏——同样两个音，节奏快和慢听起来完全不同",
-      "hintPrompts": [
-        "音调由频率定，节奏由等待定——两个不同的物理量"
-      ],
-      "check": {
-        "type": "block_count_min",
-        "block": "island_wait",
-        "count": 2
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：只播 do 和 do（高）反复交替，感受「八度」的和谐感",
-      "hintPrompts": [
-        "这两个音频率 1:2，是最和谐的组合——音乐里的物理"
-      ],
+      "id": "e0",
+      "text": "探索：频率越高，波形越密集还是稀疏？",
       "check": {
         "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：波形密 = 音调高还是低？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：慢摇（低频）像什么声音？快摇（高频）呢？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

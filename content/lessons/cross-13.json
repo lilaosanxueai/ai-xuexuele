@@ -37,59 +37,59 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "第一幕·草：青草 🌿 说「我有 1000 份能量」",
-      "hintPrompts": [
-        "起点能量满格"
-      ],
+      "id": "e0",
+      "text": "探索：每一级只剩上一级能量的百分之几？（约10%）",
       "check": {
-        "type": "say_text"
-      }
-    },
-    {
-      "id": "t2",
-      "text": "第二幕·虫吃草：变成 🐛，说「我只得到 100 份（十分之一）」",
-      "hintPrompts": [
-        "能量传一层丢九成！"
-      ],
-      "check": {
-        "type": "block_used",
-        "block": "island_costume"
-      }
-    },
-    {
-      "id": "t3",
-      "text": "第三幕·鸟吃虫、鹰吃鸟：依次变成 🐦 和 🦅，各报能量（10 份、1 份）",
-      "hintPrompts": [
-        "1000 → 100 → 10 → 1，每层除以 10"
-      ],
-      "check": {
-        "type": "block_count_min",
-        "block": "island_costume",
-        "count": 3
-      }
-    },
-    {
-      "id": "t4",
-      "text": "点题：鹰说「所以塔尖的我们最少也最珍贵！」",
-      "hintPrompts": [
-        "顶级捕食者数量少的原因"
-      ],
-      "check": {
-        "type": "say_text"
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：给每幕配一个音效（吃掉时 💥），并加一句「分解者 🍄 会把能量还给大地」",
-      "hintPrompts": [
-        "分解者闭合能量循环"
-      ],
-      "check": {
-        "type": "block_used",
-        "block": "island_play"
+        "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：为什么顶级捕食者最少？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：鹰要长 1 公斤，大约需要多少公斤草？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "c0",
+      "text": "挑战：搭出 5 级食物链（草→…→虎）",
+      "check": {
+        "type": "manual"
+      },
+      "optional": true,
+      "hintPrompts": [
+        "只调挑战要求的参数，其他保持不变",
+        "注意滑块的步长，慢慢逼近目标值"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

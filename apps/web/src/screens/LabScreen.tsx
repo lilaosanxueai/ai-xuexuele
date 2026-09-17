@@ -112,6 +112,7 @@ export default function LabScreen() {
         setChallengeDone((prev) => ({ ...prev, [i]: true }));
         setToast(`🎯 挑战达成：${ch.text}`);
         buddyRef.current?.sayLocal(`🎯 挑战达成！「${ch.text}」——你用实验做到了，把这个道理想给爸妈听一遍，会更牢固。`);
+        reportTask(`c${i}`, true);
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -128,6 +129,7 @@ export default function LabScreen() {
     if (!profile) { nav('/'); return; }
     setQuizDone(false);
     setExplored({});
+    setChallengeDone({});
     setLabNote('');
     void api.settings().then(setSettings).catch(() => {});
     void api.lessons().then((all) => {
@@ -135,7 +137,23 @@ export default function LabScreen() {
       if (!l || !(l.lab || l.starterCode)) { nav(l ? `/tutor/${id}` : '/map'); return; }
       setLesson(l);
       setValues(Object.fromEntries((l.lab?.params ?? autoParams(l.lab?.code ?? l.starterCode ?? '')).map((p) => [p.name, p.value])));
-      void api.progress(profile.id).then((p) => setLabNote(p.labNotes?.[l.id] ?? '')).catch(() => {});
+      void api.progress(profile.id).then((p) => {
+        const lp = p.lessons?.[l.id];
+        setLabNote(p.labNotes?.[l.id] ?? '');
+        // 恢复上次实验进度（要点勾选/挑战达成）
+        if (lp) {
+          const ex: Record<number, boolean> = {};
+          const ch: Record<number, boolean> = {};
+          for (const [tid, st] of Object.entries(lp.tasks ?? {})) {
+            if (!st.done) continue;
+            if (/^e\d+$/.test(tid)) ex[Number(tid.slice(1))] = true;
+            if (/^c\d+$/.test(tid)) ch[Number(tid.slice(1))] = true;
+          }
+          setExplored(ex);
+          setChallengeDone(ch);
+          if (lp.tasks?.quiz?.done) setQuizDone(true);
+        }
+      }).catch(() => {});
     }).catch(() => nav('/map'));
     return () => {
       runnerRef.current?.stop();
@@ -232,6 +250,12 @@ export default function LabScreen() {
     const t = setTimeout(() => setToast(null), 4000);
     return () => clearTimeout(t);
   }, [toast]);
+
+  /** 上报要点完成状态（探索/挑战/随堂练 → 家长端「要点完成」实时可见） */
+  const reportTask = (taskId: string, done: boolean) => {
+    if (!profile || !lesson) return;
+    void api.updateProgress(profile.id, { lessonId: lesson.id, tasks: { [taskId]: done } }).catch(() => {});
+  };
 
   /** 记录单输入：1.5s 防抖自动保存到进度 */
   const onNoteChange = (text: string) => {
@@ -346,7 +370,10 @@ export default function LabScreen() {
                 {exploreList.map((q, i) => (
                   <li key={i}>
                     <button
-                      onClick={() => setExplored((prev) => ({ ...prev, [i]: !prev[i] }))}
+                      onClick={() => {
+                        setExplored((prev) => ({ ...prev, [i]: !prev[i] }));
+                        reportTask(`e${i}`, !explored[i]);
+                      }}
                       className={`flex w-full items-start gap-2 rounded-xl border p-2 text-left text-[13px] leading-snug transition ${
                         explored[i] ? 'border-emerald-300 bg-emerald-50 text-slate-500 line-through decoration-emerald-400' : 'border-slate-200 bg-white hover:border-sky-300'
                       }`}
@@ -459,6 +486,7 @@ export default function LabScreen() {
               lessonId: lesson.id,
               completed: true,
               exercise: { correct, total: lesson.exercises!.length },
+              tasks: { quiz: true },
               wrongAdds,
             }).catch(() => {});
           }}

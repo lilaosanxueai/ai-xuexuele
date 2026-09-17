@@ -47,53 +47,47 @@
   ],
   "tasks": [
     {
-      "id": "t1",
-      "text": "宝藏①💎在右上角：中心是 (0,0)，右上角 x 和 y 都是正数。用「移到」直达它！",
-      "hintPrompts": [
-        "看舞台：宝箱在右边又偏上。中心是(0,0)，越往右 x 越大，越往上 y 越大",
-        "试试「移到 x:140 y:100」，数字可以微调到准确位置"
-      ],
+      "id": "e0",
+      "text": "探索：宝藏藏在哪里？用坐标 (x, y) 报出它的位置",
       "check": {
-        "type": "actor_reach",
-        "targetIndex": 0
-      }
-    },
-    {
-      "id": "t2",
-      "text": "宝藏②🗝在左上方——这次 x 要用负数。到达它！",
-      "hintPrompts": [
-        "左边是负数！x:-100 y:60 左右",
-        "负号在数字框里直接输入 - 就有"
-      ],
-      "check": {
-        "type": "actor_reach",
-        "targetIndex": 1
-      }
-    },
-    {
-      "id": "t3",
-      "text": "终极宝藏🏆在下方——这次 y 是负数。拿到它！",
-      "hintPrompts": [
-        "下方 y 为负，x 是正的",
-        "移到 x:40 y:-120 左右"
-      ],
-      "check": {
-        "type": "actor_reach",
-        "targetIndex": 2
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：每到一个宝藏都说一句话宣布（至少 3 块「说」）",
-      "hintPrompts": [
-        "在每块「移到」后面拼一块「说」，比如「拿到钻石！」"
-      ],
-      "check": {
-        "type": "block_count_min",
-        "block": "island_say",
-        "count": 3
+        "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：横坐标变负数，宝藏跑到哪边？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：坐标就是「第几列第几行」的精确说法",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

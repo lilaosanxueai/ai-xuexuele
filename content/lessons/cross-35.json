@@ -40,47 +40,47 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "立杆见影：角色站在原地（树 🧍），先「落笔」",
-      "hintPrompts": [
-        "笔色选橙色画影子"
-      ],
-      "check": {
-        "type": "block_used",
-        "block": "island_pen_down"
-      }
-    },
-    {
-      "id": "t2",
-      "text": "早晨的影子：太阳低斜——影子长长的（右转 60 度移动 120 画出长影）",
-      "hintPrompts": [
-        "太阳低→影子长"
-      ],
-      "check": {
-        "type": "block_used",
-        "block": "island_move"
-      }
-    },
-    {
-      "id": "t3",
-      "text": "中午的影子：太阳当头——影子短短的（右转 10 度移动 25）说「太阳越高影子越短！」",
-      "hintPrompts": [
-        "日晷就是用影长报时"
-      ],
-      "check": {
-        "type": "say_text"
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：傍晚再画一根长影子——早中晚三根影子，自己排成日晷",
-      "hintPrompts": [
-        "早晨影子偏西、傍晚偏东"
-      ],
+      "id": "e0",
+      "text": "探索：遮挡物越宽，影子越大还是越小？",
       "check": {
         "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：想让影子正好挡住整个门，要调多宽？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：影子和物体的形状有什么关系？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

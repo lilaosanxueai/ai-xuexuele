@@ -104,7 +104,7 @@
     }
   ],
   "subjectArea": "语文",
-  "gradeBand": "senior",
+  "gradeBand": "primary",
   "exercises": [
     {
       "q": "「画蛇添足」的寓意是？",
@@ -140,6 +140,6 @@
       "explain": "完整叙事三要素：起因（比赛）、经过（添足）、结果（输掉）"
     }
   ],
-  "textbook": "统编版语文（高中）",
-  "grade": 10
+  "textbook": "统编版语文（小学）",
+  "grade": 3
 }

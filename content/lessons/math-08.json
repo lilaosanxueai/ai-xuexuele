@@ -17,47 +17,47 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "运行 y=x（k=1,b=0）：机器人沿对角线走，经过 (90,90) 的靶点",
-      "hintPrompts": [
-        "落笔画出直线：蓝色的线就是 y=kx+b 的真身",
-        "range(-6, 7) 让 x 从 -6 走到 6；go_to 的坐标是数学值×30 的缩放"
-      ],
-      "check": {
-        "type": "actor_reach",
-        "targetIndex": 0
-      }
-    },
-    {
-      "id": "t2",
-      "text": "把 k 改成 2 再运行——线变陡了还是变缓了？",
-      "hintPrompts": [
-        "k 越大越陡！这就是「斜率」的直观感觉"
-      ],
-      "check": {
-        "type": "manual"
-      }
-    },
-    {
-      "id": "t3",
-      "text": "k 改成 -1：线倒过来了（y=-x）——负斜率=下坡",
-      "hintPrompts": [
-        "从左上到右下"
-      ],
-      "check": {
-        "type": "manual"
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：把 b 改成 2（y=x+2），观察整条线向上平移",
-      "hintPrompts": [
-        "b 就是「起点高度」，图像整体上下挪"
-      ],
+      "id": "e0",
+      "text": "探索：把 k 调成负数，直线往哪边倒？",
       "check": {
         "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：移动 b，直线怎么动？它和 y 轴的交点是多少？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：k=0 时直线是什么样的？还是函数吗？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

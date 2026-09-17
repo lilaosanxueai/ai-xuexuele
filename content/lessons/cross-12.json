@@ -37,59 +37,47 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "发芽：种子 🌱 等待 1 秒（浇水啦），开始生长——大小改变 20",
-      "hintPrompts": [
-        "先等一下，种子要喝水才能醒"
-      ],
+      "id": "e0",
+      "text": "探索：种子发芽需要什么？（水、空气、温度）",
       "check": {
-        "type": "block_used",
-        "block": "island_change_size"
-      }
-    },
-    {
-      "id": "t2",
-      "text": "长高：重复 3 次 { 大小改变 20， 等待 0.5 }，变成 🌿 茁壮的苗",
-      "hintPrompts": [
-        "长身体要一步一步来"
-      ],
-      "check": {
-        "type": "block_used",
-        "block": "island_repeat"
-      }
-    },
-    {
-      "id": "t3",
-      "text": "向阳开花：走到太阳 ☀️ 附近（光合作用！），变成 🌸 并说「开花啦！」",
-      "hintPrompts": [
-        "植物会朝着阳光长——移到太阳边"
-      ],
-      "check": {
-        "type": "actor_reach",
-        "targetIndex": 0
-      }
-    },
-    {
-      "id": "t4",
-      "text": "结果实：最后变成 🍎 说「一颗种子的使命完成了」",
-      "hintPrompts": [
-        "花落结果，种子又进入下一轮生命"
-      ],
-      "check": {
-        "type": "say_text"
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：加一个「如果碰到边缘？那么说 缺水警报！」——环境不合适植物长不好",
-      "hintPrompts": [
-        "用条件积木表达生存条件"
-      ],
-      "check": {
-        "type": "block_used",
-        "block": "island_if"
+        "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：第几天长出第一片真叶？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：生长的速度一样快吗？哪段最快？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

@@ -17,46 +17,47 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "运行程序：解出 x=6、y=4，并验证 x+y=10 ✓",
-      "hintPrompts": [
-        "加减消元：两式相加得 2x=12"
-      ],
-      "check": {
-        "type": "say_text"
-      }
-    },
-    {
-      "id": "t2",
-      "text": "数轴验证：走到 x×y=24×5=120 的位置命中靶心",
-      "hintPrompts": [
-        "6×4=24，24×5=120 是缩放后位置"
-      ],
-      "check": {
-        "type": "actor_reach",
-        "targetIndex": 0
-      }
-    },
-    {
-      "id": "t3",
-      "text": "换一组：x+y=12，x-y=4（先心算 x=8,y=4）再改程序验证",
-      "hintPrompts": [
-        "x=(12+4)/2=8"
-      ],
-      "check": {
-        "type": "manual"
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：鸡兔同笼！头 10 个脚 28 只：x+y=10，2x+4y=28——解出鸡兔各几只",
-      "hintPrompts": [
-        "x=6 鸡，y=4 兔——千年名题一秒解"
-      ],
+      "id": "e0",
+      "text": "探索：两条直线的交点坐标是多少？和图上标注的 x、y 对一对",
       "check": {
         "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：移动 s（和），交点怎么动？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：方程组的解，就是两条直线的什么？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

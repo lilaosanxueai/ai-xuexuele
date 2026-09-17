@@ -35,46 +35,47 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "起飞：说「环球时区之旅，出发!」",
-      "hintPrompts": [
-        "先报旅程名"
-      ],
-      "check": {
-        "type": "say_text"
-      }
-    },
-    {
-      "id": "t2",
-      "text": "经停三站：运行程序，飞机依次停靠并报出当地时区名",
-      "hintPrompts": [
-        "每 15 度经度差 1 小时"
-      ],
-      "check": {
-        "type": "say_text"
-      }
-    },
-    {
-      "id": "t3",
-      "text": "到达本初子午线：飞到 🌍 目标处，说「Greenwich! 0 度经线!」",
-      "hintPrompts": [
-        "0 度经线经过伦敦"
-      ],
-      "check": {
-        "type": "actor_reach",
-        "targetIndex": 0
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：算一算：北京 20 点时，纽约几点？（说给伙伴听）",
-      "hintPrompts": [
-        "北京比纽约快 13 小时左右"
-      ],
+      "id": "e0",
+      "text": "探索：每 15° 经度相差 1 小时——你选的经度和北京差几小时？",
       "check": {
         "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：东经为正、西经为负，往西时间越早还是晚？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：180° 经线附近为什么有「日期变更线」？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

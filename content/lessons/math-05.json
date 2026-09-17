@@ -32,48 +32,47 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "宝藏①💎在东北 45°方向、120 步处：右转 45 度，移动 120（每寻一宝先「移到 0,0」回原点更清爽）",
-      "hintPrompts": [
-        "角色一开始朝上。右转 45° 朝东北，走 120 步"
-      ],
-      "check": {
-        "type": "actor_reach",
-        "targetIndex": 0
-      }
-    },
-    {
-      "id": "t2",
-      "text": "宝藏②🗝在正西（左转 90°）、120 步处",
-      "hintPrompts": [
-        "左转 90 度再移动 120"
-      ],
-      "check": {
-        "type": "actor_reach",
-        "targetIndex": 1
-      }
-    },
-    {
-      "id": "t3",
-      "text": "终极宝藏🏆在正南（180°）、130 步处",
-      "hintPrompts": [
-        "右转 180 或左转 180 都行——转到正下方"
-      ],
-      "check": {
-        "type": "actor_reach",
-        "targetIndex": 2
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：把三段寻宝路连成一趟不回起点的旅行",
-      "hintPrompts": [
-        "不回原点，到每个宝藏后原地转向下一个"
-      ],
+      "id": "e0",
+      "text": "探索：宝藏（红点）的位置由什么决定？距离+方向",
       "check": {
         "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：方向角变 90°，红点跑到哪去了？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：这就是极坐标：(r, θ) 一个距离一个角定位",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {

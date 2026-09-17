@@ -35,49 +35,47 @@
   },
   "tasks": [
     {
-      "id": "t1",
-      "text": "出发报到：说「上北下南，左西右东!」",
-      "hintPrompts": [
-        "先背口诀再出发"
-      ],
-      "check": {
-        "type": "say_text"
-      }
-    },
-    {
-      "id": "t2",
-      "text": "向北侦查：向上移动 80 步（北是上方），说「North! 北!」",
-      "hintPrompts": [
-        "舞台上方就是北"
-      ],
-      "check": {
-        "type": "block_count_min",
-        "block": "island_move",
-        "count": 1
-      }
-    },
-    {
-      "id": "t3",
-      "text": "转向东进：右转 90 度，移动 80 步，说「East! 东!」",
-      "hintPrompts": [
-        "面向右转 90 度是东"
-      ],
-      "check": {
-        "type": "block_count_min",
-        "block": "island_turn_right",
-        "count": 1
-      }
-    },
-    {
-      "id": "c1",
-      "text": "⭐ 挑战：走一个「北→东→南→西」的完整方位圈，回到起点",
-      "hintPrompts": [
-        "走四边回原点就是绕一圈"
-      ],
+      "id": "e0",
+      "text": "探索：指南针红针指向哪？地图上北在哪？",
       "check": {
         "type": "manual"
       },
-      "optional": true
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：「上北下南左西右东」——朝 90° 走是哪个方向？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：180° 呢？270° 呢？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
     }
   ],
   "curriculum": {
