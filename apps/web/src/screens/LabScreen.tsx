@@ -80,6 +80,8 @@ export default function LabScreen() {
   const [quizOpen, setQuizOpen] = useState(false);
   const [quizDone, setQuizDone] = useState(false);
   const [teachOpen, setTeachOpen] = useState(false);
+  /** 讲解是否看过（stepper 用；打开过讲解弹窗即算） */
+  const [teachSeen, setTeachSeen] = useState(false);
   const [explored, setExplored] = useState<Record<number, boolean>>({});
   const [toast, setToast] = useState<string | null>(null);
   const [challengeDone, setChallengeDone] = useState<Record<number, boolean>>({});
@@ -294,6 +296,8 @@ export default function LabScreen() {
 
   const exploreList = lesson.lab?.explore ?? [];
   const bandText = lesson.gradeBand === 'senior' ? '高中' : lesson.gradeBand === 'junior' ? '初中' : '小学';
+  /** 已勾选的探索问题数（stepper 判断"学"阶段进行中） */
+  const exploredCount = Object.values(explored).filter(Boolean).length;
 
   const getContext = () => ({
     screen: 'lab' as const,
@@ -325,7 +329,7 @@ export default function LabScreen() {
           <div className="ml-auto flex items-center gap-1.5">
             {lesson.teach && (
               <button
-                onClick={() => setTeachOpen(true)}
+                onClick={() => { setTeachOpen(true); setTeachSeen(true); }}
                 className="rounded-xl bg-sky-600 px-3 py-1.5 text-sm font-bold text-white shadow-sm transition hover:bg-sky-700"
                 title="概念精讲 + 例题分步 + 易错点（像课本一样自己学）"
               >
@@ -345,6 +349,28 @@ export default function LabScreen() {
               📖 问 AI
             </button>
           </div>
+        </div>
+        {/* 学习路径 stepper（学而思式 预习-学习-巩固 闭环可视化） */}
+        <div className="mt-2 flex items-center gap-1 overflow-x-auto pb-0.5 text-[11px] font-bold">
+          {(() => {
+            const steps: { key: string; label: string; state: 'done' | 'now' | 'todo'; onClick?: () => void }[] = [
+              { key: 'pre', label: '① 预习·开场一问', state: teachOpen ? 'now' : (teachSeen ? 'done' : 'todo'), onClick: () => setTeachOpen(true) },
+              { key: 'learn', label: '② 学·讲解+实验', state: !teachSeen ? 'todo' : exploredCount > 0 || quizDone ? 'done' : 'now', onClick: () => setTeachOpen(true) },
+              { key: 'test', label: '③ 练·随堂小练', state: quizDone ? 'done' : teachSeen ? 'now' : 'todo', onClick: () => (lesson.exercises?.length ? setQuizOpen(true) : undefined) },
+              { key: 'fix', label: '④ 固·错题清零', state: 'todo', onClick: () => nav('/wrongbook') },
+            ];
+            return steps.map((s) => (
+              <button
+                key={s.key}
+                onClick={s.onClick}
+                className={`shrink-0 rounded-full px-2.5 py-1 transition ${
+                  s.state === 'done' ? 'bg-emerald-100 text-emerald-700' : s.state === 'now' ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-400'
+                }`}
+              >
+                {s.state === 'done' ? '✓ ' : ''}{s.label}
+              </button>
+            ));
+          })()}
         </div>
       </div>
 
@@ -554,10 +580,22 @@ export default function LabScreen() {
                   <p className="text-[15px] leading-[1.9] text-indigo-900">{lesson.story}</p>
                 </div>
               )}
-              <TeachPanel
-                teach={lesson.teach}
-                onFinish={lesson.exercises?.length ? () => { setTeachOpen(false); setQuizOpen(true); } : undefined}
-              />
+              <TeachPanel teach={lesson.teach} />
+              {/* 理解度自评（洋葱学园式）：读完自评，模糊/没懂给回学路径 */}
+              <div className="mt-5 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-100">
+                <div className="mb-2 text-sm font-black text-slate-700">🧐 读完了？给自己打个分：</div>
+                <div className="flex flex-wrap gap-2">
+                  <button onClick={() => { setTeachOpen(false); setQuizOpen(true); setBuddyOpen(true); buddyRef.current?.sayLocal('😄 很有信心！那就用随堂小练验证一下——全对才算真懂哦。'); }} className="rounded-xl bg-emerald-500 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-600">
+                    😀 全懂了，去小练
+                  </button>
+                  <button onClick={() => { setBuddyOpen(true); buddyRef.current?.sayLocal('🤔 有点模糊很正常！建议：① 拖动左边滑块做几组实验，看着图形变化再回来重读对应章节；② 或点我问具体哪里不懂。'); }} className="rounded-xl bg-amber-100 px-4 py-2 text-sm font-bold text-amber-700 hover:bg-amber-200">
+                    😐 有点模糊
+                  </button>
+                  <button onClick={() => { setBuddyOpen(true); buddyRef.current?.sayLocal('😅 没懂也不要紧！回到最上面的「开场一问」重读一遍，重点看【高亮框】里的定义；还卡住就告诉我具体哪句看不懂，我们一句一句拆。'); }} className="rounded-xl bg-rose-100 px-4 py-2 text-sm font-bold text-rose-600 hover:bg-rose-200">
+                    😵 没太懂
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

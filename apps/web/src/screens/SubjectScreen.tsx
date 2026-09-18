@@ -39,6 +39,18 @@ export default function SubjectScreen() {
     .map((b) => ({ band: b, list: mine.filter((l) => (l.gradeBand ?? 'primary') === b) }))
     .filter((g) => g.list.length > 0);
 
+  // 知识图谱掌握度（松鼠AI式）：按课标模块聚合——做过的课按随堂正确率计掌握度
+  const modules = new Map<string, { done: number; total: number; masterySum: number; masteryN: number }>();
+  for (const l of mine) {
+    const mod = l.curriculum?.module ?? '其他';
+    const m = modules.get(mod) ?? { done: 0, total: 0, masterySum: 0, masteryN: 0 };
+    m.total++;
+    if (progress?.lessons[l.id]?.status === 'completed') m.done++;
+    const ex = progress?.exercises?.[l.id];
+    if (ex && ex.total > 0) { m.masterySum += ex.correct / ex.total; m.masteryN++; }
+    modules.set(mod, m);
+  }
+
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
@@ -55,6 +67,38 @@ export default function SubjectScreen() {
             <div className="text-xs opacity-70">已完成</div>
           </div>
         </div>
+
+        {/* 知识图谱掌握度（松鼠AI 式模块级诊断） */}
+        {modules.size > 1 && [...modules.entries()].some(([, m]) => m.masteryN > 0) && (
+          <section className="mb-8 rounded-3xl bg-white/85 p-5 shadow-sm">
+            <div className="mb-1 flex items-center gap-2">
+              <h2 className="text-lg font-black text-slate-700">🧠 知识图谱掌握度</h2>
+              <span className="text-xs text-slate-400">按课标模块诊断 · 数据来自随堂练正确率</span>
+            </div>
+            <div className="grid gap-2 sm:grid-cols-2">
+              {[...modules.entries()]
+                .sort((a, b) => (b[1].masteryN ? b[1].masterySum / b[1].masteryN : -1) - (a[1].masteryN ? a[1].masterySum / a[1].masteryN : -1))
+                .map(([mod, m]) => {
+                  const mastery = m.masteryN ? Math.round((m.masterySum / m.masteryN) * 100) : -1;
+                  const col = mastery < 0 ? '#cbd5e1' : mastery >= 80 ? '#16a34a' : mastery >= 60 ? '#f59e0b' : '#dc2626';
+                  return (
+                    <div key={mod} className="rounded-2xl bg-slate-50 p-3">
+                      <div className="mb-1.5 flex items-baseline justify-between gap-2">
+                        <span className="truncate text-sm font-bold text-slate-700">{mod}</span>
+                        <span className="shrink-0 text-xs font-black" style={{ color: col }}>
+                          {mastery < 0 ? '未检测' : `${mastery}%`}
+                        </span>
+                      </div>
+                      <div className="h-2 overflow-hidden rounded-full bg-slate-200">
+                        <div className="h-full rounded-full transition-all" style={{ width: `${mastery < 0 ? 0 : mastery}%`, background: col }} />
+                      </div>
+                      <div className="mt-1 text-[10px] text-slate-400">已学 {m.done}/{m.total} 课{mastery >= 0 && mastery < 60 ? ' · 薄弱模块，优先巩固' : ''}</div>
+                    </div>
+                  );
+                })}
+            </div>
+          </section>
+        )}
 
         {bands.map(({ band, list }) => (
           <section key={band} className="mb-8">

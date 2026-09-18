@@ -15,12 +15,24 @@ export default function WrongBookScreen() {
   const [practicing, setPracticing] = useState(false);
   const [celebrate, setCelebrate] = useState<string | null>(null);
   const [labIds, setLabIds] = useState<Set<string>>(new Set());
+  /** 举一反三（作业帮式）：错题关联同模块课程，推荐变式练习 */
+  const [moduleLessons, setModuleLessons] = useState<Map<string, { id: string; title: string; emoji: string; subjectArea: string }[]>>(new Map());
 
   useEffect(() => {
     if (!profile) { nav('/'); return; }
     void api.progress(profile.id).then(setProgress).catch(() => setProgress(null));
-    // 实验课跳 /lab、辅导课跳 /tutor——「看讲解」直达对应课程
-    void api.lessons().then((ls) => setLabIds(new Set(ls.filter((l) => l.lab || l.starterCode).map((l) => l.id)))).catch(() => {});
+    // 实验课跳 /lab、辅导课跳 /tutor——「看讲解」直达对应课程；同时建 课标模块→课程 索引
+    void api.lessons().then((ls) => {
+      setLabIds(new Set(ls.filter((l) => l.lab || l.starterCode).map((l) => l.id)));
+      const m = new Map<string, { id: string; title: string; emoji: string; subjectArea: string }[]>();
+      for (const l of ls) {
+        const mod = l.curriculum?.module;
+        if (!mod) continue;
+        if (!m.has(mod)) m.set(mod, []);
+        m.get(mod)!.push({ id: l.id, title: l.title, emoji: l.emoji, subjectArea: l.subjectArea ?? '' });
+      }
+      setModuleLessons(m);
+    }).catch(() => {});
   }, [profile, nav]);
 
   const wrongs = progress?.wrongBook ?? [];
@@ -114,9 +126,19 @@ export default function WrongBookScreen() {
                     <span className="text-2xl">{meta.emoji}</span>{area}
                     <span className="text-sm font-normal text-slate-400">{items.length} 道</span>
                   </h2>
-                  <div className="space-y-2">
-                    {items.map((w) => (
-                      <div key={w.id} className="rounded-2xl bg-white/85 p-4 shadow-sm">
+                      <div className="space-y-2">
+                        {items.map((w) => {
+                          // 举一反三：找同模块的其他课程（排除本题来源课）
+                          const siblings = (() => {
+                            for (const [mod, ls] of moduleLessons) {
+                              if (ls.some((x) => x.id === w.lessonId)) {
+                                return ls.filter((x) => x.id !== w.lessonId).slice(0, 2);
+                              }
+                            }
+                            return [];
+                          })();
+                          return (
+                          <div key={w.id} className="rounded-2xl bg-white/85 p-4 shadow-sm">
                         <div className="flex items-start gap-3">
                           <span className={`mt-0.5 shrink-0 rounded-lg px-2 py-0.5 text-xs font-black ${
                             w.times >= 3 ? 'bg-rose-500 text-white' : w.times === 2 ? 'bg-orange-400 text-white' : 'bg-slate-200 text-slate-600'
@@ -137,9 +159,24 @@ export default function WrongBookScreen() {
                             📖 看讲解
                           </button>
                         </div>
+                        {siblings.length > 0 && (
+                          <div className="mt-2 flex flex-wrap items-center gap-1.5 border-t border-slate-100 pt-2">
+                            <span className="text-[11px] font-bold text-slate-400">🔁 举一反三（同考点变式）：</span>
+                            {siblings.map((s) => (
+                              <button
+                                key={s.id}
+                                onClick={() => nav(labIds.has(s.id) ? `/lab/${s.id}` : `/tutor/${s.id}`)}
+                                className="rounded-lg bg-violet-50 px-2 py-1 text-[11px] font-bold text-violet-700 transition hover:bg-violet-100"
+                              >
+                                {s.emoji} {s.title}
+                              </button>
+                            ))}
+                          </div>
+                        )}
                       </div>
-                    ))}
-                  </div>
+                          );
+                        })}
+                      </div>
                 </section>
               );
             })}
