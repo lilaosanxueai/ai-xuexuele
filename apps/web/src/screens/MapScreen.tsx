@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { Lesson, ProfileProgress } from '@shared/types.ts';
 import { api } from '../api.ts';
@@ -28,6 +28,21 @@ export default function MapScreen() {
   const todayMin = progress?.dailyUsage[today] ?? 0;
   const rec = recommendNext(lessons, progress);
   const doneCount = lessons.filter((l) => lessonDone(l.id)).length;
+
+  // 间隔重复（Duolingo 式）：完成于 1/3/7/14 天前的课进入"复习黄金期"
+  const REVIEW_DAYS = [1, 3, 7, 14];
+  const reviews = useMemo(() => {
+    if (!progress) return [];
+    const now = Date.now();
+    const out: { lesson: Lesson; daysAgo: number }[] = [];
+    for (const l of lessons) {
+      const at = progress.lessons[l.id]?.completedAt;
+      if (!at) continue;
+      const days = Math.floor((now - new Date(at).getTime()) / 86_400_000);
+      if (REVIEW_DAYS.includes(days)) out.push({ lesson: l, daysAgo: days });
+    }
+    return out.sort((a, b) => a.daysAgo - b.daysAgo).slice(0, 4);
+  }, [progress, lessons]);
 
   // 按学科聚合
   const byArea = new Map<string, Lesson[]>();
@@ -72,6 +87,32 @@ export default function MapScreen() {
             </button>
           )}
         </div>
+
+        {/* 复习黄金期（间隔重复：1/3/7/14 天前学过的课记忆将衰退，现在复习效果最好） */}
+        {reviews.length > 0 && (
+          <div className="mb-6 rounded-3xl bg-amber-50/90 p-5 shadow-sm ring-1 ring-amber-200">
+            <div className="mb-3 flex items-center gap-2">
+              <span className="text-lg font-black text-amber-700">⏰ 复习黄金期</span>
+              <span className="text-xs text-amber-600/80">学过 1/3/7/14 天的课记忆开始衰退，现在重温一遍效果最好</span>
+            </div>
+            <div className="grid gap-2 sm:grid-cols-2">
+              {reviews.map(({ lesson: l, daysAgo }) => (
+                <button
+                  key={l.id}
+                  onClick={() => nav(l.lab || l.starterCode ? `/lab/${l.id}` : `/tutor/${l.id}`)}
+                  className="flex items-center gap-3 rounded-2xl bg-white p-3 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                >
+                  <div className="text-2xl">{l.emoji}</div>
+                  <div className="min-w-0 flex-1">
+                    <div className="truncate text-sm font-bold text-slate-700">{l.title}</div>
+                    <div className="text-xs text-amber-600">{daysAgo} 天前学过 · {l.subjectArea}</div>
+                  </div>
+                  <span className="shrink-0 rounded-xl bg-amber-100 px-3 py-1.5 text-xs font-bold text-amber-700">复习 →</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* 学科网格 */}
         <h2 className="mb-3 text-xl font-black text-slate-700">📚 学科中心</h2>

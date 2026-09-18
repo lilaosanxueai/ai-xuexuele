@@ -12,6 +12,7 @@ import TeachPanel from '../components/TeachPanel.tsx';
 import { StageState, setRunSpeed } from '../runtime/stageState.ts';
 import { parsePy, PyRunner } from '../runtime/pyinterp.ts';
 import { pyStageApi } from '../runtime/pyBridge.ts';
+import { socraticOnExplore, socraticOnChallenge, socraticOnWrong, socraticOnPerfect } from '../runtime/socratic.ts';
 
 /**
  * 互动实验室（理科五科学习新主页）：内容动态化 + 动态互动。
@@ -82,6 +83,8 @@ export default function LabScreen() {
   const [explored, setExplored] = useState<Record<number, boolean>>({});
   const [toast, setToast] = useState<string | null>(null);
   const [challengeDone, setChallengeDone] = useState<Record<number, boolean>>({});
+  /** 预测-验证（PhET 式）：挑战前先猜能不能达成 {挑战序号: 猜能(true)/猜不能(false)} */
+  const [predictions, setPredictions] = useState<Record<number, boolean>>({});
   /** 实验记录单：观察笔记（自动保存到进度，AI 可点评） */
   const [labNote, setLabNote] = useState('');
   const [noteSaved, setNoteSaved] = useState(true);
@@ -113,7 +116,10 @@ export default function LabScreen() {
       if (hit) {
         setChallengeDone((prev) => ({ ...prev, [i]: true }));
         setToast(`🎯 挑战达成：${ch.text}`);
-        buddyRef.current?.sayLocal(`🎯 挑战达成！「${ch.text}」——你用实验做到了，把这个道理想给爸妈听一遍，会更牢固。`);
+        // 预测-验证：孩子事先猜过的话，先对照预测再苏格拉底追问
+        const guessed = predictions[i];
+        const predictNote = guessed === undefined ? '' : guessed ? '（你猜对了，真有预感！）' : '（你猜不会亮——猜想和实验不一致的地方，正是科学最有趣的起点！）';
+        buddyRef.current?.sayLocal(`🎯 挑战达成！「${ch.text}」${predictNote}\n${socraticOnChallenge(ch.text)}`);
         reportTask(`c${i}`, true);
       }
     });
@@ -382,8 +388,11 @@ export default function LabScreen() {
                   <li key={i}>
                     <button
                       onClick={() => {
-                        setExplored((prev) => ({ ...prev, [i]: !prev[i] }));
-                        reportTask(`e${i}`, !explored[i]);
+                        const nowChecked = !explored[i];
+                        setExplored((prev) => ({ ...prev, [i]: nowChecked }));
+                        reportTask(`e${i}`, nowChecked);
+                        // 勾选（而非取消）时，AI 用苏格拉底式追问引导深入（Khanmigo 模式）
+                        if (nowChecked) buddyRef.current?.sayLocal(socraticOnExplore(q));
                       }}
                       className={`flex w-full items-start gap-2 rounded-xl border p-2 text-left text-[13px] leading-snug transition ${
                         explored[i] ? 'border-emerald-300 bg-emerald-50 text-slate-500 line-through decoration-emerald-400' : 'border-slate-200 bg-white hover:border-sky-300'
@@ -435,12 +444,34 @@ export default function LabScreen() {
                 {lesson.lab!.challenges!.map((ch, i) => (
                   <li
                     key={i}
-                    className={`flex items-start gap-2 rounded-xl border p-2 text-[13px] leading-snug transition ${
+                    className={`rounded-xl border p-2 text-[13px] leading-snug transition ${
                       challengeDone[i] ? 'border-amber-400 bg-amber-50' : 'border-dashed border-slate-300 bg-white'
                     }`}
                   >
-                    <span className={`mt-0.5 shrink-0 ${challengeDone[i] ? '' : 'opacity-40'}`}>{challengeDone[i] ? '🏅' : '🎯'}</span>
-                    <span className={challengeDone[i] ? 'font-bold text-amber-700' : 'text-slate-600'}>{ch.text}</span>
+                    <div className="flex items-start gap-2">
+                      <span className={`mt-0.5 shrink-0 ${challengeDone[i] ? '' : 'opacity-40'}`}>{challengeDone[i] ? '🏅' : '🎯'}</span>
+                      <span className={challengeDone[i] ? 'font-bold text-amber-700' : 'text-slate-600'}>{ch.text}</span>
+                    </div>
+                    {!challengeDone[i] && predictions[i] === undefined && (
+                      <div className="mt-1.5 flex items-center gap-1.5">
+                        <span className="text-[10px] text-slate-400">先猜猜（PhET 预测法）：</span>
+                        <button
+                          onClick={() => { setPredictions((p) => ({ ...p, [i]: true })); setBuddyOpen(true); buddyRef.current?.sayLocal('🔮 你猜会达成！好，现在动手试试——实验会告诉你猜得对不对。'); }}
+                          className="rounded-lg bg-emerald-50 px-2 py-0.5 text-[11px] font-bold text-emerald-700 hover:bg-emerald-100"
+                        >
+                          能亮 🙌
+                        </button>
+                        <button
+                          onClick={() => { setPredictions((p) => ({ ...p, [i]: false })); setBuddyOpen(true); buddyRef.current?.sayLocal('🔮 你猜不会达成？敢不敢做个实验验证一下猜想？科学家就是这么工作的。'); }}
+                          className="rounded-lg bg-rose-50 px-2 py-0.5 text-[11px] font-bold text-rose-600 hover:bg-rose-100"
+                        >
+                          不能 🤨
+                        </button>
+                      </div>
+                    )}
+                    {!challengeDone[i] && predictions[i] !== undefined && (
+                      <div className="mt-1 text-[10px] text-slate-400">你的猜想：{predictions[i] ? '能达成' : '不能达成'}——去做实验验证吧！</div>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -500,6 +531,9 @@ export default function LabScreen() {
               tasks: { quiz: true },
               wrongAdds,
             }).catch(() => {});
+            // 练习复盘：苏格拉底式——有错引导回看讲解，全对检验能否举例（费曼技巧）
+            if (wrongs.length > 0) buddyRef.current?.sayLocal(socraticOnWrong(correct, lesson.exercises!.length, lesson.title));
+            else buddyRef.current?.sayLocal(socraticOnPerfect());
           }}
         />
       )}
@@ -513,6 +547,13 @@ export default function LabScreen() {
               <button onClick={() => setTeachOpen(false)} className="rounded-xl bg-slate-100 px-3 py-1.5 text-sm font-bold text-slate-600 hover:bg-slate-200">✕ 关闭</button>
             </div>
             <div className="overflow-y-auto p-4">
+              {/* 开场一问（李永乐式钩子）：讲解前先抛出真实世界的问题 */}
+              {lesson.story && (
+                <div className="mb-4 rounded-2xl bg-gradient-to-r from-indigo-50 to-sky-50 p-5 ring-1 ring-indigo-100">
+                  <div className="mb-1.5 text-sm font-black text-indigo-700">🎬 开场一问</div>
+                  <p className="text-[15px] leading-[1.9] text-indigo-900">{lesson.story}</p>
+                </div>
+              )}
               <TeachPanel
                 teach={lesson.teach}
                 onFinish={lesson.exercises?.length ? () => { setTeachOpen(false); setQuizOpen(true); } : undefined}

@@ -8,6 +8,7 @@ import Header from '../components/Header.tsx';
 import AIBuddy, { type BuddyHandle } from '../components/AIBuddy.tsx';
 import ExercisePanel from '../components/ExercisePanel.tsx';
 import TeachPanel from '../components/TeachPanel.tsx';
+import { socraticOnWrong, socraticOnPerfect } from '../runtime/socratic.ts';
 
 /** 学科辅导场景的快捷提问（替代默认的编程向问题） */
 const TUTOR_QUICK: Partial<Record<'explain' | 'hint' | 'review', string[]>> = {
@@ -169,6 +170,13 @@ export default function TutorScreen() {
         {/* 右：有课本讲解时，讲解正文是主区（可脱离 AI 自学）；否则主区为 AI 对话 */}
       {lesson.teach ? (
         <section className="min-h-[70vh] overflow-y-auto rounded-2xl bg-slate-50 p-4 shadow-md lg:h-[calc(100vh-7.5rem)]">
+          {/* 开场一问（李永乐式钩子） */}
+          {lesson.story && (
+            <div className="mb-4 rounded-2xl bg-gradient-to-r from-indigo-50 to-sky-50 p-5 ring-1 ring-indigo-100">
+              <div className="mb-1.5 text-sm font-black text-indigo-700">🎬 开场一问</div>
+              <p className="text-[15px] leading-[1.9] text-indigo-900">{lesson.story}</p>
+            </div>
+          )}
           <TeachPanel
             teach={lesson.teach}
             onFinish={lesson.exercises?.length ? () => setQuizOpen(true) : undefined}
@@ -231,13 +239,9 @@ export default function TutorScreen() {
               };
             });
             setQuizDone(true);
-            // 随堂练完成 → AI 老师在对话里发复盘引导（关掉成绩单即可看到，不遮挡不打扰）
-            const acc = Math.round((correct / lesson.exercises!.length) * 100);
-            buddyRef.current?.sayLocal(
-              acc === 100
-                ? `🎉 ${correct} 题全对！最后想一想：这一课最重要的一点是什么？它让你想起了之前学过的什么？想检验自己可以点下面的「🎯 考考我」。`
-                : `练习完成：答对 ${correct}/${lesson.exercises!.length}。答错的题已经收进错题本了。要不要把错的那题弄懂？跟我说「给我讲讲做错的题」，我们把它彻底搞明白。`,
-            );
+            // 练习复盘：苏格拉底式——有错引导回看讲解，全对检验能否举例（费曼技巧）
+            if (wrongs.length > 0) buddyRef.current?.sayLocal(socraticOnWrong(correct, lesson.exercises!.length, lesson.title));
+            else buddyRef.current?.sayLocal(socraticOnPerfect());
             void api.updateProgress(profile.id, {
               lessonId: lesson.id,
               completed: true,
