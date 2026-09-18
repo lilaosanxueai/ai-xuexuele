@@ -140,6 +140,39 @@
       ],
       "answer": 2,
       "explain": "do re mi fa sol——fa 的下一个是 sol。"
+    },
+    {
+      "q": "do 到高音 do 叫？",
+      "options": [
+        "一个八度",
+        "半个八度",
+        "两个八度",
+        "七度"
+      ],
+      "answer": 0,
+      "explain": "8 个音级组成一个八度"
+    },
+    {
+      "q": "fa 的下一个音是？",
+      "options": [
+        "sol",
+        "mi",
+        "la",
+        "re"
+      ],
+      "answer": 0,
+      "explain": "do re mi fa sol……"
+    },
+    {
+      "q": "音阶从低到高排列（上行）后回到？",
+      "options": [
+        "高音 do",
+        "xi 停住",
+        "低音 sol",
+        "re"
+      ],
+      "answer": 0,
+      "explain": "完整音阶回到高八度的 do"
     }
   ],
   "grade": 2,

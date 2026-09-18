@@ -32,6 +32,11 @@ start.bat
 
 ## 本地相对上游的增量（持续更新）
 
+1. **题库扩容一倍：226 课每课 3→6 题（2026-09-18，第 30 轮，用户反馈「课程本身的优化远远不够」）**：
+   - 原题 3-4 题偏概念回忆；为全部课程各新增 3 题（2 中等应用 + 1 挑战），总题量 678 → 1356，每课恰好 6 题
+   - 分九批写入（quiz-math-primary/junior/senior、quiz-physics、quiz-chem-bio、quiz-geo-sci-chs-eng、quiz-rest）：数学三批全是计算/应用（追及、植树式进阶、篱笆最值、测交）、物理全是公式代入与情境判断、化学生物是实验现象与推理、语文是字词运用与诗句赏析进阶、英语是句型转换与情景交际、信息科技是读程序/算步数
+   - 质量控制：每题 answer 均经计算核验（写作中修正了 math-30 方程组等 3 处草稿错误）；audit/validate 全 0；vitest 64；tsc+build 通过
+   - 浏览器实测：/api/lessons 全部 226 课 exercises=6；cross-97 随堂小练打开显示「第 1/6 题」
 1. **取消家长 PIN 码机制（2026-09-18，第 29 轮，用户指令「取消家长PIN码」）**：
    - 全链路移除：服务端 requirePin 中间件与 /verify-pin、/pin 路由删除（删角色/保存设置/对话记录全部开放）、AppConfig.parentPin 与 setParentPin 删除、api.ts 的 verifyPin/changePin 与各接口 pin 参数删除
    - 前端：HomeScreen 删角色改为 ConfirmDialog 直接确认；ParentScreen 去掉 PIN 门直接进入、设置页删「修改 PIN」区；WorkshopScreen 超时锁定改为 60 秒护眼倒计时自动解锁（保留休息强制性、不再需要 PIN）

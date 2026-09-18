@@ -150,6 +150,39 @@
       ],
       "answer": 1,
       "explain": "grand- 表示上一辈：grandfather 爷爷/外公"
+    },
+    {
+      "q": "grandfather 是？",
+      "options": [
+        "爷爷/外公",
+        "爸爸",
+        "叔叔",
+        "哥哥"
+      ],
+      "answer": 0,
+      "explain": "grand- 表示上一辈"
+    },
+    {
+      "q": "This is ___ mother.（我的）填？",
+      "options": [
+        "my",
+        "me",
+        "I",
+        "mine"
+      ],
+      "answer": 0,
+      "explain": "形容词性物主代词 my 修饰名词"
+    },
+    {
+      "q": "介绍妹妹用哪句？",
+      "options": [
+        "This is my sister.",
+        "I am sister.",
+        "She is I sister.",
+        "This is sister my."
+      ],
+      "answer": 0,
+      "explain": "This is my + 称谓"
     }
   ],
   "textbook": "人教PEP英语三年级上册",

@@ -138,6 +138,39 @@
       ],
       "answer": 1,
       "explain": "爱好=hào（四声）"
+    },
+    {
+      "q": "\"还\"在\"归还\"中读？",
+      "options": [
+        "huán",
+        "hái",
+        "hài",
+        "huàn?（同 huán）"
+      ],
+      "answer": 0,
+      "explain": "归还 huán；还有 hái"
+    },
+    {
+      "q": "\"音乐\"的\"乐\"读？",
+      "options": [
+        "yuè",
+        "lè",
+        "yuě",
+        "liàng"
+      ],
+      "answer": 0,
+      "explain": "音乐 yuè；快乐 lè"
+    },
+    {
+      "q": "\"背着书包\"的\"背\"读？",
+      "options": [
+        "bēi",
+        "bèi",
+        "bái",
+        "péi"
+      ],
+      "answer": 0,
+      "explain": "背东西 bēi（动词）；后背 bèi（名词）"
     }
   ],
   "codeLesson": false,

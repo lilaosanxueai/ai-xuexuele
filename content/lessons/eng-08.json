@@ -133,6 +133,39 @@
       ],
       "answer": 1,
       "explain": "国际惯例 Sunday 是一周第一天，中国习惯把 Monday 当第一天。"
+    },
+    {
+      "q": "周末（周六和周日）的英语是？",
+      "options": [
+        "weekend",
+        "weekday",
+        "Sunday",
+        "Monday"
+      ],
+      "answer": 0,
+      "explain": "weekend = 周末（week 末尾）"
+    },
+    {
+      "q": "What day is it today? 问的是？",
+      "options": [
+        "星期几",
+        "日期",
+        "天气",
+        "时间"
+      ],
+      "answer": 0,
+      "explain": "What day 问星期；问日期用 What is the date"
+    },
+    {
+      "q": "星期几的首字母要？",
+      "options": [
+        "大写",
+        "小写",
+        "斜体",
+        "加粗"
+      ],
+      "answer": 0,
+      "explain": "Monday、Sunday 等星期名首字母大写"
     }
   ],
   "textbook": "人教版英语（初中）",

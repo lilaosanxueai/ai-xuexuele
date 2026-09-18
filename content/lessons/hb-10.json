@@ -153,6 +153,39 @@
       ],
       "answer": 0,
       "explain": "shouldn't = 不应该；stay up late 熬夜"
+    },
+    {
+      "q": "He has a fever. 他怎么了？",
+      "options": [
+        "发烧了",
+        "头疼",
+        "感冒",
+        "胃疼"
+      ],
+      "answer": 0,
+      "explain": "fever 发烧；headache 头疼"
+    },
+    {
+      "q": "You ___ drink more water.（应该）填？",
+      "options": [
+        "should",
+        "shall",
+        "will",
+        "would like"
+      ],
+      "answer": 0,
+      "explain": "should + 动词原形表建议"
+    },
+    {
+      "q": "牙疼应该建议？",
+      "options": [
+        "You should see a dentist.",
+        "You should eat candy.",
+        "You should not sleep.",
+        "You should run."
+      ],
+      "answer": 0,
+      "explain": "see a dentist 看牙医"
     }
   ],
   "teach": {

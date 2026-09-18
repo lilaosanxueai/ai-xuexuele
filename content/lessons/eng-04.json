@@ -133,6 +133,39 @@
       ],
       "answer": 0,
       "explain": "How many 问数量，How old 问年龄。"
+    },
+    {
+      "q": "How many books do you have? 正确回答（3 本）？",
+      "options": [
+        "Three.",
+        "It is three book.",
+        "Yes, I do.",
+        "I have book."
+      ],
+      "answer": 0,
+      "explain": "How many 问数量，直接用数字回答"
+    },
+    {
+      "q": "nine 的前一个数字是？",
+      "options": [
+        "eight",
+        "ten",
+        "seven",
+        "five"
+      ],
+      "answer": 0,
+      "explain": "eight (8) → nine (9) → ten (10)"
+    },
+    {
+      "q": "\"你有几支铅笔？\"英语是？",
+      "options": [
+        "How many pencils do you have?",
+        "How much pencils?",
+        "What pencils?",
+        "How old pencils?"
+      ],
+      "answer": 0,
+      "explain": "可数名词问数量用 How many + 复数"
     }
   ],
   "textbook": "人教PEP英语（三年级起点）",

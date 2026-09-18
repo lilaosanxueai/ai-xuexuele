@@ -133,6 +133,39 @@
       ],
       "answer": 2,
       "explain": "I like + 事物/doing，表达喜欢什么。"
+    },
+    {
+      "q": "介绍自己的名字用？",
+      "options": [
+        "My name is…",
+        "Your name is…",
+        "I name is…",
+        "Name is my…"
+      ],
+      "answer": 0,
+      "explain": "My name is + 名字"
+    },
+    {
+      "q": "表达\"我十岁了\"用？",
+      "options": [
+        "I am ten years old.",
+        "I have ten years.",
+        "My age ten.",
+        "I is ten."
+      ],
+      "answer": 0,
+      "explain": "I am + 数字 + years old"
+    },
+    {
+      "q": "说\"我喜欢游泳\"用？",
+      "options": [
+        "I like swimming.",
+        "I like swim.",
+        "I likes swimming.",
+        "Me like swim."
+      ],
+      "answer": 0,
+      "explain": "like + doing（动词 -ing 形式）"
     }
   ],
   "textbook": "人教版英语（初中）",

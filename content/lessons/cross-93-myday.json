@@ -151,6 +151,39 @@
       ],
       "answer": 0,
       "explain": "go to bed + at + 时间（p.m. 表示下午/晚上）"
+    },
+    {
+      "q": "He ___ to school at seven. 填？",
+      "options": [
+        "goes",
+        "go",
+        "going",
+        "went"
+      ],
+      "answer": 0,
+      "explain": "三单 he 的一般现在时动词加 es"
+    },
+    {
+      "q": "\"在七点\"用英语说是？",
+      "options": [
+        "at seven",
+        "on seven",
+        "in seven",
+        "to seven"
+      ],
+      "answer": 0,
+      "explain": "钟点前用介词 at"
+    },
+    {
+      "q": "always, usually, often, sometimes, never 中频率最高的是？",
+      "options": [
+        "always",
+        "sometimes",
+        "never",
+        "often"
+      ],
+      "answer": 0,
+      "explain": "always 总是（100%）> usually > often > sometimes > never（0%）"
     }
   ],
   "textbook": "人教版英语七年级上册",

@@ -153,6 +153,39 @@
       ],
       "answer": 0,
       "explain": "一闪一闪亮晶晶：do do sol sol la la sol～"
+    },
+    {
+      "q": "旋律 do mi sol mi do 属于？",
+      "options": [
+        "上行再下行",
+        "纯上行",
+        "纯下行",
+        "无规律"
+      ],
+      "answer": 0,
+      "explain": "先升后降（do→mi→sol 是上行）"
+    },
+    {
+      "q": "音阶下行是？",
+      "options": [
+        "从高音到低音",
+        "从低到高",
+        "乱序",
+        "同音重复"
+      ],
+      "answer": 0,
+      "explain": "下行 = 音高降低"
+    },
+    {
+      "q": "《小星星》后半段旋律的走向是？",
+      "options": [
+        "下行收尾回到 do",
+        "一直上行",
+        "保持同音",
+        "没有规律"
+      ],
+      "answer": 0,
+      "explain": "整曲围绕 do、sol、la 构建，句尾下行回到主音 do"
     }
   ],
   "codeLesson": false,

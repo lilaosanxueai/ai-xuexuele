@@ -152,6 +152,39 @@
       ],
       "answer": 1,
       "explain": "blue = 蓝色，The sky is blue. 天空是蓝色的"
+    },
+    {
+      "q": "彩虹中 purple 是什么颜色？",
+      "options": [
+        "紫色",
+        "红色",
+        "黄色",
+        "绿色"
+      ],
+      "answer": 0,
+      "explain": "purple = 紫，红橙黄绿蓝靛紫的最后一色"
+    },
+    {
+      "q": "The sky is blue. 中 blue 是？",
+      "options": [
+        "颜色形容词",
+        "名词（天空）",
+        "动词",
+        "代词"
+      ],
+      "answer": 0,
+      "explain": "be 动词后接形容词作表语"
+    },
+    {
+      "q": "复数句 The apples ___ red. 填？",
+      "options": [
+        "are",
+        "is",
+        "am",
+        "be"
+      ],
+      "answer": 0,
+      "explain": "复数主语用 are"
     }
   ],
   "codeLesson": false,

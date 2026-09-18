@@ -113,6 +113,39 @@
       ],
       "answer": 1,
       "explain": "循环让计数器每次加 1 并报出，就是程序报数"
+    },
+    {
+      "q": "six 后面的数字是？",
+      "options": [
+        "seven",
+        "five",
+        "eight",
+        "nine"
+      ],
+      "answer": 0,
+      "explain": "顺序 six → seven → eight"
+    },
+    {
+      "q": "eight 的中文是？",
+      "options": [
+        "八",
+        "三",
+        "十八",
+        "八十"
+      ],
+      "answer": 0,
+      "explain": "eight = 8；eighteen = 18"
+    },
+    {
+      "q": "\"十三\"的英文是？",
+      "options": [
+        "thirteen",
+        "threeteen",
+        "thirty",
+        "three"
+      ],
+      "answer": 0,
+      "explain": "three → thirteen（30 是 thirty）"
     }
   ],
   "textbook": "人教PEP英语（三年级起点）",

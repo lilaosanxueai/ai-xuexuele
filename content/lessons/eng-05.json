@@ -133,6 +133,39 @@
       ],
       "answer": 1,
       "explain": "color 是颜色——这句问的是颜色。"
+    },
+    {
+      "q": "香蕉的颜色用英语说是？",
+      "options": [
+        "yellow",
+        "red",
+        "blue",
+        "black"
+      ],
+      "answer": 0,
+      "explain": "香蕉是黄色的：banana is yellow"
+    },
+    {
+      "q": "What color is the grass? 答：？",
+      "options": [
+        "It is green.",
+        "It is blue.",
+        "It is red.",
+        "It is big."
+      ],
+      "answer": 0,
+      "explain": "草是绿色的"
+    },
+    {
+      "q": "蓝天用英语说是？",
+      "options": [
+        "blue sky",
+        "sky blue color",
+        "blue the sky",
+        "the sky blue"
+      ],
+      "answer": 0,
+      "explain": "形容词在名词前：blue sky"
     }
   ],
   "textbook": "人教PEP英语（三年级起点）",

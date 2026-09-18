@@ -150,6 +150,39 @@
       ],
       "answer": 1,
       "explain": "调动眼睛、耳朵、嘴巴多感官记忆，效果最好"
+    },
+    {
+      "q": "an apple 中用 an 是因为？",
+      "options": [
+        "apple 以元音音开头",
+        "apple 是水果",
+        "单数",
+        "复数"
+      ],
+      "answer": 0,
+      "explain": "元音音开头用 an：an apple / an orange"
+    },
+    {
+      "q": "一 a book 还是 an book？",
+      "options": [
+        "a book",
+        "an book",
+        "the book 都行",
+        "books"
+      ],
+      "answer": 0,
+      "explain": "book 以辅音音 /b/ 开头，用 a"
+    },
+    {
+      "q": "\"书包\"的英语是？",
+      "options": [
+        "bag",
+        "bad",
+        "big",
+        "bed"
+      ],
+      "answer": 0,
+      "explain": "bag 书包；bad 坏的；big 大的；bed 床"
     }
   ],
   "codeLesson": false,

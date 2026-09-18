@@ -151,6 +151,39 @@
       ],
       "answer": 0,
       "explain": "Here you are = 给你；对方回答 Thank you"
+    },
+    {
+      "q": "顾客想买文具，礼貌的表达是？",
+      "options": [
+        "I'd like a pen, please.",
+        "Give me pen!",
+        "Pen!",
+        "You give pen."
+      ],
+      "answer": 0,
+      "explain": "I'd like…, please. 委婉表达想要"
+    },
+    {
+      "q": "店员问\"Can I help you?\" 你的回答可能是？",
+      "options": [
+        "Yes, I want a ruler.",
+        "No, you cannot.",
+        "I help you.",
+        "Help!"
+      ],
+      "answer": 0,
+      "explain": "购物场景：说出想要的商品"
+    },
+    {
+      "q": "问价格\"多少钱\"用？",
+      "options": [
+        "How much is it?",
+        "How many is it?",
+        "What money?",
+        "How price?"
+      ],
+      "answer": 0,
+      "explain": "价格不可数，用 How much"
     }
   ],
   "textbook": "人教版英语七年级上册",

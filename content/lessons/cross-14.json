@@ -132,6 +132,39 @@
       ],
       "answer": 0,
       "explain": "循环依次展示，等待控制每张卡的停留时长"
+    },
+    {
+      "q": "\"cat\"是什么意思？",
+      "options": [
+        "猫",
+        "狗",
+        "帽子",
+        "汽车"
+      ],
+      "answer": 0,
+      "explain": "cat = 猫 🐱"
+    },
+    {
+      "q": "与 \"dog\" 同类的词是？",
+      "options": [
+        "bird",
+        "book",
+        "pen",
+        "sun"
+      ],
+      "answer": 0,
+      "explain": "dog（狗）和 bird（鸟）都是动物"
+    },
+    {
+      "q": "\"apple\" 和哪个词同类？",
+      "options": [
+        "banana",
+        "desk",
+        "chair",
+        "bag"
+      ],
+      "answer": 0,
+      "explain": "apple（苹果）和 banana（香蕉）都是水果"
     }
   ],
   "textbook": "人教PEP英语（三年级起点）",

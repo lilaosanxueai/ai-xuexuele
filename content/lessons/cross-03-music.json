@@ -135,6 +135,39 @@
       ],
       "answer": 1,
       "explain": "七个音级构成大调音阶，是旋律的字母表"
+    },
+    {
+      "q": "《小星星》开头的音符是？",
+      "options": [
+        "do do sol sol la la sol",
+        "do re mi fa sol la xi",
+        "mi mi fa fa sol sol mi",
+        "sol la xi do re mi do"
+      ],
+      "answer": 0,
+      "explain": "一闪一闪亮晶晶 = do do sol sol la la sol"
+    },
+    {
+      "q": "拍手打节奏时拍点应该？",
+      "options": [
+        "间隔均匀",
+        "忽快忽慢",
+        "越来越快",
+        "随机"
+      ],
+      "answer": 0,
+      "explain": "稳定的拍点是音乐的基础"
+    },
+    {
+      "q": "大调音阶的第七个音是？",
+      "options": [
+        "xi",
+        "la",
+        "do",
+        "fa"
+      ],
+      "answer": 0,
+      "explain": "do re mi fa sol la xi（do）"
     }
   ],
   "grade": 2,

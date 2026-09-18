@@ -133,6 +133,39 @@
       ],
       "answer": 1,
       "explain": "how old 固定搭配，问多大年纪。"
+    },
+    {
+      "q": "别人问 How are you? 你应回答？",
+      "options": [
+        "I'm fine, thank you.",
+        "I am nine.",
+        "My name is Li.",
+        "How do you do?"
+      ],
+      "answer": 0,
+      "explain": "How are you 问状态（你好吗）"
+    },
+    {
+      "q": "初次见面应说？",
+      "options": [
+        "Nice to meet you!",
+        "How old are you?",
+        "Goodbye!",
+        "See you."
+      ],
+      "answer": 0,
+      "explain": "初次见面问好用 Nice to meet you"
+    },
+    {
+      "q": "What's your name? 中的 What's 是什么缩写？",
+      "options": [
+        "What is",
+        "What are",
+        "What does",
+        "What has"
+      ],
+      "answer": 0,
+      "explain": "What's = What is"
     }
   ],
   "textbook": "人教版英语（初中）",

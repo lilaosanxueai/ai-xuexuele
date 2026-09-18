@@ -151,6 +151,39 @@
       ],
       "answer": 1,
       "explain": "Ten, nine, eight…one, lift off!"
+    },
+    {
+      "q": "one 的下一个是？",
+      "options": [
+        "two",
+        "ten",
+        "three",
+        "six"
+      ],
+      "answer": 0,
+      "explain": "one, two, three…顺序"
+    },
+    {
+      "q": "four 和 five 哪个大？",
+      "options": [
+        "five",
+        "four",
+        "一样",
+        "没法比"
+      ],
+      "answer": 0,
+      "explain": "5 > 4"
+    },
+    {
+      "q": "火箭倒数从几开始？",
+      "options": [
+        "ten",
+        "one",
+        "five",
+        "three"
+      ],
+      "answer": 0,
+      "explain": "Ten, nine…one, lift off!"
     }
   ],
   "textbook": "人教PEP英语三年级上册",
