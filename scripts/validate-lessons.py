@@ -20,7 +20,7 @@ VALID_CHECKS = {"block_used", "block_used_any", "block_count_min", "block_count_
 VALID_AREAS = {"信息科技", "数学", "语文", "英语", "科学", "物理", "化学", "生物", "地理", "音乐", "艺术", "道德与法治", "劳动", "体育与健康"}
 VALID_BANDS = {"primary", "junior", "senior"}
 REQUIRED = ["id", "island", "order", "title", "emoji", "story", "goals", "toolbox", "actor", "tasks", "aiIntro", "celebrate"]
-PY_COMMANDS = {"move","turn_right","turn_left","go_to","bounce","say","say_for","costume","change_size","show","hide","play","wait","pen_down","pen_up","pen_color"}
+PY_COMMANDS = {"move","turn_right","turn_left","go_to","bounce","say","say_for","costume","change_size","show","hide","play","wait","pen_down","pen_up","pen_color","write","fill_rect","circle","ring"}
 PY_FUNCS = {"touching_edge","key_down","recognize","random","range","sin","cos","sqrt","abs","eq","print"}
 PY_BLACKLIST = [(r"\bdef\s", "不支持 def 函数定义"), (r"\belif\b", "不支持 elif（用嵌套 if）"), (r"\.append", "不支持列表方法"), (r"\[", "不支持列表"), (r"\*\*", "不支持幂运算（用连乘）"), (r"\blen\s*\(", "不支持 len"), (r"\bround\s*\(", "不支持 round"), (r"\bpow\s*\(", "不支持 pow"), (r"\bimport\b", "不支持 import"), (r"\"", "双引号检查")]  # 最后一条单独处理
 

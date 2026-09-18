@@ -1,0 +1,209 @@
+{
+  "id": "math-65",
+  "island": "math",
+  "order": 240,
+  "codeLesson": true,
+  "title": "三角恒等变换：单位圆的密码",
+  "emoji": "🔄",
+  "story": "sin²x + cos²x = 1，还有和角公式、二倍角公式——它们都藏在单位圆里。三角恒等变换是解三角形和求值的万能钥匙。",
+  "goals": [
+    "掌握同角关系 sin²x+cos²x=1 与 tanx=sinx/cosx",
+    "会用和角公式与二倍角公式",
+    "会求特殊角的三角函数值"
+  ],
+  "toolbox": [],
+  "actor": {
+    "costume": "🔄",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：cos 与 sin 的平方和显示多少？（恒为 1）",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：tan = sin/cos 成立吗？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：deg=45 时 sin 和 cos 什么关系？（相等）",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "curriculum": {
+    "module": "函数与导数",
+    "points": [
+      "同角三角函数基本关系",
+      "两角和与差公式",
+      "二倍角公式"
+    ]
+  },
+  "subjectArea": "数学",
+  "gradeBand": "senior",
+  "grade": 10,
+  "textbook": "人教A版数学（高中）",
+  "aiIntro": "🔄 单位圆上转一圈，sin 与 cos 的平方和永远是 1——勾股定理在圆上跳舞！",
+  "celebrate": "高中数学新兵器入手！",
+  "starterCode": "# 单位圆与三角恒等式探索台\ndeg = 30   # 旋转角\n\nhide()\nring(0, 0, 100, \"#94a3b8\")\n# 半径（旋转角处）\npx = 100 * cos(deg)\npy = 100 * sin(deg)\npen_color(\"#dc2626\")\npen_down()\ngo_to(0, 0)\ngo_to(px, py)\npen_up()\n# cos 分量（x 轴投影）\npen_color(\"#1d4ed8\")\npen_down()\ngo_to(0, 0)\ngo_to(px, 0)\npen_up()\nfill_rect(px / 2, -16, 6, 10, \"#1d4ed8\")\nwrite(\"cos=\" + cos(deg) * 0.01, px, -30, \"#1d4ed8\", 11)\n# sin 分量（竖直投影）\npen_color(\"#16a34a\")\npen_down()\ngo_to(px, 0)\ngo_to(px, py)\npen_up()\nwrite(\"sin=\" + sin(deg) * 0.01, px + 30, py / 2, \"#16a34a\", 11)\ncircle(px, py, 5, \"#dc2626\")\nwrite(\"sin²+cos² = 1 恒成立！\", -60, 150, \"#dc2626\", 13)\nwrite(\"（半径为 1 的直角三角形勾股定理）\", -60, 128, \"#64748b\", 11)\nwrite(\"tan = sin/cos = \" + sin(deg) / cos(deg), -90, -150, \"#7c3aed\", 12)\nwrite(\"角 \" + deg + \"°\", 30, 30, \"#0f172a\", 12)\n",
+  "lab": {
+    "params": [
+      {
+        "name": "deg",
+        "label": "旋转角",
+        "min": 0,
+        "max": 360,
+        "step": 15,
+        "value": 30
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "cos 与 sin 的平方和显示多少？（恒为 1）",
+      "tan = sin/cos 成立吗？",
+      "deg=45 时 sin 和 cos 什么关系？（相等）"
+    ],
+    "code": "# 单位圆与三角恒等式探索台\ndeg = 30   # 旋转角\n\nhide()\nring(0, 0, 100, \"#94a3b8\")\n# 半径（旋转角处）\npx = 100 * cos(deg)\npy = 100 * sin(deg)\npen_color(\"#dc2626\")\npen_down()\ngo_to(0, 0)\ngo_to(px, py)\npen_up()\n# cos 分量（x 轴投影）\npen_color(\"#1d4ed8\")\npen_down()\ngo_to(0, 0)\ngo_to(px, 0)\npen_up()\nfill_rect(px / 2, -16, 6, 10, \"#1d4ed8\")\nwrite(\"cos=\" + cos(deg) * 0.01, px, -30, \"#1d4ed8\", 11)\n# sin 分量（竖直投影）\npen_color(\"#16a34a\")\npen_down()\ngo_to(px, 0)\ngo_to(px, py)\npen_up()\nwrite(\"sin=\" + sin(deg) * 0.01, px + 30, py / 2, \"#16a34a\", 11)\ncircle(px, py, 5, \"#dc2626\")\nwrite(\"sin²+cos² = 1 恒成立！\", -60, 150, \"#dc2626\", 13)\nwrite(\"（半径为 1 的直角三角形勾股定理）\", -60, 128, \"#64748b\", 11)\nwrite(\"tan = sin/cos = \" + sin(deg) / cos(deg), -90, -150, \"#7c3aed\", 12)\nwrite(\"角 \" + deg + \"°\", 30, 30, \"#0f172a\", 12)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "同角基本关系",
+        "body": "【sin²x + cos²x = 1；tan x = sin x / cos x（cos x ≠ 0）】\n几何来源：单位圆中半径、横坐标、纵坐标构成直角三角形。\n知 sin 求 cos：cos = ±√(1−sin²)，符号看象限。"
+      },
+      {
+        "title": "两角和与差",
+        "body": "【sin(α±β) = sinαcosβ ± cosαsinβ】【cos(α±β) = cosαcosβ ∓ sinαsinβ】\n用于把非特殊角拆成特殊角的和差：sin75° = sin(45°+30°)。\n符号\"±∓\"上下对应，别记混。"
+      },
+      {
+        "title": "二倍角",
+        "body": "【sin2α = 2sinαcosα；cos2α = cos²α − sin²α = 2cos²α − 1】\n由和角公式取 β=α 直接得到。\nsin30°=1/2 → cos60° = 1−2×(1/2)² = 1/2 ✓（自检）。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "已知 sinα = 3/5（α 为第一象限角），求 cosα 和 tanα。",
+        "steps": [
+          "cos²α = 1 − 9/25 = 16/25",
+          "第一象限 cos 为正：cosα = 4/5",
+          "tanα = (3/5)/(4/5) = 3/4"
+        ],
+        "tip": "平方和求另一个，象限定符号"
+      },
+      {
+        "q": "求 sin75° 的值。",
+        "steps": [
+          "75° = 45° + 30°",
+          "sin75° = sin45°cos30° + cos45°sin30°",
+          "= (√2/2)(√3/2) + (√2/2)(1/2)",
+          "= (√6 + √2)/4"
+        ],
+        "tip": "非特殊角拆成特殊角的和差"
+      }
+    ],
+    "mistakes": [
+      "cos(α+β) 展开符号记错（应为 cosαcosβ − sinαsinβ）",
+      "由 sin 求 cos 忘讨论象限符号"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "sin²x + cos²x = ?",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "不确定"
+      ],
+      "answer": 0,
+      "explain": "同角平方和恒为 1"
+    },
+    {
+      "q": "tanx 用 sin、cos 表示为？",
+      "options": [
+        "sinx/cosx",
+        "cosx/sinx",
+        "sinx·cosx",
+        "sinx−cosx"
+      ],
+      "answer": 0,
+      "explain": "正切 = 对边/邻边 = sin/cos"
+    },
+    {
+      "q": "sinα=3/5（第一象限），cosα=？",
+      "options": [
+        "4/5",
+        "−4/5",
+        "±4/5",
+        "5/4"
+      ],
+      "answer": 0,
+      "explain": "1−9/25=16/25，第一象限取正"
+    },
+    {
+      "q": "sin2α 等于？",
+      "options": [
+        "2sinαcosα",
+        "2sinα",
+        "sin²α",
+        "sinα+cosα"
+      ],
+      "answer": 0,
+      "explain": "二倍角公式"
+    },
+    {
+      "q": "cos(α−β) = ?",
+      "options": [
+        "cosαcosβ + sinαsinβ",
+        "cosαcosβ − sinαsinβ",
+        "sinαcosβ − cosαsinβ",
+        "cosα − cosβ"
+      ],
+      "answer": 0,
+      "explain": "差角公式：减变加（cos 的差角中 sin 项变号）"
+    },
+    {
+      "q": "cos60° 用二倍角由 sin30° 求：cos60° = 1 − 2sin²30° = ？",
+      "options": [
+        "1/2",
+        "1/4",
+        "3/4",
+        "0"
+      ],
+      "answer": 0,
+      "explain": "1 − 2×(1/2)² = 1/2 ✓"
+    }
+  ]
+}
