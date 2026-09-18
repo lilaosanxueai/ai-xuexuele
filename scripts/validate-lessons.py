@@ -15,7 +15,7 @@ VALID_BLOCKS = {
     "island_number", "island_eq", "island_random",
     "island_pen_down", "island_pen_up", "island_pen_color",
 }
-VALID_ISLANDS = {"basics", "extra", "cross", "math"}
+VALID_ISLANDS = {"basics", "extra", "cross", "math", "physics"}
 VALID_CHECKS = {"block_used", "block_used_any", "block_count_min", "block_count_total_min", "say_text", "actor_reach", "manual"}
 VALID_AREAS = {"信息科技", "数学", "语文", "英语", "科学", "物理", "化学", "生物", "地理", "音乐", "艺术", "道德与法治", "劳动", "体育与健康"}
 VALID_BANDS = {"primary", "junior", "senior"}

@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import type { Lesson, ProfileProgress } from '@shared/types.ts';
+import type { Exercise, Lesson, ProfileProgress } from '@shared/types.ts';
 import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
+import ExercisePanel from '../components/ExercisePanel.tsx';
 import { SUBJECTS, SUBJECT_STYLE } from '../components/subjectMeta.ts';
 
 /** 学科页：该学科按学段分组的全部课程，含课标标注。理科动态演示课进互动实验室，其余进辅导页 */
@@ -20,6 +21,26 @@ export default function SubjectScreen() {
   const { current: profile } = useProfileStore();
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [progress, setProgress] = useState<ProfileProgress | null>(null);
+  /** 单元测验（猿题库/学而思式模块级组卷）：模块名 + 抽好的题 */
+  const [unitTest, setUnitTest] = useState<{ module: string; exercises: Exercise[] } | null>(null);
+
+  /** 从模块内的课程随堂题抽 8 道组卷（每课最多 2 道，打散顺序） */
+  const startUnitTest = (mod: string) => {
+    const pool: Exercise[] = [];
+    for (const l of lessons) {
+      if ((l.curriculum?.module ?? '其他') !== mod) continue;
+      const exs = l.exercises ?? [];
+      // 每课抽后 3 题里的 2 道（前 3 题是基础，单元测验偏综合）
+      const picks = [3, 4, 5].filter((i) => exs[i]).map((i) => exs[i]);
+      pool.push(...picks.slice(0, 2).map((e) => ({ ...e })));
+    }
+    // Fisher-Yates 打散
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    setUnitTest({ module: mod, exercises: pool.slice(0, 8) });
+  };
 
   useEffect(() => {
     if (!profile) { nav('/'); return; }
@@ -68,8 +89,8 @@ export default function SubjectScreen() {
           </div>
         </div>
 
-        {/* 知识图谱掌握度（松鼠AI 式模块级诊断） */}
-        {modules.size > 1 && [...modules.entries()].some(([, m]) => m.masteryN > 0) && (
+        {/* 知识图谱掌握度（松鼠AI 式模块级诊断）；无成绩时也显示（全部"未检测"），保证单元小测入口常在 */}
+        {modules.size > 1 && (
           <section className="mb-8 rounded-3xl bg-white/85 p-5 shadow-sm">
             <div className="mb-1 flex items-center gap-2">
               <h2 className="text-lg font-black text-slate-700">🧠 知识图谱掌握度</h2>
@@ -92,7 +113,16 @@ export default function SubjectScreen() {
                       <div className="h-2 overflow-hidden rounded-full bg-slate-200">
                         <div className="h-full rounded-full transition-all" style={{ width: `${mastery < 0 ? 0 : mastery}%`, background: col }} />
                       </div>
-                      <div className="mt-1 text-[10px] text-slate-400">已学 {m.done}/{m.total} 课{mastery >= 0 && mastery < 60 ? ' · 薄弱模块，优先巩固' : ''}</div>
+                      <div className="mt-1.5 flex items-center justify-between gap-2">
+                        <span className="text-[10px] text-slate-400">已学 {m.done}/{m.total} 课{mastery >= 0 && mastery < 60 ? ' · 薄弱模块，优先巩固' : ''}</span>
+                        <button
+                          onClick={() => startUnitTest(mod)}
+                          className="shrink-0 rounded-lg bg-violet-100 px-2 py-0.5 text-[10px] font-bold text-violet-700 transition hover:bg-violet-200"
+                          title="综合该模块多课的题目进行测验"
+                        >
+                          📝 单元小测
+                        </button>
+                      </div>
                     </div>
                   );
                 })}
@@ -141,6 +171,19 @@ export default function SubjectScreen() {
           <div className="rounded-3xl bg-white/70 p-10 text-center text-slate-400">该学科暂无课程</div>
         )}
       </main>
+
+      {/* 单元测验（模块级综合测评） */}
+      {unitTest && unitTest.exercises.length > 0 && (
+        <ExercisePanel
+          title={`单元小测 · ${unitTest.module}`}
+          exercises={unitTest.exercises}
+          onClose={() => setUnitTest(null)}
+          onDone={(correct) => {
+            setUnitTest(null);
+            alert(`单元小测完成：${correct}/${unitTest.exercises.length} 道正确${correct === unitTest.exercises.length ? '，满分！🎉' : correct / unitTest.exercises.length >= 0.6 ? '，模块基本掌握 ✓' : '，建议回看该模块的薄弱课程'}`);
+          }}
+        />
+      )}
     </div>
   );
 }
