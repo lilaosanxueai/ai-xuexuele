@@ -1,7 +1,7 @@
 import { Router, type Request, type Response } from 'express';
 import type { BlockCatalogEntry, BuddyMode, BuildOp, ChatContext, ChatMessage, PlaygroundModel, Settings } from '@shared/types.ts';
 import type { AppConfig } from './config.ts';
-import { llmConfigured, setParentPin } from './config.ts';
+import { llmConfigured } from './config.ts';
 import * as store from './store.ts';
 import { loadLessons, findLesson } from './lessons.ts';
 import { completeChat, streamChat, type LlmMessage } from './llm.ts';
@@ -12,14 +12,6 @@ import { getPlayground, savePlayground } from './playground.ts';
 
 export function buildRouter(cfg: AppConfig): Router {
   const r = Router();
-
-  const requirePin = (req: Request, res: Response): boolean => {
-    if (req.get('x-parent-pin') !== cfg.parentPin) {
-      res.status(403).json({ error: 'PIN 不正确' });
-      return false;
-    }
-    return true;
-  };
 
   r.get('/health', (_req, res) => {
     res.json({ ok: true, llmConfigured: llmConfigured(cfg) });
@@ -33,7 +25,7 @@ export function buildRouter(cfg: AppConfig): Router {
     res.status(201).json(store.createProfile(name, typeof avatar === 'string' ? avatar : '🧒'));
   });
   r.delete('/profiles/:id', (req, res) => {
-    if (!requirePin(req, res)) return;   // 删除角色连带清空学习数据，必须家长 PIN
+    // 删除角色连带清空学习数据（家长确认弹窗在前端完成，已取消 PIN 码机制）
     store.deleteProfile(req.params.id);
     res.json({ ok: true });
   });
@@ -97,7 +89,6 @@ export function buildRouter(cfg: AppConfig): Router {
   // ---------- 设置 ----------
   r.get('/settings', (_req, res) => res.json(store.getSettings()));
   r.put('/settings', (req, res) => {
-    if (!requirePin(req, res)) return;
     const body = req.body as Settings;
     if (!body?.buddy?.name || !body?.limits) return res.status(400).json({ error: '设置格式不对' });
     res.json(store.saveSettings({
@@ -112,18 +103,6 @@ export function buildRouter(cfg: AppConfig): Router {
         hardStop: !!body.limits.hardStop,
       },
     }));
-  });
-  r.post('/verify-pin', (req, res) => {
-    res.json({ ok: String(req.body?.pin ?? '') === cfg.parentPin });
-  });
-
-  // 修改家长 PIN（需旧 PIN 验证），持久化到 data/config.json
-  r.put('/pin', (req, res) => {
-    if (!requirePin(req, res)) return;
-    const pin = String(req.body?.pin ?? '');
-    if (!/^\d{4,8}$/.test(pin)) return res.status(400).json({ error: '新 PIN 需要是 4-8 位数字' });
-    setParentPin(cfg, pin);
-    res.json({ ok: true });
   });
 
   // ---------- AI 对话（SSE 流式） ----------
@@ -241,7 +220,6 @@ export function buildRouter(cfg: AppConfig): Router {
 
   // ---------- 对话记录（家长） ----------
   r.get('/chatlogs', (req, res) => {
-    if (!requirePin(req, res)) return;
     const profileId = String(req.query.profileId ?? '');
     if (!profileId) return res.status(400).json({ error: '缺少 profileId' });
     if (req.query.date) return res.json(readChatLogs(profileId, String(req.query.date)));

@@ -81,8 +81,8 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
   const [restOverlay, setRestOverlay] = useState(false);
   const [restCountdown, setRestCountdown] = useState(0);
   const [locked, setLocked] = useState(false);
+  const [restSecs, setRestSecs] = useState(60);
   const [quizOpen, setQuizOpen] = useState(false);
-  const [pinInput, setPinInput] = useState('');
 
   const wsApiRef = useRef<WorkspaceApi | null>(null);
   const stageRef = useRef(new StageState());
@@ -332,16 +332,23 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
     return () => clearInterval(timer);
   }, [profile, settings.limits.dailyMinutes, settings.limits.hardStop]);
 
-  const unlockWithPin = async () => {
-    const r = await api.verifyPin(pinInput).catch(() => ({ ok: false }));
-    if (r.ok) {
-      localStorage.setItem(`island-unlocked-${new Date().toISOString().slice(0, 10)}`, '1');
-      setLocked(false);
-      setPinInput('');
-    } else {
-      setToast('PIN 不对哦，请爸爸妈妈来输入');
-    }
-  };
+  // 超时锁定：强制休息 60 秒护眼，倒计时结束自动解锁（已取消家长 PIN 机制）
+  useEffect(() => {
+    if (!locked) return;
+    setRestSecs(60);
+    const t = setInterval(() => {
+      setRestSecs((s) => {
+        if (s <= 1) {
+          clearInterval(t);
+          setLocked(false);
+          localStorage.setItem(`island-unlocked-${new Date().toISOString().slice(0, 10)}`, '1');
+          return 0;
+        }
+        return s - 1;
+      });
+    }, 1000);
+    return () => clearInterval(t);
+  }, [locked]);
 
   useEffect(() => {
     if (!toast) return;
@@ -887,23 +894,13 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
         </div>
       )}
 
-      {/* 到时锁定（家长开启 hardStop 后生效，PIN 解锁当日有效） */}
+      {/* 到时锁定（家长开启 hardStop 后生效）：强制休息 60 秒护眼，倒计时结束自动解锁 */}
       {locked && (
         <div className="fixed inset-0 z-[70] flex flex-col items-center justify-center gap-4 bg-slate-900/95 p-6 text-white">
           <div className="text-7xl">🌙</div>
           <h2 className="text-2xl font-black">今天的学习时间用完啦</h2>
-          <p className="max-w-sm text-center text-white/70">作品都保存好了。早点休息，明天继续学！</p>
-          <div className="mt-2 flex gap-2">
-            <input
-              type="password"
-              value={pinInput}
-              onChange={(e) => setPinInput(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && void unlockWithPin()}
-              placeholder="家长 PIN"
-              className="w-36 rounded-xl border border-white/30 bg-white/10 px-3 py-2 text-center text-xl tracking-widest outline-none"
-            />
-            <button onClick={() => void unlockWithPin()} className="rounded-xl bg-white/20 px-4 py-2 font-bold hover:bg-white/30">解锁</button>
-          </div>
+          <p className="max-w-sm text-center text-white/70">作品都保存好了。先休息一下眼睛，{restSecs} 秒后自动继续～</p>
+          <div className="text-5xl font-black tabular-nums">{restSecs}</div>
           <button onClick={() => nav('/map')} className="rounded-xl bg-white/10 px-5 py-2 text-sm hover:bg-white/20">回地图看看作品</button>
         </div>
       )}

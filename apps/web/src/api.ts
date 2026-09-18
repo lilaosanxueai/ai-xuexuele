@@ -2,8 +2,7 @@ import type { BlockCatalogEntry, BuddyMode, BuildOp, ChatContext, ChatMessage, L
 
 async function req<T>(url: string, init?: RequestInit): Promise<T> {
   const resp = await fetch(url, {
-    // headers 放在 ...init 之后合并：否则自定义 header（如 x-parent-pin）会把 Content-Type 覆盖掉，
-    // 服务端 express.json() 解析不到 body（改 PIN/保存设置会报「格式不对」）
+    // headers 放在 ...init 之后合并：保证 Content-Type 始终带上，服务端 express.json() 才能解析 body
     ...init,
     headers: { 'Content-Type': 'application/json', ...(init?.headers as Record<string, string> | undefined) },
   });
@@ -19,7 +18,7 @@ export const api = {
   profiles: () => req<Profile[]>('/api/profiles'),
   createProfile: (name: string, avatar: string) =>
     req<Profile>('/api/profiles', { method: 'POST', body: JSON.stringify({ name, avatar }) }),
-  deleteProfile: (id: string, pin: string) => req<{ ok: boolean }>(`/api/profiles/${id}`, { method: 'DELETE', headers: { 'x-parent-pin': pin } }),
+  deleteProfile: (id: string) => req<{ ok: boolean }>(`/api/profiles/${id}`, { method: 'DELETE' }),
   lessons: () => req<Lesson[]>('/api/lessons'),
   progress: (profileId: string) => req<ProfileProgress>(`/api/progress/${profileId}`),
   updateProgress: (profileId: string, patch: Record<string, unknown>) =>
@@ -32,19 +31,16 @@ export const api = {
   likeProject: (profileId: string, id: string, likerId: string) =>
     req<Project>(`/api/projects/${id}/like?profileId=${profileId}`, { method: 'POST', body: JSON.stringify({ likerId }) }),
   settings: () => req<Settings>('/api/settings'),
-  saveSettings: (s: Settings, pin: string) =>
-    req<Settings>('/api/settings', { method: 'PUT', body: JSON.stringify(s), headers: { 'x-parent-pin': pin } }),
-  verifyPin: (pin: string) => req<{ ok: boolean }>('/api/verify-pin', { method: 'POST', body: JSON.stringify({ pin }) }),
-  changePin: (pin: string, newPin: string) =>
-    req<{ ok: boolean }>('/api/pin', { method: 'PUT', body: JSON.stringify({ pin: newPin }), headers: { 'x-parent-pin': pin } }),
+  saveSettings: (s: Settings) =>
+    req<Settings>('/api/settings', { method: 'PUT', body: JSON.stringify(s) }),
   playground: (profileId: string) => req<PlaygroundModel>(`/api/playground/${profileId}`),
   savePlayground: (profileId: string, model: PlaygroundModel) =>
     req<PlaygroundModel>(`/api/playground/${profileId}`, { method: 'POST', body: JSON.stringify(model) }),
-  chatDates: (profileId: string, pin: string) =>
-    req<{ dates: string[] }>(`/api/chatlogs?profileId=${profileId}`, { headers: { 'x-parent-pin': pin } }),
-  chatLogs: (profileId: string, date: string, pin: string) =>
+  chatDates: (profileId: string) =>
+    req<{ dates: string[] }>(`/api/chatlogs?profileId=${profileId}`),
+  chatLogs: (profileId: string, date: string) =>
     req<{ ts: string; mode: string; user: string; assistant: string }[]>(
-      `/api/chatlogs?profileId=${profileId}&date=${date}`, { headers: { 'x-parent-pin': pin } }),
+      `/api/chatlogs?profileId=${profileId}&date=${date}`),
 };
 
 /** AI 代搭：口述 → 积木指令（fallback=true 表示服务端没有大模型，前端走本地解析） */

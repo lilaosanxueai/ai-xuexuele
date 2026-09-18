@@ -16,14 +16,12 @@ export interface LlmConfig {
 export interface AppConfig {
   llm: LlmConfig;
   server: { host: string; port: number };
-  parentPin: string;
 }
 
 function defaults(): AppConfig {
   return {
     llm: { baseURL: 'https://open.bigmodel.cn/api/paas/v4', apiKey: '', model: 'glm-4.6', maxTokens: 800 },
     server: { host: '127.0.0.1', port: 8787 },
-    parentPin: '1234',
   };
 }
 
@@ -41,7 +39,6 @@ export function loadConfig(): AppConfig {
     return {
       llm: { ...base.llm, ...raw.llm },
       server: { ...base.server, ...raw.server },
-      parentPin: typeof raw.parentPin === 'string' && raw.parentPin ? raw.parentPin : base.parentPin,
     };
   } catch (e) {
     console.error('data/config.json 解析失败，使用默认配置：', e);
@@ -52,18 +49,6 @@ export function loadConfig(): AppConfig {
 export function llmConfigured(cfg: AppConfig): boolean {
   const k = cfg.llm.apiKey.trim();
   return k.length > 0 && !k.includes('在这里填');
-}
-
-/** 修改家长 PIN：更新运行时配置并持久化到 data/config.json（保留 llm/server 等已有字段） */
-export function setParentPin(cfg: AppConfig, pin: string): void {
-  const file = path.join(DATA_DIR, 'config.json');
-  let raw: Record<string, unknown> = { llm: cfg.llm, server: cfg.server };
-  try {
-    raw = { ...raw, ...(JSON.parse(fs.readFileSync(file, 'utf-8')) as Record<string, unknown>) };
-  } catch { /* 无配置文件或解析失败：用运行时配置重建 */ }
-  raw.parentPin = pin;
-  fs.writeFileSync(file, JSON.stringify(raw, null, 2), 'utf-8');
-  cfg.parentPin = pin;
 }
 
 export function ensureDirs(): void {

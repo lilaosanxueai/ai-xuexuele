@@ -4,45 +4,11 @@ import type { Lesson, Profile, ProfileProgress, Project, Settings } from '@share
 import { api } from '../api.ts';
 import { calcStreak } from '../utils/streak.ts';
 
-/** 家长面板：PIN 门 → 学习进度 / 学情报告 / AI 对话记录 / 伙伴设置 */
+/** 家长面板：学习进度 / 学情报告 / AI 对话记录 / 伙伴设置（已取消 PIN 门，直接进入） */
 
 type Tab = 'progress' | 'report' | 'chats' | 'settings';
 
 export default function ParentScreen() {
-  const [pin, setPin] = useState(sessionStorage.getItem('island-pin') ?? '');
-  const [verified, setVerified] = useState(!!sessionStorage.getItem('island-pin'));
-  const [error, setError] = useState('');
-
-  const tryPin = async () => {
-    const r = await api.verifyPin(pin);
-    if (r.ok) {
-      sessionStorage.setItem('island-pin', pin);
-      setVerified(true);
-    } else {
-      setError('PIN 不对，再试试（默认 1234，进入后在「设置」页可以修改）');
-    }
-  };
-
-  if (!verified) {
-    return (
-      <div className="flex min-h-screen flex-col items-center justify-center gap-4 p-6">
-        <div className="text-5xl">🛡</div>
-        <h1 className="text-2xl font-black">家长中心</h1>
-        <input
-          type="password"
-          value={pin}
-          onChange={(e) => { setPin(e.target.value); setError(''); }}
-          onKeyDown={(e) => e.key === 'Enter' && void tryPin()}
-          placeholder="输入家长 PIN"
-          className="w-48 rounded-xl border border-slate-300 px-4 py-2 text-center text-xl tracking-widest outline-none focus:border-sky-400"
-        />
-        {error && <p className="text-sm text-rose-500">{error}</p>}
-        <button onClick={() => void tryPin()} className="rounded-xl bg-slate-800 px-6 py-2 font-bold text-white">进入</button>
-        <Link to="/" className="text-sm text-slate-400">← 回到首页</Link>
-      </div>
-    );
-  }
-
   return (
     <div className="mx-auto min-h-screen max-w-4xl px-6 py-8">
       <div className="mb-4 flex items-center gap-3">
@@ -95,8 +61,8 @@ function Tabs() {
       {!profileId ? <p className="text-slate-400">还没有创建孩子角色</p> : (
         tab === 'progress' ? <ProgressTab profileId={profileId} />
           : tab === 'report' ? <ReportTab profileId={profileId} />
-          : tab === 'chats' ? <ChatsTab profileId={profileId} pin={sessionStorage.getItem('island-pin')!} />
-          : <SettingsTab pin={sessionStorage.getItem('island-pin')!} />
+ : tab === 'chats' ? <ChatsTab profileId={profileId} />
+ : <SettingsTab />
       )}
     </div>
   );
@@ -326,20 +292,20 @@ function StatCard({ label, value, emoji }: { label: string; value: string; emoji
   );
 }
 
-function ChatsTab({ profileId, pin }: { profileId: string; pin: string }) {  const [dates, setDates] = useState<string[]>([]);
+function ChatsTab({ profileId }: { profileId: string }) {  const [dates, setDates] = useState<string[]>([]);
   const [date, setDate] = useState('');
   const [logs, setLogs] = useState<{ ts: string; mode: string; user: string; assistant: string }[]>([]);
 
   useEffect(() => {
-    void api.chatDates(profileId, pin).then((r) => {
+    void api.chatDates(profileId).then((r) => {
       setDates(r.dates);
       if (r.dates[0]) setDate(r.dates[0]);
     });
-  }, [profileId, pin]);
+  }, [profileId]);
 
   useEffect(() => {
-    if (date) void api.chatLogs(profileId, date, pin).then(setLogs);
-  }, [profileId, date, pin]);
+    if (date) void api.chatLogs(profileId, date).then(setLogs);
+  }, [profileId, date]);
 
   const MODE_LABEL: Record<string, string> = { idea: '💡灵感', hint: '🆘提示', explain: '📖讲解', review: '🌟点评', 'safety-guard': '🛡安全拦截' };
 
@@ -371,34 +337,17 @@ function ChatsTab({ profileId, pin }: { profileId: string; pin: string }) {  con
   );
 }
 
-function SettingsTab({ pin }: { pin: string }) {
+function SettingsTab() {
   const [settings, setSettings] = useState<Settings | null>(null);
   const [saved, setSaved] = useState(false);
-  const [newPin, setNewPin] = useState('');
-  const [pinMsg, setPinMsg] = useState('');
 
   useEffect(() => { void api.settings().then(setSettings); }, []);
   if (!settings) return <p className="text-slate-400">加载中…</p>;
 
-  // 改过 PIN 后 sessionStorage 里才是最新值（prop 可能是旧值）
-  const curPin = sessionStorage.getItem('island-pin') ?? pin;
-
   const save = async () => {
-    await api.saveSettings(settings, curPin);
+    await api.saveSettings(settings);
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
-  };
-
-  const changePin = async () => {
-    if (!/^\d{4,8}$/.test(newPin)) { setPinMsg('新 PIN 需要是 4-8 位数字'); return; }
-    try {
-      await api.changePin(curPin, newPin);
-      sessionStorage.setItem('island-pin', newPin);
-      setNewPin('');
-      setPinMsg('PIN 已修改 ✓');
-    } catch (e) {
-      setPinMsg(e instanceof Error ? e.message : '修改失败，再试试');
-    }
   };
 
   return (
@@ -446,7 +395,7 @@ function SettingsTab({ pin }: { pin: string }) {
             onChange={(e) => setSettings({ ...settings, limits: { ...settings.limits, hardStop: e.target.checked } })}
             className="h-4 w-4 accent-emerald-600"
           />
-          <span><b>到时锁定</b>：达到每日时长后锁定使用，需要家长 PIN 解锁（当天有效）。不勾选则只提醒不锁定</span>
+          <span><b>到时锁定</b>：达到每日时长后锁定休息 1 分钟（自动解锁）。不勾选则只提醒不锁定</span>
         </label>
       </div>
 
@@ -463,30 +412,6 @@ function SettingsTab({ pin }: { pin: string }) {
             </button>
           ))}
         </div>
-      </div>
-
-      <div>
-        <h3 className="mb-3 font-black">🔑 家长 PIN</h3>
-        <div className="flex flex-wrap items-center gap-2">
-          <input
-            type="password"
-            inputMode="numeric"
-            maxLength={8}
-            value={newPin}
-            onChange={(e) => { setNewPin(e.target.value.replace(/\D/g, '')); setPinMsg(''); }}
-            placeholder="新 PIN（4-8 位数字）"
-            className="w-44 rounded-xl border border-slate-300 px-3 py-2 tracking-widest outline-none focus:border-sky-400"
-          />
-          <button
-            onClick={() => void changePin()}
-            disabled={newPin.length < 4}
-            className="rounded-xl bg-slate-700 px-4 py-2 font-bold text-white hover:bg-slate-800 disabled:opacity-40"
-          >
-            修改 PIN
-          </button>
-          {pinMsg && <span className={`text-sm font-bold ${pinMsg.includes('✓') ? 'text-emerald-600' : 'text-rose-500'}`}>{pinMsg}</span>}
-        </div>
-        <p className="mt-1 text-xs text-slate-400">删除角色、解锁超时、看对话记录都会用到这个 PIN（默认 1234）</p>
       </div>
 
       <div className="flex items-center gap-3">

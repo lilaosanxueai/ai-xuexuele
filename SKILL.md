@@ -32,6 +32,10 @@ start.bat
 
 ## 本地相对上游的增量（持续更新）
 
+1. **取消家长 PIN 码机制（2026-09-18，第 29 轮，用户指令「取消家长PIN码」）**：
+   - 全链路移除：服务端 requirePin 中间件与 /verify-pin、/pin 路由删除（删角色/保存设置/对话记录全部开放）、AppConfig.parentPin 与 setParentPin 删除、api.ts 的 verifyPin/changePin 与各接口 pin 参数删除
+   - 前端：HomeScreen 删角色改为 ConfirmDialog 直接确认；ParentScreen 去掉 PIN 门直接进入、设置页删「修改 PIN」区；WorkshopScreen 超时锁定改为 60 秒护眼倒计时自动解锁（保留休息强制性、不再需要 PIN）
+   - 验证：tsc/build/64 测试全过；浏览器实测家长中心直进、删角色纯确认弹窗、设置保存与对话记录接口无 PIN 头 200
 1. **讲解层事实自查 + 自学闭环打通（2026-09-18，第 28 轮）**：
    - **积压推送完成**：第 26/27 轮两提交已同步 GitHub（f818acb..d576c84）
    - **226 课全部【】定义/公式句提取复核**（dump-teach-claims.mjs，16668 字符逐条人工审）：整体准确，仅修 2 处小问题（cross-62 颜色词表粘连、cross-96"幼体水生成体水陆"缺顿号）
