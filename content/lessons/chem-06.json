@@ -1,0 +1,209 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🌱",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：什么条件下复分解才能发生？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：Na₂CO₃ 和 HCl 混合的现象？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：氮磷钾各管庄稼的什么？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 复分解反应探索台\nmix = 1   # 1=Na2CO3+HCl 2=NaCl+AgNO3 3=NaCl+KNO3\n\nhide()\n# 两支试管倒入烧杯\nfill_rect(-70, 60, 40, 100, \"#dbeafe\")\nfill_rect(70, 60, 40, 100, \"#fce7f3\")\nfill_rect(0, -50, 180, 14, \"#94a3b8\")\nfill_rect(0, -44, 168, 110, \"#f8fafc\")\nresult = \"\"\ncolor = \"#f8fafc\"\nif mix == 1:\n    result = \"Na₂CO₃+2HCl：冒气泡！\"\n    color = \"#dbeafe\"\nif mix == 2:\n    result = \"NaCl+AgNO₃：白色沉淀！\"\n    color = \"#ffffff\"\nif mix == 3:\n    result = \"NaCl+KNO₃：无现象，不反应\"\n    color = \"#f1f5f9\"\nfill_rect(0, -44 + 55, 168, 110, color)\nif mix == 1:\n    i = 0\n    while i < 5:\n        circle(-50 + i * 25, 20 - i * 8, 5, \"#93c5fd\")\n        i = i + 1\nif mix == 2:\n    i = 0\n    while i < 6:\n        circle(-60 + i * 24, 10 - i * 5, 4, \"#ffffff\")\n        i = i + 1\nwrite(result, 0, -80, \"#0f172a\", 12)\nwrite(\"复分解发生条件：生成沉淀/气体/水（三者有其一）\", -130, 130, \"#dc2626\", 12)\nif mix == 3:\n    write(\"没有沉淀气体水 → 交换后无新物质 → 不反应\", -140, 105, \"#ea580c\", 11)\nif mix < 3:\n    write(\"AB + CD = AD + CB（互相交换成分）\", -90, 105, \"#16a34a\", 12)\nwrite(\"化肥三要素：N 叶·P 果·K 茎\", -30, 150, \"#7c3aed\", 12)\n",
+  "celebrate": "新知识到手！",
+  "id": "chem-06",
+  "island": "cross",
+  "order": 258,
+  "title": "盐与化肥",
+  "emoji": "🌱",
+  "subjectArea": "化学",
+  "gradeBand": "junior",
+  "grade": 9,
+  "textbook": "人教版化学（初中）",
+  "curriculum": {
+    "module": "身边的化学物质",
+    "points": [
+      "常见盐的性质",
+      "复分解反应的条件",
+      "化肥的种类与作用"
+    ]
+  },
+  "story": "食盐、纯碱、小苏打——厨房里就藏着化学\"盐\"家族。田里的氮磷钾肥让庄稼疯长。盐与盐之间还能\"交换舞伴\"，这就是复分解反应。",
+  "goals": [
+    "认识常见盐（NaCl/Na₂CO₃/NaHCO₃/CaCO₃）",
+    "掌握复分解反应发生的条件",
+    "知道氮磷钾肥的作用"
+  ],
+  "aiIntro": "🌱 拖动两种溶液混合，看沉淀/气体/水什么时候出现——复分解的开关！",
+  "lab": {
+    "params": [
+      {
+        "name": "mix",
+        "label": "混合对象",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "什么条件下复分解才能发生？",
+      "Na₂CO₃ 和 HCl 混合的现象？",
+      "氮磷钾各管庄稼的什么？"
+    ],
+    "code": "# 复分解反应探索台\nmix = 1   # 1=Na2CO3+HCl 2=NaCl+AgNO3 3=NaCl+KNO3\n\nhide()\n# 两支试管倒入烧杯\nfill_rect(-70, 60, 40, 100, \"#dbeafe\")\nfill_rect(70, 60, 40, 100, \"#fce7f3\")\nfill_rect(0, -50, 180, 14, \"#94a3b8\")\nfill_rect(0, -44, 168, 110, \"#f8fafc\")\nresult = \"\"\ncolor = \"#f8fafc\"\nif mix == 1:\n    result = \"Na₂CO₃+2HCl：冒气泡！\"\n    color = \"#dbeafe\"\nif mix == 2:\n    result = \"NaCl+AgNO₃：白色沉淀！\"\n    color = \"#ffffff\"\nif mix == 3:\n    result = \"NaCl+KNO₃：无现象，不反应\"\n    color = \"#f1f5f9\"\nfill_rect(0, -44 + 55, 168, 110, color)\nif mix == 1:\n    i = 0\n    while i < 5:\n        circle(-50 + i * 25, 20 - i * 8, 5, \"#93c5fd\")\n        i = i + 1\nif mix == 2:\n    i = 0\n    while i < 6:\n        circle(-60 + i * 24, 10 - i * 5, 4, \"#ffffff\")\n        i = i + 1\nwrite(result, 0, -80, \"#0f172a\", 12)\nwrite(\"复分解发生条件：生成沉淀/气体/水（三者有其一）\", -130, 130, \"#dc2626\", 12)\nif mix == 3:\n    write(\"没有沉淀气体水 → 交换后无新物质 → 不反应\", -140, 105, \"#ea580c\", 11)\nif mix < 3:\n    write(\"AB + CD = AD + CB（互相交换成分）\", -90, 105, \"#16a34a\", 12)\nwrite(\"化肥三要素：N 叶·P 果·K 茎\", -30, 150, \"#7c3aed\", 12)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "常见的盐",
+        "body": "【NaCl 食盐、Na₂CO₃ 纯碱、NaHCO₃ 小苏打、CaCO₃ 石灰石】\n\"盐\"是酸碱中和产物的一大类，不只是食盐。\n碳酸（氢）盐遇酸都冒 CO₂——检验的依据。"
+      },
+      {
+        "title": "复分解反应",
+        "body": "【AB + CD → AD + CB，发生条件：生成沉淀、气体或水】\nNa₂CO₃+2HCl（气体）、NaCl+AgNO₃（沉淀）、酸+碱（水）都能发生。\nNaCl+KNO₃ 无沉淀气体水 → 不反应。"
+      },
+      {
+        "title": "化肥",
+        "body": "【氮肥促叶、磷肥促果/根、钾肥壮茎抗倒伏】\n铵态氮肥（NH₄⁺）不能与碱混用——放出氨气失效。\n复合肥含两三种营养元素。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "判断：NaOH 溶液与 CuSO₄ 溶液能否发生复分解？",
+        "steps": [
+          "交换成分：NaOH + CuSO₄ → Na₂SO₄ + Cu(OH)₂",
+          "Cu(OH)₂ 是蓝色沉淀",
+          "有沉淀生成 → 能发生",
+          "2NaOH + CuSO₄ = Na₂SO₄ + Cu(OH)₂↓"
+        ],
+        "tip": "记住常见沉淀：BaSO₄/AgCl 白、Cu(OH)₂ 蓝、Fe(OH)₃ 红褐"
+      },
+      {
+        "q": "为什么铵态氮肥不能跟草木灰（含 K₂CO₃，碱性）混用？",
+        "steps": [
+          "K₂CO₃ 水解显碱性",
+          "碱与 NH₄⁺ 反应放出 NH₃ 气体",
+          "氮元素跑掉，肥效降低"
+        ],
+        "tip": "闻到刺激性氨味=铵肥遇碱"
+      }
+    ],
+    "mistakes": [
+      "以为两种盐混合一定反应（需有沉淀气体水）",
+      "化肥混用不看性质（铵肥遇碱失效）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "复分解反应发生的条件是生成？",
+      "options": [
+        "沉淀、气体或水",
+        "光和热",
+        "氧气",
+        "氢气"
+      ],
+      "answer": 0,
+      "explain": "三者有其一即可"
+    },
+    {
+      "q": "下列反应能发生的是？",
+      "options": [
+        "NaCl+AgNO₃",
+        "NaCl+KNO₃",
+        "Na₂SO₄+KNO₃",
+        "两种都需要加热"
+      ],
+      "answer": 0,
+      "explain": "生成 AgCl 白色沉淀"
+    },
+    {
+      "q": "小苏打的化学式是？",
+      "options": [
+        "NaHCO₃",
+        "Na₂CO₃",
+        "NaCl",
+        "NaOH"
+      ],
+      "answer": 0,
+      "explain": "碳酸氢钠"
+    },
+    {
+      "q": "促进叶片浓绿应施？",
+      "options": [
+        "氮肥",
+        "磷肥",
+        "钾肥",
+        "复合肥"
+      ],
+      "answer": 0,
+      "explain": "氮促叶"
+    },
+    {
+      "q": "CuSO₄ 与 NaOH 反应的沉淀颜色是？",
+      "options": [
+        "蓝色",
+        "白色",
+        "红褐",
+        "黑色"
+      ],
+      "answer": 0,
+      "explain": "Cu(OH)₂ 蓝色沉淀"
+    },
+    {
+      "q": "铵态氮肥不能与碱性物质混用是因为会？",
+      "options": [
+        "放出氨气降低肥效",
+        "爆炸",
+        "生成沉淀",
+        "变绿色"
+      ],
+      "answer": 0,
+      "explain": "NH₄⁺遇碱变 NH₃ 跑掉"
+    }
+  ]
+}

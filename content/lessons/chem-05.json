@@ -1,0 +1,209 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "⚗️",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：酸碱恰好中和时 pH 是多少？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：谁过量指示剂变什么色？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：酸和碱各有哪几条通性？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 酸碱中和探索台\nacid = 8   # 滴入盐酸量（碱原有10）\n\nhide()\n# 烧杯中的 NaOH（10 份）+ 滴入 HCl\nbase = 10 - acid\nif base < 0:\n    base = 0\nex = acid - 10\nif ex < 0:\n    ex = 0\nfill_rect(0, 40, 200, 14, \"#94a3b8\")\nif base > 0:\n    fill_rect(0, -20 + 60, 170, 70, \"#dbeafe\")\nif base == 0:\n    fill_rect(0, -20 + 60, 170, 70, \"#fce7f3\")\n# pH 条\nph = 7\nif base > 0:\n    ph = 13 - base\nif ex > 0:\n    ph = 1 + ex\nif ex == 0:\n    if base == 0:\n        ph = 7\nfill_rect(0, -120, 360, 16, \"#e2e8f0\")\npos = -180 + ph * 24\nfill_rect(pos, -120, 24, 16, \"#dc2626\")\nwrite(\"pH=\" + ph, pos + 12, -98, \"#dc2626\", 12)\nwrite(\"NaOH + HCl = NaCl + H₂O\", -20, 130, \"#1d4ed8\", 14)\nif base > 0:\n    write(\"碱剩 \" + base + \" 份：碱性，酚酞红\", -80, 105, \"#be185d\", 12)\nif base == 0:\n    if ex == 0:\n        write(\"恰好中和！pH=7，酚酞刚好褪色\", -100, 105, \"#16a34a\", 12)\nif ex > 0:\n    write(\"酸过量 \" + ex + \" 份：酸性，酚酞无色\", -90, 105, \"#0369a1\", 12)\nwrite(\"中和反应：酸 + 碱 → 盐 + 水\", -90, -150, \"#0f172a\", 12)\n",
+  "celebrate": "新知识到手！",
+  "id": "chem-05",
+  "island": "cross",
+  "order": 257,
+  "title": "常见的酸和碱",
+  "emoji": "⚗️",
+  "subjectArea": "化学",
+  "gradeBand": "junior",
+  "grade": 9,
+  "textbook": "人教版化学（初中）",
+  "curriculum": {
+    "module": "身边的化学物质",
+    "points": [
+      "盐酸硫酸的性质",
+      "氢氧化钠与氢氧化钙",
+      "酸的通性与碱的通性"
+    ]
+  },
+  "story": "胃里的盐酸帮你消化，洁厕灵里的盐酸除垢；烧碱凶到能伤皮肤，却也是肥皂的原料。酸和碱是化学世界的水火两极，相遇便\"中和\"。",
+  "goals": [
+    "知道常见酸碱的组成与性质",
+    "掌握酸碱各自的通性",
+    "了解浓硫酸的稀释与特性"
+  ],
+  "aiIntro": "⚗️ 拖动酸碱量看中和曲线——酚酞在等点变色的一瞬间！",
+  "lab": {
+    "params": [
+      {
+        "name": "acid",
+        "label": "盐酸滴入量",
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "value": 8
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "酸碱恰好中和时 pH 是多少？",
+      "谁过量指示剂变什么色？",
+      "酸和碱各有哪几条通性？"
+    ],
+    "code": "# 酸碱中和探索台\nacid = 8   # 滴入盐酸量（碱原有10）\n\nhide()\n# 烧杯中的 NaOH（10 份）+ 滴入 HCl\nbase = 10 - acid\nif base < 0:\n    base = 0\nex = acid - 10\nif ex < 0:\n    ex = 0\nfill_rect(0, 40, 200, 14, \"#94a3b8\")\nif base > 0:\n    fill_rect(0, -20 + 60, 170, 70, \"#dbeafe\")\nif base == 0:\n    fill_rect(0, -20 + 60, 170, 70, \"#fce7f3\")\n# pH 条\nph = 7\nif base > 0:\n    ph = 13 - base\nif ex > 0:\n    ph = 1 + ex\nif ex == 0:\n    if base == 0:\n        ph = 7\nfill_rect(0, -120, 360, 16, \"#e2e8f0\")\npos = -180 + ph * 24\nfill_rect(pos, -120, 24, 16, \"#dc2626\")\nwrite(\"pH=\" + ph, pos + 12, -98, \"#dc2626\", 12)\nwrite(\"NaOH + HCl = NaCl + H₂O\", -20, 130, \"#1d4ed8\", 14)\nif base > 0:\n    write(\"碱剩 \" + base + \" 份：碱性，酚酞红\", -80, 105, \"#be185d\", 12)\nif base == 0:\n    if ex == 0:\n        write(\"恰好中和！pH=7，酚酞刚好褪色\", -100, 105, \"#16a34a\", 12)\nif ex > 0:\n    write(\"酸过量 \" + ex + \" 份：酸性，酚酞无色\", -90, 105, \"#0369a1\", 12)\nwrite(\"中和反应：酸 + 碱 → 盐 + 水\", -90, -150, \"#0f172a\", 12)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "常见的酸",
+        "body": "【盐酸 HCl、硫酸 H₂SO₄、硝酸 HNO₃】\n酸在水溶液中解离出 H⁺——这就是酸的共同本质。\n浓硫酸有吸水性（干燥剂）和脱水性（使纸张碳化）；稀释必须酸入水。"
+      },
+      {
+        "title": "常见的碱",
+        "body": "【氢氧化钠 NaOH（烧碱/苛性钠）、氢氧化钙 Ca(OH)₂（熟石灰）】\n碱解离出 OH⁻。\nNaOH 易潮解可作干燥剂；二者都强腐蚀性，沾皮肤先用干布擦再水冲。"
+      },
+      {
+        "title": "通性与中和",
+        "body": "【酸通性：指示剂变色 + 活泼金属 + 金属氧化物 + 碱 + 某些盐】【碱通性：指示剂 + 非金属氧化物 + 酸 + 某些盐】\n酸 + 碱 → 盐 + 水（中和反应），放热。\n应用：熟石灰改良酸性土壤、胃药中和胃酸。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "写出盐酸与氢氧化钠反应的方程式。",
+        "steps": [
+          "酸 + 碱 → 盐 + 水",
+          "HCl + NaOH = NaCl + H₂O",
+          "检查：H 1+1=2、O 1+1=2（水中2个H来自酸碱各一）✓"
+        ],
+        "tip": "中和反应都放热"
+      },
+      {
+        "q": "为什么用熟石灰改良酸性土壤？",
+        "steps": [
+          "土壤酸化 H⁺ 过多",
+          "Ca(OH)₂ 提供 OH⁻ 中和酸",
+          "生成中性的盐和水",
+          "但不能用 NaOH：碱性太强且易潮解成本高"
+        ],
+        "tip": "改良土壤选\"温和\"的碱"
+      }
+    ],
+    "mistakes": [
+      "浓硫酸稀释时把水倒入酸中",
+      "NaOH 沾皮肤直接用水冲（应先擦再冲）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "酸在水溶液中解离出的离子是？",
+      "options": [
+        "H⁺",
+        "OH⁻",
+        "Na⁺",
+        "Cl⁻"
+      ],
+      "answer": 0,
+      "explain": "H⁺ 是酸的本质"
+    },
+    {
+      "q": "下列属于碱的是？",
+      "options": [
+        "NaOH",
+        "NaCl",
+        "H₂SO₄",
+        "CO₂"
+      ],
+      "answer": 0,
+      "explain": "解离出 OH⁻ 的是碱"
+    },
+    {
+      "q": "中和反应的产物是？",
+      "options": [
+        "盐和水",
+        "盐和氢气",
+        "两种新盐",
+        "氧化物和水"
+      ],
+      "answer": 0,
+      "explain": "酸+碱→盐+水"
+    },
+    {
+      "q": "浓硫酸可作干燥剂是因为它有？",
+      "options": [
+        "吸水性",
+        "脱水性",
+        "氧化性",
+        "可燃性"
+      ],
+      "answer": 0,
+      "explain": "吸收现成的水"
+    },
+    {
+      "q": "HCl + NaOH 反应类型是？",
+      "options": [
+        "中和",
+        "分解",
+        "置换",
+        "化合"
+      ],
+      "answer": 0,
+      "explain": "酸碱中和"
+    },
+    {
+      "q": "紫色石蕊遇碱变？",
+      "options": [
+        "蓝",
+        "红",
+        "紫",
+        "无色"
+      ],
+      "answer": 0,
+      "explain": "酸红碱蓝"
+    }
+  ]
+}
