@@ -1,0 +1,210 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🔑",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：哪个语气最强？哪个最委婉？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：must not 和 need not 有什么区别？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：情态动词后接什么形式的动词？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 情态动词探索台\nmodal = 1   # 1 can 2 should 3 must\nhide()\nwrite(\"语气强度\", 0, 0, \"#64748b\", 9)\nwrite(\"情态动词 + 动词原形（不加 to！）\", -50, -115, \"#7c3aed\", 12)\nwrite(\"need not = 不必（区别于 must not 禁止）\", -55, -140, \"#0369a1\", 11)",
+  "celebrate": "新知识到手！",
+  "id": "eng-11",
+  "island": "cross",
+  "order": 279,
+  "title": "Modal Verbs: can·should·must",
+  "emoji": "🔑",
+  "subjectArea": "英语",
+  "gradeBand": "junior",
+  "grade": 8,
+  "textbook": "人教版英语（初中）",
+  "curriculum": {
+    "module": "语法",
+    "points": [
+      "can/should/must 的用法",
+      "情态动词后接原形",
+      "否定形式的意思变化"
+    ]
+  },
+  "story": "Can you swim? You should practice more! You must be safe. 三个小小的情态动词，一个说能力、一个提建议、一个下命令——语气从柔和到强硬，全靠它们。",
+  "goals": [
+    "区分 can/should/must 的语气",
+    "掌握情态动词后接原形",
+    "理解 mustn't 和 needn't 的区别"
+  ],
+  "aiIntro": "🔑 拖动情态动词，感受语气的强弱变化——从\"能\"到\"必须\"！",
+  "lab": {
+    "params": [
+      {
+        "name": "modal",
+        "label": "情态动词",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "哪个语气最强？哪个最委婉？",
+      "must not 和 need not 有什么区别？",
+      "情态动词后接什么形式的动词？"
+    ],
+    "code": "# 情态动词探索台\nmodal = 1   # 1 can 2 should 3 must\nhide()\nwrite(\"语气强度\", 0, 0, \"#64748b\", 9)\nwrite(\"情态动词 + 动词原形（不加 to！）\", -50, -115, \"#7c3aed\", 12)\nwrite(\"need not = 不必（区别于 must not 禁止）\", -55, -140, \"#0369a1\", 11)"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "三剑客的分工",
+        "body": "【can：能力（I can swim）/ 许可（Can I go?）】【should：建议（You should rest）】【must：必须（You must stop）】\n语气从弱到强：can < should < must。\ncannot 还能表推测：It can't be him!（不可能是他）。"
+      },
+      {
+        "title": "后接原形",
+        "body": "【情态动词 + 动词原形，不加 to、不加 ing、不加 s】\nHe can plays ✗ → He can play ✓\nShe must goes ✗ → She must go ✓\n疑问句直接提前情态动词：Can you…? Must I…?"
+      },
+      {
+        "title": "否定的微妙",
+        "body": "【mustn't = 禁止（千万别做）；needn't = 不必（没必要做）】\nYou mustn't smoke here.（此處禁烟）\nYou needn't come early.（不必早来）\nmust 的否定回答用 needn't：Must I…? — No, you needn't."
+      }
+    ],
+    "examples": [
+      {
+        "q": "选词：You ___ wear a seatbelt when driving.（法律强制）",
+        "steps": [
+          "语境是法律强制的\"必须\"",
+          "can 表能力/许可，语气不够",
+          "should 表建议，太弱",
+          "选 must：You must wear a seatbelt."
+        ],
+        "tip": "强制→must；建议→should"
+      },
+      {
+        "q": "填空：He can ___ (play) the piano.",
+        "steps": [
+          "情态动词后接原形",
+          "play 本身就是原形",
+          "不加 s（can 已含语法标记）",
+          "He can play the piano."
+        ],
+        "tip": "can/must/should 后的动词永远\"裸奔\""
+      }
+    ],
+    "mistakes": [
+      "情态动词后加 to（must to go ✗）",
+      "mustn't 理解成\"不必\"（是禁止！）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "___ I use your pen?（请求许可）",
+      "options": [
+        "Can",
+        "Must",
+        "Should",
+        "Am"
+      ],
+      "answer": 0,
+      "explain": "can 表许可"
+    },
+    {
+      "q": "You ___ smoke here. It's dangerous!（禁止）",
+      "options": [
+        "must not",
+        "need not",
+        "should",
+        "can"
+      ],
+      "answer": 0,
+      "explain": "must not=禁止"
+    },
+    {
+      "q": "You ___ finish it today. Tomorrow is OK.（不必）",
+      "options": [
+        "need not",
+        "must not",
+        "cannot",
+        "should not"
+      ],
+      "answer": 0,
+      "explain": "need not=不必"
+    },
+    {
+      "q": "She can ___ very fast.（run）",
+      "options": [
+        "run",
+        "runs",
+        "running",
+        "ran"
+      ],
+      "answer": 0,
+      "explain": "情态动词+原形"
+    },
+    {
+      "q": "你建议朋友多喝水，说：",
+      "options": [
+        "You should drink more water.",
+        "You must drink water.",
+        "You can water.",
+        "You drink should water."
+      ],
+      "answer": 0,
+      "explain": "should 表建议"
+    },
+    {
+      "q": "语气最强的是？",
+      "options": [
+        "must",
+        "can",
+        "should",
+        "may"
+      ],
+      "answer": 0,
+      "explain": "must=必须"
+    }
+  ]
+}

@@ -1,0 +1,210 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🏃",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：I read 与 I am reading 有什么区别？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：run 为什么要双写 n？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：look/listen 为什么提示进行时？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# Present Continuous 探索台\nscene = 1   # 场景\nhide()\nwrite(\"Be + V-ing = 此刻正在发生\", -30, -80, \"#16a34a\", 12)\nwrite(\"V-ing 规则：+ing / 去e+ing / 双写+ing / ie→y+ing\", -80, -110, \"#7c3aed\", 10)\nwrite(\"对比：She reads every day.（习惯）\", -50, -140, \"#ea580c\", 11)\nwrite(\"标志词：now·look!·listen!·at the moment\", -60, -165, \"#b45309\", 10)",
+  "celebrate": "新知识到手！",
+  "id": "eng-12",
+  "island": "cross",
+  "order": 280,
+  "title": "Present Continuous: 现在进行时",
+  "emoji": "🏃",
+  "subjectArea": "英语",
+  "gradeBand": "junior",
+  "grade": 7,
+  "textbook": "人教版英语（初中）",
+  "curriculum": {
+    "module": "语法",
+    "points": [
+      "现在进行时的构成",
+      "V-ing 变化规则",
+      "与一般现在时的区别"
+    ]
+  },
+  "story": "Look! He is running! 此刻正在发生的事，英语用\"be + doing\"来抓拍——像给动作拍一张快照。对比一般现在时的\"日常打卡\"，进行时是\"正在进行\"。",
+  "goals": [
+    "掌握 be + V-ing 结构",
+    "会变 V-ing 的四种规则",
+    "区分\"习惯\"与\"此刻\""
+  ],
+  "aiIntro": "🏃 拖动场景照片，看\"正在做\"的句子怎样生成——时态抓拍器！",
+  "lab": {
+    "params": [
+      {
+        "name": "scene",
+        "label": "场景",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "I read 与 I am reading 有什么区别？",
+      "run 为什么要双写 n？",
+      "look/listen 为什么提示进行时？"
+    ],
+    "code": "# Present Continuous 探索台\nscene = 1   # 场景\nhide()\nwrite(\"Be + V-ing = 此刻正在发生\", -30, -80, \"#16a34a\", 12)\nwrite(\"V-ing 规则：+ing / 去e+ing / 双写+ing / ie→y+ing\", -80, -110, \"#7c3aed\", 10)\nwrite(\"对比：She reads every day.（习惯）\", -50, -140, \"#ea580c\", 11)\nwrite(\"标志词：now·look!·listen!·at the moment\", -60, -165, \"#b45309\", 10)"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "构成",
+        "body": "【主语 + be动词(am/is/are) + 动词-ing】\nI am reading. / She is cooking. / They are playing.\n否定在 be 后加 not：She isn't cooking.\n疑问把 be 提前：Is she cooking?"
+      },
+      {
+        "title": "V-ing 四规则",
+        "body": "【一般 +ing：play→playing】【不发音e去e+ing：make→making】【重读闭音节双写+ing：run→running, swim→swimming】【ie结尾变y+ing：lie→lying, die→dying】\nread→reading（直接加）；write→writing（去e）。"
+      },
+      {
+        "title": "vs 一般现在时",
+        "body": "【一般现在时：习惯性/经常性（every day, usually）】【现在进行时：此刻正在（now, look!, listen!）】\nShe reads every night.（天天读）vs She is reading now.（此刻在读）。\n\"Look!\" 出现几乎必考进行时。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "用所给词的适当形式填空：Look! The boys ___ (play) basketball.",
+        "steps": [
+          "Look! 提示\"此刻\"",
+          "be + doing 结构",
+          "boys 是复数用 are",
+          "The boys are playing basketball."
+        ],
+        "tip": "Look/Listen 开头 = 进行时信号"
+      },
+      {
+        "q": "改为疑问句：She is making a cake.",
+        "steps": [
+          "把 is 提到句首",
+          "Is she making a cake?",
+          "肯定回答：Yes, she is.",
+          "否定回答：No, she isn't."
+        ],
+        "tip": "只动 be，动词 ing 不变"
+      }
+    ],
+    "mistakes": [
+      "漏掉 be 动词（She reading ✗）",
+      "make 的 ing 写成 makeing（应去掉e）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "Listen! Someone ___ in the next room.",
+      "options": [
+        "is singing",
+        "sings",
+        "sing",
+        "sang"
+      ],
+      "answer": 0,
+      "explain": "Listen! 提示此刻"
+    },
+    {
+      "q": "run 的 V-ing 是？",
+      "options": [
+        "running",
+        "runing",
+        "runnning",
+        "runs"
+      ],
+      "answer": 0,
+      "explain": "重读闭音节双写n"
+    },
+    {
+      "q": "make 的 V-ing 是？",
+      "options": [
+        "making",
+        "makeing",
+        "makking",
+        "makes"
+      ],
+      "answer": 0,
+      "explain": "去e加ing"
+    },
+    {
+      "q": "They ___ (watch) TV now.",
+      "options": [
+        "are watching",
+        "watch",
+        "watches",
+        "watched"
+      ],
+      "answer": 0,
+      "explain": "now+复数→are doing"
+    },
+    {
+      "q": "She reads every night. 说明她？",
+      "options": [
+        "习惯性每天读",
+        "此刻正在读",
+        "从不读",
+        "昨天读了"
+      ],
+      "answer": 0,
+      "explain": "一般现在时表习惯"
+    },
+    {
+      "q": "I ___ (do) my homework at the moment.",
+      "options": [
+        "am doing",
+        "do",
+        "did",
+        "does"
+      ],
+      "answer": 0,
+      "explain": "at the moment=此刻"
+    }
+  ]
+}

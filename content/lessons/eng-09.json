@@ -1,0 +1,210 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "⏮",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：go 的过去式为什么不加 ed？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：study 要怎么变？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：yesterday 提示什么时态？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# Past Tense 探索台\nverb = 1   # 动词\nhide()\nwrite(\"标志词：yesterday·last…·…ago·in 2020\", -60, -130, \"#ea580c\", 11)\nwrite(\"口诀：did 后用原形，did not 后也原形\", -50, -155, \"#0369a1\", 11)",
+  "celebrate": "新知识到手！",
+  "id": "eng-09",
+  "island": "cross",
+  "order": 277,
+  "title": "Past Tense: 一般过去时",
+  "emoji": "⏮",
+  "subjectArea": "英语",
+  "gradeBand": "junior",
+  "grade": 7,
+  "textbook": "人教版英语（初中）",
+  "curriculum": {
+    "module": "语法",
+    "points": [
+      "一般过去时的构成",
+      "规则/不规则动词过去式",
+      "时间标志词"
+    ]
+  },
+  "story": "昨天做了什么？上周去了哪？英语讲\"过去的故事\"有一套专门的时态——一般过去时。动词换上\"过去的外衣\"（-ed 或不规则变化），配上 yesterday、last week，时光机就启动了。",
+  "goals": [
+    "掌握一般过去时的肯定/否定/疑问",
+    "熟记常见不规则动词过去式",
+    "会识别时间标志词"
+  ],
+  "aiIntro": "⏮ 拖动动词，看它怎样\"穿越\"到过去——规则的加ed，不规则的换新装！",
+  "lab": {
+    "params": [
+      {
+        "name": "verb",
+        "label": "动词选择",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "go 的过去式为什么不加 ed？",
+      "study 要怎么变？",
+      "yesterday 提示什么时态？"
+    ],
+    "code": "# Past Tense 探索台\nverb = 1   # 动词\nhide()\nwrite(\"标志词：yesterday·last…·…ago·in 2020\", -60, -130, \"#ea580c\", 11)\nwrite(\"口诀：did 后用原形，did not 后也原形\", -50, -155, \"#0369a1\", 11)"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "构成",
+        "body": "【肯定：主语 + 动词过去式；否定：didn't + 原形；疑问：Did + 主语 + 原形】\nI played. / I didn't play. / Did you play?\n谓语动词已经\"承担\"了时态，助动词 did 出现时动词回到原形。"
+      },
+      {
+        "title": "过去式变化",
+        "body": "【规则：+ed；以e结尾+d；辅音+y变ied；重读闭音节双写+ed】【不规则：go→went, have→had, do→did, see→saw, eat→ate】\n不规则动词需要背——它们是英语的高频核心词。\nstudy→studied（y前是辅音d）；play→played（y前是元音a，直接加ed）。"
+      },
+      {
+        "title": "时间标志词",
+        "body": "【yesterday, last week/month/year, …ago, in 2020, just now, this morning（已过去时）】\n看到这些词，谓语动词用过去式。\n对话高频：What did you do last weekend?"
+      }
+    ],
+    "examples": [
+      {
+        "q": "用所给词的适当形式填空：They ___ (go) to the park yesterday.",
+        "steps": [
+          "yesterday 是过去时标志",
+          "go 的过去式是不规则变化",
+          "填 went",
+          "They went to the park yesterday."
+        ],
+        "tip": "go/went, do/did, have/had 是三大高频不规则"
+      },
+      {
+        "q": "改为否定句：He visited his grandma last Sunday.",
+        "steps": [
+          "谓语是行为动词 visited",
+          "借 did 构成否定，动词回原形",
+          "He didn't visit his grandma last Sunday",
+          "注意 visited 变回 visit"
+        ],
+        "tip": "didn't 后永远接原形"
+      }
+    ],
+    "mistakes": [
+      "didn't 后仍用过去式（didn't went ✗）",
+      "play 的过去式写成 plaied（直接加ed）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "go 的过去式是？",
+      "options": [
+        "went",
+        "goed",
+        "gone",
+        "going"
+      ],
+      "answer": 0,
+      "explain": "不规则变化"
+    },
+    {
+      "q": "study 的过去式是？",
+      "options": [
+        "studied",
+        "studyed",
+        "studed",
+        "studying"
+      ],
+      "answer": 0,
+      "explain": "辅音+y→ied"
+    },
+    {
+      "q": "She ___ TV last night.（watch）",
+      "options": [
+        "watched",
+        "watch",
+        "watches",
+        "watching"
+      ],
+      "answer": 0,
+      "explain": "last night 过去时+ed"
+    },
+    {
+      "q": "否定句：I went to school. →",
+      "options": [
+        "I did not go to school.",
+        "I do not went to school.",
+        "I not went to school.",
+        "I did not went to school."
+      ],
+      "answer": 0,
+      "explain": "did not+原形"
+    },
+    {
+      "q": "___ you ___ football yesterday?",
+      "options": [
+        "Did…play",
+        "Did…played",
+        "Do…play",
+        "Were…play"
+      ],
+      "answer": 0,
+      "explain": "Did+主语+原形"
+    },
+    {
+      "q": "下列哪个不是过去时标志词？",
+      "options": [
+        "tomorrow",
+        "yesterday",
+        "last week",
+        "two days ago"
+      ],
+      "answer": 0,
+      "explain": "tomorrow 指将来"
+    }
+  ]
+}

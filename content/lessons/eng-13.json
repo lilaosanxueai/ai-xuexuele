@@ -1,0 +1,210 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🚀",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：\"我打算学游泳\"用哪个更好？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：\"我想天要下雨了\"呢？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：will not 是什么的否定？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# Future Tense 探索台\ncase = 1   # 场景\nhide()\nfill_rect(0, 75, 300, 40, \"#fef3c7\")\nwrite(\"will + 原形 · be going to + 原形\", -40, -30, \"#1d4ed8\", 12)\nwrite(\"否定：will not / is not going to\", -10, -60, \"#ea580c\", 12)\nwrite(\"疑问：Will you…? / Are you going to…?\", -30, -90, \"#7c3aed\", 11)\nwrite(\"标志词：tomorrow·next…·soon·in the future\", -55, -120, \"#16a34a\", 11)",
+  "celebrate": "新知识到手！",
+  "id": "eng-13",
+  "island": "cross",
+  "order": 281,
+  "title": "Future Tense: 一般将来时",
+  "emoji": "🚀",
+  "subjectArea": "英语",
+  "gradeBand": "junior",
+  "grade": 7,
+  "textbook": "人教版英语（初中）",
+  "curriculum": {
+    "module": "语法",
+    "points": [
+      "will + 原形",
+      "be going to + 原形",
+      "两者细微区别"
+    ]
+  },
+  "story": "Tomorrow is another day! 说明天的事、下周末的计划，英语有两个法宝：will 说话算话的\"将\"，be going to 说早有打算的\"要\"。一个偏临场，一个偏计划。",
+  "goals": [
+    "掌握 will 和 be going to 结构",
+    "区分两者使用场景",
+    "会写将来时的否定和疑问"
+  ],
+  "aiIntro": "🚀 拖动场景类型，看用 will 还是 be going to——未来的两种说法！",
+  "lab": {
+    "params": [
+      {
+        "name": "case",
+        "label": "场景类型",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "\"我打算学游泳\"用哪个更好？",
+      "\"我想天要下雨了\"呢？",
+      "will not 是什么的否定？"
+    ],
+    "code": "# Future Tense 探索台\ncase = 1   # 场景\nhide()\nfill_rect(0, 75, 300, 40, \"#fef3c7\")\nwrite(\"will + 原形 · be going to + 原形\", -40, -30, \"#1d4ed8\", 12)\nwrite(\"否定：will not / is not going to\", -10, -60, \"#ea580c\", 12)\nwrite(\"疑问：Will you…? / Are you going to…?\", -30, -90, \"#7c3aed\", 11)\nwrite(\"标志词：tomorrow·next…·soon·in the future\", -55, -120, \"#16a34a\", 11)"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "两种结构",
+        "body": "【will + 原形：I will call you tonight.】【be going to + 原形：I am going to visit Beijing.】\nwill 各人称通用；be going to 的 be 随主语变 am/is/are。\n否定：won't / be not going to。"
+      },
+      {
+        "title": "细微区别",
+        "body": "【be going to：事先打算好的计划】【will：临时决定、当场承诺、纯预测】\n\"打算暑假学游泳\"→be going to（早有计划）。\n\"好的我来帮你\"→will（当场拍板）。\n自然规律预测两者皆可。"
+      },
+      {
+        "title": "常见场景",
+        "body": "【承诺：I will never give up.（意志）】【请求：Will you help me?（客气）】【预言：Robots will do more jobs.】\n时间/条件状语从句中不用 will：If it rains, I will stay home（主句才用 will）。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "翻译：我打算下学期加入篮球社。",
+        "steps": [
+          "\"打算\"= 早有计划 → be going to",
+          "主语 I 用 am",
+          "join 用原形",
+          "I am going to join the basketball club next term."
+        ],
+        "tip": "\"打算/准备\"是 be going to 的高频信号"
+      },
+      {
+        "q": "Don't worry, I ___ (help) you.（当场承诺）",
+        "steps": [
+          "当场决定帮忙",
+          "用 will",
+          "不用 be going to",
+          "Don't worry, I will help you."
+        ],
+        "tip": "临场拍板 → will"
+      }
+    ],
+    "mistakes": [
+      "If 从句里用 will（If it will rain ✗）",
+      "be going to 后加 to（going to to learn ✗）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "I ___ visit my grandma this weekend.（计划好）",
+      "options": [
+        "am going to",
+        "wills",
+        "go to",
+        "went"
+      ],
+      "answer": 0,
+      "explain": "计划→be going to"
+    },
+    {
+      "q": "Don't worry, I ___ come.（承诺）",
+      "options": [
+        "will",
+        "am going",
+        "willing",
+        "would"
+      ],
+      "answer": 0,
+      "explain": "当场承诺用will"
+    },
+    {
+      "q": "will 的否定是？",
+      "options": [
+        "will not",
+        "willn't",
+        "not will",
+        "do not will"
+      ],
+      "answer": 0,
+      "explain": "will not = will not"
+    },
+    {
+      "q": "She ___ going to buy a car.（第三人称）",
+      "options": [
+        "is",
+        "am",
+        "are",
+        "be"
+      ],
+      "answer": 0,
+      "explain": "She 用 is"
+    },
+    {
+      "q": "If it ___ tomorrow, we will stay home.",
+      "options": [
+        "rains",
+        "will rain",
+        "rained",
+        "rainning"
+      ],
+      "answer": 0,
+      "explain": "if从句用一般现在时"
+    },
+    {
+      "q": "\"打算做某事\"最好的翻译是？",
+      "options": [
+        "be going to do",
+        "will doing",
+        "go to do",
+        "will to do"
+      ],
+      "answer": 0,
+      "explain": "be going to + 原形"
+    }
+  ]
+}

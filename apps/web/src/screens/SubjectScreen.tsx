@@ -10,9 +10,9 @@ import { SUBJECTS, SUBJECT_STYLE } from '../components/subjectMeta.ts';
 /** 学科页：该学科按学段分组的全部课程，含课标标注。理科动态演示课进互动实验室，其余进辅导页 */
 const BAND_ORDER = ['primary', 'junior', 'senior'] as const;
 const BAND_LABEL: Record<string, string> = { primary: '小学', junior: '初中', senior: '高中衔接' };
-/** 理科五科 + 科学（内容动态化 + 动态互动先行） */
+/** 理科五科 + 科学（内容动态化 + 动态互动先行）；其他学科若有 lab 字段（如新文科互动课）同样进实验室 */
 const LAB_SUBJECTS = new Set(['数学', '物理', '化学', '生物', '地理', '科学']);
-const isLabLesson = (l: Lesson) => LAB_SUBJECTS.has(l.subjectArea ?? '') && !!(l.lab || l.starterCode);
+const isLabLesson = (l: Lesson) => (LAB_SUBJECTS.has(l.subjectArea ?? '') || !!l.lab) && !!(l.lab || l.starterCode);
 
 export default function SubjectScreen() {
   const nav = useNavigate();

@@ -1,0 +1,218 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "📊",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：什么时候用 taller，什么时候用 the tallest？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：as…as 什么时候用？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：big 的比较级为什么要双写 g？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 比较级探索台\na = 7   # Tom 高度\nb = 5   # Jack 高度\nhide()\nha = a * 12\nhb = b * 12\nfill_rect(-100, -60 + ha / 2, 50, ha, \"#3b82f6\")\nwrite(\"Tom\", -100, -80, \"#1d4ed8\", 11)\nfill_rect(100, -60 + hb / 2, 50, hb, \"#f59e0b\")\nwrite(\"Jack\", 100, -80, \"#b45309\", 11)\nwrite(\"Tom is tall.\", 0, 130, \"#64748b\", 11)\nif a > b:\n    write(\"Tom is taller than Jack.\", 0, 100, \"#dc2626\", 14)\nif a < b:\n    write(\"Jack is taller than Tom.\", 0, 100, \"#dc2626\", 14)\nif a == b:\n    write(\"Tom is as tall as Jack.\", 0, 100, \"#16a34a\", 14)\nwrite(\"短词+er/est · 长词前 more/most\", -70, -110, \"#1d4ed8\", 12)\nwrite(\"big→bigger→biggest（双写g）\", -30, -135, \"#ea580c\", 11)\nwrite(\"as…as 中间用原形：as tall as\", -45, -160, \"#7c3aed\", 11)",
+  "celebrate": "新知识到手！",
+  "id": "eng-10",
+  "island": "cross",
+  "order": 278,
+  "title": "Comparatives: 比较级与最高级",
+  "emoji": "📊",
+  "subjectArea": "英语",
+  "gradeBand": "junior",
+  "grade": 8,
+  "textbook": "人教版英语（初中）",
+  "curriculum": {
+    "module": "语法",
+    "points": [
+      "比较级的变化规则",
+      "比较级句型结构",
+      "as…as 同级比较"
+    ]
+  },
+  "story": "谁更高？谁跑得更快？谁是班里最棒的？英语比较三件套：比较级比两个、最高级比一堆、as…as 打平手。加 -er 还是 more？看音节！",
+  "goals": [
+    "掌握比较级/最高级变化规则",
+    "会使用 than 和 the",
+    "理解 as…as 结构"
+  ],
+  "aiIntro": "📊 拖动两座塔的高度，看比较级句子实时生成！",
+  "lab": {
+    "params": [
+      {
+        "name": "a",
+        "label": "Tom 的高度",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "value": 7
+      },
+      {
+        "name": "b",
+        "label": "Jack 的高度",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "value": 5
+      }
+    ],
+    "grid": true,
+    "explore": [
+      "什么时候用 taller，什么时候用 the tallest？",
+      "as…as 什么时候用？",
+      "big 的比较级为什么要双写 g？"
+    ],
+    "code": "# 比较级探索台\na = 7   # Tom 高度\nb = 5   # Jack 高度\nhide()\nha = a * 12\nhb = b * 12\nfill_rect(-100, -60 + ha / 2, 50, ha, \"#3b82f6\")\nwrite(\"Tom\", -100, -80, \"#1d4ed8\", 11)\nfill_rect(100, -60 + hb / 2, 50, hb, \"#f59e0b\")\nwrite(\"Jack\", 100, -80, \"#b45309\", 11)\nwrite(\"Tom is tall.\", 0, 130, \"#64748b\", 11)\nif a > b:\n    write(\"Tom is taller than Jack.\", 0, 100, \"#dc2626\", 14)\nif a < b:\n    write(\"Jack is taller than Tom.\", 0, 100, \"#dc2626\", 14)\nif a == b:\n    write(\"Tom is as tall as Jack.\", 0, 100, \"#16a34a\", 14)\nwrite(\"短词+er/est · 长词前 more/most\", -70, -110, \"#1d4ed8\", 12)\nwrite(\"big→bigger→biggest（双写g）\", -30, -135, \"#ea580c\", 11)\nwrite(\"as…as 中间用原形：as tall as\", -45, -160, \"#7c3aed\", 11)"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "变化规则",
+        "body": "【单音节：+er/+est（tall→taller→tallest）】【以e结尾：+r/+st（nice→nicer→nicest）】【辅音+y：ier/iest（happy→happier）】【重读闭音节双写：big→bigger】\n多音节：more/most + 原形（beautiful→more beautiful）。\n不规则：good→better→best；bad→worse→worst。"
+      },
+      {
+        "title": "句型",
+        "body": "【比较级：A + be + 比较级 + than + B】【最高级：the + 最高级 + in/of 范围】\nTom is taller than Jack. / Tom is the tallest in our class.\n比较级前可加 much/a little 修饰：much taller（高得多）。"
+      },
+      {
+        "title": "同级比较",
+        "body": "【as + 原形 + as：和……一样】\nTom is as tall as Jack（一样高）。\n否定 not as…as = 不如：This book is not as interesting as that one。\n= less interesting than。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "用 proper form 填空：This box is ___ (heavy) than that one.",
+        "steps": [
+          "heavy 是单音节（以辅音+y 结尾）",
+          "变 y 为 i 加 -er",
+          "填 heavier",
+          "This box is heavier than that one."
+        ],
+        "tip": "heavy→heavier→heaviest"
+      },
+      {
+        "q": "翻译：Lucy 是班上最认真的学生。",
+        "steps": [
+          "认真：careful（多音节）",
+          "最高级用 most careful",
+          "范围 our class 用 in",
+          "Lucy is the most careful student in our class."
+        ],
+        "tip": "多音节不加 est，前加 most"
+      }
+    ],
+    "mistakes": [
+      "more taller 双重比较（✗）",
+      "as…as 中误用比较级（as taller as ✗）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "big 的比较级是？",
+      "options": [
+        "bigger",
+        "biger",
+        "more big",
+        "biggest"
+      ],
+      "answer": 0,
+      "explain": "重读闭音节双写g"
+    },
+    {
+      "q": "good 的最高级是？",
+      "options": [
+        "best",
+        "goodest",
+        "most good",
+        "better"
+      ],
+      "answer": 0,
+      "explain": "good→better→best"
+    },
+    {
+      "q": "beautiful 的比较级是？",
+      "options": [
+        "more beautiful",
+        "beautifuler",
+        "most beautiful",
+        "beautifulest"
+      ],
+      "answer": 0,
+      "explain": "多音节前加 more"
+    },
+    {
+      "q": "Tom is ___ than Jack.（tall）",
+      "options": [
+        "taller",
+        "tall",
+        "tallest",
+        "as tall"
+      ],
+      "answer": 0,
+      "explain": "than 前用比较级"
+    },
+    {
+      "q": "He is ___ student in the class.（good）",
+      "options": [
+        "the best",
+        "better",
+        "good",
+        "the better"
+      ],
+      "answer": 0,
+      "explain": "范围最高级加 the"
+    },
+    {
+      "q": "同级比较\"和…一样高\"是？",
+      "options": [
+        "as tall as",
+        "taller than",
+        "the tallest",
+        "more tall"
+      ],
+      "answer": 0,
+      "explain": "as+原形+as"
+    }
+  ]
+}

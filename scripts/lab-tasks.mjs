@@ -15,7 +15,7 @@ for (const f of fs.readdirSync(D)) {
   if (!f.endsWith('.json')) continue;
   const p = path.join(D, f);
   const l = JSON.parse(fs.readFileSync(p, 'utf8'));
-  const isLab = LAB_SUBJECTS.has(l.subjectArea) && (l.lab || l.starterCode);
+  const isLab = (LAB_SUBJECTS.has(l.subjectArea) || !!l.lab) && !!(l.lab || l.starterCode);
   if (!isLab) continue;
 
   const tasks = [];
