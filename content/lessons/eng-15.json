@@ -1,0 +1,209 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🔄",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：哪种成分在变，哪种永不变？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：tense=4 的 has been done 是什么时态？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：by 短语什么时候可以不写？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 被动语态探索台\ntense = 1   # 1一般现在 2一般过去 3一般将来 4现在完成 5现在进行 6过去完成\n\nhide()\nbe = \"am / is / are\"\nname = \"一般现在时\"\nex = \"English is loved by everyone.\"\nif tense == 2:\n    be = \"was / were\"\n    name = \"一般过去时\"\n    ex = \"The bridge was built in 1990.\"\nif tense == 3:\n    be = \"will be\"\n    name = \"一般将来时\"\n    ex = \"A new school will be built here.\"\nif tense == 4:\n    be = \"has / have been\"\n    name = \"现在完成时\"\n    ex = \"The work has been finished.\"\nif tense == 5:\n    be = \"is / are being\"\n    name = \"现在进行时\"\n    ex = \"The road is being repaired now.\"\nif tense == 6:\n    be = \"had been\"\n    name = \"过去完成时\"\n    ex = \"The letter had been sent before he came.\"\nfill_rect(0, 120, 360, 30, \"#1d4ed8\")\nwrite(name + \" 被动式\", 0, 120, \"#fff\", 13)\nfill_rect(0, 74, 360, 40, \"#f1f5f9\")\nwrite(\"be（随时态变）+ done（永不变）\", 0, 74, \"#dc2626\", 12)\nfill_rect(-110, 26, 120, 34, \"#16a34a\")\nwrite(be, -110, 26, \"#fff\", 12)\nfill_rect(20, 26, 120, 34, \"#7c3aed\")\nwrite(\"done\", 20, 26, \"#fff\", 12)\nfill_rect(0, -30, 360, 44, \"#fef3c7\")\nwrite(\"例：\" + ex, 0, -30, \"#b45309\", 11)\nwrite(\"口诀：被动语态 be 加过表，时态变化全在 be\", -40, -85, \"#0f172a\", 11)\nwrite(\"不知道/不必说动作执行者时，by 短语可省\", -40, -110, \"#0369a1\", 10)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-15",
+  "island": "cross",
+  "order": 304,
+  "title": "被动语态：be + done 变形记",
+  "emoji": "🔄",
+  "subjectArea": "英语",
+  "gradeBand": "senior",
+  "grade": 10,
+  "textbook": "人教版英语（高中必修二）",
+  "curriculum": {
+    "module": "动词的语态",
+    "points": [
+      "被动语态的构成 be + 过去分词",
+      "八种时态的被动形式",
+      "主动改被动的三步法"
+    ]
+  },
+  "story": "Everyone loves English. → English is loved by everyone. 焦点一换，句子就\"变身\"：动作的承受者站上主语位，动词套上 be + done 的外壳。高考写作里用好被动，句子立刻高级。",
+  "goals": [
+    "掌握 be + done 的构成逻辑",
+    "会写八种常用时态的被动形式",
+    "会主动句改被动句"
+  ],
+  "aiIntro": "🔄 拨动时态转盘，看 be 怎么变、done 永不变——被动语态变形记！",
+  "lab": {
+    "params": [
+      {
+        "name": "tense",
+        "label": "时态",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "哪种成分在变，哪种永不变？",
+      "tense=4 的 has been done 是什么时态？",
+      "by 短语什么时候可以不写？"
+    ],
+    "code": "# 被动语态探索台\ntense = 1   # 1一般现在 2一般过去 3一般将来 4现在完成 5现在进行 6过去完成\n\nhide()\nbe = \"am / is / are\"\nname = \"一般现在时\"\nex = \"English is loved by everyone.\"\nif tense == 2:\n    be = \"was / were\"\n    name = \"一般过去时\"\n    ex = \"The bridge was built in 1990.\"\nif tense == 3:\n    be = \"will be\"\n    name = \"一般将来时\"\n    ex = \"A new school will be built here.\"\nif tense == 4:\n    be = \"has / have been\"\n    name = \"现在完成时\"\n    ex = \"The work has been finished.\"\nif tense == 5:\n    be = \"is / are being\"\n    name = \"现在进行时\"\n    ex = \"The road is being repaired now.\"\nif tense == 6:\n    be = \"had been\"\n    name = \"过去完成时\"\n    ex = \"The letter had been sent before he came.\"\nfill_rect(0, 120, 360, 30, \"#1d4ed8\")\nwrite(name + \" 被动式\", 0, 120, \"#fff\", 13)\nfill_rect(0, 74, 360, 40, \"#f1f5f9\")\nwrite(\"be（随时态变）+ done（永不变）\", 0, 74, \"#dc2626\", 12)\nfill_rect(-110, 26, 120, 34, \"#16a34a\")\nwrite(be, -110, 26, \"#fff\", 12)\nfill_rect(20, 26, 120, 34, \"#7c3aed\")\nwrite(\"done\", 20, 26, \"#fff\", 12)\nfill_rect(0, -30, 360, 44, \"#fef3c7\")\nwrite(\"例：\" + ex, 0, -30, \"#b45309\", 11)\nwrite(\"口诀：被动语态 be 加过表，时态变化全在 be\", -40, -85, \"#0f172a\", 11)\nwrite(\"不知道/不必说动作执行者时，by 短语可省\", -40, -110, \"#0369a1\", 10)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "为什么用被动",
+        "body": "【当动作的承受者比执行者更重要、或执行者未知时用被动】\nThe window was broken.（谁打的不重要/不知道）\n科技文、新闻报道高频使用被动——客观、正式。"
+      },
+      {
+        "title": "被动三步法",
+        "body": "【①宾语提前作主语 ②动词变 be + done ③原主语变 by 短语（可省）】\nEveryone loves English. → English is loved (by everyone).\n注意 be 的新主语单复数保持一致：They built two schools → Two schools were built."
+      },
+      {
+        "title": "易错点",
+        "body": "【不及物动词没有被动：happen, take place, belong to, come true】\nThe accident was happened（×）→ The accident happened（√）\n短语动词的介词不能丢：The children are taken care of."
+      }
+    ],
+    "examples": [
+      {
+        "q": "把 People speak English all over the world. 改成被动。",
+        "steps": [
+          "宾语 English 提前作主语",
+          "动词变 are spoken（复数主语）",
+          "答案：English is spoken by people all over the world"
+        ],
+        "tip": "先找宾语，再看单复数"
+      },
+      {
+        "q": "The factory ___ since 2010.（open）",
+        "steps": [
+          "since 2010 → 现在完成时",
+          "被动 = have/has been + done",
+          "主语 The factory 单数 → has been opened",
+          "答案：has been opened"
+        ],
+        "tip": "since 是完成时的信号词"
+      }
+    ],
+    "mistakes": [
+      "happen/take place 误用被动",
+      "be 的单复数不随新主语变化"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "The room ___ every day.",
+      "options": [
+        "is cleaned",
+        "cleans",
+        "is clean",
+        "cleaned"
+      ],
+      "answer": 0,
+      "explain": "一般现在被动"
+    },
+    {
+      "q": "A talk ___ tomorrow afternoon.",
+      "options": [
+        "will be given",
+        "will give",
+        "is given",
+        "has been given"
+      ],
+      "answer": 0,
+      "explain": "tomorrow→将来被动"
+    },
+    {
+      "q": "The bridge ___ last year.",
+      "options": [
+        "was built",
+        "is built",
+        "has been built",
+        "will be built"
+      ],
+      "answer": 0,
+      "explain": "last year→过去被动"
+    },
+    {
+      "q": "My bike ___. Can you repair it?",
+      "options": [
+        "is broken",
+        "broke",
+        "is breaking",
+        "breaks"
+      ],
+      "answer": 0,
+      "explain": "状态被动 is broken"
+    },
+    {
+      "q": "The song ___ by young people now.",
+      "options": [
+        "is being sung",
+        "is sung",
+        "was sung",
+        "has been sung"
+      ],
+      "answer": 0,
+      "explain": "now→进行被动"
+    },
+    {
+      "q": "下列哪句没有被动形式？",
+      "options": [
+        "The story happened in 2020.",
+        "The story was written in 2020.",
+        "The letter was sent yesterday.",
+        "The work has been done."
+      ],
+      "answer": 0,
+      "explain": "happen 不及物无被动"
+    }
+  ]
+}

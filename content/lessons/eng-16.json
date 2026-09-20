@@ -1,0 +1,208 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🎈",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：form=2 的 seen from the hill 为什么用 done？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：To pass the exam 里的 to do 表示什么？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：逻辑主语和动词的主动/被动关系怎么判断？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 非谓语动词探索台\nform = 1   # 1 doing 2 done 3 to do\n\nhide()\nf = \"doing\"\nrel = \"主动关系 / 正在进行\"\nex = \"Seeing the snake, she screamed.\"\npos = \"作状语：她主动看见蛇，同时发生\"\nif form == 2:\n    f = \"done\"\n    rel = \"被动关系 / 已完成\"\n    ex = \"Seen from the hill, the town looks small.\"\n    pos = \"作状语：镇被从山上看，被动\"\nif form == 3:\n    f = \"to do\"\n    rel = \"目的 / 将要发生\"\n    ex = \"To pass the exam, he studied hard.\"\n    pos = \"作状语：为了通过考试，目的\"\nfill_rect(-120, 110, 110, 40, \"#16a34a\")\nwrite(f, -120, 110, \"#fff\", 15)\nfill_rect(60, 110, 240, 40, \"#f1f5f9\")\nwrite(rel, 60, 110, \"#0f172a\", 12)\nfill_rect(0, 48, 360, 44, \"#fef3c7\")\nwrite(\"例：\" + ex, 0, 48, \"#b45309\", 11)\nfill_rect(0, -8, 360, 34, \"#eff6ff\")\nwrite(pos, 0, -8, \"#1d4ed8\", 11)\nwrite(\"一个句子一个谓语皇帝，其余动词都要削藩\", -30, -60, \"#dc2626\", 12)\nwrite(\"判定：找逻辑主语 → 主动 doing / 被动 done / 目的 to do\", -30, -85, \"#7c3aed\", 10)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-16",
+  "island": "cross",
+  "order": 305,
+  "title": "非谓语动词：doing·done·to do",
+  "emoji": "🎈",
+  "subjectArea": "英语",
+  "gradeBand": "senior",
+  "grade": 11,
+  "textbook": "人教版英语（高中选择性必修一）",
+  "curriculum": {
+    "module": "非谓语动词",
+    "points": [
+      "doing 主动/进行",
+      "done 被动/完成",
+      "to do 目的/将来"
+    ]
+  },
+  "story": "一个句子只能有一个\"皇帝\"（谓语动词），其余动词必须\"削藩\"变成非谓语——doing、done、to do 三种身份怎么选？看它和逻辑主语的关系：主动进行用 doing，被动完成用 done，目的将来用 to do。",
+  "goals": [
+    "理解谓语与非谓语的区别",
+    "会根据逻辑主语关系选 doing/done/to do",
+    "掌握非谓语作定语和状语的用法"
+  ],
+  "aiIntro": "🎈 拨动身份选择器，看同一个动词换三种马甲——非谓语变装秀！",
+  "lab": {
+    "params": [
+      {
+        "name": "form",
+        "label": "非谓语形式",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "form=2 的 seen from the hill 为什么用 done？",
+      "To pass the exam 里的 to do 表示什么？",
+      "逻辑主语和动词的主动/被动关系怎么判断？"
+    ],
+    "code": "# 非谓语动词探索台\nform = 1   # 1 doing 2 done 3 to do\n\nhide()\nf = \"doing\"\nrel = \"主动关系 / 正在进行\"\nex = \"Seeing the snake, she screamed.\"\npos = \"作状语：她主动看见蛇，同时发生\"\nif form == 2:\n    f = \"done\"\n    rel = \"被动关系 / 已完成\"\n    ex = \"Seen from the hill, the town looks small.\"\n    pos = \"作状语：镇被从山上看，被动\"\nif form == 3:\n    f = \"to do\"\n    rel = \"目的 / 将要发生\"\n    ex = \"To pass the exam, he studied hard.\"\n    pos = \"作状语：为了通过考试，目的\"\nfill_rect(-120, 110, 110, 40, \"#16a34a\")\nwrite(f, -120, 110, \"#fff\", 15)\nfill_rect(60, 110, 240, 40, \"#f1f5f9\")\nwrite(rel, 60, 110, \"#0f172a\", 12)\nfill_rect(0, 48, 360, 44, \"#fef3c7\")\nwrite(\"例：\" + ex, 0, 48, \"#b45309\", 11)\nfill_rect(0, -8, 360, 34, \"#eff6ff\")\nwrite(pos, 0, -8, \"#1d4ed8\", 11)\nwrite(\"一个句子一个谓语皇帝，其余动词都要削藩\", -30, -60, \"#dc2626\", 12)\nwrite(\"判定：找逻辑主语 → 主动 doing / 被动 done / 目的 to do\", -30, -85, \"#7c3aed\", 10)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "一句一个皇帝",
+        "body": "【谓语动词是句子的皇帝，一个简单句只能有一个；第二个动词必须降级为非谓语】\nShe sat there and cried.（and 连接两个谓语，合法）\nShe sat there, crying.（crying 非谓语，也合法）\nShe sat there cried.（× 两个谓语打架）"
+      },
+      {
+        "title": "三种身份",
+        "body": "【doing：与逻辑主语是主动关系，或表进行】\n【done：与逻辑主语是被动关系，或表完成】\n【to do：表目的、将来】\nThe man standing there is my teacher.（人主动站着→standing）\nthe books written by Lu Xun（书被写→written）"
+      },
+      {
+        "title": "常考细节",
+        "body": "【接不定式作宾语的动词：want/decide/hope/plan/agree】\n【接 doing 的：enjoy/finish/mind/practice/suggest/look forward to】\n forget to do（忘了要做）≠ forget doing（忘了做过）\nstop to do（停下来去做）≠ stop doing（停止做）"
+      }
+    ],
+    "examples": [
+      {
+        "q": "___ from space, the earth looks blue. 填 Seeing 还是 Seen？",
+        "steps": [
+          "找逻辑主语：the earth",
+          "地球被从太空看 → 被动关系",
+          "被动用 done → Seen from space"
+        ],
+        "tip": "先找逻辑主语再判主被动"
+      },
+      {
+        "q": "He got up early ___ the first bus.",
+        "steps": [
+          "分析语义：早起是为了赶上头班车",
+          "表目的用 to do",
+          "答案：to catch"
+        ],
+        "tip": "目的状语 = to do"
+      }
+    ],
+    "mistakes": [
+      "见动词就加 ing（不看逻辑主语关系）",
+      "look forward to 后误加 to do（to 是介词，接 doing）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "The boy ___ in the corner is my brother.",
+      "options": [
+        "standing",
+        "stood",
+        "to stand",
+        "stands"
+      ],
+      "answer": 0,
+      "explain": "男孩主动站着→doing"
+    },
+    {
+      "q": "The novel ___ by Mo Yan is popular.",
+      "options": [
+        "written",
+        "writing",
+        "to write",
+        "writes"
+      ],
+      "answer": 0,
+      "explain": "小说被写→done"
+    },
+    {
+      "q": "___ English well, you need more practice.",
+      "options": [
+        "To learn",
+        "Learning",
+        "Learned",
+        "Learns"
+      ],
+      "answer": 0,
+      "explain": "表目的用 to do"
+    },
+    {
+      "q": "He is looking forward to ___ from you.",
+      "options": [
+        "hearing",
+        "hear",
+        "be heard",
+        "heard"
+      ],
+      "answer": 0,
+      "explain": "to 是介词接 doing"
+    },
+    {
+      "q": "I remember ___ the door.（锁过了）",
+      "options": [
+        "locking",
+        "to lock",
+        "lock",
+        "locked"
+      ],
+      "answer": 0,
+      "explain": "remember doing 记得做过"
+    },
+    {
+      "q": "___ tired, he went on working.",
+      "options": [
+        "Feeling",
+        "Felt",
+        "To feel",
+        "Feel"
+      ],
+      "answer": 0,
+      "explain": "他主动感到累→doing"
+    }
+  ]
+}

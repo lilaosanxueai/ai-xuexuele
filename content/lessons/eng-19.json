@@ -1,0 +1,209 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "✉️",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：para=1 开头段必须交代哪两件事？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：主体段漏点会扣多少分？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：结尾段的礼貌句型你能背几个？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 应用文三段式探索台\npara = 1   # 1开头 2主体 3结尾\n\nhide()\nt = \"第一段：开头\"\nc = \"自我介绍 + 写信目的\"\ne = \"I am Li Hua. I am writing to invite you to our culture festival.\"\nw = \"万能句：I am writing to tell/ask/invite...\"\nif para == 2:\n    t = \"第二段：主体\"\n    c = \"要点 1 + 要点 2 + 要点 3（按提示全覆盖）\"\n    e = \"The festival will be held on June 6th. There will be paper-cutting and kite-making.\"\n    w = \"连接词：First / Besides / Finally 让层次清晰\"\nif para == 3:\n    t = \"第三段：结尾\"\n    c = \"期待回复 + 礼貌祝愿\"\n    e = \"I am looking forward to your reply. Best wishes!\"\n    w = \"万能句：Looking forward to your early reply.\"\nfill_rect(0, 120, 340, 30, \"#16a34a\")\nwrite(t, 0, 120, \"#fff\", 13)\nfill_rect(0, 72, 360, 36, \"#f1f5f9\")\nwrite(c, 0, 72, \"#0f172a\", 11)\nfill_rect(0, 16, 360, 48, \"#fef3c7\")\nwrite(e, 0, 16, \"#b45309\", 10)\nfill_rect(0, -38, 360, 34, \"#eff6ff\")\nwrite(w, 0, -38, \"#1d4ed8\", 11)\ni = 1\nwhile i < 4:\n    x = -100 + (i - 1) * 100\n    if i == para:\n        fill_rect(x, -95, 70, 40, \"#16a34a\")\n        write(\"段\" + i, x, -95, \"#fff\", 12)\n    if i != para:\n        fill_rect(x, -95, 70, 40, \"#e2e8f0\")\n        write(\"段\" + i, x, -95, \"#64748b\", 11)\n    i = i + 1\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-19",
+  "island": "cross",
+  "order": 308,
+  "title": "应用文写作：书信三段式",
+  "emoji": "✉️",
+  "subjectArea": "英语",
+  "gradeBand": "senior",
+  "grade": 10,
+  "textbook": "人教版英语（高中必修二）",
+  "curriculum": {
+    "module": "书面表达",
+    "points": [
+      "三段式结构",
+      "开头结尾万能句",
+      "要点全覆盖与润色"
+    ]
+  },
+  "story": "高考应用文 15 分，拼的不是文采而是\"结构清晰+要点齐全+少犯错\"。开头说明来意、主体覆盖要点、结尾礼貌收束——三段式框架一套，稳拿基准分，再靠亮点句冲高分。",
+  "goals": [
+    "掌握书信三段式结构",
+    "积累开头结尾万能句",
+    "学会要点全覆盖不留漏"
+  ],
+  "aiIntro": "✉️ 拨动段落滑块，看一封满分书信怎么搭骨架——应用文建筑师！",
+  "lab": {
+    "params": [
+      {
+        "name": "para",
+        "label": "段落",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "para=1 开头段必须交代哪两件事？",
+      "主体段漏点会扣多少分？",
+      "结尾段的礼貌句型你能背几个？"
+    ],
+    "code": "# 应用文三段式探索台\npara = 1   # 1开头 2主体 3结尾\n\nhide()\nt = \"第一段：开头\"\nc = \"自我介绍 + 写信目的\"\ne = \"I am Li Hua. I am writing to invite you to our culture festival.\"\nw = \"万能句：I am writing to tell/ask/invite...\"\nif para == 2:\n    t = \"第二段：主体\"\n    c = \"要点 1 + 要点 2 + 要点 3（按提示全覆盖）\"\n    e = \"The festival will be held on June 6th. There will be paper-cutting and kite-making.\"\n    w = \"连接词：First / Besides / Finally 让层次清晰\"\nif para == 3:\n    t = \"第三段：结尾\"\n    c = \"期待回复 + 礼貌祝愿\"\n    e = \"I am looking forward to your reply. Best wishes!\"\n    w = \"万能句：Looking forward to your early reply.\"\nfill_rect(0, 120, 340, 30, \"#16a34a\")\nwrite(t, 0, 120, \"#fff\", 13)\nfill_rect(0, 72, 360, 36, \"#f1f5f9\")\nwrite(c, 0, 72, \"#0f172a\", 11)\nfill_rect(0, 16, 360, 48, \"#fef3c7\")\nwrite(e, 0, 16, \"#b45309\", 10)\nfill_rect(0, -38, 360, 34, \"#eff6ff\")\nwrite(w, 0, -38, \"#1d4ed8\", 11)\ni = 1\nwhile i < 4:\n    x = -100 + (i - 1) * 100\n    if i == para:\n        fill_rect(x, -95, 70, 40, \"#16a34a\")\n        write(\"段\" + i, x, -95, \"#fff\", 12)\n    if i != para:\n        fill_rect(x, -95, 70, 40, \"#e2e8f0\")\n        write(\"段\" + i, x, -95, \"#64748b\", 11)\n    i = i + 1\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "三段式骨架",
+        "body": "【开头：我是谁+为什么写（1-2 句）】【主体：按提示要点逐条展开（4-6 句）】【结尾：期待回复+祝愿（1-2 句）】\n书信/邮件/通知/倡议书都套这个骨架，只换称呼和语气。"
+      },
+      {
+        "title": "要点全覆盖",
+        "body": "【题目给的每个要点都必须写，漏一点扣 2-3 分】\n写前列要点清单：时间？地点？活动？要求？\n用 First/Besides/Finally 把要点标清楚，阅卷老师 30 秒就能找到分点。"
+      },
+      {
+        "title": "冲分亮点",
+        "body": "【一个定语从句 + 一个非谓语 + 一个高级连接词】\nI am writing to invite you to the festival, which will be held on June 6th.\nHeld annually, the festival attracts many visitors.\nWhat is more / As far as I know 替换 and / I think。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "邀请信开头段要交代什么？",
+        "steps": [
+          "自我介绍：I am Li Hua, chairman of the Student Union",
+          "写信目的：I am writing to invite you to...",
+          "两句话内完成，直奔主题"
+        ],
+        "tip": "开头别绕弯子"
+      },
+      {
+        "q": "提示给了时间/地点/活动三个要点，怎么写主体段？",
+        "steps": [
+          "First：时间",
+          "Besides：地点与活动内容",
+          "Finally：参加方式或注意事项",
+          "每个要点 1-2 句，连接词开头"
+        ],
+        "tip": "要点顺序=得分顺序"
+      }
+    ],
+    "mistakes": [
+      "漏写题目要点（硬扣分）",
+      "通篇简单句无亮点（上不了高分档）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "书信开头段的功能是？",
+      "options": [
+        "自我介绍+写信目的",
+        "展开全部要点",
+        "致谢祝愿",
+        "罗列生词"
+      ],
+      "answer": 0,
+      "explain": "直奔主题"
+    },
+    {
+      "q": "主体段最重要的原则是？",
+      "options": [
+        "要点全覆盖",
+        "多用长难句",
+        "字数越多越好",
+        "抄题目原句"
+      ],
+      "answer": 0,
+      "explain": "漏点硬扣分"
+    },
+    {
+      "q": "下面哪个是结尾万能句？",
+      "options": [
+        "Looking forward to your reply.",
+        "I am Li Hua.",
+        "It is a pen.",
+        "He is tall."
+      ],
+      "answer": 0,
+      "explain": "期待回复"
+    },
+    {
+      "q": "表层次的连接词是？",
+      "options": [
+        "Besides",
+        "But",
+        "Or",
+        "So"
+      ],
+      "answer": 0,
+      "explain": "递进补要点"
+    },
+    {
+      "q": "亮点句 the festival which will be held... 用了？",
+      "options": [
+        "定语从句",
+        "倒装句",
+        "强调句",
+        "省略句"
+      ],
+      "answer": 0,
+      "explain": "which 引导定语从句"
+    },
+    {
+      "q": "应用文写作最忌讳的是？",
+      "options": [
+        "漏写要点",
+        "分段清晰",
+        "礼貌用语",
+        "用连接词"
+      ],
+      "answer": 0,
+      "explain": "要点=得分点"
+    }
+  ]
+}

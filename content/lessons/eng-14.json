@@ -1,0 +1,210 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🚃",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：rel=1 用 that 挂什么先行词？（人或物都可以）",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：rel=4 的 whose 在从句里充当什么？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：先行词是地点时用哪个？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 定语从句探索台\nrel = 1   # 1 that 2 who 3 whom 4 whose 5 where\n\nhide()\nword = \"that / which\"\nuse = \"指人或指物，作主语或宾语\"\nex = \"The book that I bought is great.\"\nif rel == 2:\n    word = \"who\"\n    use = \"指人，作从句主语\"\n    ex = \"The girl who is singing is my sister.\"\nif rel == 3:\n    word = \"whom\"\n    use = \"指人，作从句宾语（可省）\"\n    ex = \"The man whom we met is a teacher.\"\nif rel == 4:\n    word = \"whose\"\n    use = \"表示所属关系（谁的）\"\n    ex = \"The boy whose father is a doctor is my friend.\"\nif rel == 5:\n    word = \"where\"\n    use = \"先行词是地点，作状语\"\n    ex = \"The school where I study is beautiful.\"\nfill_rect(0, 110, 360, 34, \"#1d4ed8\")\nwrite(\"关系词：\" + word, 0, 110, \"#fff\", 14)\nfill_rect(0, 62, 360, 30, \"#f1f5f9\")\nwrite(use, 0, 62, \"#0f172a\", 12)\nfill_rect(0, 10, 360, 44, \"#fef3c7\")\nwrite(\"例：\" + ex, 0, 10, \"#b45309\", 11)\nfill_rect(-100, -60, 150, 56, \"#dc2626\")\nwrite(\"先行词\", -100, -42, \"#fff\", 13)\nwrite(\"antecedent\", -100, -68, \"#fecaca\", 10)\nfill_rect(90, -60, 150, 56, \"#16a34a\")\nwrite(\"定语从句\", 90, -42, \"#fff\", 13)\nwrite(\"relative clause\", 90, -68, \"#bbf7d0\", 10)\npen_color(\"#7c3aed\")\npen_down()\ngo_to(-25, -60)\ngo_to(15, -60)\npen_up()\nwrite(\"关系词 = 挂钩\", 0, -100, \"#7c3aed\", 11)\nif rel == 1:\n    write(\"that 万金油：人和物都能挂\", 0, 130, \"#1d4ed8\", 10)\nif rel == 4:\n    write(\"whose 后面必跟名词：whose book\", 0, 130, \"#dc2626\", 10)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-14",
+  "island": "cross",
+  "order": 303,
+  "title": "定语从句：句子里的车厢",
+  "emoji": "🚃",
+  "subjectArea": "英语",
+  "gradeBand": "senior",
+  "grade": 10,
+  "textbook": "人教版英语（高中必修一）",
+  "curriculum": {
+    "module": "复合句·定语从句",
+    "points": [
+      "关系代词 who/whom/whose/which/that",
+      "关系副词 where/when/why",
+      "只能用 that 的场合"
+    ]
+  },
+  "story": "The girl who is singing is my sister.——主句是一节车头，who is singing 是挂在 girl 后面的车厢：它专门回答\"哪个女孩\"。学会挂车厢，英语句子瞬间变长却不会散架。",
+  "goals": [
+    "会选关系代词与关系副词",
+    "理解先行词与从句的关系",
+    "掌握只用 that 的三种场合"
+  ],
+  "aiIntro": "🚃 拖动关系词转盘，看车厢怎么挂在先行词后面——定语从句装卸游戏！",
+  "lab": {
+    "params": [
+      {
+        "name": "rel",
+        "label": "关系词",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "rel=1 用 that 挂什么先行词？（人或物都可以）",
+      "rel=4 的 whose 在从句里充当什么？",
+      "先行词是地点时用哪个？"
+    ],
+    "code": "# 定语从句探索台\nrel = 1   # 1 that 2 who 3 whom 4 whose 5 where\n\nhide()\nword = \"that / which\"\nuse = \"指人或指物，作主语或宾语\"\nex = \"The book that I bought is great.\"\nif rel == 2:\n    word = \"who\"\n    use = \"指人，作从句主语\"\n    ex = \"The girl who is singing is my sister.\"\nif rel == 3:\n    word = \"whom\"\n    use = \"指人，作从句宾语（可省）\"\n    ex = \"The man whom we met is a teacher.\"\nif rel == 4:\n    word = \"whose\"\n    use = \"表示所属关系（谁的）\"\n    ex = \"The boy whose father is a doctor is my friend.\"\nif rel == 5:\n    word = \"where\"\n    use = \"先行词是地点，作状语\"\n    ex = \"The school where I study is beautiful.\"\nfill_rect(0, 110, 360, 34, \"#1d4ed8\")\nwrite(\"关系词：\" + word, 0, 110, \"#fff\", 14)\nfill_rect(0, 62, 360, 30, \"#f1f5f9\")\nwrite(use, 0, 62, \"#0f172a\", 12)\nfill_rect(0, 10, 360, 44, \"#fef3c7\")\nwrite(\"例：\" + ex, 0, 10, \"#b45309\", 11)\nfill_rect(-100, -60, 150, 56, \"#dc2626\")\nwrite(\"先行词\", -100, -42, \"#fff\", 13)\nwrite(\"antecedent\", -100, -68, \"#fecaca\", 10)\nfill_rect(90, -60, 150, 56, \"#16a34a\")\nwrite(\"定语从句\", 90, -42, \"#fff\", 13)\nwrite(\"relative clause\", 90, -68, \"#bbf7d0\", 10)\npen_color(\"#7c3aed\")\npen_down()\ngo_to(-25, -60)\ngo_to(15, -60)\npen_up()\nwrite(\"关系词 = 挂钩\", 0, -100, \"#7c3aed\", 11)\nif rel == 1:\n    write(\"that 万金油：人和物都能挂\", 0, 130, \"#1d4ed8\", 10)\nif rel == 4:\n    write(\"whose 后面必跟名词：whose book\", 0, 130, \"#dc2626\", 10)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "什么是定语从句",
+        "body": "【定语从句 = 挂在名词（先行词）后面、修饰它的小句子】\nThe girl who is singing is my sister.\n先行词 girl，关系词 who，从句 who is singing 告诉你\"哪个女孩\"。\n关系词一身兼两职：①连接主从句 ②在从句中充当成分。"
+      },
+      {
+        "title": "关系代词怎么选",
+        "body": "【指人作主语 who；指人作宾语 whom（口语可用 who）；指物 which；人物皆可 that；表所属 whose】\n看两点：先行词是人还是物？关系词在从句里作主语、宾语还是定语？\n关系代词作宾语时可省略：The book (that) I bought is great."
+      },
+      {
+        "title": "只用 that 的场合",
+        "body": "【先行词是 all/everything/nothing/something 等不定代词时】\n【先行词被序数词、最高级、the only、the very 修饰时】\nThis is the best film that I have ever seen.\n另外介词后不能用 that：in which（√）in that（×）。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "I still remember the day ___ we first met. 填什么？",
+        "steps": [
+          "先行词 the day 是时间",
+          "从句 we first met 主谓宾齐全，不缺成分",
+          "时间 + 作状语 → 关系副词 when",
+          "答案：when（= on which）"
+        ],
+        "tip": "从句缺成分用 which/that，不缺用 when/where/why"
+      },
+      {
+        "q": "This is the factory ___ makes cars. 填什么？",
+        "steps": [
+          "先行词 the factory 是物",
+          "从句 ___ makes cars 缺主语",
+          "缺主语 + 指物 → which/that",
+          "答案：which 或 that"
+        ],
+        "tip": "先把从句缺口找出来再选词"
+      }
+    ],
+    "mistakes": [
+      "先行词是时间就填 when（从句缺宾语时要用 which/that）",
+      "whose 和 who 混淆（whose=谁的，后接名词）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "The man ___ is standing there is my uncle.（作主语指人）",
+      "options": [
+        "who",
+        "which",
+        "where",
+        "whose"
+      ],
+      "answer": 0,
+      "explain": "指人作主语用 who"
+    },
+    {
+      "q": "The house ___ windows are big faces south.",
+      "options": [
+        "whose",
+        "which",
+        "that",
+        "who"
+      ],
+      "answer": 0,
+      "explain": "windows 前缺定语→whose"
+    },
+    {
+      "q": "This is all ___ I want to say.",
+      "options": [
+        "that",
+        "which",
+        "who",
+        "what"
+      ],
+      "answer": 0,
+      "explain": "先行词 all 只用 that"
+    },
+    {
+      "q": "The city ___ I was born has changed a lot.",
+      "options": [
+        "where",
+        "which",
+        "that",
+        "who"
+      ],
+      "answer": 0,
+      "explain": "地点+从句不缺成分→where"
+    },
+    {
+      "q": "It is the most interesting book ___ I have read.",
+      "options": [
+        "that",
+        "which",
+        "who",
+        "whom"
+      ],
+      "answer": 0,
+      "explain": "最高级修饰只用 that"
+    },
+    {
+      "q": "The pen ___ I lost yesterday was red.（作宾语）",
+      "options": [
+        "that（可省）",
+        "who",
+        "where",
+        "what"
+      ],
+      "answer": 0,
+      "explain": "指物作宾语 that/which 可省"
+    }
+  ]
+}

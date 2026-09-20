@@ -1,0 +1,209 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🌀",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：vt=2 的 had done 表示什么时候的事？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：主句 would 后为什么接不同形式？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：为什么说虚拟=时态后移？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 虚拟语气探索台\nvt = 1   # 1与现在相反 2与过去相反 3与将来相反\n\nhide()\nname = \"与现在事实相反\"\nic = \"If I were you,（过去式）\"\nmc = \"I would go.（would + 动词原形）\"\nex = \"事实：我不是你\"\nif vt == 2:\n    name = \"与过去事实相反\"\n    ic = \"If you had studied hard,（过去完成）\"\n    mc = \"you would have passed.（would have done）\"\n    ex = \"事实：你当时没努力，没通过\"\nif vt == 3:\n    name = \"与将来事实相反\"\n    ic = \"If it should rain tomorrow,（should + 原形）\"\n    mc = \"we would stay home.（would + 原形）\"\n    ex = \"事实：明天下雨可能性很小\"\nfill_rect(0, 125, 340, 30, \"#7c3aed\")\nwrite(name, 0, 125, \"#fff\", 13)\nfill_rect(-100, 78, 160, 38, \"#1d4ed8\")\nwrite(ic, -100, 78, \"#fff\", 10)\nfill_rect(90, 78, 160, 38, \"#dc2626\")\nwrite(mc, 90, 78, \"#fff\", 10)\nwrite(\"if 从句\", -100, 46, \"#1d4ed8\", 10)\nwrite(\"主句\", 90, 46, \"#dc2626\", 10)\nfill_rect(0, -6, 360, 34, \"#f1f5f9\")\nwrite(ex, 0, -6, \"#0f172a\", 11)\nwrite(\"虚拟密码：时态后退一步\", -40, -55, \"#dc2626\", 12)\nwrite(\"现在→过去式  过去→过去完成  将来→should + 原形\", -40, -80, \"#0369a1\", 10)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-17",
+  "island": "cross",
+  "order": 306,
+  "title": "虚拟语气：如果世界可以重来",
+  "emoji": "🌀",
+  "subjectArea": "英语",
+  "gradeBand": "senior",
+  "grade": 11,
+  "textbook": "人教版英语（高中选择性必修二）",
+  "curriculum": {
+    "module": "虚拟语气",
+    "points": [
+      "与现在事实相反",
+      "与过去事实相反",
+      "与将来事实相反",
+      "wish 后的虚拟"
+    ]
+  },
+  "story": "If I were a bird, I would fly to you.——我不是鸟，所以用 were 不用 am：这就是虚拟语气，专门表达\"不可能/没发生\"的假设。时态整体\"后退一步\"，是它唯一的密码。",
+  "goals": [
+    "理解虚拟语气表达非真实假设",
+    "掌握三种 if 虚拟的时态搭配",
+    "会写 wish 后的虚拟从句"
+  ],
+  "aiIntro": "🌀 拨动假设类型，看时态怎么\"后退一步\"——虚拟语气时光机！",
+  "lab": {
+    "params": [
+      {
+        "name": "vt",
+        "label": "虚拟类型",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "vt=2 的 had done 表示什么时候的事？",
+      "主句 would 后为什么接不同形式？",
+      "为什么说虚拟=时态后移？"
+    ],
+    "code": "# 虚拟语气探索台\nvt = 1   # 1与现在相反 2与过去相反 3与将来相反\n\nhide()\nname = \"与现在事实相反\"\nic = \"If I were you,（过去式）\"\nmc = \"I would go.（would + 动词原形）\"\nex = \"事实：我不是你\"\nif vt == 2:\n    name = \"与过去事实相反\"\n    ic = \"If you had studied hard,（过去完成）\"\n    mc = \"you would have passed.（would have done）\"\n    ex = \"事实：你当时没努力，没通过\"\nif vt == 3:\n    name = \"与将来事实相反\"\n    ic = \"If it should rain tomorrow,（should + 原形）\"\n    mc = \"we would stay home.（would + 原形）\"\n    ex = \"事实：明天下雨可能性很小\"\nfill_rect(0, 125, 340, 30, \"#7c3aed\")\nwrite(name, 0, 125, \"#fff\", 13)\nfill_rect(-100, 78, 160, 38, \"#1d4ed8\")\nwrite(ic, -100, 78, \"#fff\", 10)\nfill_rect(90, 78, 160, 38, \"#dc2626\")\nwrite(mc, 90, 78, \"#fff\", 10)\nwrite(\"if 从句\", -100, 46, \"#1d4ed8\", 10)\nwrite(\"主句\", 90, 46, \"#dc2626\", 10)\nfill_rect(0, -6, 360, 34, \"#f1f5f9\")\nwrite(ex, 0, -6, \"#0f172a\", 11)\nwrite(\"虚拟密码：时态后退一步\", -40, -55, \"#dc2626\", 12)\nwrite(\"现在→过去式  过去→过去完成  将来→should + 原形\", -40, -80, \"#0369a1\", 10)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "真实 vs 虚拟",
+        "body": "【真实条件句：可能发生的假设，用正常时态】If it rains, I will stay home.\n【虚拟条件句：不可能/与事实相反，时态后移】If it rained now, I would stay home.\n判断标准：这事还有可能吗？"
+      },
+      {
+        "title": "三种 if 虚拟",
+        "body": "【与现在相反：If + 过去式，主句 would + 原形】If I had time, I would help you.\n【与过去相反：If + had done，主句 would have done】If you had come, you would have met her.\n【与将来相反：If + should/were to + 原形】If the sun were to rise in the west, I would not change my mind."
+      },
+      {
+        "title": "wish 的虚拟",
+        "body": "【对现在的愿望：wish + 过去式】I wish I were taller.\n【对过去的遗憾：wish + had done】I wish I had studied harder.\n【对将来的愿望：wish + could/would + 原形】I wish you could come tomorrow.\nwish 后面永远\"时态后移\"，与 if 虚拟同源。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "If I ___ you, I would accept the offer.",
+        "steps": [
+          "虚拟语气与现在相反",
+          "be 动词过去式一律用 were",
+          "答案：were"
+        ],
+        "tip": "If I were you 是高考高频"
+      },
+      {
+        "q": "I wish I ___ the concert last night.",
+        "steps": [
+          "last night → 对过去的愿望",
+          "wish 后用 had done",
+          "答案：had attended"
+        ],
+        "tip": "时间标志词定虚拟类型"
+      }
+    ],
+    "mistakes": [
+      "虚拟句 if 后用 was（一律 were）",
+      "与过去相反的主句误用 would do（应 would have done）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "If I ___ wings, I would fly.",
+      "options": [
+        "had",
+        "have",
+        "would have",
+        "having"
+      ],
+      "answer": 0,
+      "explain": "与现在相反→过去式"
+    },
+    {
+      "q": "If he ___ earlier, he would have caught the train.",
+      "options": [
+        "had left",
+        "left",
+        "would leave",
+        "leaves"
+      ],
+      "answer": 0,
+      "explain": "与过去相反→had done"
+    },
+    {
+      "q": "I wish I ___ a bird.",
+      "options": [
+        "were",
+        "am",
+        "will be",
+        "have been"
+      ],
+      "answer": 0,
+      "explain": "对现在的愿望→过去式 were"
+    },
+    {
+      "q": "If it ___ tomorrow, we would cancel the picnic.（几乎不可能）",
+      "options": [
+        "should snow",
+        "snows",
+        "snowed",
+        "will snow"
+      ],
+      "answer": 0,
+      "explain": "与将来相反→should + 原形"
+    },
+    {
+      "q": "If I had known your number, I ___ you.",
+      "options": [
+        "would have called",
+        "would call",
+        "had called",
+        "called"
+      ],
+      "answer": 0,
+      "explain": "主句 would have done"
+    },
+    {
+      "q": "虚拟语气表达的是？",
+      "options": [
+        "非真实的假设或愿望",
+        "已经发生的事",
+        "将来的计划",
+        "命令和要求"
+      ],
+      "answer": 0,
+      "explain": "核心=非真实"
+    }
+  ]
+}
