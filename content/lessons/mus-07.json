@@ -1,0 +1,218 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🎨",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：轻+慢像什么情绪？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：强+快像什么？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：摇篮曲通常什么力度速度？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 力度速度探索台\ndyn = 4   # 1-8 pp 到 ff\ntempo = 100   # 速度\n\nhide()\nmoods = \"\"\nif dyn <= 2:\n    if tempo <= 80:\n        moods = \"摇篮曲 🌙 轻而慢 = 温柔入睡\"\n    if tempo > 80:\n        moods = \"窃窃私语 🤫 轻\"\nif dyn >= 5:\n    if tempo >= 140:\n        moods = \"冲锋号 🎺 强而快 = 激昂\"\n    if tempo < 140:\n        moods = \"庄严宣言 🏛 强而稳\"\nif dyn == 3:\n    if dyn == 4:\n        moods = \"\"\nif dyn == 4:\n    moods = \"从容讲述 😊 中等力度\"\nif dyn == 3:\n    moods = \"娓娓道来 ☕ 舒缓\"\n# 力度柱\nfill_rect(-120, -40 + dyn * 12, 50, dyn * 24, \"#3b82f6\")\n# 速度条\nfill_rect(80, -40 + (tempo - 40) / 160 * 60 + 30, 50, (tempo - 40) / 160 * 120, \"#f59e0b\")\nwrite(tempo + \" BPM\", 80, 50, \"#b45309\", 11)\nwrite(\"速度：\" + tempo + \" 拍/分\", -60, 87, \"#b45309\", 12)\nwrite(moods, 0, -120, \"#dc2626\", 13)\nwrite(\"渐强 < = 越来越响 · 渐弱 > = 越来越轻\", -80, 148, \"#7c3aed\", 11)\n",
+  "celebrate": "新知识到手！",
+  "id": "mus-07",
+  "island": "cross",
+  "order": 292,
+  "title": "音乐的表情：力度与速度",
+  "emoji": "🎨",
+  "subjectArea": "音乐",
+  "gradeBand": "primary",
+  "grade": 5,
+  "textbook": "人音版音乐（小学）",
+  "curriculum": {
+    "module": "音乐要素",
+    "points": [
+      "力度记号",
+      "速度记号",
+      "力度速度与情绪"
+    ]
+  },
+  "story": "同一段旋律，弹得又轻又慢像摇篮曲，弹得又响又快像冲锋号——音符一样，\"表情\"全变。力度和速度是音乐的语调和脚步。",
+  "goals": [
+    "认识 pp 到 ff 力度记号",
+    "认识慢到快的速度术语",
+    "会用力度速度变化表达情绪"
+  ],
+  "aiIntro": "🎨 拖动力度和速度，看同一旋律的表情大变脸！",
+  "lab": {
+    "params": [
+      {
+        "name": "dyn",
+        "label": "力度（1-8）",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "value": 4
+      },
+      {
+        "name": "tempo",
+        "label": "速度（BPM）",
+        "min": 40,
+        "max": 200,
+        "step": 20,
+        "value": 100
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "轻+慢像什么情绪？",
+      "强+快像什么？",
+      "摇篮曲通常什么力度速度？"
+    ],
+    "code": "# 力度速度探索台\ndyn = 4   # 1-8 pp 到 ff\ntempo = 100   # 速度\n\nhide()\nmoods = \"\"\nif dyn <= 2:\n    if tempo <= 80:\n        moods = \"摇篮曲 🌙 轻而慢 = 温柔入睡\"\n    if tempo > 80:\n        moods = \"窃窃私语 🤫 轻\"\nif dyn >= 5:\n    if tempo >= 140:\n        moods = \"冲锋号 🎺 强而快 = 激昂\"\n    if tempo < 140:\n        moods = \"庄严宣言 🏛 强而稳\"\nif dyn == 3:\n    if dyn == 4:\n        moods = \"\"\nif dyn == 4:\n    moods = \"从容讲述 😊 中等力度\"\nif dyn == 3:\n    moods = \"娓娓道来 ☕ 舒缓\"\n# 力度柱\nfill_rect(-120, -40 + dyn * 12, 50, dyn * 24, \"#3b82f6\")\n# 速度条\nfill_rect(80, -40 + (tempo - 40) / 160 * 60 + 30, 50, (tempo - 40) / 160 * 120, \"#f59e0b\")\nwrite(tempo + \" BPM\", 80, 50, \"#b45309\", 11)\nwrite(\"速度：\" + tempo + \" 拍/分\", -60, 87, \"#b45309\", 12)\nwrite(moods, 0, -120, \"#dc2626\", 13)\nwrite(\"渐强 < = 越来越响 · 渐弱 > = 越来越轻\", -80, 148, \"#7c3aed\", 11)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "力度记号",
+        "body": "【pp 极弱 → p 弱 → mp 中弱 → mf 中强 → f 强 → ff 极强】\n意大利语缩写，字母越多越极端。\n渐强 <（cresc.）：越来越响；渐弱 >（dim.）：越来越轻。"
+      },
+      {
+        "title": "速度术语",
+        "body": "【Grave 庄板 → Adagio 慢板 → Andante 行板 → Moderato 中板 → Allegro 快板 → Presto 急板】\nBPM（每分钟拍数）是精确度量：行板≈76，快板≈120。\n节拍器是速度的尺子。"
+      },
+      {
+        "title": "力度×速度=情绪",
+        "body": "【轻+慢=摇篮曲/安眠；强+快=进行曲/庆祝；轻+快=俏皮跳跃；强+慢=庄严宣告】\n同一旋律改力度速度 = 换表情。《小星星》变奏曲就靠这个玩出花样。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "f 和 pp 哪个更强？",
+        "steps": [
+          "f = forte = 强",
+          "pp = pianissimo = 极弱",
+          "f 强得多",
+          "音乐里 p 系列弱、f 系列强"
+        ],
+        "tip": "p弱f强，字母越多越极端"
+      },
+      {
+        "q": "摇篮曲通常用什么力度和速度？",
+        "steps": [
+          "催眠需要轻柔 → p（弱）",
+          "安抚需要缓慢 → Adagio/行板",
+          "轻而慢 = 温柔入睡",
+          "对比：进行曲强而快"
+        ],
+        "tip": "想想妈妈哼歌的样子"
+      }
+    ],
+    "mistakes": [
+      "把 p 当强（p=piano=弱！）",
+      "认为速度只影响快慢不影响情绪"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "pp 表示？",
+      "options": [
+        "极弱",
+        "极强",
+        "中强",
+        "渐强"
+      ],
+      "answer": 0,
+      "explain": "pianissimo"
+    },
+    {
+      "q": "f 表示？",
+      "options": [
+        "强",
+        "弱",
+        "慢",
+        "快"
+      ],
+      "answer": 0,
+      "explain": "forte"
+    },
+    {
+      "q": "Allegro 是？",
+      "options": [
+        "快板",
+        "慢板",
+        "极弱",
+        "渐强"
+      ],
+      "answer": 0,
+      "explain": "≈120 BPM"
+    },
+    {
+      "q": "渐强记号是？",
+      "options": [
+        "<",
+        ">",
+        "#",
+        "@"
+      ],
+      "answer": 0,
+      "explain": "开口越来越宽"
+    },
+    {
+      "q": "摇篮曲的力度速度组合是？",
+      "options": [
+        "轻而慢",
+        "强而快",
+        "强而慢",
+        "轻而快"
+      ],
+      "answer": 0,
+      "explain": "温柔入睡"
+    },
+    {
+      "q": "进行曲通常？",
+      "options": [
+        "强而快",
+        "轻而慢",
+        "轻而快",
+        "强而慢"
+      ],
+      "answer": 0,
+      "explain": "步伐铿锵"
+    }
+  ]
+}
