@@ -17,6 +17,7 @@ const WrongBookScreen = lazy(() => import('./screens/WrongBookScreen.tsx'));
 const MentalMathScreen = lazy(() => import('./screens/MentalMathScreen.tsx'));
 const FlashcardScreen = lazy(() => import('./screens/FlashcardScreen.tsx'));
 const ChallengeScreen = lazy(() => import('./screens/ChallengeScreen.tsx'));
+const SearchScreen = lazy(() => import('./screens/SearchScreen.tsx'));
 
 /** 旧书签 /lesson/:id 重定向到辅导页（学习主入口） */
 function LegacyLessonRoute() {
@@ -58,6 +59,7 @@ export default function App() {
           <Route path="/mentalmath" element={<MentalMathScreen />} />
           <Route path="/flashcards" element={<FlashcardScreen />} />
           <Route path="/challenge" element={<ChallengeScreen />} />
+          <Route path="/search" element={<SearchScreen />} />
           <Route path="/playground" element={<PlaygroundScreen />} />
           <Route path="/subject/:area" element={<SubjectScreen />} />
           <Route path="*" element={<Navigate to="/" replace />} />

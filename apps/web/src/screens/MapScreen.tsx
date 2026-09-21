@@ -58,6 +58,21 @@ export default function MapScreen() {
   const unlockedCount = badges.filter((b) => b.unlocked).length;
   const report = useMemo(() => computeWeeklyReport(lessons, progress), [lessons, progress]);
   const maxBarMinutes = Math.max(10, ...report.dayBars.map((d) => d.minutes));
+  // 近 8 周学习热力图（GitHub 式）：每天一格，颜色随分钟数加深
+  const heat = useMemo(() => {
+    const usage = progress?.dailyUsage ?? {};
+    const cells: { key: string; minutes: number; level: number }[] = [];
+    for (let i = 55; i >= 0; i--) {
+      const d = new Date();
+      d.setDate(d.getDate() - i);
+      const key = d.toISOString().slice(0, 10);
+      const minutes = usage[key] ?? 0;
+      const level = minutes === 0 ? 0 : minutes < 15 ? 1 : minutes < 30 ? 2 : minutes < 60 ? 3 : 4;
+      cells.push({ key, minutes, level });
+    }
+    return cells;
+  }, [progress]);
+  const heatColor = (lv: number) => ['bg-slate-100', 'bg-emerald-200', 'bg-emerald-400', 'bg-emerald-500', 'bg-emerald-600'][lv];
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -65,6 +80,14 @@ export default function MapScreen() {
       <main className="mx-auto w-full max-w-5xl flex-1 px-6 pb-10">
         {/* 学习概览 + 智能推荐 */}
         <div className="mb-6 rounded-3xl bg-white/80 p-5 shadow-md">
+          <button
+            onClick={() => nav('/search')}
+            className="mb-3 flex w-full items-center gap-3 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left transition hover:border-sky-300"
+          >
+            <span className="text-xl">🔍</span>
+            <span className="flex-1 text-sm font-semibold text-slate-400">卡在哪个知识点？搜「浮力」「定语从句」「光合作用」…</span>
+            <span className="rounded-xl bg-sky-500 px-3 py-1.5 text-xs font-bold text-white">知识搜索</span>
+          </button>
           <div className="mb-3 flex flex-wrap items-center gap-3 text-sm text-slate-500">
             <span className="rounded-full bg-orange-50 px-3 py-1 font-bold text-orange-500">🔥 连续学习 {calcStreak(progress?.dailyUsage ?? {})} 天</span>
             <span className="rounded-full bg-white px-3 py-1 shadow-sm">今日 {todayMin} 分钟</span>
@@ -133,6 +156,19 @@ export default function MapScreen() {
             </span>
           </div>
           <p className="mb-3 text-sm text-slate-600">{report.headline}</p>
+          {/* 近 8 周热力图 */}
+          <div className="mb-3 flex items-center gap-2 overflow-x-auto rounded-2xl bg-slate-50 p-3">
+            <span className="shrink-0 text-xs font-bold text-slate-500">8 周</span>
+            <div className="flex gap-1">
+              {heat.map((c) => (
+                <div key={c.key} title={`${c.key} · ${c.minutes} 分钟`} className={`h-4 w-4 shrink-0 rounded-[4px] ${heatColor(c.level)}`} />
+              ))}
+            </div>
+            <span className="ml-auto shrink-0 text-xs text-slate-400">少 → 多</span>
+            <div className="flex shrink-0 gap-1">
+              {[0, 1, 2, 3, 4].map((lv) => (<div key={lv} className={`h-3 w-3 rounded-[3px] ${heatColor(lv)}`} />))}
+            </div>
+          </div>
           <div className="grid gap-4 md:grid-cols-2">
             {/* 每日时长柱状图 */}
             <div className="rounded-2xl bg-slate-50 p-3">
