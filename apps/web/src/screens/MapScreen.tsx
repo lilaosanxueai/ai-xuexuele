@@ -261,8 +261,8 @@ export default function MapScreen() {
           })}
         </div>
 
-        {/* AI 答疑 + AI 实验室 + 口算 + 闪卡 */}
-        <section className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {/* AI 答疑 + AI 实验室 + 口算 + 闪卡 + 挑战赛 */}
+        <section className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           <button
             onClick={() => nav('/ask')}
             className="rounded-3xl bg-gradient-to-br from-indigo-400 to-violet-500 p-6 text-center text-white shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
@@ -294,6 +294,14 @@ export default function MapScreen() {
             <div className="text-5xl">🃏</div>
             <div className="mt-2 text-xl font-black">闪卡复习</div>
             <div className="mt-1 text-xs opacity-90">知识点正反面 · 记忆盒自动排期 · 忘了明天再见</div>
+          </button>
+          <button
+            onClick={() => nav('/challenge')}
+            className="rounded-3xl bg-gradient-to-br from-orange-400 to-rose-500 p-6 text-center text-white shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
+          >
+            <div className="text-5xl">⚡</div>
+            <div className="mt-2 text-xl font-black">全学科挑战赛</div>
+            <div className="mt-1 text-xs opacity-90">10 题 3 命 · 限时连击加分 · 错题自动进错题本</div>
           </button>
         </section>
       </main>

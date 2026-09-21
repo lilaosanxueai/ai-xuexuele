@@ -39,6 +39,17 @@ export default function ExercisePanel({ title, exercises, onDone, onClose }: Pro
     setPicked(null);
   };
 
+  // 读题（Web Speech 本地语音，不联网；不支持的环境自动隐藏按钮）
+  const ttsOk = typeof window !== 'undefined' && 'speechSynthesis' in window;
+  const speak = (text: string) => {
+    if (!ttsOk) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text.replace(/[💡✅❌🔊]/g, ''));
+    u.lang = 'zh-CN';
+    u.rate = 0.95;
+    window.speechSynthesis.speak(u);
+  };
+
   if (finished) {
     const full = correct === exercises.length;
     return (
@@ -62,7 +73,12 @@ export default function ExercisePanel({ title, exercises, onDone, onClose }: Pro
           <h3 className="font-black text-slate-800">📝 {title} · 随堂小练</h3>
           <span className="text-xs text-slate-400">第 {idx + 1}/{exercises.length} 题 · 已对 {correct}</span>
         </div>
-        <div className="mb-4 rounded-2xl bg-slate-50 p-3 text-[15px] font-semibold leading-relaxed text-slate-800">{ex.q}</div>
+        <div className="mb-4 flex items-start gap-2 rounded-2xl bg-slate-50 p-3">
+          <div className="min-w-0 flex-1 text-[15px] font-semibold leading-relaxed text-slate-800">{ex.q}</div>
+          {ttsOk && (
+            <button onClick={() => speak(ex.q)} title="读题" className="shrink-0 rounded-xl bg-white px-2.5 py-1.5 text-lg shadow-sm transition hover:bg-sky-50">🔊</button>
+          )}
+        </div>
         <div className="space-y-2">
           {ex.options.map((opt, i) => {
             const isAnswer = i === ex.answer;
