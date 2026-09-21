@@ -7,6 +7,8 @@ import Header from '../components/Header.tsx';
 import { SUBJECTS, SUBJECT_STYLE } from '../components/subjectMeta.ts';
 import { recommendNext } from '../runtime/recommend.ts';
 import { calcStreak } from '../utils/streak.ts';
+import { computeBadges } from '../runtime/achievements.ts';
+import { computeWeeklyReport } from '../runtime/weeklyReport.ts';
 
 /** 学科中心：以「学科 × 学段」组织全部课程（对标课表结构） */
 export default function MapScreen() {
@@ -51,6 +53,11 @@ export default function MapScreen() {
     if (!byArea.has(key)) byArea.set(key, []);
     byArea.get(key)!.push(l);
   }
+
+  const badges = useMemo(() => computeBadges(lessons, progress), [lessons, progress]);
+  const unlockedCount = badges.filter((b) => b.unlocked).length;
+  const report = useMemo(() => computeWeeklyReport(lessons, progress), [lessons, progress]);
+  const maxBarMinutes = Math.max(10, ...report.dayBars.map((d) => d.minutes));
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -113,6 +120,108 @@ export default function MapScreen() {
             </div>
           </div>
         )}
+
+        {/* 学情周报：本地数据算出「这周学得怎么样、哪里薄弱、下一步干什么」 */}
+        <div className="mb-6 rounded-3xl bg-white/80 p-5 shadow-md">
+          <div className="mb-1 flex flex-wrap items-center gap-2">
+            <span className="text-lg font-black text-slate-700">📊 本周学情</span>
+            <span className="text-xs text-slate-400">过去 7 天 · 数据只在本机</span>
+            <span className="ml-auto flex gap-2 text-xs">
+              <span className="rounded-full bg-sky-50 px-3 py-1 font-bold text-sky-600">共 {report.totalMinutes} 分钟</span>
+              <span className="rounded-full bg-emerald-50 px-3 py-1 font-bold text-emerald-600">学习 {report.activeDays} 天</span>
+              <span className="rounded-full bg-orange-50 px-3 py-1 font-bold text-orange-500">🔥 连续 {report.streak} 天</span>
+            </span>
+          </div>
+          <p className="mb-3 text-sm text-slate-600">{report.headline}</p>
+          <div className="grid gap-4 md:grid-cols-2">
+            {/* 每日时长柱状图 */}
+            <div className="rounded-2xl bg-slate-50 p-3">
+              <div className="mb-2 text-xs font-bold text-slate-500">每日学习时长（分钟）</div>
+              <div className="flex h-24 items-end gap-1.5">
+                {report.dayBars.map((d, i) => (
+                  <div key={i} className="flex flex-1 flex-col items-center gap-1">
+                    <div
+                      className={`w-full rounded-t-md ${d.minutes > 0 ? 'bg-gradient-to-t from-sky-400 to-indigo-400' : 'bg-slate-200'}`}
+                      style={{ height: `${Math.max(4, (d.minutes / maxBarMinutes) * 80)}px` }}
+                      title={`${d.label} ${d.minutes} 分钟`}
+                    />
+                    <span className="text-[10px] text-slate-400">{d.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            {/* 学科正确率 + 薄弱课 */}
+            <div className="space-y-2">
+              {report.subjectStats.length > 0 && (
+                <div className="flex flex-wrap gap-1.5">
+                  {report.subjectStats.slice(0, 6).map((s) => (
+                    <span
+                      key={s.subject}
+                      className={`rounded-full px-2.5 py-1 text-xs font-bold ${s.accuracy !== null && s.accuracy >= 80 ? 'bg-emerald-100 text-emerald-700' : s.accuracy !== null && s.accuracy >= 60 ? 'bg-amber-100 text-amber-700' : 'bg-rose-100 text-rose-600'}`}
+                    >
+                      {s.subject} {s.accuracy}%（{s.correct}/{s.total}）
+                    </span>
+                  ))}
+                </div>
+              )}
+              {report.weakLessons.length > 0 ? (
+                <div className="space-y-1.5">
+                  {report.weakLessons.map((w) => (
+                    <button
+                      key={w.lessonId}
+                      onClick={() => nav(`/tutor/${w.lessonId}`)}
+                      className="flex w-full items-center gap-2 rounded-xl bg-rose-50 p-2 text-left transition hover:bg-rose-100"
+                    >
+                      <span className="text-xl">{w.emoji}</span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block truncate text-sm font-bold text-slate-700">{w.title}</span>
+                        <span className="text-xs text-rose-500">{w.subject} · 正确率 {w.accuracy}%，建议重练</span>
+                      </span>
+                      <span className="shrink-0 rounded-lg bg-rose-500 px-2.5 py-1 text-xs font-bold text-white">去补 →</span>
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                report.totalMinutes > 0 && (
+                  <div className="rounded-xl bg-emerald-50 p-3 text-sm text-emerald-700">
+                    🎉 没有检测到薄弱课{report.lessonsDone.length > 0 && `，本周完成了 ${report.lessonsDone.length} 节课`}，可以挑战新的学科！
+                  </div>
+                )
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* 成就徽章墙：全部由本地学习数据解锁 */}
+        <div className="mb-6 rounded-3xl bg-gradient-to-br from-violet-50 to-fuchsia-50 p-5 shadow-sm ring-1 ring-violet-200">
+          <div className="mb-3 flex items-center gap-2">
+            <span className="text-lg font-black text-violet-700">🏅 我的成就</span>
+            <span className="rounded-full bg-violet-100 px-3 py-0.5 text-xs font-bold text-violet-600">{unlockedCount}/{badges.length} 已解锁</span>
+            <span className="text-xs text-violet-400">完成小目标攒徽章，学习像闯关</span>
+          </div>
+          <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-6">
+            {badges.map((b) => (
+              <div
+                key={b.id}
+                className={`rounded-2xl p-3 text-center transition ${b.unlocked ? 'bg-white shadow-md ring-2 ring-amber-300' : 'bg-white/50'}`}
+                title={b.desc}
+              >
+                <div className={`text-3xl ${b.unlocked ? '' : 'opacity-30 grayscale'}`}>{b.emoji}</div>
+                <div className={`mt-1 truncate text-xs font-bold ${b.unlocked ? 'text-slate-700' : 'text-slate-400'}`}>{b.name}</div>
+                {b.unlocked ? (
+                  <div className="text-[10px] font-bold text-amber-500">已达成 ✓</div>
+                ) : (
+                  <div className="mt-1">
+                    <div className="h-1 overflow-hidden rounded-full bg-slate-200">
+                      <div className="h-full rounded-full bg-violet-400" style={{ width: `${Math.min(100, (b.cur / b.goal) * 100)}%` }} />
+                    </div>
+                    <div className="mt-0.5 text-[10px] text-slate-400">{b.cur}/{b.goal}</div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
 
         {/* 学科网格 */}
         <h2 className="mb-3 text-xl font-black text-slate-700">📚 学科中心</h2>
