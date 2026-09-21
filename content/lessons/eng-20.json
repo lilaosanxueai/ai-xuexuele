@@ -1,0 +1,210 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🔐",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：v=1 的 a 在 cat/map 里发音一样吗？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：五个短元音里哪个最难读？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：学会拼读后可以怎么记单词？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 自然拼读解码器\nv = 1   # 1 a 2 e 3 i 4 o 5 u\n\nhide()\nletter = \"a\"\nsound = \"/æ/ 嘴巴张大\"\nw1 = \"c-a-t  cat  猫\"\nw2 = \"m-a-p  map  地图\"\nw3 = \"b-a-g  bag  书包\"\nif v == 2:\n    letter = \"e\"\n    sound = \"/e/ 嘴角咧开\"\n    w1 = \"b-e-d  bed  床\"\n    w2 = \"p-e-n  pen  钢笔\"\n    w3 = \"r-e-d  red  红色\"\nif v == 3:\n    letter = \"i\"\n    sound = \"/ɪ/ 短促有力\"\n    w1 = \"p-i-g  pig  猪\"\n    w2 = \"s-i-t  sit  坐\"\n    w3 = \"b-i-g  big  大的\"\nif v == 4:\n    letter = \"o\"\n    sound = \"/ɒ/ 嘴唇圆圆\"\n    w1 = \"d-o-g  dog  狗\"\n    w2 = \"h-o-t  hot  热的\"\n    w3 = \"b-o-x  box  盒子\"\nif v == 5:\n    letter = \"u\"\n    sound = \"/ʌ/ 短促开口\"\n    w1 = \"c-u-p  cup  杯子\"\n    w2 = \"b-u-s  bus  公交车\"\n    w3 = \"s-u-n  sun  太阳\"\nfill_rect(-130, 130, 60, 60, \"#1d4ed8\")\nwrite(letter, -130, 130, \"#fff\", 28)\nfill_rect(40, 130, 240, 60, \"#f1f5f9\")\nwrite(\"发音：\" + sound, 40, 130, \"#0f172a\", 13)\nfill_rect(0, 70, 360, 34, \"#fef3c7\")\nwrite(w1, 0, 70, \"#b45309\", 13)\nfill_rect(0, 22, 360, 34, \"#f1f5f9\")\nwrite(w2, 0, 22, \"#0f172a\", 13)\nfill_rect(0, -26, 360, 34, \"#eff6ff\")\nwrite(w3, 0, -26, \"#1d4ed8\", 13)\nwrite(\"拼读口诀：辅音快，元音清，一口气连成音\", -20, -78, \"#dc2626\", 11)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-20",
+  "island": "cross",
+  "order": 360,
+  "title": "自然拼读：元音的发音密码",
+  "emoji": "🔐",
+  "subjectArea": "英语",
+  "gradeBand": "primary",
+  "grade": 3,
+  "textbook": "人教PEP英语三年级上册",
+  "curriculum": {
+    "module": "语音·自然拼读",
+    "points": [
+      "短元音 a e i o u",
+      "辅音+元音拼读",
+      "见词能读的规律"
+    ]
+  },
+  "story": "cat 里的 a、bed 里的 e、pig 里的 i——五个短元音是英语单词的\"拼音密码\"。学会了它们，见到新单词不用查字典，张口就能读 70% 的词！",
+  "goals": [
+    "掌握五个短元音的发音",
+    "会拼读辅音+元音组合",
+    "能读出简单 CVC 单词"
+  ],
+  "aiIntro": "🔐 拨动元音密码盘，看一个字母怎么点亮一串单词——自然拼读解码器！",
+  "lab": {
+    "params": [
+      {
+        "name": "v",
+        "label": "短元音",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "v=1 的 a 在 cat/map 里发音一样吗？",
+      "五个短元音里哪个最难读？",
+      "学会拼读后可以怎么记单词？"
+    ],
+    "code": "# 自然拼读解码器\nv = 1   # 1 a 2 e 3 i 4 o 5 u\n\nhide()\nletter = \"a\"\nsound = \"/æ/ 嘴巴张大\"\nw1 = \"c-a-t  cat  猫\"\nw2 = \"m-a-p  map  地图\"\nw3 = \"b-a-g  bag  书包\"\nif v == 2:\n    letter = \"e\"\n    sound = \"/e/ 嘴角咧开\"\n    w1 = \"b-e-d  bed  床\"\n    w2 = \"p-e-n  pen  钢笔\"\n    w3 = \"r-e-d  red  红色\"\nif v == 3:\n    letter = \"i\"\n    sound = \"/ɪ/ 短促有力\"\n    w1 = \"p-i-g  pig  猪\"\n    w2 = \"s-i-t  sit  坐\"\n    w3 = \"b-i-g  big  大的\"\nif v == 4:\n    letter = \"o\"\n    sound = \"/ɒ/ 嘴唇圆圆\"\n    w1 = \"d-o-g  dog  狗\"\n    w2 = \"h-o-t  hot  热的\"\n    w3 = \"b-o-x  box  盒子\"\nif v == 5:\n    letter = \"u\"\n    sound = \"/ʌ/ 短促开口\"\n    w1 = \"c-u-p  cup  杯子\"\n    w2 = \"b-u-s  bus  公交车\"\n    w3 = \"s-u-n  sun  太阳\"\nfill_rect(-130, 130, 60, 60, \"#1d4ed8\")\nwrite(letter, -130, 130, \"#fff\", 28)\nfill_rect(40, 130, 240, 60, \"#f1f5f9\")\nwrite(\"发音：\" + sound, 40, 130, \"#0f172a\", 13)\nfill_rect(0, 70, 360, 34, \"#fef3c7\")\nwrite(w1, 0, 70, \"#b45309\", 13)\nfill_rect(0, 22, 360, 34, \"#f1f5f9\")\nwrite(w2, 0, 22, \"#0f172a\", 13)\nfill_rect(0, -26, 360, 34, \"#eff6ff\")\nwrite(w3, 0, -26, \"#1d4ed8\", 13)\nwrite(\"拼读口诀：辅音快，元音清，一口气连成音\", -20, -78, \"#dc2626\", 11)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "五个短元音",
+        "body": "【a /æ/：cat map apple（嘴巴张大）】\n【e /e/：bed pen red（嘴角咧开）】\n【i /ɪ/：pig sit big（短促）】【o /ɒ/：dog hot box（圆唇）】【u /ʌ/：cup bus sun（短开口）】\n每个元音配一个\"锚词\"，想不起发音就读锚词。"
+      },
+      {
+        "title": "CVC 拼读",
+        "body": "【辅音+元音+辅音（C-V-C）是拼读的最小单元】\nc-a-t → /k/+/æ/+/t/ → cat。\n拼法：先读元音，再把前后辅音\"夹\"上去，一气呵成。\n换首换尾：cat→bat→hat→map→mad——一族一族地记。"
+      },
+      {
+        "title": "见词能读",
+        "body": "【掌握 26 个字母基础音+五个短元音，约 70% 的简单单词能直接读出】\n读对了再对照音频验证——耳朵是最后的裁判。\n遇到读不出的词（不规则发音）再单独记，不要怀疑拼读法。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "读出单词 map。",
+        "steps": [
+          "拆：m-a-p",
+          "m/m/ + a/æ/ + p/p/",
+          "连读：/mæp/ map",
+          "对照锚词 cat 检查 a 的音"
+        ],
+        "tip": "先拆后连"
+      },
+      {
+        "q": "cat 换首字母能变出哪些词？",
+        "steps": [
+          "换 c→b：bat 蝙蝠",
+          "换 c→h：hat 帽子",
+          "换 c→f：fat 胖的",
+          "一族词一起记效率翻倍"
+        ],
+        "tip": "词族记忆法"
+      }
+    ],
+    "mistakes": [
+      "用汉语拼音读英语字母（a 读\"啊\"）",
+      "元音拖太长（短元音要短促）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "cat 中 a 的发音是？",
+      "options": [
+        "/æ/",
+        "/e/",
+        "/ɪ/",
+        "/ʌ/"
+      ],
+      "answer": 0,
+      "explain": "张大嘴"
+    },
+    {
+      "q": "下列与 pen 的 e 发音相同的是？",
+      "options": [
+        "bed",
+        "pig",
+        "dog",
+        "cup"
+      ],
+      "answer": 0,
+      "explain": "/e/"
+    },
+    {
+      "q": "p-i-g 拼读结果是？",
+      "options": [
+        "pig",
+        "big",
+        "pin",
+        "pit"
+      ],
+      "answer": 0,
+      "explain": "/pɪg/"
+    },
+    {
+      "q": "短元音 o 的口型是？",
+      "options": [
+        "圆唇",
+        "张大嘴",
+        "咧嘴",
+        "闭嘴"
+      ],
+      "answer": 0,
+      "explain": "/ɒ/"
+    },
+    {
+      "q": "CVC 指的是？",
+      "options": [
+        "辅音+元音+辅音",
+        "三个辅音",
+        "三个元音",
+        "词组"
+      ],
+      "answer": 0,
+      "explain": "拼读最小单元"
+    },
+    {
+      "q": "bus 中 u 的发音像？",
+      "options": [
+        "/ʌ/ 短开口",
+        "/æ/ 大开口",
+        "/e/ 咧嘴",
+        "/ɒ/ 圆唇"
+      ],
+      "answer": 0,
+      "explain": "短促开口"
+    }
+  ]
+}

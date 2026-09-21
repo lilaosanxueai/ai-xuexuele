@@ -1,0 +1,209 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🐾",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：pos=1 的句子怎么说？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：under 和 on 的区别？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：Where is the bird? 怎么回答？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 方位介词演示盒\npos = 1   # 1 on 2 in 3 under\n\nhide()\nprep = \"on\"\nsent = \"The cat is on the box.\"\ncn = \"猫在盒子上面（表面接触）\"\npy = 55\ninside = 0\nif pos == 2:\n    prep = \"in\"\n    sent = \"The cat is in the box.\"\n    cn = \"猫在盒子里面（被包围）\"\n    py = 0\n    inside = 1\nif pos == 3:\n    prep = \"under\"\n    sent = \"The cat is under the box.\"\n    cn = \"猫在盒子下面（下方）\"\n    py = -62\nfill_rect(0, 120, 360, 32, \"#1d4ed8\")\nwrite(sent, 0, 120, \"#fff\", 14)\nif inside == 1:\n    fill_rect(0, 20, 130, 90, \"#f59e0b\")\n    fill_rect(0, -20, 130, 16, \"#b45309\")\n    write(\"🐱\", 0, py, \"#0f172a\", 24)\nif inside == 0:\n    write(\"🐱\", 0, py, \"#0f172a\", 24)\n    fill_rect(0, -20, 130, 50, \"#f59e0b\")\n    fill_rect(0, 5, 130, 14, \"#b45309\")\nfill_rect(0, 78, 360, 30, \"#f1f5f9\")\nwrite(cn + \"（介词：\" + prep + \"）\", 0, 78, \"#0f172a\", 11)\nwrite(\"问：Where is the cat?   答：It is \" + prep + \" the box.\", -10, -80, \"#dc2626\", 11)\nwrite(\"动物单词：cat dog bird duck pig bear panda tiger\", 0, -108, \"#0369a1\", 10)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-22",
+  "island": "cross",
+  "order": 362,
+  "title": "动物与方位：on·in·under",
+  "emoji": "🐾",
+  "subjectArea": "英语",
+  "gradeBand": "primary",
+  "grade": 3,
+  "textbook": "人教PEP英语三年级下册",
+  "curriculum": {
+    "module": "词汇·方位介词",
+    "points": [
+      "常见动物单词",
+      "方位介词 on/in/under",
+      "Where is 句型"
+    ]
+  },
+  "story": "Where is the cat? 猫在盒子上？盒子里？盒子下？on、in、under 三个小词说清楚。学会问 Where is…?，你就能玩\"找动物\"的英语游戏了！",
+  "goals": [
+    "掌握 8 个动物单词",
+    "会用地on/in/under",
+    "会用 Where is 提问"
+  ],
+  "aiIntro": "🐾 拨动方位选择器，看小猫钻进钻出盒子——方位介词演示盒！",
+  "lab": {
+    "params": [
+      {
+        "name": "pos",
+        "label": "小猫位置",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "pos=1 的句子怎么说？",
+      "under 和 on 的区别？",
+      "Where is the bird? 怎么回答？"
+    ],
+    "code": "# 方位介词演示盒\npos = 1   # 1 on 2 in 3 under\n\nhide()\nprep = \"on\"\nsent = \"The cat is on the box.\"\ncn = \"猫在盒子上面（表面接触）\"\npy = 55\ninside = 0\nif pos == 2:\n    prep = \"in\"\n    sent = \"The cat is in the box.\"\n    cn = \"猫在盒子里面（被包围）\"\n    py = 0\n    inside = 1\nif pos == 3:\n    prep = \"under\"\n    sent = \"The cat is under the box.\"\n    cn = \"猫在盒子下面（下方）\"\n    py = -62\nfill_rect(0, 120, 360, 32, \"#1d4ed8\")\nwrite(sent, 0, 120, \"#fff\", 14)\nif inside == 1:\n    fill_rect(0, 20, 130, 90, \"#f59e0b\")\n    fill_rect(0, -20, 130, 16, \"#b45309\")\n    write(\"🐱\", 0, py, \"#0f172a\", 24)\nif inside == 0:\n    write(\"🐱\", 0, py, \"#0f172a\", 24)\n    fill_rect(0, -20, 130, 50, \"#f59e0b\")\n    fill_rect(0, 5, 130, 14, \"#b45309\")\nfill_rect(0, 78, 360, 30, \"#f1f5f9\")\nwrite(cn + \"（介词：\" + prep + \"）\", 0, 78, \"#0f172a\", 11)\nwrite(\"问：Where is the cat?   答：It is \" + prep + \" the box.\", -10, -80, \"#dc2626\", 11)\nwrite(\"动物单词：cat dog bird duck pig bear panda tiger\", 0, -108, \"#0369a1\", 10)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "动物单词",
+        "body": "【cat 猫 · dog 狗 · bird 鸟 · duck 鸭 · pig 猪 · bear 熊 · panda 熊猫 · tiger 老虎】\n复数加 s：cats, dogs, birds（注意 duck→ducks）。\n句型：I like cats. They are cute."
+      },
+      {
+        "title": "方位三兄弟",
+        "body": "【on：在…上面（表面接触）——on the box】\n【in：在…里面（被包围）——in the box】\n【under：在…下面——under the box】\n动作演示：把手 on 桌上、in 口袋、under 桌子——身体记忆最牢。"
+      },
+      {
+        "title": "Where is 句型",
+        "body": "【问：Where is the cat? 单数 / Where are the cats? 复数】\n【答：It is on the box. / They are under the box.】\n问答要配套：is 问 it 答，are 问 they 答。\n拓展：near（旁边）behind（后面）——捉迷藏英语全靠它。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "猫在盒子里，怎么说？",
+        "steps": [
+          "选择介词：in（里面）",
+          "主语 the cat 单数用 is",
+          "The cat is in the box."
+        ],
+        "tip": "先定介词再造句"
+      },
+      {
+        "q": "Where are the birds? 怎么回答？",
+        "steps": [
+          "are 问→they 答",
+          "假设鸟在树上",
+          "They are in the tree.",
+          "注意复数 are/they 配套"
+        ],
+        "tip": "问答配套"
+      }
+    ],
+    "mistakes": [
+      "on 和 in 混用（树上鸟用 in the tree）",
+      "Where is the cats（单复数不一致）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "The cat is ___ the box.（在盒子上面）",
+      "options": [
+        "on",
+        "in",
+        "under",
+        "at"
+      ],
+      "answer": 0,
+      "explain": "表面接触"
+    },
+    {
+      "q": "在盒子下面用？",
+      "options": [
+        "under",
+        "on",
+        "in",
+        "up"
+      ],
+      "answer": 0,
+      "explain": "under"
+    },
+    {
+      "q": "熊猫的英语是？",
+      "options": [
+        "panda",
+        "tiger",
+        "bear",
+        "duck"
+      ],
+      "answer": 0,
+      "explain": "国宝"
+    },
+    {
+      "q": "Where ___ the dog? It is under the chair.",
+      "options": [
+        "is",
+        "are",
+        "am",
+        "be"
+      ],
+      "answer": 0,
+      "explain": "单数 dog"
+    },
+    {
+      "q": "They are ___ the tree.（鸟在树上）",
+      "options": [
+        "in",
+        "on",
+        "under",
+        "at"
+      ],
+      "answer": 0,
+      "explain": "长在树里用 in"
+    },
+    {
+      "q": "I like ___.（熊猫复数）",
+      "options": [
+        "pandas",
+        "panda",
+        "pandaes",
+        "pandies"
+      ],
+      "answer": 0,
+      "explain": "直接加 s"
+    }
+  ]
+}

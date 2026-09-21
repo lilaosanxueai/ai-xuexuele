@@ -1,0 +1,208 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🏫",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：n=1 和 n=2 句子哪里变了？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：There is 后能跟复数吗？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：There is a book and two pens 对吗？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# There be 变形器\nn = 1   # 钢笔数量\n\nhide()\nsent = \"There is a pen on the desk.\"\nform = \"单数 → There is + a/an + 名词\"\nif n > 1:\n    sent = \"There are \" + n + \" pens on the desk.\"\n    form = \"复数 → There are + 数字 + 名词复数\"\nfill_rect(0, 120, 360, 44, \"#1d4ed8\")\nwrite(sent, 0, 120, \"#fff\", 13)\nfill_rect(0, 68, 360, 36, \"#f1f5f9\")\nwrite(form, 0, 68, \"#0f172a\", 11)\ni = 0\nwhile i < n:\n    x = -140 + i * 80\n    fill_rect(x, 0, 60, 16, \"#dc2626\")\n    fill_rect(x + 50, 8, 14, 6, \"#0f172a\")\n    i = i + 1\nfill_rect(0, -50, 360, 30, \"#94a3b8\")\nwrite(\"desk\", 0, -50, \"#fff\", 11)\nwrite(\"就近原则：There is a book and two pens.（看最近的词）\", -10, -95, \"#dc2626\", 10)\nwrite(\"否定在 be 后加 not：There is not a pen.\", -10, -120, \"#7c3aed\", 10)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-21",
+  "island": "cross",
+  "order": 361,
+  "title": "There be 句型：教室大发现",
+  "emoji": "🏫",
+  "subjectArea": "英语",
+  "gradeBand": "primary",
+  "grade": 4,
+  "textbook": "人教PEP英语四年级上册",
+  "curriculum": {
+    "module": "句型·There be",
+    "points": [
+      "There is 单数",
+      "There are 复数",
+      "就近原则"
+    ]
+  },
+  "story": "介绍你的教室怎么说？There is a book on the desk.（桌上有一本书）There are two pens.（有两支钢笔）——is 还是 are，看它后面跟的名词：一个 is，多个 are！",
+  "goals": [
+    "掌握 There is/are 的用法",
+    "会描述教室物品",
+    "理解就近原则"
+  ],
+  "aiIntro": "🏫 调节教室物品数量，看 is 和 are 怎么切换——There be 变形器！",
+  "lab": {
+    "params": [
+      {
+        "name": "n",
+        "label": "钢笔数量",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "n=1 和 n=2 句子哪里变了？",
+      "There is 后能跟复数吗？",
+      "There is a book and two pens 对吗？"
+    ],
+    "code": "# There be 变形器\nn = 1   # 钢笔数量\n\nhide()\nsent = \"There is a pen on the desk.\"\nform = \"单数 → There is + a/an + 名词\"\nif n > 1:\n    sent = \"There are \" + n + \" pens on the desk.\"\n    form = \"复数 → There are + 数字 + 名词复数\"\nfill_rect(0, 120, 360, 44, \"#1d4ed8\")\nwrite(sent, 0, 120, \"#fff\", 13)\nfill_rect(0, 68, 360, 36, \"#f1f5f9\")\nwrite(form, 0, 68, \"#0f172a\", 11)\ni = 0\nwhile i < n:\n    x = -140 + i * 80\n    fill_rect(x, 0, 60, 16, \"#dc2626\")\n    fill_rect(x + 50, 8, 14, 6, \"#0f172a\")\n    i = i + 1\nfill_rect(0, -50, 360, 30, \"#94a3b8\")\nwrite(\"desk\", 0, -50, \"#fff\", 11)\nwrite(\"就近原则：There is a book and two pens.（看最近的词）\", -10, -95, \"#dc2626\", 10)\nwrite(\"否定在 be 后加 not：There is not a pen.\", -10, -120, \"#7c3aed\", 10)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "There is / There are",
+        "body": "【There is + 单数/不可数：There is a book. / There is some water.】\n【There are + 复数：There are two pens.】\nThere be 表示\"某处有某物\"，注意和 have（某人拥有）区分。\n口诀：一个 is，两个 are，is/are 看后头。"
+      },
+      {
+        "title": "描述教室",
+        "body": "【This is my classroom. There are many desks and chairs.】\n【There is a blackboard on the wall. There are two lights.】\n方位介词搭档：on the desk / in the bag / under the chair / near the door。\n先说大件（黑板、讲台），再说小件（书、笔），条理清晰。"
+      },
+      {
+        "title": "就近原则",
+        "body": "【be 动词和它最近的名词保持一致】\nThere is a book and two pens on the desk.（最近的是 a book→is）\nThere are two pens and a book on the desk.（最近的是 two pens→are）\n一般疑问句：Is there…? / Are there…? 回答 Yes, there is/are. No, there isn't/aren't."
+      }
+    ],
+    "examples": [
+      {
+        "q": "用 There be 描述：桌上有三支铅笔。",
+        "steps": [
+          "pencils 复数",
+          "用 There are",
+          "There are three pencils on the desk."
+        ],
+        "tip": "先数数再选词"
+      },
+      {
+        "q": "There ___ a book and two pens on the desk. 填？",
+        "steps": [
+          "找最近的名词：a book 单数",
+          "就近原则用 is",
+          "答案：is"
+        ],
+        "tip": "就近看第一个"
+      }
+    ],
+    "mistakes": [
+      "There is two books（数错 be 动词）",
+      "There be 和 have 混用（There has ×）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "There ___ a cat under the tree.",
+      "options": [
+        "is",
+        "are",
+        "am",
+        "be"
+      ],
+      "answer": 0,
+      "explain": "a cat 单数"
+    },
+    {
+      "q": "There ___ four lights in the classroom.",
+      "options": [
+        "are",
+        "is",
+        "am",
+        "was"
+      ],
+      "answer": 0,
+      "explain": "four 复数"
+    },
+    {
+      "q": "There is some ___ in the bottle.",
+      "options": [
+        "water",
+        "books",
+        "pens",
+        "cats"
+      ],
+      "answer": 0,
+      "explain": "不可数名词"
+    },
+    {
+      "q": "There is a book and two pens 中 be 由谁决定？",
+      "options": [
+        "最近的 a book",
+        "two pens",
+        "随便",
+        "句子主语"
+      ],
+      "answer": 0,
+      "explain": "就近原则"
+    },
+    {
+      "q": "一般疑问句：桌上有书吗？",
+      "options": [
+        "Is there a book on the desk?",
+        "There is a book?",
+        "Has a book?",
+        "Is a book there desk?"
+      ],
+      "answer": 0,
+      "explain": "Is there…"
+    },
+    {
+      "q": "There be 表示？",
+      "options": [
+        "某处有某物",
+        "某人有某物",
+        "正在做",
+        "过去有"
+      ],
+      "answer": 0,
+      "explain": "have 才是拥有"
+    }
+  ]
+}
