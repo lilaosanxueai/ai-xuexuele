@@ -31,6 +31,11 @@ export default function FlashcardScreen() {
   const [flipped, setFlipped] = useState(false);
   const [tally, setTally] = useState({ again: 0, good: 0, easy: 0 });
   const [running, setRunning] = useState(false);
+  /** 听音辨卡模式：播放背面语音，从 4 个正面中选正确项 */
+  const [listening, setListening] = useState(false);
+  const [listenQ, setListenQ] = useState<{ target: Flashcard; options: Flashcard[] } | null>(null);
+  const [listenPick, setListenPick] = useState<string | null>(null);
+  const [listenScore, setListenScore] = useState({ ok: 0, total: 0 });
 
   useEffect(() => {
     if (!profile) { nav('/'); return; }
@@ -57,6 +62,41 @@ export default function FlashcardScreen() {
     setFlipped(false);
     setTally({ again: 0, good: 0, easy: 0 });
     setRunning(true);
+  };
+
+  /** 听音辨卡：目标卡 + 3 张同学科干扰项，乱序四选一，共 5 轮 */
+  const startListening = (round = 0, score = { ok: 0, total: 0 }) => {
+    if (round >= 5) { setListenQ(null); setListening(false); setListenScore(score); return; }
+    const pool = deck.filter((c) => !c.back.includes('='));
+    if (pool.length < 4) { setListening(false); return; }
+    const pickRandom = (arr: Flashcard[]) => arr[Math.floor(Math.random() * arr.length)];
+    const target = pickRandom(pool);
+    const distractors: Flashcard[] = [];
+    let guard = 0;
+    while (distractors.length < 3 && guard < 200) {
+      guard++;
+      const cand = pickRandom(pool);
+      if (cand.id !== target.id && !distractors.some((d) => d.id === cand.id)) distractors.push(cand);
+    }
+    const options = [target, ...distractors];
+    for (let i = options.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [options[i], options[j]] = [options[j], options[i]];
+    }
+    setListenQ({ target, options });
+    setListenPick(null);
+    setListenScore(score);
+    setListening(true);
+    setTimeout(() => speakCard(target.back), 350);
+  };
+
+  const answerListen = (card: Flashcard) => {
+    if (!listenQ || listenPick) return;
+    setListenPick(card.id);
+    const ok = card.id === listenQ.target.id;
+    const nextScore = { ok: listenScore.ok + (ok ? 1 : 0), total: listenScore.total + 1 };
+    setListenScore(nextScore);
+    setTimeout(() => startListening(nextScore.total, nextScore), ok ? 800 : 1600);
   };
 
   const grade = (g: 'again' | 'good' | 'easy') => {
@@ -117,8 +157,59 @@ export default function FlashcardScreen() {
             >
               {stats.due === 0 ? '今日已清空 🎉' : `开始复习（最多 10 张）→`}
             </button>
+            <button
+              onClick={() => startListening()}
+              disabled={deck.length < 4}
+              className="rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-500 px-4 py-2.5 text-sm font-black text-white shadow-lg transition hover:-translate-y-0.5 disabled:opacity-50"
+              title="听背面语音，从四个知识点里选对的"
+            >
+              🎧 听音辨卡
+            </button>
           </div>
         </div>
+
+        {/* 听音辨卡进行中 */}
+        {listening && listenQ && (
+          <div className="rounded-3xl bg-white p-6 shadow-lg">
+            <div className="mb-3 flex items-center justify-between text-sm">
+              <span className="font-bold text-slate-500">🎧 听音辨卡 · 第 {listenScore.total + 1}/5 题</span>
+              <span className="font-bold text-sky-600">答对 {listenScore.ok}</span>
+            </div>
+            <button onClick={() => speakCard(listenQ.target.back)}
+              className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-sky-400 to-indigo-500 text-4xl text-white shadow-lg transition hover:scale-105">
+              🔊
+            </button>
+            <p className="mb-4 text-center text-sm text-slate-400">听到的释义是哪个知识点？点下方选择（可再点喇叭重听）</p>
+            <div className="grid gap-2 sm:grid-cols-2">
+              {listenQ.options.map((opt) => {
+                const isTarget = opt.id === listenQ.target.id;
+                const isPicked = listenPick === opt.id;
+                const show = listenPick !== null;
+                return (
+                  <button key={opt.id} onClick={() => answerListen(opt)} disabled={show}
+                    className={`rounded-2xl border-2 px-4 py-3 text-left text-sm font-bold transition ${
+                      show && isTarget ? 'border-emerald-400 bg-emerald-50 text-emerald-700'
+                        : show && isPicked ? 'border-rose-300 bg-rose-50 text-rose-600'
+                        : 'border-slate-200 hover:border-sky-300 hover:bg-sky-50 text-slate-700'
+                    }`}>
+                    {opt.front}
+                    {show && isTarget && ' ✓'}{show && isPicked && !isTarget && ' ✗'}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* 听音结束小结 */}
+        {!listening && listenScore.total > 0 && !listenQ && (
+          <div className="rounded-3xl bg-white/90 p-6 text-center shadow-md">
+            <div className="text-5xl">{listenScore.ok === listenScore.total ? '🏆' : listenScore.ok >= 3 ? '👍' : '💪'}</div>
+            <div className="mt-2 text-lg font-black text-slate-700">听对 {listenScore.ok}/{listenScore.total}</div>
+            <button onClick={() => { setListenScore({ ok: 0, total: 0 }); startListening(); }}
+              className="mt-3 rounded-2xl bg-sky-500 px-5 py-2 font-bold text-white shadow transition hover:bg-sky-600">再来一组 🎧</button>
+          </div>
+        )}
 
         {/* 复习进行中：当前卡 */}
         {running && current && (

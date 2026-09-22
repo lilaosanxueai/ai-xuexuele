@@ -17,6 +17,7 @@ export default function MapScreen() {
   const { current: profile } = useProfileStore();
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [progress, setProgress] = useState<ProfileProgress | null>(null);
+  const [, setGoalTick] = useState(0);
 
   useEffect(() => {
     if (!profile) { nav('/'); return; }
@@ -195,6 +196,36 @@ export default function MapScreen() {
             </span>
           </div>
           <p className="mb-3 text-sm text-slate-600">{report.headline}</p>
+          {/* 本周目标：完成 N 节课（localStorage 按周存储），完成数由周报推导 */}
+          {(() => {
+            const now2 = new Date();
+            const monday = new Date(now2); monday.setDate(now2.getDate() - ((now2.getDay() + 6) % 7));
+            const weekKey = monday.toISOString().slice(0, 10);
+            const goalStore = `island-goal-${profile.id}-${weekKey}`;
+            let goal = 3;
+            try { goal = JSON.parse(localStorage.getItem(goalStore) ?? '3'); } catch { /* 默认3 */ }
+            const doneN = report.lessonsDone.length;
+            const setGoal = (g: number) => { try { localStorage.setItem(goalStore, String(g)); setGoalTick((t) => t + 1); } catch { /* 忽略 */ } };
+            const pct = Math.min(100, Math.round((doneN / goal) * 100));
+            return (
+              <div className="mb-3 flex flex-wrap items-center gap-2 rounded-2xl bg-white p-3 shadow-sm">
+                <span className="text-xs font-black text-slate-500">🎯 本周目标</span>
+                {[3, 5, 7].map((g) => (
+                  <button key={g} onClick={() => setGoal(g)}
+                    className={`rounded-full px-3 py-1 text-xs font-bold transition ${g === goal ? 'bg-indigo-500 text-white shadow' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'}`}>
+                    {g} 节课
+                  </button>
+                ))}
+                <span className="ml-2 text-xs text-slate-500">已完成 <b className="text-slate-700">{doneN}</b>/{goal}</span>
+                <div className="ml-auto flex w-32 items-center gap-2">
+                  <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-100">
+                    <div className={`h-full rounded-full ${pct >= 100 ? 'bg-emerald-500' : 'bg-indigo-400'}`} style={{ width: `${pct}%` }} />
+                  </div>
+                  {pct >= 100 && <span className="text-xs font-black text-emerald-600">达成 🎉</span>}
+                </div>
+              </div>
+            );
+          })()}
           {/* 近 8 周热力图 */}
           <div className="mb-3 flex items-center gap-2 overflow-x-auto rounded-2xl bg-slate-50 p-3">
             <span className="shrink-0 text-xs font-bold text-slate-500">8 周</span>
