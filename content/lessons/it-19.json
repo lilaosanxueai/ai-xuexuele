@@ -1,0 +1,218 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🔢",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：algo=1 round=2 后最大的几个沉底了？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：选择排序每轮在做什么？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：n 个数冒泡最多比多少次？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 排序可视化演示台\nalgo = 1    # 1冒泡 2选择\nround = 1   # 轮次\n\nhide()\nfill_rect(0, 130, 360, 30, \"#1d4ed8\")\nif algo == 1:\n    write(\"冒泡排序 · 第 \" + round + \" 轮（大的往后沉）\", 0, 130, \"#fff\", 11)\nif algo == 2:\n    write(\"选择排序 · 第 \" + round + \" 轮（选最小放前面）\", 0, 130, \"#fff\", 11)\nvals0 = 5\nvals1 = 3\nvals2 = 8\nvals3 = 1\nvals4 = 6\na = vals0\nb = vals1\nc = vals2\nd = vals3\ne = vals4\nsorted1 = 8\nsorted2 = 8\nsorted3 = 8\nsorted4 = 8\nif round == 4:\n    sorted1 = 8\n    sorted2 = 6\n    sorted3 = 5\n    sorted4 = 3\nif round == 3:\n    sorted1 = 8\n    sorted2 = 8\n    sorted3 = 6\n    sorted4 = 5\nif round == 2:\n    sorted1 = 8\n    sorted2 = 8\n    sorted3 = 8\n    sorted4 = 6\nif round == 1:\n    sorted1 = 8\n    sorted2 = 8\n    sorted3 = 8\n    sorted4 = 8\ni = 0\nwhile i < 5:\n    x = -140 + i * 70\n    h = 10 + i * 8\n    val = 5\n    if i == 0:\n        val = vals0\n    if i == 1:\n        val = vals1\n    if i == 2:\n        val = vals2\n    if i == 3:\n        val = vals3\n    if i == 4:\n        val = vals4\n    if round == 2:\n        if i == 0:\n            val = 3\n        if i == 1:\n            val = 5\n        if i == 2:\n            val = 1\n        if i == 3:\n            val = 6\n        if i == 4:\n            val = 8\n    if round == 3:\n        if i == 0:\n            val = 1\n        if i == 1:\n            val = 3\n        if i == 2:\n            val = 5\n        if i == 3:\n            val = 6\n        if i == 4:\n            val = 8\n    if round == 4:\n        if i == 0:\n            val = 1\n        if i == 1:\n            val = 3\n        if i == 2:\n            val = 5\n        if i == 3:\n            val = 6\n        if i == 4:\n            val = 8\n    h = val * 9\n    done = val >= sorted1\n    if i >= 1:\n        done = val >= sorted2\n    if i >= 2:\n        done = val >= sorted3\n    if i >= 3:\n        done = val >= sorted4\n    if i == 4:\n        done = 1\n    col = \"#f59e0b\"\n    if done == 1:\n        col = \"#16a34a\"\n    fill_rect(x, 20, 50, h, col)\n    write(val, x, 20 + h / 2 + 26, \"#0f172a\", 10)\n    i = i + 1\nwrite(\"绿色=已就位；5 个数 4 轮内必然有序\", -20, -40, \"#7c3aed\", 11)\nwrite(\"比较次数：n(n-1)/2 —— 5 个数最多 10 次\", -20, -66, \"#0369a1\", 10)\n",
+  "celebrate": "新知识到手！",
+  "id": "it-19",
+  "island": "cross",
+  "order": 417,
+  "title": "排序算法：冒泡与选择",
+  "emoji": "🔢",
+  "subjectArea": "信息科技",
+  "gradeBand": "senior",
+  "grade": 11,
+  "textbook": "人教版信息科技（高中）",
+  "curriculum": {
+    "module": "算法与程序实现",
+    "points": [
+      "冒泡排序",
+      "选择排序",
+      "排序的稳定性"
+    ]
+  },
+  "story": "把 5 个数从小到大排好，最快的笨办法是什么？冒泡——相邻两个比一比，大的往后沉；选择——每轮挑最小的放前面。排序是算法世界的 Hello World。",
+  "goals": [
+    "掌握冒泡排序的过程",
+    "掌握选择排序的过程",
+    "能手动模拟排序轨迹"
+  ],
+  "aiIntro": "🔢 拨动轮次，看柱子一步步站好队——排序可视化演示台！",
+  "lab": {
+    "params": [
+      {
+        "name": "algo",
+        "label": "算法",
+        "min": 1,
+        "max": 2,
+        "step": 1,
+        "value": 1
+      },
+      {
+        "name": "round",
+        "label": "第几轮",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "algo=1 round=2 后最大的几个沉底了？",
+      "选择排序每轮在做什么？",
+      "n 个数冒泡最多比多少次？"
+    ],
+    "code": "# 排序可视化演示台\nalgo = 1    # 1冒泡 2选择\nround = 1   # 轮次\n\nhide()\nfill_rect(0, 130, 360, 30, \"#1d4ed8\")\nif algo == 1:\n    write(\"冒泡排序 · 第 \" + round + \" 轮（大的往后沉）\", 0, 130, \"#fff\", 11)\nif algo == 2:\n    write(\"选择排序 · 第 \" + round + \" 轮（选最小放前面）\", 0, 130, \"#fff\", 11)\nvals0 = 5\nvals1 = 3\nvals2 = 8\nvals3 = 1\nvals4 = 6\na = vals0\nb = vals1\nc = vals2\nd = vals3\ne = vals4\nsorted1 = 8\nsorted2 = 8\nsorted3 = 8\nsorted4 = 8\nif round == 4:\n    sorted1 = 8\n    sorted2 = 6\n    sorted3 = 5\n    sorted4 = 3\nif round == 3:\n    sorted1 = 8\n    sorted2 = 8\n    sorted3 = 6\n    sorted4 = 5\nif round == 2:\n    sorted1 = 8\n    sorted2 = 8\n    sorted3 = 8\n    sorted4 = 6\nif round == 1:\n    sorted1 = 8\n    sorted2 = 8\n    sorted3 = 8\n    sorted4 = 8\ni = 0\nwhile i < 5:\n    x = -140 + i * 70\n    h = 10 + i * 8\n    val = 5\n    if i == 0:\n        val = vals0\n    if i == 1:\n        val = vals1\n    if i == 2:\n        val = vals2\n    if i == 3:\n        val = vals3\n    if i == 4:\n        val = vals4\n    if round == 2:\n        if i == 0:\n            val = 3\n        if i == 1:\n            val = 5\n        if i == 2:\n            val = 1\n        if i == 3:\n            val = 6\n        if i == 4:\n            val = 8\n    if round == 3:\n        if i == 0:\n            val = 1\n        if i == 1:\n            val = 3\n        if i == 2:\n            val = 5\n        if i == 3:\n            val = 6\n        if i == 4:\n            val = 8\n    if round == 4:\n        if i == 0:\n            val = 1\n        if i == 1:\n            val = 3\n        if i == 2:\n            val = 5\n        if i == 3:\n            val = 6\n        if i == 4:\n            val = 8\n    h = val * 9\n    done = val >= sorted1\n    if i >= 1:\n        done = val >= sorted2\n    if i >= 2:\n        done = val >= sorted3\n    if i >= 3:\n        done = val >= sorted4\n    if i == 4:\n        done = 1\n    col = \"#f59e0b\"\n    if done == 1:\n        col = \"#16a34a\"\n    fill_rect(x, 20, 50, h, col)\n    write(val, x, 20 + h / 2 + 26, \"#0f172a\", 10)\n    i = i + 1\nwrite(\"绿色=已就位；5 个数 4 轮内必然有序\", -20, -40, \"#7c3aed\", 11)\nwrite(\"比较次数：n(n-1)/2 —— 5 个数最多 10 次\", -20, -66, \"#0369a1\", 10)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "冒泡排序",
+        "body": "【从头到尾两两比较，逆序就交换——每轮把最大的\"沉\"到末尾】\n过程演示：5 3 8 1 6 → 一轮后最大的 8 在末尾。\nn 个数最多 n−1 轮；比较次数 n(n−1)/2。\n若某一轮没有发生交换 → 已经有序，可提前结束。"
+      },
+      {
+        "title": "选择排序",
+        "body": "【每轮从未排序区间选出最小值，放到区间开头】\n与冒泡比：交换次数少（每轮最多 1 次），比较次数相同。\n直观好写：双循环 + 记录最小下标。\n手算题：写出每轮结束后的序列。"
+      },
+      {
+        "title": "稳定性",
+        "body": "【稳定排序：相等元素的相对顺序不变（冒泡、插入）】\n【不稳定：选择、快排（相等元素可能换位）】\n为什么要稳定：按两个关键字排序时（先按总分再按姓名），第二轮必须稳定。\n进阶：快排平均 O(n log n)——高中了解思想即可。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "用冒泡排序 3,1,2，写出每轮结果。",
+        "steps": [
+          "第 1 轮：3>1 交换→1,3,2；3>2 交换→1,2,3",
+          "第 1 轮后：1,2,3",
+          "第 2 轮无交换提前结束",
+          "共比较 2 次+1 轮确认"
+        ],
+        "tip": "一轮后最大沉底"
+      },
+      {
+        "q": "选择排序第 1 轮在 5,3,8,1,6 中做什么？",
+        "steps": [
+          "扫全部找最小：1",
+          "把 1 与第 1 位 5 交换",
+          "得 1,3,8,5,6",
+          "已排序区间：[1]"
+        ],
+        "tip": "选最小放前面"
+      }
+    ],
+    "mistakes": [
+      "冒泡一轮以为最小沉底（是最大沉底）",
+      "认为选择排序比冒泡比较次数少（一样，交换更少）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "冒泡排序每一轮确定？",
+      "options": [
+        "一个最大值的位置",
+        "最小值位置",
+        "全部顺序",
+        "随机值"
+      ],
+      "answer": 0,
+      "explain": "大数沉底"
+    },
+    {
+      "q": "5 个数冒泡最多比较几次？",
+      "options": [
+        "10 次",
+        "5 次",
+        "25 次",
+        "20 次"
+      ],
+      "answer": 0,
+      "explain": "n(n−1)/2"
+    },
+    {
+      "q": "选择排序每轮？",
+      "options": [
+        "选出最小放前面",
+        "两两交换",
+        "折半查找",
+        "随机洗牌"
+      ],
+      "answer": 0,
+      "explain": "挑最小"
+    },
+    {
+      "q": "某一轮无交换说明？",
+      "options": [
+        "已有序可结束",
+        "程序出错",
+        "继续排序",
+        "数据丢失"
+      ],
+      "answer": 0,
+      "explain": "提前终止优化"
+    },
+    {
+      "q": "下列稳定的排序是？",
+      "options": [
+        "冒泡排序",
+        "选择排序",
+        "快速排序",
+        "堆排序"
+      ],
+      "answer": 0,
+      "explain": "相等不换位"
+    },
+    {
+      "q": "排序算法的共同目标是？",
+      "options": [
+        "按关键字有序排列",
+        "删除数据",
+        "查找数据",
+        "压缩数据"
+      ],
+      "answer": 0,
+      "explain": "有序化"
+    }
+  ]
+}

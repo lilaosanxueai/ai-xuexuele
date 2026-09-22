@@ -25,7 +25,7 @@ export default function SubjectScreen() {
   const [unitTest, setUnitTest] = useState<{ module: string; exercises: Exercise[] } | null>(null);
 
   /** 从模块内的课程随堂题抽 8 道组卷（每课最多 2 道，打散顺序） */
-  const startUnitTest = (mod: string) => {
+  const assembleUnitTest = (mod: string): Exercise[] => {
     const pool: Exercise[] = [];
     for (const l of lessons) {
       if ((l.curriculum?.module ?? '其他') !== mod) continue;
@@ -39,7 +39,16 @@ export default function SubjectScreen() {
       const j = Math.floor(Math.random() * (i + 1));
       [pool[i], pool[j]] = [pool[j], pool[i]];
     }
-    setUnitTest({ module: mod, exercises: pool.slice(0, 8) });
+    return pool.slice(0, 8);
+  };
+  const startUnitTest = (mod: string) => setUnitTest({ module: mod, exercises: assembleUnitTest(mod) });
+
+  /** 单元小测打印：纸质卷 + 答案页 */
+  const [printing, setPrinting] = useState(false);
+  const printUnitTest = (mod: string) => {
+    setUnitTest({ module: mod, exercises: assembleUnitTest(mod) });
+    setPrinting(true);
+    setTimeout(() => { window.print(); setPrinting(false); }, 120);
   };
 
   useEffect(() => {
@@ -128,13 +137,22 @@ export default function SubjectScreen() {
                       </div>
                       <div className="mt-1.5 flex items-center justify-between gap-2">
                         <span className="text-[10px] text-slate-400">已学 {m.done}/{m.total} 课{mastery >= 0 && mastery < 60 ? ' · 薄弱模块，优先巩固' : ''}</span>
-                        <button
-                          onClick={() => startUnitTest(mod)}
-                          className="shrink-0 rounded-lg bg-violet-100 px-2 py-0.5 text-[10px] font-bold text-violet-700 transition hover:bg-violet-200"
-                          title="综合该模块多课的题目进行测验"
-                        >
-                          📝 单元小测
-                        </button>
+                        <span className="flex shrink-0 items-center gap-1">
+                          <button
+                            onClick={() => printUnitTest(mod)}
+                            className="rounded-lg bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-600 transition hover:bg-slate-200"
+                            title="打印本模块纸质试卷（含答案页）"
+                          >
+                            🖨 打印
+                          </button>
+                          <button
+                            onClick={() => startUnitTest(mod)}
+                            className="shrink-0 rounded-lg bg-violet-100 px-2 py-0.5 text-[10px] font-bold text-violet-700 transition hover:bg-violet-200"
+                            title="综合该模块多课的题目进行测验"
+                          >
+                            📝 单元小测
+                          </button>
+                        </span>
                       </div>
                     </div>
                   );
@@ -196,6 +214,35 @@ export default function SubjectScreen() {
             alert(`单元小测完成：${correct}/${unitTest.exercises.length} 道正确${correct === unitTest.exercises.length ? '，满分！🎉' : correct / unitTest.exercises.length >= 0.6 ? '，模块基本掌握 ✓' : '，建议回看该模块的薄弱课程'}`);
           }}
         />
+      )}
+
+      {/* 单元小测打印浮层：纸质卷 + 答案页 */}
+      {printing && unitTest && (
+        <div id="unit-sheet" className="fixed inset-0 z-[80] overflow-y-auto bg-white p-8 text-slate-900">
+          <style>{'@media print { body * { visibility: hidden !important; } #unit-sheet, #unit-sheet * { visibility: visible !important; } #unit-sheet { position: absolute !important; left: 0; top: 0; width: 100%; background: #fff; } }'}</style>
+          <div className="mx-auto max-w-2xl">
+            <h1 className="text-center text-2xl font-black">{subject} · {unitTest.module} 单元测验卷</h1>
+            <p className="mt-1 text-center text-sm text-slate-500">共 {unitTest.exercises.length} 题 · 来自 AI学学乐课程库 · {new Date().toLocaleDateString('zh-CN')}</p>
+            <p className="mt-1 text-center text-xs text-slate-400">姓名：____________　得分：______</p>
+            <div className="mt-6 space-y-5">
+              {unitTest.exercises.map((ex, i) => (
+                <div key={i} className="break-inside-avoid">
+                  <div className="font-semibold">{i + 1}. {ex.q}</div>
+                  <div className="mt-1 grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+                    {ex.options.map((opt, oi) => (<div key={oi}>{'ABCD'[oi]}. {opt}</div>))}
+                  </div>
+                  <div className="mt-1 text-sm">答：（　　　　）</div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-10 break-before-page border-t border-slate-300 pt-6">
+              <h2 className="text-lg font-black">参考答案</h2>
+              <ol className="mt-2 grid grid-cols-2 gap-1 text-sm">
+                {unitTest.exercises.map((ex, i) => (<li key={i}>{i + 1}. {'ABCD'[ex.answer]}　{ex.explain.slice(0, 40)}</li>))}
+              </ol>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

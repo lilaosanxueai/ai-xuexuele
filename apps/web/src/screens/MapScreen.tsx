@@ -336,8 +336,16 @@ export default function MapScreen() {
           })}
         </div>
 
-        {/* AI 答疑 + AI 实验室 + 口算 + 闪卡 + 挑战赛 */}
+        {/* AI 答疑 + AI 实验室 + 口算 + 闪卡 + 挑战赛 + 连连看 */}
         <section className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <button
+            onClick={() => nav('/pairs')}
+            className="rounded-3xl bg-gradient-to-br from-lime-400 to-emerald-500 p-6 text-center text-white shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
+          >
+            <div className="text-5xl">🔗</div>
+            <div className="mt-2 text-xl font-black">概念连连看</div>
+            <div className="mt-1 text-xs opacity-90">知识点配对小游戏 · 全学科 · 越玩越牢</div>
+          </button>
           <button
             onClick={() => nav('/ask')}
             className="rounded-3xl bg-gradient-to-br from-indigo-400 to-violet-500 p-6 text-center text-white shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
