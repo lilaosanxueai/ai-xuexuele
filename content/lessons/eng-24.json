@@ -1,0 +1,209 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🔤",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：kind=1 给动词先想什么？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：无提示词为什么最多考介词和连词？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：并列结构里为什么常填比较级？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 语法填空攻略卡\nkind = 1   # 1给动词 2给名词/形 3无提示词\n\nhide()\nt = \"给动词：变形三问\"\nq0 = \"She ___ (go) to school yesterday.\"\na0 = \"went（有 yesterday → 过去式）\"\ntip = \"一问时态语态 二问非谓语 三问主谓一致\"\nif kind == 2:\n    t = \"给名词/形容词：三方向\"\n    q0 = \"This is the ___ (good) movie.\"\n    a0 = \"best（the + 最高级）\"\n    tip = \"词性转换 · 比较最高级 · 单复数\"\nif kind == 3:\n    t = \"无提示词：功能词八选\"\n    q0 = \"He is interested ___ music.\"\n    a0 = \"in（固定搭配 be interested in）\"\n    tip = \"冠代介连比·助动·固搭——空后无完整动词时优先介词/连词\"\nfill_rect(0, 130, 360, 32, \"#1d4ed8\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 78, 360, 38, \"#eff6ff\")\nwrite(\"例：\" + q0, 0, 78, \"#1d4ed8\", 11)\nfill_rect(0, 24, 360, 40, \"#f1f5f9\")\nwrite(\"答：\" + a0, 0, 24, \"#0f172a\", 11)\nfill_rect(0, -26, 360, 38, \"#fef3c7\")\nwrite(tip, 0, -26, \"#b45309\", 10)\nwrite(\"纯空格口诀：冠代介连比，助动加搭配\", -20, -75, \"#dc2626\", 12)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-24",
+  "island": "cross",
+  "order": 383,
+  "title": "语法填空：无提示词攻略",
+  "emoji": "🔤",
+  "subjectArea": "英语",
+  "gradeBand": "senior",
+  "grade": 11,
+  "textbook": "人教版英语（高中选择性必修）",
+  "curriculum": {
+    "module": "语法·语法填空",
+    "points": [
+      "给提示词：变形三问",
+      "无提示词：功能词八选",
+      "纯空格常见考点"
+    ]
+  },
+  "story": "语法填空只有两种空：给了词的（变形）和没给词的（填功能词）。给词问三句：变词性？变时态？变级？无词想八类：冠代介连比+固搭。两类空，一套流程，10 分稳拿。",
+  "goals": [
+    "掌握给提示词的变形策略",
+    "掌握无提示词的填词思路",
+    "熟悉高频考点"
+  ],
+  "aiIntro": "🔤 切换题型卡片，看两类空的破题套路——语法填空攻略卡！",
+  "lab": {
+    "params": [
+      {
+        "name": "kind",
+        "label": "题型",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "kind=1 给动词先想什么？",
+      "无提示词为什么最多考介词和连词？",
+      "并列结构里为什么常填比较级？"
+    ],
+    "code": "# 语法填空攻略卡\nkind = 1   # 1给动词 2给名词/形 3无提示词\n\nhide()\nt = \"给动词：变形三问\"\nq0 = \"She ___ (go) to school yesterday.\"\na0 = \"went（有 yesterday → 过去式）\"\ntip = \"一问时态语态 二问非谓语 三问主谓一致\"\nif kind == 2:\n    t = \"给名词/形容词：三方向\"\n    q0 = \"This is the ___ (good) movie.\"\n    a0 = \"best（the + 最高级）\"\n    tip = \"词性转换 · 比较最高级 · 单复数\"\nif kind == 3:\n    t = \"无提示词：功能词八选\"\n    q0 = \"He is interested ___ music.\"\n    a0 = \"in（固定搭配 be interested in）\"\n    tip = \"冠代介连比·助动·固搭——空后无完整动词时优先介词/连词\"\nfill_rect(0, 130, 360, 32, \"#1d4ed8\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 78, 360, 38, \"#eff6ff\")\nwrite(\"例：\" + q0, 0, 78, \"#1d4ed8\", 11)\nfill_rect(0, 24, 360, 40, \"#f1f5f9\")\nwrite(\"答：\" + a0, 0, 24, \"#0f172a\", 11)\nfill_rect(0, -26, 360, 38, \"#fef3c7\")\nwrite(tip, 0, -26, \"#b45309\", 10)\nwrite(\"纯空格口诀：冠代介连比，助动加搭配\", -20, -75, \"#dc2626\", 12)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "给提示词",
+        "body": "【给动词：①定谓语还是非谓语 ②谓语看时态语态主谓一致 ③非谓语看 doing/done/to do】\n【给名词：单复数（one of + 复数）】\n【给形容词：比较级最高级（than/the+最高级）或词性转换（success→successful）】\n给词题 7 空，全部考\"变形\"，原文一定有信号词。"
+      },
+      {
+        "title": "无提示词",
+        "body": "【八类功能词：冠词 a/an/the、代词 it/them、介词 in/on/of、连词 and/but/that、比较 than/as、助动词 do/will、情态、固定搭配】\n判断技巧：空后是名词 → 冠词/介词/代词；空后是句子 → 连词；句首强调 → it 形式主语。\n介词和连词是最高频两类。"
+      },
+      {
+        "title": "流程与检查",
+        "body": "【四步流程：读全句 → 判断有无提示 → 套变形/功能词规则 → 代入复读】\n检查三查：主谓一致了吗？可数名词单数裸奔了吗？时态与全文一致吗？\n语法填空是\"规则题\"——每空必有规则依据，不靠玄学。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "___ (lucky), he caught the early bus. 填什么？",
+        "steps": [
+          "逗号隔开全句 → 需要副词修饰全句",
+          "lucky → luckily",
+          "答案：Luckily"
+        ],
+        "tip": "副词可修饰整句"
+      },
+      {
+        "q": "This is the tallest boy ___ I have ever seen. 空里填？",
+        "steps": [
+          "先行词被最高级修饰",
+          "定语从句关系词",
+          "最高级后 that 常见，也可省略",
+          "答案：that（或省略）"
+        ],
+        "tip": "最高级+that"
+      }
+    ],
+    "mistakes": [
+      "见括号词就原形填入（必变形）",
+      "无提示词硬填实义动词（只能填功能词）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "给动词的第一问是？",
+      "options": [
+        "谓语还是非谓语",
+        "单复数",
+        "词性转换",
+        "发音"
+      ],
+      "answer": 0,
+      "explain": "先定身份"
+    },
+    {
+      "q": "than 出现提示填？",
+      "options": [
+        "比较级",
+        "最高级",
+        "原级",
+        "名词"
+      ],
+      "answer": 0,
+      "explain": "比较标志"
+    },
+    {
+      "q": "无提示词最多考？",
+      "options": [
+        "介词和连词",
+        "实义动词",
+        "名词",
+        "形容词"
+      ],
+      "answer": 0,
+      "explain": "功能词天下"
+    },
+    {
+      "q": "one of 后名词用？",
+      "options": [
+        "复数",
+        "单数",
+        "原级",
+        "所有格"
+      ],
+      "answer": 0,
+      "explain": "之一→复数"
+    },
+    {
+      "q": "luckily 修饰的是什么？",
+      "options": [
+        "整个句子",
+        "名词",
+        "代词",
+        "动词"
+      ],
+      "answer": 0,
+      "explain": "句式副词"
+    },
+    {
+      "q": "语法填空每空的依据是？",
+      "options": [
+        "规则和原文信号",
+        "语感玄学",
+        "选项长短",
+        "位置"
+      ],
+      "answer": 0,
+      "explain": "规则题"
+    }
+  ]
+}

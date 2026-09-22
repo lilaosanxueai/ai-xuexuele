@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Lesson, Profile, ProfileProgress, Project, Settings } from '@shared/types.ts';
 import { api } from '../api.ts';
+import { computeBadges } from '../runtime/achievements.ts';
+import { computeWeeklyReport } from '../runtime/weeklyReport.ts';
 import { calcStreak } from '../utils/streak.ts';
 
 /** 家长面板：学习进度 / 学情报告 / AI 对话记录 / 伙伴设置（已取消 PIN 门，直接进入） */
@@ -162,8 +164,54 @@ function ReportTab({ profileId }: { profileId: string }) {
   // 跨学科实践课程：学科 × 编程演示双标注的课程
   const crossLessons = lessons.filter((l) => l.subject);
 
+  // 本周学情镜像（周报引擎 + 徽章 + 热力图，全部本地计算）
+  const report = computeWeeklyReport(lessons, progress);
+  const badges = computeBadges(lessons, progress);
+  const heat: number[] = [];
+  for (let i = 55; i >= 0; i--) {
+    const d = new Date(); d.setDate(d.getDate() - i);
+    const m = progress?.dailyUsage[d.toISOString().slice(0, 10)] ?? 0;
+    heat.push(m === 0 ? 0 : m < 15 ? 1 : m < 30 ? 2 : m < 60 ? 3 : 4);
+  }
+  const heatColor = (lv: number) => ['bg-slate-100', 'bg-emerald-200', 'bg-emerald-400', 'bg-emerald-500', 'bg-emerald-600'][lv];
+
   return (
     <div>
+      {/* 本周学情速览 */}
+      <div className="mb-4 rounded-2xl bg-white/80 p-5">
+        <div className="mb-2 flex flex-wrap items-center gap-2">
+          <h3 className="font-black">📊 本周学情（过去 7 天）</h3>
+          <span className="rounded-full bg-sky-50 px-3 py-1 text-xs font-bold text-sky-600">共 {report.totalMinutes} 分钟</span>
+          <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-600">学习 {report.activeDays} 天</span>
+          <span className="rounded-full bg-orange-50 px-3 py-1 text-xs font-bold text-orange-500">🔥 连续 {report.streak} 天</span>
+          <span className="rounded-full bg-violet-50 px-3 py-1 text-xs font-bold text-violet-600">🏅 徽章 {badges.filter((b) => b.unlocked).length}/{badges.length}</span>
+        </div>
+        <p className="mb-3 text-sm text-slate-600">{report.headline}</p>
+        {report.subjectStats.length > 0 && (
+          <div className="mb-3 flex flex-wrap gap-1.5">
+            {report.subjectStats.slice(0, 8).map((s) => (
+              <span key={s.subject} className={`rounded-full px-2.5 py-1 text-xs font-bold ${s.accuracy !== null && s.accuracy >= 80 ? 'bg-emerald-100 text-emerald-700' : s.accuracy !== null && s.accuracy >= 60 ? 'bg-amber-100 text-amber-700' : 'bg-rose-100 text-rose-600'}`}>
+                {s.subject} {s.accuracy}%（{s.correct}/{s.total}）
+              </span>
+            ))}
+          </div>
+        )}
+        <div className="flex items-center gap-2 overflow-x-auto">
+          <span className="shrink-0 text-xs font-bold text-slate-400">近 8 周</span>
+          <div className="flex gap-1">
+            {heat.map((lv, i) => (<div key={i} className={`h-3.5 w-3.5 shrink-0 rounded-[3px] ${heatColor(lv)}`} />))}
+          </div>
+        </div>
+        {report.weakLessons.length > 0 && (
+          <div className="mt-3 space-y-1">
+            <div className="text-xs font-bold text-rose-500">需要关注的薄弱课：</div>
+            {report.weakLessons.map((w) => (
+              <div key={w.lessonId} className="text-xs text-slate-600">{w.emoji} {w.title}（{w.subject}）— 正确率 {w.accuracy}%</div>
+            ))}
+          </div>
+        )}
+      </div>
+
       <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
         <StatCard label="累计学习" value={`${totalMin} 分钟`} emoji="⏰" />
         <StatCard label="连续天数" value={`${streak} 天`} emoji="🔥" />

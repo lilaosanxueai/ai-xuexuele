@@ -6,6 +6,16 @@ import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
 import ExercisePanel from '../components/ExercisePanel.tsx';
 import { SUBJECTS } from '../components/subjectMeta.ts';
+import { bumpCounter } from '../runtime/dailyQuests.ts';
+
+/** 每日任务计数器：当天消灭的错题数 */
+const counterKey = (pid: string) => `island-daily-${pid}`;
+function bumpDaily(pid: string, key: 'wrongsCleared' | 'flashcards' | 'challenges') {
+  try {
+    const next = bumpCounter(JSON.parse(localStorage.getItem(counterKey(pid)) ?? '{}'), key);
+    localStorage.setItem(counterKey(pid), JSON.stringify(next));
+  } catch { /* 本地存储异常不影响主流程 */ }
+}
 
 /** 错题本：练习里错过的题自动收进来，重练全对就移出 */
 export default function WrongBookScreen() {
@@ -71,6 +81,7 @@ export default function WrongBookScreen() {
     void api.updateProgress(profile.id, { wrongClears: clears, wrongAdds: adds })
       .then((p) => setProgress(p))
       .catch(() => {});
+    if (clears.length > 0) bumpDaily(profile.id, 'wrongsCleared');
     setPracticing(false);
     if (wrongPicks.length === 0 && clears.length > 0) {
       setCelebrate(`🎉 太棒了！${clears.length} 道错题全部练对，已移出错题本！`);

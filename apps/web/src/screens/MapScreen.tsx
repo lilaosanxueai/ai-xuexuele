@@ -9,6 +9,7 @@ import { recommendNext } from '../runtime/recommend.ts';
 import { calcStreak } from '../utils/streak.ts';
 import { computeBadges } from '../runtime/achievements.ts';
 import { computeWeeklyReport } from '../runtime/weeklyReport.ts';
+import { generateQuests, readCounters } from '../runtime/dailyQuests.ts';
 
 /** 学科中心：以「学科 × 学段」组织全部课程（对标课表结构） */
 export default function MapScreen() {
@@ -73,6 +74,15 @@ export default function MapScreen() {
     return cells;
   }, [progress]);
   const heatColor = (lv: number) => ['bg-slate-100', 'bg-emerald-200', 'bg-emerald-400', 'bg-emerald-500', 'bg-emerald-600'][lv];
+  // 每日任务：完成状态由真实数据推导，完成动作在对应页面里发生
+  const quests = useMemo(() => {
+    let countersRaw: unknown = null;
+    try {
+      countersRaw = JSON.parse(localStorage.getItem(`island-daily-${profile.id}`) ?? '{}');
+    } catch { /* 空档案忽略 */ }
+    return generateQuests(lessons, progress, readCounters(countersRaw));
+  }, [lessons, progress, profile.id, todayMin]);
+  const questsDone = quests.filter((q) => q.done).length;
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -88,6 +98,35 @@ export default function MapScreen() {
             <span className="flex-1 text-sm font-semibold text-slate-400">卡在哪个知识点？搜「浮力」「定语从句」「光合作用」…</span>
             <span className="rounded-xl bg-sky-500 px-3 py-1.5 text-xs font-bold text-white">知识搜索</span>
           </button>
+          {/* 每日任务：完成状态由各页面真实数据推导 */}
+          <div className="mb-3 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 p-3 ring-1 ring-amber-200">
+            <div className="mb-2 flex items-center gap-2">
+              <span className="text-sm font-black text-amber-700">📅 今日任务</span>
+              <span className="text-xs text-amber-600">{questsDone}/{quests.length} 完成</span>
+              {questsDone === quests.length && <span className="rounded-full bg-amber-500 px-2 py-0.5 text-[10px] font-black text-white">全部完成 🎉</span>}
+              <div className="ml-auto flex h-1.5 w-24 overflow-hidden rounded-full bg-amber-100">
+                <div className="h-full rounded-full bg-amber-500 transition-all" style={{ width: `${quests.length ? (questsDone / quests.length) * 100 : 0}%` }} />
+              </div>
+            </div>
+            <div className="grid gap-1.5 sm:grid-cols-2">
+              {quests.map((q) => (
+                <button
+                  key={q.id}
+                  onClick={() => nav(q.route)}
+                  className={`flex items-center gap-2 rounded-xl px-3 py-2 text-left transition ${q.done ? 'bg-white/70' : 'bg-white shadow-sm hover:-translate-y-0.5'}`}
+                >
+                  <span className={`text-lg ${q.done ? '' : 'grayscale opacity-60'}`}>{q.emoji}</span>
+                  <span className="min-w-0 flex-1">
+                    <span className={`block truncate text-xs font-bold ${q.done ? 'text-slate-400 line-through' : 'text-slate-700'}`}>{q.title}</span>
+                    <span className="block truncate text-[10px] text-slate-400">{q.detail}</span>
+                  </span>
+                  <span className={`shrink-0 rounded-lg px-2 py-0.5 text-[10px] font-black ${q.done ? 'bg-emerald-100 text-emerald-600' : 'bg-amber-100 text-amber-600'}`}>
+                    {q.done ? '✓ 完成' : `${q.cur}/${q.goal}`}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
           <div className="mb-3 flex flex-wrap items-center gap-3 text-sm text-slate-500">
             <span className="rounded-full bg-orange-50 px-3 py-1 font-bold text-orange-500">🔥 连续学习 {calcStreak(progress?.dailyUsage ?? {})} 天</span>
             <span className="rounded-full bg-white px-3 py-1 shadow-sm">今日 {todayMin} 分钟</span>

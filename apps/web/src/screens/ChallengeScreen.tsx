@@ -6,6 +6,7 @@ import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
 import { SUBJECTS } from '../components/subjectMeta.ts';
 import { comboWord, gradeResult, sampleQuestions, scoreFor, type ChallengeQ } from '../runtime/challenge.ts';
+import { bumpCounter } from '../runtime/dailyQuests.ts';
 
 /** 全学科挑战赛：10 题 · 3 条命 · 20 秒/题 · 连击加分，错题自动进错题本 */
 const QUESTION_SECONDS = 20;
@@ -54,6 +55,9 @@ export default function ChallengeScreen() {
         wrongAdds: wrongsRef.current,
         minutesDelta: 5,
       }).catch(() => {});
+      try {
+        localStorage.setItem(`island-daily-${profile.id}`, JSON.stringify(bumpCounter(localStorage.getItem(`island-daily-${profile.id}`), 'challenges')));
+      } catch { /* 忽略本地存储异常 */ }
     }
     void finalCorrect; void finalScore;
   };

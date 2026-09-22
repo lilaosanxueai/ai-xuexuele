@@ -6,9 +6,11 @@ import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
 import { SUBJECTS } from '../components/subjectMeta.ts';
 import { buildDeck, deckStats, nextCardState, pickDueCards, type CardState, type Flashcard } from '../runtime/flashcards.ts';
+import { bumpCounter } from '../runtime/dailyQuests.ts';
 
 /** 闪卡复习：知识点 → 背面要点，莱特纳记忆盒安排间隔复习 */
 const storageKey = (profileId: string) => `island-flashcards-${profileId}`;
+const dailyKey = (profileId: string) => `island-daily-${profileId}`;
 
 function loadStates(profileId: string): Record<string, CardState> {
   try {
@@ -61,6 +63,9 @@ export default function FlashcardScreen() {
     if (!current) return;
     const next = { ...states, [current.id]: nextCardState(states[current.id], g) };
     persist(next);
+    try {
+      localStorage.setItem(dailyKey(profile!.id), JSON.stringify(bumpCounter(localStorage.getItem(dailyKey(profile!.id)), 'flashcards')));
+    } catch { /* 忽略本地存储异常 */ }
     setTally((t) => ({ ...t, [g]: t[g] + 1 }));
     setFlipped(false);
     if (idx + 1 >= queue.length) setRunning(false);
