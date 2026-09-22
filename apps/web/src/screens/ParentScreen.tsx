@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Lesson, Profile, ProfileProgress, Project, Settings } from '@shared/types.ts';
 import { api } from '../api.ts';
 import BackupTab from '../components/BackupTab.tsx';
-import { computeBadges } from '../runtime/achievements.ts';
+import { computeBadges, readRecords, recordsKey, EMPTY_RECORDS } from '../runtime/achievements.ts';
 import { computeWeeklyReport } from '../runtime/weeklyReport.ts';
 import { calcStreak } from '../utils/streak.ts';
 
@@ -169,7 +169,12 @@ function ReportTab({ profileId }: { profileId: string }) {
 
   // 本周学情镜像（周报引擎 + 徽章 + 热力图，全部本地计算）
   const report = computeWeeklyReport(lessons, progress);
-  const badges = computeBadges(lessons, progress);
+  const badges = useMemo(() => {
+    let rec = EMPTY_RECORDS;
+    try { rec = readRecords(JSON.parse(localStorage.getItem(recordsKey(profileId)) ?? '{}')); } catch { /* 忽略 */ }
+    return computeBadges(lessons, progress, rec);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lessons, progress, profileId]);
   const heat: number[] = [];
   for (let i = 55; i >= 0; i--) {
     const d = new Date(); d.setDate(d.getDate() - i);

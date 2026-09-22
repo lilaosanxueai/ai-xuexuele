@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { computeBadges, streakFrom } from './achievements.ts';
+import { computeBadges, EMPTY_RECORDS, readRecords, streakFrom, bumpRecords } from './achievements.ts';
 import { computeWeeklyReport } from './weeklyReport.ts';
 import type { Lesson, ProfileProgress } from '@shared/types.ts';
 
@@ -64,6 +64,34 @@ describe('computeBadges 成就徽章', () => {
     for (let i = 0; i < 5; i++) lessonsRec['l' + i] = { status: 'completed', tasks: {} };
     const badges = computeBadges(lessons, mkProgress({ lessons: lessonsRec }));
     expect(badges.find((b) => b.id === 'five-subjects')!.unlocked).toBe(true);
+  });
+});
+
+describe('成就 v2：游戏战绩徽章', () => {
+  const lessons = [mkLesson('a', '数学')];
+  it('零战绩时 5 枚新徽章全部锁定', () => {
+    const badges = computeBadges(lessons, mkProgress(), EMPTY_RECORDS);
+    for (const id of ['pairs-3', 'listen-ear', 'challenge-180', 'exam-90', 'weekly-goal-3']) {
+      expect(badges.find((b) => b.id === id)!.unlocked).toBe(false);
+    }
+  });
+  it('战绩达标各项点亮', () => {
+    const rec = { pairsPlays: 3, listenPerfect: 1, challengeBest: 185, examBest: 92, weeklyGoalsMet: 3 };
+    const badges = computeBadges(lessons, mkProgress(), rec);
+    expect(badges.find((b) => b.id === 'pairs-3')!.unlocked).toBe(true);
+    expect(badges.find((b) => b.id === 'listen-ear')!.unlocked).toBe(true);
+    expect(badges.find((b) => b.id === 'challenge-180')!.unlocked).toBe(true);
+    expect(badges.find((b) => b.id === 'exam-90')!.unlocked).toBe(true);
+    expect(badges.find((b) => b.id === 'weekly-goal-3')!.unlocked).toBe(true);
+  });
+  it('readRecords 容错坏数据，bumpRecords 只取最大值', () => {
+    expect(readRecords(null)).toEqual(EMPTY_RECORDS);
+    expect(readRecords({ pairsPlays: 'x' }).pairsPlays).toBe(0);
+    const prev = { ...EMPTY_RECORDS, challengeBest: 100, examBest: 80 };
+    const next = bumpRecords(prev, { challengeBest: 60, examBest: 95, pairsPlays: 2 });
+    expect(next.challengeBest).toBe(100); // 低分不清破纪录
+    expect(next.examBest).toBe(95);
+    expect(next.pairsPlays).toBe(2);
   });
 });
 

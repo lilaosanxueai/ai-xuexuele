@@ -5,6 +5,7 @@ import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
 import { sampleQuestions, type ChallengeQ } from '../runtime/challenge.ts';
+import { bumpRecords, readRecords, recordsKey } from '../runtime/achievements.ts';
 
 /** 学科期末模拟卷：全学科课程抽 20 题 · 30 分钟总计时 · 无生命限制 · 结卷按课标模块诊断 */
 const TOTAL = 20;
@@ -58,8 +59,14 @@ export default function ExamScreen() {
         q: a.q.q, options: a.q.options, answer: a.q.answer, explain: a.q.explain,
         wrongPicks: [a.pick], times: 1, lastWrongAt: new Date().toISOString(),
       }));
-    if (profile && wrongAdds.length > 0) {
-      void api.updateProgress(profile.id, { wrongAdds, minutesDelta: 5 }).catch(() => {});
+    if (profile) {
+      if (wrongAdds.length > 0) void api.updateProgress(profile.id, { wrongAdds, minutesDelta: 5 }).catch(() => {});
+      const rate = finalAnswers.length ? Math.round((finalAnswers.filter((a) => a.pick === a.q.answer).length / finalAnswers.length) * 100) : 0;
+      try {
+        const k = recordsKey(profile.id);
+        const prev = readRecords(JSON.parse(localStorage.getItem(k) ?? '{}'));
+        localStorage.setItem(k, JSON.stringify(bumpRecords(prev, { examBest: rate })));
+      } catch { /* 忽略 */ }
     }
   };
 

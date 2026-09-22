@@ -7,7 +7,7 @@ import Header from '../components/Header.tsx';
 import { SUBJECTS, SUBJECT_STYLE } from '../components/subjectMeta.ts';
 import { recommendNext } from '../runtime/recommend.ts';
 import { calcStreak } from '../utils/streak.ts';
-import { computeBadges } from '../runtime/achievements.ts';
+import { computeBadges, readRecords, bumpRecords, recordsKey, EMPTY_RECORDS } from '../runtime/achievements.ts';
 import { computeWeeklyReport } from '../runtime/weeklyReport.ts';
 import { generateQuests, readCounters } from '../runtime/dailyQuests.ts';
 
@@ -56,7 +56,11 @@ export default function MapScreen() {
     byArea.get(key)!.push(l);
   }
 
-  const badges = useMemo(() => computeBadges(lessons, progress), [lessons, progress]);
+  const badges = useMemo(() => {
+    let rec = EMPTY_RECORDS;
+    try { rec = readRecords(JSON.parse(localStorage.getItem(recordsKey(profile.id)) ?? '{}')); } catch { /* 忽略 */ }
+    return computeBadges(lessons, progress, rec);
+  }, [lessons, progress, profile.id, todayMin]);
   const unlockedCount = badges.filter((b) => b.unlocked).length;
   const report = useMemo(() => computeWeeklyReport(lessons, progress), [lessons, progress]);
   const maxBarMinutes = Math.max(10, ...report.dayBars.map((d) => d.minutes));
@@ -207,6 +211,17 @@ export default function MapScreen() {
             const doneN = report.lessonsDone.length;
             const setGoal = (g: number) => { try { localStorage.setItem(goalStore, String(g)); setGoalTick((t) => t + 1); } catch { /* 忽略 */ } };
             const pct = Math.min(100, Math.round((doneN / goal) * 100));
+            // 达成周目标：一次性记入战绩（徽章「言出必行」）
+            if (pct >= 100) {
+              try {
+                const rk = recordsKey(profile.id);
+                const prev = readRecords(JSON.parse(localStorage.getItem(rk) ?? '{}'));
+                if (!localStorage.getItem(goalStore + ':met')) {
+                  localStorage.setItem(rk, JSON.stringify(bumpRecords(prev, { weeklyGoalsMet: prev.weeklyGoalsMet + 1 })));
+                  localStorage.setItem(goalStore + ':met', '1');
+                }
+              } catch { /* 忽略 */ }
+            }
             return (
               <div className="mb-3 flex flex-wrap items-center gap-2 rounded-2xl bg-white p-3 shadow-sm">
                 <span className="text-xs font-black text-slate-500">🎯 本周目标</span>
@@ -305,7 +320,7 @@ export default function MapScreen() {
             <span className="rounded-full bg-violet-100 px-3 py-0.5 text-xs font-bold text-violet-600">{unlockedCount}/{badges.length} 已解锁</span>
             <span className="text-xs text-violet-400">完成小目标攒徽章，学习像闯关</span>
           </div>
-          <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-6">
+          <div className="grid grid-cols-4 gap-2 sm:grid-cols-5 lg:grid-cols-6">
             {badges.map((b) => (
               <div
                 key={b.id}

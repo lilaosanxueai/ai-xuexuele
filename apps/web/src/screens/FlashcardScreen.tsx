@@ -7,6 +7,7 @@ import Header from '../components/Header.tsx';
 import { SUBJECTS } from '../components/subjectMeta.ts';
 import { buildDeck, deckStats, nextCardState, pickDueCards, type CardState, type Flashcard } from '../runtime/flashcards.ts';
 import { bumpCounter } from '../runtime/dailyQuests.ts';
+import { bumpRecords, readRecords, recordsKey } from '../runtime/achievements.ts';
 
 /** 闪卡复习：知识点 → 背面要点，莱特纳记忆盒安排间隔复习 */
 const storageKey = (profileId: string) => `island-flashcards-${profileId}`;
@@ -54,6 +55,15 @@ export default function FlashcardScreen() {
     if (profile) localStorage.setItem(storageKey(profile.id), JSON.stringify(next));
   };
 
+  /** 听音满分记一次战绩（徽章「金耳朵」） */
+  const recordListenPerfect = () => {
+    try {
+      const k = recordsKey(profile!.id);
+      const prev = readRecords(JSON.parse(localStorage.getItem(k) ?? '{}'));
+      localStorage.setItem(k, JSON.stringify(bumpRecords(prev, { listenPerfect: prev.listenPerfect + 1 })));
+    } catch { /* 忽略 */ }
+  };
+
   const start = () => {
     const due = pickDueCards(deck, states, 10);
     if (due.length === 0) return;
@@ -96,6 +106,7 @@ export default function FlashcardScreen() {
     const ok = card.id === listenQ.target.id;
     const nextScore = { ok: listenScore.ok + (ok ? 1 : 0), total: listenScore.total + 1 };
     setListenScore(nextScore);
+    if (nextScore.total >= 5 && nextScore.ok === nextScore.total && ok) recordListenPerfect();
     setTimeout(() => startListening(nextScore.total, nextScore), ok ? 800 : 1600);
   };
 

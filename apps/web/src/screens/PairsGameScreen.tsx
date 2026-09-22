@@ -6,6 +6,7 @@ import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
 import { SUBJECTS } from '../components/subjectMeta.ts';
 import { buildDeck } from '../runtime/flashcards.ts';
+import { bumpRecords, readRecords, recordsKey } from '../runtime/achievements.ts';
 
 /** 概念连线小游戏：左列知识点、右列定义句，点选两侧配对——答对锁定变绿，全部配对用时越短越好 */
 interface Cell {
@@ -86,7 +87,15 @@ export default function PairsGameScreen() {
     if (lCell.cardId === rCell.cardId) {
       const next = new Set(locked); next.add(curL); next.add(curR);
       setLocked(next); setPickedL(null); setPickedR(null);
-      if (next.size >= left.length * 2) { setDone(true); setRunning(false); }
+      if (next.size >= left.length * 2) {
+        setDone(true); setRunning(false);
+        try {
+          if (!profile) return;
+          const k = recordsKey(profile.id);
+          const prev = readRecords(JSON.parse(localStorage.getItem(k) ?? '{}'));
+          localStorage.setItem(k, JSON.stringify(bumpRecords(prev, { pairsPlays: prev.pairsPlays + 1 })));
+        } catch { /* 忽略 */ }
+      }
     } else {
       setWrongCount((w) => w + 1);
       setWrongFlash(curL + '|' + curR);
