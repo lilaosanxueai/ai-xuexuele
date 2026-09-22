@@ -30,6 +30,10 @@ export const api = {
     req<{ ok: boolean }>(`/api/projects/${id}?profileId=${profileId}`, { method: 'DELETE' }),
   likeProject: (profileId: string, id: string, likerId: string) =>
     req<Project>(`/api/projects/${id}/like?profileId=${profileId}`, { method: 'POST', body: JSON.stringify({ likerId }) }),
+  /** 学习数据备份（导出 JSON）/ 恢复（导入覆盖） */
+  backup: (profileId: string) => req<{ app: string; version: number; exportedAt: string; profileId: string; progress: ProfileProgress }>(`/api/backup/${profileId}`),
+  restore: (profileId: string, progress: ProfileProgress) =>
+    req<ProfileProgress>(`/api/restore/${profileId}`, { method: 'POST', body: JSON.stringify({ progress }) }),
   settings: () => req<Settings>('/api/settings'),
   saveSettings: (s: Settings) =>
     req<Settings>('/api/settings', { method: 'PUT', body: JSON.stringify(s) }),

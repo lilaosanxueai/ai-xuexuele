@@ -191,6 +191,12 @@ export function toggleProjectLike(profileId: string, projectId: string, likerId:
 
 const settingsFile = path.join(DATA_DIR, 'settings.json');
 
+/** 备份恢复：整体替换该档案的进度（导入前已由路由校验形状） */
+export function replaceProgress(profileId: string, progress: ProfileProgress): ProfileProgress {
+  writeJson(progressFile(profileId), progress);
+  return progress;
+}
+
 export function getSettings(): Settings {
   const saved = readJson<Partial<Settings>>(settingsFile, {});
   return {

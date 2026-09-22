@@ -1,0 +1,218 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🍎",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：like=0 时句子怎么说？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：哪些食物加 s，哪些不加？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：你最喜欢吃什么？用英语说！",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 美食喜好台\nfood = 1   # 食物\nlike = 1   # 1 喜欢 0 不喜欢\n\nhide()\nword = \"apples\"\ncn = \"苹果\"\nplural = \"可数名词：可以加 s\"\nemo = \"🍎\"\nif food == 2:\n    word = \"rice\"\n    cn = \"米饭\"\n    plural = \"不可数名词：不能加 s\"\n    emo = \"🍚\"\nif food == 3:\n    word = \"milk\"\n    cn = \"牛奶\"\n    plural = \"不可数名词：不能加 s\"\n    emo = \"🥛\"\nif food == 4:\n    word = \"noodles\"\n    cn = \"面条\"\n    plural = \"习惯用复数\"\n    emo = \"🍜\"\nsent = \"I like \" + word + \".\"\nif like == 0:\n    sent = \"I don't like \" + word + \".\"\nfill_rect(0, 130, 340, 32, \"#16a34a\")\nwrite(emo + \" \" + word + \"（\" + cn + \"）\", 0, 130, \"#fff\", 14)\nfill_rect(0, 76, 340, 40, \"#fef3c7\")\nwrite(sent, 0, 76, \"#b45309\", 14)\nfill_rect(0, 20, 340, 44, \"#f1f5f9\")\nwrite(\"单词说明：\" + plural, 0, 20, \"#0f172a\", 10)\nwrite(\"问答：Do you like apples? — Yes, I do. / No, I don't.\", -10, -30, \"#1d4ed8\", 10)\nwrite(\"食物单词：apple rice milk noodles bread egg fish juice\", -10, -60, \"#7c3aed\", 10)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-27",
+  "island": "cross",
+  "order": 402,
+  "title": "食物与 I like 句型",
+  "emoji": "🍎",
+  "subjectArea": "英语",
+  "gradeBand": "primary",
+  "grade": 3,
+  "textbook": "人教PEP英语三年级下册",
+  "curriculum": {
+    "module": "食物话题",
+    "points": [
+      "常见食物单词",
+      "I like / I don't like",
+      "可数与不可数"
+    ]
+  },
+  "story": "apple 苹果、rice 米饭、milk 牛奶——会用 I like… 和 I don't like… 说喜欢，你就能和外国朋友聊吃了！小心：rice 和 milk 没有复数哦。",
+  "goals": [
+    "掌握 8 个食物单词",
+    "会用 like 表达喜好",
+    "区分可数与不可数名词"
+  ],
+  "aiIntro": "🍎 拨动食物转盘，用英语说喜欢或不喜欢——美食喜好台！",
+  "lab": {
+    "params": [
+      {
+        "name": "food",
+        "label": "食物",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "value": 1
+      },
+      {
+        "name": "like",
+        "label": "喜欢吗",
+        "min": 0,
+        "max": 1,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "like=0 时句子怎么说？",
+      "哪些食物加 s，哪些不加？",
+      "你最喜欢吃什么？用英语说！"
+    ],
+    "code": "# 美食喜好台\nfood = 1   # 食物\nlike = 1   # 1 喜欢 0 不喜欢\n\nhide()\nword = \"apples\"\ncn = \"苹果\"\nplural = \"可数名词：可以加 s\"\nemo = \"🍎\"\nif food == 2:\n    word = \"rice\"\n    cn = \"米饭\"\n    plural = \"不可数名词：不能加 s\"\n    emo = \"🍚\"\nif food == 3:\n    word = \"milk\"\n    cn = \"牛奶\"\n    plural = \"不可数名词：不能加 s\"\n    emo = \"🥛\"\nif food == 4:\n    word = \"noodles\"\n    cn = \"面条\"\n    plural = \"习惯用复数\"\n    emo = \"🍜\"\nsent = \"I like \" + word + \".\"\nif like == 0:\n    sent = \"I don't like \" + word + \".\"\nfill_rect(0, 130, 340, 32, \"#16a34a\")\nwrite(emo + \" \" + word + \"（\" + cn + \"）\", 0, 130, \"#fff\", 14)\nfill_rect(0, 76, 340, 40, \"#fef3c7\")\nwrite(sent, 0, 76, \"#b45309\", 14)\nfill_rect(0, 20, 340, 44, \"#f1f5f9\")\nwrite(\"单词说明：\" + plural, 0, 20, \"#0f172a\", 10)\nwrite(\"问答：Do you like apples? — Yes, I do. / No, I don't.\", -10, -30, \"#1d4ed8\", 10)\nwrite(\"食物单词：apple rice milk noodles bread egg fish juice\", -10, -60, \"#7c3aed\", 10)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "食物单词",
+        "body": "【apple 苹果 · bread 面包 · rice 米饭 · milk 牛奶 · egg 鸡蛋 · fish 鱼 · noodles 面条 · juice 果汁】\n可数：apple(s)、egg(s)——有单复数。\n不可数：rice、milk、bread、juice——永远不加 s，说 some rice。"
+      },
+      {
+        "title": "like 句型",
+        "body": "【肯定：I like apples.（喜欢的一类用复数）】\n【否定：I don't like noodles.（don't = do not）】\n【问答：Do you like milk? —Yes, I do. / No, I don't.】\n第三人称：She likes apples.（注意 likes）"
+      },
+      {
+        "title": "可数与不可数",
+        "body": "【可数名词：一个一个数得清（an apple → two apples）】\n【不可数名词：没法数个数（rice, milk, water, bread）】\n不可数要量化得借量词：a glass of milk、two bowls of rice。\n口诀：能数加 s，不能数用 some。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "表达\"我喜欢苹果\"（一类）",
+        "steps": [
+          "喜欢一类水果用复数",
+          "apples",
+          "I like apples.",
+          "别忘 s"
+        ],
+        "tip": "一类用复数"
+      },
+      {
+        "q": "Do you like juice? 怎么回答？",
+        "steps": [
+          "juice 不可数不影响回答",
+          "喜欢：Yes, I do.",
+          "不喜欢：No, I don't.",
+          "用 do 回答"
+        ],
+        "tip": "do 问答配套"
+      }
+    ],
+    "mistakes": [
+      "I like apple（指一类应用 apples）",
+      "rice 加 s（不可数）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "米饭的英语是？",
+      "options": [
+        "rice",
+        "milk",
+        "bread",
+        "noodles"
+      ],
+      "answer": 0,
+      "explain": "不可数"
+    },
+    {
+      "q": "我不喜欢牛奶 怎么说？",
+      "options": [
+        "I don't like milk.",
+        "I not like milk.",
+        "I don't likes milk.",
+        "I like milk."
+      ],
+      "answer": 0,
+      "explain": "don't + 原形"
+    },
+    {
+      "q": "下列可数名词是？",
+      "options": [
+        "egg",
+        "rice",
+        "milk",
+        "water"
+      ],
+      "answer": 0,
+      "explain": "eggs"
+    },
+    {
+      "q": "Do you like bread? 肯定回答？",
+      "options": [
+        "Yes, I do.",
+        "Yes, I like.",
+        "No, I do.",
+        "Yes, it is."
+      ],
+      "answer": 0,
+      "explain": "do 问 do 答"
+    },
+    {
+      "q": "She ___ apples.",
+      "options": [
+        "likes",
+        "like",
+        "liking",
+        "to like"
+      ],
+      "answer": 0,
+      "explain": "三单加s"
+    },
+    {
+      "q": "两碗米饭怎么表达？",
+      "options": [
+        "two bowls of rice",
+        "two rices",
+        "two rice",
+        "rices"
+      ],
+      "answer": 0,
+      "explain": "借量词"
+    }
+  ]
+}

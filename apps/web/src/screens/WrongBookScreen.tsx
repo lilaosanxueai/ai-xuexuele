@@ -8,6 +8,9 @@ import ExercisePanel from '../components/ExercisePanel.tsx';
 import { SUBJECTS } from '../components/subjectMeta.ts';
 import { bumpCounter } from '../runtime/dailyQuests.ts';
 
+/** 打印样式：只打印练习卷浮层 */
+const PRINT_CSS = `@media print { body * { visibility: hidden !important; } #print-sheet, #print-sheet * { visibility: visible !important; } #print-sheet { position: absolute !important; left: 0; top: 0; width: 100%; background: #fff; } }`;
+
 /** 每日任务计数器：当天消灭的错题数 */
 const counterKey = (pid: string) => `island-daily-${pid}`;
 function bumpDaily(pid: string, key: 'wrongsCleared' | 'flashcards' | 'challenges') {
@@ -46,6 +49,12 @@ export default function WrongBookScreen() {
   }, [profile, nav]);
 
   const wrongs = progress?.wrongBook ?? [];
+  const [printing, setPrinting] = useState(false);
+
+  const doPrint = () => {
+    setPrinting(true);
+    setTimeout(() => { window.print(); setPrinting(false); }, 120);
+  };
 
   // 分学科分组
   const bySubject = useMemo(() => {
@@ -110,7 +119,41 @@ export default function WrongBookScreen() {
           {(progress?.wrongCleared ?? 0) > 0 && (
             <span className="rounded-full bg-amber-100 px-3 py-1 text-sm font-bold text-amber-600">累计练对 {progress?.wrongCleared} 道</span>
           )}
+          {wrongs.length > 0 && (
+            <button onClick={doPrint} className="ml-auto rounded-xl bg-slate-700 px-4 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-slate-800">🖨 打印练习卷</button>
+          )}
         </div>
+
+        {/* 打印练习卷：纸质重练（家长可打印），答案单独一页 */}
+        {printing && (
+          <div id="print-sheet" className="fixed inset-0 z-[80] overflow-y-auto bg-white p-8 text-slate-900">
+            <style>{PRINT_CSS}</style>
+            <div className="mx-auto max-w-2xl">
+              <h1 className="text-center text-2xl font-black">错题重练卷</h1>
+              <p className="mt-1 text-center text-sm text-slate-500">共 {wrongs.length} 题 · 来自 AI学学乐错题本 · {new Date().toLocaleDateString('zh-CN')}</p>
+              <p className="mt-1 text-center text-xs text-slate-400">姓名：____________　日期：____________　得分：______</p>
+              <div className="mt-6 space-y-5">
+                {wrongs.map((w, i) => (
+                  <div key={w.id} className="break-inside-avoid">
+                    <div className="font-semibold">{i + 1}.（{w.subjectArea}）{w.q}</div>
+                    <div className="mt-1 grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+                      {w.options.map((opt, oi) => (<div key={oi}>{'ABCD'[oi]}. {opt}</div>))}
+                    </div>
+                    <div className="mt-1 text-sm">答：（　　　　）</div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-10 break-before-page border-t border-slate-300 pt-6">
+                <h2 className="text-lg font-black">参考答案</h2>
+                <ol className="mt-2 grid grid-cols-2 gap-1 text-sm">
+                  {wrongs.map((w, i) => (
+                    <li key={w.id}>{i + 1}. {'ABCD'[w.answer]}　{w.explain.slice(0, 40)}</li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+          </div>
+        )}
 
         {wrongs.length === 0 ? (
           <div className="rounded-3xl bg-white/80 p-10 text-center shadow-md">

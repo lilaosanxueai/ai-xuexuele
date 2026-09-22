@@ -57,6 +57,17 @@ export function buildRouter(cfg: AppConfig): Router {
     res.json(store.mergeProgress(req.params.profileId, { lessonId, tasks, completed, minutesDelta, draft, code, exercise, wrongAdds, wrongClears, labNote }));
   });
 
+  // ---------- 备份与恢复（本地数据一份都不丢） ----------
+  r.get('/backup/:profileId', (req, res) => {
+    res.json({ app: 'ai-xuexuele', version: 1, exportedAt: new Date().toISOString(), profileId: req.params.profileId, progress: store.getProgress(req.params.profileId) });
+  });
+  r.post('/restore/:profileId', (req, res) => {
+    const p = req.body?.progress;
+    if (!p || typeof p !== 'object' || p.profileId !== req.params.profileId) return res.status(400).json({ error: '备份文件格式不对或与当前档案不匹配' });
+    if (!p.lessons || !p.dailyUsage) return res.status(400).json({ error: '备份缺少学习进度数据' });
+    res.json(store.replaceProgress(req.params.profileId, p));
+  });
+
   // ---------- 作品 ----------
   r.get('/projects', (req, res) => {
     const profileId = String(req.query.profileId ?? '');

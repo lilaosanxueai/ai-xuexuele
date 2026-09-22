@@ -1,0 +1,210 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "📊",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：苹果比香蕉多几人？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：一格代表几人？一格代表 1 人和 2 人有什么区别？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：怎样从图中快速找出最多的？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 数据广播台\napple = 6   # 喜欢苹果的人数\n\nhide()\nbanana = 5\ngrape = 3\npeach = 4\nfill_rect(0, 130, 340, 30, \"#1d4ed8\")\nwrite(\"三（2）班最喜欢的水果调查（共 \" + (apple + banana + grape + peach) + \" 人）\", 0, 130, \"#fff\", 11)\npen_color(\"#0f172a\")\npen_down()\ngo_to(-150, -80)\ngo_to(170, -80)\ngo_to(170, 100)\npen_up()\nvals0 = apple\nvals1 = banana\nvals2 = grape\nvals3 = peach\nmx = apple\nif banana > mx:\n    mx = banana\nif grape > mx:\n    mx = grape\nif peach > mx:\n    mx = peach\nunit = 80 / mx\nfill_rect(-120, -80 + apple * unit / 2, 44, apple * unit, \"#dc2626\")\nwrite(apple, -120, -80 + apple * unit + 12, \"#dc2626\", 11)\nwrite(\"苹果\", -120, -98, \"#0f172a\", 10)\nfill_rect(-60, -80 + banana * unit / 2, 44, banana * unit, \"#f59e0b\")\nwrite(banana, -60, -80 + banana * unit + 12, \"#b45309\", 11)\nwrite(\"香蕉\", -60, -98, \"#0f172a\", 10)\nfill_rect(0, -80 + grape * unit / 2, 44, grape * unit, \"#a855f7\")\nwrite(grape, 0, -80 + grape * unit + 12, \"#7c3aed\", 11)\nwrite(\"葡萄\", 0, -98, \"#0f172a\", 10)\nfill_rect(60, -80 + peach * unit / 2, 44, peach * unit, \"#fca5a5\")\nwrite(peach, 60, -80 + peach * unit + 12, \"#dc2626\", 11)\nwrite(\"桃子\", 60, -98, \"#0f172a\", 10)\nif apple >= mx:\n    write(\"★ 最受欢迎：苹果！\", 0, 108, \"#dc2626\", 11)\nif banana > apple:\n    write(\"★ 最受欢迎：香蕉！\", 0, 108, \"#b45309\", 11)\n",
+  "celebrate": "新知识到手！",
+  "id": "math-91",
+  "island": "cross",
+  "order": 399,
+  "title": "条形统计图：数据会说话",
+  "emoji": "📊",
+  "subjectArea": "数学",
+  "gradeBand": "primary",
+  "grade": 3,
+  "textbook": "人教版数学（三年级）",
+  "curriculum": {
+    "module": "统计与概率",
+    "points": [
+      "收集与整理数据",
+      "条形统计图的画法",
+      "从图中获取信息"
+    ]
+  },
+  "story": "全班同学最喜欢的水果是哪种？光看一堆名字看不出名堂，画成条形统计图——谁高谁低一目了然。数据不会撒谎，还会讲故事！",
+  "goals": [
+    "会收集整理数据",
+    "会画条形统计图",
+    "会根据图表回答问题"
+  ],
+  "aiIntro": "📊 拖动苹果的票数，看条形图实时长高——数据广播台！",
+  "lab": {
+    "params": [
+      {
+        "name": "apple",
+        "label": "喜欢苹果的人数",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "value": 6
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "苹果比香蕉多几人？",
+      "一格代表几人？一格代表 1 人和 2 人有什么区别？",
+      "怎样从图中快速找出最多的？"
+    ],
+    "code": "# 数据广播台\napple = 6   # 喜欢苹果的人数\n\nhide()\nbanana = 5\ngrape = 3\npeach = 4\nfill_rect(0, 130, 340, 30, \"#1d4ed8\")\nwrite(\"三（2）班最喜欢的水果调查（共 \" + (apple + banana + grape + peach) + \" 人）\", 0, 130, \"#fff\", 11)\npen_color(\"#0f172a\")\npen_down()\ngo_to(-150, -80)\ngo_to(170, -80)\ngo_to(170, 100)\npen_up()\nvals0 = apple\nvals1 = banana\nvals2 = grape\nvals3 = peach\nmx = apple\nif banana > mx:\n    mx = banana\nif grape > mx:\n    mx = grape\nif peach > mx:\n    mx = peach\nunit = 80 / mx\nfill_rect(-120, -80 + apple * unit / 2, 44, apple * unit, \"#dc2626\")\nwrite(apple, -120, -80 + apple * unit + 12, \"#dc2626\", 11)\nwrite(\"苹果\", -120, -98, \"#0f172a\", 10)\nfill_rect(-60, -80 + banana * unit / 2, 44, banana * unit, \"#f59e0b\")\nwrite(banana, -60, -80 + banana * unit + 12, \"#b45309\", 11)\nwrite(\"香蕉\", -60, -98, \"#0f172a\", 10)\nfill_rect(0, -80 + grape * unit / 2, 44, grape * unit, \"#a855f7\")\nwrite(grape, 0, -80 + grape * unit + 12, \"#7c3aed\", 11)\nwrite(\"葡萄\", 0, -98, \"#0f172a\", 10)\nfill_rect(60, -80 + peach * unit / 2, 44, peach * unit, \"#fca5a5\")\nwrite(peach, 60, -80 + peach * unit + 12, \"#dc2626\", 11)\nwrite(\"桃子\", 60, -98, \"#0f172a\", 10)\nif apple >= mx:\n    write(\"★ 最受欢迎：苹果！\", 0, 108, \"#dc2626\", 11)\nif banana > apple:\n    write(\"★ 最受欢迎：香蕉！\", 0, 108, \"#b45309\", 11)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "收集与整理",
+        "body": "【收集：调查、记录（画正字最方便）】\n【整理：分类数一数，制成统计表】\n\"正\"字计数法：一笔 1 个，一个正字 5 个。\n数据要真实——统计的生命是诚实。"
+      },
+      {
+        "title": "画条形图",
+        "body": "【步骤：画横轴（类别）纵轴（数量）→ 定每格代表几→ 画直条（宽度相同、间隔均匀）→ 标数据】\n每格代表几由数据大小决定：数据大用 2、5、10，数据小用 1。\n直条要画得一样宽，高度对准刻度。"
+      },
+      {
+        "title": "读图",
+        "body": "【看最高：最多项；看最矮：最少项；做减法：相差多少】\n常见问题：一共多少（加法）、谁比谁多几（减法）、是几倍（除法）。\n预测与决策：根据数据提建议（多买苹果）——统计是为了更好地决定。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "调查 40 人喜欢的水果，每格代表 2 人，纵轴最多画几格？",
+        "steps": [
+          "先找最大数据：假设 12 人",
+          "12 ÷ 2 = 6 格",
+          "再加表头留 1-2 格",
+          "约 7-8 格够用"
+        ],
+        "tip": "格数看最大值"
+      },
+      {
+        "q": "苹果 12 人、香蕉 7 人，苹果比香蕉多几人？多几倍关系接近吗？",
+        "steps": [
+          "12 − 7 = 5（人）",
+          "12 ÷ 7 ≈ 1.7",
+          "多 5 人，约 1.7 倍",
+          "减法答差，除法答倍数"
+        ],
+        "tip": "看清问的是差还是倍"
+      }
+    ],
+    "mistakes": [
+      "直条宽度不一（条形图要等宽）",
+      "每格代表几没看刻度就报数"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "记录数据最常用的方法是？",
+      "options": [
+        "画正字",
+        "拍照",
+        "背下来",
+        "随便记"
+      ],
+      "answer": 0,
+      "explain": "一个正字5个"
+    },
+    {
+      "q": "条形图的直条应该？",
+      "options": [
+        "宽度相同",
+        "高矮相同",
+        "颜色相同",
+        "随便画"
+      ],
+      "answer": 0,
+      "explain": "高度表数量"
+    },
+    {
+      "q": "数据很大时每格可代表？",
+      "options": [
+        "2、5 或 10",
+        "只能 1",
+        "0.1",
+        "1000"
+      ],
+      "answer": 0,
+      "explain": "灵活定刻度"
+    },
+    {
+      "q": "最高的直条表示？",
+      "options": [
+        "数量最多",
+        "数量最少",
+        "时间最长",
+        "最重"
+      ],
+      "answer": 0,
+      "explain": "高=多"
+    },
+    {
+      "q": "苹果 9 人香蕉 6 人，共几人？",
+      "options": [
+        "15 人",
+        "3 人",
+        "54 人",
+        "9 人"
+      ],
+      "answer": 0,
+      "explain": "加法"
+    },
+    {
+      "q": "统计最重要的品质是？",
+      "options": [
+        "数据真实",
+        "图画得美",
+        "颜色多",
+        "字大"
+      ],
+      "answer": 0,
+      "explain": "诚实记录"
+    }
+  ]
+}

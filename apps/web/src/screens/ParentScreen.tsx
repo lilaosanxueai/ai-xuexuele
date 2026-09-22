@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Lesson, Profile, ProfileProgress, Project, Settings } from '@shared/types.ts';
 import { api } from '../api.ts';
+import BackupTab from '../components/BackupTab.tsx';
 import { computeBadges } from '../runtime/achievements.ts';
 import { computeWeeklyReport } from '../runtime/weeklyReport.ts';
 import { calcStreak } from '../utils/streak.ts';
 
 /** 家长面板：学习进度 / 学情报告 / AI 对话记录 / 伙伴设置（已取消 PIN 门，直接进入） */
 
-type Tab = 'progress' | 'report' | 'chats' | 'settings';
+type Tab = 'progress' | 'report' | 'chats' | 'settings' | 'backup';
 
 export default function ParentScreen() {
   return (
@@ -40,7 +41,8 @@ function Tabs() {
   return (
     <div>
       <div className="mb-6 flex gap-2">
-        {([['progress', '📈 学习进度'], ['report', '📗 学情报告'], ['chats', '💬 AI 对话记录'], ['settings', '⚙️ 设置']] as [Tab, string][])
+        {([['progress', '📈 学习进度'], ['report', '📗 学情报告'], ['chats', '💬 AI 对话记录'], ['backup', '💾 数据备份'],
+        ['settings', '⚙️ 设置']] as [Tab, string][])
           .map(([k, label]) => (
             <button
               key={k}
@@ -61,7 +63,8 @@ function Tabs() {
         )}
       </div>
       {!profileId ? <p className="text-slate-400">还没有创建孩子角色</p> : (
-        tab === 'progress' ? <ProgressTab profileId={profileId} />
+        tab === 'backup' ? <BackupTab profileId={profileId} />
+        : tab === 'progress' ? <ProgressTab profileId={profileId} />
           : tab === 'report' ? <ReportTab profileId={profileId} />
  : tab === 'chats' ? <ChatsTab profileId={profileId} />
  : <SettingsTab />

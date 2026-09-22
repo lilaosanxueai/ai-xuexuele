@@ -1,0 +1,210 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🎂",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：你生日在哪个月？用英语说说",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：月份首字母有什么规矩？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：May 是几月？和情态动词 may 怎么区分？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 生日月份转盘\nm = 1   # 月份\n\nhide()\nname = \"January\"\nseason = \"冬天 ❄️\"\nif m == 2:\n    name = \"February\"\nif m == 3:\n    name = \"March\"\n    season = \"春天 🌱\"\nif m == 4:\n    name = \"April\"\nif m == 5:\n    name = \"May\"\nif m == 6:\n    name = \"June\"\n    season = \"夏天 ☀️\"\nif m == 7:\n    name = \"July\"\nif m == 8:\n    name = \"August\"\nif m == 9:\n    name = \"September\"\n    season = \"秋天 🍂\"\nif m == 10:\n    name = \"October\"\nif m == 11:\n    name = \"November\"\nif m == 12:\n    name = \"December\"\n    season = \"冬天 ❄️\"\nfill_rect(0, 130, 340, 32, \"#a855f7\")\nwrite(\"Month \" + m + \"：\" + name + \"（\" + season + \"）\", 0, 130, \"#fff\", 13)\nfill_rect(0, 74, 340, 44, \"#fef3c7\")\nwrite(\"My birthday is in \" + name + \".\", 0, 74, \"#b45309\", 13)\nfill_rect(0, 16, 340, 46, \"#f1f5f9\")\nwrite(\"问答：When is your birthday? — It's in \" + name + \".\", 0, 16, \"#0f172a\", 10)\nwrite(\"月份首字母要大写；具体日期用序数词（May 1st）\", -20, -40, \"#dc2626\", 10)\nwrite(\"缩写：Jan. Feb. Mar. …（前三个字母加点）\", -20, -68, \"#7c3aed\", 10)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-28",
+  "island": "cross",
+  "order": 403,
+  "title": "月份与生日表达",
+  "emoji": "🎂",
+  "subjectArea": "英语",
+  "gradeBand": "primary",
+  "grade": 4,
+  "textbook": "人教PEP英语四年级下册",
+  "curriculum": {
+    "module": "时间话题",
+    "points": [
+      "十二个月份单词",
+      "My birthday is in…",
+      "序数词表示日期"
+    ]
+  },
+  "story": "一年十二个月，每个月都有自己的英文名字——January 一月开门，December 十二月收尾。学会它们，就能用英语说出自己的生日：My birthday is in May!",
+  "goals": [
+    "记住十二个月份",
+    "会表达生日所在月份",
+    "会用序数词说日期"
+  ],
+  "aiIntro": "🎂 拨动月份转盘，看季节和生日句子一起出现——生日月份转盘！",
+  "lab": {
+    "params": [
+      {
+        "name": "m",
+        "label": "月份",
+        "min": 1,
+        "max": 12,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "你生日在哪个月？用英语说说",
+      "月份首字母有什么规矩？",
+      "May 是几月？和情态动词 may 怎么区分？"
+    ],
+    "code": "# 生日月份转盘\nm = 1   # 月份\n\nhide()\nname = \"January\"\nseason = \"冬天 ❄️\"\nif m == 2:\n    name = \"February\"\nif m == 3:\n    name = \"March\"\n    season = \"春天 🌱\"\nif m == 4:\n    name = \"April\"\nif m == 5:\n    name = \"May\"\nif m == 6:\n    name = \"June\"\n    season = \"夏天 ☀️\"\nif m == 7:\n    name = \"July\"\nif m == 8:\n    name = \"August\"\nif m == 9:\n    name = \"September\"\n    season = \"秋天 🍂\"\nif m == 10:\n    name = \"October\"\nif m == 11:\n    name = \"November\"\nif m == 12:\n    name = \"December\"\n    season = \"冬天 ❄️\"\nfill_rect(0, 130, 340, 32, \"#a855f7\")\nwrite(\"Month \" + m + \"：\" + name + \"（\" + season + \"）\", 0, 130, \"#fff\", 13)\nfill_rect(0, 74, 340, 44, \"#fef3c7\")\nwrite(\"My birthday is in \" + name + \".\", 0, 74, \"#b45309\", 13)\nfill_rect(0, 16, 340, 46, \"#f1f5f9\")\nwrite(\"问答：When is your birthday? — It's in \" + name + \".\", 0, 16, \"#0f172a\", 10)\nwrite(\"月份首字母要大写；具体日期用序数词（May 1st）\", -20, -40, \"#dc2626\", 10)\nwrite(\"缩写：Jan. Feb. Mar. …（前三个字母加点）\", -20, -68, \"#7c3aed\", 10)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "十二个月",
+        "body": "【January February March | April May June | July August September | October November December】\n分段记：每三月一组，配季节背。\n首字母必须大写；缩写取前三字母加点（Sep. / Sept.）。\n易混：May 五月 vs may 可以；March 行军 vs 三月。"
+      },
+      {
+        "title": "生日表达",
+        "body": "【问：When is your birthday?】【答：My birthday is in May. / It's in May.】\n月份前用 in（in July）。\n具体日期：My birthday is on May 1st.（日期前用 on，用序数词）。\n序数词：1st 2nd 3rd 21st，其余 th。"
+      },
+      {
+        "title": "季节与月份",
+        "body": "【春：March April May】【夏：June July August】【秋：September October November】【冬：December January February】\n季节前用 in：in winter。\n北半球季节与中国一致——按自己的生活记忆最快。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "你的生日是 6 月 8 日，用英语说。",
+        "steps": [
+          "月份：June",
+          "日期序数词：8th（eighth）",
+          "My birthday is on June 8th.",
+          "只说月份：in June"
+        ],
+        "tip": "月份in日期on"
+      },
+      {
+        "q": "When is your birthday? 怎么回答？",
+        "steps": [
+          "结构：My birthday is in + 月份",
+          "例如：My birthday is in October",
+          "也可以 It's in October.",
+          "别忘了 in"
+        ],
+        "tip": "in 接月份"
+      }
+    ],
+    "mistakes": [
+      "月份小写（必须大写）",
+      "生日说 on May（月份用 in，日期才用 on）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "三月是？",
+      "options": [
+        "March",
+        "May",
+        "March 和 May 都是",
+        "May 不是月份"
+      ],
+      "answer": 0,
+      "explain": "三月March"
+    },
+    {
+      "q": "十二月是？",
+      "options": [
+        "December",
+        "November",
+        "October",
+        "January"
+      ],
+      "answer": 0,
+      "explain": "一年最后"
+    },
+    {
+      "q": "我的生日在五月 说？",
+      "options": [
+        "My birthday is in May.",
+        "My birthday on May.",
+        "My birthday is May.",
+        "My birthday at May."
+      ],
+      "answer": 0,
+      "explain": "in+月份"
+    },
+    {
+      "q": "1st 是几号的写法？",
+      "options": [
+        "1 号",
+        "第 1 个",
+        "11 号",
+        "21 号"
+      ],
+      "answer": 0,
+      "explain": "first"
+    },
+    {
+      "q": "夏天的月份不包括？",
+      "options": [
+        "March",
+        "June",
+        "July",
+        "August"
+      ],
+      "answer": 0,
+      "explain": "March是春"
+    },
+    {
+      "q": "月份首字母要？",
+      "options": [
+        "大写",
+        "小写",
+        "斜体",
+        "双写"
+      ],
+      "answer": 0,
+      "explain": "专有名词"
+    }
+  ]
+}
