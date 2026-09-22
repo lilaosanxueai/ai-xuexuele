@@ -1,22 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { Settings } from '@shared/types.ts';
+import type { Lesson, Settings } from '@shared/types.ts';
 import { DEFAULT_SETTINGS } from '@shared/types.ts';
 import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
 import AIBuddy from '../components/AIBuddy.tsx';
+import { buildIndex, searchLessons } from '../runtime/search.ts';
 
-/** AI 答疑页：不绑定课程的自由学科问答——作业不会做、知识点没听懂，直接问 */
+/** AI 答疑页：不绑定课程的自由学科问答——作业不会做、知识点没听懂，直接问。
+ *  创新点：问句先过全科知识索引，命中的课本定义句注入 AI 上下文，让回答向课本口径靠拢。 */
 export default function AskScreen() {
   const nav = useNavigate();
   const { current: profile } = useProfileStore();
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
+  const [lessons, setLessons] = useState<Lesson[]>([]);
 
   useEffect(() => {
     if (!profile) { nav('/'); return; }
     void api.settings().then(setSettings).catch(() => {});
+    void api.lessons().then(setLessons).catch(() => {});
   }, [profile, nav]);
+
+  const index = useMemo(() => buildIndex(lessons), [lessons]);
 
   if (!profile) return null;
 
@@ -40,7 +46,22 @@ export default function AskScreen() {
               hint: ['这道题不会做', '作业里有一题卡住了'],
             }}
             subtitle="AI 学科辅导老师"
-            getContext={() => ({ screen: 'ask' as const })}
+            getContext={(message) => {
+              const ctx: { screen: 'ask'; askKnowledge?: string } = { screen: 'ask' };
+              if (message && index.length > 0) {
+                const hits = searchLessons(index, message, { limit: 2 });
+                if (hits.length > 0) {
+                  const byId = new Map(lessons.map((l) => [l.id, l]));
+                  const parts = hits.map((h) => {
+                    const l = byId.get(h.lessonId);
+                    const grade = l ? (l.gradeBand === 'primary' ? '小学' : l.gradeBand === 'junior' ? '初中' : '高中') : '';
+                    return `《${h.lessonTitle}》（${h.subject}·${grade}）：${h.snippets.join('；')}`;
+                  });
+                  ctx.askKnowledge = parts.join('\n').slice(0, 800);
+                }
+              }
+              return ctx;
+            }}
           />
         </div>
       </main>

@@ -15,7 +15,7 @@ interface Props {
   buddy: BuddySettings;
   intro: string;
   defaultMode: BuddyMode;
-  getContext: () => ChatContext;
+  getContext: (message?: string) => ChatContext;
   /** 显示哪些模式页签（默认全部；辅导页传 ['explain','hint','review']） */
   modes?: BuddyMode[];
   /** 覆盖某模式的快捷提问（辅导页用学科向问题替代默认的编程向问题） */
@@ -109,7 +109,7 @@ const AIBuddy = forwardRef<BuddyHandle, Props>(function AIBuddy(
       let ops: BuildOp[] | null = null;
       let via = '';
       try {
-        const r = await askBuild({ profileId, message: text, catalog: catalog ?? [], context: getContext(), current: getCurrentOps?.() ?? [] });
+        const r = await askBuild({ profileId, message: text, catalog: catalog ?? [], context: getContext(text), current: getCurrentOps?.() ?? [] });
         const note = r.note;
         if (note) {
           setMessages((prev) => [...prev, { role: 'assistant', content: note, mode: 'build' }]);
@@ -150,7 +150,7 @@ const AIBuddy = forwardRef<BuddyHandle, Props>(function AIBuddy(
         .map((msg) => ({ role: msg.role, content: msg.content }));
       let acc = '';
       await chatStream(
-        { profileId, mode: m, message: trimmed, history, context: getContext() },
+        { profileId, mode: m, message: trimmed, history, context: getContext(trimmed) },
         (delta) => {
           acc += delta;
           const shown = acc.replace(URL_RE, '（链接已隐藏）');

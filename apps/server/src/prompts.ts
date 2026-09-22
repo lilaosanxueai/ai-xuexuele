@@ -75,6 +75,10 @@ function contextBlock(ctx: ChatContext): string {
     if (ctx.labNote) lines.push('【点评记录单】孩子请求点评实验记录单时：先肯定他写对的部分（引用他的原话），指出可以更准确的地方，再教一句科学记录的写法（现象→数据→结论）；鼓励他把记录补充完整，不要替他重写。');
   } else if (ctx.screen === 'ask') {
     lines.push('【自由答疑】孩子没有指定课程，可能在问任何学科的问题。先判断题目属于哪个学科、大概哪个年级，按孩子的年龄讲。');
+    if (ctx.askKnowledge) {
+      lines.push('【本应用的课本参考】孩子的问题命中了课程库中的以下内容（讲解口径以此为准，术语和定义向课本靠拢，再用自己的话讲给孩子）：');
+      lines.push(ctx.askKnowledge);
+    }
   } else if (ctx.screen === 'lesson' && ctx.lessonTitle) {
     lines.push('【孩子正在做的编程练习】');
     lines.push(`课题：《${ctx.lessonTitle}》`);

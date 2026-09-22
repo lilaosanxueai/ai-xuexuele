@@ -1,0 +1,210 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "📅",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：day=1 为什么用 on？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：月份和年份用哪个介词？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：日期用基数词还是序数词？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 时间介词值班表\nday = 1   # 1具体日期 2月份 3年份 4钟点\n\nhide()\nprep = \"on\"\nex = \"on Monday, September 21st\"\nrule = \"具体到某一天（日期+星期）用 on\"\nif day == 2:\n    prep = \"in\"\n    ex = \"in September / in winter\"\n    rule = \"月份、季节、年份用 in\"\nif day == 3:\n    prep = \"in\"\n    ex = \"in 2026\"\n    rule = \"年份用 in\"\nif day == 4:\n    prep = \"at\"\n    ex = \"at 7:00 / at noon / at night\"\n    rule = \"钟点、中午、夜里用 at\"\nfill_rect(0, 130, 360, 32, \"#16a34a\")\nwrite(\"介词：\" + prep, 0, 130, \"#fff\", 16)\nfill_rect(0, 76, 360, 42, \"#f1f5f9\")\nwrite(ex, 0, 76, \"#0f172a\", 13)\nfill_rect(0, 20, 360, 46, \"#fef3c7\")\nwrite(rule, 0, 20, \"#b45309\", 11)\nwrite(\"口诀：in 年 in 月 in 季节，on 具体某一天，at 钟点中午夜\", -30, -40, \"#dc2626\", 11)\nwrite(\"日期写读用序数词：21st 读 the twenty-first\", -30, -70, \"#7c3aed\", 10)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-26",
+  "island": "cross",
+  "order": 395,
+  "title": "时间与日期表达",
+  "emoji": "📅",
+  "subjectArea": "英语",
+  "gradeBand": "junior",
+  "grade": 7,
+  "textbook": "人教版英语（初中）",
+  "curriculum": {
+    "module": "交际用语",
+    "points": [
+      "年月日表达",
+      "星期与介词 on/in/at",
+      "询问时间的句型"
+    ]
+  },
+  "story": "2026 年 9 月 21 日星期一——英语怎么说？月份要大写、日期用序数词、年份分两位读……时间表达是初中英语的第一道\"格式关\"，也是考试的常客。",
+  "goals": [
+    "掌握年月日星期的表达",
+    "会用 on/in/at 时间介词",
+    "会问答时间和日期"
+  ],
+  "aiIntro": "📅 拨到不同的日子，看介词怎么换班——时间介词值班表！",
+  "lab": {
+    "params": [
+      {
+        "name": "day",
+        "label": "日期类型",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "day=1 为什么用 on？",
+      "月份和年份用哪个介词？",
+      "日期用基数词还是序数词？"
+    ],
+    "code": "# 时间介词值班表\nday = 1   # 1具体日期 2月份 3年份 4钟点\n\nhide()\nprep = \"on\"\nex = \"on Monday, September 21st\"\nrule = \"具体到某一天（日期+星期）用 on\"\nif day == 2:\n    prep = \"in\"\n    ex = \"in September / in winter\"\n    rule = \"月份、季节、年份用 in\"\nif day == 3:\n    prep = \"in\"\n    ex = \"in 2026\"\n    rule = \"年份用 in\"\nif day == 4:\n    prep = \"at\"\n    ex = \"at 7:00 / at noon / at night\"\n    rule = \"钟点、中午、夜里用 at\"\nfill_rect(0, 130, 360, 32, \"#16a34a\")\nwrite(\"介词：\" + prep, 0, 130, \"#fff\", 16)\nfill_rect(0, 76, 360, 42, \"#f1f5f9\")\nwrite(ex, 0, 76, \"#0f172a\", 13)\nfill_rect(0, 20, 360, 46, \"#fef3c7\")\nwrite(rule, 0, 20, \"#b45309\", 11)\nwrite(\"口诀：in 年 in 月 in 季节，on 具体某一天，at 钟点中午夜\", -30, -40, \"#dc2626\", 11)\nwrite(\"日期写读用序数词：21st 读 the twenty-first\", -30, -70, \"#7c3aed\", 10)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "年月日",
+        "body": "【英文顺序：月 + 日 + 年（September 21st, 2026）】\n月份首字母大写；日用序数词（1st/2nd/3rd/21st）。\n读法：September the twenty-first, twenty twenty-six。\n日期前可加 the：September (the) 21st。"
+      },
+      {
+        "title": "星期",
+        "body": "【Monday Tuesday Wednesday Thursday Friday Saturday Sunday（首字母大写）】\n问星期：What day is it today? —It's Monday.\n周末：on weekends（美）/ at weekends（英）。\n周一早晨 on Monday morning：具体某天的上下午也用 on。"
+      },
+      {
+        "title": "问时间",
+        "body": "【What time is it? / What's the time?】\n回答：7:00 读 seven (o'clock)；7:30 读 seven thirty 或 half past seven。\n问答日期：What's the date today? —It's September 21st.\n区分：What day 问星期，What's the date 问日期。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "9 月 21 日怎么表达？",
+        "steps": [
+          "月在前：September",
+          "日期序数词：21st",
+          "September 21st / September (the) twenty-first",
+          "年份放最后：September 21st, 2026"
+        ],
+        "tip": "月日年顺序"
+      },
+      {
+        "q": "周一早上用哪个介词？",
+        "steps": [
+          "Monday 是具体某天 → on",
+          "Monday morning 还是具体某天的时段",
+          "仍用 on：on Monday morning",
+          "口诀：on 具体某一天"
+        ],
+        "tip": "某天的时段也on"
+      }
+    ],
+    "mistakes": [
+      "日期用基数词（21 读 twenty-one × 应 twenty-first）",
+      "in Monday（× 具体某天用 on）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "September 21st 读作？",
+      "options": [
+        "the twenty-first",
+        "twenty-one",
+        "twenty-oneth",
+        "twentieth-one"
+      ],
+      "answer": 0,
+      "explain": "序数词"
+    },
+    {
+      "q": "___ Monday 用？",
+      "options": [
+        "on",
+        "in",
+        "at",
+        "of"
+      ],
+      "answer": 0,
+      "explain": "具体某天"
+    },
+    {
+      "q": "___ 2026 用？",
+      "options": [
+        "in",
+        "on",
+        "at",
+        "to"
+      ],
+      "answer": 0,
+      "explain": "年份用in"
+    },
+    {
+      "q": "___ seven o'clock 用？",
+      "options": [
+        "at",
+        "in",
+        "on",
+        "by"
+      ],
+      "answer": 0,
+      "explain": "钟点用at"
+    },
+    {
+      "q": "问星期几说？",
+      "options": [
+        "What day is it today?",
+        "What's the date?",
+        "What time?",
+        "How day?"
+      ],
+      "answer": 0,
+      "explain": "day问星期"
+    },
+    {
+      "q": "月份首字母？",
+      "options": [
+        "要大写",
+        "要小写",
+        "斜体",
+        "加引号"
+      ],
+      "answer": 0,
+      "explain": "September"
+    }
+  ]
+}

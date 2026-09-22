@@ -1,0 +1,210 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "⏰",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：subj=3 动词加 s 了吗？为什么？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：频度副词放在哪？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：o/ch/sh 结尾的动词怎么变？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 三单变身器\nsubj = 1   # 1 I 2 You 3 He 4 My mother\n\nhide()\ns = \"I\"\nverb = \"play\"\nsent = \"I play basketball every day.\"\nwhy = \"第一人称：动词用原形\"\nif subj == 2:\n    s = \"You\"\n    sent = \"You play basketball every day.\"\n    why = \"第二人称：动词用原形\"\nif subj == 3:\n    s = \"He\"\n    verb = \"plays\"\n    sent = \"He plays basketball every day.\"\n    why = \"第三人称单数：动词加 s（三单）\"\nif subj == 4:\n    s = \"My mother\"\n    verb = \"watches\"\n    sent = \"My mother watches TV in the evening.\"\n    why = \"三单 + ch 结尾加 es（watch→watches）\"\nfill_rect(0, 130, 360, 32, \"#1d4ed8\")\nwrite(s + \" \" + verb + \" …\", 0, 130, \"#fff\", 14)\nfill_rect(0, 78, 360, 40, \"#f1f5f9\")\nwrite(sent, 0, 78, \"#0f172a\", 12)\nfill_rect(0, 22, 360, 44, \"#fef3c7\")\nwrite(\"规则：\" + why, 0, 22, \"#b45309\", 11)\nwrite(\"三单变化：一般加s；s/x/ch/sh/o 结尾加es；辅音+y 变y为ies\", -30, -30, \"#dc2626\", 10)\nwrite(\"频度副词（always/usually/often/sometimes/never）放实义动词前\", -30, -58, \"#7c3aed\", 10)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-25",
+  "island": "cross",
+  "order": 394,
+  "title": "一般现在时与三单",
+  "emoji": "⏰",
+  "subjectArea": "英语",
+  "gradeBand": "junior",
+  "grade": 7,
+  "textbook": "人教版英语（初中）",
+  "curriculum": {
+    "module": "时态·一般现在时",
+    "points": [
+      "一般现在时的用法",
+      "第三人称单数变化",
+      "频度副词的位置"
+    ]
+  },
+  "story": "I go to school. He goes to school.——为什么 he 后面的动词要加 s？这就是\"三单\"魔咒：只要主语是第三人称单数（他/她/它/小明），一般现在时的动词就要变身。",
+  "goals": [
+    "掌握一般现在时的两大用法",
+    "熟练三单动词变化",
+    "会摆频度副词位置"
+  ],
+  "aiIntro": "⏰ 切换主语，看动词怎么变身——三单变身器！",
+  "lab": {
+    "params": [
+      {
+        "name": "subj",
+        "label": "主语",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "subj=3 动词加 s 了吗？为什么？",
+      "频度副词放在哪？",
+      "o/ch/sh 结尾的动词怎么变？"
+    ],
+    "code": "# 三单变身器\nsubj = 1   # 1 I 2 You 3 He 4 My mother\n\nhide()\ns = \"I\"\nverb = \"play\"\nsent = \"I play basketball every day.\"\nwhy = \"第一人称：动词用原形\"\nif subj == 2:\n    s = \"You\"\n    sent = \"You play basketball every day.\"\n    why = \"第二人称：动词用原形\"\nif subj == 3:\n    s = \"He\"\n    verb = \"plays\"\n    sent = \"He plays basketball every day.\"\n    why = \"第三人称单数：动词加 s（三单）\"\nif subj == 4:\n    s = \"My mother\"\n    verb = \"watches\"\n    sent = \"My mother watches TV in the evening.\"\n    why = \"三单 + ch 结尾加 es（watch→watches）\"\nfill_rect(0, 130, 360, 32, \"#1d4ed8\")\nwrite(s + \" \" + verb + \" …\", 0, 130, \"#fff\", 14)\nfill_rect(0, 78, 360, 40, \"#f1f5f9\")\nwrite(sent, 0, 78, \"#0f172a\", 12)\nfill_rect(0, 22, 360, 44, \"#fef3c7\")\nwrite(\"规则：\" + why, 0, 22, \"#b45309\", 11)\nwrite(\"三单变化：一般加s；s/x/ch/sh/o 结尾加es；辅音+y 变y为ies\", -30, -30, \"#dc2626\", 10)\nwrite(\"频度副词（always/usually/often/sometimes/never）放实义动词前\", -30, -58, \"#7c3aed\", 10)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "一般现在时",
+        "body": "【用法一：经常性习惯性动作（常伴频度副词）】\n【用法二：客观事实普遍真理（The earth goes around the sun.）】\n时间标志：every day、usually、often、on Mondays。\n否定/疑问借 do/does：He doesn't play. Does he play?"
+      },
+      {
+        "title": "三单变化",
+        "body": "【一般动词 +s：play→plays】【s/x/ch/sh/o 结尾 +es：watch→watches、go→goes】\n【辅音字母+y：study→studies（元音+y 直接加 s：play→plays）】\n【特殊：have→has】\n口诀：三单魔咒，动词变身；他她它名，统统加身。"
+      },
+      {
+        "title": "频度副词",
+        "body": "【always 总是(100%) > usually 通常 > often 经常 > sometimes 有时 > never 从不(0%)】\n位置：实义动词之前，be 动词/助动词之后。\nHe is always late. / He always plays.\n提问用 How often：—How often do you exercise? —Every day."
+      }
+    ],
+    "examples": [
+      {
+        "q": "She ___ (go) to school by bike. 填？",
+        "steps": [
+          "主语 she 是三单",
+          "一般现在时",
+          "go→goes",
+          "答案：goes"
+        ],
+        "tip": "o结尾加es"
+      },
+      {
+        "q": "把 He often plays football. 改否定。",
+        "steps": [
+          "三单否定借 does",
+          "He does not / doesn't play",
+          "动词还原原形",
+          "频度副词保留"
+        ],
+        "tip": "借does动词回原形"
+      }
+    ],
+    "mistakes": [
+      "用了 does 又给动词加 s（doesn't plays ×）",
+      "频度副词放到句尾（应在动词前）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "He ___ football after school.",
+      "options": [
+        "plays",
+        "play",
+        "playing",
+        "to play"
+      ],
+      "answer": 0,
+      "explain": "三单加s"
+    },
+    {
+      "q": "watch 的三单形式是？",
+      "options": [
+        "watches",
+        "watchs",
+        "watch",
+        "watching"
+      ],
+      "answer": 0,
+      "explain": "ch结尾加es"
+    },
+    {
+      "q": "study 的三单形式是？",
+      "options": [
+        "studies",
+        "studys",
+        "study",
+        "studing"
+      ],
+      "answer": 0,
+      "explain": "辅音+y变ies"
+    },
+    {
+      "q": "My mother ___ (have) breakfast at 7.",
+      "options": [
+        "has",
+        "have",
+        "haves",
+        "having"
+      ],
+      "answer": 0,
+      "explain": "特殊变化"
+    },
+    {
+      "q": "频度副词应放在？",
+      "options": [
+        "实义动词前",
+        "句首",
+        "句尾",
+        "主语前"
+      ],
+      "answer": 0,
+      "explain": "动词之前"
+    },
+    {
+      "q": "The earth ___ around the sun.",
+      "options": [
+        "goes",
+        "go",
+        "going",
+        "went"
+      ],
+      "answer": 0,
+      "explain": "客观真理用一般现在时"
+    }
+  ]
+}

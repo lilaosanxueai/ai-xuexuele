@@ -285,6 +285,8 @@ export interface ChatContext {
   labOps?: string;
   /** lab 模式：孩子实验记录单内容（AI 点评观察笔记用） */
   labNote?: string;
+  /** ask 模式：问句命中的课本知识摘要（课题+定义句），AI 按课本口径讲解 */
+  askKnowledge?: string;
 }
 
 export interface BuddySettings {
