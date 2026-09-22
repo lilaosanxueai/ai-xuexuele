@@ -1,5 +1,16 @@
 import type { Teach } from '@shared/types.ts';
 
+/** 本地语音朗读（Web Speech，不联网；不支持的环境隐藏按钮） */
+const ttsOk = typeof window !== 'undefined' && 'speechSynthesis' in window;
+function speak(text: string) {
+  if (!ttsOk) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text.replace(/[【】💡✏️⚠️✗]/g, ''));
+  u.lang = 'zh-CN';
+  u.rate = 0.95;
+  window.speechSynthesis.speak(u);
+}
+
 /**
  * 教材级讲解面板（自学正文）：概念精讲 + 例题分步 + 易错点。
  * 像课本一页：定义准确、步骤完整，孩子不需要 AI 也能自己学懂。
@@ -13,6 +24,9 @@ export default function TeachPanel({ teach, compact = false, onFinish }: { teach
           <h3 className="mb-2.5 flex items-center gap-2 text-base font-black text-slate-800">
             <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-sky-100 text-xs text-sky-700">{i + 1}</span>
             {sec.title}
+            {ttsOk && (
+              <button onClick={() => speak(sec.title + '。' + sec.body)} title="朗读本节" className="ml-auto shrink-0 rounded-xl bg-slate-100 px-2.5 py-1 text-base transition hover:bg-sky-100">🔊</button>
+            )}
           </h3>
           <div className="space-y-2">
             {sec.body.split('\n').map((p, j) =>

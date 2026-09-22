@@ -178,8 +178,62 @@ function ReportTab({ profileId }: { profileId: string }) {
   }
   const heatColor = (lv: number) => ['bg-slate-100', 'bg-emerald-200', 'bg-emerald-400', 'bg-emerald-500', 'bg-emerald-600'][lv];
 
+  // 学习成长报告打印（打印时只显示报告浮层）
+  const [printing, setPrinting] = useState(false);
+  const doPrint = () => {
+    setPrinting(true);
+    setTimeout(() => { window.print(); setPrinting(false); }, 120);
+  };
+  const unlockedBadges = badges.filter((b) => b.unlocked);
+  const PRINT_CSS = '@media print { body * { visibility: hidden !important; } #growth-report, #growth-report * { visibility: visible !important; } #growth-report { position: absolute !important; left: 0; top: 0; width: 100%; background: #fff; } }';
+
   return (
     <div>
+      {/* 打印成长报告浮层 */}
+      {printing && (
+        <div id="growth-report" className="fixed inset-0 z-[80] overflow-y-auto bg-white p-8 text-slate-900">
+          <style>{PRINT_CSS}</style>
+          <div className="mx-auto max-w-2xl">
+            <h1 className="text-center text-2xl font-black">学习成长报告</h1>
+            <p className="mt-1 text-center text-sm text-slate-500">AI学学乐 · {new Date().toLocaleDateString('zh-CN')} 生成</p>
+            <div className="mt-4 grid grid-cols-2 gap-2 text-sm">
+              <div>本周学习时长：{report.totalMinutes} 分钟（{report.activeDays} 天）</div>
+              <div>连续学习：{report.streak} 天</div>
+              <div>课程完成：{doneCount}/{lessons.length}</div>
+              <div>累计学习：{totalMin} 分钟</div>
+              <div>随堂练习正确率：{exTotal ? Math.round((exCorrect / exTotal) * 100) : 0}%（{exCorrect}/{exTotal}）</div>
+              <div>错题练对：{wrongCleared} 道（待重练 {wrongItems.length} 道）</div>
+            </div>
+            <p className="mt-3 rounded-xl bg-slate-100 p-3 text-sm">{report.headline}</p>
+            {report.subjectStats.length > 0 && (
+              <div className="mt-4">
+                <h2 className="font-black">各学科正确率</h2>
+                <ul className="mt-1 grid grid-cols-2 gap-x-4 text-sm">
+                  {report.subjectStats.map((s) => (<li key={s.subject}>· {s.subject}：{s.accuracy}%（{s.correct}/{s.total}）</li>))}
+                </ul>
+              </div>
+            )}
+            {unlockedBadges.length > 0 && (
+              <div className="mt-4">
+                <h2 className="font-black">已解锁成就（{unlockedBadges.length}/{badges.length}）</h2>
+                <p className="mt-1 text-sm">{unlockedBadges.map((b) => `${b.emoji}${b.name}`).join('　')}</p>
+              </div>
+            )}
+            {report.weakLessons.length > 0 && (
+              <div className="mt-4">
+                <h2 className="font-black">建议加强</h2>
+                <ul className="mt-1 text-sm">
+                  {report.weakLessons.map((w) => (<li key={w.lessonId}>· {w.title}（{w.subject}）正确率 {w.accuracy}%</li>))}
+                </ul>
+              </div>
+            )}
+            <div className="mt-6 grid grid-cols-7 gap-1">
+              {heat.map((lv, i) => (<div key={i} className="h-4 w-4 rounded-[3px] border border-slate-200" style={{ background: ['#f1f5f9', '#a7f3d0', '#6ee7b7', '#34d399', '#10b981'][lv] }} />))}
+            </div>
+            <p className="mt-1 text-xs text-slate-400">近 8 周学习热力图（颜色越深学习越久）</p>
+          </div>
+        </div>
+      )}
       {/* 本周学情速览 */}
       <div className="mb-4 rounded-2xl bg-white/80 p-5">
         <div className="mb-2 flex flex-wrap items-center gap-2">
@@ -188,6 +242,7 @@ function ReportTab({ profileId }: { profileId: string }) {
           <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-600">学习 {report.activeDays} 天</span>
           <span className="rounded-full bg-orange-50 px-3 py-1 text-xs font-bold text-orange-500">🔥 连续 {report.streak} 天</span>
           <span className="rounded-full bg-violet-50 px-3 py-1 text-xs font-bold text-violet-600">🏅 徽章 {badges.filter((b) => b.unlocked).length}/{badges.length}</span>
+          <button onClick={doPrint} className="ml-auto rounded-xl bg-slate-700 px-3 py-1 text-xs font-bold text-white transition hover:bg-slate-800">🖨 打印成长报告</button>
         </div>
         <p className="mb-3 text-sm text-slate-600">{report.headline}</p>
         {report.subjectStats.length > 0 && (

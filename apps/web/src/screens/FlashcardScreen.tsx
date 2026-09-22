@@ -73,6 +73,15 @@ export default function FlashcardScreen() {
   };
 
   if (!profile) return null;
+  const ttsOk = typeof window !== 'undefined' && 'speechSynthesis' in window;
+  const speakCard = (text: string) => {
+    if (!ttsOk) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text.replace(/[★📦🃏]/g, ''));
+    u.lang = 'zh-CN';
+    u.rate = 0.95;
+    window.speechSynthesis.speak(u);
+  };
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -122,7 +131,16 @@ export default function FlashcardScreen() {
               onClick={() => setFlipped(!flipped)}
               className={`w-full rounded-3xl p-8 text-left shadow-lg transition ${flipped ? 'bg-white ring-2 ring-violet-300' : 'bg-gradient-to-br from-sky-500 to-indigo-500 text-white hover:-translate-y-0.5'}`}
             >
-              <div className="mb-2 text-xs opacity-70">{flipped ? '背面 · 要点' : '正面 · 知识点'}</div>
+              <div className="mb-2 flex items-center gap-2 text-xs opacity-70">
+                <span>{flipped ? '背面 · 要点' : '正面 · 知识点'}</span>
+                {ttsOk && (
+                  <span
+                    role="button"
+                    onClick={(e) => { e.stopPropagation(); speakCard(flipped ? current.back : current.front); }}
+                    className="ml-auto rounded-lg bg-white/25 px-2 py-0.5 text-sm hover:bg-white/40"
+                  >🔊</span>
+                )}
+              </div>
               <div className={`text-2xl font-black leading-relaxed ${flipped ? 'text-slate-800' : ''}`}>{flipped ? current.back : current.front}</div>
               {!flipped && <div className="mt-6 text-center text-sm opacity-80">点击卡片查看答案 ✋</div>}
             </button>
