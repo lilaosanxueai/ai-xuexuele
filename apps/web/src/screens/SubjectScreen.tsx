@@ -6,6 +6,7 @@ import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
 import ExercisePanel from '../components/ExercisePanel.tsx';
 import { SUBJECTS, SUBJECT_STYLE } from '../components/subjectMeta.ts';
+import { collectModules, generateStudyPlan, todayModules, type StudyPlan } from '../runtime/studyPlan.ts';
 
 /** 学科页：该学科按学段分组的全部课程，含课标标注。理科动态演示课进互动实验室，其余进辅导页 */
 const BAND_ORDER = ['primary', 'junior', 'senior'] as const;
@@ -49,6 +50,19 @@ export default function SubjectScreen() {
     setUnitTest({ module: mod, exercises: assembleUnitTest(mod) });
     setPrinting(true);
     setTimeout(() => { window.print(); setPrinting(false); }, 120);
+  };
+
+  /** 期末复习计划：按模块掌握度生成 N 天安排（localStorage 存当前档案+学科） */
+  const planKey = profile ? `island-plan-${profile.id}-${subject}` : '';
+  const [plan, setPlan] = useState<StudyPlan | null>(null);
+  useEffect(() => {
+    if (!planKey) return;
+    try { setPlan(JSON.parse(localStorage.getItem(planKey) ?? 'null')); } catch { setPlan(null); }
+  }, [planKey]);
+  const makePlan = (days: number) => {
+    const p = generateStudyPlan(collectModules(lessons, progress), days);
+    try { localStorage.setItem(planKey, JSON.stringify(p)); } catch { /* 忽略 */ }
+    setPlan(p);
   };
 
   useEffect(() => {
@@ -110,6 +124,41 @@ export default function SubjectScreen() {
           </div>
           <div className="shrink-0 rounded-xl bg-white/20 px-4 py-2 text-sm font-bold">开考 →</div>
         </button>
+
+        {/* 期末复习计划：模块掌握度 → N 天安排（弱者优先多配） */}
+        <div className="mb-4 rounded-3xl bg-white/85 p-5 shadow-sm">
+          <div className="mb-2 flex flex-wrap items-center gap-2">
+            <h2 className="text-lg font-black text-slate-700">🗓 期末复习计划</h2>
+            <span className="text-xs text-slate-400">按模块掌握度排序——薄弱模块优先且多排</span>
+            <span className="ml-auto flex gap-1.5">
+              {[7, 14].map((d) => (
+                <button key={d} onClick={() => makePlan(d)} className="rounded-xl bg-teal-500 px-3 py-1.5 text-xs font-bold text-white shadow transition hover:bg-teal-600">
+                  生成 {d} 天计划
+                </button>
+              ))}
+              {plan && (
+                <button onClick={() => { try { localStorage.removeItem(planKey); } catch { /* 忽略 */ } setPlan(null); }} className="rounded-xl bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-500 transition hover:bg-slate-200">清除</button>
+              )}
+            </span>
+          </div>
+          {plan ? (
+            <div>
+              {todayModules(plan).length > 0 && (
+                <p className="mb-2 rounded-xl bg-teal-50 p-2 text-sm font-bold text-teal-700">📌 今日该复习：{todayModules(plan).join('、')}</p>
+              )}
+              <div className="flex flex-wrap gap-1.5">
+                {plan.schedule.map((d) => (
+                  <div key={d.day} className="rounded-xl border border-slate-200 px-3 py-1.5 text-xs">
+                    <span className="font-black text-slate-400">D{d.day}</span>
+                    <span className="ml-1 font-bold text-slate-700">{d.modules.join(' + ')}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <p className="text-xs leading-relaxed text-slate-400">还没有计划。点击「生成 7 天 / 14 天计划」：系统会按知识图谱里各模块的随堂正确率排序，越薄弱的模块出现越早、重复越多——像教练一样帮你把期末前的时间花在刀刃上。</p>
+          )}
+        </div>
 
         {/* 知识图谱掌握度（松鼠AI 式模块级诊断）；无成绩时也显示（全部"未检测"），保证单元小测入口常在 */}
         {modules.size > 1 && (
