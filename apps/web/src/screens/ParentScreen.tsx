@@ -78,6 +78,7 @@ function Tabs() {
 function ProgressTab({ profileId }: { profileId: string }) {
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [progress, setProgress] = useState<ProfileProgress | null>(null);
+  const [noteText, setNoteText] = useState('');
   useEffect(() => {
     void api.lessons().then(setLessons);
     void api.progress(profileId).then(setProgress);
@@ -86,8 +87,44 @@ function ProgressTab({ profileId }: { profileId: string }) {
   const today = new Date().toISOString().slice(0, 10);
   const todayMin = progress?.dailyUsage[today] ?? 0;
 
+  const sendNote = async () => {
+    const text = noteText.trim();
+    if (!text) return;
+    const next = [{ text, at: new Date().toISOString() }, ...(progress?.parentNotes ?? [])].slice(0, 20);
+    setNoteText('');
+    try {
+      const p = await api.updateProgress(profileId, { parentNotes: next });
+      setProgress(p);
+    } catch { /* 提交失败静默 */ }
+  };
+
   return (
     <div>
+      {/* 家长悄悄话：写给孩子的小鼓励 */}
+      <div className="mb-4 rounded-2xl bg-gradient-to-r from-amber-50 to-rose-50 p-4 ring-1 ring-amber-200">
+        <div className="mb-1 text-sm font-black text-amber-700">💌 给孩子的悄悄话</div>
+        <div className="flex gap-2">
+          <input
+            value={noteText}
+            onChange={(e) => setNoteText(e.target.value)}
+            onKeyDown={(e) => { if (e.key === 'Enter') void sendNote(); }}
+            maxLength={120}
+            placeholder="写一句鼓励，会显示在孩子的学习地图顶部（120 字以内）"
+            className="flex-1 rounded-xl border-2 border-amber-200 bg-white px-3 py-2 text-sm outline-none focus:border-amber-400"
+          />
+          <button onClick={sendNote} disabled={!noteText.trim()} className="rounded-xl bg-amber-500 px-4 py-2 text-sm font-bold text-white transition hover:bg-amber-600 disabled:opacity-40">送出 💌</button>
+        </div>
+        {(progress?.parentNotes ?? []).length > 0 && (
+          <div className="mt-2 space-y-1">
+            {progress!.parentNotes!.slice(0, 3).map((n, i) => (
+              <div key={n.at + i} className="flex items-center gap-2 text-xs text-slate-600">
+                <span className="shrink-0 text-slate-400">{new Date(n.at).toLocaleDateString('zh-CN')}</span>
+                <span className="truncate">{i === 0 ? '📌 ' : ''}{n.text}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
       <div className="mb-4 rounded-2xl bg-white/80 p-4">
         今天使用了 <b className="text-xl text-sky-700">{todayMin}</b> 分钟
       </div>

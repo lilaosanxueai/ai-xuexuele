@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- 遮罩安全区：主要内容收缩到中心 80%，四周留安全边 -->
+  <rect width="128" height="128" fill="#1d4ed8"/>
+  <circle cx="94" cy="40" r="11" fill="#fbbf24"/>
+  <path d="M24 94 L48 66 L66 84 L86 58 L106 94 Z" fill="#34d399"/>
+  <text x="46" y="58" font-size="26" font-family="sans-serif">📖</text>
+</svg>

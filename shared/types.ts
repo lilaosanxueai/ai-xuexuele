@@ -180,6 +180,14 @@ export interface ProfileProgress {
   wrongBook?: WrongItem[];
   /** 已消灭的错题总数（成长记录） */
   wrongCleared?: number;
+  /** 家长鼓励留言（悄悄话）：最新在前，保留最近 20 条 */
+  parentNotes?: ParentNote[];
+}
+
+/** 家长留言条目 */
+export interface ParentNote {
+  text: string;
+  at: string;
 }
 
 /** 错题本条目：题目快照 + 错误历史 */

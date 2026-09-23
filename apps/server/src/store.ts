@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { DATA_DIR } from './config.ts';
-import type { Profile, ProfileProgress, Project, Settings, WrongItem } from '@shared/types.ts';
+import type { ParentNote, Profile, ProfileProgress, Project, Settings, WrongItem } from '@shared/types.ts';
 import { DEFAULT_SETTINGS } from '@shared/types.ts';
 
 /** 家庭规模用 JSON 文件 + 启动时读入内存、写入即落盘，足够简单可靠 */
@@ -75,6 +75,7 @@ export function mergeProgress(profileId: string, patch: {
   exercise?: { correct: number; total: number };
   wrongAdds?: WrongItem[];
   wrongClears?: string[];
+  parentNotes?: ParentNote[];
 }): ProfileProgress {
   const cur = getProgress(profileId);
   if (patch.lessonId) {
@@ -136,6 +137,13 @@ export function mergeProgress(profileId: string, patch: {
     const before = cur.wrongBook.length;
     cur.wrongBook = cur.wrongBook.filter((x) => !cleared.has(x.id));
     cur.wrongCleared = (cur.wrongCleared ?? 0) + (before - cur.wrongBook.length);
+  }
+  if (Array.isArray(patch.parentNotes) && patch.parentNotes.length > 0 && patch.parentNotes.length <= 20) {
+    const clean = patch.parentNotes
+      .filter((n) => typeof n?.text === 'string' && n.text.trim().length > 0 && n.text.length <= 120)
+      .slice(0, 20)
+      .map((n) => ({ text: n.text.trim(), at: typeof n.at === 'string' ? n.at : new Date().toISOString() }));
+    if (clean.length > 0) cur.parentNotes = clean;
   }
   writeJson(progressFile(profileId), cur);
   return cur;

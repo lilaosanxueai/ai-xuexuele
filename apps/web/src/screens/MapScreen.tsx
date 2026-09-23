@@ -93,6 +93,18 @@ export default function MapScreen() {
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="mx-auto w-full max-w-5xl flex-1 px-6 pb-10">
+        {/* 家长悄悄话：最新一条显示在地图最上方 */}
+        {(progress?.parentNotes?.length ?? 0) > 0 && (
+          <div className="mb-4 flex items-center gap-3 rounded-3xl bg-gradient-to-r from-amber-50 to-rose-50 p-4 shadow-sm ring-1 ring-amber-200">
+            <span className="text-3xl">💌</span>
+            <div className="min-w-0 flex-1">
+              <div className="text-xs font-black text-amber-700">来自爸妈的悄悄话</div>
+              <div className="truncate text-[15px] font-semibold text-slate-700">{progress!.parentNotes![0].text}</div>
+            </div>
+            <span className="shrink-0 text-[10px] text-slate-400">{new Date(progress!.parentNotes![0].at).toLocaleDateString('zh-CN')}</span>
+          </div>
+        )}
+
         {/* 学习概览 + 智能推荐 */}
         <div className="mb-6 rounded-3xl bg-white/80 p-5 shadow-md">
           <button
