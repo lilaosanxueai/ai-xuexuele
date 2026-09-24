@@ -253,6 +253,48 @@ export default function MapScreen() {
               </div>
             );
           })()}
+          {/* 学习月历：当月日历格（分钟色阶+●完成课） */}
+          {(() => {
+            const usage = progress?.dailyUsage ?? {};
+            const now = new Date();
+            const y = now.getFullYear();
+            const m = now.getMonth();
+            const first = new Date(y, m, 1);
+            const startDay = (first.getDay() + 6) % 7;
+            const days = new Date(y, m + 1, 0).getDate();
+            const doneByDay = new Map<string, number>();
+            for (const lp of Object.values(progress?.lessons ?? {})) {
+              if (lp.status !== 'completed' || !lp.completedAt) continue;
+              const k = lp.completedAt.slice(0, 10);
+              doneByDay.set(k, (doneByDay.get(k) ?? 0) + 1);
+            }
+            const cells: { key: string; day: number; min: number; done: number }[] = [];
+            for (let d = 1; d <= days; d++) {
+              const key = `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+              cells.push({ key, day: d, min: usage[key] ?? 0, done: doneByDay.get(key) ?? 0 });
+            }
+            const lv = (min: number) => min === 0 ? 0 : min < 15 ? 1 : min < 30 ? 2 : min < 60 ? 3 : 4;
+            return (
+              <div className="mb-3 rounded-2xl bg-slate-50 p-3">
+                <div className="mb-2 flex items-center gap-2 text-xs font-bold text-slate-500">
+                  📅 {y} 年 {m + 1} 月学习月历
+                  <span className="font-normal text-slate-400">格=天（色=分钟），●=完成的课</span>
+                </div>
+                <div className="grid grid-cols-7 gap-1">
+                  {['一', '二', '三', '四', '五', '六', '日'].map((w) => <div key={w} className="text-center text-[10px] font-bold text-slate-300">{w}</div>)}
+                  {Array.from({ length: startDay }).map((_, i) => <div key={'p' + i} />)}
+                  {cells.map((c) => (
+                    <div key={c.key} title={`${c.key} · ${c.min} 分钟 · 完成 ${c.done} 课`}
+                      className={`relative flex h-9 items-center justify-center rounded-md text-[11px] font-bold ${heatColor(lv(c.min))} ${c.min === 0 ? 'text-slate-300' : 'text-slate-800'}`}>
+                      {c.day}
+                      {c.done > 0 && <span className="absolute bottom-0.5 right-0.5 h-1.5 w-1.5 rounded-full bg-violet-500" />}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
+
           {/* 近 8 周热力图 */}
           <div className="mb-3 flex items-center gap-2 overflow-x-auto rounded-2xl bg-slate-50 p-3">
             <span className="shrink-0 text-xs font-bold text-slate-500">8 周</span>
