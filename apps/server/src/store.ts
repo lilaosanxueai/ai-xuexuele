@@ -76,6 +76,7 @@ export function mergeProgress(profileId: string, patch: {
   wrongAdds?: WrongItem[];
   wrongClears?: string[];
   parentNotes?: ParentNote[];
+  lessonNotes?: Record<string, string>;
 }): ProfileProgress {
   const cur = getProgress(profileId);
   if (patch.lessonId) {
@@ -144,6 +145,18 @@ export function mergeProgress(profileId: string, patch: {
       .slice(0, 20)
       .map((n) => ({ text: n.text.trim(), at: typeof n.at === 'string' ? n.at : new Date().toISOString() }));
     if (clean.length > 0) cur.parentNotes = clean;
+  }
+  // 课程笔记：单课 ≤2000 字，合并写入（每课一条）
+  if (patch.lessonNotes && typeof patch.lessonNotes === 'object') {
+    for (const [lessonId, text] of Object.entries(patch.lessonNotes)) {
+      if (typeof text === 'string' && text.length <= 2000 && /^[A-Za-z0-9_-]{1,80}$/.test(lessonId)) {
+        if (text.trim() === '') {
+          delete cur.lessonNotes?.[lessonId];
+        } else {
+          (cur.lessonNotes ??= {})[lessonId] = text.trim();
+        }
+      }
+    }
   }
   writeJson(progressFile(profileId), cur);
   return cur;

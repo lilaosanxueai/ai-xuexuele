@@ -182,6 +182,8 @@ export interface ProfileProgress {
   wrongCleared?: number;
   /** 家长鼓励留言（悄悄话）：最新在前，保留最近 20 条 */
   parentNotes?: ParentNote[];
+  /** 课程笔记（孩子自己写的学习笔记）：lessonId -> 文本 */
+  lessonNotes?: Record<string, string>;
 }
 
 /** 家长留言条目 */
