@@ -356,6 +356,32 @@ export default function MapScreen() {
           </div>
         </div>
 
+        {/* 我的收藏：孩子标记的想再学的课（localStorage 按档案存） */}
+        {(() => {
+          let favs: string[] = [];
+          try { favs = JSON.parse(localStorage.getItem(`island-fav-${profile.id}`) ?? '[]'); } catch { /* 忽略 */ }
+          const favLessons = lessons.filter((l) => favs.includes(l.id)).slice(0, 6);
+          if (favLessons.length === 0) return null;
+          return (
+            <div className="mb-6 rounded-3xl bg-rose-50/80 p-4 shadow-sm ring-1 ring-rose-200">
+              <div className="mb-2 flex items-center gap-2">
+                <span className="text-sm font-black text-rose-600">❤️ 我的收藏</span>
+                <span className="text-xs text-rose-400">收藏了 {favs.length} 课（学科页点 ❤️ 添加）</span>
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {favLessons.map((l) => (
+                  <button key={l.id}
+                    onClick={() => nav(l.lab || l.starterCode ? `/lab/${l.id}` : `/tutor/${l.id}`)}
+                    className="flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-xs font-bold text-slate-700 shadow-sm transition hover:-translate-y-0.5">
+                    <span>{l.emoji}</span>
+                    <span className="max-w-40 truncate">{l.title}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
+
         {/* 学科网格 */}
         <h2 className="mb-3 text-xl font-black text-slate-700">📚 学科中心</h2>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

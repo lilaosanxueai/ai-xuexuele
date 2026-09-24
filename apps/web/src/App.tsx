@@ -20,6 +20,7 @@ const ChallengeScreen = lazy(() => import('./screens/ChallengeScreen.tsx'));
 const SearchScreen = lazy(() => import('./screens/SearchScreen.tsx'));
 const ExamScreen = lazy(() => import('./screens/ExamScreen.tsx'));
 const PairsGameScreen = lazy(() => import('./screens/PairsGameScreen.tsx'));
+const SpeakingScreen = lazy(() => import('./screens/SpeakingScreen.tsx'));
 
 /** 旧书签 /lesson/:id 重定向到辅导页（学习主入口） */
 function LegacyLessonRoute() {
@@ -64,6 +65,7 @@ export default function App() {
           <Route path="/search" element={<SearchScreen />} />
           <Route path="/exam/:subject" element={<ExamScreen />} />
           <Route path="/pairs" element={<PairsGameScreen />} />
+          <Route path="/speaking" element={<SpeakingScreen />} />
           <Route path="/playground" element={<PlaygroundScreen />} />
           <Route path="/subject/:area" element={<SubjectScreen />} />
           <Route path="*" element={<Navigate to="/" replace />} />

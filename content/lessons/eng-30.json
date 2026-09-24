@@ -1,0 +1,210 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "✍️",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：el=1 段首句给了什么提示？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：el=3 高分描写句长什么样？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：续写能改原文情节吗？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 读后续写工作台\nel = 1   # 要素\n\nhide()\nt = \"读原文：两条线\"\nd = \"情节线：谁做了什么结果如何；情感线：人物心情的走向（紧张→释然）\"\ntip = \"划出原文最后一句和两段的段首句——衔接点\"\nif el == 2:\n    t = \"续写结构：两段各司其职\"\n    d = \"第一段：顺着段首句发展冲突/行动；第二段：解决问题+点题升华\"\n    tip = \"段首句是路标：第一段尾要能自然接第二段首\"\nif el == 3:\n    t = \"高分描写：动作+情绪\"\n    d = \"Tears welled up in her eyes. / A warm smile spread across his face. / My heart raced.\"\n    tip = \"少用 sad/happy，多用身体反应写情绪\"\nfill_rect(0, 130, 360, 30, \"#7c3aed\")\nwrite(t, 0, 130, \"#fff\", 12)\nfill_rect(0, 74, 360, 52, \"#f5f3ff\")\nwrite(d, 0, 74, \"#6d28d9\", 10)\nfill_rect(0, 12, 360, 58, \"#fef3c7\")\nwrite(\"要点：\" + tip, 0, 12, \"#b45309\", 10)\nwrite(\"黄金结构：承接段首句 → 冲突/行动 → 转折/解决 → 情感升华\", -15, -55, \"#dc2626\", 10)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-30",
+  "island": "cross",
+  "order": 449,
+  "title": "读后续写：续写故事",
+  "emoji": "✍️",
+  "subjectArea": "英语",
+  "gradeBand": "senior",
+  "grade": 12,
+  "textbook": "人教版英语（高中选择性必修）",
+  "curriculum": {
+    "module": "写作·读后续写",
+    "points": [
+      "读原文抓情节与情感",
+      "两段续写衔接",
+      "动作与情绪描写"
+    ]
+  },
+  "story": "读后续写是新高考写作的\"讲故事\"题：给一篇没有结局的文章，让你接着写两段。秘诀是\"顺着原文的情绪走\"——原文紧张你别突然搞笑，原文温暖你别突然反转。",
+  "goals": [
+    "会抓原文情节线和情感线",
+    "掌握两段式续写结构",
+    "积累动作情绪描写句"
+  ],
+  "aiIntro": "✍️ 拨动情节刻度，看故事怎么接着讲——读后续写工作台！",
+  "lab": {
+    "params": [
+      {
+        "name": "el",
+        "label": "要素",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "el=1 段首句给了什么提示？",
+      "el=3 高分描写句长什么样？",
+      "续写能改原文情节吗？"
+    ],
+    "code": "# 读后续写工作台\nel = 1   # 要素\n\nhide()\nt = \"读原文：两条线\"\nd = \"情节线：谁做了什么结果如何；情感线：人物心情的走向（紧张→释然）\"\ntip = \"划出原文最后一句和两段的段首句——衔接点\"\nif el == 2:\n    t = \"续写结构：两段各司其职\"\n    d = \"第一段：顺着段首句发展冲突/行动；第二段：解决问题+点题升华\"\n    tip = \"段首句是路标：第一段尾要能自然接第二段首\"\nif el == 3:\n    t = \"高分描写：动作+情绪\"\n    d = \"Tears welled up in her eyes. / A warm smile spread across his face. / My heart raced.\"\n    tip = \"少用 sad/happy，多用身体反应写情绪\"\nfill_rect(0, 130, 360, 30, \"#7c3aed\")\nwrite(t, 0, 130, \"#fff\", 12)\nfill_rect(0, 74, 360, 52, \"#f5f3ff\")\nwrite(d, 0, 74, \"#6d28d9\", 10)\nfill_rect(0, 12, 360, 58, \"#fef3c7\")\nwrite(\"要点：\" + tip, 0, 12, \"#b45309\", 10)\nwrite(\"黄金结构：承接段首句 → 冲突/行动 → 转折/解决 → 情感升华\", -15, -55, \"#dc2626\", 10)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "读懂原文",
+        "body": "【情节线：5W1H 快速梳理——谁/何时/何地/做了什么/遇到什么问题】\n【情感线：标出描写情绪的词（nervous/relieved）——续写要延续这条线】\n【衔接锚点：原文末句+两个段首句是必须咬合的齿轮】\n10 分钟读原文，5 分钟划线构思，10 分钟写。"
+      },
+      {
+        "title": "两段结构",
+        "body": "【第一段：顺着段首句推进——人物的行动与冲突升级】\n【第二段：解决+升华——问题化解，情感落点与主题呼应】\n段首句已给的内容不能重复写；第一段尾留好钩子接第二段。\n情节要合理：不能突然出现原文没有的超能力式转折。"
+      },
+      {
+        "title": "描写升级",
+        "body": "【情绪外化：不写 I was nervous，写 My hands were trembling.】\n【动作细化：walked → stumbled forward（蹒跚前行）】\n【高分句积累：A sense of relief washed over me. / Words failed me. / The moment seemed frozen.】\n每段 5-8 句、用到 2 个非谓语或从句——语法丰富度是加分项。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "段首句是 \"Suddenly, he noticed something moving in the bushes.\"，第一段写什么？",
+        "steps": [
+          "顺着 suddenly 的紧张推进",
+          "写他屏息观察/靠近的系列动作",
+          "揭示灌木丛里是什么（制造小高潮）",
+          "段尾留悬念或初步解决"
+        ],
+        "tip": "顺藤摸瓜"
+      },
+      {
+        "q": "怎么把 happy 写得高级？",
+        "steps": [
+          "情绪外化为身体反应",
+          "Her eyes lit up with joy. / He couldn't help smiling.",
+          "配合动作：clapped her hands in excitement",
+          "忌只写 very happy"
+        ],
+        "tip": "show 不 tell"
+      }
+    ],
+    "mistakes": [
+      "续写偏离原文情感基调（紧张文写成喜剧）",
+      "重复段首句已给的内容（浪费字数）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "读原文首先要抓？",
+      "options": [
+        "情节线+情感线",
+        "生词",
+        "标题",
+        "页码"
+      ],
+      "answer": 0,
+      "explain": "两条线"
+    },
+    {
+      "q": "段首句的作用是？",
+      "options": [
+        "续写路标",
+        "装饰",
+        "无关紧要",
+        "必须重复"
+      ],
+      "answer": 0,
+      "explain": "咬合齿轮"
+    },
+    {
+      "q": "两段式第二段通常？",
+      "options": [
+        "解决+升华",
+        "制造新冲突",
+        "重述原文",
+        "写景"
+      ],
+      "answer": 0,
+      "explain": "收束点题"
+    },
+    {
+      "q": "高分情绪描写应？",
+      "options": [
+        "身体反应外化",
+        "只写 sad",
+        "用 very 修饰",
+        "写中文"
+      ],
+      "answer": 0,
+      "explain": "show不tell"
+    },
+    {
+      "q": "Words failed me 表示？",
+      "options": [
+        "激动得说不出话",
+        "单词考试没及格",
+        "失声了",
+        "没词了"
+      ],
+      "answer": 0,
+      "explain": "情绪句"
+    },
+    {
+      "q": "续写可以？",
+      "options": [
+        "合理延伸原文情节",
+        "推翻原文",
+        "换主角",
+        "抄原文"
+      ],
+      "answer": 0,
+      "explain": "顺着讲"
+    }
+  ]
+}

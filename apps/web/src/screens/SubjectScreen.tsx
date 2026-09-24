@@ -46,6 +46,7 @@ export default function SubjectScreen() {
 
   /** 单元小测打印：纸质卷 + 答案页 */
   const [printing, setPrinting] = useState(false);
+  const [, setFavTick] = useState(0);
   const printUnitTest = (mod: string) => {
     setUnitTest({ module: mod, exercises: assembleUnitTest(mod) });
     setPrinting(true);
@@ -219,12 +220,29 @@ export default function SubjectScreen() {
             <div className="space-y-2">
               {list.map((l) => {
                 const isDone = lessonDone(l.id);
+                const favKey = `island-fav-${profile.id}`;
+                let isFav = false;
+                try { isFav = (JSON.parse(localStorage.getItem(favKey) ?? '[]') as string[]).includes(l.id); } catch { /* 忽略 */ }
+                const toggleFav = () => {
+                  try {
+                    const cur = JSON.parse(localStorage.getItem(favKey) ?? '[]') as string[];
+                    const next = cur.includes(l.id) ? cur.filter((x) => x !== l.id) : [...cur, l.id];
+                    localStorage.setItem(favKey, JSON.stringify(next));
+                  } catch { /* 忽略 */ }
+                  setFavTick((t) => t + 1);
+                };
                 return (
-                  <button
-                    key={l.id}
-                    onClick={() => nav(isLabLesson(l) ? `/lab/${l.id}` : `/tutor/${l.id}`)}
-                    className={`flex w-full items-center gap-3 rounded-2xl bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${isDone ? `ring-2 ${style.ring}` : ''}`}
-                  >
+                  <div key={l.id} className="relative">
+                    <span
+                      role="button"
+                      onClick={(e) => { e.stopPropagation(); toggleFav(); }}
+                      className={`absolute right-12 top-1/2 z-10 -translate-y-1/2 cursor-pointer rounded-full px-1.5 text-lg transition ${isFav ? '' : 'opacity-25 grayscale hover:opacity-70'}`}
+                      title={isFav ? '取消收藏' : '收藏这节课'}
+                    >{isFav ? '❤️' : '🤍'}</span>
+                    <button
+                      onClick={() => nav(isLabLesson(l) ? `/lab/${l.id}` : `/tutor/${l.id}`)}
+                      className={`flex w-full items-center gap-3 rounded-2xl bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${isDone ? `ring-2 ${style.ring}` : ''}`}
+                    >
                     <div className="text-3xl">{l.emoji}</div>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
@@ -240,7 +258,8 @@ export default function SubjectScreen() {
                       </div>
                     </div>
                     <span className="shrink-0 text-xl">{isDone ? '✅' : '▶'}</span>
-                  </button>
+                    </button>
+                  </div>
                 );
               })}
             </div>
