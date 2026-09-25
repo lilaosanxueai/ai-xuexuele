@@ -5,6 +5,7 @@ import { api } from '../api.ts';
 import BackupTab from '../components/BackupTab.tsx';
 import CompareTab from '../components/CompareTab.tsx';
 import AnnualReport from '../components/AnnualReport.tsx';
+import { exercisesToCsv, usageToCsv, downloadCsv } from '../runtime/csvExport.ts';
 import { computeBadges, readRecords, recordsKey, EMPTY_RECORDS } from '../runtime/achievements.ts';
 import { computeWeeklyReport } from '../runtime/weeklyReport.ts';
 import { calcStreak } from '../utils/streak.ts';
@@ -345,6 +346,24 @@ function ReportTab({ profileId }: { profileId: string }) {
       )}
 
       <div className="mb-4 rounded-2xl bg-white/80 p-5">
+        {/* CSV 导出 */}
+        <div className="mb-4 flex flex-wrap items-center gap-2 rounded-2xl bg-white/80 p-4">
+          <span className="text-sm font-bold text-slate-500">📊 数据导出</span>
+          <button
+            onClick={() => downloadCsv(`成绩明细-${profileId.slice(0,6)}-${new Date().toISOString().slice(0,10)}.csv`, exercisesToCsv(lessons, progress ?? { profileId, lessons: {}, dailyUsage: {}, lessonDrafts: {}, lessonCodes: {} }))}
+            className="rounded-xl bg-emerald-500 px-3 py-1.5 text-xs font-bold text-white shadow transition hover:bg-emerald-600"
+          >
+            📄 成绩明细 CSV
+          </button>
+          <button
+            onClick={() => downloadCsv(`学习时长-${profileId.slice(0,6)}-${new Date().toISOString().slice(0,10)}.csv`, usageToCsv(progress ?? { profileId, lessons: {}, dailyUsage: {}, lessonDrafts: {}, lessonCodes: {} }))}
+            className="rounded-xl bg-sky-500 px-3 py-1.5 text-xs font-bold text-white shadow transition hover:bg-sky-600"
+          >
+            📅 学习时长 CSV
+          </button>
+          <span className="text-[10px] text-slate-400">Excel 可直接打开，适合家长会记录</span>
+        </div>
+
         <h3 className="mb-3 font-black">📚 各学科进度</h3>
         <div className="grid gap-2 sm:grid-cols-2">
           {Object.entries(bySubject).map(([area, ls]) => {

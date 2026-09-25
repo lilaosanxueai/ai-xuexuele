@@ -1,0 +1,210 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🔢",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：age=11 和 age=12 的英语有什么特点？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：How old are you? 怎么回答？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：thirteen 和 thirty 怎么区分？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 年龄问答训练器\nage = 9   # 年龄\n\nhide()\nw = \"nine\"\nif age == 5:\n    w = \"five\"\nif age == 6:\n    w = \"six\"\nif age == 7:\n    w = \"seven\"\nif age == 8:\n    w = \"eight\"\nif age == 10:\n    w = \"ten\"\nif age == 11:\n    w = \"eleven\"\nif age == 12:\n    w = \"twelve\"\nif age == 13:\n    w = \"thirteen\"\nif age == 14:\n    w = \"fourteen\"\nif age == 15:\n    w = \"fifteen\"\nif age > 15:\n    w = \"sixteen\"\nif age == 17:\n    w = \"seventeen\"\nif age == 18:\n    w = \"eighteen\"\nif age == 19:\n    w = \"nineteen\"\nif age == 20:\n    w = \"twenty\"\nfill_rect(0, 130, 340, 30, \"#2563eb\")\nwrite(\"How old are you? — I am \" + w + \".\", 0, 130, \"#fff\", 10)\nfill_rect(0, 76, 340, 40, \"#eff6ff\")\nwrite(w + \"（\" + age + \"岁）\", 0, 76, \"#1d4ed8\", 14)\nfill_rect(0, 16, 340, 56, \"#fef3c7\")\nwrite(\"1-10: one two three four five six seven eight nine ten\", 0, 16, \"#b45309\", 8)\nwrite(\"11-15: eleven twelve thirteen fourteen fifteen\", 0, 40, \"#7c3aed\", 8)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-35",
+  "island": "cross",
+  "order": 492,
+  "title": "数字与年龄",
+  "emoji": "🔢",
+  "subjectArea": "英语",
+  "gradeBand": "primary",
+  "grade": 3,
+  "textbook": "人教PEP英语三年级上册",
+  "curriculum": {
+    "module": "数字话题",
+    "points": [
+      "1-20的英语",
+      "How old are you?",
+      "年龄表达"
+    ]
+  },
+  "story": "How old are you? I am nine.——学会用英语说年龄，你就能和外国小朋友互相认识啦！one two three four five——数字是英语世界的第一把钥匙。",
+  "goals": [
+    "会说1-20的英语",
+    "会问和答年龄",
+    "会简单加减的英语表达"
+  ],
+  "aiIntro": "🔢 拨动年龄，看英语怎么问答——年龄问答训练器！",
+  "lab": {
+    "params": [
+      {
+        "name": "age",
+        "label": "年龄",
+        "min": 5,
+        "max": 15,
+        "step": 1,
+        "value": 9
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "age=11 和 age=12 的英语有什么特点？",
+      "How old are you? 怎么回答？",
+      "thirteen 和 thirty 怎么区分？"
+    ],
+    "code": "# 年龄问答训练器\nage = 9   # 年龄\n\nhide()\nw = \"nine\"\nif age == 5:\n    w = \"five\"\nif age == 6:\n    w = \"six\"\nif age == 7:\n    w = \"seven\"\nif age == 8:\n    w = \"eight\"\nif age == 10:\n    w = \"ten\"\nif age == 11:\n    w = \"eleven\"\nif age == 12:\n    w = \"twelve\"\nif age == 13:\n    w = \"thirteen\"\nif age == 14:\n    w = \"fourteen\"\nif age == 15:\n    w = \"fifteen\"\nif age > 15:\n    w = \"sixteen\"\nif age == 17:\n    w = \"seventeen\"\nif age == 18:\n    w = \"eighteen\"\nif age == 19:\n    w = \"nineteen\"\nif age == 20:\n    w = \"twenty\"\nfill_rect(0, 130, 340, 30, \"#2563eb\")\nwrite(\"How old are you? — I am \" + w + \".\", 0, 130, \"#fff\", 10)\nfill_rect(0, 76, 340, 40, \"#eff6ff\")\nwrite(w + \"（\" + age + \"岁）\", 0, 76, \"#1d4ed8\", 14)\nfill_rect(0, 16, 340, 56, \"#fef3c7\")\nwrite(\"1-10: one two three four five six seven eight nine ten\", 0, 16, \"#b45309\", 8)\nwrite(\"11-15: eleven twelve thirteen fourteen fifteen\", 0, 40, \"#7c3aed\", 8)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "数字 1-20",
+        "body": "【1-10：one two three four five six seven eight nine ten】\n【11-15：eleven twelve thirteen fourteen fifteen（-teen 结尾）】\n【16-19：sixteen seventeen eighteen nineteen（规律：个位+teen）】\n【20：twenty】\n记忆技巧：13-19 都以 -teen 结尾（thirteen→thirty 是 30）。"
+      },
+      {
+        "title": "问年龄",
+        "body": "【问：How old are you?（你几岁？）】\n【答：I am nine. / I am nine years old.】\n问第三人称：How old is he/she? — He/She is ten.\n礼貌提醒：对成年女性不随便问年龄（西方礼仪）。"
+      },
+      {
+        "title": "数字运用",
+        "body": "【加法：One and two is three.（1+2=3）】\n【电话号码：one three five...（逐个读）】\n【价格：How much is it? — It is five yuan.】\n【数量：I have three books.（复数加s）】\n数字在生活中无处不在——电话·门牌·价格·时间。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "How old are you? 你 10 岁，怎么回答？",
+        "steps": [
+          "用 I am + 数字",
+          "I am ten.",
+          "或 I am ten years old.",
+          "两种都对"
+        ],
+        "tip": "I am + 年龄"
+      },
+      {
+        "q": "thirteen 和 thirty 哪个是 30？",
+        "steps": [
+          "thirteen = 13（-teen）",
+          "thirty = 30（-ty）",
+          "重音不同：thirTEEN vs THIRty",
+          "注意区分"
+        ],
+        "tip": "-teen vs -ty"
+      }
+    ],
+    "mistakes": [
+      "忘记 am/is（I am nine 不是 I nine）",
+      "thirteen 和 thirty 混淆（13 vs 30）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "5 的英语是？",
+      "options": [
+        "five",
+        "four",
+        "six",
+        "fifteen"
+      ],
+      "answer": 0,
+      "explain": "five"
+    },
+    {
+      "q": "12 的英语是？",
+      "options": [
+        "twelve",
+        "twenty",
+        "two",
+        "ten"
+      ],
+      "answer": 0,
+      "explain": "twelve"
+    },
+    {
+      "q": "How old are you? 回答用？",
+      "options": [
+        "I am nine.",
+        "I nine.",
+        "Me nine.",
+        "Nine old."
+      ],
+      "answer": 0,
+      "explain": "I am+年龄"
+    },
+    {
+      "q": "thirteen 是多少？",
+      "options": [
+        "13",
+        "30",
+        "3",
+        "33"
+      ],
+      "answer": 0,
+      "explain": "-teen=十几"
+    },
+    {
+      "q": "20 的英语是？",
+      "options": [
+        "twenty",
+        "twelve",
+        "two",
+        "twenties"
+      ],
+      "answer": 0,
+      "explain": "twenty"
+    },
+    {
+      "q": "1+2=3 用英语说？",
+      "options": [
+        "One and two is three.",
+        "One two three.",
+        "Plus one two.",
+        "一加二"
+      ],
+      "answer": 0,
+      "explain": "and=加"
+    }
+  ]
+}
