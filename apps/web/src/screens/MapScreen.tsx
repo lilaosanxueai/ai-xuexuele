@@ -13,6 +13,7 @@ import { computeBadges, readRecords, bumpRecords, recordsKey, EMPTY_RECORDS } fr
 import { computeWeeklyReport } from '../runtime/weeklyReport.ts';
 import { generateQuests, readCounters } from '../runtime/dailyQuests.ts';
 import { pickDailyQuestion, isDailyDone, markDailyDone } from '../runtime/dailyQuestion.ts';
+import { pickDailyFact, linkFactToLesson } from '../runtime/dailyFact.ts';
 
 /** 学科中心：以「学科 × 学段」组织全部课程（对标课表结构） */
 export default function MapScreen() {
@@ -112,6 +113,29 @@ export default function MapScreen() {
         <div className="mb-4">
           <PomodoroTimer profileId={profile.id} />
         </div>
+
+        {/* 每日知识碎片：跨学科"你知道吗？"——激发好奇心 */}
+        {(() => {
+          const rawFact = pickDailyFact(today, profile.id);
+          const fact = linkFactToLesson(rawFact, lessons);
+          return (
+            <div className="mb-4 flex items-center gap-3 rounded-2xl bg-gradient-to-r from-teal-50 to-cyan-50 p-3 shadow-sm ring-1 ring-teal-200">
+              <span className="text-2xl">{fact.emoji}</span>
+              <div className="min-w-0 flex-1">
+                <div className="text-[10px] font-black text-teal-600">💡 你知道吗 · {fact.subject}</div>
+                <div className="text-[13px] font-semibold leading-snug text-slate-700">{fact.fact}</div>
+              </div>
+              {fact.lessonId && (
+                <button
+                  onClick={() => nav(fact.lessonId ? `/tutor/${fact.lessonId}` : '/map')}
+                  className="shrink-0 rounded-xl bg-teal-500 px-3 py-1.5 text-[10px] font-bold text-white shadow transition hover:bg-teal-600"
+                >
+                  去了解 →
+                </button>
+              )}
+            </div>
+          );
+        })()}
 
         {/* 每日一题：每天一道精选题打卡（确定性选题，答对记录） */}
         {daily && !dailyDone && (
