@@ -4,6 +4,7 @@ import type { Lesson, ProfileProgress } from '@shared/types.ts';
 import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
+import SubjectRadar from '../components/SubjectRadar.tsx';
 import { SUBJECTS, SUBJECT_STYLE } from '../components/subjectMeta.ts';
 import { recommendNext } from '../runtime/recommend.ts';
 import { calcStreak } from '../utils/streak.ts';
@@ -475,6 +476,9 @@ export default function MapScreen() {
             </div>
           );
         })()}
+
+        {/* 学科掌握雷达图：全学科一图看全 */}
+        <SubjectRadar lessons={lessons} progress={progress} />
 
         {/* 学科网格 */}
         <h2 className="mb-3 text-xl font-black text-slate-700">📚 学科中心</h2>

@@ -28,6 +28,7 @@ export default function WrongBookScreen() {
   const [practicing, setPracticing] = useState(false);
   const [celebrate, setCelebrate] = useState<string | null>(null);
   const [labIds, setLabIds] = useState<Set<string>>(new Set());
+  const [showAnalysis, setShowAnalysis] = useState(false);
   /** 举一反三（作业帮式）：错题关联同模块课程，推荐变式练习 */
   const [moduleLessons, setModuleLessons] = useState<Map<string, { id: string; title: string; emoji: string; subjectArea: string }[]>>(new Map());
 
@@ -120,7 +121,10 @@ export default function WrongBookScreen() {
             <span className="rounded-full bg-amber-100 px-3 py-1 text-sm font-bold text-amber-600">累计练对 {progress?.wrongCleared} 道</span>
           )}
           {wrongs.length > 0 && (
-            <button onClick={doPrint} className="ml-auto rounded-xl bg-slate-700 px-4 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-slate-800">🖨 打印练习卷</button>
+            <span className="flex gap-2">
+              <button onClick={() => setShowAnalysis(!showAnalysis)} className="rounded-xl bg-teal-600 px-3 py-1.5 text-sm font-bold text-white shadow-sm transition hover:bg-teal-700">📊 分析</button>
+              <button onClick={doPrint} className="rounded-xl bg-slate-700 px-4 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-slate-800">🖨 打印练习卷</button>
+            </span>
           )}
         </div>
 
@@ -171,6 +175,49 @@ export default function WrongBookScreen() {
             >
               🎯 开始重练错题（{Math.min(wrongs.length, 20)} 道 · 全对即移出）
             </button>
+
+            {showAnalysis && wrongs.length > 0 && (
+              <div className="mb-4 rounded-2xl bg-teal-50/80 p-4 ring-1 ring-teal-200">
+                <div className="mb-3 text-sm font-black text-teal-700">📊 错题智能分析</div>
+                {/* 学科分布 */}
+                <div className="mb-3">
+                  <div className="mb-1 text-xs font-bold text-slate-500">按学科分布（错题越多颜色越深）</div>
+                  {bySubject.map(([area, items]) => {
+                    const pct = (items.length / wrongs.length) * 100;
+                    return (
+                      <div key={area} className="mb-1 flex items-center gap-2 text-xs">
+                        <span className="w-24 shrink-0 font-bold text-slate-600">{area}</span>
+                        <div className="h-3 flex-1 overflow-hidden rounded-full bg-slate-100">
+                          <div className={`h-full rounded-full ${pct > 30 ? 'bg-rose-500' : pct > 15 ? 'bg-amber-400' : 'bg-teal-400'}`} style={{ width: `${pct}%` }} />
+                        </div>
+                        <span className="w-14 text-right text-slate-400">{items.length} 道</span>
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* 错误次数排行 */}
+                <div className="mb-3">
+                  <div className="mb-1 text-xs font-bold text-slate-500">错次最多的题（≥2次重点关注）</div>
+                  {(() => {
+                    const frequent = [...wrongs].sort((a, b) => b.times - a.times).filter((w) => w.times >= 2).slice(0, 5);
+                    if (frequent.length === 0) return <p className="text-xs text-slate-400">暂无重复错题 👍</p>;
+                    return frequent.map((w, i) => (
+                      <div key={w.id} className="mb-1 rounded-xl bg-white p-2 text-xs">
+                        <span className="mr-2 font-black text-rose-500">#{i + 1} ×{w.times}次</span>
+                        <span className="text-slate-600">{w.subjectArea} · {w.q.slice(0, 35)}…</span>
+                      </div>
+                    ));
+                  })()}
+                </div>
+                {/* 战绩统计 */}
+                <div className="flex flex-wrap gap-3 text-xs">
+                  <span className="rounded-full bg-white px-3 py-1 font-bold text-slate-500">累计练对 <b className="text-emerald-600">{progress?.wrongCleared ?? 0}</b> 道</span>
+                  <span className="rounded-full bg-white px-3 py-1 font-bold text-slate-500">待消灭 <b className="text-rose-500">{wrongs.length}</b> 道</span>
+                  <span className="rounded-full bg-white px-3 py-1 font-bold text-slate-500">涉及 <b className="text-sky-600">{bySubject.length}</b> 个学科</span>
+                  <span className="rounded-full bg-white px-3 py-1 font-bold text-slate-500">清零率 <b className="text-violet-600">{(progress?.wrongCleared ?? 0) + wrongs.length > 0 ? Math.round(((progress?.wrongCleared ?? 0) / ((progress?.wrongCleared ?? 0) + wrongs.length)) * 100) : 0}%</b></span>
+                </div>
+              </div>
+            )}
 
             {bySubject.map(([area, items]) => {
               const meta = SUBJECTS[area] ?? { emoji: '📘', color: 'slate', desc: '' };
