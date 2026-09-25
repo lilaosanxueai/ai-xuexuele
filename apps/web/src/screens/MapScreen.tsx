@@ -5,6 +5,7 @@ import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
 import SubjectRadar from '../components/SubjectRadar.tsx';
+import PomodoroTimer from '../components/PomodoroTimer.tsx';
 import { SUBJECTS, SUBJECT_STYLE } from '../components/subjectMeta.ts';
 import { recommendNext } from '../runtime/recommend.ts';
 import { calcStreak } from '../utils/streak.ts';
@@ -107,6 +108,11 @@ export default function MapScreen() {
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="mx-auto w-full max-w-5xl flex-1 px-6 pb-10">
+        {/* 番茄钟：25 分钟专注 → 5 分钟休息，自动计时长 */}
+        <div className="mb-4">
+          <PomodoroTimer profileId={profile.id} />
+        </div>
+
         {/* 每日一题：每天一道精选题打卡（确定性选题，答对记录） */}
         {daily && !dailyDone && (
           <div className="mb-4 rounded-3xl bg-gradient-to-r from-violet-50 to-purple-50 p-4 shadow-sm ring-1 ring-violet-200">
