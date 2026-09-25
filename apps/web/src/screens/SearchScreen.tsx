@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { Lesson } from '@shared/types.ts';
+import type { Lesson, ProfileProgress } from '@shared/types.ts';
 import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
@@ -12,15 +12,17 @@ export default function SearchScreen() {
   const nav = useNavigate();
   const { current: profile } = useProfileStore();
   const [lessons, setLessons] = useState<Lesson[]>([]);
+  const [progress, setProgress] = useState<ProfileProgress | null>(null);
   const [q, setQ] = useState('');
   const [subject, setSubject] = useState('全部');
 
   useEffect(() => {
     if (!profile) { nav('/'); return; }
     void api.lessons().then(setLessons);
+    void api.progress(profile.id).then(setProgress).catch(() => {});
   }, [profile, nav]);
 
-  const index = useMemo(() => buildIndex(lessons), [lessons]);
+  const index = useMemo(() => buildIndex(lessons, progress), [lessons, progress]);
   const results = useMemo(() => searchLessons(index, q, { subject }), [index, q, subject]);
   const subjects = useMemo(() => ['全部', ...new Set(lessons.map((l) => l.subjectArea ?? '信息科技'))], [lessons]);
   const hots = useMemo(() => hotKeywords(lessons), [lessons]);

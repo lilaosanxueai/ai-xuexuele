@@ -1,0 +1,210 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "✅",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：use=2 怎么区分完成时和过去时？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：for 和 since 后面接什么？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：have been to 和 have gone to 差在哪？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 现在完成时透视镜\nuse = 1   # 用法\n\nhide()\nt = \"① 强调结果（对现在的影响）\"\nex = \"I have lost my key. → 钥匙丢了（所以现在进不了门）\"\ntip = \"重点不在过去丢了，在现在进不去\"\nif use == 2:\n    t = \"② 与一般过去时的区别\"\n    ex = \"I have seen the film.（看过——现在知道内容）\\nI saw the film yesterday.（昨天看的——跟现在无关）\"\n    tip = \"有 yesterday/last week 等过去时间 → 用过去时\"\nif use == 3:\n    t = \"③ for 与 since\"\n    ex = \"I have lived here for 5 years.（住了5年——时间段）\\nI have lived here since 2021.（自2021年——时间点）\"\n    tip = \"for + 时间段；since + 时间点/从句\"\nfill_rect(0, 130, 360, 30, \"#2563eb\")\nwrite(t, 0, 130, \"#fff\", 11)\nfill_rect(0, 72, 360, 54, \"#eff6ff\")\nwrite(ex, 0, 72, \"#1d4ed8\", 9)\nfill_rect(0, 8, 360, 58, \"#fef3c7\")\nwrite(\"要点：\" + tip, 0, 8, \"#b45309\", 10)\nwrite(\"结构：主语 + have/has + 过去分词（done）\", -20, -60, \"#dc2626\", 11)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-33",
+  "island": "cross",
+  "order": 477,
+  "title": "现在完成时：have done",
+  "emoji": "✅",
+  "subjectArea": "英语",
+  "gradeBand": "junior",
+  "grade": 8,
+  "textbook": "人教版英语（初中）",
+  "curriculum": {
+    "module": "时态·现在完成时",
+    "points": [
+      "have/has + 过去分词",
+      "与一般过去时的区别",
+      "for/since 时间状语"
+    ]
+  },
+  "story": "\"I have finished my homework\" 和 \"I finished my homework\" 差在哪？完成时强调\"现在的结果\"（作业写完了，所以现在可以玩），过去时只说\"过去做了\"（跟现在无关）。",
+  "goals": [
+    "掌握现在完成时结构",
+    "区分与过去时",
+    "会用 for/since"
+  ],
+  "aiIntro": "✅ 切换时间轴场景，看 have done 的用法——现在完成时透视镜！",
+  "lab": {
+    "params": [
+      {
+        "name": "use",
+        "label": "用法",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "use=2 怎么区分完成时和过去时？",
+      "for 和 since 后面接什么？",
+      "have been to 和 have gone to 差在哪？"
+    ],
+    "code": "# 现在完成时透视镜\nuse = 1   # 用法\n\nhide()\nt = \"① 强调结果（对现在的影响）\"\nex = \"I have lost my key. → 钥匙丢了（所以现在进不了门）\"\ntip = \"重点不在过去丢了，在现在进不去\"\nif use == 2:\n    t = \"② 与一般过去时的区别\"\n    ex = \"I have seen the film.（看过——现在知道内容）\\nI saw the film yesterday.（昨天看的——跟现在无关）\"\n    tip = \"有 yesterday/last week 等过去时间 → 用过去时\"\nif use == 3:\n    t = \"③ for 与 since\"\n    ex = \"I have lived here for 5 years.（住了5年——时间段）\\nI have lived here since 2021.（自2021年——时间点）\"\n    tip = \"for + 时间段；since + 时间点/从句\"\nfill_rect(0, 130, 360, 30, \"#2563eb\")\nwrite(t, 0, 130, \"#fff\", 11)\nfill_rect(0, 72, 360, 54, \"#eff6ff\")\nwrite(ex, 0, 72, \"#1d4ed8\", 9)\nfill_rect(0, 8, 360, 58, \"#fef3c7\")\nwrite(\"要点：\" + tip, 0, 8, \"#b45309\", 10)\nwrite(\"结构：主语 + have/has + 过去分词（done）\", -20, -60, \"#dc2626\", 11)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "结构与用法",
+        "body": "【结构：have/has + 过去分词（I have finished / She has gone）】\n用法一：过去动作对现在的影响（I have lost my key→现在进不了门）\n用法二：从过去持续到现在的状态（I have lived here for 5 years）\n否定：haven't/hasn't + done；疑问：Have/Has + 主语 + done？"
+      },
+      {
+        "title": "与过去时区别",
+        "body": "【现在完成时：跟现在有关（影响/持续）】\n【一般过去时：只说过去的事，与现在无关】\n有明确过去时间词（yesterday/last week/just now/in 2020）→ 必须用过去时，不能用完成时。\n对比：I have been to Beijing（去过，经历）vs I went to Beijing last year（去年去的）。"
+      },
+      {
+        "title": "标志词与易混",
+        "body": "【already（已经）/ yet（还，否定疑问）/ just（刚刚）/ ever（曾经）/ never（从未）】\n【for + 时间段（for 3 years）/ since + 时间点（since 2020）】\nhave been to：去过（人已回来）≠ have gone to：去了（人不在）\nHe has been to Shanghai.（去过上海，现在在这儿）\nHe has gone to Shanghai.（去上海了，现在不在这儿）"
+      }
+    ],
+    "examples": [
+      {
+        "q": "I ___ my homework already. 填什么？",
+        "steps": [
+          "already 是完成时标志",
+          "主语 I → have + 过去分词",
+          "have finished",
+          "答案"
+        ],
+        "tip": "already→完成时"
+      },
+      {
+        "q": "I ___ him yesterday.（meet）",
+        "steps": [
+          "yesterday 是过去时间",
+          "过去时间→一般过去时",
+          "met",
+          "不能用 have met"
+        ],
+        "tip": "过去时间→过去时"
+      }
+    ],
+    "mistakes": [
+      "有 yesterday 还用完成时（过去时间禁用完成时）",
+      "have been to 和 have gone to 混淆（一个回来了一个没回来）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "现在完成时的结构是？",
+      "options": [
+        "have/has + 过去分词",
+        "had + 动词",
+        "will + 动词",
+        "am/is/are + doing"
+      ],
+      "answer": 0,
+      "explain": "have done"
+    },
+    {
+      "q": "I have lived here ___ 2020.",
+      "options": [
+        "since",
+        "for",
+        "from",
+        "at"
+      ],
+      "answer": 0,
+      "explain": "since+时间点"
+    },
+    {
+      "q": "___ you ever ___ to Beijing?",
+      "options": [
+        "Have, been",
+        "Have, gone",
+        "Did, go",
+        "Are, going"
+      ],
+      "answer": 0,
+      "explain": "ever+been"
+    },
+    {
+      "q": "yesterday 出现应用什么时态？",
+      "options": [
+        "一般过去时",
+        "现在完成时",
+        "现在进行时",
+        "将来时"
+      ],
+      "answer": 0,
+      "explain": "过去时间"
+    },
+    {
+      "q": "for 后面接？",
+      "options": [
+        "时间段",
+        "时间点",
+        "地点",
+        "人"
+      ],
+      "answer": 0,
+      "explain": "for 5 years"
+    },
+    {
+      "q": "He has ___ to Shanghai.（人还在上海）",
+      "options": [
+        "gone",
+        "been",
+        "went",
+        "going"
+      ],
+      "answer": 0,
+      "explain": "去了没回来"
+    }
+  ]
+}

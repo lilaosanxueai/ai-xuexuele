@@ -1,0 +1,210 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🗺️",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：sc=2 \"go along\" 和 \"go straight\" 一样吗？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：on the corner 是在角落里吗？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：问路前为什么说 Excuse me？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 问路指路导航仪\nsc = 1   # 场景\n\nhide()\nt = \"问路\"\na1 = \"Excuse me, how can I get to the library?\"\na2 = \"Is there a bank near here? / Where is the nearest bus stop?\"\ntip = \"先说 Excuse me（打扰了）再问——礼貌是通行证\"\nif sc == 2:\n    t = \"指路（方向）\"\n    a1 = \"Go along this street and turn left at the second crossing.\"\n    a2 = \"Go straight on until you see a hospital, then turn right.\"\n    tip = \"along=沿着 / straight=直走 / crossing=十字路口\"\nif sc == 3:\n    t = \"指路（位置）\"\n    a1 = \"It's next to the supermarket. / It's across from the park.\"\n    a2 = \"It's between the bank and the post office. / It's on your right.\"\n    tip = \"next to=旁边 / across from=对面 / between...and=在…之间\"\nfill_rect(0, 130, 360, 30, \"#16a34a\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 74, 360, 48, \"#f0fdf4\")\nwrite(a1, 0, 74, \"#166534\", 10)\nfill_rect(0, 12, 360, 58, \"#fef3c7\")\nwrite(a2, 0, 12, \"#b45309\", 9)\nwrite(\"词汇：\" + tip, -20, -55, \"#dc2626\", 10)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-32",
+  "island": "cross",
+  "order": 476,
+  "title": "情景交际：问路与指路",
+  "emoji": "🗺️",
+  "subjectArea": "英语",
+  "gradeBand": "junior",
+  "grade": 7,
+  "textbook": "人教版英语（初中）",
+  "curriculum": {
+    "module": "交际用语",
+    "points": [
+      "问路句型",
+      "方位介词",
+      "指路表达"
+    ]
+  },
+  "story": "在国外旅行迷路了怎么办？Excuse me, how can I get to...? 一句话打开对话。学会问路和指路，你就有了英语世界的\"导航仪\"！",
+  "goals": [
+    "掌握问路句型",
+    "会用方位介词",
+    "会指路描述"
+  ],
+  "aiIntro": "🗺️ 切换问路场景，看怎么用英语找方向——问路指路导航仪！",
+  "lab": {
+    "params": [
+      {
+        "name": "sc",
+        "label": "场景",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "sc=2 \"go along\" 和 \"go straight\" 一样吗？",
+      "on the corner 是在角落里吗？",
+      "问路前为什么说 Excuse me？"
+    ],
+    "code": "# 问路指路导航仪\nsc = 1   # 场景\n\nhide()\nt = \"问路\"\na1 = \"Excuse me, how can I get to the library?\"\na2 = \"Is there a bank near here? / Where is the nearest bus stop?\"\ntip = \"先说 Excuse me（打扰了）再问——礼貌是通行证\"\nif sc == 2:\n    t = \"指路（方向）\"\n    a1 = \"Go along this street and turn left at the second crossing.\"\n    a2 = \"Go straight on until you see a hospital, then turn right.\"\n    tip = \"along=沿着 / straight=直走 / crossing=十字路口\"\nif sc == 3:\n    t = \"指路（位置）\"\n    a1 = \"It's next to the supermarket. / It's across from the park.\"\n    a2 = \"It's between the bank and the post office. / It's on your right.\"\n    tip = \"next to=旁边 / across from=对面 / between...and=在…之间\"\nfill_rect(0, 130, 360, 30, \"#16a34a\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 74, 360, 48, \"#f0fdf4\")\nwrite(a1, 0, 74, \"#166534\", 10)\nfill_rect(0, 12, 360, 58, \"#fef3c7\")\nwrite(a2, 0, 12, \"#b45309\", 9)\nwrite(\"词汇：\" + tip, -20, -55, \"#dc2626\", 10)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "问路句型",
+        "body": "【Excuse me, how can I get to + 地点？】\n【Is there a + 地点 near here?】\n【Where is the nearest + 地点？】\n【Could you tell me the way to + 地点？】（更礼貌）\n回答不知道：Sorry, I am new here. / Sorry, I do not know."
+      },
+      {
+        "title": "方位介词",
+        "body": "【next to = 旁边 / beside = 在…旁边】\n【across from = 对面 / opposite = 对面】\n【between...and... = 在…和…之间】\n【in front of = 在…前面（外部）/ behind = 在…后面】\n【on the left/right = 在左/右边 / at the corner = 在拐角】\n方位介词+名词：next to the bank（在银行旁边）。"
+      },
+      {
+        "title": "指路表达",
+        "body": "【Go along this street. 沿这条街走】\n【Turn left/right at the... 在…处左/右转】\n【Go straight on. 直走】\n【Take the first turning on the left. 第一个路口左转】\n【It is about 5 minute walk. 步行约5分钟】\n结束时可以说：You cannot miss it.（你不会错过的）"
+      }
+    ],
+    "examples": [
+      {
+        "q": "礼貌地问图书馆怎么走？",
+        "steps": [
+          "先说 Excuse me",
+          "用 how can I get to 句型",
+          "Excuse me, how can I get to the library?",
+          "或 Could you tell me the way to the library?"
+        ],
+        "tip": "礼貌开头"
+      },
+      {
+        "q": "\"在超市对面\"怎么说？",
+        "steps": [
+          "对面 = across from",
+          "It's across from the supermarket",
+          "也可用 opposite the supermarket",
+          "答案"
+        ],
+        "tip": "across from"
+      }
+    ],
+    "mistakes": [
+      "问路不说 Excuse me（不礼貌）",
+      "across from 和 through 混淆（across 从表面穿过，through 从内部穿过）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "礼貌问路应先说？",
+      "options": [
+        "Excuse me",
+        "Hey",
+        "Hello",
+        "Look"
+      ],
+      "answer": 0,
+      "explain": "礼貌用语"
+    },
+    {
+      "q": "\"在银行旁边\"是？",
+      "options": [
+        "next to the bank",
+        "in the bank",
+        "on the bank",
+        "at the bank"
+      ],
+      "answer": 0,
+      "explain": "next to"
+    },
+    {
+      "q": "\"直走\"是？",
+      "options": [
+        "Go straight",
+        "Go left",
+        "Go right",
+        "Go back"
+      ],
+      "answer": 0,
+      "explain": "straight=直"
+    },
+    {
+      "q": "across from 的意思是？",
+      "options": [
+        "在…对面",
+        "在…上面",
+        "穿过",
+        "在…里面"
+      ],
+      "answer": 0,
+      "explain": "对面"
+    },
+    {
+      "q": "between...and... 表示？",
+      "options": [
+        "在…和…之间",
+        "在…后面",
+        "在…旁边",
+        "在…上面"
+      ],
+      "answer": 0,
+      "explain": "两者之间"
+    },
+    {
+      "q": "Turn left at the second crossing 的意思是？",
+      "options": [
+        "第二个路口左转",
+        "左转两次",
+        "在左边第二个",
+        "向左走两步"
+      ],
+      "answer": 0,
+      "explain": "crossing=路口"
+    }
+  ]
+}

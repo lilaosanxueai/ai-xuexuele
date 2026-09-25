@@ -10,6 +10,7 @@ import { calcStreak } from '../utils/streak.ts';
 import { computeBadges, readRecords, bumpRecords, recordsKey, EMPTY_RECORDS } from '../runtime/achievements.ts';
 import { computeWeeklyReport } from '../runtime/weeklyReport.ts';
 import { generateQuests, readCounters } from '../runtime/dailyQuests.ts';
+import { pickDailyQuestion, isDailyDone, markDailyDone } from '../runtime/dailyQuestion.ts';
 
 /** 学科中心：以「学科 × 学段」组织全部课程（对标课表结构） */
 export default function MapScreen() {
@@ -17,6 +18,9 @@ export default function MapScreen() {
   const { current: profile } = useProfileStore();
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [progress, setProgress] = useState<ProfileProgress | null>(null);
+  // 每日一题
+  const [dailyPick, setDailyPick] = useState<number | null>(null);
+  const [dailyDoneTick, setDailyDoneTick] = useState(0);
   const [, setGoalTick] = useState(0);
 
   useEffect(() => {
@@ -26,6 +30,15 @@ export default function MapScreen() {
   }, [profile, nav]);
 
   if (!profile) return null;
+
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const daily = pickDailyQuestion(lessons, progress, todayStr, profile.id);
+  const dailyDone = isDailyDone(profile.id, todayStr);
+  const answerDaily = (i: number) => {
+    if (dailyPick !== null || !daily) return;
+    setDailyPick(i);
+    if (i === daily.answer) markDailyDone(profile.id, todayStr);
+  };
 
   const lessonDone = (id: string) => progress?.lessons[id]?.status === 'completed';
   const today = new Date().toISOString().slice(0, 10);
@@ -93,6 +106,45 @@ export default function MapScreen() {
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="mx-auto w-full max-w-5xl flex-1 px-6 pb-10">
+        {/* 每日一题：每天一道精选题打卡（确定性选题，答对记录） */}
+        {daily && !dailyDone && (
+          <div className="mb-4 rounded-3xl bg-gradient-to-r from-violet-50 to-purple-50 p-4 shadow-sm ring-1 ring-violet-200">
+            <div className="mb-2 flex items-center gap-2 text-sm font-black text-violet-700">
+              🎯 每日一题 · {daily.subject}
+              <span className="text-xs font-normal text-violet-400">来自《{daily.lessonTitle}》·答对打卡 ✓</span>
+            </div>
+            <div className="mb-3 text-[15px] font-bold leading-relaxed text-slate-700">{daily.q}</div>
+            <div className="flex flex-wrap gap-1.5">
+              {daily.options.map((opt, i) => {
+                const show = dailyPick !== null;
+                const isAns = i === daily.answer;
+                const isPick = dailyPick === i;
+                return (
+                  <button key={i} onClick={() => answerDaily(i)} disabled={show}
+                    className={`rounded-xl px-3 py-1.5 text-xs font-bold transition ${
+                      show && isAns ? 'bg-emerald-100 text-emerald-700 ring-1 ring-emerald-400'
+                        : show && isPick ? 'bg-rose-100 text-rose-600 ring-1 ring-rose-300'
+                        : 'bg-white shadow-sm text-slate-600 hover:bg-violet-50'
+                    }`}>
+                    {'ABCD'[i]}. {opt}
+                    {show && isAns && ' ✓'}{show && isPick && !isAns && ' ✗'}
+                  </button>
+                );
+              })}
+            </div>
+            {dailyPick !== null && (
+              <div className="mt-2 rounded-xl bg-slate-50 p-2 text-xs leading-relaxed text-slate-600">
+                {dailyPick === daily.answer ? '🎉 答对了！明天再来挑战新题。' : '💡 ' + daily.explain + '（明天再来！）'}
+              </div>
+            )}
+          </div>
+        )}
+        {dailyDone && (
+          <div className="mb-4 rounded-2xl bg-emerald-50 p-3 text-center text-sm font-bold text-emerald-600 shadow-sm">
+            ✅ 今日一题已答对 · 明天见！
+          </div>
+        )}
+
         {/* 家长悄悄话：最新一条显示在地图最上方 */}
         {(progress?.parentNotes?.length ?? 0) > 0 && (
           <div className="mb-4 flex items-center gap-3 rounded-3xl bg-gradient-to-r from-amber-50 to-rose-50 p-4 shadow-sm ring-1 ring-amber-200">

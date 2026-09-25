@@ -1,12 +1,11 @@
-import type { Lesson } from '@shared/types.ts';
+import type { Lesson, ProfileProgress } from '@shared/types.ts';
 
 /**
- * 全科知识搜索：把 371 课的课标知识点、讲解定义句、章节标题建成可检索索引，
- * 让孩子卡在某个概念（如「浮力」「定语从句」）时能一秒定位到对应课程。
+ * 全科知识搜索：把课程的课标知识点、讲解定义句、章节标题 + 孩子自己的笔记/错题/实验记录建成可检索索引。
  * 纯本地字符串匹配 + 简单排序，无任何外部依赖。
  */
 
-export type EntryKind = 'point' | 'claim' | 'section';
+export type EntryKind = 'point' | 'claim' | 'section' | 'note' | 'wrong' | 'labnote';
 
 export interface SearchEntry {
   lessonId: string;
@@ -14,15 +13,16 @@ export interface SearchEntry {
   emoji: string;
   subject: string;
   band: 'primary' | 'junior' | 'senior';
-  /** 条目类型：知识点 / 定义句 / 章节标题 */
+  /** 条目类型：知识点 / 定义句 / 章节标题 / 我的笔记 / 错题 / 实验记录 */
   kind: EntryKind;
   /** 被检索的文本 */
   text: string;
 }
 
 /** 建索引：每课贡献 知识点 + 讲解【】定义句 + 章节标题 */
-export function buildIndex(lessons: Lesson[]): SearchEntry[] {
+export function buildIndex(lessons: Lesson[], progress?: ProfileProgress | null): SearchEntry[] {
   const out: SearchEntry[] = [];
+  const byId = new Map(lessons.map((l) => [l.id, l]));
   for (const l of lessons) {
     const base = {
       lessonId: l.id, lessonTitle: l.title, emoji: l.emoji,
@@ -33,6 +33,34 @@ export function buildIndex(lessons: Lesson[]): SearchEntry[] {
       out.push({ ...base, kind: 'section' as const, text: s.title });
       const claims = s.body.match(/【[^】]+】/g) ?? [];
       for (const c of claims) out.push({ ...base, kind: 'claim' as const, text: c.slice(1, -1) });
+    }
+  }
+  // 我的学习资产：笔记 + 错题 + 实验记录（有 progress 才建）
+  if (progress) {
+    for (const [lid, note] of Object.entries(progress.lessonNotes ?? {})) {
+      if (!note || note.trim().length < 5) continue;
+      const l = byId.get(lid);
+      out.push({
+        lessonId: lid, lessonTitle: l?.title ?? '已删课程', emoji: '📝',
+        subject: l?.subjectArea ?? '未知', band: l?.gradeBand ?? 'primary',
+        kind: 'note' as const, text: note.trim().slice(0, 200),
+      });
+    }
+    for (const w of progress.wrongBook ?? []) {
+      out.push({
+        lessonId: w.lessonId, lessonTitle: w.lessonTitle, emoji: '🐛',
+        subject: w.subjectArea, band: 'primary',
+        kind: 'wrong' as const, text: w.q.slice(0, 100),
+      });
+    }
+    for (const [lid, note] of Object.entries(progress.labNotes ?? {})) {
+      if (!note || note.trim().length < 5) continue;
+      const l = byId.get(lid);
+      out.push({
+        lessonId: lid, lessonTitle: l?.title ?? '实验课', emoji: '🔬',
+        subject: l?.subjectArea ?? '科学', band: l?.gradeBand ?? 'primary',
+        kind: 'labnote' as const, text: note.trim().slice(0, 200),
+      });
     }
   }
   return out;

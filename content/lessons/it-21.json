@@ -1,0 +1,210 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🗄️",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：ex=2 WHERE 后面怎么写条件？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：ORDER BY 默认从小到大还是从大到小？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：SELECT * 中的 * 是什么意思？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# SQL 查询工作台\nex = 1   # 示例\n\nhide()\nt = \"① 查全部\"\nsql = \"SELECT * FROM students;\"\nd = \"取出 students 表的所有行和所有列（* = 全部）\"\nif ex == 2:\n    t = \"② 条件筛选\"\n    sql = \"SELECT name, score FROM students WHERE score >= 90;\"\n    d = \"只取 name 和 score 列，且 score ≥ 90 的行\"\nif ex == 3:\n    t = \"③ 排序取前 N\"\n    sql = \"SELECT name, score FROM students ORDER BY score DESC LIMIT 5;\"\n    d = \"按 score 从高到低排，取前 5 名\"\nfill_rect(0, 130, 360, 30, \"#0f766e\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 74, 360, 46, \"#f0fdfa\")\nwrite(sql, 0, 74, \"#0f766e\", 12)\nfill_rect(0, 12, 360, 58, \"#fef3c7\")\nwrite(d, 0, 12, \"#b45309\", 11)\nwrite(\"SQL 四件套：SELECT 选列 · FROM 选表 · WHERE 筛行 · ORDER BY 排序\", -15, -55, \"#dc2626\", 10)\n",
+  "celebrate": "新知识到手！",
+  "id": "it-21",
+  "island": "cross",
+  "order": 473,
+  "title": "数据库入门：SQL 查询",
+  "emoji": "🗄️",
+  "subjectArea": "信息科技",
+  "gradeBand": "senior",
+  "grade": 12,
+  "textbook": "人教版信息科技（高中）",
+  "curriculum": {
+    "module": "数据管理",
+    "points": [
+      "表·行·列概念",
+      "SELECT 基本语法",
+      "WHERE 条件筛选"
+    ]
+  },
+  "story": "你每天的聊天记录、购物历史、视频推荐——背后都是数据库。一张表就像一个 Excel：行是记录，列是字段。学会 SELECT 就能向数据库提问：帮我找出所有 90 分以上的数学作业。",
+  "goals": [
+    "理解关系型数据库结构",
+    "掌握 SELECT 基本语法",
+    "会用 WHERE 筛选条件"
+  ],
+  "aiIntro": "🗄️ 切换查询示例，看 SQL 怎么向数据库提问——SQL 查询工作台！",
+  "lab": {
+    "params": [
+      {
+        "name": "ex",
+        "label": "查询示例",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "ex=2 WHERE 后面怎么写条件？",
+      "ORDER BY 默认从小到大还是从大到小？",
+      "SELECT * 中的 * 是什么意思？"
+    ],
+    "code": "# SQL 查询工作台\nex = 1   # 示例\n\nhide()\nt = \"① 查全部\"\nsql = \"SELECT * FROM students;\"\nd = \"取出 students 表的所有行和所有列（* = 全部）\"\nif ex == 2:\n    t = \"② 条件筛选\"\n    sql = \"SELECT name, score FROM students WHERE score >= 90;\"\n    d = \"只取 name 和 score 列，且 score ≥ 90 的行\"\nif ex == 3:\n    t = \"③ 排序取前 N\"\n    sql = \"SELECT name, score FROM students ORDER BY score DESC LIMIT 5;\"\n    d = \"按 score 从高到低排，取前 5 名\"\nfill_rect(0, 130, 360, 30, \"#0f766e\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 74, 360, 46, \"#f0fdfa\")\nwrite(sql, 0, 74, \"#0f766e\", 12)\nfill_rect(0, 12, 360, 58, \"#fef3c7\")\nwrite(d, 0, 12, \"#b45309\", 11)\nwrite(\"SQL 四件套：SELECT 选列 · FROM 选表 · WHERE 筛行 · ORDER BY 排序\", -15, -55, \"#dc2626\", 10)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "表·行·列",
+        "body": "【表=一类数据（学生表/订单表）；行=一条记录（一个学生）；列=一个字段（姓名/分数）】\n主键：唯一标识一行的列（学号）——不重复不为空。\n关系型数据库：多张表通过外键关联（学生表 ↔ 班级表）。\n常见 DB：MySQL/SQLite/PostgreSQL。"
+      },
+      {
+        "title": "SELECT 语法",
+        "body": "【SELECT 列名 FROM 表名 → 查指定列】\n【SELECT * FROM 表名 → 查全部列】\n【WHERE 条件 → 筛选行（> < >= <= = <>）】\n【ORDER BY 列 DESC/ASC → 排序（DESC 降序，ASC 升序默认）】\n【LIMIT n → 取前 n 条】\n执行顺序：FROM → WHERE → SELECT → ORDER BY → LIMIT。"
+      },
+      {
+        "title": "进阶",
+        "body": "【聚合函数：COUNT(计数) SUM(求和) AVG(平均) MAX MIN】\nSELECT COUNT(*) FROM students WHERE score >= 60; → 及格人数\n【LIKE 模糊匹配：WHERE name LIKE '张%' → 姓张的】\n应用场景：学校成绩统计/电商销量分析/App 后台数据——SQL 是数据时代的\"识字能力\"。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "查出所有英语成绩高于 85 的学生姓名。",
+        "steps": [
+          "选列：SELECT name",
+          "选表：FROM students",
+          "条件：WHERE english > 85",
+          "完整：SELECT name FROM students WHERE english > 85;"
+        ],
+        "tip": "列→表→条件"
+      },
+      {
+        "q": "统计数学不及格（<60）的人数。",
+        "steps": [
+          "用 COUNT 函数",
+          "SELECT COUNT(*) FROM students",
+          "加条件 WHERE math < 60",
+          "返回一个数字"
+        ],
+        "tip": "聚合+条件"
+      }
+    ],
+    "mistakes": [
+      "忘记 FROM 指定表（SELECT 后必须有 FROM）",
+      "WHERE 用 = 而不是 ==（SQL 用单等号）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "SELECT * 中的 * 表示？",
+      "options": [
+        "所有列",
+        "乘法",
+        "指针",
+        "注释"
+      ],
+      "answer": 0,
+      "explain": "全选"
+    },
+    {
+      "q": "WHERE 子句的作用是？",
+      "options": [
+        "筛选行",
+        "选列",
+        "排序",
+        "删除"
+      ],
+      "answer": 0,
+      "explain": "条件过滤"
+    },
+    {
+      "q": "ORDER BY score DESC 是？",
+      "options": [
+        "降序排列",
+        "升序",
+        "随机",
+        "删除"
+      ],
+      "answer": 0,
+      "explain": "DESC=大→小"
+    },
+    {
+      "q": "表的\"行\"对应什么？",
+      "options": [
+        "一条记录",
+        "一个字段",
+        "一种类型",
+        "一个文件"
+      ],
+      "answer": 0,
+      "explain": "行=记录"
+    },
+    {
+      "q": "LIMIT 5 的作用？",
+      "options": [
+        "取前 5 条",
+        "删除 5 条",
+        "乘 5",
+        "循环 5 次"
+      ],
+      "answer": 0,
+      "explain": "截取"
+    },
+    {
+      "q": "COUNT(*) 用于？",
+      "options": [
+        "统计行数",
+        "求和",
+        "平均",
+        "最大"
+      ],
+      "answer": 0,
+      "explain": "计数"
+    }
+  ]
+}
