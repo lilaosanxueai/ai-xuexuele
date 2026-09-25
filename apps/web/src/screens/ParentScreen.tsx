@@ -4,13 +4,14 @@ import type { Lesson, Profile, ProfileProgress, Project, Settings } from '@share
 import { api } from '../api.ts';
 import BackupTab from '../components/BackupTab.tsx';
 import CompareTab from '../components/CompareTab.tsx';
+import AnnualReport from '../components/AnnualReport.tsx';
 import { computeBadges, readRecords, recordsKey, EMPTY_RECORDS } from '../runtime/achievements.ts';
 import { computeWeeklyReport } from '../runtime/weeklyReport.ts';
 import { calcStreak } from '../utils/streak.ts';
 
 /** 家长面板：学习进度 / 学情报告 / AI 对话记录 / 伙伴设置（已取消 PIN 门，直接进入） */
 
-type Tab = 'progress' | 'report' | 'chats' | 'settings' | 'backup' | 'compare';
+type Tab = 'progress' | 'report' | 'annual' | 'chats' | 'settings' | 'backup' | 'compare';
 
 export default function ParentScreen() {
   return (
@@ -42,7 +43,7 @@ function Tabs() {
   return (
     <div>
       <div className="mb-6 flex gap-2">
-        {([['progress', '📈 学习进度'], ['report', '📗 学情报告'], ['chats', '💬 AI 对话记录'], ['compare', '👥 档案对比'], ['backup', '💾 数据备份'],
+        {([['progress', '📈 学习进度'], ['report', '📗 学情报告'], ['annual', '📖 年度报告'], ['chats', '💬 AI 对话记录'], ['compare', '👥 档案对比'], ['backup', '💾 数据备份'],
         ['settings', '⚙️ 设置']] as [Tab, string][])
           .map(([k, label]) => (
             <button
@@ -64,7 +65,8 @@ function Tabs() {
         )}
       </div>
       {!profileId ? <p className="text-slate-400">还没有创建孩子角色</p> : (
-        tab === 'compare' ? <CompareTab profiles={profiles} />
+        tab === 'annual' ? <AnnualReport profiles={profiles} />
+        : tab === 'compare' ? <CompareTab profiles={profiles} />
         : tab === 'backup' ? <BackupTab profileId={profileId} />
         : tab === 'progress' ? <ProgressTab profileId={profileId} />
           : tab === 'report' ? <ReportTab profileId={profileId} />
