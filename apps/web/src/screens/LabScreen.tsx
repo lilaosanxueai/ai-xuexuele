@@ -13,6 +13,7 @@ import { StageState, setRunSpeed } from '../runtime/stageState.ts';
 import { parsePy, PyRunner } from '../runtime/pyinterp.ts';
 import { pyStageApi } from '../runtime/pyBridge.ts';
 import { socraticOnExplore, socraticOnChallenge, socraticOnWrong, socraticOnPerfect } from '../runtime/socratic.ts';
+import { lessonNeighbors, lessonRoute } from '../runtime/lessonNav.ts';
 
 /**
  * 互动实验室（理科五科学习新主页）：内容动态化 + 动态互动。
@@ -73,6 +74,7 @@ export default function LabScreen() {
   const nav = useNavigate();
   const { current: profile } = useProfileStore();
   const [lesson, setLesson] = useState<Lesson | null>(null);
+  const [allLessons, setAllLessons] = useState<Lesson[]>([]);
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
   const [values, setValues] = useState<Record<string, number>>({});
   const [slowRunning, setSlowRunning] = useState(false);
@@ -145,6 +147,7 @@ export default function LabScreen() {
     void api.lessons().then((all) => {
       const l = all.find((x) => x.id === id) ?? null;
       if (!l || !(l.lab || l.starterCode)) { nav(l ? `/tutor/${id}` : '/map'); return; }
+      setAllLessons(all);
       setLesson(l);
       setValues(Object.fromEntries((l.lab?.params ?? autoParams(l.lab?.code ?? l.starterCode ?? '')).map((p) => [p.name, p.value])));
       void api.progress(profile.id).then((p) => {
@@ -326,6 +329,26 @@ export default function LabScreen() {
           {lesson.grade != null && <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-bold text-amber-700">{lesson.grade}年级</span>}
           <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-bold text-slate-500">{bandText}</span>
           {lesson.textbook && <span className="hidden rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-700 sm:inline">📚 {lesson.textbook}</span>}
+          {/* 连续学习导航：同学科按 order 排序，学完直接翻下一课 */}
+          {(() => {
+            const nb = lessonNeighbors(allLessons, lesson.id);
+            if (nb.total === 0) return null;
+            return (
+              <span className="flex items-center gap-1.5">
+                <span className="hidden text-xs font-bold text-slate-400 md:inline">{nb.index}/{nb.total}</span>
+                {nb.prev && (
+                  <button onClick={() => nav(lessonRoute(nb.prev!))} className="max-w-32 truncate rounded-xl bg-slate-100 px-2 py-1.5 text-xs font-bold text-slate-600 transition hover:bg-slate-200" title={`上一课：${nb.prev.title}`}>
+                    ← {nb.prev.title}
+                  </button>
+                )}
+                {nb.next && (
+                  <button onClick={() => nav(lessonRoute(nb.next!))} className="max-w-32 truncate rounded-xl bg-sky-500 px-2 py-1.5 text-xs font-bold text-white transition hover:bg-sky-600" title={`下一课：${nb.next.title}`}>
+                    {nb.next.title} →
+                  </button>
+                )}
+              </span>
+            );
+          })()}
           <div className="ml-auto flex items-center gap-1.5">
             {lesson.teach && (
               <button

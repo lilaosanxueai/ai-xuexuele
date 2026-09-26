@@ -5,6 +5,7 @@ import { DEFAULT_SETTINGS } from '@shared/types.ts';
 import MindmapView from '../components/MindmapView.tsx';
 import LessonNoteEditor from '../components/LessonNoteEditor.tsx';
 import { findCrossLinks } from '../runtime/crossLink.ts';
+import { lessonNeighbors, lessonRoute } from '../runtime/lessonNav.ts';
 import type { Lesson as LessonType } from '@shared/types.ts';
 import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
@@ -89,6 +90,26 @@ export default function TutorScreen() {
           {lesson.grade != null && <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-bold text-amber-700">{lesson.grade} 年级</span>}
           <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-bold text-slate-500">{bandText}</span>
           {lesson.textbook && <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-700">📚 {lesson.textbook}</span>}
+          {/* 连续学习导航：同学科按 order 排序，学完直接翻下一课 */}
+          {(() => {
+            const nb = lessonNeighbors(allLessons, lesson.id);
+            if (nb.total === 0) return null;
+            return (
+              <span className="ml-auto flex items-center gap-1.5">
+                <span className="hidden text-xs font-bold text-slate-400 sm:inline">{nb.index}/{nb.total} 课</span>
+                {nb.prev && (
+                  <button onClick={() => nav(lessonRoute(nb.prev!))} className="max-w-36 truncate rounded-xl bg-slate-100 px-2.5 py-1.5 text-xs font-bold text-slate-600 transition hover:bg-slate-200" title={`上一课：${nb.prev.title}`}>
+                    ← {nb.prev.title}
+                  </button>
+                )}
+                {nb.next && (
+                  <button onClick={() => nav(lessonRoute(nb.next!))} className="max-w-36 truncate rounded-xl bg-sky-500 px-2.5 py-1.5 text-xs font-bold text-white transition hover:bg-sky-600" title={`下一课：${nb.next.title}`}>
+                    {nb.next.title} →
+                  </button>
+                )}
+              </span>
+            );
+          })()}
         </div>
       </div>
 

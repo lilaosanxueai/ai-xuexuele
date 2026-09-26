@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { Lesson, ProfileProgress } from '@shared/types.ts';
 import { api } from '../api.ts';
@@ -14,6 +14,7 @@ import { computeWeeklyReport } from '../runtime/weeklyReport.ts';
 import { generateQuests, readCounters } from '../runtime/dailyQuests.ts';
 import { pickDailyQuestion, isDailyDone, markDailyDone } from '../runtime/dailyQuestion.ts';
 import { pickDailyFact, linkFactToLesson } from '../runtime/dailyFact.ts';
+import { buildShareStats, drawShareCard, downloadShareCard } from '../runtime/shareCard.ts';
 
 /** 学科中心：以「学科 × 学段」组织全部课程（对标课表结构） */
 export default function MapScreen() {
@@ -25,12 +26,25 @@ export default function MapScreen() {
   const [dailyPick, setDailyPick] = useState<number | null>(null);
   const [dailyDoneTick, setDailyDoneTick] = useState(0);
   const [, setGoalTick] = useState(0);
+  // 成就分享卡片：canvas 绘制 + PNG 下载
+  const [shareOpen, setShareOpen] = useState(false);
+  const shareCanvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     if (!profile) { nav('/'); return; }
     void api.lessons().then(setLessons);
     void api.progress(profile.id).then(setProgress).catch(() => setProgress({ profileId: profile.id, lessons: {}, dailyUsage: {}, lessonDrafts: {}, lessonCodes: {} }));
   }, [profile, nav]);
+
+  // 分享卡片：打开时用最新本地数据重绘（战绩来自 localStorage）
+  useEffect(() => {
+    if (!shareOpen || !profile) return;
+    const canvas = shareCanvasRef.current;
+    if (!canvas) return;
+    let recRaw: unknown = {};
+    try { recRaw = JSON.parse(localStorage.getItem(recordsKey(profile.id)) ?? '{}'); } catch { /* 忽略 */ }
+    drawShareCard(canvas, buildShareStats(lessons, progress, { name: profile.name, avatar: profile.avatar }, recRaw));
+  }, [shareOpen, lessons, progress, profile]);
 
   if (!profile) return null;
 
@@ -455,6 +469,7 @@ export default function MapScreen() {
           <div className="mb-3 flex items-center gap-2">
             <span className="text-lg font-black text-violet-700">🏅 我的成就</span>
             <span className="rounded-full bg-violet-100 px-3 py-0.5 text-xs font-bold text-violet-600">{unlockedCount}/{badges.length} 已解锁</span>
+            <button onClick={() => setShareOpen(true)} className="rounded-full bg-white px-3 py-0.5 text-xs font-bold text-violet-600 shadow-sm transition hover:bg-violet-50">📸 分享卡片</button>
             <span className="text-xs text-violet-400">完成小目标攒徽章，学习像闯关</span>
           </div>
           <div className="grid grid-cols-4 gap-2 sm:grid-cols-5 lg:grid-cols-6">
@@ -600,6 +615,25 @@ export default function MapScreen() {
           </button>
         </section>
       </main>
+
+      {/* 成就分享卡片：canvas 实时绘制，可下载 PNG（手机端也可长按保存） */}
+      {shareOpen && (
+        <div className="fixed inset-0 z-[90] flex items-center justify-center bg-slate-900/60 p-4" onClick={() => setShareOpen(false)}>
+          <div className="max-h-full overflow-y-auto rounded-3xl bg-white p-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <canvas ref={shareCanvasRef} className="h-auto w-full max-w-sm rounded-2xl shadow-md" />
+            <div className="mt-3 flex items-center justify-center gap-2">
+              <button
+                onClick={() => shareCanvasRef.current && downloadShareCard(shareCanvasRef.current, profile.name)}
+                className="rounded-xl bg-violet-600 px-4 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-violet-700"
+              >
+                ⬇ 保存图片
+              </button>
+              <button onClick={() => setShareOpen(false)} className="rounded-xl bg-slate-200 px-4 py-2 text-sm font-bold text-slate-600 transition hover:bg-slate-300">关闭</button>
+            </div>
+            <p className="mt-2 text-center text-xs text-slate-400">手机端也可以长按图片保存到相册</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
