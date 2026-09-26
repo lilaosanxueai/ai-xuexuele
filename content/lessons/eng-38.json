@@ -1,0 +1,210 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "📊",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：adj=2 big 为什么要双写 g？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：adj=3 heavy 的 y 怎么变？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：adj=4 为什么不合规则？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 比较级变化台\nadj = 1   # 1tall 2big 3heavy 4good\n\nhide()\nbase = \"tall\"\ncomp = \"taller\"\nsup = \"tallest\"\nrule = \"规则一：直接加 er / est\"\nex = \"Tom is taller than Mike.\"\nif adj == 2:\n    base = \"big\"\n    comp = \"bigger\"\n    sup = \"biggest\"\n    rule = \"规则二：重读闭音节，双写末尾辅音再加\"\n    ex = \"My box is bigger than yours.\"\nif adj == 3:\n    base = \"heavy\"\n    comp = \"heavier\"\n    sup = \"heaviest\"\n    rule = \"规则三：辅音字母+y，变 y 为 i 再加\"\n    ex = \"This bag is heavier.\"\nif adj == 4:\n    base = \"good\"\n    comp = \"better\"\n    sup = \"best\"\n    rule = \"不规则变化，需要背下来\"\n    ex = \"She is the best student.\"\nfill_rect(0, 130, 340, 30, \"#2563eb\")\nwrite(base + \" - \" + comp + \" - \" + sup, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 320, 42, \"#eff6ff\")\nwrite(rule, 0, 76, \"#1d4ed8\", 11)\nfill_rect(0, 10, 320, 60, \"#fef3c7\")\nwrite(\"原级：a \" + base + \" boy\", 0, 26, \"#b45309\", 10)\nwrite(\"比较级/最高级例句：\", 0, 6, \"#92400e\", 9)\nwrite(ex, 0, -12, \"#b45309\", 10)\nwrite(\"比较级后接 than · 最高级前加 the\", 0, -60, \"#7c3aed\", 10)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-38",
+  "island": "cross",
+  "order": 538,
+  "title": "比较级与最高级：谁更谁最",
+  "emoji": "📊",
+  "subjectArea": "英语",
+  "gradeBand": "primary",
+  "grade": 6,
+  "textbook": "人教PEP英语六年级上册",
+  "curriculum": {
+    "module": "形容词比较等级",
+    "points": [
+      "比较级构成规则",
+      "最高级构成规则",
+      "than 与 the"
+    ]
+  },
+  "story": "tall → taller → tallest：比较级比两人，最高级比一群！形容词变身有三条规则，还有 good→better→best 这样的捣蛋鬼——掌握规律，一句 Who is taller? 走天下。",
+  "goals": [
+    "会构成比较级最高级",
+    "会用 than 句型",
+    "记住常见不规则变化"
+  ],
+  "aiIntro": "📊 切换形容词，看它怎么三段变身——比较级变化台！",
+  "lab": {
+    "params": [
+      {
+        "name": "adj",
+        "label": "形容词",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "adj=2 big 为什么要双写 g？",
+      "adj=3 heavy 的 y 怎么变？",
+      "adj=4 为什么不合规则？"
+    ],
+    "code": "# 比较级变化台\nadj = 1   # 1tall 2big 3heavy 4good\n\nhide()\nbase = \"tall\"\ncomp = \"taller\"\nsup = \"tallest\"\nrule = \"规则一：直接加 er / est\"\nex = \"Tom is taller than Mike.\"\nif adj == 2:\n    base = \"big\"\n    comp = \"bigger\"\n    sup = \"biggest\"\n    rule = \"规则二：重读闭音节，双写末尾辅音再加\"\n    ex = \"My box is bigger than yours.\"\nif adj == 3:\n    base = \"heavy\"\n    comp = \"heavier\"\n    sup = \"heaviest\"\n    rule = \"规则三：辅音字母+y，变 y 为 i 再加\"\n    ex = \"This bag is heavier.\"\nif adj == 4:\n    base = \"good\"\n    comp = \"better\"\n    sup = \"best\"\n    rule = \"不规则变化，需要背下来\"\n    ex = \"She is the best student.\"\nfill_rect(0, 130, 340, 30, \"#2563eb\")\nwrite(base + \" - \" + comp + \" - \" + sup, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 320, 42, \"#eff6ff\")\nwrite(rule, 0, 76, \"#1d4ed8\", 11)\nfill_rect(0, 10, 320, 60, \"#fef3c7\")\nwrite(\"原级：a \" + base + \" boy\", 0, 26, \"#b45309\", 10)\nwrite(\"比较级/最高级例句：\", 0, 6, \"#92400e\", 9)\nwrite(ex, 0, -12, \"#b45309\", 10)\nwrite(\"比较级后接 than · 最高级前加 the\", 0, -60, \"#7c3aed\", 10)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "三条变身规则",
+        "body": "【规则一：一般直接加 -er / -est】tall→taller→tallest\n【规则二：重读闭音节双写末尾辅音】big→bigger→biggest·hot→hotter\n【规则三：辅音字母+y 变 i 再加】heavy→heavier→heaviest·easy→easier\n先看词尾，再选规则。"
+      },
+      {
+        "title": "句型",
+        "body": "【比较级：A … + er + than + B】Tom is taller than Mike.\n【最高级：the + …est + of/in 范围】He is the tallest in our class.\n比较的两者用 than 连接；最高级要说范围（in the class / of all）。\n问身高：Who is taller, Tom or Mike?"
+      },
+      {
+        "title": "不规则捣蛋鬼",
+        "body": "【必背四个】good/well→better→best\nbad→worse→worst　many/much→more→most\nlittle→less→least　far→farther→farthest\n口诀：好坏多少远，通通不规则。\n多音节词（beautiful）加 more/most，不加 er。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "翻译：我的书包比你的重。",
+        "steps": [
+          "重 heavy→heavier",
+          "比较级句型：A is -er than B",
+          "My bag is heavier than yours",
+          "别忘了 than"
+        ],
+        "tip": "变y为i"
+      },
+      {
+        "q": "他是我们班最高的。",
+        "steps": [
+          "高 tall→tallest",
+          "最高级前加 the",
+          "范围 our class 用 in",
+          "He is the tallest in our class"
+        ],
+        "tip": "the+est"
+      }
+    ],
+    "mistakes": [
+      "比较级忘了 than（My bag is heavier yours ✗）",
+      "双写规则漏掉（biger ✗ 应为 bigger）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "tall 的比较级是？",
+      "options": [
+        "taller",
+        "tallerest",
+        "more tall",
+        "tallest"
+      ],
+      "answer": 0,
+      "explain": "直接加er"
+    },
+    {
+      "q": "big 的最高级是？",
+      "options": [
+        "biggest",
+        "biger",
+        "bigst",
+        "most big"
+      ],
+      "answer": 0,
+      "explain": "双写g加est"
+    },
+    {
+      "q": "heavy 的比较级是？",
+      "options": [
+        "heavier",
+        "heavyer",
+        "more heavy",
+        "heavest"
+      ],
+      "answer": 0,
+      "explain": "变y为i"
+    },
+    {
+      "q": "good 的比较级是？",
+      "options": [
+        "better",
+        "gooder",
+        "more good",
+        "best"
+      ],
+      "answer": 0,
+      "explain": "不规则"
+    },
+    {
+      "q": "比较级连接词用？",
+      "options": [
+        "than",
+        "then",
+        "that",
+        "the"
+      ],
+      "answer": 0,
+      "explain": "A er than B"
+    },
+    {
+      "q": "最高级前面要加？",
+      "options": [
+        "the",
+        "a",
+        "an",
+        "不加"
+      ],
+      "answer": 0,
+      "explain": "the + est"
+    }
+  ]
+}

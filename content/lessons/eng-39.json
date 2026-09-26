@@ -1,0 +1,210 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "📦",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：scene=1 和 scene=2 的 be 动词为什么不同？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：scene=3 不可数名词用哪个？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：There be 和 have 的区别是什么？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# There be 演示台\nscene = 1   # 1单数 2复数 3不可数\n\nhide()\nt = \"单数名词用 There is\"\ns = \"There is a book on the desk.\"\ntip = \"a/an + 单数名词，动词用 is\"\nif scene == 2:\n    t = \"复数名词用 There are\"\n    s = \"There are two birds in the tree.\"\n    tip = \"two/some + 复数名词，动词用 are\"\nif scene == 3:\n    t = \"不可数名词也用 There is\"\n    s = \"There is some water in the glass.\"\n    tip = \"water/milk/bread 不可数，动词用 is\"\nfill_rect(0, 130, 340, 30, \"#16a34a\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 60, 320, 64, \"#f0fdf4\")\nwrite(s, 0, 60, \"#166534\", 12)\nfill_rect(0, -20, 320, 50, \"#fef3c7\")\nwrite(tip, 0, -20, \"#b45309\", 11)\nwrite(\"There be 表存在 · have 表拥有\", 0, -78, \"#64748b\", 10)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-39",
+  "island": "cross",
+  "order": 539,
+  "title": "There be 句型：某处有某物",
+  "emoji": "📦",
+  "subjectArea": "英语",
+  "gradeBand": "primary",
+  "grade": 5,
+  "textbook": "人教PEP英语五年级上册",
+  "curriculum": {
+    "module": "There be 句型",
+    "points": [
+      "There is/are 的选择",
+      "就近原则",
+      "some 与 any"
+    ]
+  },
+  "story": "There is a book on the desk.——「桌上有本书」就这么说！There be 是英语里的「有」字句：某处存在某物用它，某人拥有用 have。is 还是 are？看后面的名词是单数还是复数！",
+  "goals": [
+    "会选 is 或 are",
+    "理解就近原则",
+    "会用 some 和 any"
+  ],
+  "aiIntro": "📦 切换场景，看 is/are 怎么选——There be 演示台！",
+  "lab": {
+    "params": [
+      {
+        "name": "scene",
+        "label": "场景",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "scene=1 和 scene=2 的 be 动词为什么不同？",
+      "scene=3 不可数名词用哪个？",
+      "There be 和 have 的区别是什么？"
+    ],
+    "code": "# There be 演示台\nscene = 1   # 1单数 2复数 3不可数\n\nhide()\nt = \"单数名词用 There is\"\ns = \"There is a book on the desk.\"\ntip = \"a/an + 单数名词，动词用 is\"\nif scene == 2:\n    t = \"复数名词用 There are\"\n    s = \"There are two birds in the tree.\"\n    tip = \"two/some + 复数名词，动词用 are\"\nif scene == 3:\n    t = \"不可数名词也用 There is\"\n    s = \"There is some water in the glass.\"\n    tip = \"water/milk/bread 不可数，动词用 is\"\nfill_rect(0, 130, 340, 30, \"#16a34a\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 60, 320, 64, \"#f0fdf4\")\nwrite(s, 0, 60, \"#166534\", 12)\nfill_rect(0, -20, 320, 50, \"#fef3c7\")\nwrite(tip, 0, -20, \"#b45309\", 11)\nwrite(\"There be 表存在 · have 表拥有\", 0, -78, \"#64748b\", 10)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "基本结构",
+        "body": "【There be + 某物 + 某处 = 某处有某物】\nThere is a cat under the tree.（树上有只猫）\nThere are some apples on the table.\nbe 动词看后面的名词：单数/不可数→is·复数→are。"
+      },
+      {
+        "title": "就近原则",
+        "body": "【多个名词并列时，be 与最近的名词一致】\nThere is a pen and two books on the desk.（最近的是 a pen → is）\nThere are two books and a pen on the desk.（最近的是 two books → are）\n口诀：be 看邻居，就近不商量。"
+      },
+      {
+        "title": "some/any 与否定疑问",
+        "body": "【肯定句用 some】There are some ducks on the lake.\n【否定/疑问句用 any】There are not any ducks. / Are there any ducks?\n【一般疑问回答】Yes, there is. / No, there are not.\nThere be 表存在；I have 表拥有——两码事。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "翻译：书包里有两支铅笔。",
+        "steps": [
+          "两支铅笔复数→are",
+          "There are + 数量 + 复数",
+          "There are two pencils in the bag",
+          "地点用 in"
+        ],
+        "tip": "复数用are"
+      },
+      {
+        "q": "There ___ a dog and two cats here. 填？",
+        "steps": [
+          "并列名词看最近的",
+          "最近的是 a dog 单数",
+          "填 is",
+          "就近原则"
+        ],
+        "tip": "be看邻居"
+      }
+    ],
+    "mistakes": [
+      "见 There 就用 is（复数要用 are）",
+      "疑问句还用 some（应用 any）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "There ___ a book on the desk. 填？",
+      "options": [
+        "is",
+        "are",
+        "am",
+        "be"
+      ],
+      "answer": 0,
+      "explain": "单数用is"
+    },
+    {
+      "q": "There ___ some birds in the sky. 填？",
+      "options": [
+        "are",
+        "is",
+        "am",
+        "be"
+      ],
+      "answer": 0,
+      "explain": "复数用are"
+    },
+    {
+      "q": "There is some ___ in the glass.",
+      "options": [
+        "water",
+        "eggs",
+        "apples",
+        "pens"
+      ],
+      "answer": 0,
+      "explain": "不可数名词"
+    },
+    {
+      "q": "Are there ___ flowers? 填？",
+      "options": [
+        "any",
+        "some",
+        "a",
+        "much"
+      ],
+      "answer": 0,
+      "explain": "疑问用any"
+    },
+    {
+      "q": "There ___ a cat and two dogs. 填？",
+      "options": [
+        "is",
+        "are",
+        "am",
+        "were"
+      ],
+      "answer": 0,
+      "explain": "就近原则"
+    },
+    {
+      "q": "表达「桌上有本书」用？",
+      "options": [
+        "There is",
+        "I have",
+        "He has",
+        "It is"
+      ],
+      "answer": 0,
+      "explain": "存在用There be"
+    }
+  ]
+}

@@ -613,6 +613,14 @@ export default function MapScreen() {
             <div className="mt-2 text-xl font-black">全学科挑战赛</div>
             <div className="mt-1 text-xs opacity-90">10 题 3 命 · 限时连击加分 · 错题自动进错题本</div>
           </button>
+          <button
+            onClick={() => nav('/dictation')}
+            className="rounded-3xl bg-gradient-to-br from-rose-400 to-orange-400 p-6 text-center text-white shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
+          >
+            <div className="text-5xl">✍️</div>
+            <div className="mt-2 text-xl font-black">听写训练</div>
+            <div className="mt-1 text-xs opacity-90">听音写词 · 语文生字 + 英语单词 · 错词重练</div>
+          </button>
         </section>
       </main>
 
