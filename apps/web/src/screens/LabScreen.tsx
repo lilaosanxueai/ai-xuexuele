@@ -374,9 +374,9 @@ export default function LabScreen() {
         </div>
       </div>
 
-      <main className="relative flex min-h-0 flex-1">
-        {/* 左：参数 + 探索问题 */}
-        <aside className="w-72 shrink-0 space-y-3 overflow-y-auto border-r bg-white/60 p-3">
+      <main className="relative flex min-h-0 flex-1 flex-col md:flex-row">
+        {/* 左：参数 + 探索问题（手机端横排在上，桌面竖排在左） */}
+        <aside className="w-full shrink-0 space-y-3 overflow-y-auto border-b border-r bg-white/60 p-3 md:w-72 md:border-b-0">
           <div className="rounded-2xl bg-white p-3 shadow-sm">
             <div className="mb-2 text-sm font-black text-slate-700">⚙️ 探索参数</div>
             {params.length === 0 && <p className="text-xs text-slate-400">这节演示没有可调参数</p>}

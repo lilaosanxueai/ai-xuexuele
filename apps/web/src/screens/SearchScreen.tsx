@@ -28,6 +28,19 @@ export default function SearchScreen() {
   const hots = useMemo(() => hotKeywords(lessons), [lessons]);
   const labIds = useMemo(() => new Set(lessons.filter((l) => l.lab || l.starterCode).map((l) => l.id)), [lessons]);
   const bandText = (b: string) => (b === 'primary' ? '小学' : b === 'junior' ? '初中' : '高中');
+  const historyKey = profile ? `island-search-hist-${profile.id}` : '';
+
+  const saveHistory = (term: string) => {
+    if (!historyKey || !term.trim() || term.trim().length < 2) return;
+    try {
+      const cur = JSON.parse(localStorage.getItem(historyKey) ?? '[]') as string[];
+      const next = [term.trim(), ...cur.filter((x) => x !== term.trim())].slice(0, 8);
+      localStorage.setItem(historyKey, JSON.stringify(next));
+    } catch { /* ignore */ }
+  };
+  const searchHistory = (() => {
+    try { return JSON.parse(localStorage.getItem(historyKey) ?? '[]') as string[]; } catch { return []; }
+  })();
 
   if (!profile) return null;
 
@@ -53,6 +66,17 @@ export default function SearchScreen() {
             <button onClick={() => setQ('')} className="shrink-0 rounded-2xl bg-slate-100 px-4 text-sm font-bold text-slate-500 transition hover:bg-slate-200">清空</button>
           )}
         </div>
+
+        {/* 搜索历史 */}
+        {!q && searchHistory.length > 0 && (
+          <div className="mb-3 flex flex-wrap items-center gap-1.5">
+            <span className="text-xs font-bold text-slate-400">🕐 最近搜索</span>
+            {searchHistory.map((h) => (
+              <button key={h} onClick={() => setQ(h)} className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-500 transition hover:bg-sky-50 hover:text-sky-600">{h}</button>
+            ))}
+            <button onClick={() => { try { localStorage.removeItem(historyKey); } catch { /* ignore */ } setQ(''); }} className="text-[10px] text-slate-300 hover:text-rose-400">清除</button>
+          </div>
+        )}
 
         {/* 学科过滤 */}
         <div className="mb-4 flex flex-wrap gap-1.5">

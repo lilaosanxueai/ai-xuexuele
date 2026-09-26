@@ -236,7 +236,7 @@ export default function TutorScreen() {
       {/* 讲解课的 AI 答疑浮窗（讲解为主、AI 为辅） */}
       {lesson.teach && (
         <div
-          className={`fixed bottom-4 right-4 top-20 z-40 w-[22rem] max-w-[calc(100vw-2rem)] transition-all duration-300 ${
+          className={`fixed bottom-4 right-4 top-20 z-40 w-full max-w-[calc(100vw-2rem)] transition-all duration-300 md:w-[22rem] ${
             buddyOpen ? 'translate-x-0 opacity-100' : 'pointer-events-none translate-x-8 opacity-0'
           }`}
         >
