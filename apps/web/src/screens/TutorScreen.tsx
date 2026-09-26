@@ -4,6 +4,8 @@ import type { Lesson, Settings, WrongItem } from '@shared/types.ts';
 import { DEFAULT_SETTINGS } from '@shared/types.ts';
 import MindmapView from '../components/MindmapView.tsx';
 import LessonNoteEditor from '../components/LessonNoteEditor.tsx';
+import { findCrossLinks } from '../runtime/crossLink.ts';
+import type { Lesson as LessonType } from '@shared/types.ts';
 import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
@@ -33,6 +35,7 @@ export default function TutorScreen() {
   const [quizOpen, setQuizOpen] = useState(false);
   const [quizDone, setQuizDone] = useState(false);
   const [buddyOpen, setBuddyOpen] = useState(false);
+  const [allLessons, setAllLessons] = useState<LessonType[]>([]);
   const buddyRef = useRef<BuddyHandle>(null);
 
   useEffect(() => {
@@ -40,6 +43,7 @@ export default function TutorScreen() {
     setQuizDone(false);
     void api.settings().then(setSettings).catch(() => {});
     void api.lessons().then((all) => {
+      setAllLessons(all);
       const l = all.find((x) => x.id === id) ?? null;
       setLesson(l);
       if (!l) nav('/map');
@@ -189,6 +193,28 @@ export default function TutorScreen() {
               <LessonNoteEditor lessonId={lesson.id} profileId={profile.id} />
             </div>
           )}
+          {(() => {
+            const links = findCrossLinks(lesson, allLessons, 3);
+            if (links.length === 0) return null;
+            return (
+              <div className="mt-4 rounded-2xl bg-cyan-50/80 p-4 ring-1 ring-cyan-200">
+                <div className="mb-2 text-sm font-black text-cyan-700">🔗 跨学科链接</div>
+                <p className="mb-2 text-xs text-cyan-500">这个知识点在其他学科中也有——知识是连通的</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {links.map((link) => (
+                    <button key={link.lessonId}
+                      onClick={() => nav(`/tutor/${link.lessonId}`)}
+                      className="flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-xs font-bold text-slate-700 shadow-sm transition hover:-translate-y-0.5"
+                    >
+                      <span>{link.emoji}</span>
+                      <span className="max-w-48 truncate">{link.lessonTitle}</span>
+                      <span className="rounded-full bg-cyan-100 px-1.5 py-0.5 text-[9px] text-cyan-600">{link.subject}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
         </section>
       ) : (
         <section className="min-h-[70vh] overflow-hidden rounded-2xl bg-white/80 shadow-md lg:h-[calc(100vh-7.5rem)]">
