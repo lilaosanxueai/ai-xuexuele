@@ -1,0 +1,210 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🛒",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：sc=1 店员怎么打招呼？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：sc=2 怎么问价格和试穿？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：sc=3 How much 和 How many 的区别？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 英语购物模拟器\nsc = 1   # 场景\n\nhide()\nt = \"进店问候\"\na1 = \"Can I help you? / What can I do for you?\"\na2 = \"I'm looking for a T-shirt. / I want to buy a skirt.\"\ntip = \"店员问+你回答=对话开始\"\nif sc == 2:\n    t = \"询问与试穿\"\n    a1 = \"How much is it? / What size do you have?\"\n    a2 = \"Can I try it on? / Do you have a bigger one?\"\n    tip = \"How much is/are + 单/复数\"\nif sc == 3:\n    t = \"付款与礼貌\"\n    a1 = \"I'll take it. / That's too expensive.\"\n    a2 = \"Here you are. / Thank you!\"\n    tip = \"即使不买也要说 Thanks anyway\"\nfill_rect(0, 130, 340, 30, \"#16a34a\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 74, 340, 48, \"#f0fdf4\")\nwrite(a1, 0, 74, \"#166534\", 10)\nfill_rect(0, 12, 340, 60, \"#fef3c7\")\nwrite(a2, 0, 12, \"#b45309\", 10)\nwrite(\"要领：\" + tip, -20, -55, \"#dc2626\", 11)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-37",
+  "island": "cross",
+  "order": 523,
+  "title": "情景交际：购物",
+  "emoji": "🛒",
+  "subjectArea": "英语",
+  "gradeBand": "junior",
+  "grade": 8,
+  "textbook": "人教版英语（初中）",
+  "curriculum": {
+    "module": "交际用语",
+    "points": [
+      "购物常用句",
+      "询问价格与尺寸",
+      "讨价还价"
+    ]
+  },
+  "story": "Can I help you? Yes, I'm looking for a T-shirt.——学会购物英语，出国旅行不再比手画脚！从问价到试穿到付款，一条龙搞定。",
+  "goals": [
+    "掌握购物常用句",
+    "会问价格尺寸",
+    "会用购物礼仪"
+  ],
+  "aiIntro": "🛒 切换购物环节，看英语怎么应对——英语购物模拟器！",
+  "lab": {
+    "params": [
+      {
+        "name": "sc",
+        "label": "场景",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "sc=1 店员怎么打招呼？",
+      "sc=2 怎么问价格和试穿？",
+      "sc=3 How much 和 How many 的区别？"
+    ],
+    "code": "# 英语购物模拟器\nsc = 1   # 场景\n\nhide()\nt = \"进店问候\"\na1 = \"Can I help you? / What can I do for you?\"\na2 = \"I'm looking for a T-shirt. / I want to buy a skirt.\"\ntip = \"店员问+你回答=对话开始\"\nif sc == 2:\n    t = \"询问与试穿\"\n    a1 = \"How much is it? / What size do you have?\"\n    a2 = \"Can I try it on? / Do you have a bigger one?\"\n    tip = \"How much is/are + 单/复数\"\nif sc == 3:\n    t = \"付款与礼貌\"\n    a1 = \"I'll take it. / That's too expensive.\"\n    a2 = \"Here you are. / Thank you!\"\n    tip = \"即使不买也要说 Thanks anyway\"\nfill_rect(0, 130, 340, 30, \"#16a34a\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 74, 340, 48, \"#f0fdf4\")\nwrite(a1, 0, 74, \"#166534\", 10)\nfill_rect(0, 12, 340, 60, \"#fef3c7\")\nwrite(a2, 0, 12, \"#b45309\", 10)\nwrite(\"要领：\" + tip, -20, -55, \"#dc2626\", 11)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "购物三步",
+        "body": "【①进店：Can I help you? → I'm looking for...\n【②询问：How much is it? What size? Can I try it on?\n【③决定：I'll take it.（买）/ That's too expensive.（嫌贵）\n礼貌离店：Thanks anyway.（不买也说谢谢）"
+      },
+      {
+        "title": "问价",
+        "body": "【How much is + 单数？How much are + 复数？\nHow much is this hat? How much are these shoes?\n【What's the price of...? 也可以问价】\n回答：It's ten dollars. / They're fifty yuan.\n讨价还价：Can you make it cheaper? / That's a bit expensive."
+      },
+      {
+        "title": "尺寸与颜色",
+        "body": "【What size do you want? → Size M / Medium】\n【Do you have this in blue? → 问问有没有别的颜色】\n【It's too small/big. Do you have a bigger/smaller one?】\n试穿：Where is the fitting room?（试衣间在哪）\nThat fits well.（很合身）/ It doesn't fit.（不合身）"
+      }
+    ],
+    "examples": [
+      {
+        "q": "你想买一条裤子，店员问 Can I help you?",
+        "steps": [
+          "回答意图",
+          "I'm looking for a pair of pants",
+          "或 I want to buy pants",
+          "不要只说Yes"
+        ],
+        "tip": "说出你要什么"
+      },
+      {
+        "q": "试穿后太小了怎么说？",
+        "steps": [
+          "It's too small",
+          "Do you have a bigger one",
+          "或 This doesn't fit",
+          "礼貌请求换号"
+        ],
+        "tip": "too+形容词"
+      }
+    ],
+    "mistakes": [
+      "How much is these shoes（复数用are）",
+      "不买时不打招呼就走（说Thanks anyway）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "How much ___ this shirt?",
+      "options": [
+        "is",
+        "are",
+        "do",
+        "does"
+      ],
+      "answer": 0,
+      "explain": "单数用is"
+    },
+    {
+      "q": "How much ___ these shoes?",
+      "options": [
+        "are",
+        "is",
+        "do",
+        "does"
+      ],
+      "answer": 0,
+      "explain": "复数用are"
+    },
+    {
+      "q": "Can I ___ it on?",
+      "options": [
+        "try",
+        "trying",
+        "tried",
+        "tries"
+      ],
+      "answer": 0,
+      "explain": "try on"
+    },
+    {
+      "q": "决定买了说？",
+      "options": [
+        "I'll take it",
+        "I'll go",
+        "I'll see",
+        "I'll try"
+      ],
+      "answer": 0,
+      "explain": "买了"
+    },
+    {
+      "q": "不买东西离开时说？",
+      "options": [
+        "Thanks anyway",
+        "Nothing",
+        "Go away",
+        "Bye"
+      ],
+      "answer": 0,
+      "explain": "礼貌拒绝"
+    },
+    {
+      "q": "想要大一号说？",
+      "options": [
+        "a bigger one",
+        "a big one",
+        "more big",
+        "biggest"
+      ],
+      "answer": 0,
+      "explain": "比较级"
+    }
+  ]
+}

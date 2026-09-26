@@ -1,0 +1,211 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "💬",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：type=1 that 什么时候可以省？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：type=2 if 和 whether 的区别？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：type=3 时态怎么呼应？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 宾语从句构造器\ntype = 1   # 类型\n\nhide()\nt = \"陈述句作从句\"\nconn = \"that（可省略）\"\nex = \"I think (that) you are right.\"\nrule = \"语序：陈述语序（主语+谓语）\"\nif type == 2:\n    t = \"一般疑问句作从句\"\n    conn = \"if / whether（不可省）\"\n    ex = \"I wonder if he will come.\"\n    rule = \"疑问句要改成陈述语序\"\nif type == 3:\n    t = \"特殊疑问句作从句\"\n    conn = \"原来的疑问词（what/where/when/why/how）\"\n    ex = \"I don't know where he lives.\"\n    rule = \"保留疑问词+陈述语序\"\nfill_rect(0, 130, 340, 30, \"#2563eb\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 340, 42, \"#eff6ff\")\nwrite(\"连接词：\" + conn, 0, 76, \"#1d4ed8\", 12)\nfill_rect(0, 16, 340, 56, \"#fef3c7\")\nwrite(\"例：\" + ex, 0, 26, \"#b45309\", 10)\nwrite(rule, 0, 8, \"#92400e\", 9)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-36",
+  "island": "cross",
+  "order": 522,
+  "title": "宾语从句",
+  "emoji": "💬",
+  "subjectArea": "英语",
+  "gradeBand": "junior",
+  "grade": 9,
+  "textbook": "人教版英语（初中九年级）",
+  "curriculum": {
+    "module": "复合句·宾语从句",
+    "points": [
+      "宾语从句的连接词",
+      "语序永远陈述",
+      "时态呼应"
+    ]
+  },
+  "story": "I think (that) English is fun.——think 后面跟的那个小句子就是宾语从句！掌握\"一个连接词+陈述语序+时态呼应\"三原则，宾语从句就是送分题。",
+  "goals": [
+    "会选连接词",
+    "掌握陈述语序",
+    "会做时态呼应"
+  ],
+  "aiIntro": "💬 切换从句类型，看连接词和语序怎么定——宾语从句构造器！",
+  "lab": {
+    "params": [
+      {
+        "name": "type",
+        "label": "从句类型",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "type=1 that 什么时候可以省？",
+      "type=2 if 和 whether 的区别？",
+      "type=3 时态怎么呼应？"
+    ],
+    "code": "# 宾语从句构造器\ntype = 1   # 类型\n\nhide()\nt = \"陈述句作从句\"\nconn = \"that（可省略）\"\nex = \"I think (that) you are right.\"\nrule = \"语序：陈述语序（主语+谓语）\"\nif type == 2:\n    t = \"一般疑问句作从句\"\n    conn = \"if / whether（不可省）\"\n    ex = \"I wonder if he will come.\"\n    rule = \"疑问句要改成陈述语序\"\nif type == 3:\n    t = \"特殊疑问句作从句\"\n    conn = \"原来的疑问词（what/where/when/why/how）\"\n    ex = \"I don't know where he lives.\"\n    rule = \"保留疑问词+陈述语序\"\nfill_rect(0, 130, 340, 30, \"#2563eb\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 340, 42, \"#eff6ff\")\nwrite(\"连接词：\" + conn, 0, 76, \"#1d4ed8\", 12)\nfill_rect(0, 16, 340, 56, \"#fef3c7\")\nwrite(\"例：\" + ex, 0, 26, \"#b45309\", 10)\nwrite(rule, 0, 8, \"#92400e\", 9)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "连接词三选一",
+        "body": "【陈述句→that（口语可省）】I know (that) she likes music.\n【一般疑问句→if/whether】I ask if he is happy.\n【特殊疑问句→保留疑问词】Tell me what you want.\n选词看从句原来是哪种句子。"
+      },
+      {
+        "title": "语序：永远陈述",
+        "body": "【宾语从句永远用陈述语序（主语+谓语）】\nWhere does he live?→I don't know where he lives.（不是where does he live）\n这是最容易扣分的地方！\n口诀：从句开头疑问词，后面主谓要陈述。"
+      },
+      {
+        "title": "时态呼应",
+        "body": "【主句现在时→从句按实际需要】I think he came yesterday.\n【主句过去时→从句用过去某种时态】I thought he had come.\n【客观真理永远现在时】He said the earth is round.\n口诀：主现从随便，主过从过去，真理永现在。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "I don't know ___ he will come.",
+        "options": [
+          "if",
+          "that",
+          "what",
+          "where"
+        ],
+        "answer": 0,
+        "explain": "一般疑问句用if"
+      },
+      {
+        "q": "Can you tell me ___?",
+        "steps": [
+          "原句Where is the station？",
+          "改成陈述语序where the station is",
+          "Can you tell me where the station is？",
+          "不是where is the station"
+        ],
+        "tip": "陈述语序"
+      }
+    ],
+    "mistakes": [
+      "从句用了疑问语序（永远陈述）",
+      "客观真理用了过去时（永现在）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "I think ___ he is right.（填连接词）",
+      "options": [
+        "that",
+        "if",
+        "what",
+        "who"
+      ],
+      "answer": 0,
+      "explain": "陈述句用that"
+    },
+    {
+      "q": "I wonder ___ you can help me.",
+      "options": [
+        "if",
+        "that",
+        "what",
+        "who"
+      ],
+      "answer": 0,
+      "explain": "一般疑问用if"
+    },
+    {
+      "q": "Do you know ___ he lives?",
+      "options": [
+        "where",
+        "that",
+        "if",
+        "what"
+      ],
+      "answer": 0,
+      "explain": "疑问词where"
+    },
+    {
+      "q": "宾语从句的语序是？",
+      "options": [
+        "陈述语序",
+        "疑问语序",
+        "倒装",
+        "任意"
+      ],
+      "answer": 0,
+      "explain": "主谓不倒"
+    },
+    {
+      "q": "He said the earth ___ round.",
+      "options": [
+        "is",
+        "was",
+        "were",
+        "be"
+      ],
+      "answer": 0,
+      "explain": "真理永现在"
+    },
+    {
+      "q": "I thought you ___ finished it.",
+      "options": [
+        "had",
+        "have",
+        "has",
+        "having"
+      ],
+      "answer": 0,
+      "explain": "主过从过去"
+    }
+  ]
+}
