@@ -123,7 +123,7 @@ export default function ExamScreen() {
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-indigo-50 to-sky-50">
       <Header />
-      <main className="mx-auto w-full max-w-2xl flex-1 px-6 pb-10">
+      <main className="mx-auto w-full max-w-2xl flex-1 px-3 pb-10 sm:px-6">
         <div className="mb-4 flex items-center gap-3">
           <button onClick={() => nav(`/subject/${subject}`)} className="rounded-xl bg-white px-4 py-2 text-sm font-bold text-slate-600 shadow-sm transition hover:bg-slate-100">← 返回学科</button>
           <h1 className="text-2xl font-black text-slate-700">📝 {decodeURIComponent(subject)}·期末模拟卷</h1>

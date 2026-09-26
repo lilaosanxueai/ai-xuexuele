@@ -137,7 +137,7 @@ export default function FlashcardScreen() {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="mx-auto w-full max-w-3xl flex-1 px-6 pb-10">
+      <main className="mx-auto w-full max-w-3xl flex-1 px-3 pb-10 sm:px-6">
         <div className="mb-4 flex items-center gap-3">
           <button onClick={() => nav('/map')} className="rounded-xl bg-white px-4 py-2 text-sm font-bold text-slate-600 shadow-sm transition hover:bg-slate-100">← 返回地图</button>
           <h1 className="text-2xl font-black text-slate-700">🃏 闪卡复习</h1>
@@ -231,7 +231,7 @@ export default function FlashcardScreen() {
             </div>
             <button
               onClick={() => setFlipped(!flipped)}
-              className={`w-full rounded-3xl p-8 text-left shadow-lg transition ${flipped ? 'bg-white ring-2 ring-violet-300' : 'bg-gradient-to-br from-sky-500 to-indigo-500 text-white hover:-translate-y-0.5'}`}
+              className={`w-full rounded-3xl p-5 md:p-8 text-left shadow-lg transition ${flipped ? 'bg-white ring-2 ring-violet-300' : 'bg-gradient-to-br from-sky-500 to-indigo-500 text-white hover:-translate-y-0.5'}`}
             >
               <div className="mb-2 flex items-center gap-2 text-xs opacity-70">
                 <span>{flipped ? '背面 · 要点' : '正面 · 知识点'}</span>
@@ -243,7 +243,7 @@ export default function FlashcardScreen() {
                   >🔊</span>
                 )}
               </div>
-              <div className={`text-2xl font-black leading-relaxed ${flipped ? 'text-slate-800' : ''}`}>{flipped ? current.back : current.front}</div>
+              <div className={`text-lg font-black leading-relaxed md:text-2xl ${flipped ? 'text-slate-800' : ''}`}>{flipped ? current.back : current.front}</div>
               {!flipped && <div className="mt-6 text-center text-sm opacity-80">点击卡片查看答案 ✋</div>}
             </button>
             {flipped && (

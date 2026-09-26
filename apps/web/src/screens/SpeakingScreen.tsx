@@ -72,7 +72,7 @@ export default function SpeakingScreen() {
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-sky-50 to-cyan-50">
       <Header />
-      <main className="mx-auto w-full max-w-2xl flex-1 px-6 pb-10">
+      <main className="mx-auto w-full max-w-2xl flex-1 px-3 pb-10 sm:px-6">
         <div className="mb-4 flex items-center gap-3">
           <button onClick={() => nav('/map')} className="rounded-xl bg-white px-4 py-2 text-sm font-bold text-slate-600 shadow-sm transition hover:bg-slate-100">← 返回地图</button>
           <h1 className="text-2xl font-black text-slate-700">🗣 英语跟读</h1>
@@ -113,7 +113,7 @@ export default function SpeakingScreen() {
           <div className="mb-5 text-2xl font-black leading-relaxed text-slate-800">{current.text}</div>
           <div className="flex items-center justify-center gap-4">
             <button onClick={speak} disabled={!ttsOk}
-              className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-sky-400 to-blue-500 text-3xl text-white shadow-lg transition hover:scale-105 disabled:opacity-40"
+              className="flex h-16 w-16 md:h-20 md:w-20 items-center justify-center rounded-full bg-gradient-to-br from-sky-400 to-blue-500 text-3xl text-white shadow-lg transition hover:scale-105 disabled:opacity-40"
               title="听示范（语速放慢）">🔊</button>
             <button onClick={startRecord} disabled={recording}
               className={`flex h-20 w-20 items-center justify-center rounded-full text-3xl text-white shadow-lg transition hover:scale-105 ${recording ? 'animate-pulse bg-rose-500' : 'bg-gradient-to-br from-emerald-400 to-teal-500'}`}

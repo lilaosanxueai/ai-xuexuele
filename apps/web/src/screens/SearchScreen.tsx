@@ -47,7 +47,7 @@ export default function SearchScreen() {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="mx-auto w-full max-w-3xl flex-1 px-6 pb-10">
+      <main className="mx-auto w-full max-w-3xl flex-1 px-3 pb-10 sm:px-6">
         <div className="mb-4 flex items-center gap-3">
           <button onClick={() => nav('/map')} className="rounded-xl bg-white px-4 py-2 text-sm font-bold text-slate-600 shadow-sm transition hover:bg-slate-100">← 返回地图</button>
           <h1 className="text-2xl font-black text-slate-700">🔍 知识搜索</h1>

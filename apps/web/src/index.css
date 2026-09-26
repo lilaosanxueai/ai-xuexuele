@@ -42,3 +42,42 @@ body {
 /* 滚动条柔和一点 */
 *::-webkit-scrollbar { width: 8px; height: 8px; }
 *::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; }
+
+/* ===== 移动端自适应优化 ===== */
+
+/* 触屏：滑条拖动不触发页面滚动 */
+input[type="range"] {
+  touch-action: none;
+}
+
+/* 触屏：按钮点击不触发双击缩放 */
+button, a, [role="button"] {
+  touch-action: manipulation;
+}
+
+/* 手机端全局间距缩小 */
+@media (max-width: 640px) {
+  main {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+}
+
+/* 手机端按钮加大触控区 */
+@media (max-width: 640px) {
+  button {
+    min-height: 36px;
+  }
+}
+
+/* 手机端输入框增大字号（防 iOS 自动缩放） */
+@media (max-width: 640px) {
+  input[type="text"], input[type="search"], textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* 平板/手机端 canvas 触控 */
+canvas {
+  touch-action: none;
+}
