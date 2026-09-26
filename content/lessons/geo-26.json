@@ -1,0 +1,210 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "⛰",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：landform=1 山峰的等高线是什么形状？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：landform=3 山谷为什么可能有小河？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：landform=5 陡崖的等高线发生了什么？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 等高线透视台\nlandform = 1   # 1山峰 2山脊 3山谷 4鞍部 5陡崖\n\nhide()\nname = \"山峰：等高线闭合·数值从外向内增大\"\nif landform == 2:\n    name = \"山脊：等高线由高处凸向低处\"\nif landform == 3:\n    name = \"山谷：等高线由低处凸向高处·易发育河流\"\nif landform == 4:\n    name = \"鞍部：两山峰之间的低地·形似马鞍\"\nif landform == 5:\n    name = \"陡崖：多条等高线重叠一处·崖壁陡峭\"\nfill_rect(0, 130, 340, 30, \"#0ea5e9\")\nwrite(name, 0, 130, \"#fff\", 10)\nif landform == 1:\n    circle(0, 0, 74, \"#bae6fd\")\n    circle(0, 0, 54, \"#7dd3fc\")\n    circle(0, 0, 36, \"#38bdf8\")\n    circle(0, 0, 18, \"#0284c7\")\nif landform == 2:\n    fill_rect(0, 0, 230, 84, \"#bae6fd\")\n    fill_rect(0, 0, 160, 58, \"#7dd3fc\")\n    fill_rect(0, 0, 90, 32, \"#0284c7\")\n    write(\"坡面向两侧低处流\", 0, -60, \"#0369a1\", 10)\nif landform == 3:\n    i = 1\n    while i <= 3:\n        w = i * 34\n        pen_color(\"#38bdf8\")\n        pen_up()\n        go_to(0 - w, -24)\n        pen_down()\n        go_to(0, 40)\n        go_to(w, -24)\n        pen_up()\n        i = i + 1\n    write(\"集水线·可能有小河\", 0, -60, \"#0369a1\", 10)\nif landform == 4:\n    circle(-64, 10, 40, \"#7dd3fc\")\n    circle(-64, 10, 22, \"#0284c7\")\n    circle(64, 10, 40, \"#7dd3fc\")\n    circle(64, 10, 22, \"#0284c7\")\n    write(\"鞍部在两峰之间\", 0, -60, \"#0369a1\", 10)\nif landform == 5:\n    i = 0\n    while i < 5:\n        x = -48 + i * 24\n        pen_color(\"#0284c7\")\n        pen_up()\n        go_to(x, 56)\n        pen_down()\n        go_to(x, -40)\n        pen_up()\n        i = i + 1\n    write(\"等高线重叠=陡崖\", 0, -72, \"#0369a1\", 10)\n",
+  "celebrate": "新知识到手！",
+  "id": "geo-26",
+  "island": "cross",
+  "order": 531,
+  "title": "等高线地形图：山地的五副面孔",
+  "emoji": "⛰",
+  "subjectArea": "地理",
+  "gradeBand": "junior",
+  "grade": 7,
+  "textbook": "人教版地理（初中）",
+  "curriculum": {
+    "module": "地球与地图",
+    "points": [
+      "等高线原理",
+      "五种地形部位",
+      "判读应用"
+    ]
+  },
+  "story": "把一座山像切洋葱一样水平切片，再把每片轮廓投影到纸上，就得到等高线图。山峰、山脊、山谷、鞍部、陡崖——五种地形在图上各有各的「指纹」。",
+  "goals": [
+    "理解等高线原理",
+    "会判读五种地形部位",
+    "能应用等高线选路"
+  ],
+  "aiIntro": "⛰ 切换地形部位，看等高线形状怎么变——等高线透视台！",
+  "lab": {
+    "params": [
+      {
+        "name": "landform",
+        "label": "地形部位",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "landform=1 山峰的等高线是什么形状？",
+      "landform=3 山谷为什么可能有小河？",
+      "landform=5 陡崖的等高线发生了什么？"
+    ],
+    "code": "# 等高线透视台\nlandform = 1   # 1山峰 2山脊 3山谷 4鞍部 5陡崖\n\nhide()\nname = \"山峰：等高线闭合·数值从外向内增大\"\nif landform == 2:\n    name = \"山脊：等高线由高处凸向低处\"\nif landform == 3:\n    name = \"山谷：等高线由低处凸向高处·易发育河流\"\nif landform == 4:\n    name = \"鞍部：两山峰之间的低地·形似马鞍\"\nif landform == 5:\n    name = \"陡崖：多条等高线重叠一处·崖壁陡峭\"\nfill_rect(0, 130, 340, 30, \"#0ea5e9\")\nwrite(name, 0, 130, \"#fff\", 10)\nif landform == 1:\n    circle(0, 0, 74, \"#bae6fd\")\n    circle(0, 0, 54, \"#7dd3fc\")\n    circle(0, 0, 36, \"#38bdf8\")\n    circle(0, 0, 18, \"#0284c7\")\nif landform == 2:\n    fill_rect(0, 0, 230, 84, \"#bae6fd\")\n    fill_rect(0, 0, 160, 58, \"#7dd3fc\")\n    fill_rect(0, 0, 90, 32, \"#0284c7\")\n    write(\"坡面向两侧低处流\", 0, -60, \"#0369a1\", 10)\nif landform == 3:\n    i = 1\n    while i <= 3:\n        w = i * 34\n        pen_color(\"#38bdf8\")\n        pen_up()\n        go_to(0 - w, -24)\n        pen_down()\n        go_to(0, 40)\n        go_to(w, -24)\n        pen_up()\n        i = i + 1\n    write(\"集水线·可能有小河\", 0, -60, \"#0369a1\", 10)\nif landform == 4:\n    circle(-64, 10, 40, \"#7dd3fc\")\n    circle(-64, 10, 22, \"#0284c7\")\n    circle(64, 10, 40, \"#7dd3fc\")\n    circle(64, 10, 22, \"#0284c7\")\n    write(\"鞍部在两峰之间\", 0, -60, \"#0369a1\", 10)\nif landform == 5:\n    i = 0\n    while i < 5:\n        x = -48 + i * 24\n        pen_color(\"#0284c7\")\n        pen_up()\n        go_to(x, 56)\n        pen_down()\n        go_to(x, -40)\n        pen_up()\n        i = i + 1\n    write(\"等高线重叠=陡崖\", 0, -72, \"#0369a1\", 10)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "等高线原理",
+        "body": "【等高线：海拔相同点的连线】\n同线等高·同图等距（相邻线高差相同）。\n密陡疏缓：等高线密集=坡陡·稀疏=坡缓。\n等高线是俯视的「山 slices 投影」。"
+      },
+      {
+        "title": "五种地形部位",
+        "body": "【山峰：闭合圈·内大外小·标三角▲】\n【山脊：曲线凸向低处·分水线】\n【山谷：曲线凸向高处·集水线·易有河】\n【鞍部：两峰之间·马鞍形】\n【陡崖：多条线重叠·适合攀岩·危险】\n口诀：脊凸低·谷凸高。"
+      },
+      {
+        "title": "判读应用",
+        "body": "【选爬山路线：等高线稀疏的缓坡省力】\n【找水源：山谷集水·沿谷找溪流】\n【修水库：选口小肚大的盆地地形】\n【露营避险：避开陡崖和谷底（山洪）】\n会读等高线=拿着一张会说话的地形说明书。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "怎么在等高线图上选最省力的爬山路线？",
+        "steps": [
+          "找等高线稀疏的方向",
+          "稀疏=坡度缓",
+          "沿缓坡修路省力",
+          "避开密集线和陡崖"
+        ],
+        "tip": "密陡疏缓"
+      },
+      {
+        "q": "图上等高线向海拔高处凸出，这是什么？",
+        "steps": [
+          "凸向高处=山谷",
+          "山谷是集水线",
+          "可能有河流发育",
+          "山脊正好相反（凸向低处）"
+        ],
+        "tip": "脊凸低谷凸高"
+      }
+    ],
+    "mistakes": [
+      "山脊山谷的凸向记反（脊凸低·谷凸高）",
+      "认为等高线越密坡越缓（越密越陡）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "等高线密集说明坡度？",
+      "options": [
+        "陡",
+        "缓",
+        "平地",
+        "垂直"
+      ],
+      "answer": 0,
+      "explain": "密陡疏缓"
+    },
+    {
+      "q": "山峰的等高线是？",
+      "options": [
+        "闭合圈且内大外小",
+        "直线",
+        "交叉线",
+        "波浪线"
+      ],
+      "answer": 0,
+      "explain": "同心闭合"
+    },
+    {
+      "q": "等高线凸向低处的是？",
+      "options": [
+        "山脊",
+        "山谷",
+        "鞍部",
+        "陡崖"
+      ],
+      "answer": 0,
+      "explain": "脊凸低"
+    },
+    {
+      "q": "容易发育河流的是？",
+      "options": [
+        "山谷",
+        "山脊",
+        "陡崖",
+        "鞍部"
+      ],
+      "answer": 0,
+      "explain": "集水线"
+    },
+    {
+      "q": "两山峰之间的低地叫？",
+      "options": [
+        "鞍部",
+        "盆地",
+        "峡谷",
+        "平原"
+      ],
+      "answer": 0,
+      "explain": "马鞍形"
+    },
+    {
+      "q": "多条等高线重叠表示？",
+      "options": [
+        "陡崖",
+        "平原",
+        "湖泊",
+        "道路"
+      ],
+      "answer": 0,
+      "explain": "崖壁陡峭"
+    }
+  ]
+}
