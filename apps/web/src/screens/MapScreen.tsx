@@ -621,6 +621,14 @@ export default function MapScreen() {
             <div className="mt-2 text-xl font-black">听写训练</div>
             <div className="mt-1 text-xs opacity-90">听音写词 · 语文生字 + 英语单词 · 错词重练</div>
           </button>
+          <button
+            onClick={() => nav('/poem')}
+            className="rounded-3xl bg-gradient-to-br from-amber-400 to-orange-500 p-6 text-center text-white shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
+          >
+            <div className="text-5xl">📜</div>
+            <div className="mt-2 text-xl font-black">古诗词默写</div>
+            <div className="mt-1 text-xs opacity-90">22 首必背古诗 · 补字/接句双模式 · 忽略标点判分</div>
+          </button>
         </section>
       </main>
 
