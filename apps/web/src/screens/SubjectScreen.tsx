@@ -7,6 +7,7 @@ import Header from '../components/Header.tsx';
 import ExercisePanel from '../components/ExercisePanel.tsx';
 import { SUBJECTS, SUBJECT_STYLE } from '../components/subjectMeta.ts';
 import { collectModules, generateStudyPlan, todayModules, type StudyPlan } from '../runtime/studyPlan.ts';
+import { difficultyStars, starsDisplay, difficultyLabel } from '../runtime/difficulty.ts';
 
 /** 学科页：该学科按学段分组的全部课程，含课标标注。理科动态演示课进互动实验室，其余进辅导页 */
 const BAND_ORDER = ['primary', 'junior', 'senior'] as const;
@@ -255,6 +256,7 @@ export default function SubjectScreen() {
                         {l.subject ? `${l.subject.emoji} ${l.subject.name}` : l.curriculum ? `📗 ${l.curriculum.module}` : ''}
                         {l.curriculum ? ` · ${l.curriculum.points.slice(0, 2).join(' / ')}` : ''}
                         {l.textbook ? ` · 📚 ${l.textbook}` : ''}
+                        {' · '}{(() => { const d = difficultyStars(l); return starsDisplay(d) + ' ' + difficultyLabel(d); })()}
                       </div>
                     </div>
                     <span className="shrink-0 text-xl">{isDone ? '✅' : '▶'}</span>
