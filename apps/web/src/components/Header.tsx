@@ -9,7 +9,7 @@ export default function Header() {
       <Link to="/map" className="text-xl font-black text-sky-700 md:text-2xl">📖 AI学学乐</Link>
       <nav className="flex gap-0.5 md:ml-6 md:gap-1">
         <NavLink to="/map">📚 <span className="hidden sm:inline">学习中心</span></NavLink>
-        <NavLink to="/ask">💬 <span className="hidden sm:inline">问 AI</span></NavLink>
+        <NavLink to="/ask">💬 <span className="hidden sm:inline">答疑</span></NavLink>
         <NavLink to="/gallery">🖼 <span className="hidden sm:inline">作品墙</span></NavLink>
       </nav>
       <div className="ml-auto flex items-center gap-1.5 md:gap-2">

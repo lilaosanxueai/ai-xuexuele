@@ -307,8 +307,8 @@ export default function LabScreen() {
                 {quizDone ? '✅ 随堂小练' : '📝 随堂小练'}
               </button>
             ) : null}
-            {/* 原生互动卡课没有代码可看 */}
-            {!lesson.interact && (
+            {/* 「看代码」只属于信息科技编程课；其他学科的演示代码只是内部渲染引擎，不暴露 */}
+            {!lesson.interact && lesson.subjectArea === '信息科技' && (
               <button onClick={() => nav(`/practice/${lesson.id}`)} className="rounded-xl bg-white/80 px-3 py-1.5 text-sm font-bold text-slate-600 shadow-sm hover:bg-white" title="查看和修改演示代码">⌨ 看代码</button>
             )}
             <button
@@ -367,7 +367,7 @@ export default function LabScreen() {
                 />
               </div>
             ))}
-            {!lesson.interact && (
+            {lesson.subjectArea === '信息科技' && !lesson.interact && (
               <button
                 onClick={() => runLab(baseCode, values, 'normal')}
                 disabled={slowRunning}

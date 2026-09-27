@@ -578,7 +578,7 @@ export default function MapScreen() {
             className="rounded-3xl bg-gradient-to-br from-indigo-400 to-violet-500 p-6 text-center text-white shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
           >
             <div className="text-5xl">💬</div>
-            <div className="mt-2 text-xl font-black">问 AI 老师</div>
+            <div className="mt-2 text-xl font-black">问老师 · 答疑</div>
             <div className="mt-1 text-xs opacity-90">作业不会做、知识点没听懂，什么学科都可以问</div>
           </button>
           <button

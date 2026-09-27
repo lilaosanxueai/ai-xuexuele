@@ -49,7 +49,7 @@ export default function HomeScreen() {
       <div className="text-center pt-16 pb-10">
         <div className="text-7xl">📖</div>
         <h1 className="mt-3 text-4xl font-black text-sky-800">AI学学乐</h1>
-        <p className="mt-2 text-slate-500">AI 老师辅导学科学习 · 15 学科 · 覆盖小学到高中</p>
+        <p className="mt-2 text-slate-500">互动课程自学 · 15 学科 · 覆盖小学到高中</p>
       </div>
 
       <div className="mx-auto w-full max-w-3xl px-6 pb-4">

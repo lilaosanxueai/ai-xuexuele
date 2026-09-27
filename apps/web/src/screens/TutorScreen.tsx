@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import type { Lesson, Settings, WrongItem } from '@shared/types.ts';
-import { DEFAULT_SETTINGS } from '@shared/types.ts';
+import type { Lesson, WrongItem } from '@shared/types.ts';
 import MindmapView from '../components/MindmapView.tsx';
 import LessonNoteEditor from '../components/LessonNoteEditor.tsx';
 import { findCrossLinks } from '../runtime/crossLink.ts';
@@ -10,39 +9,26 @@ import type { Lesson as LessonType } from '@shared/types.ts';
 import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
-import AIBuddy, { type BuddyHandle } from '../components/AIBuddy.tsx';
 import ExercisePanel from '../components/ExercisePanel.tsx';
 import TeachPanel from '../components/TeachPanel.tsx';
-import { socraticOnWrong, socraticOnPerfect } from '../runtime/socratic.ts';
-
-/** 学科辅导场景的快捷提问（替代默认的编程向问题） */
-const TUTOR_QUICK: Partial<Record<'explain' | 'hint' | 'review', string[]>> = {
-  explain: ['这一课的重点是什么？', '这个知识点怎么用？'],
-  hint: ['这道题我不会做', '给我一点提示'],
-  review: ['我这课学得怎么样？'],
-};
 
 /**
- * AI 辅导页（重构后的课程学习主入口）：
- * 左栏导学卡（目标/知识点/教材） + 主区 AI 老师对话 + 随堂小练闭环 + 可选动手演示。
- * 没有任务点亮、没有通关庆祝——学习本身是主线。
+ * 课程阅读页（现代自学形态）：
+ * 左栏导学卡（目标/知识点/引入） + 主区课本讲解正文 + 思维导图 + 笔记 + 跨学科链接。
+ * 学习流程内不嵌 AI 对话；有疑问走独立「问老师」页（/ask）。
  */
 export default function TutorScreen() {
   const { id } = useParams();
   const nav = useNavigate();
   const { current: profile } = useProfileStore();
   const [lesson, setLesson] = useState<Lesson | null>(null);
-  const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
   const [quizOpen, setQuizOpen] = useState(false);
   const [quizDone, setQuizDone] = useState(false);
-  const [buddyOpen, setBuddyOpen] = useState(false);
   const [allLessons, setAllLessons] = useState<LessonType[]>([]);
-  const buddyRef = useRef<BuddyHandle>(null);
 
   useEffect(() => {
     if (!profile) { nav('/'); return; }
     setQuizDone(false);
-    void api.settings().then(setSettings).catch(() => {});
     void api.lessons().then((all) => {
       setAllLessons(all);
       const l = all.find((x) => x.id === id) ?? null;
@@ -59,19 +45,6 @@ export default function TutorScreen() {
 
   const bandText = lesson.gradeBand === 'senior' ? '高中' : lesson.gradeBand === 'junior' ? '初中' : '小学';
   const hasPractice = (lesson.toolbox?.length ?? 0) > 0 || !!lesson.starterCode;
-
-  const getContext = () => ({
-    screen: 'tutor' as const,
-    lessonTitle: lesson.title,
-    lessonGoals: lesson.goals,
-    curriculumModule: lesson.curriculum?.module,
-    curriculumPoints: lesson.curriculum?.points,
-    textbook: lesson.textbook,
-    grade: lesson.grade,
-    subjectArea: lesson.subjectArea,
-    lessonStory: lesson.story?.slice(0, 200),
-    hintPrompts: lesson.tasks.find((t) => !t.optional)?.hintPrompts,
-  });
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-50">
@@ -116,23 +89,13 @@ export default function TutorScreen() {
       <main className="mx-auto grid w-full max-w-6xl flex-1 gap-4 p-4 lg:grid-cols-[320px_1fr]">
         {/* 左：本课导学 */}
         <aside className="space-y-3">
-          {lesson.teach ? (
-            <button
-              onClick={() => setBuddyOpen(true)}
-              className="w-full rounded-2xl bg-white p-4 text-left shadow-sm ring-1 ring-slate-200 transition hover:ring-sky-300"
-            >
-              <div className="text-base font-black text-slate-700">💬 看完讲解还有疑问？</div>
-              <div className="mt-0.5 text-xs text-slate-500">点这里问老师（讲解正文在右边，先自己读）</div>
-            </button>
-          ) : (
-            <button
-              onClick={() => buddyRef.current?.askInMode('explain', `请给我讲讲《${lesson.title}》这一课：我要学什么？最重要的知识点是什么？`)}
-              className="w-full rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-500 p-4 text-left text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
-            >
-              <div className="text-base font-black">📖 让 AI 老师讲讲这一课</div>
-              <div className="mt-0.5 text-xs opacity-85">听不懂就追问，随时可以换种讲法</div>
-            </button>
-          )}
+          <button
+            onClick={() => nav('/ask')}
+            className="w-full rounded-2xl bg-white p-4 text-left shadow-sm ring-1 ring-slate-200 transition hover:ring-sky-300"
+          >
+            <div className="text-base font-black text-slate-700">💬 有疑问？问老师</div>
+            <div className="mt-0.5 text-xs text-slate-500">先读右边讲解正文，卡住了再去答疑页问</div>
+          </button>
 
           <div className="rounded-2xl bg-white p-4 shadow-sm">
             <div className="mb-2 text-sm font-black text-slate-700">🎯 学习目标</div>
@@ -194,7 +157,7 @@ export default function TutorScreen() {
           </div>
         </aside>
 
-        {/* 右：有课本讲解时，讲解正文是主区（可脱离 AI 自学）；否则主区为 AI 对话 */}
+        {/* 右：课本讲解正文是主区（现代自学阅读形态） */}
       {lesson.teach ? (
         <section className="min-h-[70vh] overflow-y-auto rounded-2xl bg-slate-50 p-4 shadow-md lg:h-[calc(100vh-7.5rem)]">
           {/* 开场一问（李永乐式钩子） */}
@@ -238,42 +201,15 @@ export default function TutorScreen() {
           })()}
         </section>
       ) : (
-        <section className="min-h-[70vh] overflow-hidden rounded-2xl bg-white/80 shadow-md lg:h-[calc(100vh-7.5rem)]">
-          <AIBuddy
-            ref={buddyRef}
-            profileId={profile.id}
-            buddy={settings.buddy}
-            intro={lesson.aiIntro || `你好！我是${settings.buddy.name}。今天我们一起学《${lesson.title}》。点左边的「让 AI 老师讲讲这一课」开始，有任何不懂的随时问我！`}
-            defaultMode="explain"
-            modes={['explain', 'hint', 'review']}
-            quick={TUTOR_QUICK}
-            subtitle="AI 学科辅导老师"
-            getContext={getContext}
-          />
+        <section className="flex min-h-[70vh] flex-col items-center justify-center gap-4 rounded-2xl bg-white/80 p-8 text-center shadow-md lg:h-[calc(100vh-7.5rem)]">
+          <div className="text-5xl">{lesson.emoji}</div>
+          <div className="text-xl font-black text-slate-700">{lesson.title}</div>
+          <p className="max-w-md text-sm leading-relaxed text-slate-500">
+            这是一节动手课：看左边的学习目标，点「▶ 动手演示」开始练习；有疑问去「问老师」页。
+          </p>
         </section>
       )}
       </main>
-
-      {/* 讲解课的 AI 答疑浮窗（讲解为主、AI 为辅） */}
-      {lesson.teach && (
-        <div
-          className={`fixed bottom-4 right-4 top-20 z-40 w-full max-w-[calc(100vw-2rem)] transition-all duration-300 md:w-[22rem] ${
-            buddyOpen ? 'translate-x-0 opacity-100' : 'pointer-events-none translate-x-8 opacity-0'
-          }`}
-        >
-          <AIBuddy
-            ref={buddyRef}
-            profileId={profile.id}
-            buddy={settings.buddy}
-            intro={lesson.aiIntro || `我是${settings.buddy.name}。先读右边的讲解，哪里没看懂就问我！`}
-            defaultMode="explain"
-            modes={['explain', 'hint', 'review']}
-            quick={TUTOR_QUICK}
-            subtitle="答疑老师"
-            getContext={getContext}
-          />
-        </div>
-      )}
 
       {/* 随堂小练：做完即记录完成（无庆祝），错题自动进错题本 */}
       {quizOpen && lesson.exercises && profile && (
@@ -294,9 +230,6 @@ export default function TutorScreen() {
               };
             });
             setQuizDone(true);
-            // 练习复盘：苏格拉底式——有错引导回看讲解，全对检验能否举例（费曼技巧）
-            if (wrongs.length > 0) buddyRef.current?.sayLocal(socraticOnWrong(correct, lesson.exercises!.length, lesson.title));
-            else buddyRef.current?.sayLocal(socraticOnPerfect());
             void api.updateProgress(profile.id, {
               lessonId: lesson.id,
               completed: true,

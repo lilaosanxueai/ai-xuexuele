@@ -524,7 +524,7 @@ function SettingsTab() {
   return (
     <div className="max-w-xl space-y-5 rounded-2xl bg-white/80 p-6">
       <div>
-        <h3 className="mb-3 font-black">🤖 AI 伙伴</h3>
+        <h3 className="mb-3 font-black">🤖 答疑老师形象</h3>
         <div className="flex items-center gap-3">
           <input
             value={settings.buddy.emoji}
