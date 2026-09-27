@@ -30,6 +30,23 @@ describe('sampleQuestions 抽样', () => {
     expect(sampleQuestions([], { count: 10 })).toHaveLength(0);
     expect(sampleQuestions([mkLesson('y', '音乐', 'senior')], { subject: '数学' })).toHaveLength(0);
   });
+  it('带年级时：同龄课优先入卷，不足用其他年级补齐', () => {
+    const g3 = [mkLesson('a1', '数学', 'primary'), mkLesson('a2', '数学', 'primary')];
+    // 显式覆盖为其他年级，制造「同龄池不足」场景
+    const others = [{ ...mkLesson('b1', '数学', 'junior'), grade: 8 }, { ...mkLesson('b2', '数学', 'senior'), grade: 10 }];
+    // 年级内只有 2 课 → 抽 3 题时 2 题来自 g3，1 题来自其他年级
+    const qs = sampleQuestions([...g3, ...others], { count: 3, grade: 3 });
+    expect(qs).toHaveLength(3);
+    const fromG3 = qs.filter((q) => q.lessonId.startsWith('a')).length;
+    expect(fromG3).toBe(2);
+    // 年级内充足 → 全部来自同龄课
+    const rich = sampleQuestions([...g3, ...others], { count: 2, grade: 3 });
+    expect(rich.every((q) => q.lessonId.startsWith('a'))).toBe(true);
+  });
+  it('带年级但该年级无课时：退回全学科抽样', () => {
+    const qs = sampleQuestions([mkLesson('z', '数学', 'junior')], { count: 5, grade: 7 });
+    expect(qs).toHaveLength(1);
+  });
 });
 
 describe('scoreFor 连击计分', () => {

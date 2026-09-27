@@ -15,13 +15,14 @@ export interface ChallengeQ {
   explain: string;
 }
 
-/** 从题库抽样：默认每课最多抽 1 题保证覆盖面，学科/学段可过滤 */
+/** 从题库抽样：默认每课最多抽 1 题保证覆盖面，学科/学段可过滤；带 grade 时同龄课优先入卷 */
 export function sampleQuestions(
   lessons: Lesson[],
-  opts: { subject?: string; gradeBand?: string; count?: number } = {},
+  opts: { subject?: string; gradeBand?: string; count?: number; grade?: number } = {},
 ): ChallengeQ[] {
-  const { subject, gradeBand, count = 10 } = opts;
+  const { subject, gradeBand, count = 10, grade } = opts;
   const pool: ChallengeQ[] = [];
+  const gradePool: ChallengeQ[] = [];
   for (const l of lessons) {
     if (subject && subject !== '全部' && (l.subjectArea ?? '信息科技') !== subject) continue;
     if (gradeBand && gradeBand !== '全部' && l.gradeBand !== gradeBand) continue;
@@ -29,17 +30,31 @@ export function sampleQuestions(
     if (exs.length === 0) continue;
     // 每课随机挑 1 题（挑战赛重覆盖不重深度）
     const pick = exs[Math.floor(Math.random() * exs.length)];
-    pool.push({
+    const item: ChallengeQ = {
       lessonId: l.id, lessonTitle: l.title, subjectArea: l.subjectArea ?? '信息科技',
       q: pick.q, options: pick.options, answer: pick.answer, explain: pick.explain,
-    });
+    };
+    pool.push(item);
+    if (grade != null && l.grade === grade) gradePool.push(item);
   }
-  // Fisher-Yates 洗牌后取前 count 题
-  for (let i = pool.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [pool[i], pool[j]] = [pool[j], pool[i]];
+  // 洗牌函数
+  const shuffle = (arr: ChallengeQ[]) => {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  };
+  // 同龄优先：年级内题目不足 count 时用全学科题补齐
+  if (grade != null && gradePool.length > 0) {
+    const picked = shuffle([...gradePool]).slice(0, count);
+    if (picked.length < count) {
+      const rest = shuffle(pool.filter((x) => !gradePool.includes(x)));
+      picked.push(...rest.slice(0, count - picked.length));
+    }
+    return picked;
   }
-  return pool.slice(0, count);
+  return shuffle(pool).slice(0, count);
 }
 
 /** 答对一题的得分：基础 10 分 + 连击加成（每连击 +2，封顶 +10） */

@@ -91,7 +91,8 @@ export default function ExamScreen() {
   useEffect(() => { answersRef.current = answers; }, [answers]);
 
   const start = () => {
-    const qs = sampleQuestions(subjectLessons, { count: TOTAL });
+    if (!profile) return;
+    const qs = sampleQuestions(subjectLessons, { count: TOTAL, grade: profile.grade });
     if (qs.length === 0) return;
     submittedRef.current = false;
     setQueue(qs);
@@ -133,6 +134,9 @@ export default function ExamScreen() {
           <div className="rounded-3xl bg-white/90 p-6 shadow-md">
             <div className="mb-4 rounded-2xl bg-indigo-50 p-4 text-sm leading-relaxed text-indigo-900">
               📋 考试说明：从本学科 {subjectLessons.length} 节课中抽取最多 {TOTAL} 题（覆盖不同课标模块）· 限时 30 分钟 · 不限答题顺序感受（逐题作答，即时判分）· 到点自动交卷 · 答错的题自动进错题本。
+              {profile.grade != null && subjectLessons.some((l) => l.grade === profile.grade) && (
+                <b className="text-indigo-700"> 本卷优先出 {profile.grade} 年级课程的题目。</b>
+              )}
             </div>
             <div className="mb-4 text-xs text-slate-400">本学科课程库：{subjectLessons.length} 节 · 涵盖 {[...new Set(subjectLessons.map((l) => l.curriculum?.module).filter(Boolean))].length} 个课标模块</div>
             <button onClick={start} disabled={subjectLessons.length === 0} className="w-full rounded-2xl bg-gradient-to-r from-indigo-500 to-sky-500 py-3.5 text-lg font-black text-white shadow-lg transition hover:-translate-y-0.5 disabled:opacity-50">
