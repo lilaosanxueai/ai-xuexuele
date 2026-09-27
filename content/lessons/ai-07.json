@@ -11,7 +11,7 @@
   ],
   "toolbox": [],
   "codeLesson": true,
-  "starterCode": "# 二分查找：每次猜中间，排除一半！\nsecret = random(1, 100)   # 程序心里想一个数\nlow = 1\nhigh = 100\ncount = 0\n\nsay(\"我想好了 1~100 的一个数，开猜！\")\n\n# 只要还没猜中就一直猜\nwhile low < high:\n    mid = (low + high) / 2      # 中间位置（自动取整也没关系）\n    count = count + 1\n    if mid == secret:\n        low = mid\n        high = mid\n    else:\n        if mid < secret:\n            low = mid + 1       # 猜小了：答案在右半边\n        else:\n            high = mid - 1      # 猜大了：答案在左半边\n    say(\"第 \" + count + \" 次猜 \" + mid + \"，范围缩小到 \" + low + \"~\" + high)\n    wait(0.5)\n\nsay(\"猜中了！\" + secret + \"，只用了 \" + count + \" 次！\")\n",
+  "starterCode": "# 二分查找：每次猜中间，范围砍一半！\nsecret = 50   # 程序心里想的数（1~100）\n\nhide()\nfill_rect(0, 140, 330, 34, \"#2563eb\")\nwrite(\"二分查找：每猜一次，范围砍一半\", 0, 140, \"#fff\", 13)\nwrite(\"不管目标数是几，最多 7 次必中\", 0, 114, \"#64748b\", 10)\nleft = 100\nk = 0\nwhile k < 7:\n    y = 88 - k * 32\n    w = left * 3.1\n    fill_rect(20, y, w, 22, \"#10b981\")\n    write(\"第\" + (k + 1) + \"次\", -158, y, \"#64748b\", 10)\n    write(\"剩 \" + left + \" 个\", 20 + w / 2 + 34, y, \"#065f46\", 10)\n    q = 0\n    r = left\n    while r >= 2:\n        r = r - 2\n        q = q + 1\n    left = q\n    k = k + 1\nwrite(\"100 个数：7 次必中；顺序找最多 100 次\", 0, -132, \"#dc2626\", 12)",
   "actor": {
     "costume": "🎯",
     "x": -60,
@@ -200,6 +200,19 @@
     ],
     "mistakes": [
       "在无序数据上用二分——必须先排序，否则\"排除一半\"不成立"
+    ]
+  },
+  "lab": {
+    "code": "# 二分查找：每次猜中间，范围砍一半！\nsecret = 50   # 程序心里想的数（1~100）\n\nhide()\nfill_rect(0, 140, 330, 34, \"#2563eb\")\nwrite(\"二分查找：每猜一次，范围砍一半\", 0, 140, \"#fff\", 13)\nwrite(\"不管目标数是几，最多 7 次必中\", 0, 114, \"#64748b\", 10)\nleft = 100\nk = 0\nwhile k < 7:\n    y = 88 - k * 32\n    w = left * 3.1\n    fill_rect(20, y, w, 22, \"#10b981\")\n    write(\"第\" + (k + 1) + \"次\", -158, y, \"#64748b\", 10)\n    write(\"剩 \" + left + \" 个\", 20 + w / 2 + 34, y, \"#065f46\", 10)\n    q = 0\n    r = left\n    while r >= 2:\n        r = r - 2\n        q = q + 1\n    left = q\n    k = k + 1\nwrite(\"100 个数：7 次必中；顺序找最多 100 次\", 0, -132, \"#dc2626\", 12)",
+    "params": [
+      {
+        "name": "secret",
+        "label": "目标数",
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "value": 50
+      }
     ]
   }
 }

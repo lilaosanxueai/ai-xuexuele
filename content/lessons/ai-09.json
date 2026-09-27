@@ -11,7 +11,7 @@
   ],
   "toolbox": [],
   "codeLesson": true,
-  "starterCode": "# 算法竞速：数步数！\nn = 100\n\ncostume(\"⏱\")\n\n# 选手 1：顺序查找——最多走 n 步\ncount1 = 0\nfor i in range(0, n):\n    count1 = count1 + 1\nsay(\"顺序查找：\" + count1 + \" 步\")\n\n# 选手 2：二分查找——每次砍一半\ncount2 = 0\nleft = n\nwhile left > 1:\n    left = left / 2\n    count2 = count2 + 1\nsay(\"二分查找：\" + count2 + \" 步\")\n\n# 选手 3：冒泡排序风格——双层循环 n×n 步\ncount3 = 0\nfor i in range(0, 10):\n    for j in range(0, 10):\n        count3 = count3 + 1\nsay(\"嵌套循环(10×10)：\" + count3 + \" 步\")\n\nsay(\"结论：n=100 时，查找 100 步 vs 7 步，排序要 10000 步！\")\n",
+  "starterCode": "# 算法竞速：同样找 1 个数，步数天差地别\nn = 100   # 数据规模 n\n\nhide()\nfill_rect(0, 140, 330, 34, \"#2563eb\")\nwrite(\"算法快慢：数一数步数（n = \" + n + \"）\", 0, 140, \"#fff\", 13)\ncnt = 0\nleft = n\nwhile left > 1:\n    left = left / 2\n    cnt = cnt + 1\nwrite(\"二分查找 ≈ \" + cnt + \" 步\", 0, 104, \"#047857\", 11)\nfill_rect(0, 88, 320, 20, \"#10b981\")\nwrite(\"顺序查找 = \" + n + \" 步\", 0, 64, \"#b45309\", 11)\nfill_rect(0, 48, 320, 20, \"#f59e0b\")\nwrite(\"冒泡排序 = \" + (n * n) + \" 步\", 0, 24, \"#be123c\", 11)\nfill_rect(0, 8, 320, 20, \"#f43f5e\")\nwrite(\"条一样长？差距太大画不下——\", 0, -24, \"#64748b\", 10)\nwrite(\"如果画准：绿的 \" + cnt + \"，黄的 \" + n + \"，红的 \" + (n * n) + \"！\", 0, -46, \"#64748b\", 10)\nwrite(\"n 变 10 倍：二分只多几步，排序慢 100 倍\", 0, -74, \"#dc2626\", 11)",
   "actor": {
     "costume": "⏱",
     "x": -60,
@@ -199,6 +199,19 @@
     ],
     "mistakes": [
       "认为\"快电脑能弥补慢算法\"——数据量一大，n² 会把任何电脑拖垮"
+    ]
+  },
+  "lab": {
+    "code": "# 算法竞速：同样找 1 个数，步数天差地别\nn = 100   # 数据规模 n\n\nhide()\nfill_rect(0, 140, 330, 34, \"#2563eb\")\nwrite(\"算法快慢：数一数步数（n = \" + n + \"）\", 0, 140, \"#fff\", 13)\ncnt = 0\nleft = n\nwhile left > 1:\n    left = left / 2\n    cnt = cnt + 1\nwrite(\"二分查找 ≈ \" + cnt + \" 步\", 0, 104, \"#047857\", 11)\nfill_rect(0, 88, 320, 20, \"#10b981\")\nwrite(\"顺序查找 = \" + n + \" 步\", 0, 64, \"#b45309\", 11)\nfill_rect(0, 48, 320, 20, \"#f59e0b\")\nwrite(\"冒泡排序 = \" + (n * n) + \" 步\", 0, 24, \"#be123c\", 11)\nfill_rect(0, 8, 320, 20, \"#f43f5e\")\nwrite(\"条一样长？差距太大画不下——\", 0, -24, \"#64748b\", 10)\nwrite(\"如果画准：绿的 \" + cnt + \"，黄的 \" + n + \"，红的 \" + (n * n) + \"！\", 0, -46, \"#64748b\", 10)\nwrite(\"n 变 10 倍：二分只多几步，排序慢 100 倍\", 0, -74, \"#dc2626\", 11)",
+    "params": [
+      {
+        "name": "n",
+        "label": "数据规模 n",
+        "min": 10,
+        "max": 1000,
+        "step": 10,
+        "value": 100
+      }
     ]
   }
 }

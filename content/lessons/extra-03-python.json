@@ -5,7 +5,7 @@
   "title": "和 Python 打招呼",
   "emoji": "🐍",
   "codeLesson": true,
-  "starterCode": "# 欢迎来到 Python 的世界！\n# 这些字就是真正的代码——学校信息技术课教的就是它\n# 点右边的 ▶ 运行，看看会发生什么\n\nsay(\"你好，Python！\")\nwait(0.5)\n\nfor _ in range(4):\n    move(80)\n    turn_right(90)\n    wait(0.3)\n\nsay(\"我用代码画了一个方块！\")\nplay(\"cheer\")\n",
+  "starterCode": "# 欢迎来到 Python 的世界！\n# 下面这些字就是真正的代码——点「▶ 慢速看过程」看它怎么画图\nhide()\ngo_to(-70, -20)\npen_color(\"#2563eb\")\npen_down()\ni = 0\nwhile i < 4:\n    move(110)\n    turn_right(90)\n    i = i + 1\npen_up()\nwrite(\"你好，Python！\", 0, 115, \"#dc2626\", 15)\nwrite(\"这个方块就是 4 行循环画出来的\", 0, -60, \"#2563eb\", 12)\nwrite(\"去「⌨ 代码」里改改 move(110) 的数字试试？\", 0, -85, \"#64748b\", 10)",
   "story": "AI学学乐的码头来了一位新朋友：蟒蛇 Python！它不看积木，只认「文字指令」。别怕——你已经会用积木编程了，代码只是同一件事的另一种写法，而且全世界的大程序员都在用它。",
   "goals": [
     "看懂简单的 Python 代码",
@@ -174,5 +174,8 @@
     "mistakes": [
       "引号只写一半——引号必须成对，颜色提示会帮你发现"
     ]
+  },
+  "lab": {
+    "code": "# 欢迎来到 Python 的世界！\n# 下面这些字就是真正的代码——点「▶ 慢速看过程」看它怎么画图\nhide()\ngo_to(-70, -20)\npen_color(\"#2563eb\")\npen_down()\ni = 0\nwhile i < 4:\n    move(110)\n    turn_right(90)\n    i = i + 1\npen_up()\nwrite(\"你好，Python！\", 0, 115, \"#dc2626\", 15)\nwrite(\"这个方块就是 4 行循环画出来的\", 0, -60, \"#2563eb\", 12)\nwrite(\"去「⌨ 代码」里改改 move(110) 的数字试试？\", 0, -85, \"#64748b\", 10)"
   }
 }

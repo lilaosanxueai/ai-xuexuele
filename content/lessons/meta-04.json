@@ -52,7 +52,7 @@
     }
   ],
   "codeLesson": true,
-  "starterCode": "st = 1\nfill_rect(0, 130, 340, 30, \"#1d4ed8\")\nwrite(cur_step, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 340, 42, \"#eff6ff\")\nwrite(cur_desc, 0, 76, \"#1d4ed8\", 10)\nfill_rect(0, 16, 340, 56, \"#fef3c7\")\nwrite(\"要领：\" + cur_tip, 0, 16, \"#b45309\", 11)\ni = 0\nwhile i < 5:\n    x = -120 + i * 60\n    if i + 1 <= st:\n        circle(x, -50, 20, \"#1d4ed8\")\n    if i + 1 > st:\n        circle(x, -50, 20, \"#e2e8f0\")\n    write(i + 1, x, -50, \"#fff\", 11)\n    i = i + 1\n",
+  "starterCode": "# 教科书阅读五步法：拖动滑块走一遍\nst = 1   # 阅读第几步（1~5）\n\nhide()\nif st == 1:\n    cur_step = \"第 1 步 · 预习提问\"\n    cur_desc = \"读标题、看插图，猜这课讲什么\"\n    cur_tip = \"带着问题读，比闷头读快 3 倍\"\nif st == 2:\n    cur_step = \"第 2 步 · 通读圈画\"\n    cur_desc = \"快速读一遍，圈出不认识的词\"\n    cur_tip = \"第一遍不抠细节，先抓大貌\"\nif st == 3:\n    cur_step = \"第 3 步 · 精读标记\"\n    cur_desc = \"细读重点段落，划出关键句\"\n    cur_tip = \"一段话往往只有一个中心句\"\nif st == 4:\n    cur_step = \"第 4 步 · 追问答疑\"\n    cur_desc = \"把没懂的问出来：问老师、问同学\"\n    cur_tip = \"能提出好问题 = 真读懂了一半\"\nif st == 5:\n    cur_step = \"第 5 步 · 合书复述\"\n    cur_desc = \"合上书，用自己的话讲一遍\"\n    cur_tip = \"讲不出来的地方 = 没学会的地方\"\nfill_rect(0, 130, 340, 32, \"#1d4ed8\")\nwrite(cur_step, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 340, 42, \"#eff6ff\")\nwrite(cur_desc, 0, 76, \"#1d4ed8\", 11)\nfill_rect(0, 16, 340, 52, \"#fef3c7\")\nwrite(\"要领：\" + cur_tip, 0, 16, \"#b45309\", 11)\ni = 0\nwhile i < 5:\n    x = -120 + i * 60\n    if i + 1 <= st:\n        circle(x, -50, 20, \"#1d4ed8\")\n    if i + 1 > st:\n        circle(x, -50, 20, \"#e2e8f0\")\n    if i + 1 <= st:\n        write(i + 1, x, -50, \"#fff\", 11)\n    if i + 1 > st:\n        write(i + 1, x, -50, \"#94a3b8\", 11)\n    i = i + 1\nwrite(\"读书五步：预习 → 通读 → 精读 → 追问 → 复述\", 0, -110, \"#64748b\", 11)",
   "celebrate": "新知识到手！",
   "id": "meta-04",
   "island": "cross",
@@ -82,7 +82,7 @@
     "params": [
       {
         "name": "st",
-        "label": "步骤",
+        "label": "阅读第几步",
         "min": 1,
         "max": 5,
         "step": 1,
@@ -95,7 +95,7 @@
       "st=4 复述怎么做？",
       "你平时是直接从第一页读到最后一页吗？"
     ],
-    "code": "st = 1\nfill_rect(0, 130, 340, 30, \"#1d4ed8\")\nwrite(cur_step, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 340, 42, \"#eff6ff\")\nwrite(cur_desc, 0, 76, \"#1d4ed8\", 10)\nfill_rect(0, 16, 340, 56, \"#fef3c7\")\nwrite(\"要领：\" + cur_tip, 0, 16, \"#b45309\", 11)\ni = 0\nwhile i < 5:\n    x = -120 + i * 60\n    if i + 1 <= st:\n        circle(x, -50, 20, \"#1d4ed8\")\n    if i + 1 > st:\n        circle(x, -50, 20, \"#e2e8f0\")\n    write(i + 1, x, -50, \"#fff\", 11)\n    i = i + 1\n"
+    "code": "# 教科书阅读五步法：拖动滑块走一遍\nst = 1   # 阅读第几步（1~5）\n\nhide()\nif st == 1:\n    cur_step = \"第 1 步 · 预习提问\"\n    cur_desc = \"读标题、看插图，猜这课讲什么\"\n    cur_tip = \"带着问题读，比闷头读快 3 倍\"\nif st == 2:\n    cur_step = \"第 2 步 · 通读圈画\"\n    cur_desc = \"快速读一遍，圈出不认识的词\"\n    cur_tip = \"第一遍不抠细节，先抓大貌\"\nif st == 3:\n    cur_step = \"第 3 步 · 精读标记\"\n    cur_desc = \"细读重点段落，划出关键句\"\n    cur_tip = \"一段话往往只有一个中心句\"\nif st == 4:\n    cur_step = \"第 4 步 · 追问答疑\"\n    cur_desc = \"把没懂的问出来：问老师、问同学\"\n    cur_tip = \"能提出好问题 = 真读懂了一半\"\nif st == 5:\n    cur_step = \"第 5 步 · 合书复述\"\n    cur_desc = \"合上书，用自己的话讲一遍\"\n    cur_tip = \"讲不出来的地方 = 没学会的地方\"\nfill_rect(0, 130, 340, 32, \"#1d4ed8\")\nwrite(cur_step, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 340, 42, \"#eff6ff\")\nwrite(cur_desc, 0, 76, \"#1d4ed8\", 11)\nfill_rect(0, 16, 340, 52, \"#fef3c7\")\nwrite(\"要领：\" + cur_tip, 0, 16, \"#b45309\", 11)\ni = 0\nwhile i < 5:\n    x = -120 + i * 60\n    if i + 1 <= st:\n        circle(x, -50, 20, \"#1d4ed8\")\n    if i + 1 > st:\n        circle(x, -50, 20, \"#e2e8f0\")\n    if i + 1 <= st:\n        write(i + 1, x, -50, \"#fff\", 11)\n    if i + 1 > st:\n        write(i + 1, x, -50, \"#94a3b8\", 11)\n    i = i + 1\nwrite(\"读书五步：预习 → 通读 → 精读 → 追问 → 复述\", 0, -110, \"#64748b\", 11)"
   },
   "teach": {
     "sections": [

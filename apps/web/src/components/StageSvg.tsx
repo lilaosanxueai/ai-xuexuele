@@ -45,8 +45,9 @@ const keyOf = (hex: string): ThemeKey => {
   return (THEME_KEYS.find((k) => THEME[k].fill === fill) ?? 'blue');
 };
 
-/** 文字分级：小注/正文/标题三档，杜绝字号随意 */
+/** 文字分级：小注/正文/标题三档；大号焦点字（emoji/主角数字）原样保留，不被钳平 */
 function fontSizeOf(size: number): number {
+  if (size >= 18) return Math.round(size);
   if (size >= 13) return 15;
   if (size >= 10) return 12;
   return 10;
@@ -65,7 +66,7 @@ export default function StageSvg({ cmds, grid = false }: { cmds: StageCmd[]; gri
       minY = Math.min(minY, y - r); maxY = Math.max(maxY, y + r);
     };
     for (const c of cmds) {
-      if (c.t === 'rect') touch(c.x, c.y, Math.max(c.w, c.h) / 2);
+      if (c.t === 'rect') { touch(c.x - c.w / 2, c.y - c.h / 2); touch(c.x + c.w / 2, c.y + c.h / 2); }
       else if (c.t === 'circle' || c.t === 'ring') touch(c.x, c.y, c.r);
       else if (c.t === 'line') { touch(c.x1, c.y1); touch(c.x2, c.y2); }
       else { const tw = c.text.length * c.size * (/[\u4e00-\u9fff]/.test(c.text) ? 1.05 : 0.6); touch(c.x - tw / 2, c.y - c.size * 0.7, c.size); touch(c.x + tw / 2, c.y + c.size * 0.7, c.size); }
@@ -110,33 +111,47 @@ export default function StageSvg({ cmds, grid = false }: { cmds: StageCmd[]; gri
         node: <circle cx={toX(c.x)} cy={toY(c.y)} r={Math.max(3, c.r * scale)} fill="none" stroke={THEME[key].fill} strokeWidth={2.5} opacity={0.9} />,
       });
     });
-    // 矩形：横幅=主题色实底圆角条；数据条=浅底深边；卡片=浅底
+    // 矩形：横幅=实底圆角条；饱和色（近主题fill）=实底强调块+白字；浅色=浅底卡片
+    const solidRects: { x: number; y: number; w: number; h: number }[] = [];
     rects.forEach((c, i) => {
       const key = keyOf(c.color);
-      const banner = c.w >= 200 && c.h <= 45 && c.y + c.h / 2 >= 100;
-      const bar = c.h >= 10 && c.h <= 40 && c.w <= 70;
+      const n = typeof c.color === 'string' && c.color.length === 7 ? parseInt(c.color.slice(1), 16) : NaN;
+      const rgb = Number.isFinite(n) ? [(n >> 16) & 255, (n >> 8) & 255, n & 255] : [148, 163, 184];
+      const f = THEME[key].fill;
+      const fr = [parseInt(f.slice(1, 3), 16), parseInt(f.slice(3, 5), 16), parseInt(f.slice(5, 7), 16)];
+      const s = THEME[key].soft;
+      const sr = [parseInt(s.slice(1, 3), 16), parseInt(s.slice(3, 5), 16), parseInt(s.slice(5, 7), 16)];
+      const dFill = (rgb[0] - fr[0]) ** 2 + (rgb[1] - fr[1]) ** 2 + (rgb[2] - fr[2]) ** 2;
+      const dSoft = (rgb[0] - sr[0]) ** 2 + (rgb[1] - sr[1]) ** 2 + (rgb[2] - sr[2]) ** 2;
+      const solid = dFill <= dSoft;
       const x = toX(c.x - c.w / 2), y = toY(c.y + c.h / 2);
       const w = c.w * scale, h = c.h * scale;
+      const banner = c.w >= 200 && c.h <= 45 && c.y + c.h / 2 >= 100;
+      const bar = c.h >= 10 && c.h <= 40 && c.w <= 70;
       if (banner) {
         els.push({ key: 'r' + i, node: <rect x={x} y={y} width={w} height={h} rx={11} fill={THEME[key].fill} /> });
+      } else if (solid) {
+        els.push({ key: 'r' + i, node: <rect x={x} y={y} width={w} height={h} rx={Math.min(10, h / 2, w / 2)} fill={THEME[key].fill} /> });
+        solidRects.push({ x: c.x, y: c.y, w: c.w, h: c.h });
       } else if (bar) {
         els.push({ key: 'r' + i, node: <rect x={x} y={y} width={w} height={h} rx={Math.min(5, h / 2)} fill={THEME[key].soft} stroke={THEME[key].fill} strokeWidth={1.6} /> });
       } else {
         els.push({ key: 'r' + i, node: <rect x={x} y={y} width={w} height={h} rx={13} fill={THEME[key].soft} stroke={THEME[key].fill} strokeWidth={1.6} opacity={0.95} /> });
       }
     });
-    // 文字（顶层）：白描边+主题文字色+分级字号，横幅上的字强制白色
+    // 文字（顶层）：横幅/实底块上的字强制白色，其余白描边+主题文字色+分级字号
     const bannerRects = rects.filter((c) => c.w >= 200 && c.h <= 45 && c.y + c.h / 2 >= 100);
     const inBanner = (t: Extract<StageCmd, { t: 'text' }>) => bannerRects.some((r) => Math.abs(t.x - r.x) < r.w / 2 + 4 && Math.abs(t.y - r.y) < r.h / 2 + 4);
+    const inSolid = (t: Extract<StageCmd, { t: 'text' }>) => solidRects.some((r) => Math.abs(t.x - r.x) < r.w / 2 - 2 && Math.abs(t.y - r.y) < r.h / 2 - 2);
     texts.forEach((c, i) => {
       const fs = fontSizeOf(toS(c.size));
-      const onBanner = inBanner(c);
-      const fill = onBanner ? '#ffffff' : clampColor(c.color, 'text');
+      const onBlock = inBanner(c) || inSolid(c);
+      const fill = onBlock ? '#ffffff' : clampColor(c.color, 'text');
       els.push({
         key: 't' + i,
         node: (
           <text x={toX(c.x)} y={toY(c.y) + fs * 0.36} textAnchor="middle" fontSize={fs} fill={fill} fontWeight={fs >= 15 ? 800 : 600}
-            style={onBanner ? undefined : { paintOrder: 'stroke', stroke: 'rgba(255,255,255,0.95)', strokeWidth: 4.5, strokeLinejoin: 'round' }}>
+            style={onBlock ? undefined : { paintOrder: 'stroke', stroke: 'rgba(255,255,255,0.95)', strokeWidth: 4.5, strokeLinejoin: 'round' }}>
             {c.text}
           </text>
         ),

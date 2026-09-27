@@ -11,7 +11,7 @@
   ],
   "toolbox": [],
   "codeLesson": true,
-  "starterCode": "# 冒泡排序：相邻比较，顺序不对就交换\n# 三只小鸭的身高（待排序的数）\na = 3\nb = 1\nc = 2\n\ncostume(\"🦆\")\nsay(\"排队前：\" + a + \" \" + b + \" \" + c)\n\n# 第一趟：比 a-b，再比 b-c\nt = 0\nif a > b:\n    t = a\n    a = b\n    b = t\n    say(\"a 和 b 换位置！\")\nif b > c:\n    t = b\n    b = c\n    c = t\n    say(\"b 和 c 换位置！\")\n\n# 第二趟：再比一次 a-b（大数可能还在左边）\nif a > b:\n    t = a\n    a = b\n    b = t\n    say(\"再换一次 a 和 b！\")\n\nsay(\"排队后：\" + a + \" \" + b + \" \" + c + \" ——从小到大！\")\n",
+  "starterCode": "# 冒泡排序：相邻比较，大的往后冒\nround = 1   # 看第几趟（1~2）\n\nhide()\nfill_rect(0, 140, 330, 34, \"#2563eb\")\nwrite(\"冒泡排序：相邻两个比，大的往后冒\", 0, 140, \"#fff\", 13)\nif round == 1:\n    v1 = 3\n    v2 = 1\n    v3 = 2\n    tag = \"排队前：3 1 2\"\nif round == 2:\n    v1 = 1\n    v2 = 2\n    v3 = 3\n    tag = \"排好队：1 2 3\"\ni = 0\nwhile i < 3:\n    x = -90 + i * 90\n    if i == 0:\n        v = v1\n    if i == 1:\n        v = v2\n    if i == 2:\n        v = v3\n    fill_rect(x, -40 + v * 18, 60, v * 36, \"#7dd3fc\")\n    write(v, x, -28 + v * 36, \"#0369a1\", 14)\n    write(\"第\" + (i + 1) + \"位\", x, -60, \"#64748b\", 10)\n    i = i + 1\nwrite(tag, 0, 116, \"#b45309\", 12)\nwrite(\"第1趟：3和1换、1和2换 → 1 3 2\", 0, -96, \"#64748b\", 10)\nwrite(\"第2趟：3和2换 → 1 2 3 完成！\", 0, -118, \"#64748b\", 10)",
   "actor": {
     "costume": "🦆",
     "x": -80,
@@ -199,6 +199,19 @@
     ],
     "mistakes": [
       "不用临时变量直接交换——第二行拿到的是已覆盖的值"
+    ]
+  },
+  "lab": {
+    "code": "# 冒泡排序：相邻比较，大的往后冒\nround = 1   # 看第几趟（1~2）\n\nhide()\nfill_rect(0, 140, 330, 34, \"#2563eb\")\nwrite(\"冒泡排序：相邻两个比，大的往后冒\", 0, 140, \"#fff\", 13)\nif round == 1:\n    v1 = 3\n    v2 = 1\n    v3 = 2\n    tag = \"排队前：3 1 2\"\nif round == 2:\n    v1 = 1\n    v2 = 2\n    v3 = 3\n    tag = \"排好队：1 2 3\"\ni = 0\nwhile i < 3:\n    x = -90 + i * 90\n    if i == 0:\n        v = v1\n    if i == 1:\n        v = v2\n    if i == 2:\n        v = v3\n    fill_rect(x, -40 + v * 18, 60, v * 36, \"#7dd3fc\")\n    write(v, x, -28 + v * 36, \"#0369a1\", 14)\n    write(\"第\" + (i + 1) + \"位\", x, -60, \"#64748b\", 10)\n    i = i + 1\nwrite(tag, 0, 116, \"#b45309\", 12)\nwrite(\"第1趟：3和1换、1和2换 → 1 3 2\", 0, -96, \"#64748b\", 10)\nwrite(\"第2趟：3和2换 → 1 2 3 完成！\", 0, -118, \"#64748b\", 10)",
+    "params": [
+      {
+        "name": "round",
+        "label": "看第几趟",
+        "min": 1,
+        "max": 2,
+        "step": 1,
+        "value": 1
+      }
     ]
   }
 }
