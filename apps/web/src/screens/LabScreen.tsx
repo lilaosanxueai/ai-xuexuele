@@ -8,6 +8,7 @@ import StageSvg, { createCaptureApi, type StageCmd } from '../components/StageSv
 import ExercisePanel from '../components/ExercisePanel.tsx';
 import TeachPanel from '../components/TeachPanel.tsx';
 import InteractLab from '../components/InteractLab.tsx';
+import LessonReport from '../components/LessonReport.tsx';
 import { parsePy, PyRunner } from '../runtime/pyinterp.ts';
 import { pyStageApi } from '../runtime/pyBridge.ts';
 import { lessonNeighbors, lessonRoute } from '../runtime/lessonNav.ts';
@@ -78,6 +79,9 @@ export default function LabScreen() {
   const [challengeDone, setChallengeDone] = useState<Record<number, boolean>>({});
   /** 预测-验证（PhET 式）：挑战前先猜能不能达成 {挑战序号: 猜能(true)/猜不能(false)} */
   const [predictions, setPredictions] = useState<Record<number, boolean>>({});
+  /** 课堂报告（学而思式课后反馈卡）：小练完成后弹出，本轮得分 */
+  const [report, setReport] = useState<{ correct: number; total: number; wrongCount: number } | null>(null);
+  const [reportOpen, setReportOpen] = useState(false);
   /** 我的发现：观察笔记（自动保存到进度） */
   const [labNote, setLabNote] = useState('');
   const [noteSaved, setNoteSaved] = useState(true);
@@ -141,6 +145,11 @@ export default function LabScreen() {
       void api.progress(profile.id).then((p) => {
         const lp = p.lessons?.[l.id];
         setLabNote(p.labNotes?.[l.id] ?? '');
+        // 课堂报告可回看：练过即有档案（得分 + 本课现存错题数）
+        const ex = p.exercises?.[l.id];
+        if (lp?.tasks?.quiz?.done && ex) {
+          setReport({ correct: ex.correct, total: ex.total, wrongCount: (p.wrongBook ?? []).filter((w) => w.lessonId === l.id).length });
+        }
         // 恢复上次实验进度（要点勾选/挑战达成）
         if (lp) {
           const ex: Record<number, boolean> = {};
@@ -319,9 +328,14 @@ export default function LabScreen() {
                   </button>
                 )}
                 {lesson.exercises?.length ? (
-                  <button onClick={() => setQuizOpen(true)} className={`rounded-xl px-3 py-2 text-sm font-bold shadow-sm transition ${quizDone ? 'bg-emerald-50 text-emerald-600 hover:bg-emerald-100' : 'bg-amber-400 text-white hover:bg-amber-500'}`}>
-                    {quizDone ? '✅ 小练' : '📝 小练'}
-                  </button>
+                  <>
+                    <button onClick={() => setQuizOpen(true)} className={`rounded-xl px-3 py-2 text-sm font-bold shadow-sm transition ${quizDone ? 'bg-emerald-50 text-emerald-600 hover:bg-emerald-100' : 'bg-amber-400 text-white hover:bg-amber-500'}`}>
+                      {quizDone ? '✅ 小练' : '📝 小练'}
+                    </button>
+                    {quizDone && report && (
+                      <button onClick={() => setReportOpen(true)} className="rounded-xl bg-white px-3 py-2 text-sm font-bold text-slate-600 ring-1 ring-slate-200 transition hover:bg-slate-50" title="查看课堂报告">📊 报告</button>
+                    )}
+                  </>
                 ) : null}
                 {/* 「看代码」只属于信息科技编程课；其他学科的演示代码只是内部渲染引擎，不暴露 */}
                 {!lesson.interact && lesson.subjectArea === '信息科技' && (
@@ -545,8 +559,11 @@ export default function LabScreen() {
               };
             });
             setQuizDone(true);
+            setReport({ correct, total: lesson.exercises!.length, wrongCount: wrongs.length });
+            setReportOpen(true);
             void api.updateProgress(profile.id, {
               lessonId: lesson.id,
+              minutesDelta: 5,
               completed: true,
               exercise: { correct, total: lesson.exercises!.length },
               tasks: { quiz: true },
@@ -591,6 +608,18 @@ export default function LabScreen() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* 课堂报告（学而思式课后反馈卡） */}
+      {report && reportOpen && lesson && (
+        <LessonReport
+          lesson={lesson}
+          correct={report.correct}
+          total={report.total}
+          wrongCount={report.wrongCount}
+          onClose={() => setReportOpen(false)}
+          onGoWrongbook={() => nav('/wrongbook')}
+        />
       )}
 
       {toast && (

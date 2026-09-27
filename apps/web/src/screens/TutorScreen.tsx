@@ -11,6 +11,7 @@ import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
 import ExercisePanel from '../components/ExercisePanel.tsx';
 import TeachPanel from '../components/TeachPanel.tsx';
+import LessonReport from '../components/LessonReport.tsx';
 
 /**
  * 课程阅读页（现代自学形态）：
@@ -25,6 +26,9 @@ export default function TutorScreen() {
   const [quizOpen, setQuizOpen] = useState(false);
   const [quizDone, setQuizDone] = useState(false);
   const [allLessons, setAllLessons] = useState<LessonType[]>([]);
+  /** 课堂报告（学而思式课后反馈卡） */
+  const [report, setReport] = useState<{ correct: number; total: number; wrongCount: number } | null>(null);
+  const [reportOpen, setReportOpen] = useState(false);
 
   useEffect(() => {
     if (!profile) { nav('/'); return; }
@@ -135,15 +139,25 @@ export default function TutorScreen() {
 
           <div className="space-y-2">
             {lesson.exercises?.length ? (
-              <button
-                onClick={() => setQuizOpen(true)}
-                className={`w-full rounded-2xl p-4 text-left font-bold shadow-md transition hover:-translate-y-0.5 hover:shadow-lg ${
-                  quizDone ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-400 text-white'
-                }`}
-              >
-                <div className="text-base">{quizDone ? '✅ 已完成随堂小练（可再练一遍）' : '📝 随堂小练'}</div>
-                <div className="mt-0.5 text-xs font-normal opacity-80">{lesson.exercises.length} 道题 · 答错的题自动进错题本</div>
-              </button>
+              <>
+                <button
+                  onClick={() => setQuizOpen(true)}
+                  className={`w-full rounded-2xl p-4 text-left font-bold shadow-md transition hover:-translate-y-0.5 hover:shadow-lg ${
+                    quizDone ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-400 text-white'
+                  }`}
+                >
+                  <div className="text-base">{quizDone ? '✅ 已完成随堂小练（可再练一遍）' : '📝 随堂小练'}</div>
+                  <div className="mt-0.5 text-xs font-normal opacity-80">{lesson.exercises.length} 道题 · 答错的题自动进错题本</div>
+                </button>
+                {quizDone && report && (
+                  <button
+                    onClick={() => setReportOpen(true)}
+                    className="w-full rounded-2xl bg-white p-3 text-left font-bold text-slate-600 shadow-sm ring-1 ring-slate-200 transition hover:ring-sky-300"
+                  >
+                    📊 查看课堂报告
+                  </button>
+                )}
+              </>
             ) : null}
             {hasPractice && (
               <button
@@ -230,8 +244,11 @@ export default function TutorScreen() {
               };
             });
             setQuizDone(true);
+            setReport({ correct, total: lesson.exercises!.length, wrongCount: wrongs.length });
+            setReportOpen(true);
             void api.updateProgress(profile.id, {
               lessonId: lesson.id,
+              minutesDelta: 5,
               completed: true,
               exercise: { correct, total: lesson.exercises!.length },
               // 辅导课的要点是导学与讨论（manual），随堂练通过即视为全部达成，家长端进度不再永远 0/N
@@ -239,6 +256,17 @@ export default function TutorScreen() {
               wrongAdds,
             }).catch(() => {});
           }}
+        />
+      )}
+      {/* 课堂报告（学而思式课后反馈卡） */}
+      {report && reportOpen && (
+        <LessonReport
+          lesson={lesson}
+          correct={report.correct}
+          total={report.total}
+          wrongCount={report.wrongCount}
+          onClose={() => setReportOpen(false)}
+          onGoWrongbook={() => nav('/wrongbook')}
         />
       )}
     </div>
