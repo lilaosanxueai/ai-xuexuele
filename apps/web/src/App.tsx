@@ -24,6 +24,7 @@ const SpeakingScreen = lazy(() => import('./screens/SpeakingScreen.tsx'));
 const DictationScreen = lazy(() => import('./screens/DictationScreen.tsx'));
 const PoemScreen = lazy(() => import('./screens/PoemScreen.tsx'));
 const BalanceScreen = lazy(() => import('./screens/BalanceScreen.tsx'));
+const SolveScreen = lazy(() => import('./screens/SolveScreen.tsx'));
 
 /** 旧书签 /lesson/:id 重定向到辅导页（学习主入口） */
 function LegacyLessonRoute() {
@@ -72,6 +73,7 @@ export default function App() {
           <Route path="/dictation" element={<DictationScreen />} />
           <Route path="/poem" element={<PoemScreen />} />
           <Route path="/balance" element={<BalanceScreen />} />
+          <Route path="/solve" element={<SolveScreen />} />
           <Route path="/playground" element={<PlaygroundScreen />} />
           <Route path="/subject/:area" element={<SubjectScreen />} />
           <Route path="*" element={<Navigate to="/" replace />} />

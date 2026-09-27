@@ -1,0 +1,210 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🔄",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：cs=1 主动句的宾语去哪了？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：by the boy 什么时候可以省略？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：三步变被动是哪三步？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 被动语态变形台\ncs = 1   # 例句\n\nhide()\nact = \"The boy broke the window.\"\npas = \"The window was broken by the boy.\"\nt = \"一般过去时：was/were + 过去分词\"\nif cs == 2:\n    act = \"People grow rice in the south.\"\n    pas = \"Rice is grown in the south (by people).\"\n    t = \"一般现在时：am/is/are + 过去分词；泛指人时 by 可省\"\nif cs == 3:\n    act = \"They will plant trees tomorrow.\"\n    pas = \"Trees will be planted tomorrow.\"\n    t = \"一般将来时：will be + 过去分词\"\nfill_rect(0, 130, 340, 30, \"#f59e0b\")\nwrite(\"主动 → 被动\", 0, 130, \"#fff\", 13)\nfill_rect(0, 78, 320, 44, \"#f8fafc\")\nwrite(act, 0, 78, \"#334155\", 11)\nfill_rect(0, 14, 320, 52, \"#fef3c7\")\nwrite(pas, 0, 24, \"#b45309\", 10)\nwrite(\"be 随时态变化 · 动词变过去分词\", 0, 2, \"#92400e\", 9)\nfill_rect(0, -58, 320, 44, \"#eff6ff\")\nwrite(t, 0, -58, \"#1d4ed8\", 10)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-40",
+  "island": "cross",
+  "order": 562,
+  "title": "被动语态：谁是主角",
+  "emoji": "🔄",
+  "subjectArea": "英语",
+  "gradeBand": "junior",
+  "grade": 8,
+  "textbook": "人教版英语（初中八年级）",
+  "curriculum": {
+    "module": "被动语态",
+    "points": [
+      "主动变被动",
+      "be + 过去分词",
+      "by 短语"
+    ]
+  },
+  "story": "The boy broke the window. 强调「谁干的」；The window was broken by the boy. 强调「窗户怎么样了」——同一件事，换主角就是换语态！当动作的承受者更重要时，用被动语态。",
+  "goals": [
+    "理解被动含义",
+    "掌握主动变被动三步",
+    "会按时态变换 be"
+  ],
+  "aiIntro": "🔄 切换例句，看主语宾语怎么换座位——被动语态变形台！",
+  "lab": {
+    "params": [
+      {
+        "name": "cs",
+        "label": "例句",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "cs=1 主动句的宾语去哪了？",
+      "by the boy 什么时候可以省略？",
+      "三步变被动是哪三步？"
+    ],
+    "code": "# 被动语态变形台\ncs = 1   # 例句\n\nhide()\nact = \"The boy broke the window.\"\npas = \"The window was broken by the boy.\"\nt = \"一般过去时：was/were + 过去分词\"\nif cs == 2:\n    act = \"People grow rice in the south.\"\n    pas = \"Rice is grown in the south (by people).\"\n    t = \"一般现在时：am/is/are + 过去分词；泛指人时 by 可省\"\nif cs == 3:\n    act = \"They will plant trees tomorrow.\"\n    pas = \"Trees will be planted tomorrow.\"\n    t = \"一般将来时：will be + 过去分词\"\nfill_rect(0, 130, 340, 30, \"#f59e0b\")\nwrite(\"主动 → 被动\", 0, 130, \"#fff\", 13)\nfill_rect(0, 78, 320, 44, \"#f8fafc\")\nwrite(act, 0, 78, \"#334155\", 11)\nfill_rect(0, 14, 320, 52, \"#fef3c7\")\nwrite(pas, 0, 24, \"#b45309\", 10)\nwrite(\"be 随时态变化 · 动词变过去分词\", 0, 2, \"#92400e\", 9)\nfill_rect(0, -58, 320, 44, \"#eff6ff\")\nwrite(t, 0, -58, \"#1d4ed8\", 10)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "什么是被动",
+        "body": "【主动：主语是动作的执行者】We clean the classroom.\n【被动：主语是动作的承受者】The classroom is cleaned by us.\n用被动的时机：不知道谁做的·谁做不重要·强调承受者。"
+      },
+      {
+        "title": "三步变形",
+        "body": "【①宾语提前当主语】window → The window\n【②动词变 be + 过去分词】broke → was broken\n【③原主语放 by 后（可省略）】by the boy\n口诀：宾变主·动变被动·主变 by 宾。"
+      },
+      {
+        "title": "be 的时态",
+        "body": "【一般现在时】am/is/are done：is grown\n【一般过去时】was/were done：was broken\n【一般将来时】will be done：will be planted\n【现在完成时】have/has been done\nbe 像变形金刚·过去分词永不变。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "把 They clean the room every day. 变成被动",
+        "steps": [
+          "宾语 the room 提前",
+          "clean → are cleaned（复数主语）",
+          "The room is cleaned…？注意 the room 单数",
+          "The room is cleaned by them every day."
+        ],
+        "tip": "be 看新主语"
+      },
+      {
+        "q": "被动句 Rice is grown in the south 的 by people 为什么省了？",
+        "steps": [
+          "people 是泛指「人们」",
+          "不知道/不必说明是谁",
+          "泛指的执行者可以省略",
+          "省后更简洁"
+        ],
+        "tip": "泛指可省"
+      }
+    ],
+    "mistakes": [
+      "被动句 be 的单复数还跟着旧主语（应跟新主语）",
+      "忘记把动词变成过去分词（was break ✗）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "被动语态的基本形式？",
+      "options": [
+        "be + 过去分词",
+        "be + 现在分词",
+        "do + 过去分词",
+        "have + 过去分词"
+      ],
+      "answer": 0,
+      "explain": "be done"
+    },
+    {
+      "q": "The window ___ broken by the boy. 填？",
+      "options": [
+        "was",
+        "is",
+        "were",
+        "are"
+      ],
+      "answer": 0,
+      "explain": "过去时单数"
+    },
+    {
+      "q": "Rice ___ grown in the south. 填？",
+      "options": [
+        "is",
+        "are",
+        "was",
+        "am"
+      ],
+      "answer": 0,
+      "explain": "现在时单数"
+    },
+    {
+      "q": "主动变被动第一步？",
+      "options": [
+        "宾语提前当主语",
+        "动词提前",
+        "加 by",
+        "变疑问"
+      ],
+      "answer": 0,
+      "explain": "宾变主"
+    },
+    {
+      "q": "Trees will be planted 属于什么时态被动？",
+      "options": [
+        "一般将来时",
+        "一般现在时",
+        "现在完成时",
+        "过去时"
+      ],
+      "answer": 0,
+      "explain": "will be done"
+    },
+    {
+      "q": "by people 什么时候可省？",
+      "options": [
+        "泛指人们时",
+        "永远不能省",
+        "过去时",
+        "有宾语时"
+      ],
+      "answer": 0,
+      "explain": "执行者不重要"
+    }
+  ]
+}

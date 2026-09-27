@@ -1,0 +1,210 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "⏮",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：type=1 play 和 study 的变化为什么不同？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：type=4 go 的过去式怎么背？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：哪些时间词提示用过去时？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "codeLesson": true,
+  "starterCode": "# 过去式变装台\ntype = 1   # 1规则加ed 2e结尾加d 3辅音+y 4不规则\n\nhide()\nt = \"规则一：直接加 ed\"\nex = \"play - played · visit - visited\"\ntip = \"大部分动词这样变\"\ncol = \"#16a34a\"\nif type == 2:\n    t = \"规则二：e 结尾只加 d\"\n    ex = \"like - liked · live - lived\"\n    tip = \"已经有 e 了就不重复加\"\n    col = \"#0ea5e9\"\nif type == 3:\n    t = \"规则三：辅音字母+y，变 y 为 i 加 ed\"\n    ex = \"study - studied · carry - carried\"\n    tip = \"元音字母+y 直接加 ed：play - played\"\n    col = \"#f97316\"\nif type == 4:\n    t = \"不规则：逐个背\"\n    ex = \"go-went · eat-ate · see-saw · do-did\"\n    tip = \"不规则动词表每天读一遍\"\n    col = \"#dc2626\"\nfill_rect(0, 130, 340, 30, col)\nwrite(t, 0, 130, \"#fff\", 11)\nfill_rect(0, 70, 320, 52, \"#f8fafc\")\nwrite(ex, 0, 70, \"#334155\", 11)\nfill_rect(0, -2, 320, 52, \"#fef3c7\")\nwrite(tip, 0, -2, \"#b45309\", 10)\nwrite(\"标志词：yesterday · last week · …ago · just now\", -20, -64, \"#7c3aed\", 10)\n",
+  "celebrate": "新知识到手！",
+  "id": "eng-41",
+  "island": "cross",
+  "order": 563,
+  "title": "一般过去式：昨天的事",
+  "emoji": "⏮",
+  "subjectArea": "英语",
+  "gradeBand": "primary",
+  "grade": 6,
+  "textbook": "人教PEP英语六年级下册",
+  "curriculum": {
+    "module": "一般过去时",
+    "points": [
+      "动词过去式变化",
+      "时间标志词",
+      "疑问否定式"
+    ]
+  },
+  "story": "yesterday、last week、two days ago——看到这些词，动词就要「穿古装」变过去式！规则动词加 ed，不规则动词各自变身（go→went）。过去时讲昨天的故事，故事讲完记得回来！",
+  "goals": [
+    "掌握规则变化",
+    "背熟常见不规则",
+    "会用时间标志词"
+  ],
+  "aiIntro": "⏮ 切换动词类型，看动词怎么穿古装——过去式变装台！",
+  "lab": {
+    "params": [
+      {
+        "name": "type",
+        "label": "动词类型",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "value": 1
+      }
+    ],
+    "grid": false,
+    "explore": [
+      "type=1 play 和 study 的变化为什么不同？",
+      "type=4 go 的过去式怎么背？",
+      "哪些时间词提示用过去时？"
+    ],
+    "code": "# 过去式变装台\ntype = 1   # 1规则加ed 2e结尾加d 3辅音+y 4不规则\n\nhide()\nt = \"规则一：直接加 ed\"\nex = \"play - played · visit - visited\"\ntip = \"大部分动词这样变\"\ncol = \"#16a34a\"\nif type == 2:\n    t = \"规则二：e 结尾只加 d\"\n    ex = \"like - liked · live - lived\"\n    tip = \"已经有 e 了就不重复加\"\n    col = \"#0ea5e9\"\nif type == 3:\n    t = \"规则三：辅音字母+y，变 y 为 i 加 ed\"\n    ex = \"study - studied · carry - carried\"\n    tip = \"元音字母+y 直接加 ed：play - played\"\n    col = \"#f97316\"\nif type == 4:\n    t = \"不规则：逐个背\"\n    ex = \"go-went · eat-ate · see-saw · do-did\"\n    tip = \"不规则动词表每天读一遍\"\n    col = \"#dc2626\"\nfill_rect(0, 130, 340, 30, col)\nwrite(t, 0, 130, \"#fff\", 11)\nfill_rect(0, 70, 320, 52, \"#f8fafc\")\nwrite(ex, 0, 70, \"#334155\", 11)\nfill_rect(0, -2, 320, 52, \"#fef3c7\")\nwrite(tip, 0, -2, \"#b45309\", 10)\nwrite(\"标志词：yesterday · last week · …ago · just now\", -20, -64, \"#7c3aed\", 10)\n"
+  },
+  "teach": {
+    "sections": [
+      {
+        "title": "四条变化规则",
+        "body": "【一般动词 + ed】play→played\n【e 结尾 + d】like→liked\n【辅音+y：变 y 为 i + ed】study→studied\n【不规则：背】go→went·do→did·have→had\n规则靠理解·不规则靠背诵。"
+      },
+      {
+        "title": "时间标志词",
+        "body": "【看到这些词 = 用过去时】\nyesterday（昨天）·last night/week/month（上个……）\n…ago（……以前）·just now（刚才）·in 2020（在过去年份）\n标志词是时态的红绿灯。"
+      },
+      {
+        "title": "句型变换",
+        "body": "【肯定】I played football yesterday.\n【否定】I did not (did not) play…——动词还原！\n【疑问】Did you play…?——用 did 提问·动词还原。\n口诀：did 一出现·动词回原形。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "把 I go to the park yesterday 改对",
+        "steps": [
+          "yesterday 提示过去时",
+          "go 变 went",
+          "I went to the park yesterday",
+          "别忘了动词变身"
+        ],
+        "tip": "标志词定 时态"
+      },
+      {
+        "q": "变疑问句：She watched TV last night.",
+        "steps": [
+          "过去时用 Did 提问",
+          "watched 还原成 watch",
+          "Did she watch TV last night?",
+          "did 出现动词回原形"
+        ],
+        "tip": "did+原形"
+      }
+    ],
+    "mistakes": [
+      "用了 did 还保留过去式（Did you went ✗ 应 watch）",
+      "辅音+y 动词直接加 ed（studyed ✗ 应 studied）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "study 的过去式是？",
+      "options": [
+        "studied",
+        "studyed",
+        "studed",
+        "studying"
+      ],
+      "answer": 0,
+      "explain": "变y为i"
+    },
+    {
+      "q": "go 的过去式是？",
+      "options": [
+        "went",
+        "goed",
+        "gone",
+        "going"
+      ],
+      "answer": 0,
+      "explain": "不规则"
+    },
+    {
+      "q": "哪个词提示用过去时？",
+      "options": [
+        "yesterday",
+        "now",
+        "tomorrow",
+        "usually"
+      ],
+      "answer": 0,
+      "explain": "昨天"
+    },
+    {
+      "q": "Did you ___ TV last night? 填？",
+      "options": [
+        "watch",
+        "watched",
+        "watches",
+        "watching"
+      ],
+      "answer": 0,
+      "explain": "did后还原"
+    },
+    {
+      "q": "like 的过去式是？",
+      "options": [
+        "liked",
+        "likeded",
+        "likeed",
+        "like"
+      ],
+      "answer": 0,
+      "explain": "e结尾加d"
+    },
+    {
+      "q": "I ___ football yesterday. 填？",
+      "options": [
+        "played",
+        "play",
+        "plays",
+        "playing"
+      ],
+      "answer": 0,
+      "explain": "加ed"
+    }
+  ]
+}

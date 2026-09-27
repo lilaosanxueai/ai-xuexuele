@@ -637,6 +637,14 @@ export default function MapScreen() {
             <div className="mt-2 text-xl font-black">方程式配平</div>
             <div className="mt-1 text-xs opacity-90">调系数看原子守恒 · 12 个初中必会方程式</div>
           </button>
+          <button
+            onClick={() => nav('/solve')}
+            className="rounded-3xl bg-gradient-to-br from-indigo-400 to-violet-500 p-6 text-center text-white shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
+          >
+            <div className="text-5xl">🧮</div>
+            <div className="mt-2 text-xl font-black">方程求解器</div>
+            <div className="mt-1 text-xs opacity-90">一元一次方程 · 移项合并三步示范 · 先解后看</div>
+          </button>
         </section>
       </main>
 
