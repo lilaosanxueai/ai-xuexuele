@@ -209,68 +209,92 @@
   "interact": {
     "views": [
       {
-        "when": 1,
-        "title": "铝块 · 体积 20 cm3 …",
-        "color": "green",
+        "title": "铝 · 2.7 g/cm³",
+        "subtitle": "同体积 20 cm³ → 质量 54 g",
+        "color": "sky",
+        "emoji": "🥤",
         "blocks": [
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "密度条（金最长）"
+            "icon": "🧮",
+            "title": "算一算",
+            "text": "密度 = 质量 ÷ 体积 = 54 g ÷ 20 cm³ = 2.7 g/cm³"
           },
           {
-            "kind": "highlight",
-            "text": "质量 m = 54 g"
+            "kind": "info",
+            "icon": "💡",
+            "title": "轻是铝的本事",
+            "text": "易拉罐、飞机机身都靠它——又轻又防锈"
           }
-        ]
+        ],
+        "when": 1
       },
       {
-        "when": 2,
-        "title": "铁块 · 体积 20 cm3 …",
-        "color": "green",
+        "title": "铁 · 7.9 g/cm³",
+        "subtitle": "同体积 20 cm³ → 质量 158 g",
+        "color": "amber",
+        "emoji": "🍳",
         "blocks": [
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "密度条（金最长）"
+            "icon": "🧮",
+            "title": "算一算",
+            "text": "158 g ÷ 20 cm³ = 7.9 g/cm³，约是铝的 3 倍重"
           },
           {
-            "kind": "highlight",
-            "text": "质量 m = 158 g"
+            "kind": "info",
+            "icon": "💡",
+            "title": "硬汉担当",
+            "text": "铁锅、钢筋、车架——结实便宜，就是容易生锈"
           }
-        ]
+        ],
+        "when": 2
       },
       {
-        "when": 3,
-        "title": "铜块 · 体积 20 cm3 …",
-        "color": "green",
+        "title": "铜 · 8.9 g/cm³",
+        "subtitle": "同体积 20 cm³ → 质量 178 g",
+        "color": "orange",
+        "emoji": "🔌",
         "blocks": [
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "密度条（金最长）"
+            "icon": "🧮",
+            "title": "算一算",
+            "text": "178 g ÷ 20 cm³ = 8.9 g/cm³"
           },
           {
-            "kind": "highlight",
-            "text": "质量 m = 178 g"
+            "kind": "info",
+            "icon": "💡",
+            "title": "导电高手",
+            "text": "电线芯、电机线圈都用铜——导电仅次于银，比银便宜得多"
           }
-        ]
+        ],
+        "when": 3
       },
       {
-        "when": 4,
-        "title": "金块 · 体积 20 cm3 …",
-        "color": "green",
+        "title": "金 · 19.3 g/cm³",
+        "subtitle": "同体积 20 cm³ → 质量 386 g",
+        "color": "amber",
+        "emoji": "🥇",
         "blocks": [
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "密度条（金最长）"
+            "icon": "🧮",
+            "title": "算一算",
+            "text": "386 g ÷ 20 cm³ = 19.3 g/cm³——一立方厘米快半斤重"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "沉甸甸的贵",
+            "text": "同体积比一比：金最重。真金坠手，假金轻飘"
           },
           {
             "kind": "highlight",
-            "text": "质量 m = 386 g"
+            "text": "同体积比轻重 = 比密度。密度是物质的身份证，一测便知真伪"
           }
-        ]
+        ],
+        "when": 4
       }
     ],
     "explore": [

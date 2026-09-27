@@ -229,11 +229,6 @@
           {
             "kind": "info",
             "icon": "📌",
-            "text": "法律"
-          },
-          {
-            "kind": "info",
-            "icon": "📌",
             "text": "刑法、民法典、义务教育法……依据宪法制定"
           },
           {
@@ -246,18 +241,13 @@
             "text": "最高法律效力：宪法 > 法律 > 行政法规"
           }
         ],
-        "subtitle": "国家的根本法"
+        "subtitle": "法律"
       },
       {
         "when": 3,
         "title": "宪法",
         "color": "sky",
         "blocks": [
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "行政法规、地方性法规"
-          },
           {
             "kind": "info",
             "icon": "📌",
@@ -273,7 +263,7 @@
             "text": "最高法律效力：宪法 > 法律 > 行政法规"
           }
         ],
-        "subtitle": "国家的根本法"
+        "subtitle": "行政法规、地方性法规"
       }
     ],
     "explore": [

@@ -202,7 +202,7 @@
     "views": [
       {
         "when": 1,
-        "title": "血糖状态",
+        "title": "偏高（饭后血糖↑）",
         "color": "red",
         "blocks": [
           {
@@ -216,11 +216,11 @@
             "text": "拮抗关系：一个降糖一个升糖，共同锁住稳态"
           }
         ],
-        "subtitle": "偏高（饭后血糖↑）"
+        "subtitle": "胰岛素 vs 胰高血糖素"
       },
       {
         "when": 2,
-        "title": "血糖状态",
+        "title": "偏低（血糖↓）",
         "color": "red",
         "blocks": [
           {
@@ -234,11 +234,11 @@
             "text": "拮抗关系：一个降糖一个升糖，共同锁住稳态"
           }
         ],
-        "subtitle": "偏低（血糖↓）"
+        "subtitle": "胰岛素 vs 胰高血糖素"
       },
       {
         "when": 3,
-        "title": "血糖状态",
+        "title": "正常（3.9-6.1 mmol/L）",
         "color": "red",
         "blocks": [
           {
@@ -251,7 +251,7 @@
             "text": "拮抗关系：一个降糖一个升糖，共同锁住稳态"
           }
         ],
-        "subtitle": "正常（3.9-6.1 mmol/L）"
+        "subtitle": "胰岛素 vs 胰高血糖素"
       }
     ],
     "explore": [

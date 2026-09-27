@@ -221,7 +221,8 @@
             "title": "一般过去时",
             "text": "was/were + 过去分词"
           }
-        ]
+        ],
+        "subtitle": "一般过去时"
       },
       {
         "when": 2,
@@ -244,7 +245,8 @@
             "title": "一般现在时",
             "text": "am/is/are + 过去分词；泛指人时 by 可省"
           }
-        ]
+        ],
+        "subtitle": "一般现在时"
       },
       {
         "when": 3,
@@ -267,7 +269,8 @@
             "title": "一般将来时",
             "text": "will be + 过去分词"
           }
-        ]
+        ],
+        "subtitle": "一般将来时"
       }
     ],
     "explore": [

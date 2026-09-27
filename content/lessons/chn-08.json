@@ -207,11 +207,6 @@
           {
             "kind": "info",
             "icon": "📌",
-            "text": "思乡怀人"
-          },
-          {
-            "kind": "info",
-            "icon": "📌",
             "text": "举头望明月，低头思故乡"
           },
           {
@@ -223,18 +218,14 @@
             "kind": "highlight",
             "text": "意象=景 + 固定情感，组合起来=意境"
           }
-        ]
+        ],
+        "subtitle": "思乡怀人"
       },
       {
         "when": 2,
         "title": "柳枝",
         "color": "violet",
         "blocks": [
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "惜别留恋"
-          },
           {
             "kind": "info",
             "icon": "📌",
@@ -249,18 +240,14 @@
             "kind": "highlight",
             "text": "意象=景 + 固定情感，组合起来=意境"
           }
-        ]
+        ],
+        "subtitle": "惜别留恋"
       },
       {
         "when": 3,
         "title": "大雁",
         "color": "violet",
         "blocks": [
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "音信与乡愁"
-          },
           {
             "kind": "info",
             "icon": "📌",
@@ -275,18 +262,14 @@
             "kind": "highlight",
             "text": "意象=景 + 固定情感，组合起来=意境"
           }
-        ]
+        ],
+        "subtitle": "音信与乡愁"
       },
       {
         "when": 4,
         "title": "梧桐",
         "color": "violet",
         "blocks": [
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "孤寂哀愁"
-          },
           {
             "kind": "info",
             "icon": "📌",
@@ -301,18 +284,14 @@
             "kind": "highlight",
             "text": "意象=景 + 固定情感，组合起来=意境"
           }
-        ]
+        ],
+        "subtitle": "孤寂哀愁"
       },
       {
         "when": 5,
         "title": "菊花",
         "color": "violet",
         "blocks": [
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "隐逸高洁"
-          },
           {
             "kind": "info",
             "icon": "📌",
@@ -327,18 +306,14 @@
             "kind": "highlight",
             "text": "意象=景 + 固定情感，组合起来=意境"
           }
-        ]
+        ],
+        "subtitle": "隐逸高洁"
       },
       {
         "when": 6,
         "title": "夕阳",
         "color": "violet",
         "blocks": [
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "迟暮感伤"
-          },
           {
             "kind": "info",
             "icon": "📌",
@@ -353,7 +328,8 @@
             "kind": "highlight",
             "text": "意象=景 + 固定情感，组合起来=意境"
           }
-        ]
+        ],
+        "subtitle": "迟暮感伤"
       }
     ],
     "explore": [

@@ -228,11 +228,12 @@
             "kind": "highlight",
             "text": "我句式 = 我感到… + 我需要/我希望…"
           }
-        ]
+        ],
+        "subtitle": ""
       },
       {
         "when": 2,
-        "title": "场景",
+        "title": "场景：想买一双球鞋",
         "color": "violet",
         "blocks": [
           {
@@ -251,11 +252,11 @@
             "text": "我句式 = 我感到… + 我需要/我希望…"
           }
         ],
-        "subtitle": "想买一双球鞋"
+        "subtitle": ""
       },
       {
         "when": 3,
-        "title": "场景",
+        "title": "场景：被同学误会了",
         "color": "violet",
         "blocks": [
           {
@@ -274,7 +275,7 @@
             "text": "我句式 = 我感到… + 我需要/我希望…"
           }
         ],
-        "subtitle": "被同学误会了"
+        "subtitle": ""
       }
     ],
     "explore": [

@@ -202,105 +202,111 @@
     "views": [
       {
         "when": 1,
-        "title": "色彩冷暖",
+        "title": "红色",
         "color": "sky",
         "blocks": [
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "红色 · 暖色"
+            "icon": "🎨",
+            "title": "生活中的红色",
+            "text": "消防车 · 红灯笼 · 警示标志"
           },
           {
             "kind": "highlight",
             "text": "联想：热情·喜庆·警觉"
           }
         ],
-        "subtitle": "温度的错觉"
+        "subtitle": "红色 · 暖色"
       },
       {
         "when": 2,
-        "title": "色彩冷暖",
+        "title": "橙色",
         "color": "sky",
         "blocks": [
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "橙色 · 暖色"
+            "icon": "🎨",
+            "title": "生活中的橙色",
+            "text": "橙子 · 暖灯光 · 秋天的落叶"
           },
           {
             "kind": "highlight",
             "text": "联想：温暖·活力·食欲"
           }
         ],
-        "subtitle": "温度的错觉"
+        "subtitle": "橙色 · 暖色"
       },
       {
         "when": 3,
-        "title": "色彩冷暖",
+        "title": "黄色",
         "color": "sky",
         "blocks": [
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "黄色 · 暖色"
+            "icon": "🎨",
+            "title": "生活中的黄色",
+            "text": "香蕉 · 向日葵 · 小黄帽"
           },
           {
             "kind": "highlight",
             "text": "联想：明亮·快乐·注意"
           }
         ],
-        "subtitle": "温度的错觉"
+        "subtitle": "黄色 · 暖色"
       },
       {
         "when": 4,
-        "title": "色彩冷暖",
+        "title": "绿色",
         "color": "sky",
         "blocks": [
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "绿色 · 冷色偏中性"
+            "icon": "🎨",
+            "title": "生活中的绿色",
+            "text": "树叶 · 草地 · 安全出口"
           },
           {
             "kind": "highlight",
             "text": "联想：生机·安全·放松"
           }
         ],
-        "subtitle": "温度的错觉"
+        "subtitle": "绿色 · 冷色偏中性"
       },
       {
         "when": 5,
-        "title": "色彩冷暖",
+        "title": "蓝色",
         "color": "sky",
         "blocks": [
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "蓝色 · 冷色"
+            "icon": "🎨",
+            "title": "生活中的蓝色",
+            "text": "天空 · 大海 · 校服"
           },
           {
             "kind": "highlight",
             "text": "联想：宁静·清凉·信赖"
           }
         ],
-        "subtitle": "温度的错觉"
+        "subtitle": "蓝色 · 冷色"
       },
       {
         "when": 6,
-        "title": "色彩冷暖",
+        "title": "紫色",
         "color": "sky",
         "blocks": [
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "紫色 · 冷色"
+            "icon": "🎨",
+            "title": "生活中的紫色",
+            "text": "薰衣草 · 葡萄 · 紫罗兰"
           },
           {
             "kind": "highlight",
             "text": "联想：神秘·高雅·浪漫"
           }
         ],
-        "subtitle": "温度的错觉"
+        "subtitle": "紫色 · 冷色"
       }
     ],
     "explore": [

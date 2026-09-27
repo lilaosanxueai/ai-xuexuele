@@ -202,14 +202,9 @@
     "views": [
       {
         "when": 1,
-        "title": "年画题材解码",
+        "title": "连年有鱼",
         "color": "red",
         "blocks": [
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "连年有鱼（余）"
-          },
           {
             "kind": "info",
             "icon": "📌",
@@ -218,19 +213,20 @@
           {
             "kind": "highlight",
             "text": "胖娃娃抱鲤鱼是最经典的年画"
+          },
+          {
+            "kind": "info",
+            "icon": "🖼️",
+            "title": "小知识",
+            "text": "苏州桃花坞、天津杨柳青是年画两大名产地"
           }
         ]
       },
       {
         "when": 2,
-        "title": "年画题材解码",
+        "title": "福到了",
         "color": "red",
         "blocks": [
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "福到了"
-          },
           {
             "kind": "info",
             "icon": "📌",
@@ -239,19 +235,20 @@
           {
             "kind": "highlight",
             "text": "五只蝙蝠围寿字=五福捧寿"
+          },
+          {
+            "kind": "info",
+            "icon": "📍",
+            "title": "怎么贴",
+            "text": "大门的福字要正贴，水缸、柜子才倒贴（福到）"
           }
         ]
       },
       {
         "when": 3,
-        "title": "年画题材解码",
+        "title": "多子多福",
         "color": "red",
         "blocks": [
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "多子多福"
-          },
           {
             "kind": "info",
             "icon": "📌",
@@ -260,19 +257,20 @@
           {
             "kind": "highlight",
             "text": "百子图常配石榴和葫芦"
+          },
+          {
+            "kind": "info",
+            "icon": "🌰",
+            "title": "同类吉祥果",
+            "text": "枣子=早生贵子，桂圆=富贵团圆，莲子=连生贵子"
           }
         ]
       },
       {
         "when": 4,
-        "title": "年画题材解码",
+        "title": "福禄双全",
         "color": "red",
         "blocks": [
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "福禄双全"
-          },
           {
             "kind": "info",
             "icon": "📌",
@@ -281,6 +279,12 @@
           {
             "kind": "highlight",
             "text": "门口挂葫芦还寓意平安"
+          },
+          {
+            "kind": "info",
+            "icon": "🎐",
+            "title": "一物多寓",
+            "text": "葫芦口小肚大=纳财，藤蔓绵延=子孙绵延，门口挂还保平安"
           }
         ]
       }

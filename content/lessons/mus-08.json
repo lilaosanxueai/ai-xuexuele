@@ -216,24 +216,26 @@
             "text": "乐队基础，人数最多（约60人）；小提琴分第一、第二声部"
           },
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "木管"
-          },
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "铜管"
-          },
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "打击"
-          },
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "弦乐（指挥正前方）"
+            "kind": "compare",
+            "title": "乐团座位（指挥视角）",
+            "items": [
+              {
+                "label": "弦乐",
+                "value": "正前方"
+              },
+              {
+                "label": "木管",
+                "value": "中排左侧"
+              },
+              {
+                "label": "铜管",
+                "value": "中排右侧"
+              },
+              {
+                "label": "打击",
+                "value": "最后排"
+              }
+            ]
           },
           {
             "kind": "highlight",
@@ -257,24 +259,26 @@
             "text": "音色柔美如歌；双簧管给全团对音（标准音A）"
           },
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "木管"
-          },
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "铜管"
-          },
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "打击"
-          },
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "弦乐（指挥正前方）"
+            "kind": "compare",
+            "title": "乐团座位（指挥视角）",
+            "items": [
+              {
+                "label": "弦乐",
+                "value": "正前方"
+              },
+              {
+                "label": "木管",
+                "value": "中排左侧"
+              },
+              {
+                "label": "铜管",
+                "value": "中排右侧"
+              },
+              {
+                "label": "打击",
+                "value": "最后排"
+              }
+            ]
           },
           {
             "kind": "highlight",
@@ -298,24 +302,26 @@
             "text": "音色辉煌嘹亮，高潮时的主力军"
           },
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "木管"
-          },
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "铜管"
-          },
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "打击"
-          },
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "弦乐（指挥正前方）"
+            "kind": "compare",
+            "title": "乐团座位（指挥视角）",
+            "items": [
+              {
+                "label": "弦乐",
+                "value": "正前方"
+              },
+              {
+                "label": "木管",
+                "value": "中排左侧"
+              },
+              {
+                "label": "铜管",
+                "value": "中排右侧"
+              },
+              {
+                "label": "打击",
+                "value": "最后排"
+              }
+            ]
           },
           {
             "kind": "highlight",
@@ -340,24 +346,26 @@
             "text": "掌管节奏骨架和气势"
           },
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "木管"
-          },
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "铜管"
-          },
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "打击"
-          },
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "弦乐（指挥正前方）"
+            "kind": "compare",
+            "title": "乐团座位（指挥视角）",
+            "items": [
+              {
+                "label": "弦乐",
+                "value": "正前方"
+              },
+              {
+                "label": "木管",
+                "value": "中排左侧"
+              },
+              {
+                "label": "铜管",
+                "value": "中排右侧"
+              },
+              {
+                "label": "打击",
+                "value": "最后排"
+              }
+            ]
           },
           {
             "kind": "highlight",

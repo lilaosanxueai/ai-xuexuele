@@ -202,7 +202,7 @@
     "views": [
       {
         "when": 1,
-        "title": "自然拼读",
+        "title": "字母 A · /æ/",
         "color": "sky",
         "blocks": [
           {
@@ -235,7 +235,7 @@
       },
       {
         "when": 2,
-        "title": "自然拼读",
+        "title": "字母 E · /e/",
         "color": "sky",
         "blocks": [
           {
@@ -268,7 +268,7 @@
       },
       {
         "when": 3,
-        "title": "自然拼读",
+        "title": "字母 I · /ɪ/",
         "color": "sky",
         "blocks": [
           {
@@ -301,7 +301,7 @@
       },
       {
         "when": 4,
-        "title": "自然拼读",
+        "title": "字母 O · /ɒ/",
         "color": "sky",
         "blocks": [
           {
@@ -334,7 +334,7 @@
       },
       {
         "when": 5,
-        "title": "自然拼读",
+        "title": "字母 U · /ʌ/",
         "color": "sky",
         "blocks": [
           {
