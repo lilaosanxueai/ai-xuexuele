@@ -4,6 +4,8 @@ export interface Profile {
   id: string;
   name: string;
   avatar: string; // emoji
+  /** 孩子所在年级（1-12，可选；用于课程「我的年级」标识） */
+  grade?: number;
   createdAt: string;
 }
 

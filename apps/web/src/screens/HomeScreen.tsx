@@ -13,6 +13,7 @@ export default function HomeScreen() {
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState(AVATARS[0]);
+  const [grade, setGrade] = useState<number | undefined>(undefined);
   const [adding, setAdding] = useState(false);
   const [deleting, setDeleting] = useState<Profile | null>(null);
 
@@ -31,8 +32,9 @@ export default function HomeScreen() {
 
   const add = async () => {
     if (!name.trim()) return;
-    const p = await api.createProfile(name.trim(), avatar);
+    const p = await api.createProfile(name.trim(), avatar, grade);
     setName('');
+    setGrade(undefined);
     setAdding(false);
     await refresh();
     enter(p);
@@ -65,6 +67,11 @@ export default function HomeScreen() {
                 <div className="mt-2 text-lg font-bold">{p.name}</div>
                 <div className="mt-1 text-sm text-sky-600">开始学习 →</div>
               </button>
+              {p.grade != null && (
+                <span className="absolute -left-2 -top-2 rounded-full bg-amber-400 px-2 py-0.5 text-[11px] font-black text-white shadow" title="孩子所在年级">
+                  {p.grade}年级
+                </span>
+              )}
               <button
                 onClick={() => setDeleting(p)}
                 className="absolute -right-2 -top-2 hidden h-7 w-7 items-center justify-center rounded-full bg-rose-500 text-white shadow group-hover:flex"
@@ -112,6 +119,26 @@ export default function HomeScreen() {
                   {a}
                 </button>
               ))}
+            </div>
+            <div className="mt-4 mb-2 text-sm font-bold text-slate-500">孩子在读几年级？（选了能标出同龄课程）</div>
+            <div className="flex flex-wrap gap-1.5">
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((g) => (
+                <button
+                  key={g}
+                  onClick={() => setGrade(grade === g ? undefined : g)}
+                  className={`h-9 w-11 rounded-xl text-sm font-bold transition ${
+                    grade === g ? 'bg-amber-400 text-white shadow' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                  }`}
+                >
+                  {g}
+                </button>
+              ))}
+              <button
+                onClick={() => setGrade(undefined)}
+                className={`h-9 rounded-xl px-2.5 text-sm font-bold transition ${grade === undefined ? 'bg-sky-500 text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'}`}
+              >
+                不选
+              </button>
             </div>
             <div className="mt-6 flex justify-end gap-2">
               <button onClick={() => setAdding(false)} className="rounded-xl bg-slate-200 px-4 py-2 font-bold">取消</button>

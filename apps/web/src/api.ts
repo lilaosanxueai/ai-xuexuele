@@ -16,8 +16,8 @@ async function req<T>(url: string, init?: RequestInit): Promise<T> {
 export const api = {
   health: () => req<{ ok: boolean; llmConfigured: boolean }>('/api/health'),
   profiles: () => req<Profile[]>('/api/profiles'),
-  createProfile: (name: string, avatar: string) =>
-    req<Profile>('/api/profiles', { method: 'POST', body: JSON.stringify({ name, avatar }) }),
+  createProfile: (name: string, avatar: string, grade?: number) =>
+    req<Profile>('/api/profiles', { method: 'POST', body: JSON.stringify({ name, avatar, grade }) }),
   deleteProfile: (id: string) => req<{ ok: boolean }>(`/api/profiles/${id}`, { method: 'DELETE' }),
   lessons: () => req<Lesson[]>('/api/lessons'),
   progress: (profileId: string) => req<ProfileProgress>(`/api/progress/${profileId}`),

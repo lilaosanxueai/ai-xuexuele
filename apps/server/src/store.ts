@@ -35,9 +35,9 @@ export function listProfiles(): Profile[] {
   return readJson<Profile[]>(profilesFile, []);
 }
 
-export function createProfile(name: string, avatar: string): Profile {
+export function createProfile(name: string, avatar: string, grade?: number): Profile {
   const profiles = listProfiles();
-  const p: Profile = { id: crypto.randomUUID(), name: name.trim().slice(0, 12), avatar, createdAt: new Date().toISOString() };
+  const p: Profile = { id: crypto.randomUUID(), name: name.trim().slice(0, 12), avatar, grade: grade ?? undefined, createdAt: new Date().toISOString() };
   profiles.push(p);
   writeJson(profilesFile, profiles);
   return p;

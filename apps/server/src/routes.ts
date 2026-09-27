@@ -20,9 +20,10 @@ export function buildRouter(cfg: AppConfig): Router {
   // ---------- 角色 ----------
   r.get('/profiles', (_req, res) => res.json(store.listProfiles()));
   r.post('/profiles', (req, res) => {
-    const { name, avatar } = req.body ?? {};
+    const { name, avatar, grade } = req.body ?? {};
     if (!name || typeof name !== 'string') return res.status(400).json({ error: '需要名字' });
-    res.status(201).json(store.createProfile(name, typeof avatar === 'string' ? avatar : '🧒'));
+    const g = Number(grade);
+    res.status(201).json(store.createProfile(name, typeof avatar === 'string' ? avatar : '🧒', Number.isInteger(g) && g >= 1 && g <= 12 ? g : undefined));
   });
   r.delete('/profiles/:id', (req, res) => {
     // 删除角色连带清空学习数据（家长确认弹窗在前端完成，已取消 PIN 码机制）
