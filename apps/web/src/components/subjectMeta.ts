@@ -14,6 +14,7 @@ export const SUBJECTS: Record<string, { emoji: string; color: string; desc: stri
   '道德与法治': { emoji: '🤝', color: 'red', desc: '规则与安全 · 公共生活' },
   '劳动': { emoji: '🧹', color: 'lime', desc: '生活自理 · 班级服务' },
   '体育与健康': { emoji: '🤸', color: 'cyan', desc: '运动技能 · 健康生活' },
+  '历史': { emoji: '🏛', color: 'stone', desc: '中国古代史 · 文明遗产' },
 };
 
 /** 学段显示名 */
@@ -38,5 +39,5 @@ export const SUBJECT_STYLE: Record<string, { card: string; badge: string; text: 
   '艺术': { card: 'from-fuchsia-500 to-pink-600', badge: 'bg-fuchsia-100 text-fuchsia-700', text: 'text-fuchsia-700', ring: 'ring-fuchsia-300' },
   '道德与法治': { card: 'from-red-500 to-rose-600', badge: 'bg-red-100 text-red-700', text: 'text-red-700', ring: 'ring-red-300' },
   '劳动': { card: 'from-lime-500 to-green-600', badge: 'bg-lime-100 text-lime-700', text: 'text-lime-700', ring: 'ring-lime-300' },
-  '体育与健康': { card: 'from-cyan-500 to-sky-600', badge: 'bg-cyan-100 text-cyan-700', text: 'text-cyan-700', ring: 'ring-cyan-300' },
+  '历史': { card: 'from-stone-500 to-stone-700', badge: 'bg-stone-100 text-stone-700', text: 'text-stone-700', ring: 'ring-stone-300' },
 };
