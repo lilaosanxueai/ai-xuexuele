@@ -216,12 +216,6 @@
           },
           {
             "kind": "info",
-            "icon": "💡",
-            "title": "作助词",
-            "text": "的"
-          },
-          {
-            "kind": "info",
             "icon": "📌",
             "text": "水陆草木之花"
           },
@@ -249,31 +243,13 @@
         "blocks": [
           {
             "kind": "info",
-            "icon": "💡",
-            "title": "表并列",
-            "text": "又"
-          },
-          {
-            "kind": "info",
             "icon": "📌",
             "text": "敏而好学（又好学）"
           },
           {
             "kind": "info",
-            "icon": "💡",
-            "title": "表转折",
-            "text": "却"
-          },
-          {
-            "kind": "info",
             "icon": "📌",
             "text": "学而不思则罔（却）"
-          },
-          {
-            "kind": "info",
-            "icon": "💡",
-            "title": "表承接",
-            "text": "就"
           },
           {
             "kind": "info",
@@ -337,31 +313,13 @@
         "blocks": [
           {
             "kind": "info",
-            "icon": "💡",
-            "title": "介词",
-            "text": "在"
-          },
-          {
-            "kind": "info",
             "icon": "📌",
             "text": "战于长勺（在长勺）"
           },
           {
             "kind": "info",
-            "icon": "💡",
-            "title": "介词",
-            "text": "比"
-          },
-          {
-            "kind": "info",
             "icon": "📌",
             "text": "苛政猛于虎（比虎）"
-          },
-          {
-            "kind": "info",
-            "icon": "💡",
-            "title": "介词",
-            "text": "被"
           },
           {
             "kind": "info",

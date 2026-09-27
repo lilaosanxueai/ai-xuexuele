@@ -1,31 +1,22 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import type { LabParam, Lesson, Settings, WrongItem } from '@shared/types.ts';
-import { DEFAULT_SETTINGS } from '@shared/types.ts';
+import type { LabParam, Lesson, WrongItem } from '@shared/types.ts';
 import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
 import StageSvg, { createCaptureApi, type StageCmd } from '../components/StageSvg.tsx';
-import AIBuddy, { type BuddyHandle } from '../components/AIBuddy.tsx';
 import ExercisePanel from '../components/ExercisePanel.tsx';
 import TeachPanel from '../components/TeachPanel.tsx';
 import InteractLab from '../components/InteractLab.tsx';
 import { parsePy, PyRunner } from '../runtime/pyinterp.ts';
 import { pyStageApi } from '../runtime/pyBridge.ts';
-import { socraticOnExplore, socraticOnChallenge, socraticOnWrong, socraticOnPerfect } from '../runtime/socratic.ts';
 import { lessonNeighbors, lessonRoute } from '../runtime/lessonNav.ts';
 
 /**
- * 互动实验室（理科五科学习新主页）：内容动态化 + 动态互动。
- * 左侧参数滑块 → 演示代码注入参数 → 舞台瞬时重绘；探索问题引导孩子做"实验"。
- * 无 lab 字段的代码课自动提取顶层「带注释的赋值」为滑块。
+ * 课程学习页（现代互动教育形态）：
+ * 左侧「调一调」滑块 + 中部原生互动卡 / SVG 动态图表 + 想一想问题 + 我的发现记录。
+ * 答疑走独立的「问老师」页（/ask），学习流程内不插入 AI 对话。
  */
-
-/** 实验室场景的快捷提问（替代默认的编程向问题） */
-const LAB_QUICK: Partial<Record<'explain' | 'hint', string[]>> = {
-  explain: ['我拖动参数后看到了变化，为什么？', '这个知识点在课本里怎么讲？', '帮我看看实验记录单写得怎么样'],
-  hint: ['我不知道该观察什么', '给我一点探索提示'],
-};
 
 /** 顶层数值赋值 + 中文注释 → 自动参数（如 `v0 = 0 # 初速度`） */
 const AUTO_PARAM_RE = /^([A-Za-z_]\w*)\s*=\s*(-?\d+(?:\.\d+)?)\s*#\s*(.+)$/;
@@ -75,10 +66,8 @@ export default function LabScreen() {
   const { current: profile } = useProfileStore();
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [allLessons, setAllLessons] = useState<Lesson[]>([]);
-  const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
   const [values, setValues] = useState<Record<string, number>>({});
   const [slowRunning, setSlowRunning] = useState(false);
-  const [buddyOpen, setBuddyOpen] = useState(false);
   const [quizOpen, setQuizOpen] = useState(false);
   const [quizDone, setQuizDone] = useState(false);
   const [teachOpen, setTeachOpen] = useState(false);
@@ -89,7 +78,7 @@ export default function LabScreen() {
   const [challengeDone, setChallengeDone] = useState<Record<number, boolean>>({});
   /** 预测-验证（PhET 式）：挑战前先猜能不能达成 {挑战序号: 猜能(true)/猜不能(false)} */
   const [predictions, setPredictions] = useState<Record<number, boolean>>({});
-  /** 实验记录单：观察笔记（自动保存到进度，AI 可点评） */
+  /** 我的发现：观察笔记（自动保存到进度） */
   const [labNote, setLabNote] = useState('');
   const [noteSaved, setNoteSaved] = useState(true);
   const noteTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
@@ -97,15 +86,10 @@ export default function LabScreen() {
   /** SVG 舞台命令流（Python 演示离屏执行的输出） */
   const [cmds, setCmds] = useState<StageCmd[]>([]);
   const runnerRef = useRef<PyRunner | null>(null);
-  const buddyRef = useRef<BuddyHandle>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   /** 补间动画：当前插值中的参数值（重绘用），滑块显示值是目标值 */
   const tweenValsRef = useRef<Record<string, number> | null>(null);
   const tweenRafRef = useRef(0);
-  /** AI 观察员：最近的参数操作记录（name/label/from/to） */
-  const opsRef = useRef<{ name: string; label: string; from: number; to: number }[]>([]);
-  const opsCountRef = useRef(0);
-  const guidedRef = useRef(false);
   const valuesRef = useRef(values);
   valuesRef.current = values;
 
@@ -120,11 +104,10 @@ export default function LabScreen() {
       );
       if (hit) {
         setChallengeDone((prev) => ({ ...prev, [i]: true }));
-        setToast(`🎯 挑战达成：${ch.text}`);
-        // 预测-验证：孩子事先猜过的话，先对照预测再苏格拉底追问
+        // 预测-验证：孩子事先猜过的话，对照预测给出反馈
         const guessed = predictions[i];
         const predictNote = guessed === undefined ? '' : guessed ? '（你猜对了，真有预感！）' : '（你猜不会亮——猜想和实验不一致的地方，正是科学最有趣的起点！）';
-        buddyRef.current?.sayLocal(`🎯 挑战达成！「${ch.text}」${predictNote}\n${socraticOnChallenge(ch.text)}`);
+        setToast(`🎯 挑战达成：${ch.text}${predictNote}`);
         reportTask(`c${i}`, true);
       }
     });
@@ -144,7 +127,6 @@ export default function LabScreen() {
     setExplored({});
     setChallengeDone({});
     setLabNote('');
-    void api.settings().then(setSettings).catch(() => {});
     void api.lessons().then((all) => {
       const l = all.find((x) => x.id === id) ?? null;
       if (!l || !(l.lab || l.starterCode)) { nav(l ? `/tutor/${id}` : '/map'); return; }
@@ -204,32 +186,16 @@ export default function LabScreen() {
   }, [lesson, baseCode]);
 
   /**
-   * 滑块变动：记录操作（AI 观察员用）→ 目标值立即生效于滑块显示；
+   * 滑块变动：目标值立即生效于滑块显示；
    * 图形用补间动画连续变形（随机类课直接跳变防闪烁）。拖动中防抖 120ms。
    */
   const onParamChange = (name: string, v: number) => {
-    const p = params.find((x) => x.name === name);
     const from = values[name] ?? v;
     setValues((prev) => ({ ...prev, [name]: v }));
     // 原生互动卡：视图直接由参数驱动，无需运行演示代码
     if (lesson?.interact) return;
-    // 记录操作（合并同一参数的连续拖动）
-    const ops = opsRef.current;
-    const last = ops[ops.length - 1];
-    if (last && last.name === name) {
-      last.to = v;
-    } else {
-      ops.push({ name, label: p?.label ?? name, from, to: v });
-      if (ops.length > 6) ops.shift();
-    }
-    opsCountRef.current++;
     clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(() => {
-      // AI 观察员：探索满 5 次且未引导过 → 伙伴主动开口（本地零成本）
-      if (opsCountRef.current >= 5 && !guidedRef.current) {
-        guidedRef.current = true;
-        buddyRef.current?.sayLocal('👀 我注意到你已经调了好几组参数——发现什么规律了吗？说出来或点 💬 问我，我帮你把发现变成结论！');
-      }
       const animate = lesson?.lab?.animate !== false;
       if (!animate) {
         tweenValsRef.current = null;
@@ -284,38 +250,14 @@ export default function LabScreen() {
     }, 1500);
   };
 
-  /** 让 AI 点评记录单：打开伙伴窗并发送点评请求（记录内容会随上下文带给 AI） */
-  const askAiToReview = () => {
-    if (!labNote.trim()) {
-      setToast('先在记录单里写下你的发现，再让 AI 老师看～');
-      return;
-    }
-    setBuddyOpen(true);
-    buddyRef.current?.askInMode('explain', '请点评我的实验记录单：我的发现对不对？哪里可以写得更像科学家？');
-  };
-
   if (!profile || !lesson) {
-    return <div className="flex min-h-screen items-center justify-center text-slate-400">正在搭建实验室…</div>;
+    return <div className="flex min-h-screen items-center justify-center text-slate-400">正在准备这一课…</div>;
   }
 
   const exploreList = lesson.interact?.explore ?? lesson.lab?.explore ?? [];
   const bandText = lesson.gradeBand === 'senior' ? '高中' : lesson.gradeBand === 'junior' ? '初中' : '小学';
   /** 已勾选的探索问题数（stepper 判断"学"阶段进行中） */
   const exploredCount = Object.values(explored).filter(Boolean).length;
-
-  const getContext = () => ({
-    screen: 'lab' as const,
-    lessonTitle: lesson.title,
-    lessonGoals: lesson.goals,
-    curriculumModule: lesson.curriculum?.module,
-    curriculumPoints: lesson.curriculum?.points,
-    textbook: lesson.textbook,
-    grade: lesson.grade,
-    subjectArea: lesson.subjectArea,
-    labParams: params.map((p) => `${p.label}=${values[p.name]}${p.unit ?? ''}`).join('、'),
-    labOps: opsRef.current.map((o) => `把${o.label}从${Math.round(o.from * 100) / 100}调到${Math.round(o.to * 100) / 100}`).join('；'),
-    labNote: labNote.trim() || undefined,
-  });
 
   return (
     <div className="flex h-screen flex-col overflow-hidden bg-slate-50">
@@ -370,10 +312,11 @@ export default function LabScreen() {
               <button onClick={() => nav(`/practice/${lesson.id}`)} className="rounded-xl bg-white/80 px-3 py-1.5 text-sm font-bold text-slate-600 shadow-sm hover:bg-white" title="查看和修改演示代码">⌨ 看代码</button>
             )}
             <button
-              onClick={() => setBuddyOpen((v) => !v)}
-              className={`rounded-xl px-3 py-1.5 text-sm font-bold shadow-sm transition ${buddyOpen ? 'bg-amber-400 text-white hover:bg-amber-500' : 'bg-white/80 text-slate-700 hover:bg-white'}`}
+              onClick={() => nav('/ask')}
+              className="rounded-xl bg-white/80 px-3 py-1.5 text-sm font-bold text-slate-700 shadow-sm transition hover:bg-white"
+              title="有疑问去问老师（独立答疑页）"
             >
-              📖 问 AI
+              💬 答疑
             </button>
           </div>
         </div>
@@ -405,7 +348,7 @@ export default function LabScreen() {
         {/* 左：参数 + 探索问题（手机端横排在上，桌面竖排在左） */}
         <aside className="w-full shrink-0 space-y-3 overflow-y-auto border-b border-r bg-white/60 p-3 md:w-72 md:border-b-0">
           <div className="rounded-2xl bg-white p-3 shadow-sm">
-            <div className="mb-2 text-sm font-black text-slate-700">⚙️ 探索参数</div>
+            <div className="mb-2 text-sm font-black text-slate-700">🎛 调一调</div>
             {params.length === 0 && <p className="text-xs text-slate-400">这节演示没有可调参数</p>}
             {params.map((p) => (
               <div key={p.name} className="mb-3">
@@ -436,7 +379,7 @@ export default function LabScreen() {
           </div>
 
           <div className="rounded-2xl bg-white p-3 shadow-sm">
-            <div className="mb-2 text-sm font-black text-slate-700">🔍 探索问题</div>
+            <div className="mb-2 text-sm font-black text-slate-700">💭 想一想</div>
             {exploreList.length > 0 ? (
               <ul className="space-y-2">
                 {exploreList.map((q, i) => (
@@ -446,8 +389,6 @@ export default function LabScreen() {
                         const nowChecked = !explored[i];
                         setExplored((prev) => ({ ...prev, [i]: nowChecked }));
                         reportTask(`e${i}`, nowChecked);
-                        // 勾选（而非取消）时，AI 用苏格拉底式追问引导深入（Khanmigo 模式）
-                        if (nowChecked) buddyRef.current?.sayLocal(socraticOnExplore(q));
                       }}
                       className={`flex w-full items-start gap-2 rounded-xl border p-2 text-left text-[13px] leading-snug transition ${
                         explored[i] ? 'border-emerald-300 bg-emerald-50 text-slate-500 line-through decoration-emerald-400' : 'border-slate-200 bg-white hover:border-sky-300'
@@ -463,13 +404,13 @@ export default function LabScreen() {
               </ul>
             ) : (
               <p className="rounded-xl bg-sky-50 p-2 text-[13px] leading-snug text-sky-700">
-                💡 拖动左边的参数试一试：什么变了？为什么？把发现说给爸妈听，或点「问 AI」讨论。
+                💡 拖动上面的滑块试一试：什么变了？为什么？把发现写进下面的记录单。
               </p>
             )}
           </div>
           <div className="rounded-2xl bg-white p-3 shadow-sm">
             <div className="mb-2 flex items-center justify-between">
-              <div className="text-sm font-black text-slate-700">📝 实验记录单</div>
+              <div className="text-sm font-black text-slate-700">📝 我的发现</div>
               <span className={`text-[11px] ${noteSaved ? 'text-emerald-500' : 'text-amber-500'}`}>
                 {noteSaved ? '✓ 已保存' : '保存中…'}
               </span>
@@ -479,17 +420,12 @@ export default function LabScreen() {
               onChange={(e) => onNoteChange(e.target.value)}
               rows={5}
               maxLength={300}
-              placeholder={'像科学家一样记录：\n我动了什么参数 → 看到了什么变化 → 我的结论是…'}
+              placeholder={'写下你的发现：\n我调了什么 → 看到了什么变化 → 我的结论是…'}
               className="w-full resize-none rounded-xl border border-slate-200 p-2 text-[13px] leading-relaxed outline-none focus:border-sky-400"
             />
             <div className="mt-1 flex items-center justify-between">
               <span className="text-[11px] text-slate-400">{labNote.length}/300</span>
-              <button
-                onClick={askAiToReview}
-                className="rounded-xl bg-sky-100 px-3 py-1.5 text-xs font-bold text-sky-700 transition hover:bg-sky-200"
-              >
-                🔍 让 AI 老师看看
-              </button>
+              {noteSaved && labNote.trim() && <span className="rounded-lg bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-600">记录完成 ✓</span>}
             </div>
           </div>
           {(lesson.lab?.challenges?.length ?? 0) > 0 && (
@@ -511,13 +447,13 @@ export default function LabScreen() {
                       <div className="mt-1.5 flex items-center gap-1.5">
                         <span className="text-[10px] text-slate-400">先猜猜（PhET 预测法）：</span>
                         <button
-                          onClick={() => { setPredictions((p) => ({ ...p, [i]: true })); setBuddyOpen(true); buddyRef.current?.sayLocal('🔮 你猜会达成！好，现在动手试试——实验会告诉你猜得对不对。'); }}
+                          onClick={() => setPredictions((p) => ({ ...p, [i]: true }))}
                           className="rounded-lg bg-emerald-50 px-2 py-0.5 text-[11px] font-bold text-emerald-700 hover:bg-emerald-100"
                         >
                           能亮 🙌
                         </button>
                         <button
-                          onClick={() => { setPredictions((p) => ({ ...p, [i]: false })); setBuddyOpen(true); buddyRef.current?.sayLocal('🔮 你猜不会达成？敢不敢做个实验验证一下猜想？科学家就是这么工作的。'); }}
+                          onClick={() => setPredictions((p) => ({ ...p, [i]: false }))}
                           className="rounded-lg bg-rose-50 px-2 py-0.5 text-[11px] font-bold text-rose-600 hover:bg-rose-100"
                         >
                           不能 🤨
@@ -536,7 +472,7 @@ export default function LabScreen() {
         </aside>
 
         {/* 右：舞台（实时重绘）或原生互动卡（现代互动教育形态） */}
-        <div className={`min-w-0 flex-1 transition-all duration-300 ${buddyOpen ? 'md:pr-[22.5rem]' : ''}`}>
+        <div className="min-w-0 flex-1">
           {(() => {
             const first = params[0];
             const v = first ? (values[first.name] ?? first.value) : 0;
@@ -554,25 +490,6 @@ export default function LabScreen() {
               </div>
             );
           })()}
-        </div>
-
-        {/* AI 辅导浮窗 */}
-        <div
-          className={`absolute bottom-3 right-3 top-3 z-30 w-[22rem] max-w-[calc(100%-1.5rem)] transition-all duration-300 ${
-            buddyOpen ? 'translate-x-0 opacity-100' : 'pointer-events-none translate-x-8 opacity-0'
-          }`}
-        >
-          <AIBuddy
-            ref={buddyRef}
-            profileId={profile.id}
-            buddy={settings.buddy}
-            intro={lesson.aiIntro || `我是${settings.buddy.name}。拖动左边的参数做实验，把你的发现告诉我，不懂的随时问！`}
-            defaultMode="explain"
-            modes={['explain', 'hint']}
-            quick={LAB_QUICK}
-            subtitle="AI 学科辅导老师"
-            getContext={getContext}
-          />
         </div>
       </main>
 
@@ -602,9 +519,6 @@ export default function LabScreen() {
               tasks: { quiz: true },
               wrongAdds,
             }).catch(() => {});
-            // 练习复盘：苏格拉底式——有错引导回看讲解，全对检验能否举例（费曼技巧）
-            if (wrongs.length > 0) buddyRef.current?.sayLocal(socraticOnWrong(correct, lesson.exercises!.length, lesson.title));
-            else buddyRef.current?.sayLocal(socraticOnPerfect());
           }}
         />
       )}
@@ -630,13 +544,13 @@ export default function LabScreen() {
               <div className="mt-5 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-100">
                 <div className="mb-2 text-sm font-black text-slate-700">🧐 读完了？给自己打个分：</div>
                 <div className="flex flex-wrap gap-2">
-                  <button onClick={() => { setTeachOpen(false); setQuizOpen(true); setBuddyOpen(true); buddyRef.current?.sayLocal('😄 很有信心！那就用随堂小练验证一下——全对才算真懂哦。'); }} className="rounded-xl bg-emerald-500 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-600">
+                  <button onClick={() => { setTeachOpen(false); setQuizOpen(true); }} className="rounded-xl bg-emerald-500 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-600">
                     😀 全懂了，去小练
                   </button>
-                  <button onClick={() => { setBuddyOpen(true); buddyRef.current?.sayLocal('🤔 有点模糊很正常！建议：① 拖动左边滑块做几组实验，看着图形变化再回来重读对应章节；② 或点我问具体哪里不懂。'); }} className="rounded-xl bg-amber-100 px-4 py-2 text-sm font-bold text-amber-700 hover:bg-amber-200">
+                  <button onClick={() => { setTeachOpen(false); setToast('有点模糊很正常：拖动滑块做几组实验，看着图形变化再回来重读对应章节。'); }} className="rounded-xl bg-amber-100 px-4 py-2 text-sm font-bold text-amber-700 hover:bg-amber-200">
                     😐 有点模糊
                   </button>
-                  <button onClick={() => { setBuddyOpen(true); buddyRef.current?.sayLocal('😅 没懂也不要紧！回到最上面的「开场一问」重读一遍，重点看【高亮框】里的定义；还卡住就告诉我具体哪句看不懂，我们一句一句拆。'); }} className="rounded-xl bg-rose-100 px-4 py-2 text-sm font-bold text-rose-600 hover:bg-rose-200">
+                  <button onClick={() => { window.scrollTo({ top: 0 }); setToast('回到最上面的「开场一问」重读一遍，重点看【高亮框】里的定义。'); }} className="rounded-xl bg-rose-100 px-4 py-2 text-sm font-bold text-rose-600 hover:bg-rose-200">
                     😵 没太懂
                   </button>
                 </div>
