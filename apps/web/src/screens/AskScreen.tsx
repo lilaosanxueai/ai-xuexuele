@@ -31,7 +31,7 @@ export default function AskScreen() {
       <Header />
       <main className="mx-auto w-full max-w-3xl flex-1 p-4">
         <div className="mb-3">
-          <h1 className="text-xl font-black text-slate-800">💬 问 AI 老师</h1>
+          <h1 className="text-xl font-black text-slate-800">💬 问老师 · 答疑</h1>
           <p className="text-sm text-slate-500">作业不会做、知识点没听懂、想多学一点——什么学科都可以问</p>
         </div>
         <div className="h-[calc(100vh-12rem)] overflow-hidden rounded-2xl bg-white shadow-md">

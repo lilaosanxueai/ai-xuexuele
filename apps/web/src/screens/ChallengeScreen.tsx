@@ -115,7 +115,8 @@ export default function ChallengeScreen() {
   }, [phase, idx]);
 
   const start = () => {
-    const qs = sampleQuestions(lessons, { subject, gradeBand: band, count: TOTAL });
+    if (!profile) return;
+    const qs = sampleQuestions(lessons, { subject, gradeBand: band, count: TOTAL, grade: profile.grade });
     if (qs.length === 0) return;
     setQueue(qs);
     setIdx(0); setPicked(null); setCorrect(0); setScore(0); setStreak(0); setBestStreak(0);
