@@ -5,12 +5,11 @@ import { DEFAULT_SETTINGS } from '@shared/types.ts';
 import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
-import Stage from '../components/Stage.tsx';
+import StageSvg, { createCaptureApi, type StageCmd } from '../components/StageSvg.tsx';
 import AIBuddy, { type BuddyHandle } from '../components/AIBuddy.tsx';
 import ExercisePanel from '../components/ExercisePanel.tsx';
 import TeachPanel from '../components/TeachPanel.tsx';
 import InteractLab from '../components/InteractLab.tsx';
-import { StageState, setRunSpeed } from '../runtime/stageState.ts';
 import { parsePy, PyRunner } from '../runtime/pyinterp.ts';
 import { pyStageApi } from '../runtime/pyBridge.ts';
 import { socraticOnExplore, socraticOnChallenge, socraticOnWrong, socraticOnPerfect } from '../runtime/socratic.ts';
@@ -95,7 +94,8 @@ export default function LabScreen() {
   const [noteSaved, setNoteSaved] = useState(true);
   const noteTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
-  const stageRef = useRef(new StageState());
+  /** SVG 舞台命令流（Python 演示离屏执行的输出） */
+  const [cmds, setCmds] = useState<StageCmd[]>([]);
   const runnerRef = useRef<PyRunner | null>(null);
   const buddyRef = useRef<BuddyHandle>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
@@ -172,28 +172,26 @@ export default function LabScreen() {
     return () => {
       runnerRef.current?.stop();
       cancelAnimationFrame(tweenRafRef.current);
-      setRunSpeed('normal');
     };
   }, [id, profile, nav]);
 
-  /** 跑一遍演示：清舞台 → 注入参数 → 解析运行。speed='instant' 用于滑块实时重绘 */
+  /** 跑一遍演示：捕获图形命令流 → SVG 渲染。speed='instant' 用于滑块实时重绘 */
   const runLab = useCallback((code: string, vals: Record<string, number>, speed: 'instant' | 'normal') => {
     const l = lesson;
     if (!l) return;
     runnerRef.current?.stop();
-    stageRef.current.reset(l.actor, l.targets);
-    setRunSpeed(speed);
     const { program, error } = parsePy(injectParams(code, vals));
     if (error || !program) {
       setToast(`演示代码有问题：${error?.message ?? '无法解析'}`);
       return;
     }
-    const runner = new PyRunner(program, pyStageApi(stageRef.current));
+    const cap = createCaptureApi();
+    const runner = new PyRunner(program, pyStageApi({ api: cap.api }));
     runnerRef.current = runner;
     if (speed === 'normal') setSlowRunning(true);
     void runner.run(() => {
       setSlowRunning(false);
-      setRunSpeed('instant');
+      setCmds([...cap.cmds]);
       if (runner.lastError) setToast(`演示中断：${runner.lastError}`);
     });
   }, [lesson]);
@@ -552,7 +550,7 @@ export default function LabScreen() {
             }
             return (
               <div className="h-full p-4">
-                <Stage fit grid={lesson.lab?.grid ?? false} coords={lesson.lab?.grid ?? false} stage={stageRef.current} />
+                <StageSvg cmds={cmds} grid={lesson.lab?.grid ?? false} />
               </div>
             );
           })()}

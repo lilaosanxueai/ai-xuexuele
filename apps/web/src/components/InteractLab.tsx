@@ -41,7 +41,7 @@ export default function InteractLab({ view, paramLabel, paramValue }: { view: In
           {view.emoji && <span className="text-4xl drop-shadow">{view.emoji}</span>}
           <div className="min-w-0">
             <div className="truncate text-xl font-black sm:text-2xl">{view.title}</div>
-            {view.subtitle && <div className="mt-0.5 text-xs font-bold text-white/85 sm:text-sm">{view.subtitle}</div>}
+            {view.subtitle && <div className="mt-0.5 line-clamp-2 text-xs font-bold text-white/85 sm:text-sm">{view.subtitle}</div>}
           </div>
           <span className="ml-auto hidden shrink-0 rounded-full bg-white/25 px-3 py-1 text-xs font-bold sm:block">{paramLabel} {paramValue}</span>
         </div>

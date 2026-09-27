@@ -1,8 +1,9 @@
 import type { PyStageApi } from './pyinterp.ts';
 import type { StageState } from './stageState.ts';
 
-/** 舞台命令的 Python 名 → StageState api 方法桥 */
-const CMD_MAP: Record<string, (stage: StageState, args: (number | string | boolean)[]) => Promise<void> | void> = {
+/** 舞台命令的 Python 名 → 舞台 api 方法桥 */
+type StageHostLike = { api: StageState['api'] };
+const CMD_MAP: Record<string, (stage: StageHostLike, args: (number | string | boolean)[]) => Promise<void> | void> = {
   move: (s, a) => s.api.move(Number(a[0])),
   turn_right: (s, a) => s.api.turnRight(Number(a[0])),
   turn_left: (s, a) => s.api.turnLeft(Number(a[0])),
@@ -25,7 +26,10 @@ const CMD_MAP: Record<string, (stage: StageState, args: (number | string | boole
   ring: (s, a) => s.api.ring(Number(a[0]), Number(a[1]), Number(a[2]), String(a[3] ?? 'blue')),
 };
 
-export function pyStageApi(stage: StageState): PyStageApi {
+/** 舞台宿主：只要有 api 即可（真舞台 StageState 或命令捕获器都行） */
+export type StageHost = Pick<StageState, 'api'>;
+
+export function pyStageApi(stage: StageHost): PyStageApi {
   return {
     cmd: (name, args) => {
       const fn = CMD_MAP[name];
