@@ -88,7 +88,7 @@ export default function PomodoroTimer({ profileId }: { profileId: string }) {
         ) : (
           <button onClick={pause} className="rounded-lg bg-amber-500 px-2.5 py-1.5 text-[10px] font-bold text-white shadow transition hover:bg-amber-600">⏸</button>
         )}
-        <button onClick={reset} className="rounded-lg bg-slate-200 px-2 py-1.5 text-[10px] font-bold text-slate-500 transition hover:bg-slate-300">↺</button>
+        <button onClick={reset} className="rounded-lg bg-slate-200 px-2 py-1.5 text-sm text-slate-500 transition hover:bg-slate-300" title="重置">🔄</button>
       </div>
       {cycles > 0 && <span className="shrink-0 text-xs font-black text-red-400">{cycles}🍅</span>}
     </div>

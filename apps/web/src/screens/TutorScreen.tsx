@@ -53,41 +53,70 @@ export default function TutorScreen() {
   return (
     <div className="flex min-h-screen flex-col bg-slate-50">
       <Header />
-      {/* 课题条 */}
-      <div className="border-b bg-white/80 px-6 py-3">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3">
-          <button onClick={() => nav(`/subject/${encodeURIComponent(lesson.subjectArea ?? '信息科技')}`)} className="rounded-xl bg-slate-100 px-3 py-1.5 text-sm font-bold text-slate-600 hover:bg-slate-200">
-            ← 返回学科
-          </button>
-          <span className="text-2xl">{lesson.emoji}</span>
-          <h1 className="text-lg font-black text-slate-800">{lesson.title}</h1>
-          <span className="rounded-full bg-sky-100 px-2.5 py-0.5 text-xs font-bold text-sky-700">
-            {lesson.subjectArea ?? '信息科技'}
-          </span>
-          {lesson.grade != null && <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-bold text-amber-700">{lesson.grade} 年级</span>}
-          <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-bold text-slate-500">{bandText}</span>
-          {lesson.textbook && <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-700">📚 {lesson.textbook}</span>}
-          {/* 连续学习导航：同学科按 order 排序，学完直接翻下一课 */}
-          {(() => {
-            const nb = lessonNeighbors(allLessons, lesson.id);
-            if (nb.total === 0) return null;
-            return (
-              <span className="ml-auto flex items-center gap-1.5">
-                <span className="hidden text-xs font-bold text-slate-400 sm:inline">{nb.index}/{nb.total} 课</span>
-                {nb.prev && (
-                  <button onClick={() => nav(lessonRoute(nb.prev!))} className="max-w-36 truncate rounded-xl bg-slate-100 px-2.5 py-1.5 text-xs font-bold text-slate-600 transition hover:bg-slate-200" title={`上一课：${nb.prev.title}`}>
-                    ← {nb.prev.title}
-                  </button>
-                )}
-                {nb.next && (
-                  <button onClick={() => nav(lessonRoute(nb.next!))} className="max-w-36 truncate rounded-xl bg-sky-500 px-2.5 py-1.5 text-xs font-bold text-white transition hover:bg-sky-600" title={`下一课：${nb.next.title}`}>
-                    {nb.next.title} →
-                  </button>
-                )}
-              </span>
-            );
-          })()}
-        </div>
+      {/* 课题条：左=返回+标题+元信息，右=翻课（与实验室页同款现代形态） */}
+      <div className="border-b bg-white px-4 py-2.5">
+        {(() => {
+          const nb = lessonNeighbors(allLessons, lesson.id);
+          return (
+            <div className="flex items-center gap-2.5">
+              <button onClick={() => nav(`/subject/${encodeURIComponent(lesson.subjectArea ?? '信息科技')}`)} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-lg text-slate-500 transition hover:bg-slate-200" title="返回学科列表">←</button>
+              <span className="shrink-0 text-2xl">{lesson.emoji}</span>
+              <div className="min-w-0 flex-1">
+                <h1 className="truncate text-base font-black leading-tight text-slate-800">{lesson.title}</h1>
+                <div className="mt-0.5 flex items-center gap-1 truncate text-[11px] leading-tight text-slate-400">
+                  <span className="font-bold text-sky-600">{lesson.subjectArea ?? '信息科技'}</span>
+                  {lesson.grade != null ? <span>· {lesson.grade}年级</span> : <span>· {bandText}</span>}
+                  <span>· {bandText}</span>
+                  {lesson.textbook && <span className="hidden max-w-40 truncate sm:inline">· {lesson.textbook.replace(/[（(][^）)]*[）)]/g, '')}</span>}
+                  {nb.total > 0 && <span>· 第 {nb.index}/{nb.total} 课</span>}
+                </div>
+              </div>
+              {nb.prev && (
+                <button onClick={() => nav(lessonRoute(nb.prev!))} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-xl leading-none text-slate-500 transition hover:bg-slate-200" title={`上一课：${nb.prev.title}`}>‹</button>
+              )}
+              {nb.next && (
+                <button onClick={() => nav(lessonRoute(nb.next!))} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-sky-500 text-xl leading-none text-white shadow-sm transition hover:bg-sky-600" title={`下一课：${nb.next.title}`}>›</button>
+              )}
+            </div>
+          );
+        })()}
+        {/* 学习路径 stepper：①预习 ②学习 ③小练 ④巩固 */}
+        {(() => {
+          const steps: { key: string; label: string; tip: string; onClick?: () => void }[] = [
+            { key: 'pre', label: '预习', tip: '开场一问：带着问题进入这一课' },
+            { key: 'learn', label: '学习', tip: '通读讲解正文，重点看【高亮框】' },
+            { key: 'test', label: '小练', tip: '随堂小练，检验理解', onClick: () => (lesson.exercises?.length ? setQuizOpen(true) : undefined) },
+            { key: 'fix', label: '巩固', tip: '错题清零，真正掌握', onClick: () => nav('/wrongbook') },
+          ];
+          const doneFlags = [!!lesson.story, quizDone, quizDone, false];
+          const cur = doneFlags.findIndex((d) => !d);
+          const current = cur === -1 ? steps.length - 1 : cur;
+          const stateOf = (i: number): 'done' | 'now' | 'todo' => (i < current ? 'done' : i === current ? 'now' : 'todo');
+          return (
+            <div className="mt-2.5 flex items-center">
+              {steps.map((s, i) => {
+                const st = stateOf(i);
+                return (
+                  <div key={s.key} className="flex min-w-0 items-center">
+                    {i > 0 && <div className={`mx-1.5 h-[3px] w-4 rounded-full sm:w-7 ${stateOf(i - 1) === 'done' ? 'bg-emerald-400' : 'bg-slate-200'}`} />}
+                    <button
+                      onClick={s.onClick}
+                      title={s.tip}
+                      className={`flex shrink-0 items-center gap-1.5 rounded-full py-1 pl-1 pr-2.5 text-[11px] font-bold transition ${
+                        st === 'now' ? 'bg-sky-600 text-white shadow-sm' : st === 'done' ? 'text-emerald-700 hover:bg-emerald-50' : 'text-slate-400 hover:bg-slate-100'
+                      }`}
+                    >
+                      <span className={`flex h-5 w-5 items-center justify-center rounded-full text-[10px] ${st === 'now' ? 'bg-white/25 text-white' : st === 'done' ? 'bg-emerald-500 text-white' : 'bg-slate-200 text-slate-500'}`}>
+                        {st === 'done' ? '✓' : i + 1}
+                      </span>
+                      {s.label}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })()}
       </div>
 
       <main className="mx-auto grid w-full max-w-6xl flex-1 gap-4 p-4 lg:grid-cols-[320px_1fr]">
