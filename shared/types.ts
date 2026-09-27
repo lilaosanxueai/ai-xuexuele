@@ -89,6 +89,8 @@ export interface Lesson {
   celebrate: string;
   /** 互动实验室定义（理科动态演示课）：参数滑块 + 探索问题；缺省时 LabScreen 自动从 starterCode 提取参数 */
   lab?: LabDef;
+  /** 原生互动卡（现代互动教育形态）：有此字段时优先用 React 组件渲染，不用 Python 舞台 */
+  interact?: InteractDef;
   /** 教材级讲解（自学正文）：概念精讲 + 例题分步 + 易错点；有此字段时课程可脱离 AI 完整自学 */
   teach?: Teach;
 }
@@ -131,6 +133,39 @@ export interface LabDef {
   /** 实验挑战：把参数调到目标值即达成（目标值须为 step 的整数倍） */
   challenges?: LabChallenge[];
 }
+
+/** 原生互动卡（现代在线互动教育形态）：参数驱动多视图，React 原生渲染，不走 Python 舞台 */
+export interface InteractDef {
+  /** 视图切换参数（引用 lab.params 的第一个参数） */
+  views: InteractView[];
+  /** 探索问题（自然语言，不暴露变量名） */
+  explore?: string[];
+}
+
+export interface InteractView {
+  /** 触发值：等于第一个参数取该值时显示本视图 */
+  when: number;
+  /** 视图标题（如「儒家 · 孔子」） */
+  title: string;
+  /** 副标题（如「春秋晚期」） */
+  subtitle?: string;
+  /** 主题色（Tailwind 渐变用）：red/orange/amber/green/teal/sky/blue/violet/purple/pink/rose */
+  color: string;
+  /** 头部 emoji */
+  emoji?: string;
+  /** 内容块序列 */
+  blocks: InteractBlock[];
+}
+
+export type InteractBlock =
+  /** 图标信息卡 */
+  | { kind: 'info'; icon: string; title: string; text: string }
+  /** 键值对照卡 */
+  | { kind: 'compare'; title?: string; items: { label: string; value: string; hint?: string }[] }
+  /** 步骤条 */
+  | { kind: 'steps'; title?: string; items: string[] }
+  /** 金句/结论高亮 */
+  | { kind: 'highlight'; text: string };
 
 export interface LabChallenge {
   text: string;

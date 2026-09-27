@@ -9,6 +9,7 @@ import Stage from '../components/Stage.tsx';
 import AIBuddy, { type BuddyHandle } from '../components/AIBuddy.tsx';
 import ExercisePanel from '../components/ExercisePanel.tsx';
 import TeachPanel from '../components/TeachPanel.tsx';
+import InteractLab from '../components/InteractLab.tsx';
 import { StageState, setRunSpeed } from '../runtime/stageState.ts';
 import { parsePy, PyRunner } from '../runtime/pyinterp.ts';
 import { pyStageApi } from '../runtime/pyBridge.ts';
@@ -197,9 +198,9 @@ export default function LabScreen() {
     });
   }, [lesson]);
 
-  // 课程与参数就绪后先跑一遍（瞬时）
+  // 课程与参数就绪后先跑一遍（瞬时）；原生互动卡课没有 Python 演示，跳过
   useEffect(() => {
-    if (!lesson || !baseCode || params.length === 0) return;
+    if (!lesson || lesson.interact || !baseCode || params.length === 0) return;
     runLab(baseCode, values, 'instant');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lesson, baseCode]);
@@ -212,6 +213,8 @@ export default function LabScreen() {
     const p = params.find((x) => x.name === name);
     const from = values[name] ?? v;
     setValues((prev) => ({ ...prev, [name]: v }));
+    // 原生互动卡：视图直接由参数驱动，无需运行演示代码
+    if (lesson?.interact) return;
     // 记录操作（合并同一参数的连续拖动）
     const ops = opsRef.current;
     const last = ops[ops.length - 1];
@@ -297,7 +300,7 @@ export default function LabScreen() {
     return <div className="flex min-h-screen items-center justify-center text-slate-400">正在搭建实验室…</div>;
   }
 
-  const exploreList = lesson.lab?.explore ?? [];
+  const exploreList = lesson.interact?.explore ?? lesson.lab?.explore ?? [];
   const bandText = lesson.gradeBand === 'senior' ? '高中' : lesson.gradeBand === 'junior' ? '初中' : '小学';
   /** 已勾选的探索问题数（stepper 判断"学"阶段进行中） */
   const exploredCount = Object.values(explored).filter(Boolean).length;
@@ -364,7 +367,10 @@ export default function LabScreen() {
                 {quizDone ? '✅ 随堂小练' : '📝 随堂小练'}
               </button>
             ) : null}
-            <button onClick={() => nav(`/practice/${lesson.id}`)} className="rounded-xl bg-white/80 px-3 py-1.5 text-sm font-bold text-slate-600 shadow-sm hover:bg-white" title="查看和修改演示代码">⌨ 看代码</button>
+            {/* 原生互动卡课没有代码可看 */}
+            {!lesson.interact && (
+              <button onClick={() => nav(`/practice/${lesson.id}`)} className="rounded-xl bg-white/80 px-3 py-1.5 text-sm font-bold text-slate-600 shadow-sm hover:bg-white" title="查看和修改演示代码">⌨ 看代码</button>
+            )}
             <button
               onClick={() => setBuddyOpen((v) => !v)}
               className={`rounded-xl px-3 py-1.5 text-sm font-bold shadow-sm transition ${buddyOpen ? 'bg-amber-400 text-white hover:bg-amber-500' : 'bg-white/80 text-slate-700 hover:bg-white'}`}
@@ -420,13 +426,15 @@ export default function LabScreen() {
                 />
               </div>
             ))}
-            <button
-              onClick={() => runLab(baseCode, values, 'normal')}
-              disabled={slowRunning}
-              className="mt-1 w-full rounded-xl bg-violet-500 px-3 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-violet-600 disabled:opacity-50"
-            >
-              {slowRunning ? '⏳ 演示中…' : '▶ 慢速看过程'}
-            </button>
+            {!lesson.interact && (
+              <button
+                onClick={() => runLab(baseCode, values, 'normal')}
+                disabled={slowRunning}
+                className="mt-1 w-full rounded-xl bg-violet-500 px-3 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-violet-600 disabled:opacity-50"
+              >
+                {slowRunning ? '⏳ 演示中…' : '▶ 慢速看过程'}
+              </button>
+            )}
           </div>
 
           <div className="rounded-2xl bg-white p-3 shadow-sm">
@@ -529,9 +537,25 @@ export default function LabScreen() {
           )}
         </aside>
 
-        {/* 右：舞台（实时重绘；网格课开悬停坐标读数） */}
-        <div className={`min-w-0 flex-1 p-4 transition-all duration-300 ${buddyOpen ? 'pr-[22.5rem]' : ''}`}>
-          <Stage fit grid={lesson.lab?.grid ?? false} coords={lesson.lab?.grid ?? false} stage={stageRef.current} />
+        {/* 右：舞台（实时重绘）或原生互动卡（现代互动教育形态） */}
+        <div className={`min-w-0 flex-1 transition-all duration-300 ${buddyOpen ? 'md:pr-[22.5rem]' : ''}`}>
+          {(() => {
+            const first = params[0];
+            const v = first ? (values[first.name] ?? first.value) : 0;
+            const view = lesson.interact?.views.find((x) => x.when === v) ?? lesson.interact?.views[0];
+            if (lesson.interact && view && first) {
+              return (
+                <div className="h-full overflow-hidden rounded-3xl bg-white shadow-inner ring-1 ring-slate-200">
+                  <InteractLab view={view} paramLabel={first.label} paramValue={v} />
+                </div>
+              );
+            }
+            return (
+              <div className="h-full p-4">
+                <Stage fit grid={lesson.lab?.grid ?? false} coords={lesson.lab?.grid ?? false} stage={stageRef.current} />
+              </div>
+            );
+          })()}
         </div>
 
         {/* AI 辅导浮窗 */}
