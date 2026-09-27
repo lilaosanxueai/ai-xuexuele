@@ -16,6 +16,12 @@ const BAND_LABEL: Record<string, string> = { primary: '小学', junior: '初中'
 const LAB_SUBJECTS = new Set(['数学', '物理', '化学', '生物', '地理', '科学']);
 const isLabLesson = (l: Lesson) => (LAB_SUBJECTS.has(l.subjectArea ?? '') || !!l.lab) && !!(l.lab || l.starterCode);
 
+/** 同年级课排最前，其余按 order */
+function gradeSort(list: Lesson[], grade?: number): Lesson[] {
+  if (grade == null) return list;
+  return [...list].sort((a, b) => (b.grade === grade ? 1 : 0) - (a.grade === grade ? 1 : 0) || a.order - b.order);
+}
+
 export default function SubjectScreen() {
   const nav = useNavigate();
   const { area = '' } = useParams();
@@ -82,7 +88,7 @@ export default function SubjectScreen() {
   const done = mine.filter((l) => lessonDone(l.id)).length;
 
   const bands = BAND_ORDER
-    .map((b) => ({ band: b, list: mine.filter((l) => (l.gradeBand ?? 'primary') === b) }))
+    .map((b) => ({ band: b, list: gradeSort(mine.filter((l) => (l.gradeBand ?? 'primary') === b), profile.grade) }))
     .filter((g) => g.list.length > 0);
 
   // 知识图谱掌握度（松鼠AI式）：按课标模块聚合——做过的课按随堂正确率计掌握度

@@ -3,6 +3,8 @@ import type { Lesson, ProfileProgress } from '@shared/types.ts';
 /**
  * 智能学习路径引擎：基于进度给孩子推荐「下一步」。
  * 规则优先级：继续未完成的 > 补最薄弱学科 > 顺序推进。
+ * 带 grade 时在「薄弱学科」与「顺序推进」之间插入「同龄新课」推荐，
+ * 并让薄弱学科优先考虑孩子年级的课。
  * 纯函数，可单测。
  */
 
@@ -17,6 +19,7 @@ export interface Recommendation {
 export function recommendNext(
   lessons: Lesson[],
   progress: ProfileProgress | null,
+  grade?: number,
 ): Recommendation | null {
   if (lessons.length === 0) return null;
   const done = (id: string) => progress?.lessons[id]?.status === 'completed';
@@ -29,13 +32,19 @@ export function recommendNext(
     return toRec(inProgress, '继续上次的学习，把它学完 📖');
   }
 
-  // 2) 薄弱学科优先：完成率最低且仍有未完成课程的学科
+  // 2) 同龄新课优先：衔接在校进度（薄弱学科旧规则在无年级时保持原样）
+  if (grade != null) {
+    const sameGrade = byOrder.find((l) => !done(l.id) && l.grade === grade);
+    if (sameGrade) return toRec(sameGrade, `${sameGrade.grade}年级正在学的内容，提前打个底 ⭐`);
+  }
+
+  // 3) 薄弱学科优先：完成率最低且仍有未完成课程的学科（有年级时入口优先选孩子年级的课）
   const areas = groupByArea(byOrder);
   let weakest: { area: string; rate: number; next: Lesson } | null = null;
   for (const [area, ls] of Object.entries(areas)) {
     const total = ls.length;
     const completed = ls.filter((l) => done(l.id)).length;
-    const next = ls.find((l) => !done(l.id));
+    const next = grade != null ? (ls.find((l) => !done(l.id) && l.grade === grade) ?? ls.find((l) => !done(l.id))) : ls.find((l) => !done(l.id));
     if (!next) continue; // 该学科已全部完成
     const rate = completed / total;
     if (!weakest || rate < weakest.rate) weakest = { area, rate, next };
@@ -44,7 +53,7 @@ export function recommendNext(
     return toRec(weakest.next, `${weakest.area}学科还有进步空间，从这一课补上 📗`);
   }
 
-  // 3) 顺序推进：第一个未完成的
+  // 4) 顺序推进：第一个未完成的
   const next = byOrder.find((l) => !done(l.id));
   if (next) return toRec(next, '按学习路径的下一课，继续加油 🚀');
 

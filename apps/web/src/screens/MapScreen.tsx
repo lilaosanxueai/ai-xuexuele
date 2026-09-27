@@ -60,7 +60,7 @@ export default function MapScreen() {
   const lessonDone = (id: string) => progress?.lessons[id]?.status === 'completed';
   const today = new Date().toISOString().slice(0, 10);
   const todayMin = progress?.dailyUsage[today] ?? 0;
-  const rec = recommendNext(lessons, progress);
+  const rec = recommendNext(lessons, progress, profile.grade);
   const doneCount = lessons.filter((l) => lessonDone(l.id)).length;
 
   // 间隔重复（Duolingo 式）：完成于 1/3/7/14 天前的课进入"复习黄金期"
