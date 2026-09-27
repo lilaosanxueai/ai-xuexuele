@@ -154,34 +154,34 @@
     {
       "q": "study 的过去式是？",
       "options": [
-        "studied",
         "studyed",
+        "studied",
         "studed",
         "studying"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "辅音+y→ied"
     },
     {
       "q": "She ___ TV last night.（watch）",
       "options": [
-        "watched",
-        "watch",
         "watches",
+        "watch",
+        "watched",
         "watching"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "last night 过去时+ed"
     },
     {
       "q": "否定句：I went to school. →",
       "options": [
-        "I did not go to school.",
+        "I did not went to school.",
         "I do not went to school.",
         "I not went to school.",
-        "I did not went to school."
+        "I did not go to school."
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "did not+原形"
     },
     {
@@ -198,12 +198,12 @@
     {
       "q": "下列哪个不是过去时标志词？",
       "options": [
-        "tomorrow",
         "yesterday",
+        "tomorrow",
         "last week",
         "two days ago"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "tomorrow 指将来"
     }
   ]

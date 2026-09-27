@@ -135,23 +135,23 @@
     {
       "q": "I think ___ he is right.（填连接词）",
       "options": [
-        "that",
-        "if",
         "what",
+        "if",
+        "that",
         "who"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "陈述句用that"
     },
     {
       "q": "I wonder ___ you can help me.",
       "options": [
-        "if",
+        "who",
         "that",
         "what",
-        "who"
+        "if"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "一般疑问用if"
     },
     {
@@ -168,34 +168,34 @@
     {
       "q": "宾语从句的语序是？",
       "options": [
-        "陈述语序",
         "疑问语序",
+        "陈述语序",
         "倒装",
         "任意"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "主谓不倒"
     },
     {
       "q": "He said the earth ___ round.",
       "options": [
-        "is",
-        "was",
         "were",
+        "was",
+        "is",
         "be"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "真理永现在"
     },
     {
       "q": "I thought you ___ finished it.",
       "options": [
-        "had",
+        "having",
         "have",
         "has",
-        "having"
+        "had"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "主过从过去"
     }
   ],

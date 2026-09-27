@@ -134,12 +134,12 @@
     {
       "q": "September 21st 读作？",
       "options": [
-        "the twenty-first",
+        "twentieth-one",
         "twenty-one",
         "twenty-oneth",
-        "twentieth-one"
+        "the twenty-first"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "序数词"
     },
     {
@@ -156,34 +156,34 @@
     {
       "q": "___ 2026 用？",
       "options": [
-        "in",
         "on",
+        "in",
         "at",
         "to"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "年份用in"
     },
     {
       "q": "___ seven o'clock 用？",
       "options": [
-        "at",
-        "in",
         "on",
+        "in",
+        "at",
         "by"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "钟点用at"
     },
     {
       "q": "问星期几说？",
       "options": [
-        "What day is it today?",
+        "How day?",
         "What's the date?",
         "What time?",
-        "How day?"
+        "What day is it today?"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "day问星期"
     },
     {

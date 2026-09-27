@@ -134,34 +134,34 @@
     {
       "q": "cat 中 a 的发音是？",
       "options": [
-        "/æ/",
         "/e/",
+        "/æ/",
         "/ɪ/",
         "/ʌ/"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "张大嘴"
     },
     {
       "q": "下列与 pen 的 e 发音相同的是？",
       "options": [
-        "bed",
-        "pig",
         "dog",
+        "pig",
+        "bed",
         "cup"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "/e/"
     },
     {
       "q": "p-i-g 拼读结果是？",
       "options": [
-        "pig",
+        "pit",
         "big",
         "pin",
-        "pit"
+        "pig"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "/pɪg/"
     },
     {
@@ -178,23 +178,23 @@
     {
       "q": "CVC 指的是？",
       "options": [
-        "辅音+元音+辅音",
         "三个辅音",
+        "辅音+元音+辅音",
         "三个元音",
         "词组"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "拼读最小单元"
     },
     {
       "q": "bus 中 u 的发音像？",
       "options": [
-        "/ʌ/ 短开口",
-        "/æ/ 大开口",
         "/e/ 咧嘴",
+        "/æ/ 大开口",
+        "/ʌ/ 短开口",
         "/ɒ/ 圆唇"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "短促开口"
     }
   ],

@@ -134,23 +134,23 @@
     {
       "q": "He ___ football after school.",
       "options": [
-        "plays",
-        "play",
         "playing",
+        "play",
+        "plays",
         "to play"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "三单加s"
     },
     {
       "q": "watch 的三单形式是？",
       "options": [
-        "watches",
+        "watching",
         "watchs",
         "watch",
-        "watching"
+        "watches"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "ch结尾加es"
     },
     {
@@ -167,34 +167,34 @@
     {
       "q": "My mother ___ (have) breakfast at 7.",
       "options": [
-        "has",
         "have",
+        "has",
         "haves",
         "having"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "特殊变化"
     },
     {
       "q": "频度副词应放在？",
       "options": [
-        "实义动词前",
-        "句首",
         "句尾",
+        "句首",
+        "实义动词前",
         "主语前"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "动词之前"
     },
     {
       "q": "The earth ___ around the sun.",
       "options": [
-        "goes",
+        "went",
         "go",
         "going",
-        "went"
+        "goes"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "客观真理用一般现在时"
     }
   ],

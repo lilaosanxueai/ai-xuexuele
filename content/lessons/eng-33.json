@@ -134,12 +134,12 @@
     {
       "q": "现在完成时的结构是？",
       "options": [
-        "have/has + 过去分词",
+        "am/is/are + doing",
         "had + 动词",
         "will + 动词",
-        "am/is/are + doing"
+        "have/has + 过去分词"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "have done"
     },
     {
@@ -156,34 +156,34 @@
     {
       "q": "___ you ever ___ to Beijing?",
       "options": [
-        "Have, been",
         "Have, gone",
+        "Have, been",
         "Did, go",
         "Are, going"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "ever+been"
     },
     {
       "q": "yesterday 出现应用什么时态？",
       "options": [
-        "一般过去时",
-        "现在完成时",
         "现在进行时",
+        "现在完成时",
+        "一般过去时",
         "将来时"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "过去时间"
     },
     {
       "q": "for 后面接？",
       "options": [
-        "时间段",
+        "人",
         "时间点",
         "地点",
-        "人"
+        "时间段"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "for 5 years"
     },
     {

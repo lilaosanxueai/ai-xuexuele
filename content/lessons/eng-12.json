@@ -154,34 +154,34 @@
     {
       "q": "run 的 V-ing 是？",
       "options": [
-        "running",
         "runing",
+        "running",
         "runnning",
         "runs"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "重读闭音节双写n"
     },
     {
       "q": "make 的 V-ing 是？",
       "options": [
-        "making",
-        "makeing",
         "makking",
+        "makeing",
+        "making",
         "makes"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "去e加ing"
     },
     {
       "q": "They ___ (watch) TV now.",
       "options": [
-        "are watching",
+        "watched",
         "watch",
         "watches",
-        "watched"
+        "are watching"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "now+复数→are doing"
     },
     {
@@ -198,12 +198,12 @@
     {
       "q": "I ___ (do) my homework at the moment.",
       "options": [
-        "am doing",
         "do",
+        "am doing",
         "did",
         "does"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "at the moment=此刻"
     }
   ]

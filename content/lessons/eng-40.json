@@ -134,12 +134,12 @@
     {
       "q": "被动语态的基本形式？",
       "options": [
-        "be + 过去分词",
+        "have + 过去分词",
         "be + 现在分词",
         "do + 过去分词",
-        "have + 过去分词"
+        "be + 过去分词"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "be done"
     },
     {
@@ -156,34 +156,34 @@
     {
       "q": "Rice ___ grown in the south. 填？",
       "options": [
-        "is",
         "are",
+        "is",
         "was",
         "am"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "现在时单数"
     },
     {
       "q": "主动变被动第一步？",
       "options": [
-        "宾语提前当主语",
-        "动词提前",
         "加 by",
+        "动词提前",
+        "宾语提前当主语",
         "变疑问"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "宾变主"
     },
     {
       "q": "Trees will be planted 属于什么时态被动？",
       "options": [
-        "一般将来时",
+        "过去时",
         "一般现在时",
         "现在完成时",
-        "过去时"
+        "一般将来时"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "will be done"
     },
     {

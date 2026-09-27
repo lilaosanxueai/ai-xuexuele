@@ -143,34 +143,34 @@
     {
       "q": "5 的英语是？",
       "options": [
-        "five",
         "four",
+        "five",
         "six",
         "fifteen"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "five"
     },
     {
       "q": "12 的英语是？",
       "options": [
-        "twelve",
-        "twenty",
         "two",
+        "twenty",
+        "twelve",
         "ten"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "twelve"
     },
     {
       "q": "How old are you? 回答用？",
       "options": [
-        "I am nine.",
+        "Nine old.",
         "I nine.",
         "Me nine.",
-        "Nine old."
+        "I am nine."
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "I am+年龄"
     },
     {
@@ -187,23 +187,23 @@
     {
       "q": "20 的英语是？",
       "options": [
-        "twenty",
         "twelve",
+        "twenty",
         "two",
         "twenties"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "twenty"
     },
     {
       "q": "1+2=3 用英语说？",
       "options": [
-        "One and two is three.",
-        "One two three.",
         "Plus one two.",
+        "One two three.",
+        "One and two is three.",
         "一加二"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "and=加"
     }
   ]

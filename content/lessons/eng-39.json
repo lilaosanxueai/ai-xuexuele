@@ -134,34 +134,34 @@
     {
       "q": "There ___ a book on the desk. 填？",
       "options": [
-        "is",
         "are",
+        "is",
         "am",
         "be"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "单数用is"
     },
     {
       "q": "There ___ some birds in the sky. 填？",
       "options": [
-        "are",
-        "is",
         "am",
+        "is",
+        "are",
         "be"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "复数用are"
     },
     {
       "q": "There is some ___ in the glass.",
       "options": [
-        "water",
+        "pens",
         "eggs",
         "apples",
-        "pens"
+        "water"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "不可数名词"
     },
     {
@@ -178,23 +178,23 @@
     {
       "q": "There ___ a cat and two dogs. 填？",
       "options": [
-        "is",
         "are",
+        "is",
         "am",
         "were"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "就近原则"
     },
     {
       "q": "表达「桌上有本书」用？",
       "options": [
-        "There is",
-        "I have",
         "He has",
+        "I have",
+        "There is",
         "It is"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "存在用There be"
     }
   ],

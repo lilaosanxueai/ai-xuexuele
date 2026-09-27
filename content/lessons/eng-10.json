@@ -151,23 +151,23 @@
     {
       "q": "big 的比较级是？",
       "options": [
-        "bigger",
-        "biger",
         "more big",
+        "biger",
+        "bigger",
         "biggest"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "重读闭音节双写g"
     },
     {
       "q": "good 的最高级是？",
       "options": [
-        "best",
+        "better",
         "goodest",
         "most good",
-        "better"
+        "best"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "good→better→best"
     },
     {
@@ -184,34 +184,34 @@
     {
       "q": "Tom is ___ than Jack.（tall）",
       "options": [
-        "taller",
         "tall",
+        "taller",
         "tallest",
         "as tall"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "than 前用比较级"
     },
     {
       "q": "He is ___ student in the class.（good）",
       "options": [
-        "the best",
-        "better",
         "good",
+        "better",
+        "the best",
         "the better"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "范围最高级加 the"
     },
     {
       "q": "同级比较\"和…一样高\"是？",
       "options": [
-        "as tall as",
+        "more tall",
         "taller than",
         "the tallest",
-        "more tall"
+        "as tall as"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "as+原形+as"
     }
   ]

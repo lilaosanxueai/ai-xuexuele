@@ -143,34 +143,34 @@
     {
       "q": "I ___ visit my grandma this weekend.（计划好）",
       "options": [
-        "am going to",
         "wills",
+        "am going to",
         "go to",
         "went"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "计划→be going to"
     },
     {
       "q": "Don't worry, I ___ come.（承诺）",
       "options": [
-        "will",
-        "am going",
         "willing",
+        "am going",
+        "will",
         "would"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "当场承诺用will"
     },
     {
       "q": "will 的否定是？",
       "options": [
-        "will not",
+        "do not will",
         "willn't",
         "not will",
-        "do not will"
+        "will not"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "will not = will not"
     },
     {
@@ -187,23 +187,23 @@
     {
       "q": "If it ___ tomorrow, we will stay home.",
       "options": [
-        "rains",
         "will rain",
+        "rains",
         "rained",
         "rainning"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "if从句用一般现在时"
     },
     {
       "q": "\"打算做某事\"最好的翻译是？",
       "options": [
-        "be going to do",
-        "will doing",
         "go to do",
+        "will doing",
+        "be going to do",
         "will to do"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "be going to + 原形"
     }
   ]

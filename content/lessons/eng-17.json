@@ -142,34 +142,34 @@
     {
       "q": "If I ___ wings, I would fly.",
       "options": [
-        "had",
         "have",
+        "had",
         "would have",
         "having"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "与现在相反→过去式"
     },
     {
       "q": "If he ___ earlier, he would have caught the train.",
       "options": [
-        "had left",
-        "left",
         "would leave",
+        "left",
+        "had left",
         "leaves"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "与过去相反→had done"
     },
     {
       "q": "I wish I ___ a bird.",
       "options": [
-        "were",
+        "have been",
         "am",
         "will be",
-        "have been"
+        "were"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "对现在的愿望→过去式 were"
     },
     {
@@ -186,23 +186,23 @@
     {
       "q": "If I had known your number, I ___ you.",
       "options": [
-        "would have called",
         "would call",
+        "would have called",
         "had called",
         "called"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "主句 would have done"
     },
     {
       "q": "虚拟语气表达的是？",
       "options": [
-        "非真实的假设或愿望",
-        "已经发生的事",
         "将来的计划",
+        "已经发生的事",
+        "非真实的假设或愿望",
         "命令和要求"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "核心=非真实"
     }
   ]

@@ -134,12 +134,12 @@
     {
       "q": "金属活动性由强到弱正确的是？",
       "options": [
-        "Zn>Fe>Cu>Ag",
+        "Fe>Ag>Zn>Cu",
         "Ag>Cu>Fe>Zn",
         "Cu>Zn>Fe>Ag",
-        "Fe>Ag>Zn>Cu"
+        "Zn>Fe>Cu>Ag"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "口诀顺序"
     },
     {
@@ -156,34 +156,34 @@
     {
       "q": "铜放入硝酸银溶液？",
       "options": [
-        "析出银",
         "无现象",
+        "析出银",
         "冒气泡",
         "变蓝沉淀"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "Cu>Ag"
     },
     {
       "q": "银放入硫酸铜溶液？",
       "options": [
-        "无现象",
-        "析出铜",
         "冒气泡",
+        "析出铜",
+        "无现象",
         "溶解"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "Ag<Cu"
     },
     {
       "q": "顺序表中氢的作用是？",
       "options": [
-        "参照物",
+        "没有用",
         "最活泼",
         "最不活泼",
-        "没有用"
+        "参照物"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "分界线"
     },
     {

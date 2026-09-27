@@ -153,34 +153,34 @@
     {
       "q": "我不喜欢牛奶 怎么说？",
       "options": [
-        "I don't like milk.",
         "I not like milk.",
+        "I don't like milk.",
         "I don't likes milk.",
         "I like milk."
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "don't + 原形"
     },
     {
       "q": "下列可数名词是？",
       "options": [
-        "egg",
-        "rice",
         "milk",
+        "rice",
+        "egg",
         "water"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "eggs"
     },
     {
       "q": "Do you like bread? 肯定回答？",
       "options": [
-        "Yes, I do.",
+        "Yes, it is.",
         "Yes, I like.",
         "No, I do.",
-        "Yes, it is."
+        "Yes, I do."
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "do 问 do 答"
     },
     {
@@ -197,12 +197,12 @@
     {
       "q": "两碗米饭怎么表达？",
       "options": [
-        "two bowls of rice",
         "two rices",
+        "two bowls of rice",
         "two rice",
         "rices"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "借量词"
     }
   ],

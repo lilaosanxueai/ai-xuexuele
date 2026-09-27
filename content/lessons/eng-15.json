@@ -142,12 +142,12 @@
     {
       "q": "The room ___ every day.",
       "options": [
-        "is cleaned",
+        "cleaned",
         "cleans",
         "is clean",
-        "cleaned"
+        "is cleaned"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "一般现在被动"
     },
     {
@@ -164,34 +164,34 @@
     {
       "q": "The bridge ___ last year.",
       "options": [
-        "was built",
         "is built",
+        "was built",
         "has been built",
         "will be built"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "last year→过去被动"
     },
     {
       "q": "My bike ___. Can you repair it?",
       "options": [
-        "is broken",
-        "broke",
         "is breaking",
+        "broke",
+        "is broken",
         "breaks"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "状态被动 is broken"
     },
     {
       "q": "The song ___ by young people now.",
       "options": [
-        "is being sung",
+        "has been sung",
         "is sung",
         "was sung",
-        "has been sung"
+        "is being sung"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "now→进行被动"
     },
     {

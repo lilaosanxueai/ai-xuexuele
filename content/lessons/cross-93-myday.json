@@ -122,56 +122,56 @@
     {
       "q": "「我七点起床」正确的说法是？",
       "options": [
-        "I get up at seven.",
+        "I gets up at seven.",
         "I get up on seven.",
         "I get up in seven.",
-        "I gets up at seven."
+        "I get up at seven."
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "钟点前用 at；主语 I 后动词不加 s"
     },
     {
       "q": "He ___ to school at eight. 空里填？",
       "options": [
-        "go",
         "goes",
+        "go",
         "going",
         "went"
       ],
-      "answer": 1,
+      "answer": 0,
       "explain": "第三人称单数 he + 一般现在时，动词加 es：goes"
     },
     {
       "q": "晚上十点睡觉，怎么说？",
       "options": [
-        "I go to bed at ten p.m.",
         "I go bed at ten.",
+        "I go to bed at ten p.m.",
         "I sleep in ten.",
         "I go to bed on ten."
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "go to bed + at + 时间（p.m. 表示下午/晚上）"
     },
     {
       "q": "He ___ to school at seven. 填？",
       "options": [
-        "goes",
-        "go",
         "going",
+        "go",
+        "goes",
         "went"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "三单 he 的一般现在时动词加 es"
     },
     {
       "q": "\"在七点\"用英语说是？",
       "options": [
-        "at seven",
+        "to seven",
         "on seven",
         "in seven",
-        "to seven"
+        "at seven"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "钟点前用介词 at"
     },
     {

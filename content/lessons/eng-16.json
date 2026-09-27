@@ -152,34 +152,34 @@
     {
       "q": "The novel ___ by Mo Yan is popular.",
       "options": [
-        "written",
         "writing",
+        "written",
         "to write",
         "writes"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "小说被写→done"
     },
     {
       "q": "___ English well, you need more practice.",
       "options": [
-        "To learn",
-        "Learning",
         "Learned",
+        "Learning",
+        "To learn",
         "Learns"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "表目的用 to do"
     },
     {
       "q": "He is looking forward to ___ from you.",
       "options": [
-        "hearing",
+        "heard",
         "hear",
         "be heard",
-        "heard"
+        "hearing"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "to 是介词接 doing"
     },
     {
@@ -196,12 +196,12 @@
     {
       "q": "___ tired, he went on working.",
       "options": [
-        "Feeling",
         "Felt",
+        "Feeling",
         "To feel",
         "Feel"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "他主动感到累→doing"
     }
   ]

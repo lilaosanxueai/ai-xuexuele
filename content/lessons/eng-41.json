@@ -132,47 +132,25 @@
   },
   "exercises": [
     {
-      "q": "study 的过去式是？",
-      "options": [
-        "studied",
-        "studyed",
-        "studed",
-        "studying"
-      ],
-      "answer": 0,
-      "explain": "变y为i"
-    },
-    {
-      "q": "go 的过去式是？",
-      "options": [
-        "went",
-        "goed",
-        "gone",
-        "going"
-      ],
-      "answer": 0,
-      "explain": "不规则"
-    },
-    {
       "q": "哪个词提示用过去时？",
       "options": [
-        "yesterday",
-        "now",
         "tomorrow",
+        "now",
+        "yesterday",
         "usually"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "昨天"
     },
     {
       "q": "Did you ___ TV last night? 填？",
       "options": [
-        "watch",
+        "watching",
         "watched",
         "watches",
-        "watching"
+        "watch"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "did后还原"
     },
     {
@@ -189,12 +167,12 @@
     {
       "q": "I ___ football yesterday. 填？",
       "options": [
-        "played",
         "play",
+        "played",
         "plays",
         "playing"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "加ed"
     }
   ],

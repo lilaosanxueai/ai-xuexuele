@@ -143,34 +143,34 @@
     {
       "q": "三月是？",
       "options": [
-        "March",
         "May",
+        "March",
         "March 和 May 都是",
         "May 不是月份"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "三月March"
     },
     {
       "q": "十二月是？",
       "options": [
-        "December",
-        "November",
         "October",
+        "November",
+        "December",
         "January"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "一年最后"
     },
     {
       "q": "我的生日在五月 说？",
       "options": [
-        "My birthday is in May.",
+        "My birthday at May.",
         "My birthday on May.",
         "My birthday is May.",
-        "My birthday at May."
+        "My birthday is in May."
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "in+月份"
     },
     {
@@ -187,23 +187,23 @@
     {
       "q": "夏天的月份不包括？",
       "options": [
-        "March",
         "June",
+        "March",
         "July",
         "August"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "March是春"
     },
     {
       "q": "月份首字母要？",
       "options": [
-        "大写",
-        "小写",
         "斜体",
+        "小写",
+        "大写",
         "双写"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "专有名词"
     }
   ]

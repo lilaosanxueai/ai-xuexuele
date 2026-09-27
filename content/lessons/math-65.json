@@ -153,34 +153,34 @@
     {
       "q": "tanx 用 sin、cos 表示为？",
       "options": [
-        "sinx/cosx",
         "cosx/sinx",
+        "sinx/cosx",
         "sinx·cosx",
         "sinx−cosx"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "正切 = 对边/邻边 = sin/cos"
     },
     {
       "q": "sinα=3/5（第一象限），cosα=？",
       "options": [
-        "4/5",
-        "−4/5",
         "±4/5",
+        "−4/5",
+        "4/5",
         "5/4"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "1−9/25=16/25，第一象限取正"
     },
     {
       "q": "sin2α 等于？",
       "options": [
-        "2sinαcosα",
+        "sinα+cosα",
         "2sinα",
         "sin²α",
-        "sinα+cosα"
+        "2sinαcosα"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "二倍角公式"
     },
     {
@@ -197,12 +197,12 @@
     {
       "q": "cos60° 用二倍角由 sin30° 求：cos60° = 1 − 2sin²30° = ？",
       "options": [
-        "1/2",
         "1/4",
+        "1/2",
         "3/4",
         "0"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "1 − 2×(1/2)² = 1/2 ✓"
     }
   ]

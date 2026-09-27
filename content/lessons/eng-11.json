@@ -143,12 +143,12 @@
     {
       "q": "___ I use your pen?（请求许可）",
       "options": [
-        "Can",
+        "Am",
         "Must",
         "Should",
-        "Am"
+        "Can"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "can 表许可"
     },
     {
@@ -165,34 +165,34 @@
     {
       "q": "You ___ finish it today. Tomorrow is OK.（不必）",
       "options": [
-        "need not",
         "must not",
+        "need not",
         "cannot",
         "should not"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "need not=不必"
     },
     {
       "q": "She can ___ very fast.（run）",
       "options": [
-        "run",
-        "runs",
         "running",
+        "runs",
+        "run",
         "ran"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "情态动词+原形"
     },
     {
       "q": "你建议朋友多喝水，说：",
       "options": [
-        "You should drink more water.",
+        "You drink should water.",
         "You must drink water.",
         "You can water.",
-        "You drink should water."
+        "You should drink more water."
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "should 表建议"
     },
     {

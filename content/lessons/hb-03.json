@@ -155,17 +155,6 @@
       "explain": "knee 膝盖，两只用 knees（复数）"
     },
     {
-      "q": "knees 指的是？",
-      "options": [
-        "膝盖（两个）",
-        "脚趾",
-        "手指",
-        "肩膀"
-      ],
-      "answer": 0,
-      "explain": "knee 的复数 knees（成对部位用复数）"
-    },
-    {
       "q": "Touch your ___.（摸你的鼻子）填？",
       "options": [
         "nose",

@@ -142,12 +142,12 @@
     {
       "q": "书信开头段的功能是？",
       "options": [
-        "自我介绍+写信目的",
+        "罗列生词",
         "展开全部要点",
         "致谢祝愿",
-        "罗列生词"
+        "自我介绍+写信目的"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "直奔主题"
     },
     {
@@ -164,34 +164,34 @@
     {
       "q": "下面哪个是结尾万能句？",
       "options": [
-        "Looking forward to your reply.",
         "I am Li Hua.",
+        "Looking forward to your reply.",
         "It is a pen.",
         "He is tall."
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "期待回复"
     },
     {
       "q": "表层次的连接词是？",
       "options": [
-        "Besides",
-        "But",
         "Or",
+        "But",
+        "Besides",
         "So"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "递进补要点"
     },
     {
       "q": "亮点句 the festival which will be held... 用了？",
       "options": [
-        "定语从句",
+        "省略句",
         "倒装句",
         "强调句",
-        "省略句"
+        "定语从句"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "which 引导定语从句"
     },
     {

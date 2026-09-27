@@ -134,23 +134,23 @@
     {
       "q": "礼貌问路应先说？",
       "options": [
-        "Excuse me",
-        "Hey",
         "Hello",
+        "Hey",
+        "Excuse me",
         "Look"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "礼貌用语"
     },
     {
       "q": "\"在银行旁边\"是？",
       "options": [
-        "next to the bank",
+        "at the bank",
         "in the bank",
         "on the bank",
-        "at the bank"
+        "next to the bank"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "next to"
     },
     {
@@ -167,34 +167,34 @@
     {
       "q": "across from 的意思是？",
       "options": [
-        "在…对面",
         "在…上面",
+        "在…对面",
         "穿过",
         "在…里面"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "对面"
     },
     {
       "q": "between...and... 表示？",
       "options": [
-        "在…和…之间",
-        "在…后面",
         "在…旁边",
+        "在…后面",
+        "在…和…之间",
         "在…上面"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "两者之间"
     },
     {
       "q": "Turn left at the second crossing 的意思是？",
       "options": [
-        "第二个路口左转",
+        "向左走两步",
         "左转两次",
         "在左边第二个",
-        "向左走两步"
+        "第二个路口左转"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "crossing=路口"
     }
   ],

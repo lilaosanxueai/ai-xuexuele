@@ -145,34 +145,34 @@
     {
       "q": "elephant 前用？",
       "options": [
-        "an",
         "a",
+        "an",
         "the",
         "不填"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "元音开头"
     },
     {
       "q": "cat 的复数？",
       "options": [
-        "cats",
-        "cates",
         "cat",
+        "cates",
+        "cats",
         "caties"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "加s"
     },
     {
       "q": "Is it a dog? 肯定回答？",
       "options": [
-        "Yes, it is.",
+        "It is.",
         "Yes, it does.",
         "No.",
-        "It is."
+        "Yes, it is."
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "is问is答"
     },
     {
@@ -189,12 +189,12 @@
     {
       "q": "panda 的意思是？",
       "options": [
-        "熊猫",
         "老虎",
+        "熊猫",
         "猴子",
         "狮子"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "国宝🐼"
     }
   ],

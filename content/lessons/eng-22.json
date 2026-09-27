@@ -142,12 +142,12 @@
     {
       "q": "The cat is ___ the box.（在盒子上面）",
       "options": [
-        "on",
+        "at",
         "in",
         "under",
-        "at"
+        "on"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "表面接触"
     },
     {
@@ -164,34 +164,34 @@
     {
       "q": "熊猫的英语是？",
       "options": [
-        "panda",
         "tiger",
+        "panda",
         "bear",
         "duck"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "国宝"
     },
     {
       "q": "Where ___ the dog? It is under the chair.",
       "options": [
-        "is",
-        "are",
         "am",
+        "are",
+        "is",
         "be"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "单数 dog"
     },
     {
       "q": "They are ___ the tree.（鸟在树上）",
       "options": [
-        "in",
+        "at",
         "on",
         "under",
-        "at"
+        "in"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "长在树里用 in"
     },
     {

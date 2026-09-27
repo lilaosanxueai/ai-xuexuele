@@ -151,12 +151,12 @@
     {
       "q": "简谐运动的回复力满足？",
       "options": [
-        "F=-kx",
+        "F=mg",
         "F=kx",
         "F=ma",
-        "F=mg"
+        "F=-kx"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "正比反向"
     },
     {
@@ -173,34 +173,34 @@
     {
       "q": "振子在最大位移处速度？",
       "options": [
-        "零",
         "最大",
+        "零",
         "A",
         "2A"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "折返瞬间"
     },
     {
       "q": "周期和频率的关系？",
       "options": [
-        "T=1/f",
-        "T=f",
         "T=2f",
+        "T=f",
+        "T=1/f",
         "无关"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "互为倒数"
     },
     {
       "q": "弹簧振子周期公式？",
       "options": [
-        "T=2π√(m/k)",
+        "T=mk",
         "T=2π√(k/m)",
         "T=mg/k",
-        "T=mk"
+        "T=2π√(m/k)"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "由系统决定"
     },
     {

@@ -145,34 +145,34 @@
     {
       "q": "big 的最高级是？",
       "options": [
-        "biggest",
         "biger",
+        "biggest",
         "bigst",
         "most big"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "双写g加est"
     },
     {
       "q": "heavy 的比较级是？",
       "options": [
-        "heavier",
-        "heavyer",
         "more heavy",
+        "heavyer",
+        "heavier",
         "heavest"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "变y为i"
     },
     {
       "q": "good 的比较级是？",
       "options": [
-        "better",
+        "best",
         "gooder",
         "more good",
-        "best"
+        "better"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "不规则"
     },
     {
@@ -189,12 +189,12 @@
     {
       "q": "最高级前面要加？",
       "options": [
-        "the",
         "a",
+        "the",
         "an",
         "不加"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "the + est"
     }
   ],

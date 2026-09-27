@@ -134,12 +134,12 @@
     {
       "q": "How much ___ this shirt?",
       "options": [
-        "is",
+        "does",
         "are",
         "do",
-        "does"
+        "is"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "单数用is"
     },
     {
@@ -156,34 +156,34 @@
     {
       "q": "Can I ___ it on?",
       "options": [
-        "try",
         "trying",
+        "try",
         "tried",
         "tries"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "try on"
     },
     {
       "q": "决定买了说？",
       "options": [
-        "I'll take it",
-        "I'll go",
         "I'll see",
+        "I'll go",
+        "I'll take it",
         "I'll try"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "买了"
     },
     {
       "q": "不买东西离开时说？",
       "options": [
-        "Thanks anyway",
+        "Bye",
         "Nothing",
         "Go away",
-        "Bye"
+        "Thanks anyway"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "礼貌拒绝"
     },
     {

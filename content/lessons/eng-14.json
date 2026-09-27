@@ -143,23 +143,23 @@
     {
       "q": "The man ___ is standing there is my uncle.（作主语指人）",
       "options": [
-        "who",
-        "which",
         "where",
+        "which",
+        "who",
         "whose"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "指人作主语用 who"
     },
     {
       "q": "The house ___ windows are big faces south.",
       "options": [
-        "whose",
+        "who",
         "which",
         "that",
-        "who"
+        "whose"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "windows 前缺定语→whose"
     },
     {
@@ -176,34 +176,34 @@
     {
       "q": "The city ___ I was born has changed a lot.",
       "options": [
-        "where",
         "which",
+        "where",
         "that",
         "who"
       ],
-      "answer": 0,
+      "answer": 1,
       "explain": "地点+从句不缺成分→where"
     },
     {
       "q": "It is the most interesting book ___ I have read.",
       "options": [
-        "that",
-        "which",
         "who",
+        "which",
+        "that",
         "whom"
       ],
-      "answer": 0,
+      "answer": 2,
       "explain": "最高级修饰只用 that"
     },
     {
       "q": "The pen ___ I lost yesterday was red.（作宾语）",
       "options": [
-        "that（可省）",
+        "what",
         "who",
         "where",
-        "what"
+        "that（可省）"
       ],
-      "answer": 0,
+      "answer": 3,
       "explain": "指物作宾语 that/which 可省"
     }
   ]

@@ -152,17 +152,6 @@
       "explain": "grand- 表示上一辈：grandfather 爷爷/外公"
     },
     {
-      "q": "grandfather 是？",
-      "options": [
-        "爷爷/外公",
-        "爸爸",
-        "叔叔",
-        "哥哥"
-      ],
-      "answer": 0,
-      "explain": "grand- 表示上一辈"
-    },
-    {
       "q": "This is ___ mother.（我的）填？",
       "options": [
         "my",
