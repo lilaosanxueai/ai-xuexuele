@@ -25,7 +25,14 @@ export function buildRouter(cfg: AppConfig): Router {
     const g = Number(grade);
     res.status(201).json(store.createProfile(name, typeof avatar === 'string' ? avatar : '🧒', Number.isInteger(g) && g >= 1 && g <= 12 ? g : undefined));
   });
-  r.delete('/profiles/:id', (req, res) => {
+    r.patch('/profiles/:id', (req, res) => {
+    try {
+      res.json(store.updateProfile(req.params.id, req.body ?? {}));
+    } catch (e) {
+      res.status(400).json({ error: (e as Error).message });
+    }
+  });
+r.delete('/profiles/:id', (req, res) => {
     // 删除角色连带清空学习数据（家长确认弹窗在前端完成，已取消 PIN 码机制）
     store.deleteProfile(req.params.id);
     res.json({ ok: true });

@@ -43,6 +43,18 @@ export function createProfile(name: string, avatar: string, grade?: number): Pro
   return p;
 }
 
+export function updateProfile(id: string, patch: { name?: string; avatar?: string; grade?: number | null }): Profile {
+  if (!validId(id)) throw new Error('非法 profileId');
+  const profiles = listProfiles();
+  const p = profiles.find((x) => x.id === id);
+  if (!p) throw new Error('角色不存在');
+  if (typeof patch.name === 'string' && patch.name.trim()) p.name = patch.name.trim().slice(0, 12);
+  if (typeof patch.avatar === 'string' && patch.avatar) p.avatar = patch.avatar;
+  if (patch.grade === null) delete p.grade;
+  else if (typeof patch.grade === 'number' && Number.isInteger(patch.grade) && patch.grade >= 1 && patch.grade <= 12) p.grade = patch.grade;
+  writeJson(profilesFile, profiles);
+  return p;
+}
 export function deleteProfile(id: string): void {
   if (!validId(id)) throw new Error('非法 profileId');
   writeJson(profilesFile, listProfiles().filter((p) => p.id !== id));

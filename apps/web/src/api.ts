@@ -18,6 +18,8 @@ export const api = {
   profiles: () => req<Profile[]>('/api/profiles'),
   createProfile: (name: string, avatar: string, grade?: number) =>
     req<Profile>('/api/profiles', { method: 'POST', body: JSON.stringify({ name, avatar, grade }) }),
+  updateProfile: (id: string, patch: { name?: string; avatar?: string; grade?: number | null }) =>
+    req<Profile>(`/api/profiles/${id}`, { method: 'PATCH', body: JSON.stringify(patch) }),
   deleteProfile: (id: string) => req<{ ok: boolean }>(`/api/profiles/${id}`, { method: 'DELETE' }),
   lessons: () => req<Lesson[]>('/api/lessons'),
   progress: (profileId: string) => req<ProfileProgress>(`/api/progress/${profileId}`),
