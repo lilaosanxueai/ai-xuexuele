@@ -85,6 +85,9 @@ export default function LabScreen() {
 
   /** SVG 舞台命令流（Python 演示离屏执行的输出） */
   const [cmds, setCmds] = useState<StageCmd[]>([]);
+  /** 慢速模式：逐条揭示到第几条命令（Infinity=全部） */
+  const [reveal, setReveal] = useState<number>(Infinity);
+  const revealTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const runnerRef = useRef<PyRunner | null>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   /** 补间动画：当前插值中的参数值（重绘用），滑块显示值是目标值 */
@@ -127,6 +130,8 @@ export default function LabScreen() {
     setExplored({});
     setChallengeDone({});
     setLabNote('');
+    setCmds([]);
+    setReveal(Infinity);
     void api.lessons().then((all) => {
       const l = all.find((x) => x.id === id) ?? null;
       if (!l || !(l.lab || l.starterCode)) { nav(l ? `/tutor/${id}` : '/map'); return; }
@@ -154,6 +159,7 @@ export default function LabScreen() {
     return () => {
       runnerRef.current?.stop();
       cancelAnimationFrame(tweenRafRef.current);
+      clearTimeout(revealTimer.current);
     };
   }, [id, profile, nav]);
 
@@ -172,8 +178,25 @@ export default function LabScreen() {
     runnerRef.current = runner;
     if (speed === 'normal') setSlowRunning(true);
     void runner.run(() => {
-      setSlowRunning(false);
-      setCmds([...cap.cmds]);
+      const all = [...cap.cmds];
+      setCmds(all);
+      if (speed === 'normal' && all.length > 0) {
+        // 慢速看过程：命令逐条上屏（像看老师一笔一笔画），总时长压在 ~6s 内
+        const per = Math.max(40, Math.min(160, Math.round(6000 / all.length)));
+        setReveal(0);
+        clearTimeout(revealTimer.current);
+        let i = 0;
+        const tick = () => {
+          i += 1;
+          setReveal(i);
+          if (i < all.length) revealTimer.current = setTimeout(tick, per);
+          else { setReveal(Infinity); setSlowRunning(false); }
+        };
+        revealTimer.current = setTimeout(tick, 300);
+      } else {
+        setReveal(Infinity);
+        setSlowRunning(false);
+      }
       if (runner.lastError) setToast(`演示中断：${runner.lastError}`);
     });
   }, [lesson]);
@@ -262,91 +285,101 @@ export default function LabScreen() {
   return (
     <div className="flex h-screen flex-col overflow-hidden bg-slate-50">
       <Header />
-      {/* 课题条 */}
-      <div className="border-b bg-white/80 px-4 py-2">
-        <div className="flex flex-wrap items-center gap-2">
-          <button onClick={() => nav(`/subject/${encodeURIComponent(lesson.subjectArea ?? '数学')}`)} className="rounded-xl bg-slate-100 px-3 py-1.5 text-sm font-bold text-slate-600 hover:bg-slate-200">← 返回学科</button>
-          <span className="text-xl">{lesson.emoji}</span>
-          <h1 className="text-base font-black text-slate-800">{lesson.title}</h1>
-          <span className="rounded-full bg-sky-100 px-2 py-0.5 text-xs font-bold text-sky-700">{lesson.subjectArea ?? '数学'}</span>
-          {lesson.grade != null && <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-bold text-amber-700">{lesson.grade}年级</span>}
-          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-bold text-slate-500">{bandText}</span>
-          {lesson.textbook && <span className="hidden rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-700 sm:inline">📚 {lesson.textbook}</span>}
-          {/* 连续学习导航：同学科按 order 排序，学完直接翻下一课 */}
-          {(() => {
-            const nb = lessonNeighbors(allLessons, lesson.id);
-            if (nb.total === 0) return null;
-            return (
-              <span className="flex items-center gap-1.5">
-                <span className="hidden text-xs font-bold text-slate-400 md:inline">{nb.index}/{nb.total}</span>
-                {nb.prev && (
-                  <button onClick={() => nav(lessonRoute(nb.prev!))} className="max-w-32 truncate rounded-xl bg-slate-100 px-2 py-1.5 text-xs font-bold text-slate-600 transition hover:bg-slate-200" title={`上一课：${nb.prev.title}`}>
-                    ← {nb.prev.title}
+      {/* 课题条：左=返回+标题+元信息一行，右=翻课+动作；下=学习路径 stepper */}
+      <div className="border-b bg-white px-4 py-2.5">
+        {(() => {
+          const nb = lessonNeighbors(allLessons, lesson.id);
+          return (
+            <div className="flex items-center gap-2.5">
+              <button onClick={() => nav(`/subject/${encodeURIComponent(lesson.subjectArea ?? '数学')}`)} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-lg text-slate-500 transition hover:bg-slate-200" title="返回学科列表">←</button>
+              <span className="shrink-0 text-2xl">{lesson.emoji}</span>
+              <div className="min-w-0 flex-1">
+                <h1 className="truncate text-base font-black leading-tight text-slate-800">{lesson.title}</h1>
+                <div className="mt-0.5 flex items-center gap-1 truncate text-[11px] leading-tight text-slate-400">
+                  <span className="font-bold text-sky-600">{lesson.subjectArea ?? '数学'}</span>
+                  {lesson.grade != null ? <span>· {lesson.grade}年级</span> : <span>· {bandText}</span>}
+                  {lesson.textbook && <span className="hidden max-w-40 truncate sm:inline">· {lesson.textbook.replace(/[（(][^）)]*[）)]/g, '')}</span>}
+                  {nb.total > 0 && <span>· 第 {nb.index}/{nb.total} 课</span>}
+                </div>
+              </div>
+              {nb.prev && (
+                <button onClick={() => nav(lessonRoute(nb.prev!))} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-xl leading-none text-slate-500 transition hover:bg-slate-200" title={`上一课：${nb.prev.title}`}>‹</button>
+              )}
+              {nb.next && (
+                <button onClick={() => nav(lessonRoute(nb.next!))} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-sky-500 text-xl leading-none text-white shadow-sm transition hover:bg-sky-600" title={`下一课：${nb.next.title}`}>›</button>
+              )}
+              <div className="flex shrink-0 items-center gap-1.5">
+                {lesson.teach && (
+                  <button
+                    onClick={() => { setTeachOpen(true); setTeachSeen(true); }}
+                    className="rounded-xl bg-sky-600 px-3 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-sky-700"
+                    title="概念精讲 + 例题分步 + 易错点（像课本一样自己学）"
+                  >
+                    📖 讲解
                   </button>
                 )}
-                {nb.next && (
-                  <button onClick={() => nav(lessonRoute(nb.next!))} className="max-w-32 truncate rounded-xl bg-sky-500 px-2 py-1.5 text-xs font-bold text-white transition hover:bg-sky-600" title={`下一课：${nb.next.title}`}>
-                    {nb.next.title} →
+                {lesson.exercises?.length ? (
+                  <button onClick={() => setQuizOpen(true)} className={`rounded-xl px-3 py-2 text-sm font-bold shadow-sm transition ${quizDone ? 'bg-emerald-50 text-emerald-600 hover:bg-emerald-100' : 'bg-amber-400 text-white hover:bg-amber-500'}`}>
+                    {quizDone ? '✅ 小练' : '📝 小练'}
                   </button>
+                ) : null}
+                {/* 「看代码」只属于信息科技编程课；其他学科的演示代码只是内部渲染引擎，不暴露 */}
+                {!lesson.interact && lesson.subjectArea === '信息科技' && (
+                  <button onClick={() => nav(`/practice/${lesson.id}`)} className="rounded-xl bg-white px-3 py-2 text-sm font-bold text-slate-600 ring-1 ring-slate-200 transition hover:bg-slate-50" title="查看和修改演示代码">⌨ 代码</button>
                 )}
-              </span>
-            );
-          })()}
-          <div className="ml-auto flex items-center gap-1.5">
-            {lesson.teach && (
-              <button
-                onClick={() => { setTeachOpen(true); setTeachSeen(true); }}
-                className="rounded-xl bg-sky-600 px-3 py-1.5 text-sm font-bold text-white shadow-sm transition hover:bg-sky-700"
-                title="概念精讲 + 例题分步 + 易错点（像课本一样自己学）"
-              >
-                📖 课本讲解
-              </button>
-            )}
-            {lesson.exercises?.length ? (
-              <button onClick={() => setQuizOpen(true)} className={`rounded-xl px-3 py-1.5 text-sm font-bold shadow-sm ${quizDone ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-400 text-white hover:bg-amber-500'}`}>
-                {quizDone ? '✅ 随堂小练' : '📝 随堂小练'}
-              </button>
-            ) : null}
-            {/* 「看代码」只属于信息科技编程课；其他学科的演示代码只是内部渲染引擎，不暴露 */}
-            {!lesson.interact && lesson.subjectArea === '信息科技' && (
-              <button onClick={() => nav(`/practice/${lesson.id}`)} className="rounded-xl bg-white/80 px-3 py-1.5 text-sm font-bold text-slate-600 shadow-sm hover:bg-white" title="查看和修改演示代码">⌨ 看代码</button>
-            )}
-            <button
-              onClick={() => nav('/ask')}
-              className="rounded-xl bg-white/80 px-3 py-1.5 text-sm font-bold text-slate-700 shadow-sm transition hover:bg-white"
-              title="有疑问去问老师（独立答疑页）"
-            >
-              💬 答疑
-            </button>
-          </div>
-        </div>
-        {/* 学习路径 stepper（学而思式 预习-学习-巩固 闭环可视化） */}
-        <div className="mt-2 flex items-center gap-1 overflow-x-auto pb-0.5 text-[11px] font-bold">
-          {(() => {
-            const steps: { key: string; label: string; state: 'done' | 'now' | 'todo'; onClick?: () => void }[] = [
-              { key: 'pre', label: '① 预习·开场一问', state: teachOpen ? 'now' : (teachSeen ? 'done' : 'todo'), onClick: () => setTeachOpen(true) },
-              { key: 'learn', label: '② 学·讲解+实验', state: !teachSeen ? 'todo' : exploredCount > 0 || quizDone ? 'done' : 'now', onClick: () => setTeachOpen(true) },
-              { key: 'test', label: '③ 练·随堂小练', state: quizDone ? 'done' : teachSeen ? 'now' : 'todo', onClick: () => (lesson.exercises?.length ? setQuizOpen(true) : undefined) },
-              { key: 'fix', label: '④ 固·错题清零', state: 'todo', onClick: () => nav('/wrongbook') },
-            ];
-            return steps.map((s) => (
-              <button
-                key={s.key}
-                onClick={s.onClick}
-                className={`shrink-0 rounded-full px-2.5 py-1 transition ${
-                  s.state === 'done' ? 'bg-emerald-100 text-emerald-700' : s.state === 'now' ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-400'
-                }`}
-              >
-                {s.state === 'done' ? '✓ ' : ''}{s.label}
-              </button>
-            ));
-          })()}
-        </div>
+                <button
+                  onClick={() => nav('/ask')}
+                  className="rounded-xl bg-white px-3 py-2 text-sm font-bold text-slate-600 ring-1 ring-slate-200 transition hover:bg-slate-50"
+                  title="有疑问去问老师（独立答疑页）"
+                >
+                  💬 答疑
+                </button>
+              </div>
+            </div>
+          );
+        })()}
+        {/* 学习路径 stepper：①预习 ②学习 ③小练 ④巩固（顺序推进：完成打勾，当前步高亮常亮） */}
+        {(() => {
+          const steps: { key: string; label: string; tip: string; onClick?: () => void }[] = [
+            { key: 'pre', label: '预习', tip: '开场一问：带着问题进入这一课', onClick: () => setTeachOpen(true) },
+            { key: 'learn', label: '学习', tip: '读讲解 + 拖滑块做实验', onClick: () => setTeachOpen(true) },
+            { key: 'test', label: '小练', tip: '随堂小练，检验理解', onClick: () => (lesson.exercises?.length ? setQuizOpen(true) : undefined) },
+            { key: 'fix', label: '巩固', tip: '错题清零，真正掌握', onClick: () => nav('/wrongbook') },
+          ];
+          const doneFlags = [teachSeen, exploredCount > 0 || quizDone, quizDone, false];
+          const cur = doneFlags.findIndex((d) => !d);
+          const current = cur === -1 ? steps.length - 1 : cur;
+          const stateOf = (i: number): 'done' | 'now' | 'todo' => (i < current ? 'done' : i === current ? 'now' : 'todo');
+          return (
+            <div className="mt-2.5 flex items-center">
+              {steps.map((s, i) => {
+                const st = stateOf(i);
+                return (
+                <div key={s.key} className="flex min-w-0 items-center">
+                  {i > 0 && <div className={`mx-1.5 h-[3px] w-4 rounded-full sm:w-7 ${stateOf(i - 1) === 'done' ? 'bg-emerald-400' : 'bg-slate-200'}`} />}
+                  <button
+                    onClick={s.onClick}
+                    title={s.tip}
+                    className={`flex shrink-0 items-center gap-1.5 rounded-full py-1 pl-1 pr-2.5 text-[11px] font-bold transition ${
+                      st === 'now' ? 'bg-sky-600 text-white shadow-sm' : st === 'done' ? 'text-emerald-700 hover:bg-emerald-50' : 'text-slate-400 hover:bg-slate-100'
+                    }`}
+                  >
+                    <span className={`flex h-5 w-5 items-center justify-center rounded-full text-[10px] ${st === 'now' ? 'bg-white/25 text-white' : st === 'done' ? 'bg-emerald-500 text-white' : 'bg-slate-200 text-slate-500'}`}>
+                      {st === 'done' ? '✓' : i + 1}
+                    </span>
+                    {s.label}
+                  </button>
+                </div>
+                );
+              })}
+            </div>
+          );
+        })()}
       </div>
 
       <main className="relative flex min-h-0 flex-1 flex-col md:flex-row">
         {/* 左：参数 + 探索问题（手机端横排在上，桌面竖排在左） */}
-        <aside className="w-full shrink-0 space-y-3 overflow-y-auto border-b border-r bg-white/60 p-3 md:w-72 md:border-b-0">
+        <aside className="w-full shrink-0 space-y-3 overflow-y-auto border-b border-r bg-white/60 p-3 pb-6 md:w-72 md:border-b-0">
           <div className="rounded-2xl bg-white p-3 shadow-sm">
             <div className="mb-2 text-sm font-black text-slate-700">🎛 调一调</div>
             {params.length === 0 && <p className="text-xs text-slate-400">这节演示没有可调参数</p>}
@@ -486,7 +519,7 @@ export default function LabScreen() {
             }
             return (
               <div className="h-full p-4">
-                <StageSvg cmds={cmds} grid={lesson.lab?.grid ?? false} />
+                <StageSvg cmds={reveal >= cmds.length ? cmds : cmds.slice(0, reveal)} grid={lesson.lab?.grid ?? false} />
               </div>
             );
           })()}
