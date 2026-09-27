@@ -187,6 +187,11 @@
         "step": 1,
         "value": 5
       }
+    ],
+    "explore": [
+      "one 到 five 里哪个字母出现最多？",
+      "three 比 two 多了什么发音变化？",
+      "试着从 five 倒着数回去！"
     ]
   }
 }

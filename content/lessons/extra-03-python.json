@@ -176,6 +176,11 @@
     ]
   },
   "lab": {
-    "code": "# 欢迎来到 Python 的世界！\n# 下面这些字就是真正的代码——点「▶ 慢速看过程」看它怎么画图\nhide()\ngo_to(-70, -20)\npen_color(\"#2563eb\")\npen_down()\ni = 0\nwhile i < 4:\n    move(110)\n    turn_right(90)\n    i = i + 1\npen_up()\nwrite(\"你好，Python！\", 0, 115, \"#dc2626\", 15)\nwrite(\"这个方块就是 4 行循环画出来的\", 0, -60, \"#2563eb\", 12)\nwrite(\"去「⌨ 代码」里改改 move(110) 的数字试试？\", 0, -85, \"#64748b\", 10)"
+    "code": "# 欢迎来到 Python 的世界！\n# 下面这些字就是真正的代码——点「▶ 慢速看过程」看它怎么画图\nhide()\ngo_to(-70, -20)\npen_color(\"#2563eb\")\npen_down()\ni = 0\nwhile i < 4:\n    move(110)\n    turn_right(90)\n    i = i + 1\npen_up()\nwrite(\"你好，Python！\", 0, 115, \"#dc2626\", 15)\nwrite(\"这个方块就是 4 行循环画出来的\", 0, -60, \"#2563eb\", 12)\nwrite(\"去「⌨ 代码」里改改 move(110) 的数字试试？\", 0, -85, \"#64748b\", 10)",
+    "explore": [
+      "把 move(110) 改成 move(80)，图形怎么变？",
+      "循环 4 次改成 3 次，画出来是什么？",
+      "turn_right 改成 turn_left 会怎样？"
+    ]
   }
 }
