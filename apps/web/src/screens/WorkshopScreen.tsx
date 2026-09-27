@@ -781,7 +781,7 @@ export default function WorkshopScreen({ mode }: { mode: WorkshopMode }) {
             {!codeMode && wsReady && blockTotal <= 1 && (
               <div className="pointer-events-none absolute inset-x-0 bottom-6 z-10 flex justify-center px-6">
                 <div className="rounded-2xl bg-amber-100/95 px-5 py-3 text-center text-sm font-bold text-amber-800 shadow-lg">
-                  👋 第一步：从左边拖一块积木进来（比如「外观」里的「说」），拼到黄色积木下面，再点右下角 ▶ 试试！
+                  👋 第一步：从左边积木盒拖出黄色「当 ▶ 开始被点击」放进画布，再把「说」之类的积木拼到它下面，点右下角 ▶ 试试！
                 </div>
               </div>
             )}

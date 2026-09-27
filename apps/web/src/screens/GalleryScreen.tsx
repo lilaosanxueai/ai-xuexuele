@@ -47,8 +47,13 @@ export default function GalleryScreen() {
       <main className="mx-auto w-full max-w-5xl flex-1 px-6 pb-10">
         <h2 className="mb-4 text-2xl font-black text-slate-700">🖼 我们的作品墙</h2>
         {projects.length === 0 ? (
-          <div className="rounded-3xl bg-white/70 p-10 text-center text-slate-400">
-            还没有作品～在课程学习中点「💾 存作品」，你的学科项目就会展示在这里！
+          <div className="rounded-3xl bg-white/70 p-12 text-center">
+            <div className="text-6xl">🎨</div>
+            <p className="mt-4 text-lg font-bold text-slate-500">作品墙还空着——第一件作品会是最难忘的！</p>
+            <p className="mt-1 text-sm text-slate-400">在编程课里点「💾 存作品」，你的学科项目就会展示在这里</p>
+            <button onClick={() => nav('/map')} className="mt-6 rounded-2xl bg-sky-500 px-6 py-3 text-sm font-black text-white shadow-lg transition hover:bg-sky-600">
+              📚 去学习中心逛逛
+            </button>
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
