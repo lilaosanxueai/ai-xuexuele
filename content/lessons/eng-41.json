@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 过去式变装台\ntype = 1   # 1规则加ed 2e结尾加d 3辅音+y 4不规则\n\nhide()\nt = \"规则一：直接加 ed\"\nex = \"play - played · visit - visited\"\ntip = \"大部分动词这样变\"\ncol = \"#16a34a\"\nif type == 2:\n    t = \"规则二：e 结尾只加 d\"\n    ex = \"like - liked · live - lived\"\n    tip = \"已经有 e 了就不重复加\"\n    col = \"#0ea5e9\"\nif type == 3:\n    t = \"规则三：辅音字母+y，变 y 为 i 加 ed\"\n    ex = \"study - studied · carry - carried\"\n    tip = \"元音字母+y 直接加 ed：play - played\"\n    col = \"#f97316\"\nif type == 4:\n    t = \"不规则：逐个背\"\n    ex = \"go-went · eat-ate · see-saw · do-did\"\n    tip = \"不规则动词表每天读一遍\"\n    col = \"#dc2626\"\nfill_rect(0, 130, 340, 30, col)\nwrite(t, 0, 130, \"#fff\", 11)\nfill_rect(0, 70, 320, 52, \"#f8fafc\")\nwrite(ex, 0, 70, \"#334155\", 11)\nfill_rect(0, -2, 320, 52, \"#fef3c7\")\nwrite(tip, 0, -2, \"#b45309\", 10)\nwrite(\"标志词：yesterday · last week · …ago · just now\", -20, -64, \"#7c3aed\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "eng-41",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "type=1 play 和 study 的变化为什么不同？",
-      "type=4 go 的过去式怎么背？",
-      "哪些时间词提示用过去时？"
-    ],
-    "code": "# 过去式变装台\ntype = 1   # 1规则加ed 2e结尾加d 3辅音+y 4不规则\n\nhide()\nt = \"规则一：直接加 ed\"\nex = \"play - played · visit - visited\"\ntip = \"大部分动词这样变\"\ncol = \"#16a34a\"\nif type == 2:\n    t = \"规则二：e 结尾只加 d\"\n    ex = \"like - liked · live - lived\"\n    tip = \"已经有 e 了就不重复加\"\n    col = \"#0ea5e9\"\nif type == 3:\n    t = \"规则三：辅音字母+y，变 y 为 i 加 ed\"\n    ex = \"study - studied · carry - carried\"\n    tip = \"元音字母+y 直接加 ed：play - played\"\n    col = \"#f97316\"\nif type == 4:\n    t = \"不规则：逐个背\"\n    ex = \"go-went · eat-ate · see-saw · do-did\"\n    tip = \"不规则动词表每天读一遍\"\n    col = \"#dc2626\"\nfill_rect(0, 130, 340, 30, col)\nwrite(t, 0, 130, \"#fff\", 11)\nfill_rect(0, 70, 320, 52, \"#f8fafc\")\nwrite(ex, 0, 70, \"#334155\", 11)\nfill_rect(0, -2, 320, 52, \"#fef3c7\")\nwrite(tip, 0, -2, \"#b45309\", 10)\nwrite(\"标志词：yesterday · last week · …ago · just now\", -20, -64, \"#7c3aed\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,101 @@
       "answer": 0,
       "explain": "加ed"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "规则一",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "play - played · visit - visited"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "大部分动词这样变"
+          },
+          {
+            "kind": "highlight",
+            "text": "标志词：yesterday · last week · …ago · just now"
+          }
+        ],
+        "subtitle": "直接加 ed"
+      },
+      {
+        "when": 2,
+        "title": "规则二",
+        "color": "sky",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "like - liked · live - lived"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "已经有 e 了就不重复加"
+          },
+          {
+            "kind": "highlight",
+            "text": "标志词：yesterday · last week · …ago · just now"
+          }
+        ],
+        "subtitle": "e 结尾只加 d"
+      },
+      {
+        "when": 3,
+        "title": "规则三",
+        "color": "orange",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "study - studied · carry - carried"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "元音字母+y 直接加 ed：play - played"
+          },
+          {
+            "kind": "highlight",
+            "text": "标志词：yesterday · last week · …ago · just now"
+          }
+        ],
+        "subtitle": "辅音字母+y，变 y 为 i 加 ed"
+      },
+      {
+        "when": 4,
+        "title": "不规则：逐个背",
+        "color": "red",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "go-went · eat-ate · see-saw · do-did"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "不规则动词表每天读一遍"
+          },
+          {
+            "kind": "highlight",
+            "text": "标志词：yesterday · last week · …ago · just now"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "play 和 study 的变化为什么不同？",
+      "go 的过去式怎么背？",
+      "哪些时间词提示用过去时？"
+    ]
+  }
 }

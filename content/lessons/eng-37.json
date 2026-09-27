@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 英语购物模拟器\nsc = 1   # 场景\n\nhide()\nt = \"进店问候\"\na1 = \"Can I help you? / What can I do for you?\"\na2 = \"I'm looking for a T-shirt. / I want to buy a skirt.\"\ntip = \"店员问+你回答=对话开始\"\nif sc == 2:\n    t = \"询问与试穿\"\n    a1 = \"How much is it? / What size do you have?\"\n    a2 = \"Can I try it on? / Do you have a bigger one?\"\n    tip = \"How much is/are + 单/复数\"\nif sc == 3:\n    t = \"付款与礼貌\"\n    a1 = \"I'll take it. / That's too expensive.\"\n    a2 = \"Here you are. / Thank you!\"\n    tip = \"即使不买也要说 Thanks anyway\"\nfill_rect(0, 130, 340, 30, \"#16a34a\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 74, 340, 48, \"#f0fdf4\")\nwrite(a1, 0, 74, \"#166534\", 10)\nfill_rect(0, 12, 340, 60, \"#fef3c7\")\nwrite(a2, 0, 12, \"#b45309\", 10)\nwrite(\"要领：\" + tip, -20, -55, \"#dc2626\", 11)\n",
   "celebrate": "新知识到手！",
   "id": "eng-37",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "sc=1 店员怎么打招呼？",
-      "sc=2 怎么问价格和试穿？",
-      "sc=3 How much 和 How many 的区别？"
-    ],
-    "code": "# 英语购物模拟器\nsc = 1   # 场景\n\nhide()\nt = \"进店问候\"\na1 = \"Can I help you? / What can I do for you?\"\na2 = \"I'm looking for a T-shirt. / I want to buy a skirt.\"\ntip = \"店员问+你回答=对话开始\"\nif sc == 2:\n    t = \"询问与试穿\"\n    a1 = \"How much is it? / What size do you have?\"\n    a2 = \"Can I try it on? / Do you have a bigger one?\"\n    tip = \"How much is/are + 单/复数\"\nif sc == 3:\n    t = \"付款与礼貌\"\n    a1 = \"I'll take it. / That's too expensive.\"\n    a2 = \"Here you are. / Thank you!\"\n    tip = \"即使不买也要说 Thanks anyway\"\nfill_rect(0, 130, 340, 30, \"#16a34a\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 74, 340, 48, \"#f0fdf4\")\nwrite(a1, 0, 74, \"#166534\", 10)\nfill_rect(0, 12, 340, 60, \"#fef3c7\")\nwrite(a2, 0, 12, \"#b45309\", 10)\nwrite(\"要领：\" + tip, -20, -55, \"#dc2626\", 11)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,77 @@
       "answer": 0,
       "explain": "比较级"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "进店问候",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "Can I help you? / What can I do for you?"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "I'm looking for a T-shirt. / I want to buy a skirt."
+          },
+          {
+            "kind": "highlight",
+            "text": "要领：店员问+你回答=对话开始"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "询问与试穿",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "How much is it? / What size do you have?"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "Can I try it on? / Do you have a bigger one?"
+          },
+          {
+            "kind": "highlight",
+            "text": "要领：How much is/are + 单/复数"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "付款与礼貌",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "I'll take it. / That's too expensive."
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "Here you are. / Thank you!"
+          },
+          {
+            "kind": "highlight",
+            "text": "要领：即使不买也要说 Thanks anyway"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "店员怎么打招呼？",
+      "怎么问价格和试穿？",
+      "How much 和 How many 的区别？"
+    ]
+  }
 }

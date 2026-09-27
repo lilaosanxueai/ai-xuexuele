@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 年画寓意解码器\nmotive = 1   # 1鱼 2蝙蝠 3石榴 4葫芦\n\nhide()\nname = \"连年有鱼（余）\"\nmean = \"鱼与余同音·富足有余\"\nstory2 = \"胖娃娃抱鲤鱼是最经典的年画\"\nif motive == 2:\n    name = \"福到了\"\n    mean = \"蝠与福同音·倒贴=福到\"\n    story2 = \"五只蝙蝠围寿字=五福捧寿\"\nif motive == 3:\n    name = \"多子多福\"\n    mean = \"石榴籽多·象征子孙满堂\"\n    story2 = \"百子图常配石榴和葫芦\"\nif motive == 4:\n    name = \"福禄双全\"\n    mean = \"葫芦谐音福禄·藤蔓绵延\"\n    story2 = \"门口挂葫芦还寓意平安\"\nfill_rect(0, 130, 340, 30, \"#dc2626\")\nwrite(\"年画题材解码\", 0, 130, \"#fff\", 13)\nfill_rect(0, 62, 260, 80, \"#fef3c7\")\nwrite(name, 0, 62, \"#b45309\", 15)\nfill_rect(0, -14, 300, 44, \"#fff7ed\")\nwrite(mean, 0, -14, \"#92400e\", 11)\nwrite(story2, 0, -70, \"#64748b\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "art-23",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "motive=1 鱼为什么表示有余？",
-      "motive=2 蝙蝠倒着贴是什么意思？",
-      "还有哪些谐音吉祥物？"
-    ],
-    "code": "# 年画寓意解码器\nmotive = 1   # 1鱼 2蝙蝠 3石榴 4葫芦\n\nhide()\nname = \"连年有鱼（余）\"\nmean = \"鱼与余同音·富足有余\"\nstory2 = \"胖娃娃抱鲤鱼是最经典的年画\"\nif motive == 2:\n    name = \"福到了\"\n    mean = \"蝠与福同音·倒贴=福到\"\n    story2 = \"五只蝙蝠围寿字=五福捧寿\"\nif motive == 3:\n    name = \"多子多福\"\n    mean = \"石榴籽多·象征子孙满堂\"\n    story2 = \"百子图常配石榴和葫芦\"\nif motive == 4:\n    name = \"福禄双全\"\n    mean = \"葫芦谐音福禄·藤蔓绵延\"\n    story2 = \"门口挂葫芦还寓意平安\"\nfill_rect(0, 130, 340, 30, \"#dc2626\")\nwrite(\"年画题材解码\", 0, 130, \"#fff\", 13)\nfill_rect(0, 62, 260, 80, \"#fef3c7\")\nwrite(name, 0, 62, \"#b45309\", 15)\nfill_rect(0, -14, 300, 44, \"#fff7ed\")\nwrite(mean, 0, -14, \"#92400e\", 11)\nwrite(story2, 0, -70, \"#64748b\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,98 @@
       "answer": 0,
       "explain": "贴在墙上的祝福"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "年画题材解码",
+        "color": "red",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "连年有鱼（余）"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "鱼与余同音·富足有余"
+          },
+          {
+            "kind": "highlight",
+            "text": "胖娃娃抱鲤鱼是最经典的年画"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "年画题材解码",
+        "color": "red",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "福到了"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "蝠与福同音·倒贴=福到"
+          },
+          {
+            "kind": "highlight",
+            "text": "五只蝙蝠围寿字=五福捧寿"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "年画题材解码",
+        "color": "red",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "多子多福"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "石榴籽多·象征子孙满堂"
+          },
+          {
+            "kind": "highlight",
+            "text": "百子图常配石榴和葫芦"
+          }
+        ]
+      },
+      {
+        "when": 4,
+        "title": "年画题材解码",
+        "color": "red",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "福禄双全"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "葫芦谐音福禄·藤蔓绵延"
+          },
+          {
+            "kind": "highlight",
+            "text": "门口挂葫芦还寓意平安"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "鱼为什么表示有余？",
+      "蝙蝠倒着贴是什么意思？",
+      "还有哪些谐音吉祥物？"
+    ]
+  }
 }

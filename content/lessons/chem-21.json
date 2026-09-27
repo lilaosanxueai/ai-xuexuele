@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 金属擂台赛：前面的金属能否置换后面的\npair = 1   # 组合\n\nhide()\nt = \"锌 放入 硫酸铜溶液\"\nres = \"能置换！Zn + CuSO4 → ZnSO4 + Cu\"\nwhy = \"锌排在铜前面：强的打出弱的\"\ncol = \"#16a34a\"\nif pair == 2:\n    t = \"铜 放入 稀盐酸\"\n    res = \"不能反应！没有气泡\"\n    why = \"铜排在氢后面：打不过氢\"\n    col = \"#dc2626\"\nif pair == 3:\n    t = \"铜 放入 硝酸银溶液\"\n    res = \"能置换！Cu + 2AgNO3 → Cu(NO3)2 + 2Ag\"\n    why = \"铜排在银前面：铜丝上长出银白色\"\n    col = \"#16a34a\"\nif pair == 4:\n    t = \"银 放入 硫酸铜溶液\"\n    res = \"不能反应：银纹丝不动\"\n    why = \"银排在铜后面：打不过铜\"\n    col = \"#dc2626\"\nfill_rect(0, 130, 340, 30, \"#b45309\")\nwrite(t, 0, 130, \"#fff\", 12)\nfill_rect(0, 68, 320, 54, \"#fffbeb\")\nwrite(res, 0, 74, col, 10)\nwrite(why, 0, 48, \"#92400e\", 9)\nwrite(\"K Ca Na Mg Al Zn Fe Sn Pb (H) Cu Hg Ag Pt Au\", -10, -20, \"#7c3aed\", 9)\nwrite(\"前打后：前排金属置换后排金属\", -20, -60, \"#64748b\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "chem-21",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "pair=1 锌为什么能置换出铜？",
-      "pair=3 铜放入银盐溶液会怎样？",
-      "氢在顺序里是什么角色？"
-    ],
-    "code": "# 金属擂台赛：前面的金属能否置换后面的\npair = 1   # 组合\n\nhide()\nt = \"锌 放入 硫酸铜溶液\"\nres = \"能置换！Zn + CuSO4 → ZnSO4 + Cu\"\nwhy = \"锌排在铜前面：强的打出弱的\"\ncol = \"#16a34a\"\nif pair == 2:\n    t = \"铜 放入 稀盐酸\"\n    res = \"不能反应！没有气泡\"\n    why = \"铜排在氢后面：打不过氢\"\n    col = \"#dc2626\"\nif pair == 3:\n    t = \"铜 放入 硝酸银溶液\"\n    res = \"能置换！Cu + 2AgNO3 → Cu(NO3)2 + 2Ag\"\n    why = \"铜排在银前面：铜丝上长出银白色\"\n    col = \"#16a34a\"\nif pair == 4:\n    t = \"银 放入 硫酸铜溶液\"\n    res = \"不能反应：银纹丝不动\"\n    why = \"银排在铜后面：打不过铜\"\n    col = \"#dc2626\"\nfill_rect(0, 130, 340, 30, \"#b45309\")\nwrite(t, 0, 130, \"#fff\", 12)\nfill_rect(0, 68, 320, 54, \"#fffbeb\")\nwrite(res, 0, 74, col, 10)\nwrite(why, 0, 48, \"#92400e\", 9)\nwrite(\"K Ca Na Mg Al Zn Fe Sn Pb (H) Cu Hg Ag Pt Au\", -10, -20, \"#7c3aed\", 9)\nwrite(\"前打后：前排金属置换后排金属\", -20, -60, \"#64748b\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,79 @@
       "answer": 0,
       "explain": "遇水先反应"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "锌 放入 硫酸铜溶液",
+        "color": "red",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "能置换！Zn + CuSO4 → ZnSO4 + Cu；锌排在铜前面：强的打出弱的"
+          },
+          {
+            "kind": "highlight",
+            "text": "K Ca Na Mg Al Zn Fe Sn Pb (H) Cu Hg Ag Pt Au"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "铜 放入 稀盐酸",
+        "color": "red",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "不能反应！没有气泡；铜排在氢后面：打不过氢"
+          },
+          {
+            "kind": "highlight",
+            "text": "K Ca Na Mg Al Zn Fe Sn Pb (H) Cu Hg Ag Pt Au"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "铜 放入 硝酸银溶液",
+        "color": "red",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "能置换！Cu + 2AgNO3 → Cu(NO3)2 + 2Ag；铜排在银前面：铜丝上长出银白色"
+          },
+          {
+            "kind": "highlight",
+            "text": "K Ca Na Mg Al Zn Fe Sn Pb (H) Cu Hg Ag Pt Au"
+          }
+        ]
+      },
+      {
+        "when": 4,
+        "title": "银 放入 硫酸铜溶液",
+        "color": "red",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "不能反应",
+            "text": "银纹丝不动；银排在铜后面：打不过铜"
+          },
+          {
+            "kind": "highlight",
+            "text": "K Ca Na Mg Al Zn Fe Sn Pb (H) Cu Hg Ag Pt Au"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "锌为什么能置换出铜？",
+      "铜放入银盐溶液会怎样？",
+      "氢在顺序里是什么角色？"
+    ]
+  }
 }

@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# There be 演示台\nscene = 1   # 1单数 2复数 3不可数\n\nhide()\nt = \"单数名词用 There is\"\ns = \"There is a book on the desk.\"\ntip = \"a/an + 单数名词，动词用 is\"\nif scene == 2:\n    t = \"复数名词用 There are\"\n    s = \"There are two birds in the tree.\"\n    tip = \"two/some + 复数名词，动词用 are\"\nif scene == 3:\n    t = \"不可数名词也用 There is\"\n    s = \"There is some water in the glass.\"\n    tip = \"water/milk/bread 不可数，动词用 is\"\nfill_rect(0, 130, 340, 30, \"#16a34a\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 60, 320, 64, \"#f0fdf4\")\nwrite(s, 0, 60, \"#166534\", 12)\nfill_rect(0, -20, 320, 50, \"#fef3c7\")\nwrite(tip, 0, -20, \"#b45309\", 11)\nwrite(\"There be 表存在 · have 表拥有\", 0, -78, \"#64748b\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "eng-39",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "scene=1 和 scene=2 的 be 动词为什么不同？",
-      "scene=3 不可数名词用哪个？",
-      "There be 和 have 的区别是什么？"
-    ],
-    "code": "# There be 演示台\nscene = 1   # 1单数 2复数 3不可数\n\nhide()\nt = \"单数名词用 There is\"\ns = \"There is a book on the desk.\"\ntip = \"a/an + 单数名词，动词用 is\"\nif scene == 2:\n    t = \"复数名词用 There are\"\n    s = \"There are two birds in the tree.\"\n    tip = \"two/some + 复数名词，动词用 are\"\nif scene == 3:\n    t = \"不可数名词也用 There is\"\n    s = \"There is some water in the glass.\"\n    tip = \"water/milk/bread 不可数，动词用 is\"\nfill_rect(0, 130, 340, 30, \"#16a34a\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 60, 320, 64, \"#f0fdf4\")\nwrite(s, 0, 60, \"#166534\", 12)\nfill_rect(0, -20, 320, 50, \"#fef3c7\")\nwrite(tip, 0, -20, \"#b45309\", 11)\nwrite(\"There be 表存在 · have 表拥有\", 0, -78, \"#64748b\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,77 @@
       "answer": 0,
       "explain": "存在用There be"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "单数名词用 There is",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "There is a book on the desk."
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "a/an + 单数名词，动词用 is"
+          },
+          {
+            "kind": "highlight",
+            "text": "There be 表存在 · have 表拥有"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "复数名词用 There are",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "There are two birds in the tree."
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "two/some + 复数名词，动词用 are"
+          },
+          {
+            "kind": "highlight",
+            "text": "There be 表存在 · have 表拥有"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "不可数名词也用 There is",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "There is some water in the glass."
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "water/milk/bread 不可数，动词用 is"
+          },
+          {
+            "kind": "highlight",
+            "text": "There be 表存在 · have 表拥有"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "和 scene=2 的 be 动词为什么不同？",
+      "不可数名词用哪个？",
+      "There be 和 have 的区别是什么？"
+    ]
+  }
 }

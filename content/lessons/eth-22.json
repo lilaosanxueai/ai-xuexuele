@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 垃圾分类小达人\nitem = 1   # 垃圾类型\n\nhide()\nname = \"剩饭剩菜\"\nbin = \"厨余垃圾（绿色桶）\"\nwhy = \"可堆肥变肥料：果皮菜叶剩饭都是\"\ncol = \"#16a34a\"\nif item == 2:\n    name = \"矿泉水瓶\"\n    bin = \"可回收物（蓝色桶）\"\n    why = \"洗净压扁可回收再造：塑料瓶纸张金属玻璃\"\n    col = \"#2563eb\"\nif item == 3:\n    name = \"废电池\"\n    bin = \"有害垃圾（红色桶）\"\n    why = \"含重金属污染土壤水源：电池灯管过期药\"\n    col = \"#dc2626\"\nif item == 4:\n    name = \"用过的纸巾\"\n    bin = \"其他垃圾（灰色桶）\"\n    why = \"已污染不可回收：脏纸巾尘土烟蒂\"\n    col = \"#64748b\"\nif item == 5:\n    name = \"旧衣物\"\n    bin = \"可回收物（蓝色桶）\"\n    why = \"干净完好的衣物可捐赠或回收再利用\"\n    col = \"#2563eb\"\nfill_rect(0, 130, 360, 30, col)\nwrite(name + \" → \" + bin, 0, 130, \"#fff\", 12)\nfill_rect(0, 76, 360, 42, \"#f1f5f9\")\nwrite(why, 0, 76, \"#0f172a\", 10)\nwrite(\"口诀：能卖拿去卖·有害单独放·易腐厨余投·其他兜底收\", -15, -50, \"#dc2626\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "eth-22",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "item=1 剩饭剩菜是什么垃圾？",
-      "item=3 电池为什么是有害垃圾？",
-      "你的家庭可以怎么减量？"
-    ],
-    "code": "# 垃圾分类小达人\nitem = 1   # 垃圾类型\n\nhide()\nname = \"剩饭剩菜\"\nbin = \"厨余垃圾（绿色桶）\"\nwhy = \"可堆肥变肥料：果皮菜叶剩饭都是\"\ncol = \"#16a34a\"\nif item == 2:\n    name = \"矿泉水瓶\"\n    bin = \"可回收物（蓝色桶）\"\n    why = \"洗净压扁可回收再造：塑料瓶纸张金属玻璃\"\n    col = \"#2563eb\"\nif item == 3:\n    name = \"废电池\"\n    bin = \"有害垃圾（红色桶）\"\n    why = \"含重金属污染土壤水源：电池灯管过期药\"\n    col = \"#dc2626\"\nif item == 4:\n    name = \"用过的纸巾\"\n    bin = \"其他垃圾（灰色桶）\"\n    why = \"已污染不可回收：脏纸巾尘土烟蒂\"\n    col = \"#64748b\"\nif item == 5:\n    name = \"旧衣物\"\n    bin = \"可回收物（蓝色桶）\"\n    why = \"干净完好的衣物可捐赠或回收再利用\"\n    col = \"#2563eb\"\nfill_rect(0, 130, 360, 30, col)\nwrite(name + \" → \" + bin, 0, 130, \"#fff\", 12)\nfill_rect(0, 76, 360, 42, \"#f1f5f9\")\nwrite(why, 0, 76, \"#0f172a\", 10)\nwrite(\"口诀：能卖拿去卖·有害单独放·易腐厨余投·其他兜底收\", -15, -50, \"#dc2626\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,95 @@
       "answer": 0,
       "explain": "源头减量"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "剩饭剩菜 → 厨余垃圾（绿色桶）",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "可堆肥变肥料",
+            "text": "果皮菜叶剩饭都是"
+          },
+          {
+            "kind": "highlight",
+            "text": "口诀：能卖拿去卖·有害单独放·易腐厨余投·其他兜底收"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "矿泉水瓶 → 可回收物（蓝色桶）",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "洗净压扁可回收再造：塑料瓶纸张金属玻璃"
+          },
+          {
+            "kind": "highlight",
+            "text": "口诀：能卖拿去卖·有害单独放·易腐厨余投·其他兜底收"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "废电池 → 有害垃圾（红色桶）",
+        "color": "red",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "含重金属污染土壤水源：电池灯管过期药"
+          },
+          {
+            "kind": "highlight",
+            "text": "口诀：能卖拿去卖·有害单独放·易腐厨余投·其他兜底收"
+          }
+        ]
+      },
+      {
+        "when": 4,
+        "title": "用过的纸巾 → 其他垃圾（灰色…",
+        "color": "teal",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "已污染不可回收：脏纸巾尘土烟蒂"
+          },
+          {
+            "kind": "highlight",
+            "text": "口诀：能卖拿去卖·有害单独放·易腐厨余投·其他兜底收"
+          }
+        ]
+      },
+      {
+        "when": 5,
+        "title": "旧衣物 → 可回收物（蓝色桶）",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "干净完好的衣物可捐赠或回收再利用"
+          },
+          {
+            "kind": "highlight",
+            "text": "口诀：能卖拿去卖·有害单独放·易腐厨余投·其他兜底收"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "剩饭剩菜是什么垃圾？",
+      "电池为什么是有害垃圾？",
+      "你的家庭可以怎么减量？"
+    ]
+  }
 }

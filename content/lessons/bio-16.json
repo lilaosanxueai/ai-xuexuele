@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 昼夜拉锯台\ntime = 1   # 1清晨 2正午 3深夜\n\nhide()\nt = \"清晨（光较弱）\"\np = 3\nr = 2\ncon = \"光合略强于呼吸：净吸二氧化碳·放氧少\"\ncol = \"#f59e0b\"\nif time == 2:\n    t = \"正午（光最强）\"\n    p = 5\n    r = 2\n    con = \"光合远强于呼吸：大量吸二氧化碳·放氧气\"\n    col = \"#16a34a\"\nif time == 3:\n    t = \"深夜（无光）\"\n    p = 0\n    r = 2\n    con = \"只呼吸不光合：吸氧气·放二氧化碳\"\n    col = \"#7c3aed\"\nfill_rect(0, 130, 340, 30, \"#15803d\")\nwrite(t, 0, 130, \"#fff\", 13)\nwrite(\"光合作用强度\", -30, 88, \"#166534\", 10)\nfill_rect(-160, 56, p * 30, 24, \"#16a34a\")\nwrite(\"呼吸作用强度\", -30, 16, \"#1e3a8a\", 10)\nfill_rect(-160, -16, r * 30, 24, \"#2563eb\")\nfill_rect(0, -64, 320, 44, \"#f0fdf4\")\nwrite(con, 0, -64, \"#166534\", 9)\nwrite(\"光合储能量·呼吸放能量·互为相反\", -20, -114, \"#64748b\", 9)\n",
   "celebrate": "新知识到手！",
   "id": "bio-16",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "time=1 清晨树林氧气为什么可能偏少？",
-      "time=2 正午植物在做什么？",
-      "深夜植物还呼吸吗？"
-    ],
-    "code": "# 昼夜拉锯台\ntime = 1   # 1清晨 2正午 3深夜\n\nhide()\nt = \"清晨（光较弱）\"\np = 3\nr = 2\ncon = \"光合略强于呼吸：净吸二氧化碳·放氧少\"\ncol = \"#f59e0b\"\nif time == 2:\n    t = \"正午（光最强）\"\n    p = 5\n    r = 2\n    con = \"光合远强于呼吸：大量吸二氧化碳·放氧气\"\n    col = \"#16a34a\"\nif time == 3:\n    t = \"深夜（无光）\"\n    p = 0\n    r = 2\n    con = \"只呼吸不光合：吸氧气·放二氧化碳\"\n    col = \"#7c3aed\"\nfill_rect(0, 130, 340, 30, \"#15803d\")\nwrite(t, 0, 130, \"#fff\", 13)\nwrite(\"光合作用强度\", -30, 88, \"#166534\", 10)\nfill_rect(-160, 56, p * 30, 24, \"#16a34a\")\nwrite(\"呼吸作用强度\", -30, 16, \"#1e3a8a\", 10)\nfill_rect(-160, -16, r * 30, 24, \"#2563eb\")\nfill_rect(0, -64, 320, 44, \"#f0fdf4\")\nwrite(con, 0, -64, \"#166534\", 9)\nwrite(\"光合储能量·呼吸放能量·互为相反\", -20, -114, \"#64748b\", 9)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,66 @@
       "answer": 0,
       "explain": "气肥增产"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "清晨（光较弱）",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "光合略强于呼吸：净吸二氧化碳·放氧少"
+          },
+          {
+            "kind": "highlight",
+            "text": "呼吸作用强度"
+          }
+        ],
+        "subtitle": "光合作用强度"
+      },
+      {
+        "when": 2,
+        "title": "正午（光最强）",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "光合远强于呼吸：大量吸二氧化碳·放氧气"
+          },
+          {
+            "kind": "highlight",
+            "text": "呼吸作用强度"
+          }
+        ],
+        "subtitle": "光合作用强度"
+      },
+      {
+        "when": 3,
+        "title": "深夜（无光）",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "只呼吸不光合",
+            "text": "吸氧气·放二氧化碳"
+          },
+          {
+            "kind": "highlight",
+            "text": "呼吸作用强度"
+          }
+        ],
+        "subtitle": "光合作用强度"
+      }
+    ],
+    "explore": [
+      "清晨树林氧气为什么可能偏少？",
+      "正午植物在做什么？",
+      "深夜植物还呼吸吗？"
+    ]
+  }
 }

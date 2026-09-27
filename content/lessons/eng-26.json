@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 时间介词值班表\nday = 1   # 1具体日期 2月份 3年份 4钟点\n\nhide()\nprep = \"on\"\nex = \"on Monday, September 21st\"\nrule = \"具体到某一天（日期+星期）用 on\"\nif day == 2:\n    prep = \"in\"\n    ex = \"in September / in winter\"\n    rule = \"月份、季节、年份用 in\"\nif day == 3:\n    prep = \"in\"\n    ex = \"in 2026\"\n    rule = \"年份用 in\"\nif day == 4:\n    prep = \"at\"\n    ex = \"at 7:00 / at noon / at night\"\n    rule = \"钟点、中午、夜里用 at\"\nfill_rect(0, 130, 360, 32, \"#16a34a\")\nwrite(\"介词：\" + prep, 0, 130, \"#fff\", 16)\nfill_rect(0, 76, 360, 42, \"#f1f5f9\")\nwrite(ex, 0, 76, \"#0f172a\", 13)\nfill_rect(0, 20, 360, 46, \"#fef3c7\")\nwrite(rule, 0, 20, \"#b45309\", 11)\nwrite(\"口诀：in 年 in 月 in 季节，on 具体某一天，at 钟点中午夜\", -30, -40, \"#dc2626\", 11)\nwrite(\"日期写读用序数词：21st 读 the twenty-first\", -30, -70, \"#7c3aed\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "eng-26",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "day=1 为什么用 on？",
-      "月份和年份用哪个介词？",
-      "日期用基数词还是序数词？"
-    ],
-    "code": "# 时间介词值班表\nday = 1   # 1具体日期 2月份 3年份 4钟点\n\nhide()\nprep = \"on\"\nex = \"on Monday, September 21st\"\nrule = \"具体到某一天（日期+星期）用 on\"\nif day == 2:\n    prep = \"in\"\n    ex = \"in September / in winter\"\n    rule = \"月份、季节、年份用 in\"\nif day == 3:\n    prep = \"in\"\n    ex = \"in 2026\"\n    rule = \"年份用 in\"\nif day == 4:\n    prep = \"at\"\n    ex = \"at 7:00 / at noon / at night\"\n    rule = \"钟点、中午、夜里用 at\"\nfill_rect(0, 130, 360, 32, \"#16a34a\")\nwrite(\"介词：\" + prep, 0, 130, \"#fff\", 16)\nfill_rect(0, 76, 360, 42, \"#f1f5f9\")\nwrite(ex, 0, 76, \"#0f172a\", 13)\nfill_rect(0, 20, 360, 46, \"#fef3c7\")\nwrite(rule, 0, 20, \"#b45309\", 11)\nwrite(\"口诀：in 年 in 月 in 季节，on 具体某一天，at 钟点中午夜\", -30, -40, \"#dc2626\", 11)\nwrite(\"日期写读用序数词：21st 读 the twenty-first\", -30, -70, \"#7c3aed\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,98 @@
       "answer": 0,
       "explain": "September"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "介词：on",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "on Monday, September 21st"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "具体到某一天（日期+星期）用 on"
+          },
+          {
+            "kind": "highlight",
+            "text": "口诀：in 年 in 月 in 季节，on 具体某一天，at 钟点中午夜"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "介词：in",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "in September / in winter"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "月份、季节、年份用 in"
+          },
+          {
+            "kind": "highlight",
+            "text": "口诀：in 年 in 月 in 季节，on 具体某一天，at 钟点中午夜"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "介词：in",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "in 2026"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "年份用 in"
+          },
+          {
+            "kind": "highlight",
+            "text": "口诀：in 年 in 月 in 季节，on 具体某一天，at 钟点中午夜"
+          }
+        ]
+      },
+      {
+        "when": 4,
+        "title": "介词：at",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "at 7:00 / at noon / at night"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "钟点、中午、夜里用 at"
+          },
+          {
+            "kind": "highlight",
+            "text": "口诀：in 年 in 月 in 季节，on 具体某一天，at 钟点中午夜"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "为什么用 on？",
+      "月份和年份用哪个介词？",
+      "日期用基数词还是序数词？"
+    ]
+  }
 }

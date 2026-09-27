@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 遗传规律演示器（A=双眼皮显性 a=单眼皮隐性）\ncombo = 1   # 基因型\n\nhide()\nt = \"AA → 双眼皮\"\nd = \"两个显性基因：表现显性性状（双眼皮）\"\nph = \"表现型：双眼皮 · 携带者：否\"\nif combo == 2:\n    t = \"Aa → 双眼皮\"\n    d = \"一显一隐：显性盖过隐性，表现显性\"\n    ph = \"表现型：双眼皮 · 携带者：是（带a但不表现）\"\nif combo == 3:\n    t = \"aa → 单眼皮\"\n    d = \"两个隐性基因：隐性性状才表现\"\n    ph = \"表现型：单眼皮 · 携带者：否\"\nfill_rect(0, 130, 360, 30, \"#7c3aed\")\nwrite(t, 0, 130, \"#fff\", 14)\nfill_rect(0, 76, 360, 42, \"#f5f3ff\")\nwrite(d, 0, 76, \"#6d28d9\", 11)\nfill_rect(0, 16, 360, 56, \"#fef3c7\")\nwrite(ph, 0, 16, \"#b45309\", 10)\nwrite(\"Aa×Aa → 1AA:2Aa:1aa → 3双眼皮:1单眼皮\", -15, -50, \"#dc2626\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "sci-28",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "combo=3 为什么两个单眼皮不会生出双眼皮？",
-      "Aa 的人表现什么性状？",
-      "什么是携带者？"
-    ],
-    "code": "# 遗传规律演示器（A=双眼皮显性 a=单眼皮隐性）\ncombo = 1   # 基因型\n\nhide()\nt = \"AA → 双眼皮\"\nd = \"两个显性基因：表现显性性状（双眼皮）\"\nph = \"表现型：双眼皮 · 携带者：否\"\nif combo == 2:\n    t = \"Aa → 双眼皮\"\n    d = \"一显一隐：显性盖过隐性，表现显性\"\n    ph = \"表现型：双眼皮 · 携带者：是（带a但不表现）\"\nif combo == 3:\n    t = \"aa → 单眼皮\"\n    d = \"两个隐性基因：隐性性状才表现\"\n    ph = \"表现型：单眼皮 · 携带者：否\"\nfill_rect(0, 130, 360, 30, \"#7c3aed\")\nwrite(t, 0, 130, \"#fff\", 14)\nfill_rect(0, 76, 360, 42, \"#f5f3ff\")\nwrite(d, 0, 76, \"#6d28d9\", 11)\nfill_rect(0, 16, 360, 56, \"#fef3c7\")\nwrite(ph, 0, 16, \"#b45309\", 10)\nwrite(\"Aa×Aa → 1AA:2Aa:1aa → 3双眼皮:1单眼皮\", -15, -50, \"#dc2626\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,83 @@
       "answer": 0,
       "explain": "8年豌豆"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "AA → 双眼皮",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "两个显性基因",
+            "text": "表现显性性状（双眼皮）"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "表现型",
+            "text": "双眼皮 · 携带者：否"
+          },
+          {
+            "kind": "highlight",
+            "text": "Aa×Aa → 1AA:2Aa:1aa → 3双眼皮:1单眼皮"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "Aa → 双眼皮",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "一显一隐",
+            "text": "显性盖过隐性，表现显性"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "表现型",
+            "text": "双眼皮 · 携带者：是（带a但不表现）"
+          },
+          {
+            "kind": "highlight",
+            "text": "Aa×Aa → 1AA:2Aa:1aa → 3双眼皮:1单眼皮"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "aa → 单眼皮",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "两个隐性基因",
+            "text": "隐性性状才表现"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "表现型",
+            "text": "单眼皮 · 携带者：否"
+          },
+          {
+            "kind": "highlight",
+            "text": "Aa×Aa → 1AA:2Aa:1aa → 3双眼皮:1单眼皮"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "为什么两个单眼皮不会生出双眼皮？",
+      "Aa 的人表现什么性状？",
+      "什么是携带者？"
+    ]
+  }
 }

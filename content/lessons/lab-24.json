@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 跳闸排查决策台\nfault = 1   # 1超负荷 2短路 3漏电\n\nhide()\nt = \"超负荷跳闸\"\nsign = \"现象：开取暖器后跳闸·摸闸有点热\"\nsteps2 = \"排查：关掉大功率电器→合闸→逐个恢复\"\ntip = \"大功率电器分开用·不共用插排\"\ncol = \"#f97316\"\nif fault == 2:\n    t = \"短路跳闸\"\n    sign = \"现象：合闸立刻跳·有焦味或火花\"\n    steps2 = \"排查：全部拔插头→合闸→逐个插回找元凶\"\n    tip = \"找到的电器停用送修·别再插\"\n    col = \"#dc2626\"\nif fault == 3:\n    t = \"漏电跳闸\"\n    sign = \"现象：漏保跳·某电器外壳麻手\"\n    steps2 = \"排查：断电拔插头→合闸→装漏保复位看跳否\"\n    tip = \"麻手的电器立即停用·叫电工\"\n    col = \"#7c3aed\"\nfill_rect(0, 130, 340, 30, col)\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 74, 320, 44, \"#fef2f2\")\nwrite(sign, 0, 74, \"#991b1b\", 10)\nfill_rect(0, 8, 320, 56, \"#f8fafc\")\nwrite(steps2, 0, 20, \"#334155\", 10)\nwrite(\"第一步永远是：先断电保安全\", 0, -6, \"#dc2626\", 10)\nwrite(\"要点：\" + tip, 0, -66, col, 10)\n",
   "celebrate": "新知识到手！",
   "id": "lab-24",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "fault=1 为什么冬天更容易跳闸？",
-      "fault=2 拔电器插头为什么能找到短路电器？",
-      "排查前第一步永远是什么？"
-    ],
-    "code": "# 跳闸排查决策台\nfault = 1   # 1超负荷 2短路 3漏电\n\nhide()\nt = \"超负荷跳闸\"\nsign = \"现象：开取暖器后跳闸·摸闸有点热\"\nsteps2 = \"排查：关掉大功率电器→合闸→逐个恢复\"\ntip = \"大功率电器分开用·不共用插排\"\ncol = \"#f97316\"\nif fault == 2:\n    t = \"短路跳闸\"\n    sign = \"现象：合闸立刻跳·有焦味或火花\"\n    steps2 = \"排查：全部拔插头→合闸→逐个插回找元凶\"\n    tip = \"找到的电器停用送修·别再插\"\n    col = \"#dc2626\"\nif fault == 3:\n    t = \"漏电跳闸\"\n    sign = \"现象：漏保跳·某电器外壳麻手\"\n    steps2 = \"排查：断电拔插头→合闸→装漏保复位看跳否\"\n    tip = \"麻手的电器立即停用·叫电工\"\n    col = \"#7c3aed\"\nfill_rect(0, 130, 340, 30, col)\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 74, 320, 44, \"#fef2f2\")\nwrite(sign, 0, 74, \"#991b1b\", 10)\nfill_rect(0, 8, 320, 56, \"#f8fafc\")\nwrite(steps2, 0, 20, \"#334155\", 10)\nwrite(\"第一步永远是：先断电保安全\", 0, -6, \"#dc2626\", 10)\nwrite(\"要点：\" + tip, 0, -66, col, 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,83 @@
       "answer": 0,
       "explain": "水导电"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "超负荷跳闸",
+        "color": "orange",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "现象",
+            "text": "开取暖器后跳闸·摸闸有点热"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "排查",
+            "text": "关掉大功率电器→合闸→逐个恢复；第一步永远是：先断电保安全"
+          },
+          {
+            "kind": "highlight",
+            "text": "要点：大功率电器分开用·不共用插排"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "短路跳闸",
+        "color": "red",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "现象",
+            "text": "合闸立刻跳·有焦味或火花"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "排查",
+            "text": "全部拔插头→合闸→逐个插回找元凶；第一步永远是：先断电保安全"
+          },
+          {
+            "kind": "highlight",
+            "text": "要点：找到的电器停用送修·别再插"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "漏电跳闸",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "现象",
+            "text": "漏保跳·某电器外壳麻手"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "排查",
+            "text": "断电拔插头→合闸→装漏保复位看跳否；第一步永远是：先断电保安全"
+          },
+          {
+            "kind": "highlight",
+            "text": "要点：麻手的电器立即停用·叫电工"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "为什么冬天更容易跳闸？",
+      "拔电器插头为什么能找到短路电器？",
+      "排查前第一步永远是什么？"
+    ]
+  }
 }

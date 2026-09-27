@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 拼音正音训练场\npair = 1   # 1 z-zh 2 c-ch 3 s-sh 4 n-ng\n\nhide()\nt = \"z（平舌） vs zh（翘舌）\"\nex = \"四 sì —— 是 shì\"\ntip = \"平舌舌尖抵下齿背；翘舌舌尖卷向上腭\"\nrk = \"四是四，十是十，十四是十四，四十是四十\"\nif pair == 2:\n    t = \"c（平舌） vs ch（翘舌）\"\n    ex = \"从 cónɡ —— 虫 chónɡ\"\n    tip = \"c 像刺猬嘘气，ch 像火车出发\"\n    rk = \"从虫从虫冲出洞\"\nif pair == 3:\n    t = \"s（平舌） vs sh（翘舌）\"\n    ex = \"三 sān —— 山 shān\"\n    tip = \"s 轻轻送气，sh 舌尖翘起\"\n    rk = \"三山四树十三只狮\"\nif pair == 4:\n    t = \"前鼻 n vs 后鼻 ng\"\n    ex = \"分 fēn —— 风 fēnɡ\"\n    tip = \"前鼻舌尖顶上齿龈收尾；后鼻舌根抬起走鼻腔\"\n    rk = \"风吹门缝分外冷\"\nfill_rect(0, 130, 360, 30, \"#dc2626\")\nwrite(t, 0, 130, \"#fff\", 12)\nfill_rect(0, 82, 360, 36, \"#f1f5f9\")\nwrite(ex, 0, 82, \"#0f172a\", 13)\nfill_rect(0, 32, 360, 38, \"#fef3c7\")\nwrite(tip, 0, 32, \"#b45309\", 11)\nfill_rect(0, -20, 360, 38, \"#eff6ff\")\nwrite(\"绕口令：\" + rk, 0, -20, \"#1d4ed8\", 11)\nwrite(\"口诀：舌尖抵下是平舌，舌尖上翘是翘舌\", -20, -70, \"#16a34a\", 11)\nwrite(\"鼻音收尾舌前顶，后鼻收尾舌根抬\", -20, -95, \"#7c3aed\", 11)\n",
   "celebrate": "新知识到手！",
   "id": "chn-11",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "pair=1 四和是的声母差在哪？",
-      "前鼻音和后鼻音舌位有什么不同？",
-      "你能快速读对绕口令吗？"
-    ],
-    "code": "# 拼音正音训练场\npair = 1   # 1 z-zh 2 c-ch 3 s-sh 4 n-ng\n\nhide()\nt = \"z（平舌） vs zh（翘舌）\"\nex = \"四 sì —— 是 shì\"\ntip = \"平舌舌尖抵下齿背；翘舌舌尖卷向上腭\"\nrk = \"四是四，十是十，十四是十四，四十是四十\"\nif pair == 2:\n    t = \"c（平舌） vs ch（翘舌）\"\n    ex = \"从 cónɡ —— 虫 chónɡ\"\n    tip = \"c 像刺猬嘘气，ch 像火车出发\"\n    rk = \"从虫从虫冲出洞\"\nif pair == 3:\n    t = \"s（平舌） vs sh（翘舌）\"\n    ex = \"三 sān —— 山 shān\"\n    tip = \"s 轻轻送气，sh 舌尖翘起\"\n    rk = \"三山四树十三只狮\"\nif pair == 4:\n    t = \"前鼻 n vs 后鼻 ng\"\n    ex = \"分 fēn —— 风 fēnɡ\"\n    tip = \"前鼻舌尖顶上齿龈收尾；后鼻舌根抬起走鼻腔\"\n    rk = \"风吹门缝分外冷\"\nfill_rect(0, 130, 360, 30, \"#dc2626\")\nwrite(t, 0, 130, \"#fff\", 12)\nfill_rect(0, 82, 360, 36, \"#f1f5f9\")\nwrite(ex, 0, 82, \"#0f172a\", 13)\nfill_rect(0, 32, 360, 38, \"#fef3c7\")\nwrite(tip, 0, 32, \"#b45309\", 11)\nfill_rect(0, -20, 360, 38, \"#eff6ff\")\nwrite(\"绕口令：\" + rk, 0, -20, \"#1d4ed8\", 11)\nwrite(\"口诀：舌尖抵下是平舌，舌尖上翘是翘舌\", -20, -70, \"#16a34a\", 11)\nwrite(\"鼻音收尾舌前顶，后鼻收尾舌根抬\", -20, -95, \"#7c3aed\", 11)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,122 @@
       "answer": 0,
       "explain": "舌根+鼻腔共鸣"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "z（平舌） vs zh（翘舌）",
+        "color": "red",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "四 sì —— 是 shì"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "平舌舌尖抵下齿背；翘舌舌尖卷向上腭"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "绕口令",
+            "text": "四是四，十是十，十四是十四，四十是四十"
+          },
+          {
+            "kind": "highlight",
+            "text": "口诀：舌尖抵下是平舌，舌尖上翘是翘舌"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "c（平舌） vs ch（翘舌）",
+        "color": "red",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "从 cónɡ —— 虫 chónɡ"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "c 像刺猬嘘气，ch 像火车出发"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "绕口令",
+            "text": "从虫从虫冲出洞"
+          },
+          {
+            "kind": "highlight",
+            "text": "口诀：舌尖抵下是平舌，舌尖上翘是翘舌"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "s（平舌） vs sh（翘舌）",
+        "color": "red",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "三 sān —— 山 shān"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "s 轻轻送气，sh 舌尖翘起"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "绕口令",
+            "text": "三山四树十三只狮"
+          },
+          {
+            "kind": "highlight",
+            "text": "口诀：舌尖抵下是平舌，舌尖上翘是翘舌"
+          }
+        ]
+      },
+      {
+        "when": 4,
+        "title": "前鼻 n vs 后鼻 ng",
+        "color": "red",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "分 fēn —— 风 fēnɡ"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "前鼻舌尖顶上齿龈收尾；后鼻舌根抬起走鼻腔"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "绕口令",
+            "text": "风吹门缝分外冷"
+          },
+          {
+            "kind": "highlight",
+            "text": "口诀：舌尖抵下是平舌，舌尖上翘是翘舌"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "四和是的声母差在哪？",
+      "前鼻音和后鼻音舌位有什么不同？",
+      "你能快速读对绕口令吗？"
+    ]
+  }
 }

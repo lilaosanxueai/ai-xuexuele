@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# SQL 查询工作台\nex = 1   # 示例\n\nhide()\nt = \"① 查全部\"\nsql = \"SELECT * FROM students;\"\nd = \"取出 students 表的所有行和所有列（* = 全部）\"\nif ex == 2:\n    t = \"② 条件筛选\"\n    sql = \"SELECT name, score FROM students WHERE score >= 90;\"\n    d = \"只取 name 和 score 列，且 score ≥ 90 的行\"\nif ex == 3:\n    t = \"③ 排序取前 N\"\n    sql = \"SELECT name, score FROM students ORDER BY score DESC LIMIT 5;\"\n    d = \"按 score 从高到低排，取前 5 名\"\nfill_rect(0, 130, 360, 30, \"#0f766e\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 74, 360, 46, \"#f0fdfa\")\nwrite(sql, 0, 74, \"#0f766e\", 12)\nfill_rect(0, 12, 360, 58, \"#fef3c7\")\nwrite(d, 0, 12, \"#b45309\", 11)\nwrite(\"SQL 四件套：SELECT 选列 · FROM 选表 · WHERE 筛行 · ORDER BY 排序\", -15, -55, \"#dc2626\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "it-21",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "ex=2 WHERE 后面怎么写条件？",
-      "ORDER BY 默认从小到大还是从大到小？",
-      "SELECT * 中的 * 是什么意思？"
-    ],
-    "code": "# SQL 查询工作台\nex = 1   # 示例\n\nhide()\nt = \"① 查全部\"\nsql = \"SELECT * FROM students;\"\nd = \"取出 students 表的所有行和所有列（* = 全部）\"\nif ex == 2:\n    t = \"② 条件筛选\"\n    sql = \"SELECT name, score FROM students WHERE score >= 90;\"\n    d = \"只取 name 和 score 列，且 score ≥ 90 的行\"\nif ex == 3:\n    t = \"③ 排序取前 N\"\n    sql = \"SELECT name, score FROM students ORDER BY score DESC LIMIT 5;\"\n    d = \"按 score 从高到低排，取前 5 名\"\nfill_rect(0, 130, 360, 30, \"#0f766e\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 74, 360, 46, \"#f0fdfa\")\nwrite(sql, 0, 74, \"#0f766e\", 12)\nfill_rect(0, 12, 360, 58, \"#fef3c7\")\nwrite(d, 0, 12, \"#b45309\", 11)\nwrite(\"SQL 四件套：SELECT 选列 · FROM 选表 · WHERE 筛行 · ORDER BY 排序\", -15, -55, \"#dc2626\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,77 @@
       "answer": 0,
       "explain": "计数"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "① 查全部",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "SELECT * FROM students;"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "取出 students 表的所有行和所有列（* = 全部）"
+          },
+          {
+            "kind": "highlight",
+            "text": "SQL 四件套：SELECT 选列 · FROM 选表 · WHERE 筛行 · ORDER BY 排序"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "② 条件筛选",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "SELECT name, score FROM students WHERE score >= 90;"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "只取 name 和 score 列，且 score ≥ 90 的行"
+          },
+          {
+            "kind": "highlight",
+            "text": "SQL 四件套：SELECT 选列 · FROM 选表 · WHERE 筛行 · ORDER BY 排序"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "③ 排序取前 N",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "SELECT name, score FROM students ORDER BY score DESC LIMIT 5;"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "按 score 从高到低排，取前 5 名"
+          },
+          {
+            "kind": "highlight",
+            "text": "SQL 四件套：SELECT 选列 · FROM 选表 · WHERE 筛行 · ORDER BY 排序"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "WHERE 后面怎么写条件？",
+      "ORDER BY 默认从小到大还是从大到小？",
+      "SELECT * 中的 * 是什么意思？"
+    ]
+  }
 }

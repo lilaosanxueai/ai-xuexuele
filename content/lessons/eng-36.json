@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 宾语从句构造器\ntype = 1   # 类型\n\nhide()\nt = \"陈述句作从句\"\nconn = \"that（可省略）\"\nex = \"I think (that) you are right.\"\nrule = \"语序：陈述语序（主语+谓语）\"\nif type == 2:\n    t = \"一般疑问句作从句\"\n    conn = \"if / whether（不可省）\"\n    ex = \"I wonder if he will come.\"\n    rule = \"疑问句要改成陈述语序\"\nif type == 3:\n    t = \"特殊疑问句作从句\"\n    conn = \"原来的疑问词（what/where/when/why/how）\"\n    ex = \"I don't know where he lives.\"\n    rule = \"保留疑问词+陈述语序\"\nfill_rect(0, 130, 340, 30, \"#2563eb\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 340, 42, \"#eff6ff\")\nwrite(\"连接词：\" + conn, 0, 76, \"#1d4ed8\", 12)\nfill_rect(0, 16, 340, 56, \"#fef3c7\")\nwrite(\"例：\" + ex, 0, 26, \"#b45309\", 10)\nwrite(rule, 0, 8, \"#92400e\", 9)\n",
   "celebrate": "新知识到手！",
   "id": "eng-36",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "type=1 that 什么时候可以省？",
-      "type=2 if 和 whether 的区别？",
-      "type=3 时态怎么呼应？"
-    ],
-    "code": "# 宾语从句构造器\ntype = 1   # 类型\n\nhide()\nt = \"陈述句作从句\"\nconn = \"that（可省略）\"\nex = \"I think (that) you are right.\"\nrule = \"语序：陈述语序（主语+谓语）\"\nif type == 2:\n    t = \"一般疑问句作从句\"\n    conn = \"if / whether（不可省）\"\n    ex = \"I wonder if he will come.\"\n    rule = \"疑问句要改成陈述语序\"\nif type == 3:\n    t = \"特殊疑问句作从句\"\n    conn = \"原来的疑问词（what/where/when/why/how）\"\n    ex = \"I don't know where he lives.\"\n    rule = \"保留疑问词+陈述语序\"\nfill_rect(0, 130, 340, 30, \"#2563eb\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 340, 42, \"#eff6ff\")\nwrite(\"连接词：\" + conn, 0, 76, \"#1d4ed8\", 12)\nfill_rect(0, 16, 340, 56, \"#fef3c7\")\nwrite(\"例：\" + ex, 0, 26, \"#b45309\", 10)\nwrite(rule, 0, 8, \"#92400e\", 9)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -207,5 +198,71 @@
       "answer": 0,
       "explain": "主过从过去"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "陈述句作从句",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "连接词",
+            "text": "that（可省略）"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "例",
+            "text": "I think (that) you are right.；语序：陈述语序（主语+谓语）"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "一般疑问句作从句",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "连接词",
+            "text": "if / whether（不可省）"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "例",
+            "text": "I wonder if he will come.；疑问句要改成陈述语序"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "特殊疑问句作从句",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "连接词",
+            "text": "原来的疑问词（what/where/when/why/how）"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "例",
+            "text": "I don't know where he lives.；保留疑问词+陈述语序"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "that 什么时候可以省？",
+      "if 和 whether 的区别？",
+      "时态怎么呼应？"
+    ]
+  }
 }

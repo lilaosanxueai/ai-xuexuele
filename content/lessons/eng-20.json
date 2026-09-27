@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 自然拼读解码器\nv = 1   # 1 a 2 e 3 i 4 o 5 u\n\nhide()\nletter = \"a\"\nsound = \"/æ/ 嘴巴张大\"\nw1 = \"c-a-t  cat  猫\"\nw2 = \"m-a-p  map  地图\"\nw3 = \"b-a-g  bag  书包\"\nif v == 2:\n    letter = \"e\"\n    sound = \"/e/ 嘴角咧开\"\n    w1 = \"b-e-d  bed  床\"\n    w2 = \"p-e-n  pen  钢笔\"\n    w3 = \"r-e-d  red  红色\"\nif v == 3:\n    letter = \"i\"\n    sound = \"/ɪ/ 短促有力\"\n    w1 = \"p-i-g  pig  猪\"\n    w2 = \"s-i-t  sit  坐\"\n    w3 = \"b-i-g  big  大的\"\nif v == 4:\n    letter = \"o\"\n    sound = \"/ɒ/ 嘴唇圆圆\"\n    w1 = \"d-o-g  dog  狗\"\n    w2 = \"h-o-t  hot  热的\"\n    w3 = \"b-o-x  box  盒子\"\nif v == 5:\n    letter = \"u\"\n    sound = \"/ʌ/ 短促开口\"\n    w1 = \"c-u-p  cup  杯子\"\n    w2 = \"b-u-s  bus  公交车\"\n    w3 = \"s-u-n  sun  太阳\"\nfill_rect(-130, 130, 60, 60, \"#1d4ed8\")\nwrite(letter, -130, 130, \"#fff\", 28)\nfill_rect(40, 130, 240, 60, \"#f1f5f9\")\nwrite(\"发音：\" + sound, 40, 130, \"#0f172a\", 13)\nfill_rect(0, 70, 360, 34, \"#fef3c7\")\nwrite(w1, 0, 70, \"#b45309\", 13)\nfill_rect(0, 22, 360, 34, \"#f1f5f9\")\nwrite(w2, 0, 22, \"#0f172a\", 13)\nfill_rect(0, -26, 360, 34, \"#eff6ff\")\nwrite(w3, 0, -26, \"#1d4ed8\", 13)\nwrite(\"拼读口诀：辅音快，元音清，一口气连成音\", -20, -78, \"#dc2626\", 11)\n",
   "celebrate": "新知识到手！",
   "id": "eng-20",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "v=1 的 a 在 cat/map 里发音一样吗？",
-      "五个短元音里哪个最难读？",
-      "学会拼读后可以怎么记单词？"
-    ],
-    "code": "# 自然拼读解码器\nv = 1   # 1 a 2 e 3 i 4 o 5 u\n\nhide()\nletter = \"a\"\nsound = \"/æ/ 嘴巴张大\"\nw1 = \"c-a-t  cat  猫\"\nw2 = \"m-a-p  map  地图\"\nw3 = \"b-a-g  bag  书包\"\nif v == 2:\n    letter = \"e\"\n    sound = \"/e/ 嘴角咧开\"\n    w1 = \"b-e-d  bed  床\"\n    w2 = \"p-e-n  pen  钢笔\"\n    w3 = \"r-e-d  red  红色\"\nif v == 3:\n    letter = \"i\"\n    sound = \"/ɪ/ 短促有力\"\n    w1 = \"p-i-g  pig  猪\"\n    w2 = \"s-i-t  sit  坐\"\n    w3 = \"b-i-g  big  大的\"\nif v == 4:\n    letter = \"o\"\n    sound = \"/ɒ/ 嘴唇圆圆\"\n    w1 = \"d-o-g  dog  狗\"\n    w2 = \"h-o-t  hot  热的\"\n    w3 = \"b-o-x  box  盒子\"\nif v == 5:\n    letter = \"u\"\n    sound = \"/ʌ/ 短促开口\"\n    w1 = \"c-u-p  cup  杯子\"\n    w2 = \"b-u-s  bus  公交车\"\n    w3 = \"s-u-n  sun  太阳\"\nfill_rect(-130, 130, 60, 60, \"#1d4ed8\")\nwrite(letter, -130, 130, \"#fff\", 28)\nfill_rect(40, 130, 240, 60, \"#f1f5f9\")\nwrite(\"发音：\" + sound, 40, 130, \"#0f172a\", 13)\nfill_rect(0, 70, 360, 34, \"#fef3c7\")\nwrite(w1, 0, 70, \"#b45309\", 13)\nfill_rect(0, 22, 360, 34, \"#f1f5f9\")\nwrite(w2, 0, 22, \"#0f172a\", 13)\nfill_rect(0, -26, 360, 34, \"#eff6ff\")\nwrite(w3, 0, -26, \"#1d4ed8\", 13)\nwrite(\"拼读口诀：辅音快，元音清，一口气连成音\", -20, -78, \"#dc2626\", 11)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,179 @@
       "answer": 0,
       "explain": "短促开口"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "自然拼读",
+        "color": "sky",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "发音",
+            "text": "/æ/ 嘴巴张大"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "c-a-t  cat  猫"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "m-a-p  map  地图"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "b-a-g  bag  书包"
+          },
+          {
+            "kind": "highlight",
+            "text": "拼读口诀：辅音快，元音清，一口气连成音"
+          }
+        ],
+        "subtitle": "元音的发音密码"
+      },
+      {
+        "when": 2,
+        "title": "自然拼读",
+        "color": "sky",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "发音",
+            "text": "/e/ 嘴角咧开"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "b-e-d  bed  床"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "p-e-n  pen  钢笔"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "r-e-d  red  红色"
+          },
+          {
+            "kind": "highlight",
+            "text": "拼读口诀：辅音快，元音清，一口气连成音"
+          }
+        ],
+        "subtitle": "元音的发音密码"
+      },
+      {
+        "when": 3,
+        "title": "自然拼读",
+        "color": "sky",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "发音",
+            "text": "/ɪ/ 短促有力"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "p-i-g  pig  猪"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "s-i-t  sit  坐"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "b-i-g  big  大的"
+          },
+          {
+            "kind": "highlight",
+            "text": "拼读口诀：辅音快，元音清，一口气连成音"
+          }
+        ],
+        "subtitle": "元音的发音密码"
+      },
+      {
+        "when": 4,
+        "title": "自然拼读",
+        "color": "sky",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "发音",
+            "text": "/ɒ/ 嘴唇圆圆"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "d-o-g  dog  狗"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "h-o-t  hot  热的"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "b-o-x  box  盒子"
+          },
+          {
+            "kind": "highlight",
+            "text": "拼读口诀：辅音快，元音清，一口气连成音"
+          }
+        ],
+        "subtitle": "元音的发音密码"
+      },
+      {
+        "when": 5,
+        "title": "自然拼读",
+        "color": "sky",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "发音",
+            "text": "/ʌ/ 短促开口"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "c-u-p  cup  杯子"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "b-u-s  bus  公交车"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "s-u-n  sun  太阳"
+          },
+          {
+            "kind": "highlight",
+            "text": "拼读口诀：辅音快，元音清，一口气连成音"
+          }
+        ],
+        "subtitle": "元音的发音密码"
+      }
+    ],
+    "explore": [
+      "的 a 在 cat/map 里发音一样吗？",
+      "五个短元音里哪个最难读？",
+      "学会拼读后可以怎么记单词？"
+    ]
+  }
 }

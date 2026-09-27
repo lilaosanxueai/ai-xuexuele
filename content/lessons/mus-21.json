@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 节奏创编实验室\nmix = 1   # 节奏配方\n\nhide()\nt = \"配方A：X X X X（四分音符·匀速）\"\nfeel = \"感觉：稳健·行进·庄严\"\nuse2 = \"适合《静夜思》：安静平和的夜晚\"\nif mix == 2:\n    t = \"配方B：XX XX X —（八分+四分）\"\n    feel = \"感觉：轻快·跳动·活泼\"\n    use2 = \"适合《春晓》：春日鸟鸣的欢快\"\nif mix == 3:\n    t = \"配方C：X - XX X（含休止·张弛）\"\n    feel = \"感觉：顿挫·有力·变化\"\n    use2 = \"适合《满江红》：壮怀激烈的情感\"\nfill_rect(0, 130, 360, 30, \"#7c3aed\")\nwrite(t, 0, 130, \"#fff\", 11)\nfill_rect(0, 76, 360, 40, \"#f5f3ff\")\nwrite(feel, 0, 76, \"#6d28d9\", 11)\nfill_rect(0, 16, 360, 56, \"#fef3c7\")\nwrite(\"诗配乐：\" + use2, 0, 16, \"#b45309\", 10)\ni = 0\nwhile i < 4:\n    x = -120 + i * 80\n    if mix == 1:\n        fill_rect(x, -50, 56, 40, \"#7c3aed\")\n        write(\"X\", x, -50, \"#fff\", 14)\n    if mix == 2:\n        if i < 2:\n            fill_rect(x, -50, 32, 40, \"#7c3aed\")\n            write(\"XX\", x, -50, \"#fff\", 10)\n        if i == 2:\n            fill_rect(x, -50, 56, 40, \"#7c3aed\")\n            write(\"X\", x, -50, \"#fff\", 14)\n        if i == 3:\n            write(\"—\", x, -50, \"#94a3b8\", 14)\n    if mix == 3:\n        if i == 0:\n            fill_rect(x, -50, 56, 40, \"#7c3aed\")\n            write(\"X\", x, -50, \"#fff\", 14)\n        if i == 1:\n            write(\"—\", x, -50, \"#94a3b8\", 14)\n        if i >= 2:\n            fill_rect(x, -50, 32, 40, \"#7c3aed\")\n            write(\"XX\", x, -50, \"#fff\", 9)\n    i = i + 1\nwrite(\"X=击一下 XX=快击两下 —=休止\", -20, -95, \"#0369a1\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "mus-21",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "同一首诗配不同节奏感觉一样吗？",
-      "四拍可以有几种节奏型？",
-      "小组合奏怎么分配声部？"
-    ],
-    "code": "# 节奏创编实验室\nmix = 1   # 节奏配方\n\nhide()\nt = \"配方A：X X X X（四分音符·匀速）\"\nfeel = \"感觉：稳健·行进·庄严\"\nuse2 = \"适合《静夜思》：安静平和的夜晚\"\nif mix == 2:\n    t = \"配方B：XX XX X —（八分+四分）\"\n    feel = \"感觉：轻快·跳动·活泼\"\n    use2 = \"适合《春晓》：春日鸟鸣的欢快\"\nif mix == 3:\n    t = \"配方C：X - XX X（含休止·张弛）\"\n    feel = \"感觉：顿挫·有力·变化\"\n    use2 = \"适合《满江红》：壮怀激烈的情感\"\nfill_rect(0, 130, 360, 30, \"#7c3aed\")\nwrite(t, 0, 130, \"#fff\", 11)\nfill_rect(0, 76, 360, 40, \"#f5f3ff\")\nwrite(feel, 0, 76, \"#6d28d9\", 11)\nfill_rect(0, 16, 360, 56, \"#fef3c7\")\nwrite(\"诗配乐：\" + use2, 0, 16, \"#b45309\", 10)\ni = 0\nwhile i < 4:\n    x = -120 + i * 80\n    if mix == 1:\n        fill_rect(x, -50, 56, 40, \"#7c3aed\")\n        write(\"X\", x, -50, \"#fff\", 14)\n    if mix == 2:\n        if i < 2:\n            fill_rect(x, -50, 32, 40, \"#7c3aed\")\n            write(\"XX\", x, -50, \"#fff\", 10)\n        if i == 2:\n            fill_rect(x, -50, 56, 40, \"#7c3aed\")\n            write(\"X\", x, -50, \"#fff\", 14)\n        if i == 3:\n            write(\"—\", x, -50, \"#94a3b8\", 14)\n    if mix == 3:\n        if i == 0:\n            fill_rect(x, -50, 56, 40, \"#7c3aed\")\n            write(\"X\", x, -50, \"#fff\", 14)\n        if i == 1:\n            write(\"—\", x, -50, \"#94a3b8\", 14)\n        if i >= 2:\n            fill_rect(x, -50, 32, 40, \"#7c3aed\")\n            write(\"XX\", x, -50, \"#fff\", 9)\n    i = i + 1\nwrite(\"X=击一下 XX=快击两下 —=休止\", -20, -95, \"#0369a1\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,86 @@
       "answer": 0,
       "explain": "创编=合作"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "配方A",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "感觉",
+            "text": "稳健·行进·庄严"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "诗配乐",
+            "text": "适合《静夜思》：安静平和的夜晚"
+          },
+          {
+            "kind": "highlight",
+            "text": "X=击一下 XX=快击两下 —=休止"
+          }
+        ],
+        "subtitle": "X X X X（四分音符·匀速）"
+      },
+      {
+        "when": 2,
+        "title": "配方B",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "感觉",
+            "text": "轻快·跳动·活泼"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "诗配乐",
+            "text": "适合《春晓》：春日鸟鸣的欢快"
+          },
+          {
+            "kind": "highlight",
+            "text": "X=击一下 XX=快击两下 —=休止"
+          }
+        ],
+        "subtitle": "XX XX X —（八分+四分）"
+      },
+      {
+        "when": 3,
+        "title": "配方C",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "感觉",
+            "text": "顿挫·有力·变化"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "诗配乐",
+            "text": "适合《满江红》：壮怀激烈的情感"
+          },
+          {
+            "kind": "highlight",
+            "text": "X=击一下 XX=快击两下 —=休止"
+          }
+        ],
+        "subtitle": "X - XX X（含休止·张弛）"
+      }
+    ],
+    "explore": [
+      "同一首诗配不同节奏感觉一样吗？",
+      "四拍可以有几种节奏型？",
+      "小组合奏怎么分配声部？"
+    ]
+  }
 }

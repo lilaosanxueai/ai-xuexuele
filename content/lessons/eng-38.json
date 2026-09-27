@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 比较级变化台\nadj = 1   # 1tall 2big 3heavy 4good\n\nhide()\nbase = \"tall\"\ncomp = \"taller\"\nsup = \"tallest\"\nrule = \"规则一：直接加 er / est\"\nex = \"Tom is taller than Mike.\"\nif adj == 2:\n    base = \"big\"\n    comp = \"bigger\"\n    sup = \"biggest\"\n    rule = \"规则二：重读闭音节，双写末尾辅音再加\"\n    ex = \"My box is bigger than yours.\"\nif adj == 3:\n    base = \"heavy\"\n    comp = \"heavier\"\n    sup = \"heaviest\"\n    rule = \"规则三：辅音字母+y，变 y 为 i 再加\"\n    ex = \"This bag is heavier.\"\nif adj == 4:\n    base = \"good\"\n    comp = \"better\"\n    sup = \"best\"\n    rule = \"不规则变化，需要背下来\"\n    ex = \"She is the best student.\"\nfill_rect(0, 130, 340, 30, \"#2563eb\")\nwrite(base + \" - \" + comp + \" - \" + sup, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 320, 42, \"#eff6ff\")\nwrite(rule, 0, 76, \"#1d4ed8\", 11)\nfill_rect(0, 10, 320, 60, \"#fef3c7\")\nwrite(\"原级：a \" + base + \" boy\", 0, 26, \"#b45309\", 10)\nwrite(\"比较级/最高级例句：\", 0, 6, \"#92400e\", 9)\nwrite(ex, 0, -12, \"#b45309\", 10)\nwrite(\"比较级后接 than · 最高级前加 the\", 0, -60, \"#7c3aed\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "eng-38",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "adj=2 big 为什么要双写 g？",
-      "adj=3 heavy 的 y 怎么变？",
-      "adj=4 为什么不合规则？"
-    ],
-    "code": "# 比较级变化台\nadj = 1   # 1tall 2big 3heavy 4good\n\nhide()\nbase = \"tall\"\ncomp = \"taller\"\nsup = \"tallest\"\nrule = \"规则一：直接加 er / est\"\nex = \"Tom is taller than Mike.\"\nif adj == 2:\n    base = \"big\"\n    comp = \"bigger\"\n    sup = \"biggest\"\n    rule = \"规则二：重读闭音节，双写末尾辅音再加\"\n    ex = \"My box is bigger than yours.\"\nif adj == 3:\n    base = \"heavy\"\n    comp = \"heavier\"\n    sup = \"heaviest\"\n    rule = \"规则三：辅音字母+y，变 y 为 i 再加\"\n    ex = \"This bag is heavier.\"\nif adj == 4:\n    base = \"good\"\n    comp = \"better\"\n    sup = \"best\"\n    rule = \"不规则变化，需要背下来\"\n    ex = \"She is the best student.\"\nfill_rect(0, 130, 340, 30, \"#2563eb\")\nwrite(base + \" - \" + comp + \" - \" + sup, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 320, 42, \"#eff6ff\")\nwrite(rule, 0, 76, \"#1d4ed8\", 11)\nfill_rect(0, 10, 320, 60, \"#fef3c7\")\nwrite(\"原级：a \" + base + \" boy\", 0, 26, \"#b45309\", 10)\nwrite(\"比较级/最高级例句：\", 0, 6, \"#92400e\", 9)\nwrite(ex, 0, -12, \"#b45309\", 10)\nwrite(\"比较级后接 than · 最高级前加 the\", 0, -60, \"#7c3aed\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,105 @@
       "answer": 0,
       "explain": "the + est"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "tall - taller -…",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "规则一",
+            "text": "直接加 er / est"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "原级",
+            "text": "a tall boy；比较级/最高级例句：；Tom is taller than Mike."
+          },
+          {
+            "kind": "highlight",
+            "text": "比较级后接 than · 最高级前加 the"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "big - bigger - …",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "规则二",
+            "text": "重读闭音节，双写末尾辅音再加"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "原级",
+            "text": "a big boy；比较级/最高级例句：；My box is bigger than yours."
+          },
+          {
+            "kind": "highlight",
+            "text": "比较级后接 than · 最高级前加 the"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "heavy - heavier…",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "规则三",
+            "text": "辅音字母+y，变 y 为 i 再加"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "原级",
+            "text": "a heavy boy；比较级/最高级例句：；This bag is heavier."
+          },
+          {
+            "kind": "highlight",
+            "text": "比较级后接 than · 最高级前加 the"
+          }
+        ]
+      },
+      {
+        "when": 4,
+        "title": "good - better -…",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "不规则变化，需要背下来"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "原级",
+            "text": "a good boy；比较级/最高级例句：；She is the best student."
+          },
+          {
+            "kind": "highlight",
+            "text": "比较级后接 than · 最高级前加 the"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "big 为什么要双写 g？",
+      "heavy 的 y 怎么变？",
+      "为什么不合规则？"
+    ]
+  }
 }

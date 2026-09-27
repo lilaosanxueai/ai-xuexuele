@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 意象密码本探索台\nimg = 1   # 1月 2柳 3雁 4梧桐 5菊 6夕阳\n\nhide()\nsym = \"月亮\"\nemo = \"思乡怀人\"\npoem = \"举头望明月，低头思故乡\"\nwhy = \"月圆人不圆，天涯共此月\"\nif img == 2:\n    sym = \"柳枝\"\n    emo = \"惜别留恋\"\n    poem = \"昔我往矣，杨柳依依\"\n    why = \"柳谐音留，折柳送别\"\nif img == 3:\n    sym = \"大雁\"\n    emo = \"音信与乡愁\"\n    poem = \"雁字回时，月满西楼\"\n    why = \"雁南飞定期，传书之鸟\"\nif img == 4:\n    sym = \"梧桐\"\n    emo = \"孤寂哀愁\"\n    poem = \"梧桐更兼细雨，到黄昏\"\n    why = \"秋雨打桐叶，声声皆是愁\"\nif img == 5:\n    sym = \"菊花\"\n    emo = \"隐逸高洁\"\n    poem = \"采菊东篱下，悠然见南山\"\n    why = \"陶渊明之花，不与百花争\"\nif img == 6:\n    sym = \"夕阳\"\n    emo = \"迟暮感伤\"\n    poem = \"夕阳无限好，只是近黄昏\"\n    why = \"日暮喻人生暮年\"\nfill_rect(0, 128, 340, 32, \"#7c3aed\")\nwrite(sym, 0, 128, \"#fff\", 16)\nfill_rect(0, 82, 360, 34, \"#fef3c7\")\nwrite(emo, 0, 82, \"#b45309\", 13)\nfill_rect(0, 32, 360, 42, \"#eff6ff\")\nwrite(poem, 0, 32, \"#1d4ed8\", 11)\nfill_rect(0, -20, 360, 40, \"#f1f5f9\")\nwrite(why, 0, -20, \"#0f172a\", 11)\nwrite(\"意象=景 + 固定情感，组合起来=意境\", -30, -78, \"#dc2626\", 11)\nwrite(\"答题模板：本诗借xx意象，描绘xx画面，抒发xx情感\", -30, -102, \"#0369a1\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "chn-08",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "img=1 的月亮为什么总和思乡绑定？",
-      "柳 和 留 谐音说明了什么手法？",
-      "同一意象在不同诗里情感会变吗？"
-    ],
-    "code": "# 意象密码本探索台\nimg = 1   # 1月 2柳 3雁 4梧桐 5菊 6夕阳\n\nhide()\nsym = \"月亮\"\nemo = \"思乡怀人\"\npoem = \"举头望明月，低头思故乡\"\nwhy = \"月圆人不圆，天涯共此月\"\nif img == 2:\n    sym = \"柳枝\"\n    emo = \"惜别留恋\"\n    poem = \"昔我往矣，杨柳依依\"\n    why = \"柳谐音留，折柳送别\"\nif img == 3:\n    sym = \"大雁\"\n    emo = \"音信与乡愁\"\n    poem = \"雁字回时，月满西楼\"\n    why = \"雁南飞定期，传书之鸟\"\nif img == 4:\n    sym = \"梧桐\"\n    emo = \"孤寂哀愁\"\n    poem = \"梧桐更兼细雨，到黄昏\"\n    why = \"秋雨打桐叶，声声皆是愁\"\nif img == 5:\n    sym = \"菊花\"\n    emo = \"隐逸高洁\"\n    poem = \"采菊东篱下，悠然见南山\"\n    why = \"陶渊明之花，不与百花争\"\nif img == 6:\n    sym = \"夕阳\"\n    emo = \"迟暮感伤\"\n    poem = \"夕阳无限好，只是近黄昏\"\n    why = \"日暮喻人生暮年\"\nfill_rect(0, 128, 340, 32, \"#7c3aed\")\nwrite(sym, 0, 128, \"#fff\", 16)\nfill_rect(0, 82, 360, 34, \"#fef3c7\")\nwrite(emo, 0, 82, \"#b45309\", 13)\nfill_rect(0, 32, 360, 42, \"#eff6ff\")\nwrite(poem, 0, 32, \"#1d4ed8\", 11)\nfill_rect(0, -20, 360, 40, \"#f1f5f9\")\nwrite(why, 0, -20, \"#0f172a\", 11)\nwrite(\"意象=景 + 固定情感，组合起来=意境\", -30, -78, \"#dc2626\", 11)\nwrite(\"答题模板：本诗借xx意象，描绘xx画面，抒发xx情感\", -30, -102, \"#0369a1\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -205,5 +196,170 @@
       "answer": 0,
       "explain": "意象→画面→意境"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "月亮",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "思乡怀人"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "举头望明月，低头思故乡"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "月圆人不圆，天涯共此月"
+          },
+          {
+            "kind": "highlight",
+            "text": "意象=景 + 固定情感，组合起来=意境"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "柳枝",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "惜别留恋"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "昔我往矣，杨柳依依"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "柳谐音留，折柳送别"
+          },
+          {
+            "kind": "highlight",
+            "text": "意象=景 + 固定情感，组合起来=意境"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "大雁",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "音信与乡愁"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "雁字回时，月满西楼"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "雁南飞定期，传书之鸟"
+          },
+          {
+            "kind": "highlight",
+            "text": "意象=景 + 固定情感，组合起来=意境"
+          }
+        ]
+      },
+      {
+        "when": 4,
+        "title": "梧桐",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "孤寂哀愁"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "梧桐更兼细雨，到黄昏"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "秋雨打桐叶，声声皆是愁"
+          },
+          {
+            "kind": "highlight",
+            "text": "意象=景 + 固定情感，组合起来=意境"
+          }
+        ]
+      },
+      {
+        "when": 5,
+        "title": "菊花",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "隐逸高洁"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "采菊东篱下，悠然见南山"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "陶渊明之花，不与百花争"
+          },
+          {
+            "kind": "highlight",
+            "text": "意象=景 + 固定情感，组合起来=意境"
+          }
+        ]
+      },
+      {
+        "when": 6,
+        "title": "夕阳",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "迟暮感伤"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "夕阳无限好，只是近黄昏"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "日暮喻人生暮年"
+          },
+          {
+            "kind": "highlight",
+            "text": "意象=景 + 固定情感，组合起来=意境"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "的月亮为什么总和思乡绑定？",
+      "柳 和 留 谐音说明了什么手法？",
+      "同一意象在不同诗里情感会变吗？"
+    ]
+  }
 }

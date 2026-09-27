@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 篮球规则判罚台\ncall = 1   # 判罚\n\nhide()\nt = \"带球走步（Traveling）\"\nrule = \"持球移动必须运球：中枢脚抬起前球要离手\"\ngest = \"双手转动双拳（像拧瓶子）\"\npen = \"对方掷界外球\"\nif call == 2:\n    t = \"二次运球（Double Dribble）\"\n    rule = \"运球停止后再次运球；双手同时触球即停止\"\n    gest = \"双手交替拍击（上下摆动）\"\n    pen = \"对方掷界外球\"\nif call == 3:\n    t = \"3 秒违例\"\n    rule = \"进攻队员不得在对方限制区停留超过 3 秒\"\n    gest = \"单臂伸出三指\"\n    pen = \"对方掷界外球\"\nif call == 4:\n    t = \"侵人犯规（打手/推人）\"\n    rule = \"不得通过手拉推撞妨碍对方\"\n    gest = \"单拳握紧指向另一手掌（打手）\"\n    pen = \"对方掷界外球；投篮犯规罚球 2-3 次\"\nfill_rect(0, 130, 360, 30, \"#f59e0b\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 360, 40, \"#f1f5f9\")\nwrite(rule, 0, 76, \"#0f172a\", 10)\nfill_rect(0, 18, 360, 50, \"#fef3c7\")\nwrite(\"手势：\" + gest, 0, 18, \"#b45309\", 10)\nwrite(\"判罚：\" + pen, -20, -50, \"#7c3aed\", 10)\nwrite(\"时间限制：3秒限制区·5秒发球·8秒过半场·24秒进攻\", -15, -80, \"#dc2626\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "pe-15",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "call=1 走步为什么违例？",
-      "call=4 侵人犯规罚几次？",
-      "3 秒 5 秒 8 秒各限制什么？"
-    ],
-    "code": "# 篮球规则判罚台\ncall = 1   # 判罚\n\nhide()\nt = \"带球走步（Traveling）\"\nrule = \"持球移动必须运球：中枢脚抬起前球要离手\"\ngest = \"双手转动双拳（像拧瓶子）\"\npen = \"对方掷界外球\"\nif call == 2:\n    t = \"二次运球（Double Dribble）\"\n    rule = \"运球停止后再次运球；双手同时触球即停止\"\n    gest = \"双手交替拍击（上下摆动）\"\n    pen = \"对方掷界外球\"\nif call == 3:\n    t = \"3 秒违例\"\n    rule = \"进攻队员不得在对方限制区停留超过 3 秒\"\n    gest = \"单臂伸出三指\"\n    pen = \"对方掷界外球\"\nif call == 4:\n    t = \"侵人犯规（打手/推人）\"\n    rule = \"不得通过手拉推撞妨碍对方\"\n    gest = \"单拳握紧指向另一手掌（打手）\"\n    pen = \"对方掷界外球；投篮犯规罚球 2-3 次\"\nfill_rect(0, 130, 360, 30, \"#f59e0b\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 360, 40, \"#f1f5f9\")\nwrite(rule, 0, 76, \"#0f172a\", 10)\nfill_rect(0, 18, 360, 50, \"#fef3c7\")\nwrite(\"手势：\" + gest, 0, 18, \"#b45309\", 10)\nwrite(\"判罚：\" + pen, -20, -50, \"#7c3aed\", 10)\nwrite(\"时间限制：3秒限制区·5秒发球·8秒过半场·24秒进攻\", -15, -80, \"#dc2626\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,102 @@
       "answer": 0,
       "explain": "进攻3秒区"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "带球走步（Traveling）",
+        "color": "amber",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "持球移动必须运球：中枢脚抬起前球要离手"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "手势",
+            "text": "双手转动双拳（像拧瓶子）"
+          },
+          {
+            "kind": "highlight",
+            "text": "判罚：对方掷界外球"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "二次运球（Double Dri…",
+        "color": "amber",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "运球停止后再次运球；双手同时触球即停止"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "手势",
+            "text": "双手交替拍击（上下摆动）"
+          },
+          {
+            "kind": "highlight",
+            "text": "判罚：对方掷界外球"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "3 秒违例",
+        "color": "amber",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "进攻队员不得在对方限制区停留超过 3 秒"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "手势",
+            "text": "单臂伸出三指"
+          },
+          {
+            "kind": "highlight",
+            "text": "判罚：对方掷界外球"
+          }
+        ]
+      },
+      {
+        "when": 4,
+        "title": "侵人犯规（打手/推人）",
+        "color": "amber",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "不得通过手拉推撞妨碍对方"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "手势",
+            "text": "单拳握紧指向另一手掌（打手）"
+          },
+          {
+            "kind": "highlight",
+            "text": "判罚：对方掷界外球；投篮犯规罚球 2-3 次"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "走步为什么违例？",
+      "侵人犯规罚几次？",
+      "3 秒 5 秒 8 秒各限制什么？"
+    ]
+  }
 }

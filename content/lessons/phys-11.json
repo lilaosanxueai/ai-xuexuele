@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 比热容对比台：1kg 水 vs 1kg 干沙 同样升温\ndt = 10   # 升温摄氏度\n\nhide()\ncw = 4200\ncs = 920\nqw = dt * cw\nqs = dt * cs\nfill_rect(0, 130, 340, 30, \"#0ea5e9\")\nwrite(\"同样升温 \" + dt + \"℃ 各需多少热量（J）\", 0, 130, \"#fff\", 11)\nfill_rect(0, 74, 150, 48, \"#dbeafe\")\nwrite(\"水 1kg\", 0, 92, \"#1d4ed8\", 10)\nwrite(\"Q = \" + qw + \" J\", 0, 62, \"#1d4ed8\", 10)\nfill_rect(0, -6, 150, 48, \"#fef3c7\")\nwrite(\"干沙 1kg\", 0, 12, \"#b45309\", 10)\nwrite(\"Q = \" + qs + \" J\", 0, -18, \"#b45309\", 10)\nfill_rect(-160, -60, 320, 20, \"#e2e8f0\")\nfill_rect(-160, -60, qs / 300, 20, \"#f59e0b\")\nwrite(\"干沙吸热条\", -95, -60, \"#b45309\", 9)\nfill_rect(-160, -88, 320, 20, \"#e2e8f0\")\nfill_rect(-160, -88, qw / 300, 20, \"#0ea5e9\")\nwrite(\"水吸热条（长）\", -85, -88, \"#1d4ed8\", 9)\nwrite(\"水升温慢=比热容大=吸热多\", -30, -128, \"#7c3aed\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "phys-11",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 5,
         "value": 10
       }
-    ],
-    "grid": false,
-    "explore": [
-      "ΔT=10 时水需要多少热量？",
-      "同样升温 10℃，沙子需要多少？",
-      "为什么沿海昼夜温差小？"
-    ],
-    "code": "# 比热容对比台：1kg 水 vs 1kg 干沙 同样升温\ndt = 10   # 升温摄氏度\n\nhide()\ncw = 4200\ncs = 920\nqw = dt * cw\nqs = dt * cs\nfill_rect(0, 130, 340, 30, \"#0ea5e9\")\nwrite(\"同样升温 \" + dt + \"℃ 各需多少热量（J）\", 0, 130, \"#fff\", 11)\nfill_rect(0, 74, 150, 48, \"#dbeafe\")\nwrite(\"水 1kg\", 0, 92, \"#1d4ed8\", 10)\nwrite(\"Q = \" + qw + \" J\", 0, 62, \"#1d4ed8\", 10)\nfill_rect(0, -6, 150, 48, \"#fef3c7\")\nwrite(\"干沙 1kg\", 0, 12, \"#b45309\", 10)\nwrite(\"Q = \" + qs + \" J\", 0, -18, \"#b45309\", 10)\nfill_rect(-160, -60, 320, 20, \"#e2e8f0\")\nfill_rect(-160, -60, qs / 300, 20, \"#f59e0b\")\nwrite(\"干沙吸热条\", -95, -60, \"#b45309\", 9)\nfill_rect(-160, -88, 320, 20, \"#e2e8f0\")\nfill_rect(-160, -88, qw / 300, 20, \"#0ea5e9\")\nwrite(\"水吸热条（长）\", -85, -88, \"#1d4ed8\", 9)\nwrite(\"水升温慢=比热容大=吸热多\", -30, -128, \"#7c3aed\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,98 @@
       "answer": 0,
       "explain": "4200×2×80"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 5,
+        "title": "同样升温 5℃ 各需多少热量（…",
+        "color": "sky",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "水 1kg；Q = 21000 J"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "干沙 1kg；Q = 4600 J"
+          },
+          {
+            "kind": "highlight",
+            "text": "水吸热条（长）"
+          }
+        ]
+      },
+      {
+        "when": 10,
+        "title": "同样升温 10℃ 各需多少热量…",
+        "color": "sky",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "水 1kg；Q = 42000 J"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "干沙 1kg；Q = 9200 J"
+          },
+          {
+            "kind": "highlight",
+            "text": "水吸热条（长）"
+          }
+        ]
+      },
+      {
+        "when": 15,
+        "title": "同样升温 15℃ 各需多少热量…",
+        "color": "sky",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "水 1kg；Q = 63000 J"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "干沙 1kg；Q = 13800 J"
+          },
+          {
+            "kind": "highlight",
+            "text": "水吸热条（长）"
+          }
+        ]
+      },
+      {
+        "when": 20,
+        "title": "同样升温 20℃ 各需多少热量…",
+        "color": "sky",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "水 1kg；Q = 84000 J"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "干沙 1kg；Q = 18400 J"
+          },
+          {
+            "kind": "highlight",
+            "text": "水吸热条（长）"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "ΔT=10 时水需要多少热量？",
+      "同样升温 10℃，沙子需要多少？",
+      "为什么沿海昼夜温差小？"
+    ]
+  }
 }

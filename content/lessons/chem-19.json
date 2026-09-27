@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 能源化学博览馆\ne = 1   # 能源\n\nhide()\nt = \"煤\"\nd = \"古代植物埋地亿年变质而成——黑色金子\"\npros = \"储量大·成本低\"\ncons = \"污染大·不可再生\"\nemo = \"⚫\"\nif e == 2:\n    t = \"石油\"\n    d = \"古代海洋生物变成的混合物——分馏得汽油柴油\"\n    pros = \"用途广·能量高\"\n    cons = \"不可再生·燃烧污染\"\n    emo = \"🛢️\"\nif e == 3:\n    t = \"天然气（甲烷CH₄）\"\n    d = \"最清洁的化石燃料——燃烧只生成CO₂和H₂O\"\n    pros = \"污染小·热值高\"\n    cons = \"不可再生·温室气体\"\n    emo = \"🔥\"\nif e == 4:\n    t = \"氢能源\"\n    d = \"氢气燃烧只生成水——零排放终极清洁能源\"\n    pros = \"清洁·可再生（电解水制取）\"\n    cons = \"储运困难·成本高\"\n    emo = \"💧\"\nfill_rect(0, 130, 360, 30, \"#16a34a\")\nwrite(emo + \" \" + t, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 360, 42, \"#f0fdf4\")\nwrite(d, 0, 76, \"#166534\", 10)\nfill_rect(-90, 12, 150, 36, \"#dcfce7\")\nwrite(\"优点：\" + pros, -90, 12, \"#16a34a\", 9)\nfill_rect(90, 12, 150, 36, \"#fef2f2\")\nwrite(\"缺点：\" + cons, 90, 12, \"#dc2626\", 9)\n",
   "celebrate": "新知识到手！",
   "id": "chem-19",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "e=1 煤是怎么形成的？",
-      "e=4 氢能源为什么最清洁？",
-      "酸雨是什么造成的？"
-    ],
-    "code": "# 能源化学博览馆\ne = 1   # 能源\n\nhide()\nt = \"煤\"\nd = \"古代植物埋地亿年变质而成——黑色金子\"\npros = \"储量大·成本低\"\ncons = \"污染大·不可再生\"\nemo = \"⚫\"\nif e == 2:\n    t = \"石油\"\n    d = \"古代海洋生物变成的混合物——分馏得汽油柴油\"\n    pros = \"用途广·能量高\"\n    cons = \"不可再生·燃烧污染\"\n    emo = \"🛢️\"\nif e == 3:\n    t = \"天然气（甲烷CH₄）\"\n    d = \"最清洁的化石燃料——燃烧只生成CO₂和H₂O\"\n    pros = \"污染小·热值高\"\n    cons = \"不可再生·温室气体\"\n    emo = \"🔥\"\nif e == 4:\n    t = \"氢能源\"\n    d = \"氢气燃烧只生成水——零排放终极清洁能源\"\n    pros = \"清洁·可再生（电解水制取）\"\n    cons = \"储运困难·成本高\"\n    emo = \"💧\"\nfill_rect(0, 130, 360, 30, \"#16a34a\")\nwrite(emo + \" \" + t, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 360, 42, \"#f0fdf4\")\nwrite(d, 0, 76, \"#166534\", 10)\nfill_rect(-90, 12, 150, 36, \"#dcfce7\")\nwrite(\"优点：\" + pros, -90, 12, \"#16a34a\", 9)\nfill_rect(90, 12, 150, 36, \"#fef2f2\")\nwrite(\"缺点：\" + cons, 90, 12, \"#dc2626\", 9)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,110 @@
       "answer": 0,
       "explain": "净零排放"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "⚫ 煤",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "古代植物埋地亿年变质而成——黑色金子"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "优点",
+            "text": "储量大·成本低"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "缺点",
+            "text": "污染大·不可再生"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "🛢️ 石油",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "古代海洋生物变成的混合物——分馏得汽油柴油"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "优点",
+            "text": "用途广·能量高"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "缺点",
+            "text": "不可再生·燃烧污染"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "🔥 天然气（甲烷CH₄）",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "最清洁的化石燃料——燃烧只生成CO₂和H₂O"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "优点",
+            "text": "污染小·热值高"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "缺点",
+            "text": "不可再生·温室气体"
+          }
+        ]
+      },
+      {
+        "when": 4,
+        "title": "💧 氢能源",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "氢气燃烧只生成水——零排放终极清洁能源"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "优点",
+            "text": "清洁·可再生（电解水制取）"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "缺点",
+            "text": "储运困难·成本高"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "煤是怎么形成的？",
+      "氢能源为什么最清洁？",
+      "酸雨是什么造成的？"
+    ]
+  }
 }

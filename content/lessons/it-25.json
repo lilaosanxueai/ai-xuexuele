@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 文字加工厂\nop = 1   # 1拼接 2长度 3查找替换\n\nhide()\nt = \"拼接：把两段文字连起来\"\nex = \"信息 + 科技 = 信息科技\"\nrule = \"加号 + 把字符串首尾相连\"\ncol = \"#2563eb\"\nif op == 2:\n    t = \"长度：数字符的个数\"\n    ex = \"你好世界 的长度 = 4\"\n    rule = \"每个汉字·字母·数字·标点都算1个\"\n    col = \"#16a34a\"\nif op == 3:\n    t = \"查找与替换：改文章的利器\"\n    ex = \"把 我 替换成 我们\"\n    rule = \"先找到位置，再换掉内容\"\n    col = \"#7c3aed\"\nfill_rect(0, 130, 340, 30, col)\nwrite(t, 0, 130, \"#fff\", 12)\nfill_rect(0, 66, 320, 64, \"#f8fafc\")\nwrite(ex, 0, 66, \"#334155\", 13)\nfill_rect(0, -8, 320, 52, \"#fef3c7\")\nwrite(rule, 0, -8, \"#b45309\", 11)\nwrite(\"字符串 = 被引号括起来的一串文字\", -20, -70, \"#64748b\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "it-25",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "op=1 拼接的顺序影响结果吗？",
-      "op=2 「你好」的长度是多少？标点算吗？",
-      "生活里哪些软件在拼接字符串？"
-    ],
-    "code": "# 文字加工厂\nop = 1   # 1拼接 2长度 3查找替换\n\nhide()\nt = \"拼接：把两段文字连起来\"\nex = \"信息 + 科技 = 信息科技\"\nrule = \"加号 + 把字符串首尾相连\"\ncol = \"#2563eb\"\nif op == 2:\n    t = \"长度：数字符的个数\"\n    ex = \"你好世界 的长度 = 4\"\n    rule = \"每个汉字·字母·数字·标点都算1个\"\n    col = \"#16a34a\"\nif op == 3:\n    t = \"查找与替换：改文章的利器\"\n    ex = \"把 我 替换成 我们\"\n    rule = \"先找到位置，再换掉内容\"\n    col = \"#7c3aed\"\nfill_rect(0, 130, 340, 30, col)\nwrite(t, 0, 130, \"#fff\", 12)\nfill_rect(0, 66, 320, 64, \"#f8fafc\")\nwrite(ex, 0, 66, \"#334155\", 13)\nfill_rect(0, -8, 320, 52, \"#fef3c7\")\nwrite(rule, 0, -8, \"#b45309\", 11)\nwrite(\"字符串 = 被引号括起来的一串文字\", -20, -70, \"#64748b\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,80 @@
       "answer": 0,
       "explain": "查找操作"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "拼接",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "信息 + 科技 = 信息科技"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "加号 + 把字符串首尾相连"
+          },
+          {
+            "kind": "highlight",
+            "text": "字符串 = 被引号括起来的一串文字"
+          }
+        ],
+        "subtitle": "把两段文字连起来"
+      },
+      {
+        "when": 2,
+        "title": "长度",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "你好世界 的长度 = 4"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "每个汉字·字母·数字·标点都算1个"
+          },
+          {
+            "kind": "highlight",
+            "text": "字符串 = 被引号括起来的一串文字"
+          }
+        ],
+        "subtitle": "数字符的个数"
+      },
+      {
+        "when": 3,
+        "title": "查找与替换",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "把 我 替换成 我们"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "先找到位置，再换掉内容"
+          },
+          {
+            "kind": "highlight",
+            "text": "字符串 = 被引号括起来的一串文字"
+          }
+        ],
+        "subtitle": "改文章的利器"
+      }
+    ],
+    "explore": [
+      "拼接的顺序影响结果吗？",
+      "「你好」的长度是多少？标点算吗？",
+      "生活里哪些软件在拼接字符串？"
+    ]
+  }
 }

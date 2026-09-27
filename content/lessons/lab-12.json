@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 家庭值日表设计台\nwd = 1   # 星期几\n\nhide()\nnames = \"周一\"\nt = \"周一：擦桌摆碗 + 倒垃圾（约 15 分钟）\"\nwho = \"我\"\nif wd == 2:\n    names = \"周二\"\n    t = \"周二：洗碗擦灶 + 收厨房（约 20 分钟）\"\n    who = \"爸爸\"\nif wd == 3:\n    names = \"周三\"\n    t = \"周三：扫地拖地 + 收客厅（约 25 分钟）\"\n    who = \"妈妈\"\nif wd == 4:\n    names = \"周四\"\n    t = \"周四：洗衣晾晒 + 叠衣入柜（约 20 分钟）\"\n    who = \"我\"\nif wd == 5:\n    names = \"周五\"\n    t = \"周五：倒垃圾 + 整理玄关鞋柜（约 10 分钟）\"\n    who = \"爸爸\"\nif wd == 6:\n    names = \"周六\"\n    t = \"周六：换床单 + 全屋除尘 + 采购（约 60 分钟，全家）\"\n    who = \"全家总动员\"\nif wd == 7:\n    names = \"周日\"\n    t = \"周日：做一顿饭 + 复盘调整下周表（约 40 分钟）\"\n    who = \"我和妈妈\"\nfill_rect(0, 130, 340, 30, \"#16a34a\")\nwrite(names + \" · 主责：\" + who, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 360, 44, \"#f1f5f9\")\nwrite(t, 0, 76, \"#0f172a\", 11)\ni = 1\nwhile i < 8:\n    x = -150 + (i - 1) * 50\n    if i == wd:\n        fill_rect(x, -30, 42, 40, \"#16a34a\")\n        write(\"今\" + i, x, -30, \"#fff\", 10)\n    if i != wd:\n        fill_rect(x, -30, 42, 40, \"#e2e8f0\")\n        write(\"周\" + i, x, -30, \"#64748b\", 9)\n    i = i + 1\nwrite(\"三原则：任务均衡 · 大活放周末 · 每周轮换复盘\", -20, -80, \"#dc2626\", 11)\nwrite(\"家务是全家的事，不是妈妈一个人的事\", -20, -105, \"#7c3aed\", 11)\n",
   "celebrate": "新知识到手！",
   "id": "lab-12",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "每天的家务量是怎么均衡的？",
-      "为什么要把耗时任务放周末？",
-      "轮换制比固定制好在哪？"
-    ],
-    "code": "# 家庭值日表设计台\nwd = 1   # 星期几\n\nhide()\nnames = \"周一\"\nt = \"周一：擦桌摆碗 + 倒垃圾（约 15 分钟）\"\nwho = \"我\"\nif wd == 2:\n    names = \"周二\"\n    t = \"周二：洗碗擦灶 + 收厨房（约 20 分钟）\"\n    who = \"爸爸\"\nif wd == 3:\n    names = \"周三\"\n    t = \"周三：扫地拖地 + 收客厅（约 25 分钟）\"\n    who = \"妈妈\"\nif wd == 4:\n    names = \"周四\"\n    t = \"周四：洗衣晾晒 + 叠衣入柜（约 20 分钟）\"\n    who = \"我\"\nif wd == 5:\n    names = \"周五\"\n    t = \"周五：倒垃圾 + 整理玄关鞋柜（约 10 分钟）\"\n    who = \"爸爸\"\nif wd == 6:\n    names = \"周六\"\n    t = \"周六：换床单 + 全屋除尘 + 采购（约 60 分钟，全家）\"\n    who = \"全家总动员\"\nif wd == 7:\n    names = \"周日\"\n    t = \"周日：做一顿饭 + 复盘调整下周表（约 40 分钟）\"\n    who = \"我和妈妈\"\nfill_rect(0, 130, 340, 30, \"#16a34a\")\nwrite(names + \" · 主责：\" + who, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 360, 44, \"#f1f5f9\")\nwrite(t, 0, 76, \"#0f172a\", 11)\ni = 1\nwhile i < 8:\n    x = -150 + (i - 1) * 50\n    if i == wd:\n        fill_rect(x, -30, 42, 40, \"#16a34a\")\n        write(\"今\" + i, x, -30, \"#fff\", 10)\n    if i != wd:\n        fill_rect(x, -30, 42, 40, \"#e2e8f0\")\n        write(\"周\" + i, x, -30, \"#64748b\", 9)\n    i = i + 1\nwrite(\"三原则：任务均衡 · 大活放周末 · 每周轮换复盘\", -20, -80, \"#dc2626\", 11)\nwrite(\"家务是全家的事，不是妈妈一个人的事\", -20, -105, \"#7c3aed\", 11)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,140 @@
       "answer": 0,
       "explain": "共同承担"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "周一 · 主责",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "周一",
+            "text": "擦桌摆碗 + 倒垃圾（约 15 分钟）"
+          },
+          {
+            "kind": "highlight",
+            "text": "三原则：任务均衡 · 大活放周末 · 每周轮换复盘"
+          }
+        ],
+        "subtitle": "我"
+      },
+      {
+        "when": 2,
+        "title": "周二 · 主责",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "周二",
+            "text": "洗碗擦灶 + 收厨房（约 20 分钟）"
+          },
+          {
+            "kind": "highlight",
+            "text": "三原则：任务均衡 · 大活放周末 · 每周轮换复盘"
+          }
+        ],
+        "subtitle": "爸爸"
+      },
+      {
+        "when": 3,
+        "title": "周三 · 主责",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "周三",
+            "text": "扫地拖地 + 收客厅（约 25 分钟）"
+          },
+          {
+            "kind": "highlight",
+            "text": "三原则：任务均衡 · 大活放周末 · 每周轮换复盘"
+          }
+        ],
+        "subtitle": "妈妈"
+      },
+      {
+        "when": 4,
+        "title": "周四 · 主责",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "周四",
+            "text": "洗衣晾晒 + 叠衣入柜（约 20 分钟）"
+          },
+          {
+            "kind": "highlight",
+            "text": "三原则：任务均衡 · 大活放周末 · 每周轮换复盘"
+          }
+        ],
+        "subtitle": "我"
+      },
+      {
+        "when": 5,
+        "title": "周五 · 主责",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "周五",
+            "text": "倒垃圾 + 整理玄关鞋柜（约 10 分钟）"
+          },
+          {
+            "kind": "highlight",
+            "text": "三原则：任务均衡 · 大活放周末 · 每周轮换复盘"
+          }
+        ],
+        "subtitle": "爸爸"
+      },
+      {
+        "when": 6,
+        "title": "周六 · 主责",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "周六",
+            "text": "换床单 + 全屋除尘 + 采购（约 60 分钟，全家）"
+          },
+          {
+            "kind": "highlight",
+            "text": "三原则：任务均衡 · 大活放周末 · 每周轮换复盘"
+          }
+        ],
+        "subtitle": "全家总动员"
+      },
+      {
+        "when": 7,
+        "title": "周日 · 主责",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "周日",
+            "text": "做一顿饭 + 复盘调整下周表（约 40 分钟）"
+          },
+          {
+            "kind": "highlight",
+            "text": "三原则：任务均衡 · 大活放周末 · 每周轮换复盘"
+          }
+        ],
+        "subtitle": "我和妈妈"
+      }
+    ],
+    "explore": [
+      "每天的家务量是怎么均衡的？",
+      "为什么要把耗时任务放周末？",
+      "轮换制比固定制好在哪？"
+    ]
+  }
 }

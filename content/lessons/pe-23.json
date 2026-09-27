@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 立定跳远动作分解台\nphase = 1   # 1预摆 2起跳 3腾空 4落地\n\nhide()\nt = \"① 预摆\"\nkey = \"两脚开立与肩宽·双臂前后摆·重心降低\"\nwrong2 = \"常见错误：直腿站·不摆臂\"\ncol = \"#0ea5e9\"\nif phase == 2:\n    t = \"② 起跳\"\n    key = \"两脚用力蹬地·双臂快速上摆·向前上方跳出\"\n    wrong2 = \"常见错误：只蹬不摆·方向太平\"\n    col = \"#f97316\"\nif phase == 3:\n    t = \"③ 腾空\"\n    key = \"收腹举腿·身体充分伸展像一张弓\"\n    wrong2 = \"常见错误：腿垂着不放\"\n    col = \"#16a34a\"\nif phase == 4:\n    t = \"④ 落地\"\n    key = \"脚跟先着地·屈膝缓冲·双臂前伸保平衡\"\n    wrong2 = \"常见错误：直腿硬落地伤膝盖\"\n    col = \"#7c3aed\"\nfill_rect(0, 130, 340, 30, col)\nwrite(t + \" —— 口诀：一摆二蹬三收四稳\", 0, 130, \"#fff\", 11)\nfill_rect(0, 70, 320, 50, \"#f8fafc\")\nwrite(key, 0, 70, \"#334155\", 11)\nfill_rect(0, 4, 320, 50, \"#fef2f2\")\nwrite(wrong2, 0, 4, \"#991b1b\", 10)\nwrite(\"动作做完整比拼尽全力更远\", 0, -62, \"#64748b\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "pe-23",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "phase=1 预摆为什么要摆臂？",
-      "phase=2 蹬地的方向是哪里？",
-      "phase=4 落地不缓冲会怎样？"
-    ],
-    "code": "# 立定跳远动作分解台\nphase = 1   # 1预摆 2起跳 3腾空 4落地\n\nhide()\nt = \"① 预摆\"\nkey = \"两脚开立与肩宽·双臂前后摆·重心降低\"\nwrong2 = \"常见错误：直腿站·不摆臂\"\ncol = \"#0ea5e9\"\nif phase == 2:\n    t = \"② 起跳\"\n    key = \"两脚用力蹬地·双臂快速上摆·向前上方跳出\"\n    wrong2 = \"常见错误：只蹬不摆·方向太平\"\n    col = \"#f97316\"\nif phase == 3:\n    t = \"③ 腾空\"\n    key = \"收腹举腿·身体充分伸展像一张弓\"\n    wrong2 = \"常见错误：腿垂着不放\"\n    col = \"#16a34a\"\nif phase == 4:\n    t = \"④ 落地\"\n    key = \"脚跟先着地·屈膝缓冲·双臂前伸保平衡\"\n    wrong2 = \"常见错误：直腿硬落地伤膝盖\"\n    col = \"#7c3aed\"\nfill_rect(0, 130, 340, 30, col)\nwrite(t + \" —— 口诀：一摆二蹬三收四稳\", 0, 130, \"#fff\", 11)\nfill_rect(0, 70, 320, 50, \"#f8fafc\")\nwrite(key, 0, 70, \"#334155\", 11)\nfill_rect(0, 4, 320, 50, \"#fef2f2\")\nwrite(wrong2, 0, 4, \"#991b1b\", 10)\nwrite(\"动作做完整比拼尽全力更远\", 0, -62, \"#64748b\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,106 @@
       "answer": 0,
       "explain": "屈膝蓄力"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "① 预摆 —— 口诀",
+        "color": "sky",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "两脚开立与肩宽·双臂前后摆·重心降低"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "常见错误",
+            "text": "直腿站·不摆臂"
+          },
+          {
+            "kind": "highlight",
+            "text": "动作做完整比拼尽全力更远"
+          }
+        ],
+        "subtitle": "一摆二蹬三收四稳"
+      },
+      {
+        "when": 2,
+        "title": "② 起跳 —— 口诀",
+        "color": "orange",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "两脚用力蹬地·双臂快速上摆·向前上方跳出"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "常见错误",
+            "text": "只蹬不摆·方向太平"
+          },
+          {
+            "kind": "highlight",
+            "text": "动作做完整比拼尽全力更远"
+          }
+        ],
+        "subtitle": "一摆二蹬三收四稳"
+      },
+      {
+        "when": 3,
+        "title": "③ 腾空 —— 口诀",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "收腹举腿·身体充分伸展像一张弓"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "常见错误",
+            "text": "腿垂着不放"
+          },
+          {
+            "kind": "highlight",
+            "text": "动作做完整比拼尽全力更远"
+          }
+        ],
+        "subtitle": "一摆二蹬三收四稳"
+      },
+      {
+        "when": 4,
+        "title": "④ 落地 —— 口诀",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "脚跟先着地·屈膝缓冲·双臂前伸保平衡"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "常见错误",
+            "text": "直腿硬落地伤膝盖"
+          },
+          {
+            "kind": "highlight",
+            "text": "动作做完整比拼尽全力更远"
+          }
+        ],
+        "subtitle": "一摆二蹬三收四稳"
+      }
+    ],
+    "explore": [
+      "预摆为什么要摆臂？",
+      "蹬地的方向是哪里？",
+      "落地不缓冲会怎样？"
+    ]
+  }
 }

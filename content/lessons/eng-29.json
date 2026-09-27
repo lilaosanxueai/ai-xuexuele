@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 七选五拼图台\nst = 1   # 步骤\n\nhide()\nt = \"第一步：读选项，找指纹\"\nd = \"圈出代词（this/they）、连词（but/so）、疑问句/祈使句——这些是选项的身份证\"\ntip = \"代词必有先行词：找原文里能被 it/they 指代的名字\"\nif st == 2:\n    t = \"第二步：读空格前后，定形状\"\n    d = \"段首空→看尾句主题；段中空→前后句逻辑；段尾空→总结或转折\"\n    tip = \"空前有 but → 选含转折的项\"\nif st == 3:\n    t = \"第三步：回填验证\"\n    d = \"全部填完后连读一遍：代词有着落？逻辑通顺？话题一致？\"\n    tip = \"两空互相纠缠时：先定最有把握的那个\"\nfill_rect(0, 130, 360, 30, \"#1d4ed8\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 360, 42, \"#f1f5f9\")\nwrite(d, 0, 76, \"#0f172a\", 10)\nfill_rect(0, 18, 360, 52, \"#fef3c7\")\nwrite(\"线索：\" + tip, 0, 18, \"#b45309\", 10)\ni = 0\nwhile i < 5:\n    x = -130 + i * 66\n    col = \"#e2e8f0\"\n    if i == 2:\n        col = \"#1d4ed8\"\n    if st == 3:\n        col = \"#16a34a\"\n    fill_rect(x, -50, 56, 42, col)\n    if i == 2:\n        write(\"?\", x, -50, \"#fff\", 16)\n    if i != 2:\n        write(i + 1, x, -50, \"#64748b\", 11)\n    i = i + 1\nwrite(\"口诀：先识指纹，再看形状，最后回填验证\", -20, -105, \"#dc2626\", 11)\n",
   "celebrate": "新知识到手！",
   "id": "eng-29",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "st=1 为什么先读选项再读原文？",
-      "空格在段首段中段尾各有什么规律？",
-      "代词 this/they 指什么线索？"
-    ],
-    "code": "# 七选五拼图台\nst = 1   # 步骤\n\nhide()\nt = \"第一步：读选项，找指纹\"\nd = \"圈出代词（this/they）、连词（but/so）、疑问句/祈使句——这些是选项的身份证\"\ntip = \"代词必有先行词：找原文里能被 it/they 指代的名字\"\nif st == 2:\n    t = \"第二步：读空格前后，定形状\"\n    d = \"段首空→看尾句主题；段中空→前后句逻辑；段尾空→总结或转折\"\n    tip = \"空前有 but → 选含转折的项\"\nif st == 3:\n    t = \"第三步：回填验证\"\n    d = \"全部填完后连读一遍：代词有着落？逻辑通顺？话题一致？\"\n    tip = \"两空互相纠缠时：先定最有把握的那个\"\nfill_rect(0, 130, 360, 30, \"#1d4ed8\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 360, 42, \"#f1f5f9\")\nwrite(d, 0, 76, \"#0f172a\", 10)\nfill_rect(0, 18, 360, 52, \"#fef3c7\")\nwrite(\"线索：\" + tip, 0, 18, \"#b45309\", 10)\ni = 0\nwhile i < 5:\n    x = -130 + i * 66\n    col = \"#e2e8f0\"\n    if i == 2:\n        col = \"#1d4ed8\"\n    if st == 3:\n        col = \"#16a34a\"\n    fill_rect(x, -50, 56, 42, col)\n    if i == 2:\n        write(\"?\", x, -50, \"#fff\", 16)\n    if i != 2:\n        write(i + 1, x, -50, \"#64748b\", 11)\n    i = i + 1\nwrite(\"口诀：先识指纹，再看形状，最后回填验证\", -20, -105, \"#dc2626\", 11)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,82 @@
       "answer": 0,
       "explain": "三查回填"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "第一步",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "圈出代词（this/they）、连词（but/so）、疑问句/祈使句——这些是选项的身份证"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "线索",
+            "text": "代词必有先行词：找原文里能被 it/they 指代的名字"
+          },
+          {
+            "kind": "highlight",
+            "text": "口诀：先识指纹，再看形状，最后回填验证"
+          }
+        ],
+        "subtitle": "读选项，找指纹"
+      },
+      {
+        "when": 2,
+        "title": "第二步",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "段首空→看尾句主题；段中空→前后句逻辑；段尾空→总结或转折"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "线索",
+            "text": "空前有 but → 选含转折的项"
+          },
+          {
+            "kind": "highlight",
+            "text": "口诀：先识指纹，再看形状，最后回填验证"
+          }
+        ],
+        "subtitle": "读空格前后，定形状"
+      },
+      {
+        "when": 3,
+        "title": "第三步：回填验证",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "全部填完后连读一遍：代词有着落？逻辑通顺？话题一致？"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "线索",
+            "text": "两空互相纠缠时：先定最有把握的那个"
+          },
+          {
+            "kind": "highlight",
+            "text": "口诀：先识指纹，再看形状，最后回填验证"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "为什么先读选项再读原文？",
+      "空格在段首段中段尾各有什么规律？",
+      "代词 this/they 指什么线索？"
+    ]
+  }
 }

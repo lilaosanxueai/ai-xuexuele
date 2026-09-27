@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 水的三态变化变形器\nchg = 1   # 1熔化 2凝固 3汽化 4液化 5升华 6凝华\n\nhide()\nt = \"熔化：冰 → 水\"\nd = \"冰吸热变成水（0℃ 开始熔化）\"\nheat = \"吸热\"\ncol = \"#f97316\"\nif chg == 2:\n    t = \"凝固：水 → 冰\"\n    d = \"水放热结成冰（0℃ 开始凝固）\"\n    heat = \"放热\"\n    col = \"#0ea5e9\"\nif chg == 3:\n    t = \"汽化：水 → 水蒸气\"\n    d = \"蒸发和沸腾都是汽化（吸热）\"\n    heat = \"吸热\"\n    col = \"#f59e0b\"\nif chg == 4:\n    t = \"液化：水蒸气 → 小水珠\"\n    d = \"雾·露·白气都是液化（放热）\"\n    heat = \"放热\"\n    col = \"#2563eb\"\nif chg == 5:\n    t = \"升华：冰 → 水蒸气（不经过水）\"\n    d = \"冬天冻衣服慢慢变干（吸热）\"\n    heat = \"吸热\"\n    col = \"#dc2626\"\nif chg == 6:\n    t = \"凝华：水蒸气 → 冰（不经过水）\"\n    d = \"霜·雪·窗上冰花都是凝华（放热）\"\n    heat = \"放热\"\n    col = \"#7c3aed\"\nfill_rect(0, 130, 340, 30, col)\nwrite(t, 0, 130, \"#fff\", 12)\nfill_rect(0, 66, 320, 54, \"#f8fafc\")\nwrite(d, 0, 66, \"#334155\", 10)\nfill_rect(0, -16, 320, 50, \"#fff7ed\")\nwrite(\"热量交换：\" + heat + \"（热量决定方向）\", 0, -16, \"#92400e\", 11)\nwrite(\"固态-液态-气态 循环不息\", -20, -76, \"#64748b\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "sci-33",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "chg=1 和 chg=2 是一对什么变化？",
-      "哪几种变化吸热？哪几种放热？",
-      "冬天窗户上的冰花是哪种变化？"
-    ],
-    "code": "# 水的三态变化变形器\nchg = 1   # 1熔化 2凝固 3汽化 4液化 5升华 6凝华\n\nhide()\nt = \"熔化：冰 → 水\"\nd = \"冰吸热变成水（0℃ 开始熔化）\"\nheat = \"吸热\"\ncol = \"#f97316\"\nif chg == 2:\n    t = \"凝固：水 → 冰\"\n    d = \"水放热结成冰（0℃ 开始凝固）\"\n    heat = \"放热\"\n    col = \"#0ea5e9\"\nif chg == 3:\n    t = \"汽化：水 → 水蒸气\"\n    d = \"蒸发和沸腾都是汽化（吸热）\"\n    heat = \"吸热\"\n    col = \"#f59e0b\"\nif chg == 4:\n    t = \"液化：水蒸气 → 小水珠\"\n    d = \"雾·露·白气都是液化（放热）\"\n    heat = \"放热\"\n    col = \"#2563eb\"\nif chg == 5:\n    t = \"升华：冰 → 水蒸气（不经过水）\"\n    d = \"冬天冻衣服慢慢变干（吸热）\"\n    heat = \"吸热\"\n    col = \"#dc2626\"\nif chg == 6:\n    t = \"凝华：水蒸气 → 冰（不经过水）\"\n    d = \"霜·雪·窗上冰花都是凝华（放热）\"\n    heat = \"放热\"\n    col = \"#7c3aed\"\nfill_rect(0, 130, 340, 30, col)\nwrite(t, 0, 130, \"#fff\", 12)\nfill_rect(0, 66, 320, 54, \"#f8fafc\")\nwrite(d, 0, 66, \"#334155\", 10)\nfill_rect(0, -16, 320, 50, \"#fff7ed\")\nwrite(\"热量交换：\" + heat + \"（热量决定方向）\", 0, -16, \"#92400e\", 11)\nwrite(\"固态-液态-气态 循环不息\", -20, -76, \"#64748b\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,150 @@
       "answer": 0,
       "explain": "冰直接变气"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "熔化：冰 → 水",
+        "color": "orange",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "冰吸热变成水（0℃ 开始熔化）"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "热量交换",
+            "text": "吸热（热量决定方向）"
+          },
+          {
+            "kind": "highlight",
+            "text": "固态-液态-气态 循环不息"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "凝固：水 → 冰",
+        "color": "sky",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "水放热结成冰（0℃ 开始凝固）"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "热量交换",
+            "text": "放热（热量决定方向）"
+          },
+          {
+            "kind": "highlight",
+            "text": "固态-液态-气态 循环不息"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "汽化",
+        "color": "amber",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "蒸发和沸腾都是汽化（吸热）"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "热量交换",
+            "text": "吸热（热量决定方向）"
+          },
+          {
+            "kind": "highlight",
+            "text": "固态-液态-气态 循环不息"
+          }
+        ],
+        "subtitle": "水 → 水蒸气"
+      },
+      {
+        "when": 4,
+        "title": "液化",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "雾·露·白气都是液化（放热）"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "热量交换",
+            "text": "放热（热量决定方向）"
+          },
+          {
+            "kind": "highlight",
+            "text": "固态-液态-气态 循环不息"
+          }
+        ],
+        "subtitle": "水蒸气 → 小水珠"
+      },
+      {
+        "when": 5,
+        "title": "升华",
+        "color": "red",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "冬天冻衣服慢慢变干（吸热）"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "热量交换",
+            "text": "吸热（热量决定方向）"
+          },
+          {
+            "kind": "highlight",
+            "text": "固态-液态-气态 循环不息"
+          }
+        ],
+        "subtitle": "冰 → 水蒸气（不经过水）"
+      },
+      {
+        "when": 6,
+        "title": "凝华",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "霜·雪·窗上冰花都是凝华（放热）"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "热量交换",
+            "text": "放热（热量决定方向）"
+          },
+          {
+            "kind": "highlight",
+            "text": "固态-液态-气态 循环不息"
+          }
+        ],
+        "subtitle": "水蒸气 → 冰（不经过水）"
+      }
+    ],
+    "explore": [
+      "和 chg=2 是一对什么变化？",
+      "哪几种变化吸热？哪几种放热？",
+      "冬天窗户上的冰花是哪种变化？"
+    ]
+  }
 }

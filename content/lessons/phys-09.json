@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 电磁波谱巡航器\nband = 1   # 1无线电 2微波 3红外 4可见 5紫外 6X/γ\n\nhide()\nname2 = \"无线电波\"\nfreq = \"频率 < 3×10⁹ Hz\"\nuse2 = \"广播通信 GPS WiFi\"\ncol = \"#475569\"\nif band == 2:\n    name2 = \"微波\"\n    freq = \"3×10⁹ ~ 3×10¹¹\"\n    use2 = \"微波炉 雷达 5G\"\n    col = \"#2563eb\"\nif band == 3:\n    name2 = \"红外线\"\n    freq = \"3×10¹¹ ~ 4×10¹⁴\"\n    use2 = \"遥控器 夜视仪 保温\"\n    col = \"#dc2626\"\nif band == 4:\n    name2 = \"可见光\"\n    freq = \"4×10¹⁴ ~ 8×10¹⁴\"\n    use2 = \"人眼视觉 光纤通信\"\n    col = \"#7c3aed\"\nif band == 5:\n    name2 = \"紫外线\"\n    freq = \"8×10¹⁴ ~ 3×10¹⁶\"\n    use2 = \"消毒 验钞 日光灯\"\n    col = \"#8b5cf6\"\nif band == 6:\n    name2 = \"X射线·γ射线\"\n    freq = \"> 3×10¹⁶\"\n    use2 = \"医学透视 CT 放射治疗\"\n    col = \"#0f172a\"\nfill_rect(0, 130, 360, 30, col)\nwrite(name2 + \"（\" + freq + \" Hz）\", 0, 130, \"#fff\", 10)\nfill_rect(0, 78, 360, 38, \"#f1f5f9\")\nwrite(\"应用：\" + use2, 0, 78, \"#0f172a\", 11)\ni = 0\nwhile i < 6:\n    x = -150 + i * 60\n    if i + 1 == band:\n        fill_rect(x, -30, 50, 44, col)\n        write(i + 1, x, -30, \"#fff\", 13)\n    if i + 1 != band:\n        fill_rect(x, -30, 50, 44, \"#e2e8f0\")\n        write(i + 1, x, -30, \"#64748b\", 10)\n    i = i + 1\nwrite(\"频率↑ → 能量↑ → 穿透力↑（γ 射线最强）\", -15, -80, \"#dc2626\", 11)\nwrite(\"无线电 ← 可见光 → γ 射线\", -20, -105, \"#7c3aed\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "phys-09",
   "island": "physics",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "band=3 可见光两侧是什么？",
-      "哪种电磁波穿透力最强？",
-      "微波炉用什么波段？"
-    ],
-    "code": "# 电磁波谱巡航器\nband = 1   # 1无线电 2微波 3红外 4可见 5紫外 6X/γ\n\nhide()\nname2 = \"无线电波\"\nfreq = \"频率 < 3×10⁹ Hz\"\nuse2 = \"广播通信 GPS WiFi\"\ncol = \"#475569\"\nif band == 2:\n    name2 = \"微波\"\n    freq = \"3×10⁹ ~ 3×10¹¹\"\n    use2 = \"微波炉 雷达 5G\"\n    col = \"#2563eb\"\nif band == 3:\n    name2 = \"红外线\"\n    freq = \"3×10¹¹ ~ 4×10¹⁴\"\n    use2 = \"遥控器 夜视仪 保温\"\n    col = \"#dc2626\"\nif band == 4:\n    name2 = \"可见光\"\n    freq = \"4×10¹⁴ ~ 8×10¹⁴\"\n    use2 = \"人眼视觉 光纤通信\"\n    col = \"#7c3aed\"\nif band == 5:\n    name2 = \"紫外线\"\n    freq = \"8×10¹⁴ ~ 3×10¹⁶\"\n    use2 = \"消毒 验钞 日光灯\"\n    col = \"#8b5cf6\"\nif band == 6:\n    name2 = \"X射线·γ射线\"\n    freq = \"> 3×10¹⁶\"\n    use2 = \"医学透视 CT 放射治疗\"\n    col = \"#0f172a\"\nfill_rect(0, 130, 360, 30, col)\nwrite(name2 + \"（\" + freq + \" Hz）\", 0, 130, \"#fff\", 10)\nfill_rect(0, 78, 360, 38, \"#f1f5f9\")\nwrite(\"应用：\" + use2, 0, 78, \"#0f172a\", 11)\ni = 0\nwhile i < 6:\n    x = -150 + i * 60\n    if i + 1 == band:\n        fill_rect(x, -30, 50, 44, col)\n        write(i + 1, x, -30, \"#fff\", 13)\n    if i + 1 != band:\n        fill_rect(x, -30, 50, 44, \"#e2e8f0\")\n        write(i + 1, x, -30, \"#64748b\", 10)\n    i = i + 1\nwrite(\"频率↑ → 能量↑ → 穿透力↑（γ 射线最强）\", -15, -80, \"#dc2626\", 11)\nwrite(\"无线电 ← 可见光 → γ 射线\", -20, -105, \"#7c3aed\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,116 @@
       "answer": 0,
       "explain": "热辐射"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "无线电波（频率 < 3×10⁹…",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "应用",
+            "text": "广播通信 GPS WiFi"
+          },
+          {
+            "kind": "highlight",
+            "text": "频率↑ → 能量↑ → 穿透力↑（γ 射线最强）"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "微波（3×10⁹ ~ 3×10…",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "应用",
+            "text": "微波炉 雷达 5G"
+          },
+          {
+            "kind": "highlight",
+            "text": "频率↑ → 能量↑ → 穿透力↑（γ 射线最强）"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "红外线（3×10¹¹ ~ 4×…",
+        "color": "red",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "应用",
+            "text": "遥控器 夜视仪 保温"
+          },
+          {
+            "kind": "highlight",
+            "text": "频率↑ → 能量↑ → 穿透力↑（γ 射线最强）"
+          }
+        ]
+      },
+      {
+        "when": 4,
+        "title": "可见光（4×10¹⁴ ~ 8×…",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "应用",
+            "text": "人眼视觉 光纤通信"
+          },
+          {
+            "kind": "highlight",
+            "text": "频率↑ → 能量↑ → 穿透力↑（γ 射线最强）"
+          }
+        ]
+      },
+      {
+        "when": 5,
+        "title": "紫外线（8×10¹⁴ ~ 3×…",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "应用",
+            "text": "消毒 验钞 日光灯"
+          },
+          {
+            "kind": "highlight",
+            "text": "频率↑ → 能量↑ → 穿透力↑（γ 射线最强）"
+          }
+        ]
+      },
+      {
+        "when": 6,
+        "title": "X射线·γ射线（> 3×10¹…",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "应用",
+            "text": "医学透视 CT 放射治疗"
+          },
+          {
+            "kind": "highlight",
+            "text": "频率↑ → 能量↑ → 穿透力↑（γ 射线最强）"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "可见光两侧是什么？",
+      "哪种电磁波穿透力最强？",
+      "微波炉用什么波段？"
+    ]
+  }
 }

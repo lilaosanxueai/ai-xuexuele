@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 世界音乐观光车\nrg = 1   # 1蒙古草原 2非洲 3西班牙 4美国乡村 5奥地利\n\nhide()\nname = \"蒙古草原\"\nfeat = \"长调：悠长自由，像骑着马望不到边\"\ninst = \"马头琴：琴头雕马头，声音苍茫深情\"\nif rg == 2:\n    name = \"非洲大地\"\n    feat = \"鼓乐：复杂交错的节奏，人人参与\"\n    inst = \"金贝鼓：用手掌击出低中高三种音\"\nif rg == 3:\n    name = \"西班牙\"\n    feat = \"弗拉门戈：热烈如火焰，跺脚拍手都是音乐\"\n    inst = \"响板+吉他：舞者脚下的节奏风暴\"\nif rg == 4:\n    name = \"美国乡村\"\n    feat = \"民谣：讲故事的歌，温暖质朴\"\n    inst = \"班卓琴+口琴：田园风味的琴声\"\nif rg == 5:\n    name = \"奥地利维也纳\"\n    feat = \"古典音乐之都：莫扎特、施特劳斯的故乡\"\n    inst = \"管弦乐+圆舞曲：新年音乐会的蓝色多瑙河\"\nfill_rect(0, 128, 340, 32, \"#7c3aed\")\nwrite(name, 0, 128, \"#fff\", 14)\nfill_rect(0, 78, 360, 42, \"#f1f5f9\")\nwrite(feat, 0, 78, \"#0f172a\", 11)\nfill_rect(0, 24, 360, 46, \"#fef3c7\")\nwrite(inst, 0, 24, \"#b45309\", 11)\nwrite(\"音乐是世界的通用语言\", -30, -30, \"#dc2626\", 12)\nwrite(\"土地什么样，歌就什么样\", -30, -55, \"#0369a1\", 11)\n",
   "celebrate": "新知识到手！",
   "id": "mus-09",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "rg=1 为什么草原民歌又长又自由？",
-      "rg=2 非洲音乐最看重什么？",
-      "你最喜欢哪个大洲的音乐？为什么？"
-    ],
-    "code": "# 世界音乐观光车\nrg = 1   # 1蒙古草原 2非洲 3西班牙 4美国乡村 5奥地利\n\nhide()\nname = \"蒙古草原\"\nfeat = \"长调：悠长自由，像骑着马望不到边\"\ninst = \"马头琴：琴头雕马头，声音苍茫深情\"\nif rg == 2:\n    name = \"非洲大地\"\n    feat = \"鼓乐：复杂交错的节奏，人人参与\"\n    inst = \"金贝鼓：用手掌击出低中高三种音\"\nif rg == 3:\n    name = \"西班牙\"\n    feat = \"弗拉门戈：热烈如火焰，跺脚拍手都是音乐\"\n    inst = \"响板+吉他：舞者脚下的节奏风暴\"\nif rg == 4:\n    name = \"美国乡村\"\n    feat = \"民谣：讲故事的歌，温暖质朴\"\n    inst = \"班卓琴+口琴：田园风味的琴声\"\nif rg == 5:\n    name = \"奥地利维也纳\"\n    feat = \"古典音乐之都：莫扎特、施特劳斯的故乡\"\n    inst = \"管弦乐+圆舞曲：新年音乐会的蓝色多瑙河\"\nfill_rect(0, 128, 340, 32, \"#7c3aed\")\nwrite(name, 0, 128, \"#fff\", 14)\nfill_rect(0, 78, 360, 42, \"#f1f5f9\")\nwrite(feat, 0, 78, \"#0f172a\", 11)\nfill_rect(0, 24, 360, 46, \"#fef3c7\")\nwrite(inst, 0, 24, \"#b45309\", 11)\nwrite(\"音乐是世界的通用语言\", -30, -30, \"#dc2626\", 12)\nwrite(\"土地什么样，歌就什么样\", -30, -55, \"#0369a1\", 11)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,128 @@
       "answer": 0,
       "explain": "文化平等"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "蒙古草原",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "长调",
+            "text": "悠长自由，像骑着马望不到边"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "马头琴",
+            "text": "琴头雕马头，声音苍茫深情"
+          },
+          {
+            "kind": "highlight",
+            "text": "音乐是世界的通用语言"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "非洲大地",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "鼓乐",
+            "text": "复杂交错的节奏，人人参与"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "金贝鼓",
+            "text": "用手掌击出低中高三种音"
+          },
+          {
+            "kind": "highlight",
+            "text": "音乐是世界的通用语言"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "西班牙",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "弗拉门戈",
+            "text": "热烈如火焰，跺脚拍手都是音乐"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "响板+吉他",
+            "text": "舞者脚下的节奏风暴"
+          },
+          {
+            "kind": "highlight",
+            "text": "音乐是世界的通用语言"
+          }
+        ]
+      },
+      {
+        "when": 4,
+        "title": "美国乡村",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "民谣",
+            "text": "讲故事的歌，温暖质朴"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "班卓琴+口琴",
+            "text": "田园风味的琴声"
+          },
+          {
+            "kind": "highlight",
+            "text": "音乐是世界的通用语言"
+          }
+        ]
+      },
+      {
+        "when": 5,
+        "title": "奥地利维也纳",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "古典音乐之都",
+            "text": "莫扎特、施特劳斯的故乡"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "管弦乐+圆舞曲：新年音乐会的蓝色多瑙河"
+          },
+          {
+            "kind": "highlight",
+            "text": "音乐是世界的通用语言"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "为什么草原民歌又长又自由？",
+      "非洲音乐最看重什么？",
+      "你最喜欢哪个大洲的音乐？为什么？"
+    ]
+  }
 }

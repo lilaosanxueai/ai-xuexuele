@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 天气季节观察站\nseason = 1   # 季节\n\nhide()\nt = \"春天 🌸\"\nw = \"晴转多云 12-20°C\"\nd = \"万物复苏：花开了草绿了燕子飞回来了\"\nwear = \"薄外套+长袖\"\nif season == 2:\n    t = \"夏天 ☀️\"\n    w = \"晴 26-35°C 偶有雷阵雨\"\n    d = \"烈日当空：吃西瓜游泳放暑假\"\n    wear = \"短袖短裤防晒帽\"\nif season == 3:\n    t = \"秋天 🍂\"\n    w = \"多云 15-25°C\"\n    d = \"收获季节：叶子黄了果子熟了大雁南飞\"\n    wear = \"长袖外套\"\nif season == 4:\n    t = \"冬天 ❄️\"\n    w = \"晴冷 -5-5°C 可能下雪\"\n    d = \"天寒地冻：下雪堆雪人穿棉袄\"\n    wear = \"棉袄围巾手套\"\nfill_rect(0, 130, 360, 30, \"#f59e0b\")\nwrite(t + \"：\" + w, 0, 130, \"#fff\", 11)\nfill_rect(0, 76, 360, 42, \"#fef3c7\")\nwrite(d, 0, 76, \"#b45309\", 10)\nfill_rect(0, 18, 360, 50, \"#f1f5f9\")\nwrite(\"穿衣：\" + wear, 0, 18, \"#0f172a\", 11)\nemo = \"🌸\"\nif season == 2:\n    emo = \"☀️\"\nif season == 3:\n    emo = \"🍂\"\nif season == 4:\n    emo = \"❄️\"\nwrite(emo, 0, -50, \"#0f172a\", 26)\nwrite(\"☀晴 ☁多云 🌧雨 ⛈雷阵雨 ❄雪 雾🌫\", -20, -95, \"#0369a1\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "geo-23",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "season=1 春天有什么变化？",
-      "season=4 冬天为什么要穿棉袄？",
-      "你知道哪些天气符号？"
-    ],
-    "code": "# 天气季节观察站\nseason = 1   # 季节\n\nhide()\nt = \"春天 🌸\"\nw = \"晴转多云 12-20°C\"\nd = \"万物复苏：花开了草绿了燕子飞回来了\"\nwear = \"薄外套+长袖\"\nif season == 2:\n    t = \"夏天 ☀️\"\n    w = \"晴 26-35°C 偶有雷阵雨\"\n    d = \"烈日当空：吃西瓜游泳放暑假\"\n    wear = \"短袖短裤防晒帽\"\nif season == 3:\n    t = \"秋天 🍂\"\n    w = \"多云 15-25°C\"\n    d = \"收获季节：叶子黄了果子熟了大雁南飞\"\n    wear = \"长袖外套\"\nif season == 4:\n    t = \"冬天 ❄️\"\n    w = \"晴冷 -5-5°C 可能下雪\"\n    d = \"天寒地冻：下雪堆雪人穿棉袄\"\n    wear = \"棉袄围巾手套\"\nfill_rect(0, 130, 360, 30, \"#f59e0b\")\nwrite(t + \"：\" + w, 0, 130, \"#fff\", 11)\nfill_rect(0, 76, 360, 42, \"#fef3c7\")\nwrite(d, 0, 76, \"#b45309\", 10)\nfill_rect(0, 18, 360, 50, \"#f1f5f9\")\nwrite(\"穿衣：\" + wear, 0, 18, \"#0f172a\", 11)\nemo = \"🌸\"\nif season == 2:\n    emo = \"☀️\"\nif season == 3:\n    emo = \"🍂\"\nif season == 4:\n    emo = \"❄️\"\nwrite(emo, 0, -50, \"#0f172a\", 26)\nwrite(\"☀晴 ☁多云 🌧雨 ⛈雷阵雨 ❄雪 雾🌫\", -20, -95, \"#0369a1\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,110 @@
       "answer": 0,
       "explain": "公转+照射角"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "春天 🌸",
+        "color": "amber",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "万物复苏",
+            "text": "花开了草绿了燕子飞回来了"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "穿衣",
+            "text": "薄外套+长袖"
+          },
+          {
+            "kind": "highlight",
+            "text": "☀晴 ☁多云 🌧雨 ⛈雷阵雨 ❄雪 雾🌫"
+          }
+        ],
+        "subtitle": "晴转多云 12-20°C"
+      },
+      {
+        "when": 2,
+        "title": "夏天 ☀️",
+        "color": "amber",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "烈日当空",
+            "text": "吃西瓜游泳放暑假"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "穿衣",
+            "text": "短袖短裤防晒帽"
+          },
+          {
+            "kind": "highlight",
+            "text": "☀晴 ☁多云 🌧雨 ⛈雷阵雨 ❄雪 雾🌫"
+          }
+        ],
+        "subtitle": "晴 26-35°C 偶有雷阵雨"
+      },
+      {
+        "when": 3,
+        "title": "秋天 🍂",
+        "color": "amber",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "收获季节",
+            "text": "叶子黄了果子熟了大雁南飞"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "穿衣",
+            "text": "长袖外套"
+          },
+          {
+            "kind": "highlight",
+            "text": "☀晴 ☁多云 🌧雨 ⛈雷阵雨 ❄雪 雾🌫"
+          }
+        ],
+        "subtitle": "多云 15-25°C"
+      },
+      {
+        "when": 4,
+        "title": "冬天 ❄️",
+        "color": "amber",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "天寒地冻",
+            "text": "下雪堆雪人穿棉袄"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "穿衣",
+            "text": "棉袄围巾手套"
+          },
+          {
+            "kind": "highlight",
+            "text": "☀晴 ☁多云 🌧雨 ⛈雷阵雨 ❄雪 雾🌫"
+          }
+        ],
+        "subtitle": "晴冷 -5-5°C 可能下雪"
+      }
+    ],
+    "explore": [
+      "春天有什么变化？",
+      "冬天为什么要穿棉袄？",
+      "你知道哪些天气符号？"
+    ]
+  }
 }

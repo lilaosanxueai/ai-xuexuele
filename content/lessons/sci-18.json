@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 五感侦察台\ns = 1   # 1眼 2耳 3鼻 4舌 5皮肤\n\nhide()\nemo = \"👀\"\nname = \"眼睛\"\njob = \"侦察光线和颜色 → 看世界的大小远近\"\ntip = \"护眼：读书一尺远，20 分钟望远处\"\ncol = \"#1d4ed8\"\nif s == 2:\n    emo = \"👂\"\n    name = \"耳朵\"\n    job = \"侦察声音 → 分辨高低远近强弱\"\n    tip = \"护耳：不放耳机太大声，远离噪音\"\n    col = \"#f59e0b\"\nif s == 3:\n    emo = \"👃\"\n    name = \"鼻子\"\n    job = \"侦察气味 → 闻出香臭和安全信号\"\n    tip = \"护鼻：不用手挖，闻不到的气味要小心\"\n    col = \"#16a34a\"\nif s == 4:\n    emo = \"👅\"\n    name = \"舌头\"\n    job = \"侦察味道 → 酸甜苦辣咸\"\n    tip = \"护舌：太烫的食物先吹凉\"\n    col = \"#dc2626\"\nif s == 5:\n    emo = \"🤚\"\n    name = \"皮肤\"\n    job = \"侦察触觉 → 冷热软硬疼痛\"\n    tip = \"护肤：烫的冰的先小心试探\"\n    col = \"#7c3aed\"\nfill_rect(0, 120, 360, 40, col)\nwrite(name + \" \" + emo, 0, 120, \"#fff\", 16)\nfill_rect(0, 66, 360, 40, \"#f1f5f9\")\nwrite(job, 0, 66, \"#0f172a\", 11)\nwrite(emo, -60, -20, \"#0f172a\", 30)\nfill_rect(0, -80, 360, 34, \"#fef3c7\")\nwrite(\"保护：\" + tip, 0, -80, \"#b45309\", 11)\nwrite(\"五队合作观察：看+听+闻+摸，情报越多判断越准\", -20, -122, \"#0369a1\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "sci-18",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "s=2 耳朵能收集哪些声音信息？",
-      "为什么蒙眼猜物要用到手和鼻？",
-      "怎样保护眼睛？"
-    ],
-    "code": "# 五感侦察台\ns = 1   # 1眼 2耳 3鼻 4舌 5皮肤\n\nhide()\nemo = \"👀\"\nname = \"眼睛\"\njob = \"侦察光线和颜色 → 看世界的大小远近\"\ntip = \"护眼：读书一尺远，20 分钟望远处\"\ncol = \"#1d4ed8\"\nif s == 2:\n    emo = \"👂\"\n    name = \"耳朵\"\n    job = \"侦察声音 → 分辨高低远近强弱\"\n    tip = \"护耳：不放耳机太大声，远离噪音\"\n    col = \"#f59e0b\"\nif s == 3:\n    emo = \"👃\"\n    name = \"鼻子\"\n    job = \"侦察气味 → 闻出香臭和安全信号\"\n    tip = \"护鼻：不用手挖，闻不到的气味要小心\"\n    col = \"#16a34a\"\nif s == 4:\n    emo = \"👅\"\n    name = \"舌头\"\n    job = \"侦察味道 → 酸甜苦辣咸\"\n    tip = \"护舌：太烫的食物先吹凉\"\n    col = \"#dc2626\"\nif s == 5:\n    emo = \"🤚\"\n    name = \"皮肤\"\n    job = \"侦察触觉 → 冷热软硬疼痛\"\n    tip = \"护肤：烫的冰的先小心试探\"\n    col = \"#7c3aed\"\nfill_rect(0, 120, 360, 40, col)\nwrite(name + \" \" + emo, 0, 120, \"#fff\", 16)\nfill_rect(0, 66, 360, 40, \"#f1f5f9\")\nwrite(job, 0, 66, \"#0f172a\", 11)\nwrite(emo, -60, -20, \"#0f172a\", 30)\nfill_rect(0, -80, 360, 34, \"#fef3c7\")\nwrite(\"保护：\" + tip, 0, -80, \"#b45309\", 11)\nwrite(\"五队合作观察：看+听+闻+摸，情报越多判断越准\", -20, -122, \"#0369a1\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,124 @@
       "answer": 0,
       "explain": "安全第一"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "眼睛 👀",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "侦察光线和颜色 → 看世界的大小远近"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "保护：护眼",
+            "text": "读书一尺远，20 分钟望远处"
+          },
+          {
+            "kind": "highlight",
+            "text": "五队合作观察：看+听+闻+摸，情报越多判断越准"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "耳朵 👂",
+        "color": "amber",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "侦察声音 → 分辨高低远近强弱"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "保护：护耳",
+            "text": "不放耳机太大声，远离噪音"
+          },
+          {
+            "kind": "highlight",
+            "text": "五队合作观察：看+听+闻+摸，情报越多判断越准"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "鼻子 👃",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "侦察气味 → 闻出香臭和安全信号"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "保护：护鼻",
+            "text": "不用手挖，闻不到的气味要小心"
+          },
+          {
+            "kind": "highlight",
+            "text": "五队合作观察：看+听+闻+摸，情报越多判断越准"
+          }
+        ]
+      },
+      {
+        "when": 4,
+        "title": "舌头 👅",
+        "color": "red",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "侦察味道 → 酸甜苦辣咸"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "保护：护舌",
+            "text": "太烫的食物先吹凉"
+          },
+          {
+            "kind": "highlight",
+            "text": "五队合作观察：看+听+闻+摸，情报越多判断越准"
+          }
+        ]
+      },
+      {
+        "when": 5,
+        "title": "皮肤 🤚",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "侦察触觉 → 冷热软硬疼痛"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "保护：护肤",
+            "text": "烫的冰的先小心试探"
+          },
+          {
+            "kind": "highlight",
+            "text": "五队合作观察：看+听+闻+摸，情报越多判断越准"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "耳朵能收集哪些声音信息？",
+      "为什么蒙眼猜物要用到手和鼻？",
+      "怎样保护眼睛？"
+    ]
+  }
 }

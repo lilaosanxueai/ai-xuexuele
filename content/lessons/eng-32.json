@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 问路指路导航仪\nsc = 1   # 场景\n\nhide()\nt = \"问路\"\na1 = \"Excuse me, how can I get to the library?\"\na2 = \"Is there a bank near here? / Where is the nearest bus stop?\"\ntip = \"先说 Excuse me（打扰了）再问——礼貌是通行证\"\nif sc == 2:\n    t = \"指路（方向）\"\n    a1 = \"Go along this street and turn left at the second crossing.\"\n    a2 = \"Go straight on until you see a hospital, then turn right.\"\n    tip = \"along=沿着 / straight=直走 / crossing=十字路口\"\nif sc == 3:\n    t = \"指路（位置）\"\n    a1 = \"It's next to the supermarket. / It's across from the park.\"\n    a2 = \"It's between the bank and the post office. / It's on your right.\"\n    tip = \"next to=旁边 / across from=对面 / between...and=在…之间\"\nfill_rect(0, 130, 360, 30, \"#16a34a\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 74, 360, 48, \"#f0fdf4\")\nwrite(a1, 0, 74, \"#166534\", 10)\nfill_rect(0, 12, 360, 58, \"#fef3c7\")\nwrite(a2, 0, 12, \"#b45309\", 9)\nwrite(\"词汇：\" + tip, -20, -55, \"#dc2626\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "eng-32",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "sc=2 \"go along\" 和 \"go straight\" 一样吗？",
-      "on the corner 是在角落里吗？",
-      "问路前为什么说 Excuse me？"
-    ],
-    "code": "# 问路指路导航仪\nsc = 1   # 场景\n\nhide()\nt = \"问路\"\na1 = \"Excuse me, how can I get to the library?\"\na2 = \"Is there a bank near here? / Where is the nearest bus stop?\"\ntip = \"先说 Excuse me（打扰了）再问——礼貌是通行证\"\nif sc == 2:\n    t = \"指路（方向）\"\n    a1 = \"Go along this street and turn left at the second crossing.\"\n    a2 = \"Go straight on until you see a hospital, then turn right.\"\n    tip = \"along=沿着 / straight=直走 / crossing=十字路口\"\nif sc == 3:\n    t = \"指路（位置）\"\n    a1 = \"It's next to the supermarket. / It's across from the park.\"\n    a2 = \"It's between the bank and the post office. / It's on your right.\"\n    tip = \"next to=旁边 / across from=对面 / between...and=在…之间\"\nfill_rect(0, 130, 360, 30, \"#16a34a\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 74, 360, 48, \"#f0fdf4\")\nwrite(a1, 0, 74, \"#166534\", 10)\nfill_rect(0, 12, 360, 58, \"#fef3c7\")\nwrite(a2, 0, 12, \"#b45309\", 9)\nwrite(\"词汇：\" + tip, -20, -55, \"#dc2626\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,77 @@
       "answer": 0,
       "explain": "crossing=路口"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "问路",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "Excuse me, how can I get to the library?"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "Is there a bank near here? / Where is the nearest bus stop?"
+          },
+          {
+            "kind": "highlight",
+            "text": "词汇：先说 Excuse me（打扰了）再问——礼貌是通行证"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "指路（方向）",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "Go along this street and turn left at the second crossing."
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "Go straight on until you see a hospital, then turn right."
+          },
+          {
+            "kind": "highlight",
+            "text": "词汇：along=沿着 / straight=直走 / crossing=十字路口"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "指路（位置）",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "It's next to the supermarket. / It's across from the park."
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "It's between the bank and the post office. / It's on your right."
+          },
+          {
+            "kind": "highlight",
+            "text": "词汇：next to=旁边 / across from=对面 / between...and=在…之间"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "\"go along\" 和 \"go straight\" 一样吗？",
+      "on the corner 是在角落里吗？",
+      "问路前为什么说 Excuse me？"
+    ]
+  }
 }

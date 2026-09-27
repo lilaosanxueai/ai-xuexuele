@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 被动语态变形台\ncs = 1   # 例句\n\nhide()\nact = \"The boy broke the window.\"\npas = \"The window was broken by the boy.\"\nt = \"一般过去时：was/were + 过去分词\"\nif cs == 2:\n    act = \"People grow rice in the south.\"\n    pas = \"Rice is grown in the south (by people).\"\n    t = \"一般现在时：am/is/are + 过去分词；泛指人时 by 可省\"\nif cs == 3:\n    act = \"They will plant trees tomorrow.\"\n    pas = \"Trees will be planted tomorrow.\"\n    t = \"一般将来时：will be + 过去分词\"\nfill_rect(0, 130, 340, 30, \"#f59e0b\")\nwrite(\"主动 → 被动\", 0, 130, \"#fff\", 13)\nfill_rect(0, 78, 320, 44, \"#f8fafc\")\nwrite(act, 0, 78, \"#334155\", 11)\nfill_rect(0, 14, 320, 52, \"#fef3c7\")\nwrite(pas, 0, 24, \"#b45309\", 10)\nwrite(\"be 随时态变化 · 动词变过去分词\", 0, 2, \"#92400e\", 9)\nfill_rect(0, -58, 320, 44, \"#eff6ff\")\nwrite(t, 0, -58, \"#1d4ed8\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "eng-40",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "cs=1 主动句的宾语去哪了？",
-      "by the boy 什么时候可以省略？",
-      "三步变被动是哪三步？"
-    ],
-    "code": "# 被动语态变形台\ncs = 1   # 例句\n\nhide()\nact = \"The boy broke the window.\"\npas = \"The window was broken by the boy.\"\nt = \"一般过去时：was/were + 过去分词\"\nif cs == 2:\n    act = \"People grow rice in the south.\"\n    pas = \"Rice is grown in the south (by people).\"\n    t = \"一般现在时：am/is/are + 过去分词；泛指人时 by 可省\"\nif cs == 3:\n    act = \"They will plant trees tomorrow.\"\n    pas = \"Trees will be planted tomorrow.\"\n    t = \"一般将来时：will be + 过去分词\"\nfill_rect(0, 130, 340, 30, \"#f59e0b\")\nwrite(\"主动 → 被动\", 0, 130, \"#fff\", 13)\nfill_rect(0, 78, 320, 44, \"#f8fafc\")\nwrite(act, 0, 78, \"#334155\", 11)\nfill_rect(0, 14, 320, 52, \"#fef3c7\")\nwrite(pas, 0, 24, \"#b45309\", 10)\nwrite(\"be 随时态变化 · 动词变过去分词\", 0, 2, \"#92400e\", 9)\nfill_rect(0, -58, 320, 44, \"#eff6ff\")\nwrite(t, 0, -58, \"#1d4ed8\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,83 @@
       "answer": 0,
       "explain": "执行者不重要"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "主动 → 被动",
+        "color": "amber",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "The boy broke the window."
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "The window was broken by the boy.；be 随时态变化 · 动词变过去分词"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "一般过去时",
+            "text": "was/were + 过去分词"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "主动 → 被动",
+        "color": "amber",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "People grow rice in the south."
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "Rice is grown in the south (by people).；be 随时态变化 · 动词变过去分词"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "一般现在时",
+            "text": "am/is/are + 过去分词；泛指人时 by 可省"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "主动 → 被动",
+        "color": "amber",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "They will plant trees tomorrow."
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "Trees will be planted tomorrow.；be 随时态变化 · 动词变过去分词"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "一般将来时",
+            "text": "will be + 过去分词"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "主动句的宾语去哪了？",
+      "by the boy 什么时候可以省略？",
+      "三步变被动是哪三步？"
+    ]
+  }
 }

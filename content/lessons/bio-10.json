@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 能量流动记账本\neff = 10   # 每级传递效率（%）\nlv = 4     # 营养级数\n\nhide()\ne = 10000\ni = 0\nwhile i < lv:\n    h = e / 10000 * 140\n    w = e / 10000 * 240\n    y = 100 - i * 62\n    col = \"#16a34a\"\n    if i == 1:\n        col = \"#f59e0b\"\n    if i == 2:\n        col = \"#dc2626\"\n    if i == 3:\n        col = \"#7c3aed\"\n    if i == 4:\n        col = \"#0f172a\"\n    fill_rect(0, y, w, 44, col)\n    write(e + \" kJ\", -20 + i * 6, y, \"#fff\", 11)\n    e = e * eff / 100\n    i = i + 1\nfill_rect(0, 140, 360, 28, \"#1d4ed8\")\nwrite(\"传递效率 \" + eff + \"%：上一级的 \" + eff + \"% 流向下一级\", 0, 140, \"#fff\", 11)\nwrite(\"生产者→初级消费者→次级→三级……\", 0, -120, \"#64748b\", 10)\nwrite(\"其余能量：呼吸散热+粪便流向分解者\", 0, -145, \"#0369a1\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "bio-10",
   "island": "cross",
@@ -96,14 +94,7 @@
         "step": 1,
         "value": 4
       }
-    ],
-    "grid": false,
-    "explore": [
-      "eff=5 时第 4 营养级还剩多少能量？",
-      "为什么食物链一般不超过 5 个营养级？",
-      "能量流动和物质循环有什么不同？"
-    ],
-    "code": "# 能量流动记账本\neff = 10   # 每级传递效率（%）\nlv = 4     # 营养级数\n\nhide()\ne = 10000\ni = 0\nwhile i < lv:\n    h = e / 10000 * 140\n    w = e / 10000 * 240\n    y = 100 - i * 62\n    col = \"#16a34a\"\n    if i == 1:\n        col = \"#f59e0b\"\n    if i == 2:\n        col = \"#dc2626\"\n    if i == 3:\n        col = \"#7c3aed\"\n    if i == 4:\n        col = \"#0f172a\"\n    fill_rect(0, y, w, 44, col)\n    write(e + \" kJ\", -20 + i * 6, y, \"#fff\", 11)\n    e = e * eff / 100\n    i = i + 1\nfill_rect(0, 140, 360, 28, \"#1d4ed8\")\nwrite(\"传递效率 \" + eff + \"%：上一级的 \" + eff + \"% 流向下一级\", 0, 140, \"#fff\", 11)\nwrite(\"生产者→初级消费者→次级→三级……\", 0, -120, \"#64748b\", 10)\nwrite(\"其余能量：呼吸散热+粪便流向分解者\", 0, -145, \"#0369a1\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -214,5 +205,78 @@
       "answer": 0,
       "explain": "光合是把碳拿走"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 5,
+        "title": "10000 kJ",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "传递效率 5%：上一级的 5% 流向下一级"
+          },
+          {
+            "kind": "highlight",
+            "text": "500 kJ"
+          }
+        ]
+      },
+      {
+        "when": 10,
+        "title": "10000 kJ",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "传递效率 10%：上一级的 10% 流向下一级"
+          },
+          {
+            "kind": "highlight",
+            "text": "1000 kJ"
+          }
+        ]
+      },
+      {
+        "when": 15,
+        "title": "10000 kJ",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "传递效率 15%：上一级的 15% 流向下一级"
+          },
+          {
+            "kind": "highlight",
+            "text": "1500 kJ"
+          }
+        ]
+      },
+      {
+        "when": 20,
+        "title": "10000 kJ",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "传递效率 20%：上一级的 20% 流向下一级"
+          },
+          {
+            "kind": "highlight",
+            "text": "2000 kJ"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "时第 4 营养级还剩多少能量？",
+      "为什么食物链一般不超过 5 个营养级？",
+      "能量流动和物质循环有什么不同？"
+    ]
+  }
 }

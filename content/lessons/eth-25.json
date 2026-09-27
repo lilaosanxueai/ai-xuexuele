@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 亲子沟通翻译机\nscene = 1  # 1考砸了 2想买球鞋 3被误会\ntone = 1   # 1指责式 2我句式\n\nhide()\nsc = \"考试没考好\"\nbad = \"你们从来不关心我，只会问分数！\"\ngood = \"我感到很难过，我需要你们的鼓励。\"\nif scene == 2:\n    sc = \"想买一双球鞋\"\n    bad = \"别人都有就我没有，你们真小气！\"\n    good = \"我很喜欢它，我们能商量零花钱计划吗？\"\nif scene == 3:\n    sc = \"被同学误会了\"\n    bad = \"你们根本不听我解释！\"\n    good = \"我感到委屈，我想说明当时的情况。\"\nfill_rect(0, 130, 340, 30, \"#7c3aed\")\nwrite(\"场景：\" + sc, 0, 130, \"#fff\", 12)\nsay = bad\ncol = \"#dc2626\"\nres = \"结果：争吵升级·房门一摔\"\nif tone == 2:\n    say = good\n    col = \"#16a34a\"\n    res = \"结果：对话打开·问题解决\"\nfill_rect(0, 60, 340, 64, \"#f8fafc\")\nwrite(say, 0, 60, col, 10)\nfill_rect(0, -6, 340, 40, \"#fef3c7\")\nwrite(res, 0, -6, \"#b45309\", 11)\nwrite(\"我句式 = 我感到… + 我需要/我希望…\", 0, -62, \"#2563eb\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "eth-25",
   "island": "cross",
@@ -96,14 +94,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "tone=1 和 tone=2 的结果差在哪？",
-      "我句式的固定格式是什么？",
-      "为什么指责式会让争吵升级？"
-    ],
-    "code": "# 亲子沟通翻译机\nscene = 1  # 1考砸了 2想买球鞋 3被误会\ntone = 1   # 1指责式 2我句式\n\nhide()\nsc = \"考试没考好\"\nbad = \"你们从来不关心我，只会问分数！\"\ngood = \"我感到很难过，我需要你们的鼓励。\"\nif scene == 2:\n    sc = \"想买一双球鞋\"\n    bad = \"别人都有就我没有，你们真小气！\"\n    good = \"我很喜欢它，我们能商量零花钱计划吗？\"\nif scene == 3:\n    sc = \"被同学误会了\"\n    bad = \"你们根本不听我解释！\"\n    good = \"我感到委屈，我想说明当时的情况。\"\nfill_rect(0, 130, 340, 30, \"#7c3aed\")\nwrite(\"场景：\" + sc, 0, 130, \"#fff\", 12)\nsay = bad\ncol = \"#dc2626\"\nres = \"结果：争吵升级·房门一摔\"\nif tone == 2:\n    say = good\n    col = \"#16a34a\"\n    res = \"结果：对话打开·问题解决\"\nfill_rect(0, 60, 340, 64, \"#f8fafc\")\nwrite(say, 0, 60, col, 10)\nfill_rect(0, -6, 340, 40, \"#fef3c7\")\nwrite(res, 0, -6, \"#b45309\", 11)\nwrite(\"我句式 = 我感到… + 我需要/我希望…\", 0, -62, \"#2563eb\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -214,5 +205,82 @@
       "answer": 0,
       "explain": "三个问句"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "场景：考试没考好",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "你们从来不关心我，只会问分数！"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "结果",
+            "text": "争吵升级·房门一摔"
+          },
+          {
+            "kind": "highlight",
+            "text": "我句式 = 我感到… + 我需要/我希望…"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "场景",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "别人都有就我没有，你们真小气！"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "结果",
+            "text": "争吵升级·房门一摔"
+          },
+          {
+            "kind": "highlight",
+            "text": "我句式 = 我感到… + 我需要/我希望…"
+          }
+        ],
+        "subtitle": "想买一双球鞋"
+      },
+      {
+        "when": 3,
+        "title": "场景",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "你们根本不听我解释！"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "结果",
+            "text": "争吵升级·房门一摔"
+          },
+          {
+            "kind": "highlight",
+            "text": "我句式 = 我感到… + 我需要/我希望…"
+          }
+        ],
+        "subtitle": "被同学误会了"
+      }
+    ],
+    "explore": [
+      "和 tone=2 的结果差在哪？",
+      "我句式的固定格式是什么？",
+      "为什么指责式会让争吵升级？"
+    ]
+  }
 }

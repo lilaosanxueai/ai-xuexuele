@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 三层次聆听训练台\nlv = 1   # 层次\n\nhide()\nt = \"第一层：官能欣赏\"\nd = \"感官直觉反应：好听/不好听·欢快/悲伤·紧张/放松\"\nask = \"你觉得这段音乐情绪是什么？\"\nif lv == 2:\n    t = \"第二层：联想欣赏\"\n    d = \"由音乐联想到画面/故事/场景：是山川还是大海？是清晨还是黄昏？\"\n    ask = \"这段音乐让你想到了什么画面？\"\nif lv == 3:\n    t = \"第三层：理智欣赏\"\n    d = \"分析音乐要素：旋律走向·节奏特点·力度变化·音色选择·曲式结构\"\n    ask = \"作曲家为什么在这里用了弱奏？\"\nfill_rect(0, 130, 360, 30, \"#7c3aed\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 360, 42, \"#f5f3ff\")\nwrite(d, 0, 76, \"#6d28d9\", 10)\nfill_rect(0, 16, 360, 56, \"#fef3c7\")\nwrite(\"问自己：\" + ask, 0, 16, \"#b45309\", 11)\ni = 0\nwhile i < 3:\n    y = -40 - i * 30\n    if i + 1 <= lv:\n        fill_rect(0, y, 300, 22, \"#7c3aed\")\n    if i + 1 > lv:\n        fill_rect(0, y, 300, 22, \"#e2e8f0\")\n        col2 = \"#64748b\"\n    if i + 1 <= lv:\n        col2 = \"#fff\"\n    write(\"Level \" + (i + 1), 0, y, col2, 9)\n    i = i + 1\nwrite(\"层次越高，听到的越多——耳朵也能升级\", -20, -140, \"#dc2626\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "mus-20",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "lv=2 为什么要联想画面？",
-      "lv=3 理智欣赏需要哪些知识储备？",
-      "你听音乐时停在哪一层？"
-    ],
-    "code": "# 三层次聆听训练台\nlv = 1   # 层次\n\nhide()\nt = \"第一层：官能欣赏\"\nd = \"感官直觉反应：好听/不好听·欢快/悲伤·紧张/放松\"\nask = \"你觉得这段音乐情绪是什么？\"\nif lv == 2:\n    t = \"第二层：联想欣赏\"\n    d = \"由音乐联想到画面/故事/场景：是山川还是大海？是清晨还是黄昏？\"\n    ask = \"这段音乐让你想到了什么画面？\"\nif lv == 3:\n    t = \"第三层：理智欣赏\"\n    d = \"分析音乐要素：旋律走向·节奏特点·力度变化·音色选择·曲式结构\"\n    ask = \"作曲家为什么在这里用了弱奏？\"\nfill_rect(0, 130, 360, 30, \"#7c3aed\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 360, 42, \"#f5f3ff\")\nwrite(d, 0, 76, \"#6d28d9\", 10)\nfill_rect(0, 16, 360, 56, \"#fef3c7\")\nwrite(\"问自己：\" + ask, 0, 16, \"#b45309\", 11)\ni = 0\nwhile i < 3:\n    y = -40 - i * 30\n    if i + 1 <= lv:\n        fill_rect(0, y, 300, 22, \"#7c3aed\")\n    if i + 1 > lv:\n        fill_rect(0, y, 300, 22, \"#e2e8f0\")\n        col2 = \"#64748b\"\n    if i + 1 <= lv:\n        col2 = \"#fff\"\n    write(\"Level \" + (i + 1), 0, y, col2, 9)\n    i = i + 1\nwrite(\"层次越高，听到的越多——耳朵也能升级\", -20, -140, \"#dc2626\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,82 @@
       "answer": 0,
       "explain": "联想层"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "第一层：官能欣赏",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "感官直觉反应",
+            "text": "好听/不好听·欢快/悲伤·紧张/放松"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "问自己",
+            "text": "你觉得这段音乐情绪是什么？"
+          },
+          {
+            "kind": "highlight",
+            "text": "Level 1"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "第二层：联想欣赏",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "由音乐联想到画面/故事/场景：是山川还是大海？是清晨还是黄昏？"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "问自己",
+            "text": "这段音乐让你想到了什么画面？"
+          },
+          {
+            "kind": "highlight",
+            "text": "Level 1"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "第三层：理智欣赏",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "分析音乐要素",
+            "text": "旋律走向·节奏特点·力度变化·音色选择·曲式结构"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "问自己",
+            "text": "作曲家为什么在这里用了弱奏？"
+          },
+          {
+            "kind": "highlight",
+            "text": "Level 1"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "为什么要联想画面？",
+      "理智欣赏需要哪些知识储备？",
+      "你听音乐时停在哪一层？"
+    ]
+  }
 }

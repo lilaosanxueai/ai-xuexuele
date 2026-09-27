@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 书法五体图鉴\nstyle = 3   # 1篆 2隶 3楷 4行 5草\n\nhide()\nt = \"篆书\"\nera = \"商周-秦\"\nd = \"线条圆转匀称·像图画·结构对称\"\nwork = \"代表：泰山刻石\"\ntip = \"最古老的书体·识读门槛高\"\ncol = \"#b45309\"\nif style == 2:\n    t = \"隶书\"\n    era = \"汉代\"\n    d = \"字形扁方·横画一波三折·蚕头燕尾\"\n    work = \"代表：曹全碑\"\n    tip = \"像波浪起伏·古朴大方\"\n    col = \"#0f766e\"\nif style == 3:\n    t = \"楷书\"\n    era = \"汉末起·唐最盛\"\n    d = \"横平竖直·方正端庄·一笔一画\"\n    work = \"代表：欧阳询·颜真卿·柳公权\"\n    tip = \"入门首选·打好基本功\"\n    col = \"#dc2626\"\nif style == 4:\n    t = \"行书\"\n    era = \"汉末起\"\n    d = \"楷书的快写·连带流畅·雅俗共赏\"\n    work = \"代表：王羲之兰亭序\"\n    tip = \"天下第一行书就在这里\"\n    col = \"#2563eb\"\nif style == 5:\n    t = \"草书\"\n    era = \"汉末起\"\n    d = \"笔画连绵简省·气势奔放·抒情最强\"\n    work = \"代表：张旭·怀素\"\n    tip = \"看似乱实则法度森严\"\n    col = \"#7c3aed\"\nfill_rect(0, 130, 340, 30, col)\nwrite(t + \"（\" + era + \"）\", 0, 130, \"#fff\", 12)\nfill_rect(0, 72, 320, 46, \"#fffbeb\")\nwrite(d, 0, 72, \"#92400e\", 11)\nfill_rect(0, 10, 320, 52, \"#f8fafc\")\nwrite(work, 0, 24, \"#334155\", 10)\nwrite(tip, 0, 2, \"#64748b\", 10)\nwrite(\"五体演进：篆→隶→草→行→楷\", -20, -70, col, 10)\n",
   "celebrate": "新知识到手！",
   "id": "art-24",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 3
       }
-    ],
-    "grid": false,
-    "explore": [
-      "style=1 篆书为什么像图画？",
-      "style=3 楷书和 style=4 行书差在哪？",
-      "哪个书体最难认？为什么还有那么多人学？"
-    ],
-    "code": "# 书法五体图鉴\nstyle = 3   # 1篆 2隶 3楷 4行 5草\n\nhide()\nt = \"篆书\"\nera = \"商周-秦\"\nd = \"线条圆转匀称·像图画·结构对称\"\nwork = \"代表：泰山刻石\"\ntip = \"最古老的书体·识读门槛高\"\ncol = \"#b45309\"\nif style == 2:\n    t = \"隶书\"\n    era = \"汉代\"\n    d = \"字形扁方·横画一波三折·蚕头燕尾\"\n    work = \"代表：曹全碑\"\n    tip = \"像波浪起伏·古朴大方\"\n    col = \"#0f766e\"\nif style == 3:\n    t = \"楷书\"\n    era = \"汉末起·唐最盛\"\n    d = \"横平竖直·方正端庄·一笔一画\"\n    work = \"代表：欧阳询·颜真卿·柳公权\"\n    tip = \"入门首选·打好基本功\"\n    col = \"#dc2626\"\nif style == 4:\n    t = \"行书\"\n    era = \"汉末起\"\n    d = \"楷书的快写·连带流畅·雅俗共赏\"\n    work = \"代表：王羲之兰亭序\"\n    tip = \"天下第一行书就在这里\"\n    col = \"#2563eb\"\nif style == 5:\n    t = \"草书\"\n    era = \"汉末起\"\n    d = \"笔画连绵简省·气势奔放·抒情最强\"\n    work = \"代表：张旭·怀素\"\n    tip = \"看似乱实则法度森严\"\n    col = \"#7c3aed\"\nfill_rect(0, 130, 340, 30, col)\nwrite(t + \"（\" + era + \"）\", 0, 130, \"#fff\", 12)\nfill_rect(0, 72, 320, 46, \"#fffbeb\")\nwrite(d, 0, 72, \"#92400e\", 11)\nfill_rect(0, 10, 320, 52, \"#f8fafc\")\nwrite(work, 0, 24, \"#334155\", 10)\nwrite(tip, 0, 2, \"#64748b\", 10)\nwrite(\"五体演进：篆→隶→草→行→楷\", -20, -70, col, 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,124 @@
       "answer": 0,
       "explain": "隶书定型"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "篆书（商周-秦）",
+        "color": "red",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "线条圆转匀称·像图画·结构对称"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "代表",
+            "text": "泰山刻石；最古老的书体·识读门槛高"
+          },
+          {
+            "kind": "highlight",
+            "text": "五体演进：篆→隶→草→行→楷"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "隶书（汉代）",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "字形扁方·横画一波三折·蚕头燕尾"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "代表",
+            "text": "曹全碑；像波浪起伏·古朴大方"
+          },
+          {
+            "kind": "highlight",
+            "text": "五体演进：篆→隶→草→行→楷"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "楷书（汉末起·唐最盛）",
+        "color": "red",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "横平竖直·方正端庄·一笔一画"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "代表",
+            "text": "欧阳询·颜真卿·柳公权；入门首选·打好基本功"
+          },
+          {
+            "kind": "highlight",
+            "text": "五体演进：篆→隶→草→行→楷"
+          }
+        ]
+      },
+      {
+        "when": 4,
+        "title": "行书（汉末起）",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "楷书的快写·连带流畅·雅俗共赏"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "代表",
+            "text": "王羲之兰亭序；天下第一行书就在这里"
+          },
+          {
+            "kind": "highlight",
+            "text": "五体演进：篆→隶→草→行→楷"
+          }
+        ]
+      },
+      {
+        "when": 5,
+        "title": "草书（汉末起）",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "笔画连绵简省·气势奔放·抒情最强"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "代表",
+            "text": "张旭·怀素；看似乱实则法度森严"
+          },
+          {
+            "kind": "highlight",
+            "text": "五体演进：篆→隶→草→行→楷"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "篆书为什么像图画？",
+      "楷书和 style=4 行书差在哪？",
+      "哪个书体最难认？为什么还有那么多人学？"
+    ]
+  }
 }

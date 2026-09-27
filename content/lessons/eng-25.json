@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 三单变身器\nsubj = 1   # 1 I 2 You 3 He 4 My mother\n\nhide()\ns = \"I\"\nverb = \"play\"\nsent = \"I play basketball every day.\"\nwhy = \"第一人称：动词用原形\"\nif subj == 2:\n    s = \"You\"\n    sent = \"You play basketball every day.\"\n    why = \"第二人称：动词用原形\"\nif subj == 3:\n    s = \"He\"\n    verb = \"plays\"\n    sent = \"He plays basketball every day.\"\n    why = \"第三人称单数：动词加 s（三单）\"\nif subj == 4:\n    s = \"My mother\"\n    verb = \"watches\"\n    sent = \"My mother watches TV in the evening.\"\n    why = \"三单 + ch 结尾加 es（watch→watches）\"\nfill_rect(0, 130, 360, 32, \"#1d4ed8\")\nwrite(s + \" \" + verb + \" …\", 0, 130, \"#fff\", 14)\nfill_rect(0, 78, 360, 40, \"#f1f5f9\")\nwrite(sent, 0, 78, \"#0f172a\", 12)\nfill_rect(0, 22, 360, 44, \"#fef3c7\")\nwrite(\"规则：\" + why, 0, 22, \"#b45309\", 11)\nwrite(\"三单变化：一般加s；s/x/ch/sh/o 结尾加es；辅音+y 变y为ies\", -30, -30, \"#dc2626\", 10)\nwrite(\"频度副词（always/usually/often/sometimes/never）放实义动词前\", -30, -58, \"#7c3aed\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "eng-25",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "subj=3 动词加 s 了吗？为什么？",
-      "频度副词放在哪？",
-      "o/ch/sh 结尾的动词怎么变？"
-    ],
-    "code": "# 三单变身器\nsubj = 1   # 1 I 2 You 3 He 4 My mother\n\nhide()\ns = \"I\"\nverb = \"play\"\nsent = \"I play basketball every day.\"\nwhy = \"第一人称：动词用原形\"\nif subj == 2:\n    s = \"You\"\n    sent = \"You play basketball every day.\"\n    why = \"第二人称：动词用原形\"\nif subj == 3:\n    s = \"He\"\n    verb = \"plays\"\n    sent = \"He plays basketball every day.\"\n    why = \"第三人称单数：动词加 s（三单）\"\nif subj == 4:\n    s = \"My mother\"\n    verb = \"watches\"\n    sent = \"My mother watches TV in the evening.\"\n    why = \"三单 + ch 结尾加 es（watch→watches）\"\nfill_rect(0, 130, 360, 32, \"#1d4ed8\")\nwrite(s + \" \" + verb + \" …\", 0, 130, \"#fff\", 14)\nfill_rect(0, 78, 360, 40, \"#f1f5f9\")\nwrite(sent, 0, 78, \"#0f172a\", 12)\nfill_rect(0, 22, 360, 44, \"#fef3c7\")\nwrite(\"规则：\" + why, 0, 22, \"#b45309\", 11)\nwrite(\"三单变化：一般加s；s/x/ch/sh/o 结尾加es；辅音+y 变y为ies\", -30, -30, \"#dc2626\", 10)\nwrite(\"频度副词（always/usually/often/sometimes/never）放实义动词前\", -30, -58, \"#7c3aed\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,102 @@
       "answer": 0,
       "explain": "客观真理用一般现在时"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "I play …",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "I play basketball every day."
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "规则",
+            "text": "第一人称：动词用原形"
+          },
+          {
+            "kind": "highlight",
+            "text": "三单变化：一般加s；s/x/ch/sh/o 结尾加es；辅音+y 变y为ies"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "You play …",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "You play basketball every day."
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "规则",
+            "text": "第二人称：动词用原形"
+          },
+          {
+            "kind": "highlight",
+            "text": "三单变化：一般加s；s/x/ch/sh/o 结尾加es；辅音+y 变y为ies"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "He plays …",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "He plays basketball every day."
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "规则",
+            "text": "第三人称单数：动词加 s（三单）"
+          },
+          {
+            "kind": "highlight",
+            "text": "三单变化：一般加s；s/x/ch/sh/o 结尾加es；辅音+y 变y为ies"
+          }
+        ]
+      },
+      {
+        "when": 4,
+        "title": "My mother watch…",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "My mother watches TV in the evening."
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "规则",
+            "text": "三单 + ch 结尾加 es（watch→watches）"
+          },
+          {
+            "kind": "highlight",
+            "text": "三单变化：一般加s；s/x/ch/sh/o 结尾加es；辅音+y 变y为ies"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "动词加 s 了吗？为什么？",
+      "频度副词放在哪？",
+      "o/ch/sh 结尾的动词怎么变？"
+    ]
+  }
 }

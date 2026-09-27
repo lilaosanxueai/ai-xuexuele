@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 离子检验实验台\nion = 1   # 1Cl 2SO4 3NH4 4Fe3\n\nhide()\nt = \"Cl⁻（氯离子）\"\nreg = \"滴加稀硝酸酸化的 AgNO₃ 溶液\"\nsee = \"白色沉淀（AgCl 不溶于稀硝酸）\"\nnote = \"先酸化排除 CO₃²⁻ 干扰\"\nif ion == 2:\n    t = \"SO₄²⁻（硫酸根）\"\n    reg = \"先加足量稀盐酸无沉淀，再加 BaCl₂ 溶液\"\n    see = \"白色沉淀（BaSO₄ 不溶于酸）\"\n    note = \"先加盐酸排除 Ag⁺/CO₃²⁻ 干扰\"\nif ion == 3:\n    t = \"NH₄⁺（铵根）\"\n    reg = \"加 NaOH 浓溶液并加热，湿润红色石蕊试纸靠近管口\"\n    see = \"试管口试纸变蓝（放出 NH₃）\"\n    note = \"必须加热，常温不显著\"\nif ion == 4:\n    t = \"Fe³⁺（铁离子）\"\n    reg = \"滴加 KSCN 溶液\"\n    see = \"溶液变红（Fe(SCN)₃ 血红色）\"\n    note = \"灵敏度极高；Fe²⁺ 不变色\"\nfill_rect(0, 130, 360, 30, \"#16a34a\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 360, 42, \"#f1f5f9\")\nwrite(\"操作：\" + reg, 0, 76, \"#0f172a\", 10)\nfill_rect(0, 18, 360, 50, \"#fef3c7\")\nwrite(\"现象：\" + see, 0, 18, \"#b45309\", 10)\nwrite(\"防干扰：\" + note, -20, -45, \"#7c3aed\", 10)\nwrite(\"答题格式：取样→加试剂→现象→结论\", -20, -75, \"#dc2626\", 11)\n",
   "celebrate": "新知识到手！",
   "id": "chem-15",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "ion=1 怎样区分 Cl⁻ 和 SO₄²⁻？",
-      "滴加顺序为什么影响检验？",
-      "Fe³³ 遇 KSCN 是什么现象？"
-    ],
-    "code": "# 离子检验实验台\nion = 1   # 1Cl 2SO4 3NH4 4Fe3\n\nhide()\nt = \"Cl⁻（氯离子）\"\nreg = \"滴加稀硝酸酸化的 AgNO₃ 溶液\"\nsee = \"白色沉淀（AgCl 不溶于稀硝酸）\"\nnote = \"先酸化排除 CO₃²⁻ 干扰\"\nif ion == 2:\n    t = \"SO₄²⁻（硫酸根）\"\n    reg = \"先加足量稀盐酸无沉淀，再加 BaCl₂ 溶液\"\n    see = \"白色沉淀（BaSO₄ 不溶于酸）\"\n    note = \"先加盐酸排除 Ag⁺/CO₃²⁻ 干扰\"\nif ion == 3:\n    t = \"NH₄⁺（铵根）\"\n    reg = \"加 NaOH 浓溶液并加热，湿润红色石蕊试纸靠近管口\"\n    see = \"试管口试纸变蓝（放出 NH₃）\"\n    note = \"必须加热，常温不显著\"\nif ion == 4:\n    t = \"Fe³⁺（铁离子）\"\n    reg = \"滴加 KSCN 溶液\"\n    see = \"溶液变红（Fe(SCN)₃ 血红色）\"\n    note = \"灵敏度极高；Fe²⁺ 不变色\"\nfill_rect(0, 130, 360, 30, \"#16a34a\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 360, 42, \"#f1f5f9\")\nwrite(\"操作：\" + reg, 0, 76, \"#0f172a\", 10)\nfill_rect(0, 18, 360, 50, \"#fef3c7\")\nwrite(\"现象：\" + see, 0, 18, \"#b45309\", 10)\nwrite(\"防干扰：\" + note, -20, -45, \"#7c3aed\", 10)\nwrite(\"答题格式：取样→加试剂→现象→结论\", -20, -75, \"#dc2626\", 11)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,106 @@
       "answer": 0,
       "explain": "先操作后结论"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "Cl⁻（氯离子）",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "操作",
+            "text": "滴加稀硝酸酸化的 AgNO₃ 溶液"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "现象",
+            "text": "白色沉淀（AgCl 不溶于稀硝酸）"
+          },
+          {
+            "kind": "highlight",
+            "text": "防干扰：先酸化排除 CO₃²⁻ 干扰"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "SO₄²⁻（硫酸根）",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "操作",
+            "text": "先加足量稀盐酸无沉淀，再加 BaCl₂ 溶液"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "现象",
+            "text": "白色沉淀（BaSO₄ 不溶于酸）"
+          },
+          {
+            "kind": "highlight",
+            "text": "防干扰：先加盐酸排除 Ag⁺/CO₃²⁻ 干扰"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "NH₄⁺（铵根）",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "操作",
+            "text": "加 NaOH 浓溶液并加热，湿润红色石蕊试纸靠近管口"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "现象",
+            "text": "试管口试纸变蓝（放出 NH₃）"
+          },
+          {
+            "kind": "highlight",
+            "text": "防干扰：必须加热，常温不显著"
+          }
+        ]
+      },
+      {
+        "when": 4,
+        "title": "Fe³⁺（铁离子）",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "操作",
+            "text": "滴加 KSCN 溶液"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "现象",
+            "text": "溶液变红（Fe(SCN)₃ 血红色）"
+          },
+          {
+            "kind": "highlight",
+            "text": "防干扰：灵敏度极高；Fe²⁺ 不变色"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "怎样区分 Cl⁻ 和 SO₄²⁻？",
+      "滴加顺序为什么影响检验？",
+      "Fe³³ 遇 KSCN 是什么现象？"
+    ]
+  }
 }

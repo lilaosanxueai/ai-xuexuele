@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 生态平衡天平台\nstate = 1   # 状态\n\nhide()\nt = \"生态平衡\"\nd = \"草→兔→狼数量稳定：食物链各环节互相制约\"\nres = \"天平稳定：自我调节在起作用\"\ncol = \"#16a34a\"\nif state == 2:\n    t = \"狼减少\"\n    d = \"兔子暴增→草被吃光→兔子饿死→狼也饿死\"\n    res = \"天平倾斜→崩溃：一条断了全断\"\n    col = \"#dc2626\"\nif state == 3:\n    t = \"过度放牧\"\n    d = \"牛羊过多→草来不及长→土地裸露→沙漠化\"\n    res = \"超出调节限度→不可逆破坏\"\n    col = \"#ea580c\"\nfill_rect(0, 130, 360, 30, col)\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 360, 42, \"#f1f5f9\")\nwrite(d, 0, 76, \"#0f172a\", 10)\nfill_rect(0, 16, 360, 56, \"#fef3c7\")\nwrite(res, 0, 16, \"#b45309\", 10)\nwrite(\"自我调节有限度——超过限度就崩溃\", -20, -50, \"#7c3aed\", 11)\n",
   "celebrate": "新知识到手！",
   "id": "bio-15",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "state=2 狼少了兔子为什么先增后减？",
-      "state=3 过度放牧最终毁掉谁？",
-      "自我调节有没有限度？"
-    ],
-    "code": "# 生态平衡天平台\nstate = 1   # 状态\n\nhide()\nt = \"生态平衡\"\nd = \"草→兔→狼数量稳定：食物链各环节互相制约\"\nres = \"天平稳定：自我调节在起作用\"\ncol = \"#16a34a\"\nif state == 2:\n    t = \"狼减少\"\n    d = \"兔子暴增→草被吃光→兔子饿死→狼也饿死\"\n    res = \"天平倾斜→崩溃：一条断了全断\"\n    col = \"#dc2626\"\nif state == 3:\n    t = \"过度放牧\"\n    d = \"牛羊过多→草来不及长→土地裸露→沙漠化\"\n    res = \"超出调节限度→不可逆破坏\"\n    col = \"#ea580c\"\nfill_rect(0, 130, 360, 30, col)\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 76, 360, 42, \"#f1f5f9\")\nwrite(d, 0, 76, \"#0f172a\", 10)\nfill_rect(0, 16, 360, 56, \"#fef3c7\")\nwrite(res, 0, 16, \"#b45309\", 10)\nwrite(\"自我调节有限度——超过限度就崩溃\", -20, -50, \"#7c3aed\", 11)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,78 @@
       "answer": 0,
       "explain": "就地保护"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "生态平衡",
+        "color": "green",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "草→兔→狼数量稳定：食物链各环节互相制约"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "天平稳定",
+            "text": "自我调节在起作用"
+          },
+          {
+            "kind": "highlight",
+            "text": "自我调节有限度——超过限度就崩溃"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "狼减少",
+        "color": "red",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "兔子暴增→草被吃光→兔子饿死→狼也饿死"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "天平倾斜→崩溃：一条断了全断"
+          },
+          {
+            "kind": "highlight",
+            "text": "自我调节有限度——超过限度就崩溃"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "过度放牧",
+        "color": "orange",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "牛羊过多→草来不及长→土地裸露→沙漠化"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "超出调节限度→不可逆破坏"
+          },
+          {
+            "kind": "highlight",
+            "text": "自我调节有限度——超过限度就崩溃"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "狼少了兔子为什么先增后减？",
+      "过度放牧最终毁掉谁？",
+      "自我调节有没有限度？"
+    ]
+  }
 }

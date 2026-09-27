@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 读后续写工作台\nel = 1   # 要素\n\nhide()\nt = \"读原文：两条线\"\nd = \"情节线：谁做了什么结果如何；情感线：人物心情的走向（紧张→释然）\"\ntip = \"划出原文最后一句和两段的段首句——衔接点\"\nif el == 2:\n    t = \"续写结构：两段各司其职\"\n    d = \"第一段：顺着段首句发展冲突/行动；第二段：解决问题+点题升华\"\n    tip = \"段首句是路标：第一段尾要能自然接第二段首\"\nif el == 3:\n    t = \"高分描写：动作+情绪\"\n    d = \"Tears welled up in her eyes. / A warm smile spread across his face. / My heart raced.\"\n    tip = \"少用 sad/happy，多用身体反应写情绪\"\nfill_rect(0, 130, 360, 30, \"#7c3aed\")\nwrite(t, 0, 130, \"#fff\", 12)\nfill_rect(0, 74, 360, 52, \"#f5f3ff\")\nwrite(d, 0, 74, \"#6d28d9\", 10)\nfill_rect(0, 12, 360, 58, \"#fef3c7\")\nwrite(\"要点：\" + tip, 0, 12, \"#b45309\", 10)\nwrite(\"黄金结构：承接段首句 → 冲突/行动 → 转折/解决 → 情感升华\", -15, -55, \"#dc2626\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "eng-30",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "el=1 段首句给了什么提示？",
-      "el=3 高分描写句长什么样？",
-      "续写能改原文情节吗？"
-    ],
-    "code": "# 读后续写工作台\nel = 1   # 要素\n\nhide()\nt = \"读原文：两条线\"\nd = \"情节线：谁做了什么结果如何；情感线：人物心情的走向（紧张→释然）\"\ntip = \"划出原文最后一句和两段的段首句——衔接点\"\nif el == 2:\n    t = \"续写结构：两段各司其职\"\n    d = \"第一段：顺着段首句发展冲突/行动；第二段：解决问题+点题升华\"\n    tip = \"段首句是路标：第一段尾要能自然接第二段首\"\nif el == 3:\n    t = \"高分描写：动作+情绪\"\n    d = \"Tears welled up in her eyes. / A warm smile spread across his face. / My heart raced.\"\n    tip = \"少用 sad/happy，多用身体反应写情绪\"\nfill_rect(0, 130, 360, 30, \"#7c3aed\")\nwrite(t, 0, 130, \"#fff\", 12)\nfill_rect(0, 74, 360, 52, \"#f5f3ff\")\nwrite(d, 0, 74, \"#6d28d9\", 10)\nfill_rect(0, 12, 360, 58, \"#fef3c7\")\nwrite(\"要点：\" + tip, 0, 12, \"#b45309\", 10)\nwrite(\"黄金结构：承接段首句 → 冲突/行动 → 转折/解决 → 情感升华\", -15, -55, \"#dc2626\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,84 @@
       "answer": 0,
       "explain": "顺着讲"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "读原文：两条线",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "情节线",
+            "text": "谁做了什么结果如何；情感线：人物心情的走向（紧张→释然）"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "要点",
+            "text": "划出原文最后一句和两段的段首句——衔接点"
+          },
+          {
+            "kind": "highlight",
+            "text": "黄金结构：承接段首句 → 冲突/行动 → 转折/解决 → 情感升华"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "续写结构",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "第一段",
+            "text": "顺着段首句发展冲突/行动；第二段：解决问题+点题升华"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "要点",
+            "text": "段首句是路标：第一段尾要能自然接第二段首"
+          },
+          {
+            "kind": "highlight",
+            "text": "黄金结构：承接段首句 → 冲突/行动 → 转折/解决 → 情感升华"
+          }
+        ],
+        "subtitle": "两段各司其职"
+      },
+      {
+        "when": 3,
+        "title": "高分描写",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "Tears welled up in her eyes. / A warm smile spread across his face. / My heart raced."
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "要点",
+            "text": "少用 sad/happy，多用身体反应写情绪"
+          },
+          {
+            "kind": "highlight",
+            "text": "黄金结构：承接段首句 → 冲突/行动 → 转折/解决 → 情感升华"
+          }
+        ],
+        "subtitle": "动作+情绪"
+      }
+    ],
+    "explore": [
+      "段首句给了什么提示？",
+      "高分描写句长什么样？",
+      "续写能改原文情节吗？"
+    ]
+  }
 }

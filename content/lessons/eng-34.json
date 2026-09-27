@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 动物英语卡片机\na = 1   # 动物\n\nhide()\nword = \"cat\"\ncn = \"猫\"\nsent = \"It is a cat.\"\nemo = \"🐱\"\nif a == 2:\n    word = \"dog\"\n    cn = \"狗\"\n    sent = \"It is a dog.\"\n    emo = \"🐶\"\nif a == 3:\n    word = \"bird\"\n    cn = \"鸟\"\n    sent = \"It is a bird.\"\n    emo = \"🐦\"\nif a == 4:\n    word = \"elephant\"\n    cn = \"大象\"\n    sent = \"It is an elephant.\"\n    emo = \"🐘\"\nif a == 5:\n    word = \"fish\"\n    cn = \"鱼\"\n    sent = \"It is a fish.\"\n    emo = \"🐟\"\nfill_rect(0, 130, 340, 30, \"#f59e0b\")\nwrite(emo + \" \" + word + \"（\" + cn + \"）\", 0, 130, \"#fff\", 14)\nfill_rect(0, 74, 340, 40, \"#fef3c7\")\nwrite(sent, 0, 74, \"#b45309\", 14)\nfill_rect(0, 18, 340, 46, \"#f1f5f9\")\nwrite(\"复数：cat→cats  dog→dogs  bird→birds\", 0, 18, \"#0f172a\", 10)\nwrite(\"an 用于元音开头的词（elephant·apple·egg）\", -20, -40, \"#dc2626\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "eng-34",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "a=4 为什么用an不用a？",
-      "cat的复数怎么写？",
-      "你还能想到什么动物？"
-    ],
-    "code": "# 动物英语卡片机\na = 1   # 动物\n\nhide()\nword = \"cat\"\ncn = \"猫\"\nsent = \"It is a cat.\"\nemo = \"🐱\"\nif a == 2:\n    word = \"dog\"\n    cn = \"狗\"\n    sent = \"It is a dog.\"\n    emo = \"🐶\"\nif a == 3:\n    word = \"bird\"\n    cn = \"鸟\"\n    sent = \"It is a bird.\"\n    emo = \"🐦\"\nif a == 4:\n    word = \"elephant\"\n    cn = \"大象\"\n    sent = \"It is an elephant.\"\n    emo = \"🐘\"\nif a == 5:\n    word = \"fish\"\n    cn = \"鱼\"\n    sent = \"It is a fish.\"\n    emo = \"🐟\"\nfill_rect(0, 130, 340, 30, \"#f59e0b\")\nwrite(emo + \" \" + word + \"（\" + cn + \"）\", 0, 130, \"#fff\", 14)\nfill_rect(0, 74, 340, 40, \"#fef3c7\")\nwrite(sent, 0, 74, \"#b45309\", 14)\nfill_rect(0, 18, 340, 46, \"#f1f5f9\")\nwrite(\"复数：cat→cats  dog→dogs  bird→birds\", 0, 18, \"#0f172a\", 10)\nwrite(\"an 用于元音开头的词（elephant·apple·egg）\", -20, -40, \"#dc2626\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,124 @@
       "answer": 0,
       "explain": "国宝🐼"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "🐱 cat（猫）",
+        "color": "amber",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "It is a cat."
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "复数",
+            "text": "cat→cats  dog→dogs  bird→birds"
+          },
+          {
+            "kind": "highlight",
+            "text": "an 用于元音开头的词（elephant·apple·egg）"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "🐶 dog（狗）",
+        "color": "amber",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "It is a dog."
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "复数",
+            "text": "cat→cats  dog→dogs  bird→birds"
+          },
+          {
+            "kind": "highlight",
+            "text": "an 用于元音开头的词（elephant·apple·egg）"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "🐦 bird（鸟）",
+        "color": "amber",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "It is a bird."
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "复数",
+            "text": "cat→cats  dog→dogs  bird→birds"
+          },
+          {
+            "kind": "highlight",
+            "text": "an 用于元音开头的词（elephant·apple·egg）"
+          }
+        ]
+      },
+      {
+        "when": 4,
+        "title": "🐘 elephant（大象）",
+        "color": "amber",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "It is an elephant."
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "复数",
+            "text": "cat→cats  dog→dogs  bird→birds"
+          },
+          {
+            "kind": "highlight",
+            "text": "an 用于元音开头的词（elephant·apple·egg）"
+          }
+        ]
+      },
+      {
+        "when": 5,
+        "title": "🐟 fish（鱼）",
+        "color": "amber",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "It is a fish."
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "复数",
+            "text": "cat→cats  dog→dogs  bird→birds"
+          },
+          {
+            "kind": "highlight",
+            "text": "an 用于元音开头的词（elephant·apple·egg）"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "为什么用an不用a？",
+      "cat的复数怎么写？",
+      "你还能想到什么动物？"
+    ]
+  }
 }

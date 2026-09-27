@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 急救步骤探索台\nstep = 1   # 步骤\n\nhide()\ni = 0\nwhile i < 5:\n    y = 100 - i * 50\n    col = \"#e2e8f0\"\n    if i + 1 == step:\n        col = \"#fecaca\"\n    fill_rect(0, y, 400, 40, col)\n    i = i + 1\nwrite(\"黄金 4 分钟：大脑缺氧超过 4 分钟开始不可逆损伤\", -60, -120, \"#ea580c\", 11)\nwrite(\"烫伤：冷水冲 15 分钟以上，不涂牙膏不挑水泡\", -70, -145, \"#0369a1\", 10)\nwrite(\"120 要说：地点·伤情·人数·留电话（不先挂）\", -50, -168, \"#16a34a\", 10)\n",
   "celebrate": "新知识到手！",
   "id": "eth-08",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "为什么黄金时间只有 4 分钟？",
-      "烫伤后第一步做什么？",
-      "120 报警要说什么信息？"
-    ],
-    "code": "# 急救步骤探索台\nstep = 1   # 步骤\n\nhide()\ni = 0\nwhile i < 5:\n    y = 100 - i * 50\n    col = \"#e2e8f0\"\n    if i + 1 == step:\n        col = \"#fecaca\"\n    fill_rect(0, y, 400, 40, col)\n    i = i + 1\nwrite(\"黄金 4 分钟：大脑缺氧超过 4 分钟开始不可逆损伤\", -60, -120, \"#ea580c\", 11)\nwrite(\"烫伤：冷水冲 15 分钟以上，不涂牙膏不挑水泡\", -70, -145, \"#0369a1\", 10)\nwrite(\"120 要说：地点·伤情·人数·留电话（不先挂）\", -50, -168, \"#16a34a\", 10)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,99 @@
       "answer": 0,
       "explain": "等调度确认信息"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "生命安全",
+        "color": "pink",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "黄金 4 分钟：大脑缺氧超过 4 分钟开始不可逆损伤"
+          },
+          {
+            "kind": "highlight",
+            "text": "烫伤：冷水冲 15 分钟以上，不涂牙膏不挑水泡"
+          }
+        ],
+        "subtitle": "急救常识"
+      },
+      {
+        "when": 2,
+        "title": "生命安全",
+        "color": "pink",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "黄金 4 分钟：大脑缺氧超过 4 分钟开始不可逆损伤"
+          },
+          {
+            "kind": "highlight",
+            "text": "烫伤：冷水冲 15 分钟以上，不涂牙膏不挑水泡"
+          }
+        ],
+        "subtitle": "急救常识"
+      },
+      {
+        "when": 3,
+        "title": "生命安全",
+        "color": "pink",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "黄金 4 分钟：大脑缺氧超过 4 分钟开始不可逆损伤"
+          },
+          {
+            "kind": "highlight",
+            "text": "烫伤：冷水冲 15 分钟以上，不涂牙膏不挑水泡"
+          }
+        ],
+        "subtitle": "急救常识"
+      },
+      {
+        "when": 4,
+        "title": "生命安全",
+        "color": "pink",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "黄金 4 分钟：大脑缺氧超过 4 分钟开始不可逆损伤"
+          },
+          {
+            "kind": "highlight",
+            "text": "烫伤：冷水冲 15 分钟以上，不涂牙膏不挑水泡"
+          }
+        ],
+        "subtitle": "急救常识"
+      },
+      {
+        "when": 5,
+        "title": "生命安全",
+        "color": "pink",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "黄金 4 分钟：大脑缺氧超过 4 分钟开始不可逆损伤"
+          },
+          {
+            "kind": "highlight",
+            "text": "烫伤：冷水冲 15 分钟以上，不涂牙膏不挑水泡"
+          }
+        ],
+        "subtitle": "急救常识"
+      }
+    ],
+    "explore": [
+      "为什么黄金时间只有 4 分钟？",
+      "烫伤后第一步做什么？",
+      "120 报警要说什么信息？"
+    ]
+  }
 }

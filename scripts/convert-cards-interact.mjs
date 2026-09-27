@@ -6,12 +6,12 @@ import { fileURLToPath } from 'node:url';
  * 第75轮B：把「纯卡片式」画布课自动迁移为 interact 原生卡片形态。
  * 原理：离线用项目自带 Python 解释器跑一遍 lab.code（对第一个参数的每个取值），
  * 捕获 write/fill_rect/circle 命令，按几何关系还原成 标题卡/信息卡/金句。
- * 转不干净的课自动跳过，保持画布形态。
- * 用法: npx tsx scripts/convert-cards-interact.mjs <subjectArea> [dry|write]
+ * 转不干净的课自动跳过，保持 SVG 形态。
+ * 用法: npx tsx scripts/convert-cards-interact.mjs <subjectArea|全部> [dry|write]
  */
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const DIR = path.join(ROOT, 'content', 'lessons');
-const SUBJECT = process.argv[2] ?? '数学';
+const SUBJECT = process.argv[2] ?? '全部';
 const WRITE = process.argv[3] === 'write';
 
 const { pathToFileURL } = await import('node:url');
@@ -25,9 +25,9 @@ const PALETTE = {
   purple: [147, 51, 234], pink: [236, 72, 153], rose: [244, 63, 94],
 };
 function themeOf(hex) {
-  const m = /^#?([0-9a-f]{6})$/i.exec(hex ?? '');
-  if (!m) return 'sky';
-  const n = parseInt(m[1], 16);
+  if (typeof hex !== 'string' || hex.length !== 7 || hex[0] !== '#') return 'sky';
+  const n = parseInt(hex.slice(1), 16);
+  if (!Number.isFinite(n)) return 'sky';
   const rgb = [(n >> 16) & 255, (n >> 8) & 255, n & 255];
   let best = 'sky', bd = Infinity;
   for (const [name, c] of Object.entries(PALETTE)) {
@@ -41,7 +41,7 @@ function themeOf(hex) {
 async function runCapture(code, firstParam, v) {
   let src = code;
   if (firstParam && v !== undefined) {
-    src = src.replace(new RegExp(`^(\\s*)(${firstParam})\\s*=\\s*[-+\\d.]+`, 'm'), `$1$2 = ${v}`);
+    src = src.replace(new RegExp('^(\\s*)(' + firstParam + ')\\s*=\\s*[-+\\d.]+', 'm'), '$1$2 = ' + v);
   }
   const cmds = [];
   const api = {
@@ -68,11 +68,9 @@ function extractView(cmds, fallbackTitle) {
   const rects = cmds.filter((c) => c.t === 'rect');
   const writes = cmds.filter((c) => c.t === 'write');
   if (rects.length === 0 && writes.length === 0) return null;
-  // 横幅：顶部窄长条
   const banner = rects.find((r) => r.y + r.h / 2 >= 100 && r.h <= 45 && r.w >= 200);
   const bannerWrites = banner ? writes.filter((w) => inside(w, banner)) : [];
   const bannerText = bannerWrites.sort((a, b) => b.size - a.size)[0]?.text ?? '';
-  // 其余卡片：面积足够大的矩形
   const cards = rects.filter((r) => r !== banner && r.w >= 70 && r.h >= 24);
   const used = new Set();
   const blocks = [];
@@ -85,17 +83,16 @@ function extractView(cmds, fallbackTitle) {
     if (m) blocks.push({ kind: 'info', icon: '💡', title: m[1], text: m[2] });
     else blocks.push({ kind: 'info', icon: '📌', text });
   }
-  // 游离文字（不属任何矩形）：作副标题/金句
   const loose = writes.filter((w) => !used.has(w) && w.text.trim() && !bannerWrites.includes(w));
   let subtitle = '', highlight = '';
-  const meaningful = loose.filter((w) => w.text.length >= 6 && !/[℃%]/.test(w.text.slice(0, 2)));
+  const meaningful = loose.filter((w) => w.text.length >= 6);
   if (meaningful.length >= 2) {
-    subtitle = meaningful.find((w) => w.y > 60)?.text ?? '';
-    highlight = meaningful.filter((w) => w !== (meaningful.find((w2) => w2.y > 60)))[0]?.text ?? '';
+    const subW = meaningful.find((w) => w.y > 60);
+    subtitle = subW?.text ?? '';
+    highlight = meaningful.filter((w) => w !== subW)[0]?.text ?? '';
   } else if (meaningful.length === 1) {
     highlight = meaningful[0].text;
   }
-  // 标题切分
   let title = bannerText || fallbackTitle;
   if (!subtitle && title.includes('：') && title.length > 8) {
     const i = title.indexOf('：');
@@ -112,36 +109,48 @@ function extractView(cmds, fallbackTitle) {
 
 const clean = (s) => s.replace(/^[a-zA-Z]\w*\s*=\s*\d+\s*[，,]?\s*/, '').trim();
 
+/** 已知碎片化/不适合卡片化的课（人工复查过，保持 SVG 形态） */
+const BLOCKLIST = new Set(['math-53', 'math-60', 'math-88', 'math-90', 'math-92']);
+/** 视图数超限 = 第一个参数其实是连续滑块而非离散场景切换，不适合卡片化 */
+const MAX_VIEWS = 8;
+
+const ALL_SUBJECTS = ['数学', '语文', '英语', '科学', '物理', '化学', '生物', '信息科技', '道德与法治', '地理', '音乐', '艺术', '劳动', '体育与健康'];
+const SUBJECTS = SUBJECT === '全部' ? ALL_SUBJECTS : [SUBJECT];
 const files = fs.readdirSync(DIR).filter((f) => f.endsWith('.json'));
-let converted = [], skipped = [];
-for (const f of files) {
-  const l = JSON.parse(fs.readFileSync(path.join(DIR, f), 'utf-8'));
-  if (l.subjectArea !== SUBJECT || l.interact) continue;
-  const code = l.lab?.code ?? l.starterCode;
-  if (!code || /pen_down|circle\(/.test(code)) continue; // 只转纯卡片课
-  const params = l.lab?.params ?? [];
-  if (params.length === 0) { skipped.push([l.id, '无参数']); continue; }
-  const p0 = params[0];
-  const views = [];
-  let fail = null;
-  for (let v = p0.min; v <= p0.max + 1e-9; v += p0.step) {
-    const r = await runCapture(code, p0.name, Math.round(v * 100) / 100);
-    if (r.error) { fail = `值${v}: ${r.error}`; break; }
-    const view = extractView(r.cmds, l.title);
-    if (!view) { fail = `值${v}: 提取为空`; break; }
-    view.when = Math.round(v * 100) / 100;
-    views.push(view);
+
+for (const SUB of SUBJECTS) {
+  const converted = [], skipped = [];
+  for (const f of files) {
+    const l = JSON.parse(fs.readFileSync(path.join(DIR, f), 'utf-8'));
+    if (l.subjectArea !== SUB || l.interact) continue;
+    if (BLOCKLIST.has(l.id)) { skipped.push([l.id, '人工拉黑']); continue; }
+    const code = l.lab?.code ?? l.starterCode;
+    if (!code || /pen_down|circle\(/.test(code)) continue; // 图形课留给 SVG 渲染
+    const params = l.lab?.params ?? [];
+    if (params.length === 0) { skipped.push([l.id, '无参数']); continue; }
+    const p0 = params[0];
+    if ((p0.max - p0.min) / p0.step + 1 > MAX_VIEWS) { skipped.push([l.id, '连续滑块课(>' + MAX_VIEWS + '值)']); continue; }
+    const views = [];
+    let fail = null;
+    for (let v = p0.min; v <= p0.max + 1e-9; v += p0.step) {
+      const r = await runCapture(code, p0.name, Math.round(v * 100) / 100);
+      if (r.error) { fail = '值' + v + ': ' + r.error; break; }
+      const view = extractView(r.cmds, l.title);
+      if (!view) { fail = '值' + v + ': 提取为空'; break; }
+      view.when = Math.round(v * 100) / 100;
+      views.push(view);
+    }
+    if (fail || views.length === 0) { skipped.push([l.id, fail ?? 'no views']); continue; }
+    const explore = (l.lab?.explore ?? []).map(clean);
+    const patch = { ...l };
+    patch.lab = { params };
+    patch.interact = { views, explore: explore.length ? explore : undefined };
+    delete patch.starterCode;
+    delete patch.codeLesson;
+    if (WRITE) fs.writeFileSync(path.join(DIR, f), JSON.stringify(patch, null, 2) + '\n');
+    converted.push([l.id, views.length + '视图']);
   }
-  if (fail || views.length === 0) { skipped.push([l.id, fail ?? 'no views']); continue; }
-  const explore = (l.lab?.explore ?? l.interact?.explore ?? []).map(clean);
-  const patch = { ...l };
-  patch.lab = { params };
-  patch.interact = { views, explore: explore.length ? explore : undefined };
-  delete patch.starterCode;
-  delete patch.codeLesson;
-  if (WRITE) fs.writeFileSync(path.join(DIR, f), JSON.stringify(patch, null, 2) + '\n');
-  converted.push([l.id, `${views.length}视图`]);
+  console.log('【' + SUB + '】转换 ' + converted.length + ' 节 / 跳过 ' + skipped.length + ' 节 ' + (WRITE ? '(已写入)' : '(dry-run)'));
+  converted.forEach(([id, info]) => console.log('  + ' + id + ' ' + info));
+  skipped.forEach(([id, why]) => console.log('  - ' + id + ' ' + why));
 }
-console.log(`【${SUBJECT}】转换 ${converted.length} 节 / 跳过 ${skipped.length} 节 ${WRITE ? '(已写入)' : '(dry-run)'}`);
-converted.forEach(([id, info]) => console.log(`  ✓ ${id} ${info}`));
-skipped.forEach(([id, why]) => console.log(`  ✗ ${id} ${why}`));

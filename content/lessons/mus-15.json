@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 体裁听辨训练台\ngenre = 1   # 1进行曲 2圆舞曲\n\nhide()\nt = \"进行曲 March\"\nbeat = \"2/4 拍：强-弱 强-弱\"\nfeel = \"坚定有力，踏步向前的感觉\"\nex = \"《义勇军进行曲》《运动员进行曲》\"\nemo = \"🚶 🚶 🚶 🚶\"\nif genre == 2:\n    t = \"圆舞曲 Waltz\"\n    beat = \"3/4 拍：强-弱-弱 强-弱-弱\"\n    feel = \"优雅摇摆，旋转飘荡的感觉\"\n    ex = \"《蓝色多瑙河》《溜冰圆舞曲》\"\n    emo = \"💃 旋转 ～ 💫\"\nfill_rect(0, 130, 360, 30, \"#7c3aed\")\nwrite(t + \"：\" + beat, 0, 130, \"#fff\", 12)\nfill_rect(0, 78, 360, 38, \"#f1f5f9\")\nwrite(feel, 0, 78, \"#0f172a\", 11)\nwrite(emo, 0, 30, \"#0f172a\", 16)\nif genre == 1:\n    i = 0\n    while i < 4:\n        fill_rect(-120 + i * 80, -30, 52, 30, \"#dc2626\")\n        write(\"强\", -120 + i * 80, -30, \"#fff\", 11)\n        i = i + 1\nif genre == 2:\n    i = 0\n    while i < 3:\n        fill_rect(-110 + i * 110, -30, 44, 30, \"#dc2626\")\n        write(\"强\", -110 + i * 110, -30, \"#fff\", 11)\n        i = i + 1\nfill_rect(0, -80, 360, 34, \"#fef3c7\")\nwrite(\"代表：\" + ex, 0, -80, \"#b45309\", 10)\nwrite(\"听辨口诀：踏步 2/4 是进行曲，转圈 3/4 圆舞曲\", -20, -120, \"#dc2626\", 11)\n",
   "celebrate": "新知识到手！",
   "id": "mus-15",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "进行曲的强弱规律是什么？",
-      "圆舞曲为什么有摇摆感？",
-      "《拉德茨基进行曲》和《蓝色多瑙河》分别是什么体裁？"
-    ],
-    "code": "# 体裁听辨训练台\ngenre = 1   # 1进行曲 2圆舞曲\n\nhide()\nt = \"进行曲 March\"\nbeat = \"2/4 拍：强-弱 强-弱\"\nfeel = \"坚定有力，踏步向前的感觉\"\nex = \"《义勇军进行曲》《运动员进行曲》\"\nemo = \"🚶 🚶 🚶 🚶\"\nif genre == 2:\n    t = \"圆舞曲 Waltz\"\n    beat = \"3/4 拍：强-弱-弱 强-弱-弱\"\n    feel = \"优雅摇摆，旋转飘荡的感觉\"\n    ex = \"《蓝色多瑙河》《溜冰圆舞曲》\"\n    emo = \"💃 旋转 ～ 💫\"\nfill_rect(0, 130, 360, 30, \"#7c3aed\")\nwrite(t + \"：\" + beat, 0, 130, \"#fff\", 12)\nfill_rect(0, 78, 360, 38, \"#f1f5f9\")\nwrite(feel, 0, 78, \"#0f172a\", 11)\nwrite(emo, 0, 30, \"#0f172a\", 16)\nif genre == 1:\n    i = 0\n    while i < 4:\n        fill_rect(-120 + i * 80, -30, 52, 30, \"#dc2626\")\n        write(\"强\", -120 + i * 80, -30, \"#fff\", 11)\n        i = i + 1\nif genre == 2:\n    i = 0\n    while i < 3:\n        fill_rect(-110 + i * 110, -30, 44, 30, \"#dc2626\")\n        write(\"强\", -110 + i * 110, -30, \"#fff\", 11)\n        i = i + 1\nfill_rect(0, -80, 360, 34, \"#fef3c7\")\nwrite(\"代表：\" + ex, 0, -80, \"#b45309\", 10)\nwrite(\"听辨口诀：踏步 2/4 是进行曲，转圈 3/4 圆舞曲\", -20, -120, \"#dc2626\", 11)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -206,5 +197,60 @@
       "answer": 0,
       "explain": "踏步还是转圈"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "进行曲 March",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "坚定有力，踏步向前的感觉"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "代表",
+            "text": "《义勇军进行曲》《运动员进行曲》"
+          },
+          {
+            "kind": "highlight",
+            "text": "🚶 🚶 🚶 🚶"
+          }
+        ],
+        "subtitle": "2/4 拍：强-弱 强-弱"
+      },
+      {
+        "when": 2,
+        "title": "圆舞曲 Waltz",
+        "color": "violet",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "优雅摇摆，旋转飘荡的感觉"
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "代表",
+            "text": "《蓝色多瑙河》《溜冰圆舞曲》"
+          },
+          {
+            "kind": "highlight",
+            "text": "💃 旋转 ～ 💫"
+          }
+        ],
+        "subtitle": "3/4 拍：强-弱-弱 强-弱-弱"
+      }
+    ],
+    "explore": [
+      "进行曲的强弱规律是什么？",
+      "圆舞曲为什么有摇摆感？",
+      "《拉德茨基进行曲》和《蓝色多瑙河》分别是什么体裁？"
+    ]
+  }
 }

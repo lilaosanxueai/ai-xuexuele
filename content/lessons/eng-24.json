@@ -51,8 +51,6 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 语法填空攻略卡\nkind = 1   # 1给动词 2给名词/形 3无提示词\n\nhide()\nt = \"给动词：变形三问\"\nq0 = \"She ___ (go) to school yesterday.\"\na0 = \"went（有 yesterday → 过去式）\"\ntip = \"一问时态语态 二问非谓语 三问主谓一致\"\nif kind == 2:\n    t = \"给名词/形容词：三方向\"\n    q0 = \"This is the ___ (good) movie.\"\n    a0 = \"best（the + 最高级）\"\n    tip = \"词性转换 · 比较最高级 · 单复数\"\nif kind == 3:\n    t = \"无提示词：功能词八选\"\n    q0 = \"He is interested ___ music.\"\n    a0 = \"in（固定搭配 be interested in）\"\n    tip = \"冠代介连比·助动·固搭——空后无完整动词时优先介词/连词\"\nfill_rect(0, 130, 360, 32, \"#1d4ed8\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 78, 360, 38, \"#eff6ff\")\nwrite(\"例：\" + q0, 0, 78, \"#1d4ed8\", 11)\nfill_rect(0, 24, 360, 40, \"#f1f5f9\")\nwrite(\"答：\" + a0, 0, 24, \"#0f172a\", 11)\nfill_rect(0, -26, 360, 38, \"#fef3c7\")\nwrite(tip, 0, -26, \"#b45309\", 10)\nwrite(\"纯空格口诀：冠代介连比，助动加搭配\", -20, -75, \"#dc2626\", 12)\n",
   "celebrate": "新知识到手！",
   "id": "eng-24",
   "island": "cross",
@@ -88,14 +86,7 @@
         "step": 1,
         "value": 1
       }
-    ],
-    "grid": false,
-    "explore": [
-      "kind=1 给动词先想什么？",
-      "无提示词为什么最多考介词和连词？",
-      "并列结构里为什么常填比较级？"
-    ],
-    "code": "# 语法填空攻略卡\nkind = 1   # 1给动词 2给名词/形 3无提示词\n\nhide()\nt = \"给动词：变形三问\"\nq0 = \"She ___ (go) to school yesterday.\"\na0 = \"went（有 yesterday → 过去式）\"\ntip = \"一问时态语态 二问非谓语 三问主谓一致\"\nif kind == 2:\n    t = \"给名词/形容词：三方向\"\n    q0 = \"This is the ___ (good) movie.\"\n    a0 = \"best（the + 最高级）\"\n    tip = \"词性转换 · 比较最高级 · 单复数\"\nif kind == 3:\n    t = \"无提示词：功能词八选\"\n    q0 = \"He is interested ___ music.\"\n    a0 = \"in（固定搭配 be interested in）\"\n    tip = \"冠代介连比·助动·固搭——空后无完整动词时优先介词/连词\"\nfill_rect(0, 130, 360, 32, \"#1d4ed8\")\nwrite(t, 0, 130, \"#fff\", 13)\nfill_rect(0, 78, 360, 38, \"#eff6ff\")\nwrite(\"例：\" + q0, 0, 78, \"#1d4ed8\", 11)\nfill_rect(0, 24, 360, 40, \"#f1f5f9\")\nwrite(\"答：\" + a0, 0, 24, \"#0f172a\", 11)\nfill_rect(0, -26, 360, 38, \"#fef3c7\")\nwrite(tip, 0, -26, \"#b45309\", 10)\nwrite(\"纯空格口诀：冠代介连比，助动加搭配\", -20, -75, \"#dc2626\", 12)\n"
+    ]
   },
   "teach": {
     "sections": [
@@ -205,5 +196,100 @@
       "answer": 0,
       "explain": "规则题"
     }
-  ]
+  ],
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "给动词：变形三问",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "例",
+            "text": "She ___ (go) to school yesterday."
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "答",
+            "text": "went（有 yesterday → 过去式）"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "一问时态语态 二问非谓语 三问主谓一致"
+          },
+          {
+            "kind": "highlight",
+            "text": "纯空格口诀：冠代介连比，助动加搭配"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "给名词/形容词",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "例",
+            "text": "This is the ___ (good) movie."
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "答",
+            "text": "best（the + 最高级）"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "词性转换 · 比较最高级 · 单复数"
+          },
+          {
+            "kind": "highlight",
+            "text": "纯空格口诀：冠代介连比，助动加搭配"
+          }
+        ],
+        "subtitle": "三方向"
+      },
+      {
+        "when": 3,
+        "title": "无提示词",
+        "color": "blue",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "例",
+            "text": "He is interested ___ music."
+          },
+          {
+            "kind": "info",
+            "icon": "💡",
+            "title": "答",
+            "text": "in（固定搭配 be interested in）"
+          },
+          {
+            "kind": "info",
+            "icon": "📌",
+            "text": "冠代介连比·助动·固搭——空后无完整动词时优先介词/连词"
+          },
+          {
+            "kind": "highlight",
+            "text": "纯空格口诀：冠代介连比，助动加搭配"
+          }
+        ],
+        "subtitle": "功能词八选"
+      }
+    ],
+    "explore": [
+      "给动词先想什么？",
+      "无提示词为什么最多考介词和连词？",
+      "并列结构里为什么常填比较级？"
+    ]
+  }
 }
