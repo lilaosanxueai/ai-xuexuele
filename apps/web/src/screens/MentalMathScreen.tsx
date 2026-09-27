@@ -152,6 +152,7 @@ export default function MentalMathScreen() {
       <div className="flex min-h-screen flex-col">
         <Header />
         <main className="mx-auto w-full max-w-3xl flex-1 px-6 pb-10">
+          <button onClick={() => nav('/map')} className="mb-3 rounded-xl bg-slate-100 px-3 py-1.5 text-sm font-bold text-slate-600 hover:bg-slate-200">← 返回地图</button>
           <h1 className="text-2xl font-black text-slate-700">⚡ 口算训练器</h1>
           <p className="mb-5 mt-1 text-sm text-slate-500">60 秒限时练习 · 五档年级难度 · 答错的题自动进入重练</p>
           <div className="grid gap-3 sm:grid-cols-2">
@@ -166,7 +167,7 @@ export default function MentalMathScreen() {
                   <span className="block text-lg font-black text-slate-800">{l.name}</span>
                   <span className="text-xs text-slate-500">{l.desc}</span>
                 </span>
-                <span className="ml-auto rounded-xl bg-sky-500 px-4 py-2 font-bold text-white">开始 →</span>
+                <span className="ml-auto shrink-0 whitespace-nowrap rounded-xl bg-sky-500 px-4 py-2 font-bold text-white">开始 →</span>
               </button>
             ))}
           </div>
