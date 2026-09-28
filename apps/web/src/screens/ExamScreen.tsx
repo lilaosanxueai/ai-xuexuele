@@ -5,6 +5,7 @@ import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
 import { sampleQuestions, type ChallengeQ } from '../runtime/challenge.ts';
+import { sortByDifficulty } from '../runtime/questionDifficulty.ts';
 import { bumpRecords, readRecords, recordsKey } from '../runtime/achievements.ts';
 
 /** 学科期末模拟卷：全学科课程抽 20 题 · 30 分钟总计时 · 无生命限制 · 结卷按课标模块诊断 */
@@ -92,7 +93,8 @@ export default function ExamScreen() {
 
   const start = () => {
     if (!profile) return;
-    const qs = sampleQuestions(subjectLessons, { count: TOTAL, grade: profile.grade });
+    // 由易到难排卷（真实考试法则）：先热身进入状态，推理计算题压轴
+    const qs = sortByDifficulty(sampleQuestions(subjectLessons, { count: TOTAL, grade: profile.grade }));
     if (qs.length === 0) return;
     submittedRef.current = false;
     setQueue(qs);

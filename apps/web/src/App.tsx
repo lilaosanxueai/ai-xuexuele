@@ -13,7 +13,7 @@ import LabScreen from './screens/LabScreen.tsx';
 // 首页/辅导页首屏显著变快，平板上尤其明显
 const WorkshopScreen = lazy(() => import('./screens/WorkshopScreen.tsx'));
 const PlaygroundScreen = lazy(() => import('./screens/PlaygroundScreen.tsx'));
-const WrongBookScreen = lazy(() => import('./screens/WrongBookScreen.tsx'));
+const WrongBookScreen = lazy(() => import('./screens/WrongbookScreen.tsx'));
 const MentalMathScreen = lazy(() => import('./screens/MentalMathScreen.tsx'));
 const FlashcardScreen = lazy(() => import('./screens/FlashcardScreen.tsx'));
 const ChallengeScreen = lazy(() => import('./screens/ChallengeScreen.tsx'));

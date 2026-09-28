@@ -6,6 +6,7 @@ import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
 import { SUBJECTS } from '../components/subjectMeta.ts';
 import { comboWord, gradeResult, sampleQuestions, scoreFor, type ChallengeQ } from '../runtime/challenge.ts';
+import { sortByDifficulty } from '../runtime/questionDifficulty.ts';
 import { bumpCounter } from '../runtime/dailyQuests.ts';
 import { bumpRecords, readRecords, recordsKey } from '../runtime/achievements.ts';
 
@@ -116,7 +117,8 @@ export default function ChallengeScreen() {
 
   const start = () => {
     if (!profile) return;
-    const qs = sampleQuestions(lessons, { subject, gradeBand: band, count: TOTAL, grade: profile.grade });
+    // 由易到难出题：连击从简单题起步，手感越打越热
+    const qs = sortByDifficulty(sampleQuestions(lessons, { subject, gradeBand: band, count: TOTAL, grade: profile.grade }));
     if (qs.length === 0) return;
     setQueue(qs);
     setIdx(0); setPicked(null); setCorrect(0); setScore(0); setStreak(0); setBestStreak(0);

@@ -7,6 +7,7 @@ import Header from '../components/Header.tsx';
 import ExercisePanel from '../components/ExercisePanel.tsx';
 import { SUBJECTS } from '../components/subjectMeta.ts';
 import { bumpCounter } from '../runtime/dailyQuests.ts';
+import { sortByDifficulty, sortByWrongPriority } from '../runtime/questionDifficulty.ts';
 
 /** 打印样式：只打印练习卷浮层 */
 const PRINT_CSS = `@media print { body * { visibility: hidden !important; } #print-sheet, #print-sheet * { visibility: visible !important; } #print-sheet { position: absolute !important; left: 0; top: 0; width: 100%; background: #fff; } }`;
@@ -67,12 +68,13 @@ export default function WrongBookScreen() {
     return [...m.entries()].sort((a, b) => b[1].length - a[1].length);
   }, [wrongs]);
 
-  // 重练题组：全部错题乱序
+  // 重练题组：到期优先（错次多+错得久的先练，Anki 式），题内由易到难
   const practiceSet = useMemo<Exercise[]>(() => {
-    return [...wrongs]
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 20)
-      .map((w) => ({ q: w.q, options: w.options, answer: w.answer, explain: w.explain }));
+    return sortByDifficulty(
+      sortByWrongPriority(wrongs)
+        .slice(0, 20)
+        .map((w) => ({ q: w.q, options: w.options, answer: w.answer, explain: w.explain })),
+    );
   }, [practicing]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const finishPractice = (correct: number, wrongPicks: { idx: number; pick: number }[]) => {
