@@ -155,9 +155,9 @@
       "q": "an apple 中用 an 是因为？",
       "options": [
         "apple 以元音音开头",
-        "apple 是水果",
-        "单数",
-        "复数"
+        "因为 apple 是一种水果",
+        "因为 apple 是单数名词",
+        "因为 apple 是复数名词"
       ],
       "answer": 0,
       "explain": "元音音开头用 an：an apple / an orange"

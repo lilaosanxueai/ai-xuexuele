@@ -27,8 +27,8 @@ for (const f of files) {
   } catch { /* skip */ }
 }
 
-// 只看信息科技基础课（basics/ai），孩子最先接触的课
-const targets = all.filter((l) => /^(basics|ai)-/.test(l.id));
+// 目标课：按 id 前缀过滤（第99轮：理科课）
+const targets = all.filter((l) => /^(bio|chem|cross|sci)-/.test(l.id));
 for (const l of targets) {
   (l.exercises ?? []).forEach((e, i) => {
     const opts = (e.options ?? []).map(String);
