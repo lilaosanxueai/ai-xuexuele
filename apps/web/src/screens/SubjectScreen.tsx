@@ -120,6 +120,105 @@ export default function SubjectScreen() {
           </div>
         </div>
 
+        {/* 学习路径（多邻国式闯关地图）：按课标模块分单元，蛇形节点 + 中央引导线 */}
+        {(() => {
+          // 单元 = 学段内按顺序聚合的「大单元」：每 4-6 课一组（模块名拼接）——
+          // 课标模块太碎时合成一组，才有闯关路径的节奏感（多邻国单元 5-10 关）
+          const GROUP_MAX = 6;
+          const GROUP_MIN = 4;
+          const units = BAND_ORDER.flatMap((band) => {
+            const bandLessons = gradeSort(mine.filter((l) => (l.gradeBand ?? 'primary') === band), profile.grade);
+            if (bandLessons.length === 0) return [];
+            const ordered = [...bandLessons].sort((a, b) => a.order - b.order);
+            const chunks: { mod: string; list: Lesson[] }[] = [];
+            let curList: Lesson[] = [];
+            let curMods: string[] = [];
+            const flush = () => {
+              if (curList.length === 0) return;
+              const name = curMods.length <= 2 ? curMods.join(' · ') : curMods[0] + ' · ' + curMods[1] + ' 等';
+              chunks.push({ mod: name, list: curList });
+              curList = [];
+              curMods = [];
+            };
+            ordered.forEach((l, i) => {
+              const m = l.curriculum?.module ?? '其他';
+              curList.push(l);
+              if (!curMods.includes(m)) curMods.push(m);
+              const next = ordered[i + 1];
+              const nextMod = next?.curriculum?.module ?? '其他';
+              if (curList.length >= GROUP_MAX || (curList.length >= GROUP_MIN && next && nextMod !== m)) flush();
+            });
+            flush();
+            return chunks.map((c) => ({ band, ...c }));
+          });
+          const currentId = mine.find((l) => !lessonDone(l.id))?.id;
+          const favKey = `island-fav-${profile.id}`;
+          let favs: string[] = [];
+          try { favs = JSON.parse(localStorage.getItem(favKey) ?? '[]') as string[]; } catch { /* 忽略 */ }
+          const toggleFav = (id: string) => {
+            try {
+              const next = favs.includes(id) ? favs.filter((x) => x !== id) : [...favs, id];
+              localStorage.setItem(favKey, JSON.stringify(next));
+            } catch { /* 忽略 */ }
+            setFavTick((t) => t + 1);
+          };
+          return units.map(({ band, mod, list }, ui) => {
+            const unitDone = list.filter((l) => lessonDone(l.id)).length;
+            return (
+              <section key={band + mod} className="mb-6">
+                <div className="mb-2 flex items-center gap-2 px-1">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-slate-800 text-xs font-black text-white">{ui + 1}</span>
+                  <h2 className="truncate text-base font-black text-slate-700">{mod}</h2>
+                  <span className="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-500">{BAND_LABEL[band]}</span>
+                  <span className="ml-auto shrink-0 text-xs font-bold text-slate-400">{unitDone}/{list.length} ✓</span>
+                </div>
+                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-white/70 to-slate-50/50 px-4 py-4 shadow-sm">
+                  {/* 中央引导线 */}
+                  <div className="absolute bottom-6 left-1/2 top-6 w-1 -translate-x-1/2 rounded bg-slate-200/80" />
+                  <div className="relative flex flex-col items-center gap-4">
+                    {list.map((l, i) => {
+                      const isDone = lessonDone(l.id);
+                      const isCurrent = l.id === currentId;
+                      const isMine = profile.grade != null && l.grade === profile.grade;
+                      const off = [0, 76, 0, -76][i % 4];
+                      const isFav = favs.includes(l.id);
+                      const d = difficultyStars(l);
+                      return (
+                        <div key={l.id} className="flex flex-col items-center" style={{ transform: `translateX(${off}px)` }}>
+                          <div className="group relative">
+                            <span
+                              role="button"
+                              onClick={(e) => { e.stopPropagation(); toggleFav(l.id); }}
+                              className={`absolute -right-2 -top-1 z-20 cursor-pointer text-sm transition ${isFav ? 'opacity-90' : 'opacity-0 grayscale group-hover:opacity-60'}`}
+                              title={isFav ? '取消收藏' : '收藏这节课'}
+                            >{isFav ? '❤️' : '🤍'}</span>
+                            <button
+                              onClick={() => nav(isLabLesson(l) ? `/lab/${l.id}` : `/tutor/${l.id}`)}
+                              title={`${l.title}（${l.grade ?? '?'}年级 · ${starsDisplay(d)} ${difficultyLabel(d)}${l.curriculum ? ' · ' + l.curriculum.points.slice(0, 2).join(' / ') : ''}）`}
+                              className={`relative flex h-16 w-16 items-center justify-center rounded-full text-3xl shadow-lg transition hover:scale-110 active:scale-95 ${
+                                isDone ? `bg-gradient-to-br ${style.card} text-white`
+                                  : isCurrent ? 'bg-white ring-4 ring-emerald-400'
+                                  : 'bg-white/90 ring-2 ring-slate-200'
+                              } ${isMine ? ' outline outline-[3px] outline-amber-400 outline-offset-2' : ''}`}
+                            >
+                              {l.emoji}
+                              {isDone && (
+                                <span className="absolute -bottom-0.5 -right-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500 text-[11px] font-black text-white shadow">✓</span>
+                              )}
+                              {isCurrent && !isDone && <span className="absolute -top-3 -right-2 animate-bounce text-lg drop-shadow">📍</span>}
+                            </button>
+                          </div>
+                          <span className="mt-1.5 w-24 truncate text-center text-[10px] font-bold text-slate-600">{l.title}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </section>
+            );
+          });
+        })()}
+
         {/* 期末模拟卷：全学科抽题组卷 + 限时 + 模块诊断 */}
         <button
           onClick={() => nav(`/exam/${encodeURIComponent(subject)}`)}
@@ -218,65 +317,7 @@ export default function SubjectScreen() {
           </section>
         )}
 
-        {bands.map(({ band, list }) => (
-          <section key={band} className="mb-8">
-            <h2 className="mb-3 flex items-center gap-2 text-xl font-black text-slate-700">
-              {BAND_LABEL[band]}
-              <span className="text-xs font-normal text-slate-400">{list.length} 课 · {subject}课程标准</span>
-            </h2>
-            <div className="space-y-2">
-              {list.map((l) => {
-                const isDone = lessonDone(l.id);
-                const favKey = `island-fav-${profile.id}`;
-                let isFav = false;
-                try { isFav = (JSON.parse(localStorage.getItem(favKey) ?? '[]') as string[]).includes(l.id); } catch { /* 忽略 */ }
-                const toggleFav = () => {
-                  try {
-                    const cur = JSON.parse(localStorage.getItem(favKey) ?? '[]') as string[];
-                    const next = cur.includes(l.id) ? cur.filter((x) => x !== l.id) : [...cur, l.id];
-                    localStorage.setItem(favKey, JSON.stringify(next));
-                  } catch { /* 忽略 */ }
-                  setFavTick((t) => t + 1);
-                };
-                return (
-                  <div key={l.id} className="relative">
-                    <span
-                      role="button"
-                      onClick={(e) => { e.stopPropagation(); toggleFav(); }}
-                      className={`absolute right-12 top-1/2 z-10 -translate-y-1/2 cursor-pointer rounded-full px-1.5 text-lg transition ${isFav ? '' : 'opacity-25 grayscale hover:opacity-70'}`}
-                      title={isFav ? '取消收藏' : '收藏这节课'}
-                    >{isFav ? '❤️' : '🤍'}</span>
-                    <button
-                      onClick={() => nav(isLabLesson(l) ? `/lab/${l.id}` : `/tutor/${l.id}`)}
-                      className={`flex w-full items-center gap-3 rounded-2xl bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${isDone ? `ring-2 ${style.ring}` : ''}`}
-                    >
-                    <div className="text-3xl">{l.emoji}</div>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-2">
-                        <span className="truncate font-bold text-slate-800">{l.title}</span>
-                        {isLabLesson(l) && <span className="shrink-0 rounded-full bg-violet-100 px-2 py-0.5 text-xs font-bold text-violet-700">🔬 互动实验</span>}
-                        {l.codeLesson && <span className="shrink-0 rounded-full bg-slate-800 px-2 py-0.5 text-xs font-bold text-white">Python</span>}
-                        {l.grade != null && (l.grade === profile.grade ? (
-                          <span className="shrink-0 rounded-full bg-amber-400 px-2 py-0.5 text-xs font-bold text-white" title="和你同年级">⭐ 我的年级</span>
-                        ) : (
-                          <span className="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-bold text-amber-700">{l.grade}年级</span>
-                        ))}
-                      </div>
-                      <div className="mt-0.5 truncate text-xs text-slate-400">
-                        {l.subject ? `${l.subject.emoji} ${l.subject.name}` : l.curriculum ? `📗 ${l.curriculum.module}` : ''}
-                        {l.curriculum ? ` · ${l.curriculum.points.slice(0, 2).join(' / ')}` : ''}
-                        {l.textbook ? ` · 📚 ${l.textbook}` : ''}
-                        {' · '}{(() => { const d = difficultyStars(l); return starsDisplay(d) + ' ' + difficultyLabel(d); })()}
-                      </div>
-                    </div>
-                    <span className="shrink-0 text-xl">{isDone ? '✅' : '▶'}</span>
-                    </button>
-                  </div>
-                );
-              })}
-            </div>
-          </section>
-        ))}
+
 
         {mine.length === 0 && (
           <div className="rounded-3xl bg-white/70 p-10 text-center text-slate-400">该学科暂无课程</div>
