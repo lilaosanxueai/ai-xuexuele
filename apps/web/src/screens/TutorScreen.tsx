@@ -12,6 +12,7 @@ import Header from '../components/Header.tsx';
 import ExercisePanel from '../components/ExercisePanel.tsx';
 import TeachPanel from '../components/TeachPanel.tsx';
 import LessonReport from '../components/LessonReport.tsx';
+import { suggestNext } from '../runtime/nextStep.ts';
 
 /**
  * 课程阅读页（现代自学形态）：
@@ -294,6 +295,8 @@ export default function TutorScreen() {
           correct={report.correct}
           total={report.total}
           wrongCount={report.wrongCount}
+          nextStep={suggestNext(allLessons, lesson, report.total > 0 ? report.correct / report.total : 0)}
+          onGoNext={(p) => nav(p)}
           onClose={() => setReportOpen(false)}
           onGoWrongbook={() => nav('/wrongbook')}
         />

@@ -1,4 +1,5 @@
 import type { Lesson } from '@shared/types.ts';
+import type { NextStep } from '../runtime/nextStep.ts';
 
 interface Props {
   lesson: Lesson;
@@ -6,6 +7,9 @@ interface Props {
   total: number;
   /** 本轮进错题本的题数 */
   wrongCount: number;
+  /** 难度自适应下一站建议（可选：无课程表数据时不显示） */
+  nextStep?: NextStep | null;
+  onGoNext?: (path: string) => void;
   onClose: () => void;
   onGoWrongbook: () => void;
 }
@@ -19,7 +23,7 @@ function commentOf(pct: number, wrongCount: number): { head: string; body: strin
 }
 
 /** 课堂报告（学而思式课后反馈卡）：得分环 + 知识点清单 + 学习路径 + 老师评语 */
-export default function LessonReport({ lesson, correct, total, wrongCount, onClose, onGoWrongbook }: Props) {
+export default function LessonReport({ lesson, correct, total, wrongCount, nextStep, onGoNext, onClose, onGoWrongbook }: Props) {
   const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
   const C = 2 * Math.PI * 44; // r=44 的周长
   const points = lesson.curriculum?.points ?? [];
@@ -116,6 +120,26 @@ export default function LessonReport({ lesson, correct, total, wrongCount, onClo
         </div>
         <div className="pb-3" />
         </div>
+
+        {/* 下一站（难度自适应：高分进阶/低分补基础/中间顺位） */}
+        {nextStep && (
+          <div className="mx-4 mt-3 rounded-2xl bg-white p-4 shadow-sm">
+            <div className="mb-1.5 text-sm font-black text-slate-700">🧭 下一站</div>
+            <p className="text-[13px] leading-relaxed text-slate-500">{nextStep.reason}</p>
+            {onGoNext && (
+              <button
+                onClick={() => onGoNext(nextStep.path)}
+                className="mt-2.5 flex w-full items-center gap-2.5 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-500 p-3 text-left text-white shadow-md transition hover:brightness-110"
+              >
+                <span className="text-2xl">{nextStep.emoji}</span>
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate text-sm font-black">{nextStep.title}</span>
+                  <span className="text-[11px] opacity-80">立即前往 →</span>
+                </span>
+              </button>
+            )}
+          </div>
+        )}
 
         {/* 动作（固定底栏：不随内容滚动，永远可见） */}
         <div className="flex gap-2 border-t border-slate-200 bg-white/90 p-4">

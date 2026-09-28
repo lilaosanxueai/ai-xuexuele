@@ -9,6 +9,7 @@ import ExercisePanel from '../components/ExercisePanel.tsx';
 import TeachPanel from '../components/TeachPanel.tsx';
 import InteractLab from '../components/InteractLab.tsx';
 import LessonReport from '../components/LessonReport.tsx';
+import { suggestNext } from '../runtime/nextStep.ts';
 import { parsePy, PyRunner } from '../runtime/pyinterp.ts';
 import { pyStageApi } from '../runtime/pyBridge.ts';
 import { lessonNeighbors, lessonRoute } from '../runtime/lessonNav.ts';
@@ -617,6 +618,8 @@ export default function LabScreen() {
           correct={report.correct}
           total={report.total}
           wrongCount={report.wrongCount}
+          nextStep={suggestNext(allLessons, lesson, report.total > 0 ? report.correct / report.total : 0)}
+          onGoNext={(p) => nav(p)}
           onClose={() => setReportOpen(false)}
           onGoWrongbook={() => nav('/wrongbook')}
         />
