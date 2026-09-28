@@ -104,10 +104,10 @@
     {
       "q": "Python 里重复 3 次动作用什么语句？",
       "options": [
-        "if",
+        "用 if 语句判断条件",
         "for i in range(3)",
-        "move(3)",
-        "wait(3)"
+        "用 move(3) 一次走三步",
+        "用 wait(3) 等待三秒"
       ],
       "answer": 1,
       "explain": "for i in range(3) 就是 Python 版的「重复 3 次」"

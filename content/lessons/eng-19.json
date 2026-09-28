@@ -164,10 +164,10 @@
     {
       "q": "下面哪个是结尾万能句？",
       "options": [
-        "I am Li Hua.",
+        "Let me introduce myself first.",
         "Looking forward to your reply.",
-        "It is a pen.",
-        "He is tall."
+        "Yesterday I went to the park.",
+        "My hobby is playing football."
       ],
       "answer": 1,
       "explain": "期待回复"
