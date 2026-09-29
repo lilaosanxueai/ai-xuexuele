@@ -8,6 +8,7 @@ import ExercisePanel from '../components/ExercisePanel.tsx';
 import { SUBJECTS, SUBJECT_STYLE } from '../components/subjectMeta.ts';
 import { collectModules, generateStudyPlan, todayModules, type StudyPlan } from '../runtime/studyPlan.ts';
 import { difficultyStars, starsDisplay, difficultyLabel } from '../runtime/difficulty.ts';
+import { xpForQuiz } from '../runtime/xp.ts';
 
 /** 学科页：该学科按学段分组的全部课程，含课标标注。理科动态演示课进互动实验室，其余进辅导页 */
 const BAND_ORDER = ['primary', 'junior', 'senior'] as const;
@@ -170,6 +171,7 @@ export default function SubjectScreen() {
                   <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-slate-800 text-xs font-black text-white">{ui + 1}</span>
                   <h2 className="truncate text-base font-black text-slate-700">{mod}</h2>
                   <span className="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-500">{BAND_LABEL[band]}</span>
+                  <span className="shrink-0 rounded-full bg-amber-50 px-2 py-0.5 text-[10px] font-bold text-amber-600" title="全部满分完成本单元可获得的星星">满星约 {list.reduce((s, l) => s + xpForQuiz((l.exercises ?? []).length, (l.exercises ?? []).length), 0)}⭐</span>
                   <span className="ml-auto shrink-0 text-xs font-bold text-slate-400">{unitDone}/{list.length} ✓</span>
                 </div>
                 <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-white/70 to-slate-50/50 px-4 py-4 shadow-sm">

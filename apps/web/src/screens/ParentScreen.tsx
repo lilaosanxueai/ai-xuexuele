@@ -8,6 +8,7 @@ import AnnualReport from '../components/AnnualReport.tsx';
 import { exercisesToCsv, usageToCsv, downloadCsv } from '../runtime/csvExport.ts';
 import { computeBadges, readRecords, recordsKey, EMPTY_RECORDS } from '../runtime/achievements.ts';
 import { computeWeeklyReport } from '../runtime/weeklyReport.ts';
+import { levelFor } from '../runtime/xp.ts';
 import { calcStreak } from '../utils/streak.ts';
 
 /** 家长面板：学习进度 / 学情报告 / AI 对话记录 / 伙伴设置（已取消 PIN 门，直接进入） */
@@ -103,6 +104,25 @@ function ProgressTab({ profileId }: { profileId: string }) {
 
   return (
     <div>
+      {/* 学习之星等级卡（家长可见的成长曲线入口） */}
+      {(() => {
+        const lv = levelFor(progress?.xp ?? 0);
+        return (
+          <div className="mb-4 flex items-center gap-3 rounded-2xl bg-gradient-to-r from-amber-50 to-yellow-50 p-4 ring-1 ring-amber-200">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-amber-400 text-xl font-black text-white shadow">⭐{lv.level}</span>
+            <div className="min-w-0 flex-1">
+              <div className="flex items-baseline gap-2">
+                <span className="text-sm font-black text-amber-800">{lv.title}</span>
+                <span className="text-[11px] font-bold text-amber-500">{progress?.xp ?? 0} 颗学习之星 · 距 LV{lv.level + 1} 还差 {Math.max(0, lv.cur + lv.next - (progress?.xp ?? 0))} 颗</span>
+              </div>
+              <div className="mt-1.5 h-2.5 overflow-hidden rounded-full bg-white">
+                <div className="h-full rounded-full bg-gradient-to-r from-amber-400 to-orange-500" style={{ width: `${lv.progress}%` }} />
+              </div>
+              <p className="mt-1 text-[10px] text-amber-500/80">星星来自随堂小练：每对一题 10 颗、全对加 20、完成加 5</p>
+            </div>
+          </div>
+        );
+      })()}
       {/* 家长悄悄话：写给孩子的小鼓励 */}
       <div className="mb-4 rounded-2xl bg-gradient-to-r from-amber-50 to-rose-50 p-4 ring-1 ring-amber-200">
         <div className="mb-1 text-sm font-black text-amber-700">💌 给孩子的悄悄话</div>
