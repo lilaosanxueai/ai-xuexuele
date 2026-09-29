@@ -89,8 +89,13 @@ export function mergeProgress(profileId: string, patch: {
   wrongClears?: string[];
   parentNotes?: ParentNote[];
   lessonNotes?: Record<string, string>;
+  /** 学习之星增量（0-200） */
+  xpDelta?: number;
 }): ProfileProgress {
   const cur = getProgress(profileId);
+  if (typeof patch.xpDelta === 'number' && Number.isInteger(patch.xpDelta) && patch.xpDelta >= 0 && patch.xpDelta <= 200) {
+    cur.xp = (cur.xp ?? 0) + patch.xpDelta;
+  }
   if (patch.lessonId) {
     const lp = cur.lessons[patch.lessonId] ?? { status: 'in_progress' as const, tasks: {} };
     if (patch.tasks) {

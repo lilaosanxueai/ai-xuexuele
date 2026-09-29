@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { HashRouter, Navigate, Route, Routes, useParams } from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen.tsx';
 import MapScreen from './screens/MapScreen.tsx';
@@ -8,6 +8,7 @@ import SubjectScreen from './screens/SubjectScreen.tsx';
 import AskScreen from './screens/AskScreen.tsx';
 import TutorScreen from './screens/TutorScreen.tsx';
 import LabScreen from './screens/LabScreen.tsx';
+import { useProfileStore } from './stores/profile.ts';
 
 // 重页面懒加载：进练习才下载 Blockly（776KB），进实验室才下载摄像头识别模块——
 // 首页/辅导页首屏显著变快，平板上尤其明显
@@ -47,9 +48,28 @@ function Loading() {
   );
 }
 
+/** 全局档案守卫：当前会话档案若已被删除（服务器 profiles 里不存在），清空会话回首页选人。
+ *  异步校验回来时若用户已换选新档案（current 变了），不误杀。 */
+function ProfileGuard() {
+  const { current, setCurrent } = useProfileStore();
+  useEffect(() => {
+    if (!current) return;
+    void fetch('/api/profiles')
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((list: { id: string }[]) => {
+        if (list.some((p) => p.id === current.id)) return;
+        const now = useProfileStore.getState().current;
+        if (now && now.id === current.id) setCurrent(null);
+      })
+      .catch(() => { /* 网络异常不误杀会话 */ });
+  }, [current, setCurrent]);
+  return null;
+}
+
 export default function App() {
   return (
     <HashRouter>
+      <ProfileGuard />
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<HomeScreen />} />

@@ -202,6 +202,8 @@ export interface LessonProgress {
 
 export interface ProfileProgress {
   profileId: string;
+  /** 学习之星（XP）：随堂练发放，等级成长用 */
+  xp?: number;
   lessons: Record<string, LessonProgress>;
   /** 每日使用分钟数，键为 YYYY-MM-DD */
   dailyUsage: Record<string, number>;

@@ -10,6 +10,7 @@ import TeachPanel from '../components/TeachPanel.tsx';
 import InteractLab from '../components/InteractLab.tsx';
 import LessonReport from '../components/LessonReport.tsx';
 import { suggestNext } from '../runtime/nextStep.ts';
+import { xpForQuiz } from '../runtime/xp.ts';
 import { parsePy, PyRunner } from '../runtime/pyinterp.ts';
 import { pyStageApi } from '../runtime/pyBridge.ts';
 import { lessonNeighbors, lessonRoute } from '../runtime/lessonNav.ts';
@@ -80,8 +81,8 @@ export default function LabScreen() {
   const [challengeDone, setChallengeDone] = useState<Record<number, boolean>>({});
   /** 预测-验证（PhET 式）：挑战前先猜能不能达成 {挑战序号: 猜能(true)/猜不能(false)} */
   const [predictions, setPredictions] = useState<Record<number, boolean>>({});
-  /** 课堂报告（学而思式课后反馈卡）：小练完成后弹出，本轮得分 */
-  const [report, setReport] = useState<{ correct: number; total: number; wrongCount: number } | null>(null);
+  /** 课堂报告（学而思式课后反馈卡）：小练完成后弹出，本轮得分与获得星星 */
+  const [report, setReport] = useState<{ correct: number; total: number; wrongCount: number; xp: number } | null>(null);
   const [reportOpen, setReportOpen] = useState(false);
   /** 我的发现：观察笔记（自动保存到进度） */
   const [labNote, setLabNote] = useState('');
@@ -90,6 +91,8 @@ export default function LabScreen() {
 
   /** SVG 舞台命令流（Python 演示离屏执行的输出） */
   const [cmds, setCmds] = useState<StageCmd[]>([]);
+  /** 互动卡片已浏览的视图（when 值集合）：全部看完推进「学习」步 */
+  const [viewsSeen, setViewsSeen] = useState<Set<number>>(new Set());
   /** 慢速模式：逐条揭示到第几条命令（Infinity=全部） */
   const [reveal, setReveal] = useState<number>(Infinity);
   const revealTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
@@ -137,6 +140,7 @@ export default function LabScreen() {
     setLabNote('');
     setCmds([]);
     setReveal(Infinity);
+    setViewsSeen(new Set());
     void api.lessons().then((all) => {
       const l = all.find((x) => x.id === id) ?? null;
       if (!l || !(l.lab || l.starterCode)) { nav(l ? `/tutor/${id}` : '/map'); return; }
@@ -149,7 +153,7 @@ export default function LabScreen() {
         // 课堂报告可回看：练过即有档案（得分 + 本课现存错题数）
         const ex = p.exercises?.[l.id];
         if (lp?.tasks?.quiz?.done && ex) {
-          setReport({ correct: ex.correct, total: ex.total, wrongCount: (p.wrongBook ?? []).filter((w) => w.lessonId === l.id).length });
+          setReport({ correct: ex.correct, total: ex.total, wrongCount: (p.wrongBook ?? []).filter((w) => w.lessonId === l.id).length, xp: 0 });
         }
         // 恢复上次实验进度（要点勾选/挑战达成）
         if (lp) {
@@ -361,7 +365,8 @@ export default function LabScreen() {
             { key: 'test', label: '小练', tip: '随堂小练，检验理解', onClick: () => (lesson.exercises?.length ? setQuizOpen(true) : undefined) },
             { key: 'fix', label: '巩固', tip: '错题清零，真正掌握', onClick: () => nav('/wrongbook') },
           ];
-          const doneFlags = [teachSeen, exploredCount > 0 || quizDone, quizDone, false];
+          const allViewsSeen = !!lesson.interact && viewsSeen.size >= lesson.interact.views.length;
+          const doneFlags = [teachSeen, exploredCount > 0 || quizDone || allViewsSeen, quizDone, false];
           const cur = doneFlags.findIndex((d) => !d);
           const current = cur === -1 ? steps.length - 1 : cur;
           const stateOf = (i: number): 'done' | 'now' | 'todo' => (i < current ? 'done' : i === current ? 'now' : 'todo');
@@ -525,6 +530,12 @@ export default function LabScreen() {
             const first = params[0];
             const v = first ? (values[first.name] ?? first.value) : 0;
             const view = lesson.interact?.views.find((x) => x.when === v) ?? lesson.interact?.views[0];
+            if (v && !viewsSeen.has(v)) {
+              setViewsSeen((prev) => { const n = new Set(prev); n.add(v); return n; });
+              if (lesson.interact && viewsSeen.size + 1 >= lesson.interact.views.length) {
+                setToast('✅ 本课全部要点已浏览——去「想一想」记下你的发现吧！');
+              }
+            }
             if (lesson.interact && view && first) {
               return (
                 <div className="h-full overflow-hidden rounded-3xl bg-white shadow-inner ring-1 ring-slate-200">
@@ -560,11 +571,12 @@ export default function LabScreen() {
               };
             });
             setQuizDone(true);
-            setReport({ correct, total: lesson.exercises!.length, wrongCount: wrongs.length });
+            setReport({ correct, total: lesson.exercises!.length, wrongCount: wrongs.length, xp: xpForQuiz(correct, lesson.exercises!.length) });
             setReportOpen(true);
             void api.updateProgress(profile.id, {
               lessonId: lesson.id,
               minutesDelta: 5,
+              xpDelta: xpForQuiz(correct, lesson.exercises!.length),
               completed: true,
               exercise: { correct, total: lesson.exercises!.length },
               tasks: { quiz: true },
@@ -618,6 +630,7 @@ export default function LabScreen() {
           correct={report.correct}
           total={report.total}
           wrongCount={report.wrongCount}
+          xpGained={report.xp}
           nextStep={suggestNext(allLessons, lesson, report.total > 0 ? report.correct / report.total : 0)}
           onGoNext={(p) => nav(p)}
           onClose={() => setReportOpen(false)}

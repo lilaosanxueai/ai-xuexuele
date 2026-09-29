@@ -7,6 +7,8 @@ interface Props {
   total: number;
   /** 本轮进错题本的题数 */
   wrongCount: number;
+  /** 本轮获得的学习之星（XP） */
+  xpGained?: number;
   /** 难度自适应下一站建议（可选：无课程表数据时不显示） */
   nextStep?: NextStep | null;
   onGoNext?: (path: string) => void;
@@ -23,7 +25,7 @@ function commentOf(pct: number, wrongCount: number): { head: string; body: strin
 }
 
 /** 课堂报告（学而思式课后反馈卡）：得分环 + 知识点清单 + 学习路径 + 老师评语 */
-export default function LessonReport({ lesson, correct, total, wrongCount, nextStep, onGoNext, onClose, onGoWrongbook }: Props) {
+export default function LessonReport({ lesson, correct, total, wrongCount, xpGained, nextStep, onGoNext, onClose, onGoWrongbook }: Props) {
   const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
   const C = 2 * Math.PI * 44; // r=44 的周长
   const points = lesson.curriculum?.points ?? [];
@@ -45,8 +47,13 @@ export default function LessonReport({ lesson, correct, total, wrongCount, nextS
               <h3 className="mt-1 truncate text-lg font-black">{lesson.emoji} {lesson.title}</h3>
               <div className="mt-1 text-xs text-sky-100">{new Date().toLocaleDateString('zh-CN', { month: 'long', day: 'numeric' })} · 随堂小练</div>
             </div>
-            <button onClick={onClose} className="rounded-full bg-white/20 px-2.5 py-1 text-sm font-bold hover:bg-white/30">✕</button>
-          </div>
+              <button onClick={onClose} className="rounded-full bg-white/20 px-2.5 py-1 text-sm font-bold hover:bg-white/30">✕</button>
+            </div>
+            {xpGained != null && xpGained > 0 && (
+              <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-amber-400/95 px-3.5 py-1.5 text-sm font-black text-white shadow">
+                ⭐ 本课获得 {xpGained} 颗学习之星
+              </div>
+            )}
           <div className="mt-4 flex items-center gap-5">
             <div className="relative h-28 w-28 shrink-0">
               <svg viewBox="0 0 100 100" className="h-full w-full -rotate-90">

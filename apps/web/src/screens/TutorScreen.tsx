@@ -13,6 +13,7 @@ import ExercisePanel from '../components/ExercisePanel.tsx';
 import TeachPanel from '../components/TeachPanel.tsx';
 import LessonReport from '../components/LessonReport.tsx';
 import { suggestNext } from '../runtime/nextStep.ts';
+import { xpForQuiz } from '../runtime/xp.ts';
 
 /**
  * 课程阅读页（现代自学形态）：
@@ -28,7 +29,7 @@ export default function TutorScreen() {
   const [quizDone, setQuizDone] = useState(false);
   const [allLessons, setAllLessons] = useState<LessonType[]>([]);
   /** 课堂报告（学而思式课后反馈卡） */
-  const [report, setReport] = useState<{ correct: number; total: number; wrongCount: number } | null>(null);
+  const [report, setReport] = useState<{ correct: number; total: number; wrongCount: number; xp: number } | null>(null);
   const [reportOpen, setReportOpen] = useState(false);
 
   useEffect(() => {
@@ -274,11 +275,12 @@ export default function TutorScreen() {
               };
             });
             setQuizDone(true);
-            setReport({ correct, total: lesson.exercises!.length, wrongCount: wrongs.length });
+            setReport({ correct, total: lesson.exercises!.length, wrongCount: wrongs.length, xp: xpForQuiz(correct, lesson.exercises!.length) });
             setReportOpen(true);
             void api.updateProgress(profile.id, {
               lessonId: lesson.id,
               minutesDelta: 5,
+              xpDelta: xpForQuiz(correct, lesson.exercises!.length),
               completed: true,
               exercise: { correct, total: lesson.exercises!.length },
               // 辅导课的要点是导学与讨论（manual），随堂练通过即视为全部达成，家长端进度不再永远 0/N
@@ -295,6 +297,7 @@ export default function TutorScreen() {
           correct={report.correct}
           total={report.total}
           wrongCount={report.wrongCount}
+          xpGained={report.xp}
           nextStep={suggestNext(allLessons, lesson, report.total > 0 ? report.correct / report.total : 0)}
           onGoNext={(p) => nav(p)}
           onClose={() => setReportOpen(false)}

@@ -9,6 +9,7 @@ import PomodoroTimer from '../components/PomodoroTimer.tsx';
 import { SUBJECTS, SUBJECT_STYLE } from '../components/subjectMeta.ts';
 import { recommendNext } from '../runtime/recommend.ts';
 import { calcStreak } from '../utils/streak.ts';
+import { levelFor } from '../runtime/xp.ts';
 import { computeBadges, readRecords, bumpRecords, recordsKey, EMPTY_RECORDS } from '../runtime/achievements.ts';
 import { computeWeeklyReport } from '../runtime/weeklyReport.ts';
 import { generateQuests, readCounters } from '../runtime/dailyQuests.ts';
@@ -280,6 +281,26 @@ export default function MapScreen() {
             )}
             <span className="ml-auto text-xs text-slate-400">覆盖 3-9 年级 + 高中衔接 · 对标课程标准</span>
           </div>
+
+          {/* 学习之星等级条（多邻国式成长）：⭐LV 与称号 + 到下一级进度 */}
+          {(() => {
+            const lv = levelFor(progress?.xp ?? 0);
+            return (
+              <div className="mb-3 flex items-center gap-3 rounded-2xl bg-gradient-to-r from-amber-50 to-yellow-50 p-3 ring-1 ring-amber-200">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-amber-400 text-lg font-black text-white shadow">⭐{lv.level}</span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-sm font-black text-amber-800">{lv.title}</span>
+                    <span className="text-[11px] font-bold text-amber-500">{progress?.xp ?? 0} ⭐ · 距 LV{lv.level + 1} 还差 {Math.max(0, lv.cur + lv.next - (progress?.xp ?? 0))} 颗</span>
+                  </div>
+                  <div className="mt-1 h-2.5 overflow-hidden rounded-full bg-white">
+                    <div className="h-full rounded-full bg-gradient-to-r from-amber-400 to-orange-500 transition-all" style={{ width: `${lv.progress}%` }} />
+                  </div>
+                </div>
+                <span className="shrink-0 text-[10px] font-bold text-amber-400">做随堂小练赚星星</span>
+              </div>
+            );
+          })()}
 
         </div>
 
