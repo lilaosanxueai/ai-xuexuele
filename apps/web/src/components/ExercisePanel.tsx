@@ -12,12 +12,40 @@ interface Props {
   onClose: () => void;
 }
 
-/** 随堂小练：逐题作答 → 立即判分与解析 → 成绩单 */
+/** 答题音效（WebAudio 本地合成，不联网）：正确=双音上行，错误=短低音 */
+let audioCtx: AudioContext | null = null;
+function playTone(ok: boolean) {
+  try {
+    if (!audioCtx) audioCtx = new AudioContext();
+    const t = audioCtx.currentTime;
+    const beep = (freq: number, at: number, dur: number) => {
+      const o = audioCtx!.createOscillator();
+      const g = audioCtx!.createGain();
+      o.frequency.value = freq;
+      o.type = 'sine';
+      g.gain.setValueAtTime(0.12, t + at);
+      g.gain.exponentialRampToValueAtTime(0.001, t + at + dur);
+      o.connect(g).connect(audioCtx!.destination);
+      o.start(t + at);
+      o.stop(t + at + dur);
+    };
+    if (ok) { beep(660, 0, 0.1); beep(880, 0.09, 0.14); }
+    else beep(200, 0, 0.18);
+  } catch { /* 无声环境不影响答题 */ }
+}
+
+/** 词卡模式：所有选项都短（≤12 字）时用 2×2 大词卡呈现，更像互动练习而非试卷 */
+function isCardMode(ex: Exercise): boolean {
+  return (ex.options ?? []).every((o) => String(o ?? '').length <= 12);
+}
+
+/** 随堂小练：逐题作答 → 立即判分与解析 → 成绩单（词卡/列表双形态 + 音效 + 连击） */
 export default function ExercisePanel({ title, exercises, onDone, onClose }: Props) {
   const [idx, setIdx] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
   const [correct, setCorrect] = useState(0);
   const [finished, setFinished] = useState(false);
+  const [streak, setStreak] = useState(0);
   const wrongsRef = useRef<WrongPick[]>([]);
 
   const ex = exercises[idx];
@@ -25,8 +53,10 @@ export default function ExercisePanel({ title, exercises, onDone, onClose }: Pro
   const pick = (i: number) => {
     if (picked !== null) return;
     setPicked(i);
-    if (i === ex.answer) setCorrect((c) => c + 1);
-    else wrongsRef.current.push({ idx, pick: i });
+    const ok = i === ex.answer;
+    if (ok) { setCorrect((c) => c + 1); setStreak((s) => s + 1); }
+    else { wrongsRef.current.push({ idx, pick: i }); setStreak(0); }
+    playTone(ok);
   };
 
   const next = () => {
@@ -71,7 +101,10 @@ export default function ExercisePanel({ title, exercises, onDone, onClose }: Pro
       <div className="max-h-[85vh] w-full max-w-md overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl">
         <div className="mb-2 flex items-center justify-between">
           <h3 className="font-black text-slate-800">📝 {title} · 随堂小练</h3>
-          <span className="text-xs text-slate-400">第 {idx + 1}/{exercises.length} 题 · 已对 {correct}</span>
+          <span className="text-xs text-slate-400">
+            第 {idx + 1}/{exercises.length} 题 · 已对 {correct}
+            {streak >= 3 && <b className="ml-1 text-orange-500">🔥×{streak}</b>}
+          </span>
         </div>
         <div className="mb-4 flex items-start gap-2 rounded-2xl bg-slate-50 p-3">
           <div className="min-w-0 flex-1 text-[15px] font-semibold leading-relaxed text-slate-800">{ex.q}</div>
@@ -79,29 +112,57 @@ export default function ExercisePanel({ title, exercises, onDone, onClose }: Pro
             <button onClick={() => speak(ex.q)} title="读题" className="shrink-0 rounded-xl bg-white px-2.5 py-1.5 text-lg shadow-sm transition hover:bg-sky-50">🔊</button>
           )}
         </div>
-        <div className="space-y-2">
-          {ex.options.map((opt, i) => {
-            const isAnswer = i === ex.answer;
-            const isPicked = picked === i;
-            const show = picked !== null;
-            return (
-              <button
-                key={i}
-                onClick={() => pick(i)}
-                className={`w-full rounded-xl border-2 px-4 py-2.5 text-left text-[15px] transition ${
-                  show && isAnswer ? 'border-emerald-400 bg-emerald-50 text-emerald-800'
-                    : show && isPicked ? 'border-rose-300 bg-rose-50 text-rose-700'
-                    : picked === null ? 'border-slate-200 hover:border-sky-300 hover:bg-sky-50'
-                    : 'border-slate-100 text-slate-400'
-                }`}
-              >
-                <span className="mr-2 font-black">{'ABCD'[i]}.</span>{opt}
-                {show && isAnswer && ' ✅'}
-                {show && isPicked && !isAnswer && ' ❌'}
-              </button>
-            );
-          })}
-        </div>
+        {isCardMode(ex) ? (
+          /* 词卡模式：2×2 大词卡点选（短选项题自动启用） */
+          <div className="grid grid-cols-2 gap-2.5">
+            {ex.options.map((opt, i) => {
+              const isAnswer = i === ex.answer;
+              const isPicked = picked === i;
+              const show = picked !== null;
+              return (
+                <button
+                  key={i}
+                  onClick={() => pick(i)}
+                  className={`rounded-2xl border-2 px-3 py-4 text-center text-[15px] font-bold leading-snug transition ${
+                    show && isAnswer ? 'border-emerald-400 bg-emerald-50 text-emerald-800'
+                      : show && isPicked ? 'border-rose-300 bg-rose-50 text-rose-700'
+                      : picked === null ? 'border-slate-200 bg-white text-slate-700 shadow-sm hover:-translate-y-0.5 hover:border-sky-300 hover:bg-sky-50'
+                      : 'border-slate-100 text-slate-400'
+                  }`}
+                >
+                  {opt}
+                  {show && isAnswer && ' ✅'}
+                  {show && isPicked && !isAnswer && ' ❌'}
+                </button>
+              );
+            })}
+          </div>
+        ) : (
+          /* 列表模式：长选项题（如完整句子）保持 ABCD 行式 */
+          <div className="space-y-2">
+            {ex.options.map((opt, i) => {
+              const isAnswer = i === ex.answer;
+              const isPicked = picked === i;
+              const show = picked !== null;
+              return (
+                <button
+                  key={i}
+                  onClick={() => pick(i)}
+                  className={`w-full rounded-xl border-2 px-4 py-2.5 text-left text-[15px] transition ${
+                    show && isAnswer ? 'border-emerald-400 bg-emerald-50 text-emerald-800'
+                      : show && isPicked ? 'border-rose-300 bg-rose-50 text-rose-700'
+                      : picked === null ? 'border-slate-200 hover:border-sky-300 hover:bg-sky-50'
+                      : 'border-slate-100 text-slate-400'
+                  }`}
+                >
+                  <span className="mr-2 font-black">{'ABCD'[i]}.</span>{opt}
+                  {show && isAnswer && ' ✅'}
+                  {show && isPicked && !isAnswer && ' ❌'}
+                </button>
+              );
+            })}
+          </div>
+        )}
         {picked !== null && (
           <div className="mt-3 rounded-2xl bg-amber-50 p-3 text-sm leading-relaxed text-amber-900">
             💡 {ex.explain}

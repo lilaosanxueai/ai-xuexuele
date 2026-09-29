@@ -204,7 +204,32 @@ export default function MapScreen() {
 
         {/* 学习概览 + 智能推荐 */}
         <div className="mb-6 rounded-3xl bg-white/80 p-5 shadow-md">
-          <button
+                    {/* 今日学习大 CTA（Duolingo 式每日入口）：推荐课 + 连续天数 + 正确路由 */}
+          {rec && (() => {
+            const recLesson = lessons.find((l) => l.id === rec.lessonId);
+            const recPath = recLesson && (recLesson.lab || recLesson.starterCode) ? `/lab/${rec.lessonId}` : `/tutor/${rec.lessonId}`;
+            const streakN = calcStreak(progress?.dailyUsage ?? {});
+            return (
+              <button
+                onClick={() => nav(recPath)}
+                className="mb-3 flex w-full items-center gap-4 rounded-3xl bg-gradient-to-br from-sky-500 via-indigo-500 to-violet-500 p-5 text-left text-white shadow-xl transition hover:-translate-y-1 hover:shadow-2xl"
+              >
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/20 text-4xl shadow-inner">{rec.emoji}</div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2 text-xs font-bold opacity-85">
+                    <span>🎯 今日学习</span>
+                    <span className="rounded-full bg-white/20 px-2 py-0.5">{rec.subjectArea}</span>
+                    {streakN > 0 && <span className="rounded-full bg-orange-500/90 px-2 py-0.5">🔥 连续 {streakN} 天</span>}
+                  </div>
+                  <div className="mt-1 truncate text-xl font-black">{rec.title}</div>
+                  <div className="mt-0.5 truncate text-sm opacity-90">{rec.reason}</div>
+                </div>
+                <div className="ml-auto shrink-0 rounded-2xl bg-white px-5 py-3 text-sm font-black text-indigo-600 shadow-lg">开始 →</div>
+              </button>
+            );
+          })()}
+
+<button
             onClick={() => nav('/search')}
             className="mb-3 flex w-full items-center gap-3 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left transition hover:border-sky-300"
           >
@@ -255,20 +280,7 @@ export default function MapScreen() {
             )}
             <span className="ml-auto text-xs text-slate-400">覆盖 3-9 年级 + 高中衔接 · 对标课程标准</span>
           </div>
-          {rec && (
-            <button
-              onClick={() => nav(`/tutor/${rec.lessonId}`)}
-              className="flex w-full items-center gap-4 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-500 p-4 text-left text-white shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl"
-            >
-              <div className="text-4xl">{rec.emoji}</div>
-              <div className="min-w-0">
-                <div className="text-xs opacity-80">🤖 智能推荐 · {rec.subjectArea}</div>
-                <div className="truncate text-xl font-black">{rec.title}</div>
-                <div className="mt-0.5 text-sm opacity-90">{rec.reason}</div>
-              </div>
-              <div className="ml-auto shrink-0 rounded-xl bg-white/20 px-4 py-2 font-bold">开始 →</div>
-            </button>
-          )}
+
         </div>
 
         {/* 复习黄金期（间隔重复：1/3/7/14 天前学过的课记忆将衰退，现在复习效果最好） */}
