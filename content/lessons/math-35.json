@@ -148,6 +148,25 @@
       ],
       "answer": 0,
       "explain": "qⁿ→0，S = a/(1−q)"
+    },
+    {
+      "q": "等比数列求和公式（q≠1）：S = a(1−qⁿ) ÷ (___ − q)",
+      "options": [
+        "1",
+        "2",
+        "0"
+      ],
+      "answer": 0,
+      "explain": "分母是 (1−q)",
+      "blank": {
+        "answerText": "1",
+        "bank": [
+          "1",
+          "2",
+          "0"
+        ]
+      },
+      "type": "blank"
     }
   ],
   "textbook": "人教A版数学选择性必修第二册",

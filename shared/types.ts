@@ -24,6 +24,14 @@ export interface Exercise {
   options: string[];
   answer: number; // 正确选项下标
   explain: string;
+  /** 填空题形态：题干用 ___ 占位，改为点选词库或键盘输入（options/answer 保留词库兜底，兼容挑战赛与错题本） */
+  type?: 'blank';
+  blank?: {
+    /** 正确答案文本（判分：trim + 忽略大小写） */
+    answerText: string;
+    /** 可选词库：有则点选作答，无则键盘输入 */
+    bank?: string[];
+  };
 }
 
 export interface LessonTask {

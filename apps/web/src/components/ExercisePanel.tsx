@@ -1,8 +1,9 @@
 import { useRef, useState } from 'react';
 import type { Exercise } from '@shared/types.ts';
+import { blankCorrect } from '../runtime/exerciseUtils.ts';
 
-/** 一道错题的原始信息：题目下标 + 孩子当时选的选项 */
-export interface WrongPick { idx: number; pick: number }
+/** 一道错题的原始信息：题目下标 + 孩子当时选的选项（填空题为 -1，原始输入见 input） */
+export interface WrongPick { idx: number; pick: number; input?: string }
 
 interface Props {
   title: string;
@@ -46,9 +47,14 @@ export default function ExercisePanel({ title, exercises, onDone, onClose }: Pro
   const [correct, setCorrect] = useState(0);
   const [finished, setFinished] = useState(false);
   const [streak, setStreak] = useState(0);
+  /** 填空题：已填文本 / 已判分标记 */
+  const [blankInput, setBlankInput] = useState('');
+  const [blankJudged, setBlankJudged] = useState<null | boolean>(null);
+  const blankRef = useRef<HTMLInputElement | null>(null);
   const wrongsRef = useRef<WrongPick[]>([]);
 
   const ex = exercises[idx];
+  const isBlank = ex.type === 'blank' && !!ex.blank;
 
   const pick = (i: number) => {
     if (picked !== null) return;
@@ -59,14 +65,29 @@ export default function ExercisePanel({ title, exercises, onDone, onClose }: Pro
     playTone(ok);
   };
 
+  /** 填空判分：词库点选走 pick；键盘输入在此判 */
+  const judgeBlank = () => {
+    if (blankJudged !== null) return;
+    const ok = blankCorrect(ex, blankInput);
+    setBlankJudged(ok);
+    if (ok) { setCorrect((c) => c + 1); setStreak((s) => s + 1); }
+    else { wrongsRef.current.push({ idx, pick: -1, input: blankInput }); setStreak(0); }
+    playTone(ok);
+  };
+
+  const blankLocked = isBlank ? blankJudged !== null : picked !== null;
+
   const next = () => {
     if (idx + 1 >= exercises.length) {
       setFinished(true);
-      onDone(correct, wrongsRef.current); // correct 已在 pick 中累计
+      onDone(correct, wrongsRef.current); // correct 已在判分中累计
       return;
     }
     setIdx(idx + 1);
     setPicked(null);
+    setBlankInput('');
+    setBlankJudged(null);
+    setTimeout(() => blankRef.current?.focus(), 80);
   };
 
   // 读题（Web Speech 本地语音，不联网；不支持的环境自动隐藏按钮）
@@ -112,7 +133,70 @@ export default function ExercisePanel({ title, exercises, onDone, onClose }: Pro
             <button onClick={() => speak(ex.q)} title="读题" className="shrink-0 rounded-xl bg-white px-2.5 py-1.5 text-lg shadow-sm transition hover:bg-sky-50">🔊</button>
           )}
         </div>
-        {isCardMode(ex) ? (
+        {isBlank && ex.blank ? (
+          /* 填空模式：题干 ___ 高亮 + 词库点选或键盘输入 */
+          (() => {
+            const bank = ex.blank.bank;
+            const ok = blankJudged === true;
+            const bad = blankJudged === false;
+            return (
+              <div>
+                <div className="mb-3 rounded-2xl border-2 border-dashed border-sky-200 bg-sky-50/60 p-3 text-center text-[17px] font-bold leading-relaxed text-slate-800">
+                  {ex.q.split('___').map((seg, i, arr) => (
+                    <span key={i}>
+                      {seg}
+                      {i < arr.length - 1 && (
+                        <span className={`mx-1 inline-block min-w-16 rounded-lg border-b-4 px-2 ${ok ? 'border-emerald-400 text-emerald-600' : bad ? 'border-rose-400 text-rose-600' : 'border-sky-300 text-sky-500'}`}>
+                          {ok || bad ? (ok ? ex.blank!.answerText : (blankInput.trim() || '？')) : (bank ? blankInput : '____')}
+                        </span>
+                      )}
+                    </span>
+                  ))}
+                </div>
+                {bank ? (
+                  <div className="flex flex-wrap justify-center gap-2">
+                    {bank.map((w) => (
+                      <button
+                        key={w}
+                        disabled={blankJudged !== null || blankInput === w}
+                        onClick={() => { setBlankInput(w); setTimeout(() => { setBlankJudged(blankCorrect(ex, w)); const o = blankCorrect(ex, w); if (o) { setCorrect((c) => c + 1); setStreak((s) => s + 1); } else { wrongsRef.current.push({ idx, pick: bank.indexOf(w), input: w }); setStreak(0); } playTone(o); }, 120); }}
+                        className={`rounded-2xl border-2 px-5 py-3 text-[16px] font-bold transition ${
+                          blankInput === w
+                            ? ok ? 'border-emerald-400 bg-emerald-50 text-emerald-700' : bad ? 'border-rose-300 bg-rose-50 text-rose-700' : 'border-sky-400 bg-sky-50 text-sky-700'
+                            : blankJudged !== null ? 'border-slate-100 text-slate-300'
+                            : 'border-slate-200 bg-white text-slate-700 shadow-sm hover:-translate-y-0.5 hover:border-sky-300'
+                        }`}
+                      >
+                        {w}
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <input
+                      ref={blankRef}
+                      value={blankInput}
+                      disabled={blankJudged !== null}
+                      onChange={(e) => setBlankInput(e.target.value)}
+                      onKeyDown={(e) => { if (e.key === 'Enter') judgeBlank(); }}
+                      placeholder="在这里填答案，回车确定"
+                      autoFocus
+                      className={`flex-1 rounded-2xl border-2 px-4 py-3 text-center text-[17px] font-bold outline-none transition ${
+                        ok ? 'border-emerald-400 bg-emerald-50 text-emerald-700' : bad ? 'border-rose-300 bg-rose-50 text-rose-700' : 'border-slate-200 focus:border-sky-400'
+                      }`}
+                    />
+                    {blankJudged === null && (
+                      <button onClick={judgeBlank} disabled={!blankInput.trim()} className="shrink-0 rounded-2xl bg-sky-500 px-5 py-3 font-bold text-white shadow transition hover:bg-sky-600 disabled:opacity-40">确定</button>
+                    )}
+                  </div>
+                )}
+                {bad && (
+                  <p className="mt-2 text-center text-sm font-bold text-emerald-600">正确答案：{ex.blank.answerText}</p>
+                )}
+              </div>
+            );
+          })()
+        ) : isCardMode(ex) ? (
           /* 词卡模式：2×2 大词卡点选（短选项题自动启用） */
           <div className="grid grid-cols-2 gap-2.5">
             {ex.options.map((opt, i) => {
@@ -163,14 +247,14 @@ export default function ExercisePanel({ title, exercises, onDone, onClose }: Pro
             })}
           </div>
         )}
-        {picked !== null && (
+        {blankLocked && (
           <div className="mt-3 rounded-2xl bg-amber-50 p-3 text-sm leading-relaxed text-amber-900">
             💡 {ex.explain}
           </div>
         )}
         <div className="mt-4 flex justify-end gap-2">
           <button onClick={onClose} className="rounded-xl bg-slate-200 px-4 py-2 text-sm font-bold text-slate-600 hover:bg-slate-300">先不练了</button>
-          {picked !== null && (
+          {blankLocked && (
             <button onClick={next} className="rounded-xl bg-sky-500 px-5 py-2 font-bold text-white hover:bg-sky-600">
               {idx + 1 >= exercises.length ? '看成绩' : '下一题 →'}
             </button>

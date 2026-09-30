@@ -196,6 +196,20 @@
       ],
       "answer": 0,
       "explain": "统一开端"
+    },
+    {
+      "q": "秦统一全国是在公元前 ___ 年（填数字）",
+      "options": [
+        "221",
+        "210",
+        "202"
+      ],
+      "answer": 0,
+      "explain": "公元前 221 年嬴政建秦",
+      "blank": {
+        "answerText": "221"
+      },
+      "type": "blank"
     }
   ],
   "interact": {

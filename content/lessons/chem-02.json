@@ -203,6 +203,25 @@
       ],
       "answer": 3,
       "explain": "CO₂+Ca(OH)₂=CaCO₃↓+H₂O"
+    },
+    {
+      "q": "实验室制 CO₂ 所用石灰石的主要成分是 ___",
+      "options": [
+        "碳酸钙",
+        "氧化钙",
+        "氢氧化钙"
+      ],
+      "answer": 0,
+      "explain": "CaCO₃ 与稀盐酸反应",
+      "blank": {
+        "answerText": "碳酸钙",
+        "bank": [
+          "碳酸钙",
+          "氧化钙",
+          "氢氧化钙"
+        ]
+      },
+      "type": "blank"
     }
   ]
 }

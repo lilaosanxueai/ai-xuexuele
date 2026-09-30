@@ -196,6 +196,25 @@
       ],
       "answer": 0,
       "explain": "September"
+    },
+    {
+      "q": "表达\"在早上 7 点\"（at 7:00 ___ the morning）用介词 ___",
+      "options": [
+        "in",
+        "on",
+        "at"
+      ],
+      "answer": 0,
+      "explain": "in the morning 固定搭配",
+      "blank": {
+        "answerText": "in",
+        "bank": [
+          "in",
+          "on",
+          "at"
+        ]
+      },
+      "type": "blank"
     }
   ],
   "interact": {

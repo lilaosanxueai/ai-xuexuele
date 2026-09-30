@@ -213,6 +213,20 @@
       ],
       "answer": 3,
       "explain": "as+原形+as"
+    },
+    {
+      "q": "beautiful 的比较级是 ___（填英文）",
+      "options": [
+        "more beautiful",
+        "beautifuller",
+        "most beautiful"
+      ],
+      "answer": 0,
+      "explain": "多音节词比较级用 more",
+      "blank": {
+        "answerText": "more beautiful"
+      },
+      "type": "blank"
     }
   ]
 }
