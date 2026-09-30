@@ -17,7 +17,7 @@ VALID_BLOCKS = {
 }
 VALID_ISLANDS = {"basics", "extra", "cross", "math", "physics"}
 VALID_CHECKS = {"block_used", "block_used_any", "block_count_min", "block_count_total_min", "say_text", "actor_reach", "manual"}
-VALID_AREAS = {"信息科技", "数学", "语文", "英语", "科学", "物理", "化学", "生物", "地理", "音乐", "艺术", "道德与法治", "劳动", "体育与健康", "历史"}
+VALID_AREAS = {"信息科技", "数学", "语文", "英语", "科学", "物理", "化学", "生物", "地理", "音乐", "艺术", "道德与法治", "劳动", "体育与健康", "历史", "心理学", "社会学", "经济学"}
 VALID_BANDS = {"primary", "junior", "senior"}
 REQUIRED = ["id", "island", "order", "title", "emoji", "story", "goals", "toolbox", "actor", "tasks", "aiIntro", "celebrate"]
 PY_COMMANDS = {"move","turn_right","turn_left","go_to","bounce","say","say_for","costume","change_size","show","hide","play","wait","pen_down","pen_up","pen_color","write","fill_rect","circle","ring"}

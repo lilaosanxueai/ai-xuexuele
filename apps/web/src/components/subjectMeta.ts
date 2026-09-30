@@ -15,6 +15,9 @@ export const SUBJECTS: Record<string, { emoji: string; color: string; desc: stri
   '劳动': { emoji: '🧹', color: 'lime', desc: '生活自理 · 班级服务' },
   '体育与健康': { emoji: '🤸', color: 'cyan', desc: '运动技能 · 健康生活' },
   '历史': { emoji: '🏛', color: 'yellow', desc: '中国古代史 · 文明遗产' },
+  '心理学': { emoji: '🧠', color: 'purple', desc: '情绪管理 · 成长思维 · 人际交往' },
+  '社会学': { emoji: '🏘️', color: 'cyan', desc: '社会角色 · 规则公平 · 公共生活' },
+  '经济学': { emoji: '💰', color: 'teal', desc: '稀缺选择 · 供需价格 · 理财启蒙' },
 };
 
 /** 学段显示名 */
@@ -40,4 +43,7 @@ export const SUBJECT_STYLE: Record<string, { card: string; badge: string; text: 
   '道德与法治': { card: 'from-red-500 to-rose-600', badge: 'bg-red-100 text-red-700', text: 'text-red-700', ring: 'ring-red-300' },
   '劳动': { card: 'from-lime-500 to-green-600', badge: 'bg-lime-100 text-lime-700', text: 'text-lime-700', ring: 'ring-lime-300' },
   '历史': { card: 'from-yellow-400 to-orange-500', badge: 'bg-yellow-100 text-yellow-800', text: 'text-yellow-800', ring: 'ring-yellow-300' },
+  '心理学': { card: 'from-purple-500 to-fuchsia-600', badge: 'bg-purple-100 text-purple-700', text: 'text-purple-700', ring: 'ring-purple-300' },
+  '社会学': { card: 'from-cyan-600 to-blue-700', badge: 'bg-cyan-100 text-cyan-700', text: 'text-cyan-700', ring: 'ring-cyan-300' },
+  '经济学': { card: 'from-teal-600 to-emerald-700', badge: 'bg-teal-100 text-teal-700', text: 'text-teal-700', ring: 'ring-teal-300' },
 };
