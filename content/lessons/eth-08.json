@@ -196,6 +196,20 @@
       ],
       "answer": 1,
       "explain": "等调度确认信息"
+    },
+    {
+      "q": "心肺复苏的黄金时间是大脑缺氧后 ___ 分钟内（填数字）",
+      "options": [
+        "4",
+        "10",
+        "30"
+      ],
+      "answer": 0,
+      "explain": "黄金 4 分钟",
+      "blank": {
+        "answerText": "4"
+      },
+      "type": "blank"
     }
   ],
   "interact": {

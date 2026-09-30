@@ -204,6 +204,20 @@
       ],
       "answer": 1,
       "explain": "借量词"
+    },
+    {
+      "q": "I like ___ (apple 的正确形式填空)",
+      "options": [
+        "apples",
+        "apple",
+        "apples'"
+      ],
+      "answer": 0,
+      "explain": "可数名词复数加 s",
+      "blank": {
+        "answerText": "apples"
+      },
+      "type": "blank"
     }
   ],
   "interact": {

@@ -196,6 +196,20 @@
       ],
       "answer": 1,
       "explain": "热辐射"
+    },
+    {
+      "q": "真空中电磁波（光）的速度约为 3×10 的 ___ 次方 m/s（填数字）",
+      "options": [
+        "8",
+        "6",
+        "10"
+      ],
+      "answer": 0,
+      "explain": "3×10⁸ m/s",
+      "blank": {
+        "answerText": "8"
+      },
+      "type": "blank"
     }
   ],
   "interact": {

@@ -196,6 +196,25 @@
       ],
       "answer": 2,
       "explain": "公转+照射角"
+    },
+    {
+      "q": "多云的夜晚比晴朗的夜晚更 ___（ warmer/cooler 选一填：暖/凉）",
+      "options": [
+        "暖",
+        "凉",
+        "冷"
+      ],
+      "answer": 0,
+      "explain": "云增强大气逆辐射，保温作用强",
+      "blank": {
+        "answerText": "暖",
+        "bank": [
+          "暖",
+          "凉",
+          "冷"
+        ]
+      },
+      "type": "blank"
     }
   ],
   "interact": {
