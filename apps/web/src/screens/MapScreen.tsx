@@ -6,6 +6,7 @@ import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
 import SubjectRadar from '../components/SubjectRadar.tsx';
 import PomodoroTimer from '../components/PomodoroTimer.tsx';
+import LearningHeatmap from '../components/LearningHeatmap.tsx';
 import { SUBJECTS, SUBJECT_STYLE } from '../components/subjectMeta.ts';
 import { recommendNext } from '../runtime/recommend.ts';
 import { calcStreak } from '../utils/streak.ts';
@@ -301,6 +302,9 @@ export default function MapScreen() {
               </div>
             );
           })()}
+
+          {/* 学习热力图（GitHub 式近12周活动图）：坚持可视化 */}
+          <LearningHeatmap dailyUsage={progress?.dailyUsage ?? {}} />
 
         </div>
 
