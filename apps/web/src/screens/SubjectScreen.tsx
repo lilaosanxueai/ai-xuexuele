@@ -4,6 +4,7 @@ import type { Exercise, Lesson, ProfileProgress } from '@shared/types.ts';
 import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
+import PathSearch from '../components/PathSearch.tsx';
 import ExercisePanel from '../components/ExercisePanel.tsx';
 import { SUBJECTS, SUBJECT_STYLE } from '../components/subjectMeta.ts';
 import { collectModules, generateStudyPlan, todayModules, type StudyPlan } from '../runtime/studyPlan.ts';
@@ -32,6 +33,8 @@ export default function SubjectScreen() {
   const [progress, setProgress] = useState<ProfileProgress | null>(null);
   /** 单元测验（猿题库/学而思式模块级组卷）：模块名 + 抽好的题 */
   const [unitTest, setUnitTest] = useState<{ module: string; exercises: Exercise[] } | null>(null);
+  /** 路径搜索高亮：匹配的课程 ID 集合（空=无搜索） */
+  const [hiSet, setHiSet] = useState<Set<string>>(new Set());
 
   /** 从模块内的课程随堂题抽 8 道组卷（每课最多 2 道，打散顺序） */
   const assembleUnitTest = (mod: string): Exercise[] => {
@@ -121,6 +124,9 @@ export default function SubjectScreen() {
           </div>
         </div>
 
+        {/* 学科内搜索：在路径地图中快速定位课程 */}
+        <PathSearch lessons={mine} onHighlight={setHiSet} />
+
         {/* 学习路径（多邻国式闯关地图）：按课标模块分单元，蛇形节点 + 中央引导线 */}
         {(() => {
           // 单元 = 学段内按顺序聚合的「大单元」：每 4-6 课一组（模块名拼接）——
@@ -201,7 +207,9 @@ export default function SubjectScreen() {
                                 isDone ? `bg-gradient-to-br ${style.card} text-white`
                                   : isCurrent ? 'bg-white ring-4 ring-emerald-400'
                                   : 'bg-white/90 ring-2 ring-slate-200'
-                              } ${isMine ? ' outline outline-[3px] outline-amber-400 outline-offset-2' : ''}`}
+                              } ${isMine ? ' outline outline-[3px] outline-amber-400 outline-offset-2' : ''} ${
+                                hiSet.size > 0 && !hiSet.has(l.id) ? ' opacity-25 grayscale' : ''
+                              } ${hiSet.size > 0 && hiSet.has(l.id) ? ' ring-4 ring-sky-400!' : '' }`}
                             >
                               {l.emoji}
                               {isDone && (
@@ -210,7 +218,7 @@ export default function SubjectScreen() {
                               {isCurrent && !isDone && <span className="absolute -top-3 -right-2 animate-bounce text-lg drop-shadow">📍</span>}
                             </button>
                           </div>
-                          <span className="mt-1.5 w-24 truncate text-center text-[10px] font-bold text-slate-600">{l.title}</span>
+                          <span className={`mt-1.5 w-24 truncate text-center text-[10px] font-bold ${hiSet.size > 0 && !hiSet.has(l.id) ? 'text-slate-300' : 'text-slate-600'}`}>{l.title}</span>
                         </div>
                       );
                     })}
