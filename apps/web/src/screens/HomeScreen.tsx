@@ -1,11 +1,40 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { Profile } from '@shared/types.ts';
+import type { Profile, ProfileProgress } from '@shared/types.ts';
 import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
 import ConfirmDialog from '../components/ConfirmDialog.tsx';
+import { levelFor } from '../runtime/xp.ts';
+import { calcStreak } from '../utils/streak.ts';
 
 const AVATARS = ['🧒', '👧', '👦', '🦊', '🐯', '🐼', '🚀', '🌟', '🐧', '🦄'];
+
+/** 档案卡的学习速览：等级+连续天数+已学课数 */
+function ProfileStats({ profileId }: { profileId: string }) {
+  const [progress, setProgress] = useState<ProfileProgress | null>(null);
+
+  useEffect(() => {
+    let alive = true;
+    void api.progress(profileId)
+      .then((p) => { if (alive) setProgress(p); })
+      .catch(() => {});
+    return () => { alive = false; };
+  }, [profileId]);
+
+  if (!progress) return <div className="mt-1 h-8" />; // 占位防跳
+
+  const lv = levelFor(progress.xp ?? 0);
+  const streak = calcStreak(progress.dailyUsage ?? {});
+  const done = Object.values(progress.lessons ?? {}).filter((lp) => lp.status === 'completed').length;
+
+  return (
+    <div className="mt-2 flex items-center justify-center gap-1.5 text-[10px] font-bold">
+      <span className="rounded-full bg-amber-100 px-1.5 py-0.5 text-amber-700">⭐LV{lv.level}</span>
+      {streak > 0 && <span className="rounded-full bg-orange-100 px-1.5 py-0.5 text-orange-600">🔥{streak}天</span>}
+      <span className="rounded-full bg-sky-100 px-1.5 py-0.5 text-sky-600">📖{done}课</span>
+    </div>
+  );
+}
 
 export default function HomeScreen() {
   const nav = useNavigate();
@@ -47,7 +76,7 @@ export default function HomeScreen() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-gradient-to-b from-sky-50 to-slate-50">
       <div className="text-center pt-16 pb-10">
         <div className="text-7xl">📖</div>
         <h1 className="mt-3 text-4xl font-black text-sky-800">AI学学乐</h1>
@@ -65,7 +94,8 @@ export default function HomeScreen() {
               >
                 <div className="text-5xl">{p.avatar}</div>
                 <div className="mt-2 text-lg font-bold">{p.name}</div>
-                <div className="mt-1 text-sm text-sky-600">开始学习 →</div>
+                <ProfileStats profileId={p.id} />
+                <div className="mt-1.5 text-sm font-bold text-sky-600">开始学习 →</div>
               </button>
               {p.grade != null && (
                 <span className="absolute -left-2 -top-2 rounded-full bg-amber-400 px-2 py-0.5 text-[11px] font-black text-white shadow" title="孩子所在年级">
