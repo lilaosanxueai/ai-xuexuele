@@ -166,6 +166,23 @@
       ],
       "answer": 0,
       "explain": "形容词在名词前：blue sky"
+    },
+    {
+      "q": "What ___ this?（填 is/are）",
+      "options": [
+        "is",
+        "are"
+      ],
+      "answer": 0,
+      "explain": "this是单数用is",
+      "blank": {
+        "answerText": "is",
+        "bank": [
+          "is",
+          "are"
+        ]
+      },
+      "type": "blank"
     }
   ],
   "textbook": "人教PEP英语（三年级起点）",

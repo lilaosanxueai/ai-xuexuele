@@ -196,6 +196,27 @@
       ],
       "answer": 1,
       "explain": "求助是勇敢"
+    },
+    {
+      "q": "情绪 ABC 理论中 A 代表 ___",
+      "options": [
+        "事件",
+        "信念",
+        "结果",
+        "行动"
+      ],
+      "answer": 0,
+      "explain": "A事件→B信念→C结果",
+      "blank": {
+        "answerText": "事件",
+        "bank": [
+          "事件",
+          "信念",
+          "结果",
+          "行动"
+        ]
+      },
+      "type": "blank"
     }
   ],
   "interact": {

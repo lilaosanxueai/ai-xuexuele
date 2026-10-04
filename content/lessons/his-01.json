@@ -196,6 +196,23 @@
       ],
       "answer": 1,
       "explain": "龙骨山"
+    },
+    {
+      "q": "北京人使用 ___ 石器（打制/磨制）",
+      "options": [
+        "打制",
+        "磨制"
+      ],
+      "answer": 0,
+      "explain": "旧石器时代打制石器",
+      "blank": {
+        "answerText": "打制",
+        "bank": [
+          "打制",
+          "磨制"
+        ]
+      },
+      "type": "blank"
     }
   ],
   "interact": {

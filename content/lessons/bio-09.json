@@ -196,6 +196,23 @@
       ],
       "answer": 3,
       "explain": "三网协同"
+    },
+    {
+      "q": "胰岛素的作用是降低血糖，胰高血糖素的作用是 ___ 血糖",
+      "options": [
+        "升高",
+        "降低"
+      ],
+      "answer": 0,
+      "explain": "拮抗调节",
+      "blank": {
+        "answerText": "升高",
+        "bank": [
+          "升高",
+          "降低"
+        ]
+      },
+      "type": "blank"
     }
   ],
   "interact": {
