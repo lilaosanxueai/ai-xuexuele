@@ -7,7 +7,7 @@ import CompareTab from '../components/CompareTab.tsx';
 import AnnualReport from '../components/AnnualReport.tsx';
 import { exercisesToCsv, usageToCsv, downloadCsv } from '../runtime/csvExport.ts';
 import { computeBadges, readRecords, recordsKey, EMPTY_RECORDS } from '../runtime/achievements.ts';
-import { computeWeeklyReport } from '../runtime/weeklyReport.ts';
+import { computeWeeklyReport, weekDelta } from '../runtime/weeklyReport.ts';
 import { levelFor } from '../runtime/xp.ts';
 import { calcStreak } from '../utils/streak.ts';
 import LearningHeatmap from '../components/LearningHeatmap.tsx';
@@ -236,8 +236,10 @@ function ReportTab({ profileId }: { profileId: string }) {
   // 跨学科实践课程：学科 × 编程演示双标注的课程
   const crossLessons = lessons.filter((l) => l.subject);
 
-  // 本周学情镜像（周报引擎 + 徽章 + 热力图，全部本地计算）
+  // 本周学情镜像（周报引擎 + 徽章 + 热力图，全部本地计算）；对比上周看趋势
   const report = computeWeeklyReport(lessons, progress);
+  const prevReport = useMemo(() => computeWeeklyReport(lessons, progress, new Date(), 1), [lessons, progress]); // eslint-disable-line react-hooks/exhaustive-deps
+  const delta = weekDelta(report, prevReport);
   const badges = useMemo(() => {
     let rec = EMPTY_RECORDS;
     try { rec = readRecords(JSON.parse(localStorage.getItem(recordsKey(profileId)) ?? '{}')); } catch { /* 忽略 */ }
@@ -272,6 +274,7 @@ function ReportTab({ profileId }: { profileId: string }) {
             <p className="mt-1 text-center text-sm text-slate-500">AI学学乐 · {new Date().toLocaleDateString('zh-CN')} 生成</p>
             <div className="mt-4 grid grid-cols-2 gap-2 text-sm">
               <div>本周学习时长：{report.totalMinutes} 分钟（{report.activeDays} 天）</div>
+              <div>较上周：{delta.minutes >= 0 ? '+' : ''}{delta.minutes} 分钟 · {delta.activeDays >= 0 ? '+' : ''}{delta.activeDays} 天 · 新课 {delta.lessons >= 0 ? '+' : ''}{delta.lessons} 节</div>
               <div>连续学习：{report.streak} 天</div>
               <div>课程完成：{doneCount}/{lessons.length}</div>
               <div>累计学习：{totalMin} 分钟</div>
@@ -316,6 +319,9 @@ function ReportTab({ profileId }: { profileId: string }) {
           <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-600">学习 {report.activeDays} 天</span>
           <span className="rounded-full bg-orange-50 px-3 py-1 text-xs font-bold text-orange-500">🔥 连续 {report.streak} 天</span>
           <span className="rounded-full bg-violet-50 px-3 py-1 text-xs font-bold text-violet-600">🏅 徽章 {badges.filter((b) => b.unlocked).length}/{badges.length}</span>
+          <DeltaChip label="时长" v={delta.minutes} unit="分钟" />
+          <DeltaChip label="天数" v={delta.activeDays} unit="天" />
+          <DeltaChip label="新课" v={delta.lessons} unit="节" />
           <button onClick={doPrint} className="ml-auto rounded-xl bg-slate-700 px-3 py-1 text-xs font-bold text-white transition hover:bg-slate-800">🖨 打印成长报告</button>
         </div>
         <p className="mb-3 text-sm text-slate-600">{report.headline}</p>
@@ -487,6 +493,17 @@ function StatCard({ label, value, emoji }: { label: string; value: string; emoji
       <div className="mt-1 text-xl font-black text-slate-800">{value}</div>
       <div className="text-xs text-slate-400">{label}</div>
     </div>
+  );
+}
+
+/** 周对比小胶囊：较上周 ↑/↓/持平，涨绿跌红 */
+function DeltaChip({ label, v, unit }: { label: string; v: number; unit: string }) {
+  const tone = v > 0 ? 'bg-emerald-50 text-emerald-600' : v < 0 ? 'bg-rose-50 text-rose-500' : 'bg-slate-100 text-slate-400';
+  const arrow = v > 0 ? '↑' : v < 0 ? '↓' : '→';
+  return (
+    <span className={`rounded-full px-3 py-1 text-xs font-bold ${tone}`} title="与上周对比">
+      {label}较上周 {arrow}{Math.abs(v)}{unit}
+    </span>
   );
 }
 

@@ -38,10 +38,27 @@ export interface WeeklyReport {
 
 const WEEKDAY = ['日', '一', '二', '三', '四', '五', '六'];
 
+/** 与上周的对比（正数=进步，负数=退步） */
+export interface WeekDelta {
+  minutes: number;
+  activeDays: number;
+  lessons: number;
+}
+
+export function weekDelta(cur: WeeklyReport, prev: WeeklyReport): WeekDelta {
+  return {
+    minutes: cur.totalMinutes - prev.totalMinutes,
+    activeDays: cur.activeDays - prev.activeDays,
+    lessons: cur.lessonsDone.length - prev.lessonsDone.length,
+  };
+}
+
 export function computeWeeklyReport(
   lessons: Lesson[],
   progress: ProfileProgress | null,
   now: Date = new Date(),
+  /** 0=本周，1=上周（家长端对比趋势用）；streak/headline 仅 offset=0 有意义 */
+  weekOffset = 0,
 ): WeeklyReport {
   const usage = progress?.dailyUsage ?? {};
   const dayBars: DayBar[] = [];
@@ -49,7 +66,7 @@ export function computeWeeklyReport(
   let activeDays = 0;
   for (let i = 6; i >= 0; i--) {
     const d = new Date(now);
-    d.setDate(d.getDate() - i);
+    d.setDate(d.getDate() - (weekOffset * 7 + i));
     const key = d.toISOString().slice(0, 10);
     const minutes = usage[key] ?? 0;
     dayBars.push({ label: '周' + WEEKDAY[d.getDay()], minutes });
@@ -58,12 +75,16 @@ export function computeWeeklyReport(
   }
 
   const weekStart = new Date(now);
-  weekStart.setDate(weekStart.getDate() - 7);
+  weekStart.setDate(weekStart.getDate() - (weekOffset * 7 + 7));
+  // 窗口上界：offset=0 即当下；offset=1 时排除本周完成的课
+  const weekEnd = new Date(now);
+  weekEnd.setDate(weekEnd.getDate() - weekOffset * 7);
   const byId = new Map(lessons.map((l) => [l.id, l]));
   const lessonsDone: { title: string; emoji: string }[] = [];
   for (const [id, lp] of Object.entries(progress?.lessons ?? {})) {
     if (lp.status !== 'completed' || !lp.completedAt) continue;
-    if (new Date(lp.completedAt).getTime() < weekStart.getTime()) continue;
+    const doneAt = new Date(lp.completedAt).getTime();
+    if (doneAt < weekStart.getTime() || doneAt >= weekEnd.getTime()) continue;
     const l = byId.get(id);
     if (l) lessonsDone.push({ title: l.title, emoji: l.emoji });
   }
