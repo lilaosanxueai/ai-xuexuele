@@ -208,6 +208,27 @@
       ],
       "answer": 2,
       "explain": "不配平则比例错误"
+    },
+    {
+      "q": "水的化学式是 ___",
+      "options": [
+        "H₂O",
+        "CO₂",
+        "O₂",
+        "NaCl"
+      ],
+      "answer": 0,
+      "explain": "两个氢一个氧",
+      "blank": {
+        "answerText": "H₂O",
+        "bank": [
+          "H₂O",
+          "CO₂",
+          "O₂",
+          "NaCl"
+        ]
+      },
+      "type": "blank"
     }
   ]
 }
