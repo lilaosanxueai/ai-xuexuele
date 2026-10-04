@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { Exercise, ProfileProgress, WrongItem } from '@shared/types.ts';
+import type { Exercise, Lesson, ProfileProgress, WrongItem } from '@shared/types.ts';
 import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
@@ -8,6 +8,7 @@ import ExercisePanel from '../components/ExercisePanel.tsx';
 import { SUBJECTS } from '../components/subjectMeta.ts';
 import { bumpCounter } from '../runtime/dailyQuests.ts';
 import { sortByDifficulty, sortByWrongPriority } from '../runtime/questionDifficulty.ts';
+import { pickVariants } from '../runtime/variants.ts';
 
 /** 打印样式：只打印练习卷浮层 */
 const PRINT_CSS = `@media print { body * { visibility: hidden !important; } #print-sheet, #print-sheet * { visibility: visible !important; } #print-sheet { position: absolute !important; left: 0; top: 0; width: 100%; background: #fff; } }`;
@@ -32,12 +33,18 @@ export default function WrongBookScreen() {
   const [showAnalysis, setShowAnalysis] = useState(false);
   /** 举一反三（作业帮式）：错题关联同模块课程，推荐变式练习 */
   const [moduleLessons, setModuleLessons] = useState<Map<string, { id: string; title: string; emoji: string; subjectArea: string }[]>>(new Map());
+  const [lessons, setLessons] = useState<Lesson[]>([]);
+  /** 变式训练会话：variants 阶段练同考点变式，origin 阶段挑战原题 */
+  const [variantWrong, setVariantWrong] = useState<WrongItem | null>(null);
+  const [variantStage, setVariantStage] = useState<'variants' | 'origin'>('variants');
+  const [variantSet, setVariantSet] = useState<Exercise[]>([]);
 
   useEffect(() => {
     if (!profile) { nav('/'); return; }
     void api.progress(profile.id).then(setProgress).catch(() => setProgress(null));
     // 实验课跳 /lab、辅导课跳 /tutor——「看讲解」直达对应课程；同时建 课标模块→课程 索引
     void api.lessons().then((ls) => {
+      setLessons(ls);
       setLabIds(new Set(ls.filter((l) => l.lab || l.starterCode).map((l) => l.id)));
       const m = new Map<string, { id: string; title: string; emoji: string; subjectArea: string }[]>();
       for (const l of ls) {
@@ -52,6 +59,55 @@ export default function WrongBookScreen() {
 
   const wrongs = progress?.wrongBook ?? [];
   const [printing, setPrinting] = useState(false);
+
+  // 变式训练：每道错题可用的同考点变式数（数据变化时算一次，渲染时直接查）
+  const variantCount = useMemo(() => {
+    const m = new Map<string, number>();
+    if (lessons.length === 0) return m;
+    for (const w of wrongs) m.set(w.id, pickVariants(w, lessons, wrongs, 3).length);
+    return m;
+  }, [lessons, progress]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const startVariants = (w: WrongItem) => {
+    const vs = pickVariants(w, lessons, wrongs, 3);
+    if (vs.length === 0) {
+      setCelebrate('💡 这道题暂时凑不齐同考点变式——点「📖 看讲解」复习后再来重练吧！');
+      return;
+    }
+    setVariantWrong(w);
+    setVariantStage('variants');
+    setVariantSet(vs);
+  };
+
+  const finishVariants = (correct: number, wrongPicks: { idx: number; pick: number }[]) => {
+    if (!variantWrong) return;
+    if (wrongPicks.length === 0) {
+      setVariantStage('origin'); // 变式全对 → 直接挑战原题，过了就移出错题本
+    } else {
+      setCelebrate(`💡 变式练对 ${correct}/${variantSet.length}——先点「📖 看讲解」复习，再来挑战！`);
+      setVariantWrong(null);
+      setVariantSet([]);
+    }
+  };
+
+  const finishOrigin = (_correct: number, wrongPicks: { idx: number; pick: number }[]) => {
+    if (!variantWrong || !profile) return;
+    if (wrongPicks.length === 0) {
+      void api.updateProgress(profile.id, { wrongClears: [variantWrong.id] })
+        .then((p) => setProgress(p))
+        .catch(() => {});
+      bumpDaily(profile.id, 'wrongsCleared');
+      setCelebrate('🎉 变式全对 + 原题攻克，这道错题移出错题本！');
+    } else {
+      void api.updateProgress(profile.id, { wrongAdds: [{ ...variantWrong, times: 1, wrongPicks: [wrongPicks[0]?.pick ?? 0] }] })
+        .then((p) => setProgress(p))
+        .catch(() => {});
+      setCelebrate('💪 原题还没过——回卡片里点「📖 看讲解」，明天再战！');
+    }
+    setVariantWrong(null);
+    setVariantSet([]);
+    setVariantStage('variants');
+  };
 
   const doPrint = () => {
     setPrinting(true);
@@ -262,9 +318,17 @@ export default function WrongBookScreen() {
                             📖 看讲解
                           </button>
                         </div>
+                        {(variantCount.get(w.id) ?? 0) > 0 && (
+                          <button
+                            onClick={() => startVariants(w)}
+                            className="mt-2 w-full rounded-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 py-1.5 text-xs font-black text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                          >
+                            🔁 变式训练（{variantCount.get(w.id)} 道同考点新题 · 全对解锁原题挑战）
+                          </button>
+                        )}
                         {siblings.length > 0 && (
                           <div className="mt-2 flex flex-wrap items-center gap-1.5 border-t border-slate-100 pt-2">
-                            <span className="text-[11px] font-bold text-slate-400">🔁 举一反三（同考点变式）：</span>
+                            <span className="text-[11px] font-bold text-slate-400">同考点课程：</span>
                             {siblings.map((s) => (
                               <button
                                 key={s.id}
@@ -293,6 +357,20 @@ export default function WrongBookScreen() {
           exercises={practiceSet}
           onClose={() => setPracticing(false)}
           onDone={finishPractice}
+        />
+      )}
+
+      {variantWrong && variantSet.length > 0 && (
+        <ExercisePanel
+          key={variantStage}
+          title={variantStage === 'variants'
+            ? `🔁 变式训练 · ${variantWrong.subjectArea}`
+            : '🎯 原题挑战（答对即移出错题本）'}
+          exercises={variantStage === 'variants'
+            ? variantSet
+            : [{ q: variantWrong.q, options: variantWrong.options, answer: variantWrong.answer, explain: variantWrong.explain }]}
+          onClose={() => { setVariantWrong(null); setVariantSet([]); }}
+          onDone={variantStage === 'variants' ? finishVariants : finishOrigin}
         />
       )}
     </div>
