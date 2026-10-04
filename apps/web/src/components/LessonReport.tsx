@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import type { Lesson } from '@shared/types.ts';
 import type { NextStep } from '../runtime/nextStep.ts';
 
@@ -26,6 +27,69 @@ function commentOf(pct: number, wrongCount: number): { head: string; body: strin
 
 /** 课堂报告（学而思式课后反馈卡）：得分环 + 知识点清单 + 学习路径 + 老师评语 */
 export default function LessonReport({ lesson, correct, total, wrongCount, xpGained, nextStep, onGoNext, onClose, onGoWrongbook }: Props) {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  /** 生成分享图片：白底卡片（课名+得分+星星+日期），PNG 下载 */
+  const shareAsImage = () => {
+    const cv = canvasRef.current ?? document.createElement('canvas');
+    cv.width = 600;
+    cv.height = 360;
+    const ctx = cv.getContext('2d');
+    if (!ctx) return;
+    // 背景
+    const grad = ctx.createLinearGradient(0, 0, 0, 360);
+    grad.addColorStop(0, '#38bdf8');
+    grad.addColorStop(1, '#6366f1');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 600, 360);
+    // 白色内卡
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    ctx.roundRect(24, 24, 552, 312, 20);
+    ctx.fill();
+    // 标题区
+    ctx.fillStyle = '#0f172a';
+    ctx.font = 'bold 16px sans-serif';
+    ctx.fillText('课堂报告 · ' + (lesson.subjectArea ?? ''), 48, 62);
+    ctx.fillStyle = '#1e293b';
+    ctx.font = 'bold 24px sans-serif';
+    ctx.fillText((lesson.emoji + ' ' + lesson.title).slice(0, 18), 48, 95);
+    // 得分
+    const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+    ctx.font = 'bold 72px sans-serif';
+    ctx.fillStyle = pct >= 90 ? '#16a34a' : pct >= 60 ? '#f59e0b' : '#dc2626';
+    ctx.fillText(String(pct), 48, 200);
+    ctx.font = 'bold 20px sans-serif';
+    ctx.fillStyle = '#64748b';
+    ctx.fillText('正确率', 48, 230);
+    ctx.fillText(`答对 ${correct}/${total} 题`, 48, 260);
+    // 星星
+    if (xpGained != null && xpGained > 0) {
+      ctx.font = 'bold 28px sans-serif';
+      ctx.fillStyle = '#f59e0b';
+      ctx.fillText(`⭐ +${xpGained}`, 400, 200);
+      ctx.font = '14px sans-serif';
+      ctx.fillStyle = '#64748b';
+      ctx.fillText('颗学习之星', 400, 225);
+    }
+    // 错题
+    if (wrongCount > 0) {
+      ctx.font = '14px sans-serif';
+      ctx.fillStyle = '#64748b';
+      ctx.fillText(`${wrongCount} 道错题进错题本`, 400, 260);
+    }
+    // 底部
+    ctx.font = '12px sans-serif';
+    ctx.fillStyle = '#94a3b8';
+    const d = new Date().toLocaleDateString('zh-CN');
+    ctx.fillText(d + ' · AI学学乐', 48, 310);
+    // 下载
+    const a = document.createElement('a');
+    a.download = `课堂报告_${lesson.title.slice(0, 10)}_${d.replace(/\//g, '-')}.png`;
+    a.href = cv.toDataURL('image/png');
+    a.click();
+  };
+
   const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
   const C = 2 * Math.PI * 44; // r=44 的周长
   const points = lesson.curriculum?.points ?? [];
@@ -159,6 +223,9 @@ export default function LessonReport({ lesson, correct, total, wrongCount, xpGai
               ✅ 完成这一课
             </button>
           )}
+          <button onClick={shareAsImage} className="rounded-2xl bg-sky-100 px-4 py-3 text-sm font-bold text-sky-700 transition hover:bg-sky-200" title="生成PNG图片，可发微信/朋友圈">
+            📤 分享
+          </button>
           <button onClick={onClose} className="rounded-2xl bg-slate-100 px-4 py-3 text-sm font-bold text-slate-600 transition hover:bg-slate-200">关闭</button>
         </div>
       </div>
