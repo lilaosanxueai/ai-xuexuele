@@ -10,6 +10,7 @@ import { computeBadges, readRecords, recordsKey, EMPTY_RECORDS } from '../runtim
 import { computeWeeklyReport } from '../runtime/weeklyReport.ts';
 import { levelFor } from '../runtime/xp.ts';
 import { calcStreak } from '../utils/streak.ts';
+import LearningHeatmap from '../components/LearningHeatmap.tsx';
 
 /** 家长面板：学习进度 / 学情报告 / AI 对话记录 / 伙伴设置（已取消 PIN 门，直接进入） */
 
@@ -123,6 +124,12 @@ function ProgressTab({ profileId }: { profileId: string }) {
           </div>
         );
       })()}
+
+      {/* 学习热力图：坚持可视化（家长视角） */}
+      <div className="mb-4">
+        <LearningHeatmap dailyUsage={progress?.dailyUsage ?? {}} />
+      </div>
+
       {/* 家长悄悄话：写给孩子的小鼓励 */}
       <div className="mb-4 rounded-2xl bg-gradient-to-r from-amber-50 to-rose-50 p-4 ring-1 ring-amber-200">
         <div className="mb-1 text-sm font-black text-amber-700">💌 给孩子的悄悄话</div>
