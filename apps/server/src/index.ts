@@ -1,4 +1,5 @@
 import express from 'express';
+import compression from 'compression';
 import path from 'node:path';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -9,6 +10,7 @@ const cfg = loadConfig();
 ensureDirs();
 
 const app = express();
+app.use(compression({ threshold: 2048 })); // gzip：670课JSON压缩约70%，平板WiFi秒开
 app.use(express.json({ limit: '2mb' })); // 作品截图是 dataURL
 
 app.use('/api', buildRouter(cfg));

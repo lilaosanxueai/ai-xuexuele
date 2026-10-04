@@ -219,6 +219,11 @@ export default function SubjectScreen() {
                             </button>
                           </div>
                           <span className={`mt-1.5 w-24 truncate text-center text-[10px] font-bold ${hiSet.size > 0 && !hiSet.has(l.id) ? 'text-slate-300' : 'text-slate-600'}`}>{l.title}</span>
+                          <span className="flex gap-0.5 text-[7px] leading-none" title={`难度 ${d}/5 · ${difficultyLabel(d)}`}>
+                            {Array.from({ length: 5 }, (_, di) => (
+                              <span key={di} className={di < d ? 'text-amber-400' : 'text-slate-200'}>●</span>
+                            ))}
+                          </span>
                         </div>
                       );
                     })}
