@@ -11,6 +11,7 @@ import InteractLab from '../components/InteractLab.tsx';
 import LessonReport from '../components/LessonReport.tsx';
 import { suggestNext } from '../runtime/nextStep.ts';
 import { xpForQuiz } from '../runtime/xp.ts';
+import { buildShotName, exportSvgToPng } from '../runtime/stageShot.ts';
 import { parsePy, PyRunner } from '../runtime/pyinterp.ts';
 import { pyStageApi } from '../runtime/pyBridge.ts';
 import { lessonNeighbors, lessonRoute } from '../runtime/lessonNav.ts';
@@ -103,6 +104,28 @@ export default function LabScreen() {
   const tweenRafRef = useRef(0);
   const valuesRef = useRef(values);
   valuesRef.current = values;
+  /** 舞台容器（截图时从中取 SVG 元素） */
+  const stageBoxRef = useRef<HTMLDivElement | null>(null);
+
+  /** 恢复默认参数：滑块全部归位并立即重绘 */
+  const resetParams = () => {
+    const defs = Object.fromEntries(params.map((p) => [p.name, p.value]));
+    tweenValsRef.current = null;
+    cancelAnimationFrame(tweenRafRef.current);
+    clearTimeout(debounceRef.current);
+    setValues(defs);
+    if (!lesson?.interact) runLab(baseCode, defs, 'instant');
+  };
+
+  /** 保存当前实验图为 PNG（2 倍分辨率，进下载文件夹） */
+  const saveShot = () => {
+    if (!lesson) return;
+    const svg = stageBoxRef.current?.querySelector('svg');
+    if (!svg) { setToast('当前没有可保存的演示图'); return; }
+    void exportSvgToPng(svg as SVGSVGElement, buildShotName(lesson.title))
+      .then(() => setToast('📸 实验图已保存到下载文件夹'))
+      .catch(() => setToast('保存失败，再试一次'));
+  };
 
   /** 实验挑战达成检测：参数到位（浮点容差）即亮 */
   useEffect(() => {
@@ -401,7 +424,16 @@ export default function LabScreen() {
         {/* 左：参数 + 探索问题（手机端横排在上，桌面竖排在左） */}
         <aside className="w-full shrink-0 space-y-3 overflow-y-auto border-b border-r bg-white/60 p-3 pb-6 md:w-72 md:border-b-0">
           <div className="rounded-2xl bg-white p-3 shadow-sm">
-            <div className="mb-2 text-sm font-black text-slate-700">🎛 调一调</div>
+            <div className="mb-2 flex items-center justify-between">
+              <div className="text-sm font-black text-slate-700">🎛 调一调</div>
+              <button
+                onClick={resetParams}
+                className="rounded-lg bg-slate-100 px-2 py-0.5 text-[11px] font-bold text-slate-500 transition hover:bg-slate-200"
+                title="滑块全部恢复到这一课的初始值"
+              >
+                ↺ 默认
+              </button>
+            </div>
             {params.length === 0 && <p className="text-xs text-slate-400">这节演示没有可调参数</p>}
             {params.map((p) => (
               <div key={p.name} className="mb-3">
@@ -420,14 +452,23 @@ export default function LabScreen() {
                 />
               </div>
             ))}
-            {lesson.subjectArea === '信息科技' && !lesson.interact && (
-              <button
-                onClick={() => runLab(baseCode, values, 'normal')}
-                disabled={slowRunning}
-                className="mt-1 w-full rounded-xl bg-violet-500 px-3 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-violet-600 disabled:opacity-50"
-              >
-                {slowRunning ? '⏳ 演示中…' : '▶ 慢速看过程'}
-              </button>
+            {!lesson.interact && baseCode && (
+              <div className="mt-1 flex gap-1.5">
+                <button
+                  onClick={() => runLab(baseCode, values, 'normal')}
+                  disabled={slowRunning}
+                  className="flex-1 rounded-xl bg-violet-500 px-3 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-violet-600 disabled:opacity-50"
+                >
+                  {slowRunning ? '⏳ 演示中…' : '▶ 慢速看过程'}
+                </button>
+                <button
+                  onClick={saveShot}
+                  className="shrink-0 rounded-xl bg-white px-3 py-2 text-sm font-bold text-slate-600 ring-1 ring-slate-200 transition hover:bg-slate-50"
+                  title="把当前实验图保存为 PNG（2 倍分辨率）"
+                >
+                  📸
+                </button>
+              </div>
             )}
           </div>
 
@@ -544,7 +585,7 @@ export default function LabScreen() {
               );
             }
             return (
-              <div className="h-full p-4">
+              <div ref={stageBoxRef} className="h-full p-4">
                 <StageSvg cmds={reveal >= cmds.length ? cmds : cmds.slice(0, reveal)} grid={lesson.lab?.grid ?? false} />
               </div>
             );
