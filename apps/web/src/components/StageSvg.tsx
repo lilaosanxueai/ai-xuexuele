@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState, type MouseEvent } from 'react';
 
 /** 捕获的舞台命令（Python 演示离屏执行后输出） */
 export type StageCmd =
@@ -10,6 +10,22 @@ export type StageCmd =
 
 const VW = 420;
 const VH = 330;
+
+/** 客户端像素 → viewBox 坐标（preserveAspectRatio=xMidYMid meet 的逆映射）；用于取点读数 */
+export function mapClientToView(px: number, py: number, w: number, h: number): { vx: number; vy: number } {
+  if (w <= 0 || h <= 0) return { vx: NaN, vy: NaN };
+  const s = Math.min(w / VW, h / VH);
+  const ox = (w - VW * s) / 2;
+  const oy = (h - VH * s) / 2;
+  return { vx: (px - ox) / s, vy: (py - oy) / s };
+}
+
+/** 坐标读数格式：保留 1 位小数，整数不带 .0 */
+export const fmtCoord = (n: number): string => {
+  if (!Number.isFinite(n)) return '—';
+  const r = Math.round(n * 10) / 10;
+  return Number.isInteger(r) ? String(r) : r.toFixed(1);
+};
 
 /**
  * 配色纪律：全部课程色收敛到 5 个教育主题色（蓝·绿·琥珀·玫红·紫罗兰），
@@ -58,6 +74,8 @@ function fontSizeOf(size: number): number {
  * 自动构图（内容包围盒缩放居中，杜绝偏心/裁切）+ 主题配色收敛 + 统一文字分级。
  */
 export default function StageSvg({ cmds, grid = false }: { cmds: StageCmd[]; grid?: boolean }) {
+  /** 取点读数（grid 舞台悬停时）：bx/by=气泡像素位，vx/vy=viewBox 准线位，x/y=数据坐标，w=容器宽 */
+  const [probe, setProbe] = useState<{ bx: number; by: number; vx: number; vy: number; x: number; y: number; w: number } | null>(null);
   const view = useMemo(() => {
     // 1) 计算内容包围盒（含文字宽度估计）
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
@@ -157,11 +175,26 @@ export default function StageSvg({ cmds, grid = false }: { cmds: StageCmd[]; gri
         ),
       });
     });
-    return { els, toX, toY };
+    return { els, toX, toY, scale, cx, cy };
   }, [cmds]);
 
+  const onMove = (e: MouseEvent<HTMLDivElement>) => {
+    if (!grid) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const { vx, vy } = mapClientToView(e.clientX - rect.left, e.clientY - rect.top, rect.width, rect.height);
+    if (!Number.isFinite(vx) || !Number.isFinite(vy)) return;
+    // toX/toY 的逆变换：viewBox 坐标 → 数据坐标（y 轴翻转）
+    const x = view.cx + (vx - VW / 2) / view.scale;
+    const y = view.cy - (vy - VH / 2) / view.scale;
+    setProbe({ bx: e.clientX - rect.left, by: e.clientY - rect.top, vx, vy, x, y, w: rect.width });
+  };
+
   return (
-    <div className="h-full w-full overflow-hidden rounded-3xl bg-gradient-to-b from-white to-slate-50 shadow-inner ring-1 ring-slate-200">
+    <div
+      className={`relative h-full w-full overflow-hidden rounded-3xl bg-gradient-to-b from-white to-slate-50 shadow-inner ring-1 ring-slate-200 ${grid ? 'cursor-crosshair' : ''}`}
+      onMouseMove={grid ? onMove : undefined}
+      onMouseLeave={grid ? () => setProbe(null) : undefined}
+    >
       <svg viewBox={'0 0 ' + VW + ' ' + VH} className="h-full w-full" preserveAspectRatio="xMidYMid meet">
         {grid && (
           <g>
@@ -176,7 +209,25 @@ export default function StageSvg({ cmds, grid = false }: { cmds: StageCmd[]; gri
         {view.els.map((e) => (
           <g key={e.key}>{e.node}</g>
         ))}
+        {grid && probe && (
+          <g>
+            <line x1={probe.vx} y1={0} x2={probe.vx} y2={VH} stroke="#38bdf8" strokeWidth={0.9} strokeDasharray="5 4" opacity={0.85} />
+            <line x1={0} y1={probe.vy} x2={VW} y2={probe.vy} stroke="#38bdf8" strokeWidth={0.9} strokeDasharray="5 4" opacity={0.85} />
+          </g>
+        )}
       </svg>
+      {grid && probe && (
+        <div
+          className="pointer-events-none absolute rounded-lg bg-sky-600/90 px-2 py-0.5 font-mono text-[11px] font-bold text-white shadow-md"
+          style={{
+            left: Math.min(Math.max(probe.bx, 36), Math.max(probe.w - 36, 36)),
+            top: Math.max(probe.by - 30, 4),
+            transform: 'translateX(-50%)',
+          }}
+        >
+          ({fmtCoord(probe.x)}, {fmtCoord(probe.y)})
+        </div>
+      )}
     </div>
   );
 }
