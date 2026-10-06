@@ -7,7 +7,8 @@ import CompareTab from '../components/CompareTab.tsx';
 import AnnualReport from '../components/AnnualReport.tsx';
 import { exercisesToCsv, usageToCsv, downloadCsv } from '../runtime/csvExport.ts';
 import { computeBadges, readRecords, recordsKey, EMPTY_RECORDS } from '../runtime/achievements.ts';
-import { computeWeeklyReport, weekDelta } from '../runtime/weeklyReport.ts';
+import { computeWeeklyReport, weekDelta, type WeekDelta } from '../runtime/weeklyReport.ts';
+import { buildWeeklyCardStats, drawWeeklyCard, downloadWeeklyCard } from '../runtime/shareCard.ts';
 import { levelFor } from '../runtime/xp.ts';
 import { calcStreak } from '../utils/streak.ts';
 import LearningHeatmap from '../components/LearningHeatmap.tsx';
@@ -188,11 +189,16 @@ function ReportTab({ profileId }: { profileId: string }) {
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [progress, setProgress] = useState<ProfileProgress | null>(null);
   const [projects, setProjects] = useState<Project[]>([]);
+  const [kid, setKid] = useState<{ name: string; avatar: string } | null>(null);
 
   useEffect(() => {
     void api.lessons().then(setLessons);
     void api.progress(profileId).then(setProgress);
     void api.projects(profileId).then(setProjects).catch(() => {});
+    void api.profiles().then((ps) => {
+      const p = ps.find((x) => x.id === profileId);
+      if (p) setKid({ name: p.name, avatar: p.avatar });
+    }).catch(() => {});
   }, [profileId]);
 
   const done = (id: string) => progress?.lessons[id]?.status === 'completed';
@@ -275,6 +281,15 @@ function ReportTab({ profileId }: { profileId: string }) {
       .catch(() => setAiComment(null))
       .finally(() => setCommentLoading(false));
   };
+
+  /** 分享周报：速览+评语合成 750×1000 卡片图（发家庭群） */
+  const shareWeekly = () => {
+    const who = kid ?? { name: '孩子', avatar: '🧒' };
+    const stats = buildWeeklyCardStats(who, report, delta, aiComment?.comment ?? null);
+    const canvas = document.createElement('canvas');
+    drawWeeklyCard(canvas, stats);
+    downloadWeeklyCard(canvas, who.name);
+  };
   const doPrint = () => {
     setPrinting(true);
     setTimeout(() => { window.print(); setPrinting(false); }, 120);
@@ -342,6 +357,7 @@ function ReportTab({ profileId }: { profileId: string }) {
           <DeltaChip label="天数" v={delta.activeDays} unit="天" />
           <DeltaChip label="新课" v={delta.lessons} unit="节" />
           <button onClick={doPrint} className="ml-auto rounded-xl bg-slate-700 px-3 py-1 text-xs font-bold text-white transition hover:bg-slate-800">🖨 打印成长报告</button>
+          <button onClick={shareWeekly} className="rounded-xl bg-indigo-500 px-3 py-1 text-xs font-bold text-white transition hover:bg-indigo-600" title="速览+评语合成一张图，发家庭群晒成长">📷 分享周报</button>
         </div>
         <p className="mb-3 text-sm text-slate-600">{report.headline}</p>
         <div className="mb-3 rounded-2xl bg-gradient-to-r from-indigo-50 to-sky-50 p-4 ring-1 ring-indigo-100">

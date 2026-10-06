@@ -1,5 +1,6 @@
 import type { Lesson, ProfileProgress } from '@shared/types.ts';
 import { computeBadges, readRecords, streakFrom } from './achievements.ts';
+import type { WeeklyReport, WeekDelta } from './weeklyReport.ts';
 
 /** 分享卡片统计（纯数据，可测试；绘制与数据分离） */
 export interface ShareStats {
@@ -182,5 +183,185 @@ export function downloadShareCard(canvas: HTMLCanvasElement, name: string): void
   const a = document.createElement('a');
   a.href = canvas.toDataURL('image/png');
   a.download = `AI学学乐-成长卡片-${name}.png`;
+  a.click();
+}
+
+// ---------------- 周报分享卡 ----------------
+
+export interface WeeklyCardStats {
+  name: string;
+  avatar: string;
+  /** 如 09.30 - 10.06 */
+  dateRange: string;
+  totalMinutes: number;
+  activeDays: number;
+  streak: number;
+  lessons: number;
+  delta: { minutes: number; activeDays: number; lessons: number };
+  /** 正确率条（最多4条） */
+  subjects: { subject: string; accuracy: number }[];
+  comment: string;
+  commentSource: 'llm' | 'template' | 'headline';
+}
+
+/** 评语换行（纯函数）：按固定字数折行，超长截断加省略号 */
+export function wrapComment(text: string, perLine = 26, maxLines = 6): string[] {
+  const clean = text.replace(/\s+/g, ' ').trim();
+  if (!clean) return [];
+  const lines: string[] = [];
+  for (let i = 0; i < clean.length && lines.length < maxLines; i += perLine) {
+    lines.push(clean.slice(i, i + perLine));
+  }
+  if (clean.length > maxLines * perLine && lines.length > 0) {
+    lines[lines.length - 1] = lines[lines.length - 1].slice(0, perLine - 1) + '…';
+  }
+  return lines;
+}
+
+const pad2 = (n: number) => String(n).padStart(2, '0');
+const mmdd = (d: Date) => `${pad2(d.getMonth() + 1)}.${pad2(d.getDate())}`;
+
+/** 组装周报卡数据（纯函数，可测试） */
+export function buildWeeklyCardStats(
+  profile: { name: string; avatar: string },
+  report: WeeklyReport,
+  delta: WeekDelta,
+  comment: string | null,
+  now: Date = new Date(),
+): WeeklyCardStats {
+  const start = new Date(now);
+  start.setDate(start.getDate() - 6);
+  const subjects = report.subjectStats
+    .filter((s) => s.accuracy !== null && s.total >= 3)
+    .slice(0, 4)
+    .map((s) => ({ subject: s.subject, accuracy: s.accuracy as number }));
+  const source: WeeklyCardStats['commentSource'] = comment ? 'llm' : 'headline';
+  return {
+    name: profile.name,
+    avatar: profile.avatar,
+    dateRange: `${mmdd(start)} - ${mmdd(now)}`,
+    totalMinutes: report.totalMinutes,
+    activeDays: report.activeDays,
+    streak: report.streak,
+    lessons: report.lessonsDone.length,
+    delta,
+    subjects,
+    comment: (comment ?? report.headline).slice(0, 400),
+    commentSource: source,
+  };
+}
+
+/** 画 750×(1000~1250 自适应) 周报分享卡（家庭群晒本周成长） */
+export function drawWeeklyCard(canvas: HTMLCanvasElement, s: WeeklyCardStats): void {
+  const W = 750;
+  // 先按内容算高度：头部210 + 四格288 + 学科区 + 评语区 + 页脚
+  const lines = wrapComment(s.comment);
+  const commentBoxH = lines.length > 0 ? 64 + lines.length * 40 : 0;
+  const barsH = s.subjects.length > 0 ? 50 + s.subjects.length * 46 + 26 : 0;
+  const H = Math.max(1000, Math.min(1250, 246 + 288 + 22 + barsH + commentBoxH + 130));
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const sky = ctx.createLinearGradient(0, 0, 0, H);
+  sky.addColorStop(0, '#c7d2fe');
+  sky.addColorStop(0.5, '#e0f2fe');
+  sky.addColorStop(1, '#f0fdfa');
+  ctx.fillStyle = sky;
+  ctx.fillRect(0, 0, W, H);
+
+  ctx.textAlign = 'center';
+  // 头部：头像 + 名字 + 标题 + 日期
+  ctx.font = '64px sans-serif';
+  ctx.fillText(s.avatar, 375, 110);
+  ctx.fillStyle = '#0f172a';
+  ctx.font = 'bold 42px sans-serif';
+  ctx.fillText(`${s.name} 的本周学习周报`, 375, 172);
+  ctx.fillStyle = '#64748b';
+  ctx.font = '26px sans-serif';
+  ctx.fillText(s.dateRange, 375, 212);
+
+  // 四格数据（带较上周增减）
+  const cells: [string, string, string][] = [
+    ['⏱ 学习时长', `${s.totalMinutes} 分钟`, s.delta.minutes === 0 ? '' : `较上周 ${s.delta.minutes > 0 ? '↑' : '↓'}${Math.abs(s.delta.minutes)}`],
+    ['📅 学习天数', `${s.activeDays} 天`, s.delta.activeDays === 0 ? '' : `较上周 ${s.delta.activeDays > 0 ? '↑' : '↓'}${Math.abs(s.delta.activeDays)}`],
+    ['🔥 连续打卡', `${s.streak} 天`, ''],
+    ['📘 完成新课', `${s.lessons} 节`, s.delta.lessons === 0 ? '' : `较上周 ${s.delta.lessons > 0 ? '↑' : '↓'}${Math.abs(s.delta.lessons)}`],
+  ];
+  const cw = 340, ch = 128, gx = (W - cw * 2 - 20) / 2, gy = 246;
+  cells.forEach(([label, value, d], i) => {
+    const x = gx + (i % 2) * (cw + 20);
+    const y = gy + Math.floor(i / 2) * (ch + 16);
+    ctx.fillStyle = 'rgba(255,255,255,0.92)';
+    roundRect(ctx, x, y, cw, ch, 22);
+    ctx.fill();
+    ctx.fillStyle = '#64748b';
+    ctx.font = 'bold 23px sans-serif';
+    ctx.fillText(label, x + cw / 2, y + 38);
+    ctx.fillStyle = '#0f172a';
+    ctx.font = 'bold 36px sans-serif';
+    ctx.fillText(value, x + cw / 2, y + 82);
+    if (d) {
+      ctx.fillStyle = d.includes('↑') ? '#059669' : '#e11d48';
+      ctx.font = 'bold 21px sans-serif';
+      ctx.fillText(d, x + cw / 2, y + 112);
+    }
+  });
+
+  // 学科正确率条
+  let y = gy + 2 * (ch + 16) + 22;
+  if (s.subjects.length > 0) {
+    ctx.fillStyle = '#334155';
+    ctx.font = 'bold 28px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('📊 各学科正确率', gx, y);
+    y += 22;
+    for (const sub of s.subjects) {
+      y += 46;
+      ctx.fillStyle = '#475569';
+      ctx.font = 'bold 25px sans-serif';
+      ctx.fillText(sub.subject, gx, y + 20);
+      ctx.fillStyle = '#e2e8f0';
+      roundRect(ctx, gx + 120, y, cw * 2 - 120, 26, 13);
+      ctx.fill();
+      const color = sub.accuracy >= 80 ? '#10b981' : sub.accuracy >= 60 ? '#f59e0b' : '#f43f5e';
+      ctx.fillStyle = color;
+      roundRect(ctx, gx + 120, y, Math.max(26, (cw * 2 - 120) * sub.accuracy / 100), 26, 13);
+      ctx.fill();
+      ctx.fillStyle = '#0f172a';
+      ctx.font = 'bold 24px sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(`${sub.accuracy}%`, gx + cw * 2, y + 21);
+      ctx.textAlign = 'left';
+    }
+    y += 26;
+  }
+
+  // 老师评语卡（高度按行数自适应，画布高度已预留，不再上提遮挡学科条）
+  if (lines.length > 0) {
+    ctx.fillStyle = 'rgba(255,255,255,0.95)';
+    roundRect(ctx, gx, y, cw * 2 + 20, commentBoxH, 22);
+    ctx.fill();
+    const ty = y + 42;
+    ctx.fillStyle = '#4f46e5';
+    ctx.font = 'bold 27px sans-serif';
+    ctx.fillText(s.commentSource === 'headline' ? '💡 本周小结' : '✨ 老师评语', gx + 28, ty);
+    ctx.fillStyle = '#1e293b';
+    ctx.font = '26px sans-serif';
+    lines.forEach((ln, i) => ctx.fillText(ln, gx + 28, ty + 44 + i * 40));
+  }
+
+  // 底部
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#475569';
+  ctx.font = '24px sans-serif';
+  ctx.fillText('🏝 AI学学乐 · 本地学习档案', 375, H - 52);
+}
+
+export function downloadWeeklyCard(canvas: HTMLCanvasElement, name: string): void {
+  const a = document.createElement('a');
+  a.href = canvas.toDataURL('image/png');
+  a.download = `AI学学乐-周报-${name}-${new Date().toISOString().slice(0, 10)}.png`;
   a.click();
 }
