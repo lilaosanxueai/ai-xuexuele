@@ -13,6 +13,8 @@ import { calcStreak } from '../utils/streak.ts';
 import { levelFor } from '../runtime/xp.ts';
 import { computeBadges, readRecords, bumpRecords, recordsKey, EMPTY_RECORDS } from '../runtime/achievements.ts';
 import { computeWeeklyReport } from '../runtime/weeklyReport.ts';
+import { computeWeeklyRecap } from '../runtime/weeklyRecap.ts';
+import { lessonRoute } from '../runtime/lessonNav.ts';
 import { generateQuests, readCounters } from '../runtime/dailyQuests.ts';
 import { pickDailyQuestion, isDailyDone, markDailyDone } from '../runtime/dailyQuestion.ts';
 import { pickDailyFact, linkFactToLesson } from '../runtime/dailyFact.ts';
@@ -95,6 +97,7 @@ export default function MapScreen() {
   }, [lessons, progress, profile.id, todayMin]);
   const unlockedCount = badges.filter((b) => b.unlocked).length;
   const report = useMemo(() => computeWeeklyReport(lessons, progress), [lessons, progress]);
+  const recap = useMemo(() => computeWeeklyRecap(lessons, progress), [lessons, progress]);
   const maxBarMinutes = Math.max(10, ...report.dayBars.map((d) => d.minutes));
   // 近 8 周学习热力图（GitHub 式）：每天一格，颜色随分钟数加深
   const heat = useMemo(() => {
@@ -268,6 +271,38 @@ export default function MapScreen() {
               ))}
             </div>
           </div>
+          {/* 本周高光（孩子端庆祝视角：只夸不说教；家长端分析归学情报告） */}
+          {(recap.lessons.length > 0 || recap.totalMinutes > 0) && (
+            <div className="mb-3 rounded-2xl bg-gradient-to-r from-fuchsia-50 via-violet-50 to-sky-50 p-3 ring-1 ring-violet-200">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-sm font-black text-violet-700">🏆 本周高光</span>
+                <span className="text-[11px] font-bold text-violet-500">{recap.headline}</span>
+                <span className="ml-auto flex gap-1">
+                  <span className="rounded-full bg-white px-2 py-0.5 text-[10px] font-bold text-slate-500 shadow-sm">⏱ {recap.totalMinutes} 分钟</span>
+                  <span className="rounded-full bg-white px-2 py-0.5 text-[10px] font-bold text-slate-500 shadow-sm">📅 {recap.activeDays} 天</span>
+                </span>
+              </div>
+              {recap.lessons.length > 0 && (
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  {recap.lessons.slice(0, 6).map((l) => (
+                    <button
+                      key={l.id}
+                      onClick={() => {
+                        const full = lessons.find((x) => x.id === l.id);
+                        if (full) nav(lessonRoute(full));
+                      }}
+                      className="rounded-xl bg-white/85 px-2.5 py-1 text-[11px] font-bold text-slate-600 shadow-sm transition hover:-translate-y-0.5 hover:shadow"
+                      title="回到这节课"
+                    >
+                      {l.emoji} {l.title}
+                      {l.accuracy !== null && <b className={l.accuracy >= 80 ? ' text-emerald-600' : ' text-amber-600'}> {l.accuracy}%</b>}
+                      {recap.bestLesson?.id === l.id && <span title="本周最高光"> ⭐</span>}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
           <div className="mb-3 flex flex-wrap items-center gap-3 text-sm text-slate-500">
             <span className="rounded-full bg-orange-50 px-3 py-1 font-bold text-orange-500">🔥 连续学习 {calcStreak(progress?.dailyUsage ?? {})} 天</span>
             <span className="rounded-full bg-white px-3 py-1 shadow-sm">今日 {todayMin} 分钟</span>
