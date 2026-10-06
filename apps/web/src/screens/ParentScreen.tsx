@@ -256,6 +256,25 @@ function ReportTab({ profileId }: { profileId: string }) {
 
   // 学习成长报告打印（打印时只显示报告浮层）
   const [printing, setPrinting] = useState(false);
+  /** AI 周报评语（LLM 优先，未配置时服务端本地模板） */
+  const [aiComment, setAiComment] = useState<{ comment: string; source: 'llm' | 'template' } | null>(null);
+  const [commentLoading, setCommentLoading] = useState(false);
+  const askComment = () => {
+    if (!profileId || commentLoading) return;
+    setCommentLoading(true);
+    void api.weeklyComment(profileId, {
+      totalMinutes: report.totalMinutes,
+      activeDays: report.activeDays,
+      streak: report.streak,
+      lessonsDone: report.lessonsDone.map((l) => l.title),
+      subjectStats: report.subjectStats,
+      weakLessons: report.weakLessons,
+      delta,
+    })
+      .then(setAiComment)
+      .catch(() => setAiComment(null))
+      .finally(() => setCommentLoading(false));
+  };
   const doPrint = () => {
     setPrinting(true);
     setTimeout(() => { window.print(); setPrinting(false); }, 120);
@@ -325,6 +344,26 @@ function ReportTab({ profileId }: { profileId: string }) {
           <button onClick={doPrint} className="ml-auto rounded-xl bg-slate-700 px-3 py-1 text-xs font-bold text-white transition hover:bg-slate-800">🖨 打印成长报告</button>
         </div>
         <p className="mb-3 text-sm text-slate-600">{report.headline}</p>
+        <div className="mb-3 rounded-2xl bg-gradient-to-r from-indigo-50 to-sky-50 p-4 ring-1 ring-indigo-100">
+          <div className="mb-1.5 flex items-center justify-between">
+            <span className="text-sm font-black text-indigo-700">✨ 班主任周评语</span>
+            <button
+              onClick={askComment}
+              disabled={commentLoading}
+              className="rounded-xl bg-indigo-500 px-3 py-1.5 text-xs font-bold text-white shadow-sm transition hover:bg-indigo-600 disabled:opacity-50"
+            >
+              {commentLoading ? '生成中…' : aiComment ? '换一次' : '生成评语'}
+            </button>
+          </div>
+          {aiComment ? (
+            <div>
+              <p className="text-[15px] leading-[1.9] text-indigo-900">{aiComment.comment}</p>
+              <p className="mt-1 text-right text-[11px] text-slate-400">{aiComment.source === 'llm' ? 'AI 生成' : '本地生成（配置 API Key 后为 AI 生成）'}</p>
+            </div>
+          ) : (
+            <p className="text-[13px] leading-relaxed text-slate-500">点「生成评语」：AI 老师会根据本周数据写一段话——亮点、薄弱点和下周小目标。</p>
+          )}
+        </div>
         {report.subjectStats.length > 0 && (
           <div className="mb-3 flex flex-wrap gap-1.5">
             {report.subjectStats.slice(0, 8).map((s) => (

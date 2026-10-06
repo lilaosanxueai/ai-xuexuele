@@ -25,6 +25,9 @@ export const api = {
   progress: (profileId: string) => req<ProfileProgress>(`/api/progress/${profileId}`),
   updateProgress: (profileId: string, patch: Record<string, unknown>) =>
     req<ProfileProgress>(`/api/progress/${profileId}`, { method: 'PUT', body: JSON.stringify(patch) }),
+  /** 家长端周报 AI 评语（服务端 LLM 优先，未配置时本地模板兜底） */
+  weeklyComment: (profileId: string, summary: Record<string, unknown>) =>
+    req<{ comment: string; source: 'llm' | 'template' }>('/api/parent/weekly-comment', { method: 'POST', body: JSON.stringify({ profileId, summary }) }),
   projects: (profileId: string) => req<Project[]>(`/api/projects?profileId=${profileId}`),
   saveProject: (p: { profileId: string; title: string; xml: string; thumb: string; lessonId?: string; stage?: Project['stage']; code?: string; projectId?: string }) =>
     req<Project>('/api/projects', { method: 'POST', body: JSON.stringify(p) }),

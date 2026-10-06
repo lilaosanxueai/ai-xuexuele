@@ -9,6 +9,7 @@ import { buildSystemPrompt, buildSystemPromptForBuild } from './prompts.ts';
 import { checkKidInput, stripUrls } from './safety.ts';
 import { appendChatLog, readChatLogs, listChatDates } from './logging.ts';
 import { getPlayground, savePlayground } from './playground.ts';
+import { offlineWeeklyComment, type WeeklySummary } from './weeklyComment.ts';
 
 export function buildRouter(cfg: AppConfig): Router {
   const r = Router();
@@ -122,6 +123,55 @@ r.delete('/profiles/:id', (req, res) => {
         hardStop: !!body.limits.hardStop,
       },
     }));
+  });
+
+  // ---------- 家长端 AI 周报评语（LLM 优先，未配置/失败时本地模板兜底） ----------
+  r.post('/parent/weekly-comment', async (req, res) => {
+    const { profileId, summary } = req.body ?? {};
+    if (!profileId || !summary || typeof summary !== 'object') {
+      return res.status(400).json({ error: '参数不完整' });
+    }
+    const profile = store.listProfiles().find((p) => p.id === profileId);
+    const s: WeeklySummary = {
+      name: profile?.name,
+      totalMinutes: Number(summary.totalMinutes) || 0,
+      activeDays: Number(summary.activeDays) || 0,
+      streak: Number(summary.streak) || 0,
+      lessonsDone: Array.isArray(summary.lessonsDone) ? summary.lessonsDone.slice(0, 10).map(String) : [],
+      subjectStats: Array.isArray(summary.subjectStats)
+        ? summary.subjectStats.slice(0, 12).map((x: Record<string, unknown>) => ({
+          subject: String(x.subject ?? '').slice(0, 12),
+          accuracy: x.accuracy == null ? null : Number(x.accuracy),
+          correct: Number(x.correct) || 0,
+          total: Number(x.total) || 0,
+        }))
+        : [],
+      weakLessons: Array.isArray(summary.weakLessons)
+        ? summary.weakLessons.slice(0, 5).map((x: Record<string, unknown>) => ({
+          title: String(x.title ?? '').slice(0, 30),
+          subject: String(x.subject ?? '').slice(0, 12),
+          accuracy: Number(x.accuracy) || 0,
+        }))
+        : [],
+      delta: summary.delta && typeof summary.delta === 'object' ? {
+        minutes: Number(summary.delta.minutes) || 0,
+        activeDays: Number(summary.delta.activeDays) || 0,
+        lessons: Number(summary.delta.lessons) || 0,
+      } : undefined,
+    };
+    if (llmConfigured(cfg)) {
+      try {
+        const text = await completeChat(cfg.llm, [
+          {
+            role: 'system',
+            content: '你是一位温暖而专业的班主任，为 K-12 学生写学习周报评语。根据 JSON 数据写 80-140 字的中文评语：先具体肯定亮点（引用数据），再温和指出最多一个薄弱点，最后给一个下周可执行的小目标。语气亲切、不用列表、不空泛、不提分数排名。',
+          },
+          { role: 'user', content: JSON.stringify(s) },
+        ], { mock: false });
+        if (text && text.trim()) return res.json({ comment: text.trim().slice(0, 600), source: 'llm' });
+      } catch { /* 落回本地模板 */ }
+    }
+    res.json({ comment: offlineWeeklyComment(s), source: 'template' });
   });
 
   // ---------- AI 对话（SSE 流式） ----------
