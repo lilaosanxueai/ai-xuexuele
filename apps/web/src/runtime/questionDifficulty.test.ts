@@ -51,4 +51,18 @@ describe('wrongPriority 错题重练优先级', () => {
     ];
     expect(sortByWrongPriority(list, now)[0].times).toBe(3);
   });
+  it('变式缓解降低优先级，且不为负', () => {
+    const base = { times: 2, lastWrongAt: '2026-09-20T00:00:00Z' };
+    const eased = { ...base, eases: 1 };
+    expect(wrongPriority(eased, now)).toBeLessThan(wrongPriority(base, now));
+    expect(wrongPriority(eased, now)).toBeCloseTo(wrongPriority(base, now) - 1.5, 6);
+    expect(wrongPriority({ times: 1, eases: 5, lastWrongAt: '2026-09-20T00:00:00Z' }, now)).toBe(0);
+  });
+  it('排序时被缓解的题往后排', () => {
+    const list = [
+      { times: 3, eases: 2, lastWrongAt: '2026-09-20T00:00:00Z' },
+      { times: 2, lastWrongAt: '2026-09-20T00:00:00Z' },
+    ];
+    expect(sortByWrongPriority(list, now)[0].times).toBe(2); // 3×2-2×1.5=3 < 2×2=4
+  });
 });

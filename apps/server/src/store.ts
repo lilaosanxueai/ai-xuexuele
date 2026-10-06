@@ -87,6 +87,8 @@ export function mergeProgress(profileId: string, patch: {
   exercise?: { correct: number; total: number };
   wrongAdds?: WrongItem[];
   wrongClears?: string[];
+  /** 变式训练缓解：变式大部练对的错题 id 列表（eases+1，上限不超过历史错次） */
+  wrongEases?: string[];
   parentNotes?: ParentNote[];
   lessonNotes?: Record<string, string>;
   /** 学习之星增量（0-200） */
@@ -155,6 +157,13 @@ export function mergeProgress(profileId: string, patch: {
     const before = cur.wrongBook.length;
     cur.wrongBook = cur.wrongBook.filter((x) => !cleared.has(x.id));
     cur.wrongCleared = (cur.wrongCleared ?? 0) + (before - cur.wrongBook.length);
+  }
+  // 变式缓解：eases + 1（封顶 times，历史错次不动，仅降低重练优先级）
+  if (Array.isArray(patch.wrongEases) && patch.wrongEases.length && cur.wrongBook?.length) {
+    for (const id of patch.wrongEases.slice(0, 50).map(String)) {
+      const it = cur.wrongBook.find((x) => x.id === id);
+      if (it) it.eases = Math.min((it.eases ?? 0) + 1, it.times);
+    }
   }
   if (Array.isArray(patch.parentNotes) && patch.parentNotes.length > 0 && patch.parentNotes.length <= 20) {
     const clean = patch.parentNotes

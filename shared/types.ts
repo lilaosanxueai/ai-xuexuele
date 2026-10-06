@@ -253,6 +253,8 @@ export interface WrongItem {
   /** 历史错选过的选项下标（看孩子容易被哪些干扰项迷惑） */
   wrongPicks: number[];
   times: number;
+  /** 变式训练缓解的次数（变式大部练对 +1：不动历史错次，只降低重练优先级） */
+  eases?: number;
   lastWrongAt: string;
 }
 

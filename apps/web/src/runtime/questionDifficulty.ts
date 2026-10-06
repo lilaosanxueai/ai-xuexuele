@@ -35,12 +35,14 @@ export function sortByDifficulty<T extends { q: string }>(items: T[]): T[] {
 /** 错题重练优先级：错次越多、错得越久，越该先练（Anki 式到期思想） */
 export interface WrongLike {
   times: number;
+  /** 变式训练缓解次数：每 1 次抵 1.5 优先级（部分掌握的证据） */
+  eases?: number;
   lastWrongAt: string;
 }
 
 export function wrongPriority(w: WrongLike, now = new Date()): number {
   const days = Math.max(0, (now.getTime() - new Date(w.lastWrongAt).getTime()) / 86400000);
-  return w.times * 2 + Math.min(days, 30) / 3;
+  return Math.max(0, w.times * 2 + Math.min(days, 30) / 3 - (w.eases ?? 0) * 1.5);
 }
 
 /** 错题重练排序：优先级高（最该复习）的排前面 */

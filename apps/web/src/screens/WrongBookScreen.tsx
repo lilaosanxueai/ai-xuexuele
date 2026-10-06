@@ -83,6 +83,14 @@ export default function WrongBookScreen() {
     if (!variantWrong) return;
     if (wrongPicks.length === 0) {
       setVariantStage('origin'); // 变式全对 → 直接挑战原题，过了就移出错题本
+    } else if (wrongPicks.length === 1 && variantSet.length >= 3 && profile) {
+      // 变式大部练对（如 2/3）：部分掌握的证据 → 缓解这题的重练优先级
+      void api.updateProgress(profile.id, { wrongEases: [variantWrong.id] })
+        .then((p) => setProgress(p))
+        .catch(() => {});
+      setCelebrate('💡 变式大部练对——这题的重练优先级已降低，先点「📖 看讲解」补最后一口气！');
+      setVariantWrong(null);
+      setVariantSet([]);
     } else {
       setCelebrate(`💡 变式练对 ${correct}/${variantSet.length}——先点「📖 看讲解」复习，再来挑战！`);
       setVariantWrong(null);
@@ -308,6 +316,7 @@ export default function WrongBookScreen() {
                             <div className="line-clamp-2 text-[15px] font-semibold leading-snug text-slate-800">{w.q}</div>
                             <div className="mt-1 text-xs text-slate-400">
                               来自《{w.lessonTitle}》· {new Date(w.lastWrongAt).toLocaleDateString('zh-CN')}
+                              {(w.eases ?? 0) > 0 && <span className="ml-1 rounded bg-violet-100 px-1 font-bold text-violet-600" title="变式训练部分掌握，重练优先级已降低">缓{w.eases}</span>}
                             </div>
                           </div>
                           <button
