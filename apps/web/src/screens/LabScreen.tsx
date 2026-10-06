@@ -11,7 +11,7 @@ import InteractLab from '../components/InteractLab.tsx';
 import LessonReport from '../components/LessonReport.tsx';
 import { suggestNext } from '../runtime/nextStep.ts';
 import { xpForQuiz } from '../runtime/xp.ts';
-import { buildShotName, exportSvgToPng } from '../runtime/stageShot.ts';
+import { buildShotName, exportSvgToPng, svgToDataUrl } from '../runtime/stageShot.ts';
 import { parsePy, PyRunner } from '../runtime/pyinterp.ts';
 import { pyStageApi } from '../runtime/pyBridge.ts';
 import { lessonNeighbors, lessonRoute } from '../runtime/lessonNav.ts';
@@ -124,6 +124,25 @@ export default function LabScreen() {
     if (!svg) { setToast('当前没有可保存的演示图'); return; }
     void exportSvgToPng(svg as SVGSVGElement, buildShotName(lesson.title))
       .then(() => setToast('📸 实验图已保存到下载文件夹'))
+      .catch(() => setToast('保存失败，再试一次'));
+  };
+
+  /** 存进作品墙：缩略图 + 注入当前参数的演示代码（放映时可以重跑实验） */
+  const saveToGallery = () => {
+    if (!profile || !lesson) return;
+    const svg = stageBoxRef.current?.querySelector('svg');
+    if (!svg) { setToast('当前没有可保存的演示图'); return; }
+    setToast('正在生成实验快照…');
+    void svgToDataUrl(svg as SVGSVGElement)
+      .then((thumb) => api.saveProject({
+        profileId: profile.id,
+        title: `${lesson.title} · 实验快照`,
+        xml: '<xml></xml>',
+        thumb,
+        lessonId: lesson.id,
+        code: injectParams(baseCode, valuesRef.current),
+      }))
+      .then(() => setToast('🖼 已存进作品墙——放映时还能重跑这个实验！'))
       .catch(() => setToast('保存失败，再试一次'));
   };
 
@@ -467,6 +486,13 @@ export default function LabScreen() {
                   title="把当前实验图保存为 PNG（2 倍分辨率）"
                 >
                   📸
+                </button>
+                <button
+                  onClick={saveToGallery}
+                  className="shrink-0 rounded-xl bg-white px-3 py-2 text-sm font-bold text-slate-600 ring-1 ring-slate-200 transition hover:bg-slate-50"
+                  title="存进作品墙：带缩略图，放映时还能重跑这个实验"
+                >
+                  🖼
                 </button>
               </div>
             )}
