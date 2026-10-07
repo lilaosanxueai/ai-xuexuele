@@ -1,0 +1,399 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🧫",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：ks=2 Q 和 Ksp 谁说了算？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：ks=3 钡餐为什么安全？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：水垢怎样被醋除掉？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "celebrate": "新知识到手！",
+  "island": "cross",
+  "subjectArea": "化学",
+  "gradeBand": "senior",
+  "grade": 11,
+  "area": "化学",
+  "band": "senior",
+  "id": "chem-40",
+  "order": 780,
+  "title": "沉淀溶解平衡：Ksp 的天平",
+  "emoji": "🧫",
+  "textbook": "人教版选择性必修第一册",
+  "curriculum": {
+    "module": "水溶液中的离子平衡",
+    "points": [
+      "溶度积 Ksp",
+      "沉淀的生成与溶解",
+      "沉淀转化"
+    ]
+  },
+  "story": "\"不溶于水\"的 BaSO₄ 其实每时每刻都有微量溶解·同时又有离子沉回去——绝对不溶的物质不存在，只有还没达到平衡的溶解。这把微观天平叫沉淀溶解平衡，体检喝的钡餐、牙齿防蛀、水垢软化、重金属除污，全在它的管辖之内。",
+  "goals": [
+    "理解 Ksp 的含义",
+    "会判断沉淀生成与溶解",
+    "理解沉淀转化与应用"
+  ],
+  "aiIntro": "🧫 没有\"绝对不溶\"——沉淀溶解平衡！",
+  "param": {
+    "name": "ks",
+    "label": "沉淀站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "Q 和 Ksp 谁说了算？",
+    "钡餐为什么安全？",
+    "水垢怎样被醋除掉？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "Ksp",
+      "subtitle": "溶解的天平",
+      "color": "blue",
+      "emoji": "⚖️",
+      "blocks": [
+        {
+          "kind": "info",
+          "icon": "🧮",
+          "title": "Ksp = 沉淀溶解平衡常数",
+          "text": "AgCl(s)⇌Ag⁺+Cl⁻：Ksp=c(Ag⁺)·c(Cl⁻)——只随温度变。Ksp 越小越难溶；注意类型不同的盐不能直接比 Ksp（AB 型与 AB₂ 型要换算成溶解度再比）"
+        },
+        {
+          "kind": "info",
+          "icon": "⚖️",
+          "title": "判据：Q 与 Ksp",
+          "text": "Q=当前离子积：Q>Ksp 沉淀生成·Q=Ksp 恰好饱和·Q<Ksp 未饱和可继续溶——与化学平衡的 Q/K 完全同构：一套逻辑两处用"
+        },
+        {
+          "kind": "highlight",
+          "text": "绝对不溶不存在——只有 Ksp 很小的\"难溶\""
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "生成溶解",
+      "subtitle": "两边调控",
+      "color": "green",
+      "emoji": "🔄",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "两个方向",
+          "items": [
+            "想沉淀：加沉淀剂让 Q>Ksp（如加 NaOH 沉淀 Fe³⁺）——废水除重金属的主场",
+            "想溶解：移走离子让 Q<Ksp——加酸（CO₃²⁺+H⁺→H₂O+CO₂）·加配位剂（AgCl 溶于氨水）",
+            "分步沉淀：离子被逐个\"点名\"沉淀（Ksp 差异大时）——除杂不引入新杂的工艺",
+            "沉淀完全≠一个不留：c<10⁻⁵ mol/L 即认为完全"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "🦷",
+          "title": "牙齿上的平衡",
+          "text": "牙釉质羟基磷灰石 ⇌ Ca²⁺+PO₄³⁻：吃糖产酸溶走矿物（龋齿）·含氟牙膏让 F⁻ 换 OH⁻ 生成更难溶的氟磷灰石——一支牙膏就是一套平衡移动方案"
+        },
+        {
+          "kind": "highlight",
+          "text": "沉淀与溶解是攻防战：加离子进攻·移离子撤退"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "转化",
+      "subtitle": "以弱治弱",
+      "color": "amber",
+      "emoji": "🔄",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "沉淀转化",
+          "items": [
+            "规律：向更难溶（Ksp 更小）的方向转化（整体趋势）",
+            "经典：ZnS → CuS（处理重金属：用可溶硫化物把废水中 Cu²⁺ 变成 CuS 沉下）",
+            "锅炉水垢 CaSO₄（难除）→ CaCO₃（可酸溶）：加 Na₂CO₃ 转化后用酸清——工业智慧",
+            "钟乳石与溶洞：CO₂ 溶于水的酸把 CaCO₃ 搬来搬去——百万年的沉淀平衡艺术"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "🏥",
+          "title": "钡餐的安全",
+          "text": "Ba²⁺ 剧毒但 BaSO₄ 的 Ksp 极小——喝下去几乎不放 Ba²⁺（安全造影剂）；万一头疼误服可溶钡盐·急救用 Na₂SO₄ 把它变沉淀：Ksp 在急救室里也值班"
+        },
+        {
+          "kind": "highlight",
+          "text": "会读 Ksp 的人，能指挥离子排队"
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "溶度积",
+        "body": "【定义】难溶电解质溶解平衡常数 Ksp。\n【规则】Ksp 越小越难溶（同类型才可比）。\n【判据】Q>Ksp 沉淀·Q=Ksp 饱和·Q<Ksp 溶解。"
+      },
+      {
+        "title": "生成与溶解",
+        "body": "【沉淀】加沉淀剂使 Q 超 Ksp（废水处理）。\n【溶解】加酸/配位剂移走离子。\n【分步沉淀】Ksp 差异→逐个沉淀。\n【完全标准】残留 c<10⁻⁵ mol/L。"
+      },
+      {
+        "title": "转化与应用",
+        "body": "【方向】趋向更难溶（ZnS→CuS）。\n【水垢】CaSO₄→CaCO₃→酸溶。\n【龋齿】酸溶矿物·氟化物加固。\n【钡餐】Ksp 极小故安全。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "废水中含 Fe³⁺ 和 Cu²⁺，怎样分步除去？",
+        "steps": [
+          "调 pH：Fe(OH)₃ 的 Ksp 更小先沉",
+          "过滤除 Fe(OH)₃",
+          "再调高 pH 沉 Cu(OH)₂",
+          "分步沉淀：各点各的名"
+        ],
+        "tip": "Ksp 排队"
+      },
+      {
+        "q": "误服 BaCl₂ 为什么喝硫酸钠解毒？",
+        "steps": [
+          "Ba²⁺ 有毒",
+          "SO₄²⁻ 使 Q(BaSO₄)>Ksp",
+          "Ba²⁺ 变成极难溶沉淀",
+          "肠道不再吸收——急救化学"
+        ],
+        "tip": "沉淀解毒"
+      }
+    ],
+    "mistakes": [
+      "直接比较不同类型盐的 Ksp（应换算溶解度）",
+      "认为\"沉淀完全\"= 浓度为零（标准是小于10⁻⁵）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "沉淀生成的条件是？",
+      "options": [
+        "Q<Ksp",
+        "Q=Ksp",
+        "Q>Ksp",
+        "与Q无关"
+      ],
+      "answer": 2,
+      "explain": "离子积超过溶度积"
+    },
+    {
+      "q": "Ksp 的大小只随什么变化？",
+      "options": [
+        "浓度",
+        "温度",
+        "压强",
+        "催化剂"
+      ],
+      "answer": 1,
+      "explain": "平衡常数本性"
+    },
+    {
+      "q": "钡餐安全是因为 BaSO₄？",
+      "options": [
+        "无毒",
+        "Ksp极小不释Ba²⁺",
+        "是甜的",
+        "胃酸不碰它"
+      ],
+      "answer": 1,
+      "explain": "难溶=安全"
+    },
+    {
+      "q": "沉淀转化的一般方向是？",
+      "options": [
+        "更易溶",
+        "更难溶（Ksp 更小）",
+        "颜色更白",
+        "质量更大"
+      ],
+      "answer": 1,
+      "explain": "ZnS→CuS"
+    },
+    {
+      "q": "醋除水垢利用的原理是？",
+      "options": [
+        "沉淀",
+        "酸溶碳酸盐",
+        "氧化",
+        "过滤"
+      ],
+      "answer": 1,
+      "explain": "CO₃²⁺遇酸变CO₂"
+    },
+    {
+      "q": "绝对不溶不存在——只有 Ksp 很小的 ___",
+      "options": [
+        "难溶",
+        "透明"
+      ],
+      "answer": 0,
+      "explain": "相对性思维",
+      "type": "blank",
+      "blank": {
+        "answerText": "难溶",
+        "bank": [
+          "难溶",
+          "透明"
+        ]
+      }
+    }
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "ks",
+        "label": "沉淀站",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ]
+  },
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "Ksp",
+        "subtitle": "溶解的天平",
+        "color": "blue",
+        "emoji": "⚖️",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "🧮",
+            "title": "Ksp = 沉淀溶解平衡常数",
+            "text": "AgCl(s)⇌Ag⁺+Cl⁻：Ksp=c(Ag⁺)·c(Cl⁻)——只随温度变。Ksp 越小越难溶；注意类型不同的盐不能直接比 Ksp（AB 型与 AB₂ 型要换算成溶解度再比）"
+          },
+          {
+            "kind": "info",
+            "icon": "⚖️",
+            "title": "判据：Q 与 Ksp",
+            "text": "Q=当前离子积：Q>Ksp 沉淀生成·Q=Ksp 恰好饱和·Q<Ksp 未饱和可继续溶——与化学平衡的 Q/K 完全同构：一套逻辑两处用"
+          },
+          {
+            "kind": "highlight",
+            "text": "绝对不溶不存在——只有 Ksp 很小的\"难溶\""
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "生成溶解",
+        "subtitle": "两边调控",
+        "color": "green",
+        "emoji": "🔄",
+        "blocks": [
+          {
+            "kind": "steps",
+            "title": "两个方向",
+            "items": [
+              "想沉淀：加沉淀剂让 Q>Ksp（如加 NaOH 沉淀 Fe³⁺）——废水除重金属的主场",
+              "想溶解：移走离子让 Q<Ksp——加酸（CO₃²⁺+H⁺→H₂O+CO₂）·加配位剂（AgCl 溶于氨水）",
+              "分步沉淀：离子被逐个\"点名\"沉淀（Ksp 差异大时）——除杂不引入新杂的工艺",
+              "沉淀完全≠一个不留：c<10⁻⁵ mol/L 即认为完全"
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "🦷",
+            "title": "牙齿上的平衡",
+            "text": "牙釉质羟基磷灰石 ⇌ Ca²⁺+PO₄³⁻：吃糖产酸溶走矿物（龋齿）·含氟牙膏让 F⁻ 换 OH⁻ 生成更难溶的氟磷灰石——一支牙膏就是一套平衡移动方案"
+          },
+          {
+            "kind": "highlight",
+            "text": "沉淀与溶解是攻防战：加离子进攻·移离子撤退"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "转化",
+        "subtitle": "以弱治弱",
+        "color": "amber",
+        "emoji": "🔄",
+        "blocks": [
+          {
+            "kind": "steps",
+            "title": "沉淀转化",
+            "items": [
+              "规律：向更难溶（Ksp 更小）的方向转化（整体趋势）",
+              "经典：ZnS → CuS（处理重金属：用可溶硫化物把废水中 Cu²⁺ 变成 CuS 沉下）",
+              "锅炉水垢 CaSO₄（难除）→ CaCO₃（可酸溶）：加 Na₂CO₃ 转化后用酸清——工业智慧",
+              "钟乳石与溶洞：CO₂ 溶于水的酸把 CaCO₃ 搬来搬去——百万年的沉淀平衡艺术"
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "🏥",
+            "title": "钡餐的安全",
+            "text": "Ba²⁺ 剧毒但 BaSO₄ 的 Ksp 极小——喝下去几乎不放 Ba²⁺（安全造影剂）；万一头疼误服可溶钡盐·急救用 Na₂SO₄ 把它变沉淀：Ksp 在急救室里也值班"
+          },
+          {
+            "kind": "highlight",
+            "text": "会读 Ksp 的人，能指挥离子排队"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "Q 和 Ksp 谁说了算？",
+      "钡餐为什么安全？",
+      "水垢怎样被醋除掉？"
+    ]
+  }
+}
