@@ -13,6 +13,16 @@ async function req<T>(url: string, init?: RequestInit): Promise<T> {
   return resp.json() as Promise<T>;
 }
 
+/**
+ * 课程库会话级缓存：全量 712 课约 4.7MB（gzip 1.3MB），每个屏幕挂载都重新拉
+ * 会明显拖慢导航——同一页面会话内只取一次；刷新页面即重新加载（家长改课 JSON 后 F5 生效）。
+ */
+let lessonsPromise: Promise<Lesson[]> | null = null;
+
+export function resetLessonsCache(): void {
+  lessonsPromise = null;
+}
+
 export const api = {
   health: () => req<{ ok: boolean; llmConfigured: boolean }>('/api/health'),
   profiles: () => req<Profile[]>('/api/profiles'),
@@ -21,7 +31,7 @@ export const api = {
   updateProfile: (id: string, patch: { name?: string; avatar?: string; grade?: number | null }) =>
     req<Profile>(`/api/profiles/${id}`, { method: 'PATCH', body: JSON.stringify(patch) }),
   deleteProfile: (id: string) => req<{ ok: boolean }>(`/api/profiles/${id}`, { method: 'DELETE' }),
-  lessons: () => req<Lesson[]>('/api/lessons'),
+  lessons: (): Promise<Lesson[]> => (lessonsPromise ??= req<Lesson[]>('/api/lessons')),
   progress: (profileId: string) => req<ProfileProgress>(`/api/progress/${profileId}`),
   updateProgress: (profileId: string, patch: Record<string, unknown>) =>
     req<ProfileProgress>(`/api/progress/${profileId}`, { method: 'PUT', body: JSON.stringify(patch) }),
