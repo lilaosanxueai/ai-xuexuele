@@ -8,6 +8,7 @@ import PathSearch from '../components/PathSearch.tsx';
 import ExercisePanel from '../components/ExercisePanel.tsx';
 import { SUBJECTS, SUBJECT_STYLE } from '../components/subjectMeta.ts';
 import { collectModules, generateStudyPlan, todayModules, type StudyPlan } from '../runtime/studyPlan.ts';
+import { buildPaper, printOptions, printAnswer } from '../runtime/paperSheet.ts';
 import { difficultyStars, starsDisplay, difficultyLabel } from '../runtime/difficulty.ts';
 import { xpForQuiz } from '../runtime/xp.ts';
 
@@ -62,6 +63,25 @@ export default function SubjectScreen() {
     setUnitTest({ module: mod, exercises: assembleUnitTest(mod) });
     setPrinting(true);
     setTimeout(() => { window.print(); setPrinting(false); }, 120);
+  };
+
+  /** 期中综合卷（跨模块）：选模块+题量 → 屏上作答 / 打印纸质卷 */
+  const [midtermOpen, setMidtermOpen] = useState(false);
+  const [midtermMods, setMidtermMods] = useState<Set<string>>(new Set());
+  const [midtermCount, setMidtermCount] = useState(20);
+  const [midtermPaper, setMidtermPaper] = useState<Exercise[] | null>(null);
+  const [midtermPrint, setMidtermPrint] = useState<Exercise[] | null>(null);
+  const openMidterm = () => {
+    // 默认勾选已开始学习的模块；一个没学过则默认前三个模块
+    const modsList = [...modules.keys()];
+    const started = modsList.filter((m) => (modules.get(m)?.done ?? 0) > 0);
+    setMidtermMods(new Set(started.length > 0 ? started : modsList.slice(0, 3)));
+    setMidtermOpen(true);
+  };
+  const doMidtermPrint = () => {
+    setMidtermPrint(buildPaper({ lessons, modules: [...midtermMods], count: midtermCount }));
+    setMidtermOpen(false);
+    setTimeout(() => { window.print(); setMidtermPrint(null); }, 150);
   };
 
   /** 期末复习计划：按模块掌握度生成 N 天安排（localStorage 存当前档案+学科） */
@@ -126,6 +146,19 @@ export default function SubjectScreen() {
 
         {/* 学科内搜索：在路径地图中快速定位课程 */}
         <PathSearch lessons={mine} onHighlight={setHiSet} />
+
+        {/* 期中综合卷入口：跨模块出卷（屏上作答 / 打印纸质卷） */}
+        <button
+          onClick={openMidterm}
+          className="mb-6 flex w-full items-center gap-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-violet-500 px-4 py-3 text-left text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
+        >
+          <span className="text-2xl">📄</span>
+          <span className="min-w-0 flex-1">
+            <span className="block text-sm font-black">期中综合卷 · 跨模块出卷</span>
+            <span className="block text-xs opacity-85">挑几个模块合成一张卷：屏上作答或打印成纸质卷（附答案页）</span>
+          </span>
+          <span className="shrink-0 rounded-xl bg-white/20 px-3 py-1.5 text-xs font-bold">出卷 →</span>
+        </button>
 
         {/* 学习路径（多邻国式闯关地图）：按课标模块分单元，蛇形节点 + 中央引导线 */}
         {(() => {
@@ -375,6 +408,108 @@ export default function SubjectScreen() {
               <h2 className="text-lg font-black">参考答案</h2>
               <ol className="mt-2 grid grid-cols-2 gap-1 text-sm">
                 {unitTest.exercises.map((ex, i) => (<li key={i}>{i + 1}. {'ABCD'[ex.answer]}　{ex.explain.slice(0, 40)}</li>))}
+              </ol>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* 期中综合卷：配置弹窗 */}
+      {midtermOpen && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/50 p-4" onClick={() => setMidtermOpen(false)}>
+          <div className="flex max-h-[85vh] w-full max-w-lg flex-col overflow-hidden rounded-3xl bg-slate-50 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between border-b bg-white px-5 py-3">
+              <h2 className="text-base font-black text-slate-800">📄 {subject} · 期中综合卷</h2>
+              <button onClick={() => setMidtermOpen(false)} className="rounded-xl bg-slate-100 px-3 py-1.5 text-sm font-bold text-slate-600 hover:bg-slate-200">✕ 关闭</button>
+            </div>
+            <div className="overflow-y-auto p-4">
+              <div className="mb-2 text-sm font-black text-slate-700">1. 勾选模块（默认已开始学习的）</div>
+              <div className="mb-4 grid grid-cols-2 gap-1.5">
+                {[...modules.entries()].map(([m, v]) => {
+                  const on = midtermMods.has(m);
+                  return (
+                    <button
+                      key={m}
+                      onClick={() => setMidtermMods((prev) => { const n = new Set(prev); if (n.has(m)) n.delete(m); else n.add(m); return n; })}
+                      className={`rounded-xl px-3 py-2 text-left text-xs font-bold transition ${on ? 'bg-indigo-500 text-white shadow-sm' : 'bg-white text-slate-500 ring-1 ring-slate-200 hover:ring-indigo-300'}`}
+                    >
+                      {on ? '☑' : '☐'} {m}
+                      <span className={`ml-1 font-normal ${on ? 'text-white/80' : 'text-slate-400'}`}>{v.done}/{v.total}课</span>
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="mb-2 text-sm font-black text-slate-700">2. 题量</div>
+              <div className="mb-4 flex gap-2">
+                {[10, 20, 30].map((n) => (
+                  <button key={n} onClick={() => setMidtermCount(n)} className={`flex-1 rounded-xl py-2 text-sm font-black transition ${midtermCount === n ? 'bg-violet-500 text-white' : 'bg-white text-slate-500 ring-1 ring-slate-200'}`}>{n} 题</button>
+                ))}
+              </div>
+              <p className="mb-3 rounded-xl bg-sky-50 p-2 text-[11px] leading-relaxed text-sky-700">同一张卷当天重复打印题不变；题量可能因课程池上限略减。填空题在纸质卷上印成横线作答。</p>
+            </div>
+            <div className="flex gap-2 border-t bg-white px-4 py-3">
+              <button
+                onClick={() => { const p = buildPaper({ lessons, modules: [...midtermMods], count: midtermCount }); if (p.length === 0) return; setMidtermPaper(p); setMidtermOpen(false); }}
+                disabled={midtermMods.size === 0}
+                className="flex-1 rounded-xl bg-emerald-500 py-2.5 text-sm font-black text-white shadow-sm transition hover:bg-emerald-600 disabled:opacity-40"
+              >
+                ✏️ 屏上作答（{midtermCount} 题）
+              </button>
+              <button
+                onClick={doMidtermPrint}
+                disabled={midtermMods.size === 0}
+                className="flex-1 rounded-xl bg-slate-700 py-2.5 text-sm font-black text-white shadow-sm transition hover:bg-slate-800 disabled:opacity-40"
+              >
+                🖨 打印纸质卷
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 期中综合卷：屏上作答 */}
+      {midtermPaper && (
+        <ExercisePanel
+          title={`${subject} · 期中综合卷`}
+          exercises={midtermPaper}
+          onClose={() => setMidtermPaper(null)}
+          onDone={(correct) => {
+            const n = midtermPaper.length;
+            setMidtermPaper(null);
+            alert(`期中综合卷完成：${correct}/${n} 道正确${correct === n ? '，满分！🎉' : correct / n >= 0.8 ? '，稳了！' : '，考前把这些模块的讲解再过一遍'}`);
+          }}
+        />
+      )}
+
+      {/* 期中综合卷：打印浮层（纸质卷 + 答案页；填空题印横线） */}
+      {midtermPrint && (
+        <div id="midterm-sheet" className="fixed inset-0 z-[80] overflow-y-auto bg-white p-8 text-slate-900">
+          <style>{'@media print { body * { visibility: hidden !important; } #midterm-sheet, #midterm-sheet * { visibility: visible !important; } #midterm-sheet { position: absolute !important; left: 0; top: 0; width: 100%; background: #fff; } }'}</style>
+          <div className="mx-auto max-w-2xl">
+            <h1 className="text-center text-2xl font-black">{subject} · 期中综合卷</h1>
+            <p className="mt-1 text-center text-sm text-slate-500">模块：{[...midtermMods].join(' · ')} · 共 {midtermPrint.length} 题 · {new Date().toLocaleDateString('zh-CN')}</p>
+            <p className="mt-1 text-center text-xs text-slate-400">姓名：____________　班级：________　得分：______</p>
+            <div className="mt-6 space-y-5">
+              {midtermPrint.map((ex, i) => {
+                const opts = printOptions(ex);
+                return (
+                  <div key={i} className="break-inside-avoid">
+                    <div className="font-semibold">{i + 1}. {ex.q}</div>
+                    {opts ? (
+                      <div className="mt-1 grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+                        {opts.map((opt, oi) => (<div key={oi}>{'ABCD'[oi]}. {opt}</div>))}
+                        <div className="mt-1 text-sm">答：（　　　　）</div>
+                      </div>
+                    ) : (
+                      <div className="mt-2 text-sm">答：＿＿＿＿＿＿＿＿＿＿＿＿</div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+            <div className="mt-10 break-before-page border-t border-slate-300 pt-6">
+              <h2 className="text-lg font-black">参考答案</h2>
+              <ol className="mt-2 grid grid-cols-2 gap-1 text-sm">
+                {midtermPrint.map((ex, i) => (<li key={i}>{i + 1}. {printAnswer(ex)}　{ex.explain.slice(0, 36)}</li>))}
               </ol>
             </div>
           </div>
