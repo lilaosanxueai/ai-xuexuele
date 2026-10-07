@@ -166,6 +166,25 @@ export default function WrongBookScreen() {
 
   if (!profile) return null;
 
+  // 首次加载课程库（约 4.7MB，本会话仅一次）：骨架占位，避免白屏等待
+  if (lessons.length === 0 || (!progress && lessons.length === 0)) {
+    return (
+      <div className="flex min-h-screen flex-col">
+        <Header />
+        <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-10">
+          <div className="mb-4 h-8 w-40 animate-pulse rounded-xl bg-slate-200" />
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="mb-3 rounded-2xl bg-white/80 p-4 shadow-sm">
+              <div className="mb-2 h-5 w-3/4 animate-pulse rounded-lg bg-slate-200" />
+              <div className="h-4 w-1/2 animate-pulse rounded-lg bg-slate-100" />
+            </div>
+          ))}
+          <p className="mt-4 text-center text-sm text-slate-400">正在翻开错题本…（首次打开需加载课程库，之后秒开）</p>
+        </main>
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
