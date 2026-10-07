@@ -1,7 +1,7 @@
 {
   "toolbox": [],
   "actor": {
-    "costume": "✅",
+    "costume": "🔎",
     "x": 0,
     "y": 0
   },
@@ -9,7 +9,7 @@
   "tasks": [
     {
       "id": "e0",
-      "text": "探索：use=2 怎么区分完成时和过去时？",
+      "text": "探索：in=2 推断和瞎猜差在哪？",
       "check": {
         "type": "manual"
       },
@@ -20,7 +20,7 @@
     },
     {
       "id": "e1",
-      "text": "探索：for 和 since 后面接什么？",
+      "text": "探索：in=3 为什么\"原文提及\"的选项往往是错的？",
       "check": {
         "type": "manual"
       },
@@ -31,13 +31,13 @@
     },
     {
       "id": "e2",
-      "text": "探索：have been to 和 have gone to 差在哪？",
+      "text": "探索：怎样用排除法锁定答案？",
       "check": {
         "type": "manual"
       },
       "hintPrompts": [
-        "动手验证：把参数拖到两个极端对比观察",
-        "把发现说给 AI 老师听，让它帮你变成结论"
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
       ]
     },
     {
@@ -52,35 +52,265 @@
     }
   ],
   "celebrate": "新知识到手！",
-  "id": "eng-33",
   "island": "cross",
-  "order": 477,
-  "title": "现在完成时：have done",
-  "emoji": "✅",
   "subjectArea": "英语",
-  "gradeBand": "junior",
-  "grade": 8,
-  "textbook": "人教版英语（初中）",
+  "gradeBand": "senior",
+  "grade": 12,
+  "area": "英语",
+  "band": "senior",
+  "id": "eng-33",
+  "order": 787,
+  "title": "高考阅读推断题：读懂字里行间",
+  "emoji": "🔎",
+  "textbook": "人教版选择性必修",
   "curriculum": {
-    "module": "时态·现在完成时",
+    "module": "阅读理解",
     "points": [
-      "have/has + 过去分词",
-      "与一般过去时的区别",
-      "for/since 时间状语"
+      "推断题类型",
+      "证据链思维",
+      "排除法"
     ]
   },
-  "story": "\"I have finished my homework\" 和 \"I finished my homework\" 差在哪？完成时强调\"现在的结果\"（作业写完了，所以现在可以玩），过去时只说\"过去做了\"（跟现在无关）。",
+  "story": "\"What can we infer from the passage?\"——这五个单词是无数考生的噩梦。答案从不在原文里写着，但又必须从原文里长出来。推断题考的是侦探式阅读：字面是现场·证据是指纹·答案是根据指纹还原的真相。",
   "goals": [
-    "掌握现在完成时结构",
-    "区分与过去时",
-    "会用 for/since"
+    "识别推断题的四种类型",
+    "掌握证据链解题法",
+    "用好排除法"
   ],
-  "aiIntro": "✅ 切换时间轴场景，看 have done 的用法——现在完成时透视镜！",
+  "aiIntro": "🔎 当一回阅读侦探——推断题！",
+  "param": {
+    "name": "in",
+    "label": "推断站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "推断和瞎猜差在哪？",
+    "为什么\"原文提及\"的选项往往是错的？",
+    "怎样用排除法锁定答案？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "四型",
+      "subtitle": "对号入座",
+      "color": "blue",
+      "emoji": "🗂️",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "推断题四大家族",
+          "items": [
+            {
+              "label": "细节推断",
+              "value": "根据某段细节推出隐含信息（\"作者为什么提到 X？\"——目的推断）"
+            },
+            {
+              "label": "态度推断",
+              "value": "\"attitude/tone\"——褒（positive/approving）·贬（critical/doubtful）·中（objective/neutral）：从用词的形容词副词里读情绪"
+            },
+            {
+              "label": "写作目的",
+              "value": "\"purpose—to...?\"——说明文 inform·议论文 persuade·记叙文 entertain/share：文体+对象定答案"
+            },
+            {
+              "label": "出处推断",
+              "value": "\"Where is the passage likely from?\"——科学杂志/广告/小说/通知：从文体特征反推"
+            }
+          ]
+        },
+        {
+          "kind": "highlight",
+          "text": "先判断题型再选策略——对症下药"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "证据链",
+      "subtitle": "推断=推理",
+      "color": "green",
+      "emoji": "⛓️",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "三步证据法",
+          "items": [
+            "定位：题干关键词回原文锁定段落/句子",
+            "取证据：划出可支撑推断的原句（形容词·数字·转折·例子）",
+            "推一步：从证据做\"一小步\"推理——推断≠脑补：多推一步就错"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "⚖️",
+          "title": "黄金标准",
+          "text": "正确答案的特征：原文没直说·但能从证据合理推出（\"最保险的一步\"）；错误答案特征：原文直说（太浅·是细节不是推断）·无证据支撑（脑补·常识陷阱）·推理过度（超出原文范围）"
+        },
+        {
+          "kind": "info",
+          "icon": "🎭",
+          "title": "态度题词汇表",
+          "text": "褒义：supportive·optimistic·enthusiastic；贬义：skeptical·disapproving·sympathetic(中性偏怜)；中性：objective·uninterested——背这张表·态度题变词汇题"
+        },
+        {
+          "kind": "highlight",
+          "text": "推断的每一步都要踩在原文的石头上——否则就是落水的脑补"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "排除",
+      "subtitle": "反向排除",
+      "color": "amber",
+      "emoji": "❌",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "排除三板斧",
+          "items": [
+            "砍\"无据项\"：原文完全找不到影子的选项最先排除",
+            "砍\"原文直说项\"：推断题里\"原文照抄\"的选项往往是细节干扰",
+            "砍\"过度推\"：推得比原文远（绝对化 always/never 或新信息）——砍完剩下的就是它"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "⏱️",
+          "title": "实战节奏",
+          "text": "推断题控制在 90 秒内：30 秒定位·40 秒比对排除·20 秒确认——卡壳先标记跳过·全篇做完回来再看：上下文读全后推断常自动清晰"
+        },
+        {
+          "kind": "highlight",
+          "text": "选不出\"最好\"的，就先删掉\"最坏\"的——排除法是阅读的保底武功"
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "题型识别",
+        "body": "【细节推断】目的/原因隐含信息。\n【态度】褒贬中三档词汇表。\n【写作目的】inform/persuade/entertain。\n【出处】文体特征反推。"
+      },
+      {
+        "title": "证据链法",
+        "body": "【三步】定位→取证据→推一小步。\n【正确项】没直说但可合理推出。\n【错误项】无据·直说·过度。"
+      },
+      {
+        "title": "排除法",
+        "body": "【三砍】无据项·直说项·过度项。\n【节奏】90秒分配·卡壳先跳。\n【保底】删最坏比选最好更稳。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "原文说 \"He forced a smile and left quietly.\"，可推断？",
+        "steps": [
+          "证据：forced（勉强的）·quietly（安静）",
+          "推断：他并不开心/有难言之隐",
+          "选项\"he was happy\"违背证据",
+          "推一小步：unhappy→正确"
+        ],
+        "tip": "形容词是态度指纹"
+      },
+      {
+        "q": "选项里有一项是原文原句",
+        "steps": [
+          "推断题中出现原句多为干扰",
+          "它可能答非所问（对象错了）",
+          "标记为可疑项不急着选",
+          "用证据链验证其他项后再判"
+        ],
+        "tip": "原句≠正确"
+      }
+    ],
+    "mistakes": [
+      "把推断当\"合理想象\"（必须有原文证据）",
+      "选\"原文直说\"的选项（推断题要的是隐含信息）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "推断题与细节题的最大区别？",
+      "options": [
+        "更短",
+        "答案不能从原文直接找到",
+        "更简单",
+        "不用读原文"
+      ],
+      "answer": 1,
+      "explain": "字里行间"
+    },
+    {
+      "q": "态度推断最可靠的证据来自？",
+      "options": [
+        "标题",
+        "形容词副词等评价性用词",
+        "文章长度",
+        "图片"
+      ],
+      "answer": 1,
+      "explain": "用词的指纹"
+    },
+    {
+      "q": "推断题中\"原文原句\"选项通常是？",
+      "options": [
+        "正确答案",
+        "细节干扰项",
+        "主题句",
+        "翻译"
+      ],
+      "answer": 1,
+      "explain": "太浅不是推断"
+    },
+    {
+      "q": "含 always/never 的绝对化选项应该？",
+      "options": [
+        "优先选",
+        "警惕（推断常过度）",
+        "无所谓",
+        "翻译它"
+      ],
+      "answer": 1,
+      "explain": "过度推断信号"
+    },
+    {
+      "q": "\"推一小步\"的含义是？",
+      "options": [
+        "只推最保险的一步",
+        "想得越远越好",
+        "不推",
+        "随机猜"
+      ],
+      "answer": 0,
+      "explain": "踩在证据上"
+    },
+    {
+      "q": "推断的每一步都要踩在原文的 ___ 上",
+      "options": [
+        "石头",
+        "封面"
+      ],
+      "answer": 0,
+      "explain": "证据链原则",
+      "type": "blank",
+      "blank": {
+        "answerText": "石头",
+        "bank": [
+          "石头",
+          "封面"
+        ]
+      }
+    }
+  ],
   "lab": {
     "params": [
       {
-        "name": "use",
-        "label": "用法",
+        "name": "in",
+        "label": "推断站",
         "min": 1,
         "max": 3,
         "step": 1,
@@ -88,189 +318,110 @@
       }
     ]
   },
-  "teach": {
-    "sections": [
-      {
-        "title": "结构与用法",
-        "body": "【结构：have/has + 过去分词（I have finished / She has gone）】\n用法一：过去动作对现在的影响（I have lost my key→现在进不了门）\n用法二：从过去持续到现在的状态（I have lived here for 5 years）\n否定：haven't/hasn't + done；疑问：Have/Has + 主语 + done？"
-      },
-      {
-        "title": "与过去时区别",
-        "body": "【现在完成时：跟现在有关（影响/持续）】\n【一般过去时：只说过去的事，与现在无关】\n有明确过去时间词（yesterday/last week/just now/in 2020）→ 必须用过去时，不能用完成时。\n对比：I have been to Beijing（去过，经历）vs I went to Beijing last year（去年去的）。"
-      },
-      {
-        "title": "标志词与易混",
-        "body": "【already（已经）/ yet（还，否定疑问）/ just（刚刚）/ ever（曾经）/ never（从未）】\n【for + 时间段（for 3 years）/ since + 时间点（since 2020）】\nhave been to：去过（人已回来）≠ have gone to：去了（人不在）\nHe has been to Shanghai.（去过上海，现在在这儿）\nHe has gone to Shanghai.（去上海了，现在不在这儿）"
-      }
-    ],
-    "examples": [
-      {
-        "q": "I ___ my homework already. 填什么？",
-        "steps": [
-          "already 是完成时标志",
-          "主语 I → have + 过去分词",
-          "have finished",
-          "答案"
-        ],
-        "tip": "already→完成时"
-      },
-      {
-        "q": "I ___ him yesterday.（meet）",
-        "steps": [
-          "yesterday 是过去时间",
-          "过去时间→一般过去时",
-          "met",
-          "不能用 have met"
-        ],
-        "tip": "过去时间→过去时"
-      }
-    ],
-    "mistakes": [
-      "有 yesterday 还用完成时（过去时间禁用完成时）",
-      "have been to 和 have gone to 混淆（一个回来了一个没回来）"
-    ]
-  },
-  "exercises": [
-    {
-      "q": "现在完成时的结构是？",
-      "options": [
-        "am/is/are + doing",
-        "had + 动词",
-        "will + 动词",
-        "have/has + 过去分词"
-      ],
-      "answer": 3,
-      "explain": "have done"
-    },
-    {
-      "q": "I have lived here ___ 2020.",
-      "options": [
-        "since",
-        "for",
-        "from",
-        "at"
-      ],
-      "answer": 0,
-      "explain": "since+时间点"
-    },
-    {
-      "q": "___ you ever ___ to Beijing?",
-      "options": [
-        "Have, gone",
-        "Have, been",
-        "Did, go",
-        "Are, going"
-      ],
-      "answer": 1,
-      "explain": "ever+been"
-    },
-    {
-      "q": "yesterday 出现应用什么时态？",
-      "options": [
-        "现在进行时",
-        "现在完成时",
-        "一般过去时",
-        "将来时"
-      ],
-      "answer": 2,
-      "explain": "过去时间"
-    },
-    {
-      "q": "for 后面接？",
-      "options": [
-        "人",
-        "时间点",
-        "地点",
-        "时间段"
-      ],
-      "answer": 3,
-      "explain": "for 5 years"
-    },
-    {
-      "q": "He has ___ to Shanghai.（人还在上海）",
-      "options": [
-        "gone",
-        "been",
-        "went",
-        "going"
-      ],
-      "answer": 0,
-      "explain": "去了没回来"
-    }
-  ],
   "interact": {
     "views": [
       {
         "when": 1,
-        "title": "① 强调结果（对现在的影响）",
+        "title": "四型",
+        "subtitle": "对号入座",
         "color": "blue",
+        "emoji": "🗂️",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "I have lost my key. → 钥匙丢了（所以现在进不了门）"
-          },
-          {
-            "kind": "info",
-            "icon": "💡",
-            "title": "要点",
-            "text": "重点不在过去丢了，在现在进不去"
+            "kind": "compare",
+            "title": "推断题四大家族",
+            "items": [
+              {
+                "label": "细节推断",
+                "value": "根据某段细节推出隐含信息（\"作者为什么提到 X？\"——目的推断）"
+              },
+              {
+                "label": "态度推断",
+                "value": "\"attitude/tone\"——褒（positive/approving）·贬（critical/doubtful）·中（objective/neutral）：从用词的形容词副词里读情绪"
+              },
+              {
+                "label": "写作目的",
+                "value": "\"purpose—to...?\"——说明文 inform·议论文 persuade·记叙文 entertain/share：文体+对象定答案"
+              },
+              {
+                "label": "出处推断",
+                "value": "\"Where is the passage likely from?\"——科学杂志/广告/小说/通知：从文体特征反推"
+              }
+            ]
           },
           {
             "kind": "highlight",
-            "text": "结构：主语 + have/has + 过去分词（done）"
+            "text": "先判断题型再选策略——对症下药"
           }
         ]
       },
       {
         "when": 2,
-        "title": "② 与一般过去时的区别",
-        "color": "blue",
+        "title": "证据链",
+        "subtitle": "推断=推理",
+        "color": "green",
+        "emoji": "⛓️",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "I have seen the film.（看过——现在知道内容）\\nI saw the film yesterday.（昨天看的——跟现在无关）"
+            "kind": "steps",
+            "title": "三步证据法",
+            "items": [
+              "定位：题干关键词回原文锁定段落/句子",
+              "取证据：划出可支撑推断的原句（形容词·数字·转折·例子）",
+              "推一步：从证据做\"一小步\"推理——推断≠脑补：多推一步就错"
+            ]
           },
           {
             "kind": "info",
-            "icon": "💡",
-            "title": "要点",
-            "text": "有 yesterday/last week 等过去时间 → 用过去时"
+            "icon": "⚖️",
+            "title": "黄金标准",
+            "text": "正确答案的特征：原文没直说·但能从证据合理推出（\"最保险的一步\"）；错误答案特征：原文直说（太浅·是细节不是推断）·无证据支撑（脑补·常识陷阱）·推理过度（超出原文范围）"
+          },
+          {
+            "kind": "info",
+            "icon": "🎭",
+            "title": "态度题词汇表",
+            "text": "褒义：supportive·optimistic·enthusiastic；贬义：skeptical·disapproving·sympathetic(中性偏怜)；中性：objective·uninterested——背这张表·态度题变词汇题"
           },
           {
             "kind": "highlight",
-            "text": "结构：主语 + have/has + 过去分词（done）"
+            "text": "推断的每一步都要踩在原文的石头上——否则就是落水的脑补"
           }
         ]
       },
       {
         "when": 3,
-        "title": "③ for 与 since",
-        "color": "blue",
+        "title": "排除",
+        "subtitle": "反向排除",
+        "color": "amber",
+        "emoji": "❌",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "I have lived here for 5 years.（住了5年——时间段）\\nI have lived here since 2021.（自2021年——时间点）"
+            "kind": "steps",
+            "title": "排除三板斧",
+            "items": [
+              "砍\"无据项\"：原文完全找不到影子的选项最先排除",
+              "砍\"原文直说项\"：推断题里\"原文照抄\"的选项往往是细节干扰",
+              "砍\"过度推\"：推得比原文远（绝对化 always/never 或新信息）——砍完剩下的就是它"
+            ]
           },
           {
             "kind": "info",
-            "icon": "💡",
-            "title": "要点",
-            "text": "for + 时间段；since + 时间点/从句"
+            "icon": "⏱️",
+            "title": "实战节奏",
+            "text": "推断题控制在 90 秒内：30 秒定位·40 秒比对排除·20 秒确认——卡壳先标记跳过·全篇做完回来再看：上下文读全后推断常自动清晰"
           },
           {
             "kind": "highlight",
-            "text": "结构：主语 + have/has + 过去分词（done）"
+            "text": "选不出\"最好\"的，就先删掉\"最坏\"的——排除法是阅读的保底武功"
           }
         ]
       }
     ],
     "explore": [
-      "怎么区分完成时和过去时？",
-      "for 和 since 后面接什么？",
-      "have been to 和 have gone to 差在哪？"
+      "推断和瞎猜差在哪？",
+      "为什么\"原文提及\"的选项往往是错的？",
+      "怎样用排除法锁定答案？"
     ]
   }
 }

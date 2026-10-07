@@ -1,7 +1,7 @@
 {
   "toolbox": [],
   "actor": {
-    "costume": "🔢",
+    "costume": "⏱️",
     "x": 0,
     "y": 0
   },
@@ -9,7 +9,7 @@
   "tasks": [
     {
       "id": "e0",
-      "text": "探索：age=11 和 age=12 的英语有什么特点？",
+      "text": "探索：tm=2 作文该留多少分钟？",
       "check": {
         "type": "manual"
       },
@@ -20,7 +20,7 @@
     },
     {
       "id": "e1",
-      "text": "探索：How old are you? 怎么回答？",
+      "text": "探索：tm=3 答题顺序可以变吗？",
       "check": {
         "type": "manual"
       },
@@ -31,13 +31,13 @@
     },
     {
       "id": "e2",
-      "text": "探索：thirteen 和 thirty 怎么区分？",
+      "text": "探索：剩 10 分钟检查什么最划算？",
       "check": {
         "type": "manual"
       },
       "hintPrompts": [
-        "动手验证：把参数拖到两个极端对比观察",
-        "把发现说给 AI 老师听，让它帮你变成结论"
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
       ]
     },
     {
@@ -51,160 +51,398 @@
       ]
     }
   ],
-  "codeLesson": true,
-  "starterCode": "# 年龄问答训练器\nage = 9   # 年龄\n\nhide()\nw = \"nine\"\nif age == 5:\n    w = \"five\"\nif age == 6:\n    w = \"six\"\nif age == 7:\n    w = \"seven\"\nif age == 8:\n    w = \"eight\"\nif age == 10:\n    w = \"ten\"\nif age == 11:\n    w = \"eleven\"\nif age == 12:\n    w = \"twelve\"\nif age == 13:\n    w = \"thirteen\"\nif age == 14:\n    w = \"fourteen\"\nif age == 15:\n    w = \"fifteen\"\nif age > 15:\n    w = \"sixteen\"\nif age == 17:\n    w = \"seventeen\"\nif age == 18:\n    w = \"eighteen\"\nif age == 19:\n    w = \"nineteen\"\nif age == 20:\n    w = \"twenty\"\nfill_rect(0, 130, 340, 30, \"#2563eb\")\nwrite(\"How old are you? — I am \" + w + \".\", 0, 130, \"#fff\", 10)\nfill_rect(0, 76, 340, 40, \"#eff6ff\")\nwrite(w + \"（\" + age + \"岁）\", 0, 76, \"#1d4ed8\", 14)\nfill_rect(0, 16, 340, 56, \"#fef3c7\")\nwrite(\"1-10: one two three four five six seven eight nine ten\", 0, 16, \"#b45309\", 8)\nwrite(\"11-15: eleven twelve thirteen fourteen fifteen\", 0, 40, \"#7c3aed\", 8)\n",
   "celebrate": "新知识到手！",
-  "id": "eng-35",
   "island": "cross",
-  "order": 492,
-  "title": "数字与年龄",
-  "emoji": "🔢",
   "subjectArea": "英语",
-  "gradeBand": "primary",
-  "grade": 3,
-  "textbook": "人教PEP英语三年级上册",
+  "gradeBand": "senior",
+  "grade": 12,
+  "area": "英语",
+  "band": "senior",
+  "id": "eng-35",
+  "order": 789,
+  "title": "高考英语时间管理：考场策略",
+  "emoji": "⏱️",
+  "textbook": "人教版选择性必修",
   "curriculum": {
-    "module": "数字话题",
+    "module": "考试策略",
     "points": [
-      "1-20的英语",
-      "How old are you?",
-      "年龄表达"
+      "时间分配",
+      "答题顺序",
+      "检查取舍"
     ]
   },
-  "story": "How old are you? I am nine.——学会用英语说年龄，你就能和外国小朋友互相认识啦！one two three four five——数字是英语世界的第一把钥匙。",
+  "story": "同样的水平，会安排时间的人比不会安排的多拿 10-15 分——英语考试题量大时间紧，它不光考英语，还考\"项目管理\"。这一课把 120 分钟（或各省不同）拆到每分钟，让你的实力一分不漏地变现。",
   "goals": [
-    "会说1-20的英语",
-    "会问和答年龄",
-    "会简单加减的英语表达"
+    "掌握四大部分时间分配",
+    "设计自己的答题顺序",
+    "学会检查的取舍"
   ],
-  "aiIntro": "🔢 拨动年龄，看英语怎么问答——年龄问答训练器！",
-  "lab": {
-    "params": [
-      {
-        "name": "age",
-        "label": "年龄",
-        "min": 5,
-        "max": 15,
-        "step": 1,
-        "value": 9
-      }
-    ],
-    "grid": false,
-    "explore": [
-      "age=11 和 age=12 的英语有什么特点？",
-      "How old are you? 怎么回答？",
-      "thirteen 和 thirty 怎么区分？"
-    ],
-    "code": "# 年龄问答训练器\nage = 9   # 年龄\n\nhide()\nw = \"nine\"\nif age == 5:\n    w = \"five\"\nif age == 6:\n    w = \"six\"\nif age == 7:\n    w = \"seven\"\nif age == 8:\n    w = \"eight\"\nif age == 10:\n    w = \"ten\"\nif age == 11:\n    w = \"eleven\"\nif age == 12:\n    w = \"twelve\"\nif age == 13:\n    w = \"thirteen\"\nif age == 14:\n    w = \"fourteen\"\nif age == 15:\n    w = \"fifteen\"\nif age > 15:\n    w = \"sixteen\"\nif age == 17:\n    w = \"seventeen\"\nif age == 18:\n    w = \"eighteen\"\nif age == 19:\n    w = \"nineteen\"\nif age == 20:\n    w = \"twenty\"\nfill_rect(0, 130, 340, 30, \"#2563eb\")\nwrite(\"How old are you? — I am \" + w + \".\", 0, 130, \"#fff\", 10)\nfill_rect(0, 76, 340, 40, \"#eff6ff\")\nwrite(w + \"（\" + age + \"岁）\", 0, 76, \"#1d4ed8\", 14)\nfill_rect(0, 16, 340, 56, \"#fef3c7\")\nwrite(\"1-10: one two three four five six seven eight nine ten\", 0, 16, \"#b45309\", 8)\nwrite(\"11-15: eleven twelve thirteen fourteen fifteen\", 0, 40, \"#7c3aed\", 8)\n"
+  "aiIntro": "⏱️ 让实力一分不漏——考场时间管理！",
+  "param": {
+    "name": "tm",
+    "label": "考场站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
   },
+  "explore": [
+    "作文该留多少分钟？",
+    "答题顺序可以变吗？",
+    "剩 10 分钟检查什么最划算？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "分配",
+      "subtitle": "分钟预算",
+      "color": "blue",
+      "emoji": "📊",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "120 分钟参考预算（按各省调整）",
+          "items": [
+            {
+              "label": "阅读",
+              "value": "约 35 分钟——分值最大头：每篇 7-8 分钟·卡壳的题标记后跳"
+            },
+            {
+              "label": "语言运用",
+              "value": "完形+语法填空 约 25 分钟——完形 15 分钟·语法填空 10 分钟：先通读后逐题"
+            },
+            {
+              "label": "写作",
+              "value": "应用文 15 分钟 + 读后续写/概要 25 分钟 = 40 分钟——写作占总分 35 分以上·时间不许被阅读挤占"
+            },
+            {
+              "label": "涂卡+检查",
+              "value": "留 10-15 分钟——做完一篇涂一篇（不攒到最后）"
+            }
+          ]
+        },
+        {
+          "kind": "highlight",
+          "text": "先给作文上锁——阅读的弹性远大于写作"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "顺序",
+      "subtitle": "因人而异",
+      "color": "green",
+      "emoji": "🔀",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "三种顺序",
+          "items": [
+            {
+              "label": "标准顺序",
+              "value": "按卷面：听力→阅读→语言运用→写作——适合心理稳定型"
+            },
+            {
+              "label": "作文优先",
+              "value": "听力后先写作文（头脑最清醒时拿最大分值）——适合写作强·阅读快的"
+            },
+            {
+              "label": "阅读优先",
+              "value": "先攻阅读再回头（怕写作占用过多时间的）——适合写作慢的同学先限时代写"
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "🧪",
+          "title": "找到自己的顺序",
+          "text": "考前用 3 套真题各试一种顺序·记录每种的总得分与心态感受——你的最优顺序是测出来的·不是抄来的：模拟考就是实验室"
+        },
+        {
+          "kind": "highlight",
+          "text": "顺序无对错——有实验数据支撑的才叫策略"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "检查",
+      "subtitle": "最后一刻",
+      "color": "amber",
+      "emoji": "🔍",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "检查优先级",
+          "items": [
+            "第一查：涂卡错位（一道错位=灾难）——对题号再核一遍",
+            "第二查：作文拼写与主谓一致（最快的丢分点）",
+            "第三查：标记过的卡壳题（用排除法再砍两个选项）",
+            "不查：已经确定对的题——别把对的改错"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "🎲",
+          "title": "蒙题伦理与技巧",
+          "text": "完全不会的题：统一蒙一个选项（统计上优于乱选）·三长一短选短是玄学但别空题——英语没有倒扣分：空白是最差选项"
+        },
+        {
+          "kind": "info",
+          "icon": "😰",
+          "title": "心态急救",
+          "text": "听力没听清：let it go（它已过去·纠缠会连累下一题）；阅读一篇看不懂：先做题干能定位的细节题——整场考试最大的敌人是\"上头\""
+        },
+        {
+          "kind": "highlight",
+          "text": "考场的胜利=实力×时间×心态——后两项都可以练"
+        }
+      ]
+    }
+  ],
   "teach": {
     "sections": [
       {
-        "title": "数字 1-20",
-        "body": "【1-10：one two three four five six seven eight nine ten】\n【11-15：eleven twelve thirteen fourteen fifteen（-teen 结尾）】\n【16-19：sixteen seventeen eighteen nineteen（规律：个位+teen）】\n【20：twenty】\n记忆技巧：13-19 都以 -teen 结尾（thirteen→thirty 是 30）。"
+        "title": "时间分配",
+        "body": "【参考】阅读35·语言运用25·写作40·涂检15。\n【原则】写作时间先上锁。\n【节奏】一篇一涂不攒尾。"
       },
       {
-        "title": "问年龄",
-        "body": "【问：How old are you?（你几岁？）】\n【答：I am nine. / I am nine years old.】\n问第三人称：How old is he/she? — He/She is ten.\n礼貌提醒：对成年女性不随便问年龄（西方礼仪）。"
+        "title": "答题顺序",
+        "body": "【三式】标准·作文优先·阅读优先。\n【方法】三套真题实测选优。\n【原则】顺序服务心态与分值。"
       },
       {
-        "title": "数字运用",
-        "body": "【加法：One and two is three.（1+2=3）】\n【电话号码：one three five...（逐个读）】\n【价格：How much is it? — It is five yuan.】\n【数量：I have three books.（复数加s）】\n数字在生活中无处不在——电话·门牌·价格·时间。"
+        "title": "检查与心态",
+        "body": "【查】涂卡位·拼写主谓·标记题。\n【不查】已确定项。\n【蒙】统一选项不空题。\n【心态】let it go·定位式答题。"
       }
     ],
     "examples": [
       {
-        "q": "How old are you? 你 10 岁，怎么回答？",
+        "q": "还剩 5 分钟·作文没写完",
         "steps": [
-          "用 I am + 数字",
-          "I am ten.",
-          "或 I am ten years old.",
-          "两种都对"
+          "立刻收尾：结论句+呼应开头",
+          "砍中间例子的展开部分",
+          "保证结构完整字数达标",
+          "结尾潦草好过没有结尾"
         ],
-        "tip": "I am + 年龄"
+        "tip": "结构分优先"
       },
       {
-        "q": "thirteen 和 thirty 哪个是 30？",
+        "q": "阅读第二篇完全看不懂",
         "steps": [
-          "thirteen = 13（-teen）",
-          "thirty = 30（-ty）",
-          "重音不同：thirTEEN vs THIRty",
-          "注意区分"
+          "跳到第三篇（保护节奏）",
+          "回头用时题干定位细节题",
+          "主旨题留最后用排除法",
+          "不让一篇拖垮全卷"
         ],
-        "tip": "-teen vs -ty"
+        "tip": "止损跳读"
       }
     ],
     "mistakes": [
-      "忘记 am/is（I am nine 不是 I nine）",
-      "thirteen 和 thirty 混淆（13 vs 30）"
+      "先做完全部选择再写作文（常导致作文仓促失分最多）",
+      "把对的答案改错（检查以核对为主·非重做）"
     ]
   },
   "exercises": [
     {
-      "q": "5 的英语是？",
+      "q": "写作时间应该？",
       "options": [
-        "four",
-        "five",
-        "six",
-        "fifteen"
+        "全部挤到最后五分钟",
+        "优先锁定约三分之一时间",
+        "只留五分钟",
+        "先看完阅读再说"
       ],
       "answer": 1,
-      "explain": "five"
+      "explain": "最大分值保时间"
     },
     {
-      "q": "12 的英语是？",
+      "q": "确定自己的答题顺序应？",
       "options": [
-        "two",
-        "twenty",
-        "twelve",
-        "ten"
+        "抄学霸的",
+        "抽签",
+        "用真题实测对比",
+        "每次随机"
       ],
       "answer": 2,
-      "explain": "twelve"
+      "explain": "实验出真知"
     },
     {
-      "q": "How old are you? 回答用？",
+      "q": "检查的第一优先级是？",
       "options": [
-        "Nine old.",
-        "I nine.",
-        "Me nine.",
-        "I am nine."
+        "重做阅读",
+        "背单词",
+        "数字草稿",
+        "涂卡错位核对"
       ],
       "answer": 3,
-      "explain": "I am+年龄"
+      "explain": "错位是灾难"
     },
     {
-      "q": "thirteen 是多少？",
+      "q": "已经确定的答案检查时应该？",
       "options": [
-        "13",
-        "30",
-        "3",
-        "33"
+        "保持不动",
+        "反复怀疑",
+        "全部重做",
+        "擦掉"
       ],
       "answer": 0,
-      "explain": "-teen=十几"
+      "explain": "防改错"
     },
     {
-      "q": "20 的英语是？",
+      "q": "完全不会的题最好？",
       "options": [
-        "twelve",
-        "twenty",
-        "two",
-        "twenties"
+        "空着",
+        "统一蒙一个选项",
+        "乱选",
+        "交白卷"
       ],
       "answer": 1,
-      "explain": "twenty"
+      "explain": "无倒扣分"
     },
     {
-      "q": "1+2=3 用英语说？",
+      "q": "考场的胜利=实力×时间×___",
       "options": [
-        "Plus one two.",
-        "One two three.",
-        "One and two is three.",
-        "一加二"
+        null,
+        "运气",
+        "心态"
       ],
       "answer": 2,
-      "explain": "and=加"
+      "explain": "两项都可练",
+      "type": "blank",
+      "blank": {
+        "answerText": "心态",
+        "bank": [
+          "心态",
+          "运气"
+        ]
+      }
     }
-  ]
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "tm",
+        "label": "考场站",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ]
+  },
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "分配",
+        "subtitle": "分钟预算",
+        "color": "blue",
+        "emoji": "📊",
+        "blocks": [
+          {
+            "kind": "compare",
+            "title": "120 分钟参考预算（按各省调整）",
+            "items": [
+              {
+                "label": "阅读",
+                "value": "约 35 分钟——分值最大头：每篇 7-8 分钟·卡壳的题标记后跳"
+              },
+              {
+                "label": "语言运用",
+                "value": "完形+语法填空 约 25 分钟——完形 15 分钟·语法填空 10 分钟：先通读后逐题"
+              },
+              {
+                "label": "写作",
+                "value": "应用文 15 分钟 + 读后续写/概要 25 分钟 = 40 分钟——写作占总分 35 分以上·时间不许被阅读挤占"
+              },
+              {
+                "label": "涂卡+检查",
+                "value": "留 10-15 分钟——做完一篇涂一篇（不攒到最后）"
+              }
+            ]
+          },
+          {
+            "kind": "highlight",
+            "text": "先给作文上锁——阅读的弹性远大于写作"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "顺序",
+        "subtitle": "因人而异",
+        "color": "green",
+        "emoji": "🔀",
+        "blocks": [
+          {
+            "kind": "compare",
+            "title": "三种顺序",
+            "items": [
+              {
+                "label": "标准顺序",
+                "value": "按卷面：听力→阅读→语言运用→写作——适合心理稳定型"
+              },
+              {
+                "label": "作文优先",
+                "value": "听力后先写作文（头脑最清醒时拿最大分值）——适合写作强·阅读快的"
+              },
+              {
+                "label": "阅读优先",
+                "value": "先攻阅读再回头（怕写作占用过多时间的）——适合写作慢的同学先限时代写"
+              }
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "🧪",
+            "title": "找到自己的顺序",
+            "text": "考前用 3 套真题各试一种顺序·记录每种的总得分与心态感受——你的最优顺序是测出来的·不是抄来的：模拟考就是实验室"
+          },
+          {
+            "kind": "highlight",
+            "text": "顺序无对错——有实验数据支撑的才叫策略"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "检查",
+        "subtitle": "最后一刻",
+        "color": "amber",
+        "emoji": "🔍",
+        "blocks": [
+          {
+            "kind": "steps",
+            "title": "检查优先级",
+            "items": [
+              "第一查：涂卡错位（一道错位=灾难）——对题号再核一遍",
+              "第二查：作文拼写与主谓一致（最快的丢分点）",
+              "第三查：标记过的卡壳题（用排除法再砍两个选项）",
+              "不查：已经确定对的题——别把对的改错"
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "🎲",
+            "title": "蒙题伦理与技巧",
+            "text": "完全不会的题：统一蒙一个选项（统计上优于乱选）·三长一短选短是玄学但别空题——英语没有倒扣分：空白是最差选项"
+          },
+          {
+            "kind": "info",
+            "icon": "😰",
+            "title": "心态急救",
+            "text": "听力没听清：let it go（它已过去·纠缠会连累下一题）；阅读一篇看不懂：先做题干能定位的细节题——整场考试最大的敌人是\"上头\""
+          },
+          {
+            "kind": "highlight",
+            "text": "考场的胜利=实力×时间×心态——后两项都可以练"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "作文该留多少分钟？",
+      "答题顺序可以变吗？",
+      "剩 10 分钟检查什么最划算？"
+    ]
+  }
 }

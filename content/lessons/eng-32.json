@@ -1,7 +1,7 @@
 {
   "toolbox": [],
   "actor": {
-    "costume": "🗺️",
+    "costume": "📝",
     "x": 0,
     "y": 0
   },
@@ -9,7 +9,7 @@
   "tasks": [
     {
       "id": "e0",
-      "text": "探索：sc=2 \"go along\" 和 \"go straight\" 一样吗？",
+      "text": "探索：sm=2 哪些内容该留哪些该删？",
       "check": {
         "type": "manual"
       },
@@ -20,7 +20,7 @@
     },
     {
       "id": "e1",
-      "text": "探索：on the corner 是在角落里吗？",
+      "text": "探索：sm=3 为什么不能照抄原句？",
       "check": {
         "type": "manual"
       },
@@ -31,13 +31,13 @@
     },
     {
       "id": "e2",
-      "text": "探索：问路前为什么说 Excuse me？",
+      "text": "探索：怎样一步步压到 60 词？",
       "check": {
         "type": "manual"
       },
       "hintPrompts": [
-        "动手验证：把参数拖到两个极端对比观察",
-        "把发现说给 AI 老师听，让它帮你变成结论"
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
       ]
     },
     {
@@ -52,35 +52,262 @@
     }
   ],
   "celebrate": "新知识到手！",
-  "id": "eng-32",
   "island": "cross",
-  "order": 476,
-  "title": "情景交际：问路与指路",
-  "emoji": "🗺️",
   "subjectArea": "英语",
-  "gradeBand": "junior",
-  "grade": 7,
-  "textbook": "人教版英语（初中）",
+  "gradeBand": "senior",
+  "grade": 12,
+  "area": "英语",
+  "band": "senior",
+  "id": "eng-32",
+  "order": 786,
+  "title": "概要写作：把长文读薄",
+  "emoji": "📝",
+  "textbook": "人教版选择性必修",
   "curriculum": {
-    "module": "交际用语",
+    "module": "写作",
     "points": [
-      "问路句型",
-      "方位介词",
-      "指路表达"
+      "概要的要素",
+      "同义替换技巧",
+      "一步压缩法"
     ]
   },
-  "story": "在国外旅行迷路了怎么办？Excuse me, how can I get to...? 一句话打开对话。学会问路和指路，你就有了英语世界的\"导航仪\"！",
+  "story": "60 词写清一篇 350 词的文章——概要写作像榨果汁：把果肉（细节例子）滤掉，只留最纯的那杯（主旨大意）。它考的其实是阅读理解的终极功力：你能不能用自己的话，把文章的灵魂说出来。",
   "goals": [
-    "掌握问路句型",
-    "会用方位介词",
-    "会指路描述"
+    "掌握概要四要素",
+    "学会同义替换",
+    "掌握压缩三步法"
   ],
-  "aiIntro": "🗺️ 切换问路场景，看怎么用英语找方向——问路指路导航仪！",
+  "aiIntro": "📝 把长文榨成一杯精华——概要写作！",
+  "param": {
+    "name": "sm",
+    "label": "概要站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "哪些内容该留哪些该删？",
+    "为什么不能照抄原句？",
+    "怎样一步步压到 60 词？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "留什么",
+      "subtitle": "四要素",
+      "color": "blue",
+      "emoji": "✂️",
+      "blocks": [
+        {
+          "kind": "info",
+          "icon": "🎯",
+          "title": "只留主旨骨",
+          "text": "保留：每段的主旨句·关键逻辑（因果/对比/转折）·结论——删掉：例子·数据·重复·细节描写——概要 = 文章的骨架投影"
+        },
+        {
+          "kind": "steps",
+          "title": "四步定位",
+          "items": [
+            "首段尾句常是全文主旨",
+            "每段首句常是该段 topic sentence",
+            "转折词（but/however）后是重点",
+            "尾段总结全文——四点抓到·概要成了一半"
+          ]
+        },
+        {
+          "kind": "highlight",
+          "text": "概要不是缩写——是把文章\"再想一遍\"再简说"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "替换",
+      "subtitle": "不许照抄",
+      "color": "green",
+      "emoji": "🔄",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "同义替换三招",
+          "items": [
+            {
+              "label": "换词",
+              "value": "important → crucial/vital；solve → address/tackle——高级词上分的关键"
+            },
+            {
+              "label": "换句式",
+              "value": "主动↔被动·从句↔短语（when he was young → young as he was）——句式多样加分"
+            },
+            {
+              "label": "换视角",
+              "value": "正话反说（not difficult → easy）·合并两句（因果连词串起）——逻辑显性化"
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "⚠️",
+          "title": "扣分雷区",
+          "text": "照抄原文连续 5 词以上（判为 copy）·加入自己的观点（概要≠评论）·遗漏要点（漏一段主旨）——概要的扣分往往不是语言·是\"跑偏\""
+        },
+        {
+          "kind": "highlight",
+          "text": "好概要=忠实原文的灵魂+全新的语言外衣"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "压缩",
+      "subtitle": "三步到 60",
+      "color": "amber",
+      "emoji": "🗜️",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "从 350 到 60",
+          "items": [
+            "第一轮：每段一句话（各 15 词左右）——四句共 60：主旨句的串联",
+            "第二轮：合并可连的句子（因果/转折词连接）·删冗词（very/really 类）",
+            "第三轮：替换升级词·检查语法拼写·数字控制（不超过 70 为宜）"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "📐",
+          "title": "衔接词弹药库",
+          "text": "表因果 therefore/thus/as a result；转折 however/nevertheless；递进 moreover/furthermore；总结 in conclusion——四个衔接词把四句话缝成一件衣服"
+        },
+        {
+          "kind": "highlight",
+          "text": "60 词的概要考验的不是短——是\"想得清楚\""
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "概要要素",
+        "body": "【保留】主旨+关键逻辑+结论。\n【删除】例子数据细节重复。\n【定位】首段尾句·段首句·转折后·尾段。"
+      },
+      {
+        "title": "同义替换",
+        "body": "【词】important→crucial 等升级。\n【句】主被互换·从句短语化。\n【雷区】连续照抄5词+·加观点·漏要点。"
+      },
+      {
+        "title": "压缩三步",
+        "body": "【一】每段一句共60词。\n【二】衔接合并·删冗词。\n【三】升级替换·查语法控词数。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "概要被批\"copy\"了，怎样改？",
+        "steps": [
+          "找连续照抄的部分",
+          "换词换句式重写",
+          "对照原文逐句核查",
+          "最后自问：这句话是我的话吗"
+        ],
+        "tip": "改写不改动意思"
+      },
+      {
+        "q": "四段文章写到 85 词了",
+        "steps": [
+          "删 very/quite/really 类修饰词",
+          "合并因果相关的两句",
+          "例子一律删",
+          "控制在70以内——宁精勿长"
+        ],
+        "tip": "减肥不减骨"
+      }
+    ],
+    "mistakes": [
+      "把概要写成读后感（不评论只转述）",
+      "逐句压缩（只留主干·不抄原句）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "概要写作最不该做的是？",
+      "options": [
+        "保留主旨",
+        "加入个人观点",
+        "同义替换",
+        "控制词数"
+      ],
+      "answer": 1,
+      "explain": "转述不评论"
+    },
+    {
+      "q": "每段的 topic sentence 通常在？",
+      "options": [
+        "段尾",
+        "段首",
+        "段中",
+        "任意"
+      ],
+      "answer": 1,
+      "explain": "英文学术写作惯例"
+    },
+    {
+      "q": "概要中被判\"照抄\"的红线大约是？",
+      "options": [
+        "连续 5 词以上相同",
+        "任何 1 词",
+        "3 词",
+        "整段"
+      ],
+      "answer": 0,
+      "explain": "查重机制"
+    },
+    {
+      "q": "四句概要串联成篇的\"针线\"是？",
+      "options": [
+        "感叹词",
+        "衔接词（因果转折递进）",
+        "数字",
+        "问句"
+      ],
+      "answer": 1,
+      "explain": "逻辑显性化"
+    },
+    {
+      "q": "概要的理想词数是？",
+      "options": [
+        "原文的一半左右",
+        "题目要求内不超70",
+        "越短越好10词以内",
+        "原文的四分之三"
+      ],
+      "answer": 1,
+      "explain": "宁精勿长"
+    },
+    {
+      "q": "好概要=忠实原文的灵魂+全新的语言 ___",
+      "options": [
+        "外衣",
+        "考试"
+      ],
+      "answer": 0,
+      "explain": "转述的艺术",
+      "type": "blank",
+      "blank": {
+        "answerText": "外衣",
+        "bank": [
+          "外衣",
+          "考试"
+        ]
+      }
+    }
+  ],
   "lab": {
     "params": [
       {
-        "name": "sc",
-        "label": "场景",
+        "name": "sm",
+        "label": "概要站",
         "min": 1,
         "max": 3,
         "step": 1,
@@ -88,186 +315,107 @@
       }
     ]
   },
-  "teach": {
-    "sections": [
-      {
-        "title": "问路句型",
-        "body": "【Excuse me, how can I get to + 地点？】\n【Is there a + 地点 near here?】\n【Where is the nearest + 地点？】\n【Could you tell me the way to + 地点？】（更礼貌）\n回答不知道：Sorry, I am new here. / Sorry, I do not know."
-      },
-      {
-        "title": "方位介词",
-        "body": "【next to = 旁边 / beside = 在…旁边】\n【across from = 对面 / opposite = 对面】\n【between...and... = 在…和…之间】\n【in front of = 在…前面（外部）/ behind = 在…后面】\n【on the left/right = 在左/右边 / at the corner = 在拐角】\n方位介词+名词：next to the bank（在银行旁边）。"
-      },
-      {
-        "title": "指路表达",
-        "body": "【Go along this street. 沿这条街走】\n【Turn left/right at the... 在…处左/右转】\n【Go straight on. 直走】\n【Take the first turning on the left. 第一个路口左转】\n【It is about 5 minute walk. 步行约5分钟】\n结束时可以说：You cannot miss it.（你不会错过的）"
-      }
-    ],
-    "examples": [
-      {
-        "q": "礼貌地问图书馆怎么走？",
-        "steps": [
-          "先说 Excuse me",
-          "用 how can I get to 句型",
-          "Excuse me, how can I get to the library?",
-          "或 Could you tell me the way to the library?"
-        ],
-        "tip": "礼貌开头"
-      },
-      {
-        "q": "\"在超市对面\"怎么说？",
-        "steps": [
-          "对面 = across from",
-          "It's across from the supermarket",
-          "也可用 opposite the supermarket",
-          "答案"
-        ],
-        "tip": "across from"
-      }
-    ],
-    "mistakes": [
-      "问路不说 Excuse me（不礼貌）",
-      "across from 和 through 混淆（across 从表面穿过，through 从内部穿过）"
-    ]
-  },
-  "exercises": [
-    {
-      "q": "礼貌问路应先说？",
-      "options": [
-        "Hello",
-        "Hey",
-        "Excuse me",
-        "Look"
-      ],
-      "answer": 2,
-      "explain": "礼貌用语"
-    },
-    {
-      "q": "\"在银行旁边\"是？",
-      "options": [
-        "at the bank",
-        "in the bank",
-        "on the bank",
-        "next to the bank"
-      ],
-      "answer": 3,
-      "explain": "next to"
-    },
-    {
-      "q": "\"直走\"是？",
-      "options": [
-        "Go straight",
-        "Go left",
-        "Go right",
-        "Go back"
-      ],
-      "answer": 0,
-      "explain": "straight=直"
-    },
-    {
-      "q": "across from 的意思是？",
-      "options": [
-        "在…上面",
-        "在…对面",
-        "穿过",
-        "在…里面"
-      ],
-      "answer": 1,
-      "explain": "对面"
-    },
-    {
-      "q": "between...and... 表示？",
-      "options": [
-        "在…旁边",
-        "在…后面",
-        "在…和…之间",
-        "在…上面"
-      ],
-      "answer": 2,
-      "explain": "两者之间"
-    },
-    {
-      "q": "Turn left at the second crossing 的意思是？",
-      "options": [
-        "向左走两步",
-        "左转两次",
-        "在左边第二个",
-        "第二个路口左转"
-      ],
-      "answer": 3,
-      "explain": "crossing=路口"
-    }
-  ],
   "interact": {
     "views": [
       {
         "when": 1,
-        "title": "问路",
-        "color": "green",
+        "title": "留什么",
+        "subtitle": "四要素",
+        "color": "blue",
+        "emoji": "✂️",
         "blocks": [
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "Excuse me, how can I get to the library?"
+            "icon": "🎯",
+            "title": "只留主旨骨",
+            "text": "保留：每段的主旨句·关键逻辑（因果/对比/转折）·结论——删掉：例子·数据·重复·细节描写——概要 = 文章的骨架投影"
           },
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "Is there a bank near here? / Where is the nearest bus stop?"
+            "kind": "steps",
+            "title": "四步定位",
+            "items": [
+              "首段尾句常是全文主旨",
+              "每段首句常是该段 topic sentence",
+              "转折词（but/however）后是重点",
+              "尾段总结全文——四点抓到·概要成了一半"
+            ]
           },
           {
             "kind": "highlight",
-            "text": "词汇：先说 Excuse me（打扰了）再问——礼貌是通行证"
+            "text": "概要不是缩写——是把文章\"再想一遍\"再简说"
           }
         ]
       },
       {
         "when": 2,
-        "title": "指路（方向）",
+        "title": "替换",
+        "subtitle": "不许照抄",
         "color": "green",
+        "emoji": "🔄",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "Go along this street and turn left at the second crossing."
+            "kind": "compare",
+            "title": "同义替换三招",
+            "items": [
+              {
+                "label": "换词",
+                "value": "important → crucial/vital；solve → address/tackle——高级词上分的关键"
+              },
+              {
+                "label": "换句式",
+                "value": "主动↔被动·从句↔短语（when he was young → young as he was）——句式多样加分"
+              },
+              {
+                "label": "换视角",
+                "value": "正话反说（not difficult → easy）·合并两句（因果连词串起）——逻辑显性化"
+              }
+            ]
           },
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "Go straight on until you see a hospital, then turn right."
+            "icon": "⚠️",
+            "title": "扣分雷区",
+            "text": "照抄原文连续 5 词以上（判为 copy）·加入自己的观点（概要≠评论）·遗漏要点（漏一段主旨）——概要的扣分往往不是语言·是\"跑偏\""
           },
           {
             "kind": "highlight",
-            "text": "词汇：along=沿着 / straight=直走 / crossing=十字路口"
+            "text": "好概要=忠实原文的灵魂+全新的语言外衣"
           }
         ]
       },
       {
         "when": 3,
-        "title": "指路（位置）",
-        "color": "green",
+        "title": "压缩",
+        "subtitle": "三步到 60",
+        "color": "amber",
+        "emoji": "🗜️",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "It's next to the supermarket. / It's across from the park."
+            "kind": "steps",
+            "title": "从 350 到 60",
+            "items": [
+              "第一轮：每段一句话（各 15 词左右）——四句共 60：主旨句的串联",
+              "第二轮：合并可连的句子（因果/转折词连接）·删冗词（very/really 类）",
+              "第三轮：替换升级词·检查语法拼写·数字控制（不超过 70 为宜）"
+            ]
           },
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "It's between the bank and the post office. / It's on your right."
+            "icon": "📐",
+            "title": "衔接词弹药库",
+            "text": "表因果 therefore/thus/as a result；转折 however/nevertheless；递进 moreover/furthermore；总结 in conclusion——四个衔接词把四句话缝成一件衣服"
           },
           {
             "kind": "highlight",
-            "text": "词汇：next to=旁边 / across from=对面 / between...and=在…之间"
+            "text": "60 词的概要考验的不是短——是\"想得清楚\""
           }
         ]
       }
     ],
     "explore": [
-      "\"go along\" 和 \"go straight\" 一样吗？",
-      "on the corner 是在角落里吗？",
-      "问路前为什么说 Excuse me？"
+      "哪些内容该留哪些该删？",
+      "为什么不能照抄原句？",
+      "怎样一步步压到 60 词？"
     ]
   }
 }

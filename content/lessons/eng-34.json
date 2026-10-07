@@ -1,7 +1,7 @@
 {
   "toolbox": [],
   "actor": {
-    "costume": "🐾",
+    "costume": "🎤",
     "x": 0,
     "y": 0
   },
@@ -9,7 +9,7 @@
   "tasks": [
     {
       "id": "e0",
-      "text": "探索：a=4 为什么用an不用a？",
+      "text": "探索：ls=2 机器评分看什么？",
       "check": {
         "type": "manual"
       },
@@ -20,7 +20,7 @@
     },
     {
       "id": "e1",
-      "text": "探索：cat的复数怎么写？",
+      "text": "探索：ls=3 复述记不住全部怎么办？",
       "check": {
         "type": "manual"
       },
@@ -31,13 +31,13 @@
     },
     {
       "id": "e2",
-      "text": "探索：你还能想到什么动物？",
+      "text": "探索：没听懂问题怎么救场？",
       "check": {
         "type": "manual"
       },
       "hintPrompts": [
-        "动手验证：把参数拖到两个极端对比观察",
-        "把发现说给 AI 老师听，让它帮你变成结论"
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
       ]
     },
     {
@@ -52,269 +52,390 @@
     }
   ],
   "celebrate": "新知识到手！",
-  "id": "eng-34",
   "island": "cross",
-  "order": 491,
-  "title": "动物单词与句型",
-  "emoji": "🐾",
   "subjectArea": "英语",
-  "gradeBand": "primary",
-  "grade": 3,
-  "textbook": "人教PEP英语三年级上册",
+  "gradeBand": "senior",
+  "grade": 12,
+  "area": "英语",
+  "band": "senior",
+  "id": "eng-34",
+  "order": 788,
+  "title": "英语听说考试：口语实战",
+  "emoji": "🎤",
+  "textbook": "人教版选择性必修",
   "curriculum": {
-    "module": "词汇与句型",
+    "module": "听说",
     "points": [
-      "动物单词",
-      "It is a/an 句型",
-      "复数形式"
+      "朗读技巧",
+      "听后复述",
+      "情景问答"
     ]
   },
-  "story": "dog cat bird fish——这些动物用英语怎么叫？It is a cat. It is a dog. 学会这个句型，你就能介绍任何一只动物！",
+  "story": "听力最后一大题让你开口说——朗读·复述·问答三连，很多学生当场\"宕机\"。其实口语考试是最\"可控\"的题型：它考的是可以提前准备的动作，而不是临场灵感。这一课把三个环节拆成可练习的肌肉记忆。",
   "goals": [
-    "掌握10个动物单词",
-    "会用It is a/an句型",
-    "会加复数s"
+    "掌握朗读评分点",
+    "学会复述三步法",
+    "掌握问答应答模板"
   ],
-  "aiIntro": "🐾 切换动物，看英语怎么说——动物英语卡片机！",
+  "aiIntro": "🎤 开口就是分——听说考试实战！",
+  "param": {
+    "name": "ls",
+    "label": "听说站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "机器评分看什么？",
+    "复述记不住全部怎么办？",
+    "没听懂问题怎么救场？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "朗读",
+      "subtitle": "评分四维",
+      "color": "blue",
+      "emoji": "📖",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "机器看什么",
+          "items": [
+            {
+              "label": "准确",
+              "value": "音标准确·不吞尾音（-ed/-s）——词读对是一切的前提"
+            },
+            {
+              "label": "流利",
+              "value": "不打长久停顿·错了继续读不回读（机器按完整度扣分——读错一个词别慌·止损前进）"
+            },
+            {
+              "label": "完整",
+              "value": "不漏行不跳词——用手指导读最防漏"
+            },
+            {
+              "label": "节奏",
+              "value": "意群停顿（短语间换气）·语调升降（疑问升·陈述降）——有节奏感的朗读像唱歌"
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "🎯",
+          "title": "练习法",
+          "text": "每天 3 分钟跟读（影子跟读法）：放一句音频跟一句·模仿到语调一致——坚持一个月·机器评分肉眼可见地涨：口语是肌肉不是天赋"
+        },
+        {
+          "kind": "highlight",
+          "text": "朗读不追求完美——追求止损和完整"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "复述",
+      "subtitle": "听后转述",
+      "color": "green",
+      "emoji": "🔁",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "复述三步",
+          "items": [
+            "听时记：关键词骨架（who/when/what/why/result）——中文记也可·省时间",
+            "听后理：30 秒把骨架串成 5-6 句英语——先搭骨再穿衣",
+            "说时稳：第一句定调（The story is about...）·简单句优先·卡住用 in other words 绕过"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "🧠",
+          "title": "记忆技巧",
+          "text": "记\"故事链\"不记句子：开端-发展-转折-结局四格——听时画四格图：复述=看图说话（压力骤减）：比逐句记效率高数倍"
+        },
+        {
+          "kind": "info",
+          "icon": "🛟",
+          "title": "救命句式",
+          "text": "忘了细节：It was said that... / As far as I remember...；卡壳连接：well/you know（买思考时间不算大扣分）——救场话术先备好"
+        },
+        {
+          "kind": "highlight",
+          "text": "复述考的不是记性——是\"重组\"能力"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "问答",
+      "subtitle": "情景应答",
+      "color": "amber",
+      "emoji": "💬",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "答题公式",
+          "items": [
+            "听清问题类型：事实题（What/When）直接答·观点题（Do you think...）先亮观点再给理由",
+            "公式化开头：In my opinion.../I think.../From my perspective...——先开口再完善",
+            "两句话原则：观点一句+理由一句（Because.../For example...）——不贪长·不出错",
+            "礼貌兜底：没听清→Pardon? / Could you say that again?（比乱答扣分少）"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "📋",
+          "title": "万能理由库",
+          "text": "观点题的理由准备 5 个万能角：save time / good for health / make friends / learn new things / protect the environment——任何话题都能靠上两三个：题库是死的·角度是活的"
+        },
+        {
+          "kind": "highlight",
+          "text": "口语考试的秘密：三分考英语·七分考敢说"
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "朗读技巧",
+        "body": "【四维】准确·流利·完整·节奏。\n【止损】读错不回读·继续前进。\n【练习】每日3分钟影子跟读。"
+      },
+      {
+        "title": "听后复述",
+        "body": "【三步】记关键词骨架→30秒串句→稳定输出。\n【四格法】开端发展转折结局。\n【救场】It was said that / in other words。"
+      },
+      {
+        "title": "情景问答",
+        "body": "【分类】事实题直答·观点题观点+理由。\n【模板】In my opinion + Because。\n【两句话原则】不贪长不出错。\n【兜底】Pardon 礼貌确认。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "朗读时读错了一个词",
+        "steps": [
+          "不要停",
+          "不要回读",
+          "按错误版本读完",
+          "机器扣错误词的分·回读再多扣完整度"
+        ],
+        "tip": "止损前进"
+      },
+      {
+        "q": "复述只记住一半信息",
+        "steps": [
+          "按四格串起来已知部分",
+          "It was said that 补衔接",
+          "流畅说完比吞吞吐吐说全更重要",
+          "练习记骨架·漏一两条不致命"
+        ],
+        "tip": "四格法保底"
+      }
+    ],
+    "mistakes": [
+      "朗读错了回读重念（双倍扣分）",
+      "观点问答只说 Yes/No 不给理由（内容分照扣）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "机器朗读评分的四个维度不包括？",
+      "options": [
+        "准确",
+        "流利",
+        "完整",
+        "词汇量"
+      ],
+      "answer": 3,
+      "explain": "朗读不考词汇深度"
+    },
+    {
+      "q": "朗读读错了正确做法是？",
+      "options": [
+        "停下来重读",
+        "继续读不回读",
+        "道歉",
+        "跳过整段"
+      ],
+      "answer": 1,
+      "explain": "止损原则"
+    },
+    {
+      "q": "复述最推荐的笔记方式是？",
+      "options": [
+        "逐句默写",
+        "记四格故事链关键词",
+        "画插图",
+        "不记"
+      ],
+      "answer": 1,
+      "explain": "看图说话"
+    },
+    {
+      "q": "没听清问题最好说？",
+      "options": [
+        "不管对错乱答一通",
+        "Pardon?请对方重复",
+        "沉默不语三十秒",
+        "假装没听见换话题"
+      ],
+      "answer": 1,
+      "explain": "礼貌确认扣分少"
+    },
+    {
+      "q": "观点类问答的公式是？",
+      "options": [
+        "只答Yes",
+        "观点一句+理由一句",
+        "长篇大论",
+        "反问"
+      ],
+      "answer": 1,
+      "explain": "两句话原则"
+    },
+    {
+      "q": "三分考英语，七分考 ___",
+      "options": [
+        "敢说",
+        "运气"
+      ],
+      "answer": 0,
+      "explain": "口语心理关",
+      "type": "blank",
+      "blank": {
+        "answerText": "敢说",
+        "bank": [
+          "敢说",
+          "运气"
+        ]
+      }
+    }
+  ],
   "lab": {
     "params": [
       {
-        "name": "a",
-        "label": "动物",
+        "name": "ls",
+        "label": "听说站",
         "min": 1,
-        "max": 5,
+        "max": 3,
         "step": 1,
         "value": 1
       }
     ]
   },
-  "teach": {
-    "sections": [
-      {
-        "title": "动物单词",
-        "body": "【cat 猫 · dog 狗 · bird 鸟 · fish 鱼 · rabbit 兔 · panda 熊猫 · tiger 虎 · lion 狮 · monkey 猴 · elephant 大象】\n复数规则：一般加 s（cat→cats）；以 s/x/sh/ch 结尾加 es（fish→fishes 特殊）。\n动物叫声：dog→woof·cat→meow·bird→tweet。"
-      },
-      {
-        "title": "It is a/an 句型",
-        "body": "【It is a + 辅音开头的词：It is a cat/dog/bird】\n【It is an + 元音开头的词：It is an elephant/apple/egg】\n元音字母：a e i o u 开头的单词用 an。\n否定：It is not a cat. 疑问：Is it a cat? Yes, it is. / No, it is not."
-      },
-      {
-        "title": "拓展运用",
-        "body": "【I like cats.（喜欢的一类用复数）】\n【The cat is cute.（特指那只猫）】\n【What is it? It is a dog.（问答练习）】\n动物+颜色：a black cat·a white dog·a yellow bird。\n结合已学的 there be：There is a cat under the tree."
-      }
-    ],
-    "examples": [
-      {
-        "q": "大象 elephant 前用 a 还是 an？",
-        "steps": [
-          "elephant 以元音 e 开头",
-          "元音开头用 an",
-          "It is an elephant",
-          "答案：an"
-        ],
-        "tip": "看首字母"
-      },
-      {
-        "q": "cat 的复数是什么？",
-        "steps": [
-          "一般名词加 s",
-          "cat + s",
-          "cats",
-          "两只猫：two cats"
-        ],
-        "tip": "直接加s"
-      }
-    ],
-    "mistakes": [
-      "elephant 前用 a（元音开头应用 an）",
-      "like 后用单数（应用复数 cats）"
-    ]
-  },
-  "exercises": [
-    {
-      "q": "cat 的中文是？",
-      "options": [
-        "猫",
-        "狗",
-        "鸟",
-        "鱼"
-      ],
-      "answer": 0,
-      "explain": "🐱猫"
-    },
-    {
-      "q": "elephant 前用？",
-      "options": [
-        "a",
-        "an",
-        "the",
-        "不填"
-      ],
-      "answer": 1,
-      "explain": "元音开头"
-    },
-    {
-      "q": "cat 的复数？",
-      "options": [
-        "cat",
-        "cates",
-        "cats",
-        "caties"
-      ],
-      "answer": 2,
-      "explain": "加s"
-    },
-    {
-      "q": "Is it a dog? 肯定回答？",
-      "options": [
-        "It is.",
-        "Yes, it does.",
-        "No.",
-        "Yes, it is."
-      ],
-      "answer": 3,
-      "explain": "is问is答"
-    },
-    {
-      "q": "a black cat 中 black 是？",
-      "options": [
-        "颜色",
-        "大小",
-        "数量",
-        "名字"
-      ],
-      "answer": 0,
-      "explain": "形容词"
-    },
-    {
-      "q": "panda 的意思是？",
-      "options": [
-        "老虎",
-        "熊猫",
-        "猴子",
-        "狮子"
-      ],
-      "answer": 1,
-      "explain": "国宝🐼"
-    }
-  ],
   "interact": {
     "views": [
       {
         "when": 1,
-        "title": "🐱 cat（猫）",
-        "color": "amber",
+        "title": "朗读",
+        "subtitle": "评分四维",
+        "color": "blue",
+        "emoji": "📖",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "It is a cat."
+            "kind": "compare",
+            "title": "机器看什么",
+            "items": [
+              {
+                "label": "准确",
+                "value": "音标准确·不吞尾音（-ed/-s）——词读对是一切的前提"
+              },
+              {
+                "label": "流利",
+                "value": "不打长久停顿·错了继续读不回读（机器按完整度扣分——读错一个词别慌·止损前进）"
+              },
+              {
+                "label": "完整",
+                "value": "不漏行不跳词——用手指导读最防漏"
+              },
+              {
+                "label": "节奏",
+                "value": "意群停顿（短语间换气）·语调升降（疑问升·陈述降）——有节奏感的朗读像唱歌"
+              }
+            ]
           },
           {
             "kind": "info",
-            "icon": "💡",
-            "title": "复数",
-            "text": "cat→cats  dog→dogs  bird→birds"
+            "icon": "🎯",
+            "title": "练习法",
+            "text": "每天 3 分钟跟读（影子跟读法）：放一句音频跟一句·模仿到语调一致——坚持一个月·机器评分肉眼可见地涨：口语是肌肉不是天赋"
           },
           {
             "kind": "highlight",
-            "text": "an 用于元音开头的词（elephant·apple·egg）"
+            "text": "朗读不追求完美——追求止损和完整"
           }
         ]
       },
       {
         "when": 2,
-        "title": "🐶 dog（狗）",
-        "color": "amber",
+        "title": "复述",
+        "subtitle": "听后转述",
+        "color": "green",
+        "emoji": "🔁",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "It is a dog."
+            "kind": "steps",
+            "title": "复述三步",
+            "items": [
+              "听时记：关键词骨架（who/when/what/why/result）——中文记也可·省时间",
+              "听后理：30 秒把骨架串成 5-6 句英语——先搭骨再穿衣",
+              "说时稳：第一句定调（The story is about...）·简单句优先·卡住用 in other words 绕过"
+            ]
           },
           {
             "kind": "info",
-            "icon": "💡",
-            "title": "复数",
-            "text": "cat→cats  dog→dogs  bird→birds"
+            "icon": "🧠",
+            "title": "记忆技巧",
+            "text": "记\"故事链\"不记句子：开端-发展-转折-结局四格——听时画四格图：复述=看图说话（压力骤减）：比逐句记效率高数倍"
+          },
+          {
+            "kind": "info",
+            "icon": "🛟",
+            "title": "救命句式",
+            "text": "忘了细节：It was said that... / As far as I remember...；卡壳连接：well/you know（买思考时间不算大扣分）——救场话术先备好"
           },
           {
             "kind": "highlight",
-            "text": "an 用于元音开头的词（elephant·apple·egg）"
+            "text": "复述考的不是记性——是\"重组\"能力"
           }
         ]
       },
       {
         "when": 3,
-        "title": "🐦 bird（鸟）",
+        "title": "问答",
+        "subtitle": "情景应答",
         "color": "amber",
+        "emoji": "💬",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "It is a bird."
+            "kind": "steps",
+            "title": "答题公式",
+            "items": [
+              "听清问题类型：事实题（What/When）直接答·观点题（Do you think...）先亮观点再给理由",
+              "公式化开头：In my opinion.../I think.../From my perspective...——先开口再完善",
+              "两句话原则：观点一句+理由一句（Because.../For example...）——不贪长·不出错",
+              "礼貌兜底：没听清→Pardon? / Could you say that again?（比乱答扣分少）"
+            ]
           },
           {
             "kind": "info",
-            "icon": "💡",
-            "title": "复数",
-            "text": "cat→cats  dog→dogs  bird→birds"
+            "icon": "📋",
+            "title": "万能理由库",
+            "text": "观点题的理由准备 5 个万能角：save time / good for health / make friends / learn new things / protect the environment——任何话题都能靠上两三个：题库是死的·角度是活的"
           },
           {
             "kind": "highlight",
-            "text": "an 用于元音开头的词（elephant·apple·egg）"
-          }
-        ]
-      },
-      {
-        "when": 4,
-        "title": "🐘 elephant（大象）",
-        "color": "amber",
-        "blocks": [
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "It is an elephant."
-          },
-          {
-            "kind": "info",
-            "icon": "💡",
-            "title": "复数",
-            "text": "cat→cats  dog→dogs  bird→birds"
-          },
-          {
-            "kind": "highlight",
-            "text": "an 用于元音开头的词（elephant·apple·egg）"
-          }
-        ]
-      },
-      {
-        "when": 5,
-        "title": "🐟 fish（鱼）",
-        "color": "amber",
-        "blocks": [
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "It is a fish."
-          },
-          {
-            "kind": "info",
-            "icon": "💡",
-            "title": "复数",
-            "text": "cat→cats  dog→dogs  bird→birds"
-          },
-          {
-            "kind": "highlight",
-            "text": "an 用于元音开头的词（elephant·apple·egg）"
+            "text": "口语考试的秘密：三分考英语·七分考敢说"
           }
         ]
       }
     ],
     "explore": [
-      "为什么用an不用a？",
-      "cat的复数怎么写？",
-      "你还能想到什么动物？"
+      "机器评分看什么？",
+      "复述记不住全部怎么办？",
+      "没听懂问题怎么救场？"
     ]
   }
 }
