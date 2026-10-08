@@ -1,0 +1,421 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🧱",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：fx=2 为什么同样的代码要写三遍？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：fx=3 参数像什么？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：返回值和打印有啥区别？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "celebrate": "新知识到手！",
+  "island": "cross",
+  "subjectArea": "信息科技",
+  "gradeBand": "junior",
+  "grade": 8,
+  "area": "信息科技",
+  "band": "junior",
+  "id": "ai-16",
+  "order": 813,
+  "title": "函数：代码的乐高积木",
+  "emoji": "🧱",
+  "textbook": "信息科技（初中）",
+  "curriculum": {
+    "module": "程序设计",
+    "points": [
+      "定义与调用",
+      "参数与返回值",
+      "为什么用函数"
+    ]
+  },
+  "story": "每次做饭都从钻木取火开始——太蠢了。人类发明了\"厨房\"：进去一次配置好·以后喊一声\"做饭\"就行。函数就是代码的厨房：把一段代码打包命名·以后喊名字就执行——从此你的代码像乐高：拼积木不造砖。",
+  "goals": [
+    "会定义和调用函数",
+    "理解参数与返回值",
+    "养成用函数的习惯"
+  ],
+  "aiIntro": "🧱 把代码打包成积木——函数！",
+  "param": {
+    "name": "fx",
+    "label": "函数站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "为什么同样的代码要写三遍？",
+    "参数像什么？",
+    "返回值和打印有啥区别？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "定义",
+      "subtitle": "打包命名",
+      "color": "blue",
+      "emoji": "📦",
+      "blocks": [
+        {
+          "kind": "info",
+          "icon": "✍️",
+          "title": "定义函数",
+          "text": "def greet():  print(\"你好呀！\")——def 是\"定义\"关键字·greet 是你起的名字·括号冒号不能少：定义只是\"造好厨房\"·还没做菜"
+        },
+        {
+          "kind": "info",
+          "icon": "📞",
+          "title": "调用函数",
+          "text": "greet()——喊名字+括号=执行：喊一次执行一次·喊十次执行十次：不喊不执行（定义了不调用=装好了没用过"
+        },
+        {
+          "kind": "info",
+          "icon": "🎯",
+          "title": "命名小规矩",
+          "text": "名字要说人话：check_score 比 f 好；动词开头更清晰（get_max·draw_chart）——函数名是给未来自己（和同伴）的说明书"
+        },
+        {
+          "kind": "highlight",
+          "text": "定义=造厨房·调用=下厨房——两步缺一不可"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "参数返回",
+      "subtitle": "输入与输出",
+      "color": "green",
+      "emoji": "🔌",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "一个完整函数",
+          "items": [
+            "def add(a, b):——括号里的 a, b 是参数（原料从外面递进来）",
+            "  return a + b——return 是返回值（成品递出去）",
+            "调用：result = add(3, 5)——result 拿到 8",
+            "函数=机器：原料进（参数）→加工→成品出（返回值）"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "🖨️",
+          "title": "return ≠ print",
+          "text": "print 是\"喊出来\"（人听见·程序拿不到）；return 是\"递出来\"（程序能继续用）——喊出来的不能做菜·递出来的能：要计算后续就用 return"
+        },
+        {
+          "kind": "info",
+          "icon": "♻️",
+          "title": "return 的第二功能",
+          "text": "return 一执行·函数立即结束（后面的代码不跑）——常用它提前退出：if 错了：return（早退省事）"
+        },
+        {
+          "kind": "highlight",
+          "text": "参数是入口·返回值是出口——函数是一台有进有出的机器"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "为什么",
+      "subtitle": "三大好处",
+      "color": "amber",
+      "emoji": "💎",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "函数三宝",
+          "items": [
+            "复用：写一次用百次（不用复制粘贴同样的代码三遍）",
+            "修改一处生效：同样的 bug 改函数里一处·所有调用处全好——复制粘贴的 bug 要改三处（漏一处就完蛋）",
+            "让代码可读：主程序读起来像目录（draw_chart()·save_file()）——细节藏在函数里：长代码的第一整理术"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "🏗️",
+          "title": "乐高思想",
+          "text": "每个函数做一件小事·名字说清它做什么——小程序拼函数·大程序拼模块：从\"写代码\"到\"组代码\"就是编程水平的分水岭"
+        },
+        {
+          "kind": "highlight",
+          "text": "函数是代码的乐高——拼积木不造砖"
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "定义与调用",
+        "body": "【定义】def 名字(): 冒号+缩进。\n【调用】名字() 才执行。\n【命名】动词开头·说人话。"
+      },
+      {
+        "title": "参数与返回值",
+        "body": "【参数】def f(a, b)——原料递入。\n【返回】return 值——成品递出。\n【区别】return 给程序用·print 给人看。\n【特性】return 即结束。"
+      },
+      {
+        "title": "为什么用函数",
+        "body": "【复用】写一次用百次。\n【维护】一处修改全部生效。\n【可读】主程序像目录。\n【思想】拼积木不造砖。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "成绩表要算三次平均分",
+        "steps": [
+          "写 def avg(nums): return sum/len",
+          "三处调用 avg(…) ",
+          "改算法只改函数里一处",
+          "不复制粘贴"
+        ],
+        "tip": "复用"
+      },
+      {
+        "q": "def area(r): return 3.14*r*r 调用后怎样拿到值？",
+        "steps": [
+          "s = area(5)",
+          "return 递出的值被 s 接住",
+          "print(s) 看到 78.5",
+          "没有 return 则拿不到"
+        ],
+        "tip": "接住返回值"
+      }
+    ],
+    "mistakes": [
+      "定义了忘记调用（函数不执行）",
+      "该 return 时用了 print（程序拿不到结果）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "定义函数的关键字是？",
+      "options": [
+        "func",
+        "def",
+        "return",
+        "call"
+      ],
+      "answer": 1,
+      "explain": "def 定义"
+    },
+    {
+      "q": "函数定义后自动执行吗？",
+      "options": [
+        "会",
+        "不会（要调用才执行）",
+        "随机",
+        "只执行一次"
+      ],
+      "answer": 1,
+      "explain": "不喊不做"
+    },
+    {
+      "q": "参数的作用是？",
+      "options": [
+        "让代码变得更长",
+        "可以复用的积木",
+        "让程序运行更慢",
+        "好看的颜色特效"
+      ],
+      "answer": 1,
+      "explain": "原料入口"
+    },
+    {
+      "q": "return 和 print 的不同点是？",
+      "options": [
+        "完全一样",
+        "一个给程序用一个给人看",
+        "速度不同",
+        "都不执行"
+      ],
+      "answer": 1,
+      "explain": "return 的值能被程序继续用，print 只是显示"
+    },
+    {
+      "q": "函数最大的好处不是？",
+      "options": [
+        "复用",
+        "一处改处处好",
+        "代码可读",
+        "让代码更长"
+      ],
+      "answer": 3,
+      "explain": "函数让代码更短"
+    },
+    {
+      "q": "函数是代码的乐高——拼积木不造 ___",
+      "options": [
+        "砖",
+        "车"
+      ],
+      "answer": 0,
+      "explain": "复用思想",
+      "type": "blank",
+      "blank": {
+        "answerText": "砖",
+        "bank": [
+          "砖",
+          "车"
+        ]
+      }
+    }
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "fx",
+        "label": "函数站",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ]
+  },
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "定义",
+        "subtitle": "打包命名",
+        "color": "blue",
+        "emoji": "📦",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "✍️",
+            "title": "定义函数",
+            "text": "def greet():  print(\"你好呀！\")——def 是\"定义\"关键字·greet 是你起的名字·括号冒号不能少：定义只是\"造好厨房\"·还没做菜"
+          },
+          {
+            "kind": "info",
+            "icon": "📞",
+            "title": "调用函数",
+            "text": "greet()——喊名字+括号=执行：喊一次执行一次·喊十次执行十次：不喊不执行（定义了不调用=装好了没用过"
+          },
+          {
+            "kind": "info",
+            "icon": "🎯",
+            "title": "命名小规矩",
+            "text": "名字要说人话：check_score 比 f 好；动词开头更清晰（get_max·draw_chart）——函数名是给未来自己（和同伴）的说明书"
+          },
+          {
+            "kind": "highlight",
+            "text": "定义=造厨房·调用=下厨房——两步缺一不可"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "参数返回",
+        "subtitle": "输入与输出",
+        "color": "green",
+        "emoji": "🔌",
+        "blocks": [
+          {
+            "kind": "steps",
+            "title": "一个完整函数",
+            "items": [
+              "def add(a, b):——括号里的 a, b 是参数（原料从外面递进来）",
+              "  return a + b——return 是返回值（成品递出去）",
+              "调用：result = add(3, 5)——result 拿到 8",
+              "函数=机器：原料进（参数）→加工→成品出（返回值）"
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "🖨️",
+            "title": "return ≠ print",
+            "text": "print 是\"喊出来\"（人听见·程序拿不到）；return 是\"递出来\"（程序能继续用）——喊出来的不能做菜·递出来的能：要计算后续就用 return"
+          },
+          {
+            "kind": "info",
+            "icon": "♻️",
+            "title": "return 的第二功能",
+            "text": "return 一执行·函数立即结束（后面的代码不跑）——常用它提前退出：if 错了：return（早退省事）"
+          },
+          {
+            "kind": "highlight",
+            "text": "参数是入口·返回值是出口——函数是一台有进有出的机器"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "为什么",
+        "subtitle": "三大好处",
+        "color": "amber",
+        "emoji": "💎",
+        "blocks": [
+          {
+            "kind": "steps",
+            "title": "函数三宝",
+            "items": [
+              "复用：写一次用百次（不用复制粘贴同样的代码三遍）",
+              "修改一处生效：同样的 bug 改函数里一处·所有调用处全好——复制粘贴的 bug 要改三处（漏一处就完蛋）",
+              "让代码可读：主程序读起来像目录（draw_chart()·save_file()）——细节藏在函数里：长代码的第一整理术"
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "🏗️",
+            "title": "乐高思想",
+            "text": "每个函数做一件小事·名字说清它做什么——小程序拼函数·大程序拼模块：从\"写代码\"到\"组代码\"就是编程水平的分水岭"
+          },
+          {
+            "kind": "highlight",
+            "text": "函数是代码的乐高——拼积木不造砖"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "为什么同样的代码要写三遍？",
+      "参数像什么？",
+      "返回值和打印有啥区别？"
+    ]
+  }
+}
