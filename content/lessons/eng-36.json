@@ -1,7 +1,7 @@
 {
   "toolbox": [],
   "actor": {
-    "costume": "💬",
+    "costume": "⏰",
     "x": 0,
     "y": 0
   },
@@ -9,7 +9,7 @@
   "tasks": [
     {
       "id": "e0",
-      "text": "探索：type=1 that 什么时候可以省？",
+      "text": "探索：ts=2 saw 和 have seen 差在哪？",
       "check": {
         "type": "manual"
       },
@@ -20,7 +20,7 @@
     },
     {
       "id": "e1",
-      "text": "探索：type=2 if 和 whether 的区别？",
+      "text": "探索：ts=3 哪些词是\"过去专属\"？",
       "check": {
         "type": "manual"
       },
@@ -31,13 +31,13 @@
     },
     {
       "id": "e2",
-      "text": "探索：type=3 时态怎么呼应？",
+      "text": "探索：为什么 I have seen it yesterday 是错的？",
       "check": {
         "type": "manual"
       },
       "hintPrompts": [
-        "动手验证：把参数拖到两个极端对比观察",
-        "把发现说给 AI 老师听，让它帮你变成结论"
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
       ]
     },
     {
@@ -52,35 +52,268 @@
     }
   ],
   "celebrate": "新知识到手！",
-  "id": "eng-36",
   "island": "cross",
-  "order": 522,
-  "title": "宾语从句",
-  "emoji": "💬",
   "subjectArea": "英语",
   "gradeBand": "junior",
-  "grade": 9,
-  "textbook": "人教版英语（初中九年级）",
+  "grade": 8,
+  "area": "英语",
+  "band": "junior",
+  "id": "eng-36",
+  "order": 819,
+  "title": "时态对决：过去式 vs 现在完成时",
+  "emoji": "⏰",
+  "textbook": "人教PEP（八年级）",
   "curriculum": {
-    "module": "复合句·宾语从句",
+    "module": "语法",
     "points": [
-      "宾语从句的连接词",
-      "语序永远陈述",
-      "时态呼应"
+      "两种时态的区分",
+      "时间标志词",
+      "常见错误"
     ]
   },
-  "story": "I think (that) English is fun.——think 后面跟的那个小句子就是宾语从句！掌握\"一个连接词+陈述语序+时态呼应\"三原则，宾语从句就是送分题。",
+  "story": "「I saw this movie」和「I have seen this movie」——中文都是\"我看过\"·英文却分成两个世界：一个跟过去的时间点走·一个跟现在有关系。这是初中英语最大的时态难关·这一课用\"时间轴\"一次说清楚。",
   "goals": [
-    "会选连接词",
-    "掌握陈述语序",
-    "会做时态呼应"
+    "分清两种时态的核心区别",
+    "掌握时间标志词",
+    "避免常见混淆"
   ],
-  "aiIntro": "💬 切换从句类型，看连接词和语序怎么定——宾语从句构造器！",
+  "aiIntro": "⏰ 一条时间轴分清两大时态！",
+  "param": {
+    "name": "ts",
+    "label": "时态站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "saw 和 have seen 差在哪？",
+    "哪些词是\"过去专属\"？",
+    "为什么 I have seen it yesterday 是错的？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "核心",
+      "subtitle": "一句话分",
+      "color": "blue",
+      "emoji": "🔑",
+      "blocks": [
+        {
+          "kind": "info",
+          "icon": "📏",
+          "title": "一般过去时",
+          "text": "过去某个时间发生的事·跟现在没关系——I saw this movie last week（上周看的·现在怎样不管）：句子里一定有/暗示过去时间点"
+        },
+        {
+          "kind": "info",
+          "icon": "🔗",
+          "title": "现在完成时",
+          "text": "过去发生·对现在有影响或持续到现在——I have seen this movie（我看过了→所以现在不想再看）：强调\"现在的状态\""
+        },
+        {
+          "kind": "info",
+          "icon": "🎯",
+          "title": "一句话口诀",
+          "text": "过去时=\"报告过去的事\"；完成时=\"过去的事·现在的果\"——问自己：这句话关心的是\"当时\"还是\"现在\""
+        },
+        {
+          "kind": "highlight",
+          "text": "过去时回头看·完成时回头看但脚站在现在"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "标志词",
+      "subtitle": "秒判技巧",
+      "color": "green",
+      "emoji": "🚦",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "专属信号灯",
+          "items": [
+            {
+              "label": "过去时专属",
+              "value": "yesterday·last week/month/year·ago·in 2020·just now——这些词一出现·必用过去时（时间点已经封死在过去）"
+            },
+            {
+              "label": "完成时专属",
+              "value": "already·yet·just·ever·never·since·for·so far·recently——信号是\"到现在为止\"（时间没有封死）"
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "⚠️",
+          "title": "致命组合错误",
+          "text": "I have seen it yesterday ✗ —— yesterday 是过去时专属词·不能跟完成时混搭：要么 I saw it yesterday ✓·要么 I have seen it（去掉 yesterday）✓——考试最爱挖这个坑"
+        },
+        {
+          "kind": "info",
+          "icon": "📦",
+          "title": "since vs for",
+          "text": "since + 时间点（since 2020·since last week）；for + 时间段（for two years·for a long time）——I have lived here since 2020 / for four years——两个词搭配的\"点段之别\"年年考"
+        },
+        {
+          "kind": "highlight",
+          "text": "见 ago/last → 过去式；见 already/since → 完成时"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "错误",
+      "subtitle": "TOP 3",
+      "color": "amber",
+      "emoji": "🚫",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "高频错误清单",
+          "items": [
+            "❌ I have went there → ✓ I have gone there（完成时用过去分词 gone·不是过去式 went）",
+            "❌ He has finished it yesterday → ✓ He finished it yesterday（yesterday 锁死过去时）",
+            "❌ How long do you know him? → ✓ How long have you known him?（\"认识多久\"从过去持续到现在→完成时）"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "📝",
+          "title": "动词三表",
+          "text": "写对完成时的前提是过去分词不写错——规则动词 go/went/gone·see/saw/seen·do/did/done；不规则动词表每天背 5 个·两周搞定"
+        },
+        {
+          "kind": "highlight",
+          "text": "动词三形态（原形/过去式/过去分词）是时态的地基"
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "核心区别",
+        "body": "【过去时】过去的事·跟现在无关（报告过去）。\n【完成时】过去发生·影响现在（过去的果实）。\n【自问】关心\"当时\"还是\"现在\"？"
+      },
+      {
+        "title": "时间标志词",
+        "body": "【过去】yesterday·last…·ago·in 2020·just now。\n【完成】already·yet·just·ever·never·since·for·so far。\n【禁搭】完成时不可与 yesterday 等过去时间词共现。\n【since/for】点 vs 段。"
+      },
+      {
+        "title": "常见错误",
+        "body": "【分词】have gone 不是 have went。\n【搭配】yesterday→过去式。\n【持续】know/live 等持续动词用完成时问 how long。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "She ___ (lose) her key. She cannot open the door.",
+        "steps": [
+          "不能开门=影响现在",
+          "用完成时",
+          "She has lost her key",
+          "have/has + 过去分词"
+        ],
+        "tip": "影响判完成"
+      },
+      {
+        "q": "I ___ (visit) Beijing in 2019.",
+        "steps": [
+          "in 2019 = 过去时间点",
+          "用过去时",
+          "I visited Beijing",
+          "封死在过去"
+        ],
+        "tip": "时间点判过去"
+      }
+    ],
+    "mistakes": [
+      "把 yesterday 和完成时搭配（过去时间词锁死过去式）",
+      "完成时误用过去式替代过去分词（have went → have gone）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "I ___ this book already.",
+      "options": [
+        "read",
+        "readed",
+        "have read",
+        "will read"
+      ],
+      "answer": 2,
+      "explain": "already 是完成时信号"
+    },
+    {
+      "q": "They ___ to the park last Sunday.",
+      "options": [
+        "have gone",
+        "will go",
+        "go",
+        "went"
+      ],
+      "answer": 3,
+      "explain": "last Sunday 锁过去式"
+    },
+    {
+      "q": "He ___ here since 2020.",
+      "options": [
+        "has lived",
+        "lived",
+        "lives",
+        "living"
+      ],
+      "answer": 0,
+      "explain": "since+完成时"
+    },
+    {
+      "q": "I have known her ___ ten years.",
+      "options": [
+        "since",
+        "for",
+        "from",
+        "at"
+      ],
+      "answer": 1,
+      "explain": "for + 时间段"
+    },
+    {
+      "q": "下列哪句是正确的？",
+      "options": [
+        "I have seen it yesterday",
+        "I have saw it yesterday",
+        "I saw it yesterday",
+        "I seen it yesterday"
+      ],
+      "answer": 2,
+      "explain": "yesterday 排除完成时"
+    },
+    {
+      "q": "过去时回头看·完成时回头看但脚站在 ___",
+      "options": [
+        null,
+        "过去",
+        null,
+        "现在"
+      ],
+      "answer": 3,
+      "explain": "核心区别",
+      "type": "blank",
+      "blank": {
+        "answerText": "现在",
+        "bank": [
+          "现在",
+          "过去"
+        ]
+      }
+    }
+  ],
   "lab": {
     "params": [
       {
-        "name": "type",
-        "label": "从句类型",
+        "name": "ts",
+        "label": "时态站",
         "min": 1,
         "max": 3,
         "step": 1,
@@ -88,181 +321,111 @@
       }
     ]
   },
-  "teach": {
-    "sections": [
-      {
-        "title": "连接词三选一",
-        "body": "【陈述句→that（口语可省）】I know (that) she likes music.\n【一般疑问句→if/whether】I ask if he is happy.\n【特殊疑问句→保留疑问词】Tell me what you want.\n选词看从句原来是哪种句子。"
-      },
-      {
-        "title": "语序：永远陈述",
-        "body": "【宾语从句永远用陈述语序（主语+谓语）】\nWhere does he live?→I don't know where he lives.（不是where does he live）\n这是最容易扣分的地方！\n口诀：从句开头疑问词，后面主谓要陈述。"
-      },
-      {
-        "title": "时态呼应",
-        "body": "【主句现在时→从句按实际需要】I think he came yesterday.\n【主句过去时→从句用过去某种时态】I thought he had come.\n【客观真理永远现在时】He said the earth is round.\n口诀：主现从随便，主过从过去，真理永现在。"
-      }
-    ],
-    "examples": [
-      {
-        "q": "I don't know ___ he will come.",
-        "options": [
-          "if",
-          "that",
-          "what",
-          "where"
-        ],
-        "answer": 0,
-        "explain": "一般疑问句用if"
-      },
-      {
-        "q": "Can you tell me ___?",
-        "steps": [
-          "原句Where is the station？",
-          "改成陈述语序where the station is",
-          "Can you tell me where the station is？",
-          "不是where is the station"
-        ],
-        "tip": "陈述语序"
-      }
-    ],
-    "mistakes": [
-      "从句用了疑问语序（永远陈述）",
-      "客观真理用了过去时（永现在）"
-    ]
-  },
-  "exercises": [
-    {
-      "q": "I think ___ he is right.（填连接词）",
-      "options": [
-        "what",
-        "if",
-        "that",
-        "who"
-      ],
-      "answer": 2,
-      "explain": "陈述句用that"
-    },
-    {
-      "q": "I wonder ___ you can help me.",
-      "options": [
-        "who",
-        "that",
-        "what",
-        "if"
-      ],
-      "answer": 3,
-      "explain": "一般疑问用if"
-    },
-    {
-      "q": "Do you know ___ he lives?",
-      "options": [
-        "where",
-        "that",
-        "if",
-        "what"
-      ],
-      "answer": 0,
-      "explain": "疑问词where"
-    },
-    {
-      "q": "宾语从句的语序是？",
-      "options": [
-        "疑问语序",
-        "陈述语序",
-        "倒装",
-        "任意"
-      ],
-      "answer": 1,
-      "explain": "主谓不倒"
-    },
-    {
-      "q": "He said the earth ___ round.",
-      "options": [
-        "were",
-        "was",
-        "is",
-        "be"
-      ],
-      "answer": 2,
-      "explain": "真理永现在"
-    },
-    {
-      "q": "I thought you ___ finished it.",
-      "options": [
-        "having",
-        "have",
-        "has",
-        "had"
-      ],
-      "answer": 3,
-      "explain": "主过从过去"
-    }
-  ],
   "interact": {
     "views": [
       {
         "when": 1,
-        "title": "陈述句作从句",
+        "title": "核心",
+        "subtitle": "一句话分",
         "color": "blue",
+        "emoji": "🔑",
         "blocks": [
           {
             "kind": "info",
-            "icon": "💡",
-            "title": "连接词",
-            "text": "that（可省略）"
+            "icon": "📏",
+            "title": "一般过去时",
+            "text": "过去某个时间发生的事·跟现在没关系——I saw this movie last week（上周看的·现在怎样不管）：句子里一定有/暗示过去时间点"
           },
           {
             "kind": "info",
-            "icon": "💡",
-            "title": "例",
-            "text": "I think (that) you are right.；语序：陈述语序（主语+谓语）"
+            "icon": "🔗",
+            "title": "现在完成时",
+            "text": "过去发生·对现在有影响或持续到现在——I have seen this movie（我看过了→所以现在不想再看）：强调\"现在的状态\""
+          },
+          {
+            "kind": "info",
+            "icon": "🎯",
+            "title": "一句话口诀",
+            "text": "过去时=\"报告过去的事\"；完成时=\"过去的事·现在的果\"——问自己：这句话关心的是\"当时\"还是\"现在\""
+          },
+          {
+            "kind": "highlight",
+            "text": "过去时回头看·完成时回头看但脚站在现在"
           }
         ]
       },
       {
         "when": 2,
-        "title": "一般疑问句作从句",
-        "color": "blue",
+        "title": "标志词",
+        "subtitle": "秒判技巧",
+        "color": "green",
+        "emoji": "🚦",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "💡",
-            "title": "连接词",
-            "text": "if / whether（不可省）"
+            "kind": "compare",
+            "title": "专属信号灯",
+            "items": [
+              {
+                "label": "过去时专属",
+                "value": "yesterday·last week/month/year·ago·in 2020·just now——这些词一出现·必用过去时（时间点已经封死在过去）"
+              },
+              {
+                "label": "完成时专属",
+                "value": "already·yet·just·ever·never·since·for·so far·recently——信号是\"到现在为止\"（时间没有封死）"
+              }
+            ]
           },
           {
             "kind": "info",
-            "icon": "💡",
-            "title": "例",
-            "text": "I wonder if he will come.；疑问句要改成陈述语序"
+            "icon": "⚠️",
+            "title": "致命组合错误",
+            "text": "I have seen it yesterday ✗ —— yesterday 是过去时专属词·不能跟完成时混搭：要么 I saw it yesterday ✓·要么 I have seen it（去掉 yesterday）✓——考试最爱挖这个坑"
+          },
+          {
+            "kind": "info",
+            "icon": "📦",
+            "title": "since vs for",
+            "text": "since + 时间点（since 2020·since last week）；for + 时间段（for two years·for a long time）——I have lived here since 2020 / for four years——两个词搭配的\"点段之别\"年年考"
+          },
+          {
+            "kind": "highlight",
+            "text": "见 ago/last → 过去式；见 already/since → 完成时"
           }
         ]
       },
       {
         "when": 3,
-        "title": "特殊疑问句作从句",
-        "color": "blue",
+        "title": "错误",
+        "subtitle": "TOP 3",
+        "color": "amber",
+        "emoji": "🚫",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "💡",
-            "title": "连接词",
-            "text": "原来的疑问词（what/where/when/why/how）"
+            "kind": "steps",
+            "title": "高频错误清单",
+            "items": [
+              "❌ I have went there → ✓ I have gone there（完成时用过去分词 gone·不是过去式 went）",
+              "❌ He has finished it yesterday → ✓ He finished it yesterday（yesterday 锁死过去时）",
+              "❌ How long do you know him? → ✓ How long have you known him?（\"认识多久\"从过去持续到现在→完成时）"
+            ]
           },
           {
             "kind": "info",
-            "icon": "💡",
-            "title": "例",
-            "text": "I don't know where he lives.；保留疑问词+陈述语序"
+            "icon": "📝",
+            "title": "动词三表",
+            "text": "写对完成时的前提是过去分词不写错——规则动词 go/went/gone·see/saw/seen·do/did/done；不规则动词表每天背 5 个·两周搞定"
+          },
+          {
+            "kind": "highlight",
+            "text": "动词三形态（原形/过去式/过去分词）是时态的地基"
           }
         ]
       }
     ],
     "explore": [
-      "that 什么时候可以省？",
-      "if 和 whether 的区别？",
-      "时态怎么呼应？"
+      "saw 和 have seen 差在哪？",
+      "哪些词是\"过去专属\"？",
+      "为什么 I have seen it yesterday 是错的？"
     ]
   }
 }

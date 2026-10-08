@@ -1,7 +1,7 @@
 {
   "toolbox": [],
   "actor": {
-    "costume": "🛒",
+    "costume": "🔍",
     "x": 0,
     "y": 0
   },
@@ -9,7 +9,7 @@
   "tasks": [
     {
       "id": "e0",
-      "text": "探索：sc=1 店员怎么打招呼？",
+      "text": "探索：rd=2 为什么\"看懂了\"还会选错？",
       "check": {
         "type": "manual"
       },
@@ -20,7 +20,7 @@
     },
     {
       "id": "e1",
-      "text": "探索：sc=2 怎么问价格和试穿？",
+      "text": "探索：rd=3 题目和原文总是\"一模一样\"吗？",
       "check": {
         "type": "manual"
       },
@@ -31,13 +31,13 @@
     },
     {
       "id": "e2",
-      "text": "探索：sc=3 How much 和 How many 的区别？",
+      "text": "探索：四个选项怎样排除最快？",
       "check": {
         "type": "manual"
       },
       "hintPrompts": [
-        "动手验证：把参数拖到两个极端对比观察",
-        "把发现说给 AI 老师听，让它帮你变成结论"
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
       ]
     },
     {
@@ -52,35 +52,261 @@
     }
   ],
   "celebrate": "新知识到手！",
-  "id": "eng-37",
   "island": "cross",
-  "order": 523,
-  "title": "情景交际：购物",
-  "emoji": "🛒",
   "subjectArea": "英语",
   "gradeBand": "junior",
   "grade": 8,
-  "textbook": "人教版英语（初中）",
+  "area": "英语",
+  "band": "junior",
+  "id": "eng-37",
+  "order": 820,
+  "title": "阅读细节题：定位三板斧",
+  "emoji": "🔍",
+  "textbook": "人教PEP（八年级）",
   "curriculum": {
-    "module": "交际用语",
+    "module": "阅读理解",
     "points": [
-      "购物常用句",
-      "询问价格与尺寸",
-      "讨价还价"
+      "关键词定位",
+      "同义替换",
+      "排除法"
     ]
   },
-  "story": "Can I help you? Yes, I'm looking for a T-shirt.——学会购物英语，出国旅行不再比手画脚！从问价到试穿到付款，一条龙搞定。",
+  "story": "英语考试阅读占分最大·细节题又占阅读的大头——很多同学全文\"看懂了\"但选错了：因为细节题不考\"读懂\"·考\"找对\"。这一课学三把斧：关键词定位·同义替换识别·排除法——从此细节题稳拿。",
   "goals": [
-    "掌握购物常用句",
-    "会问价格尺寸",
-    "会用购物礼仪"
+    "掌握关键词定位法",
+    "识别同义替换",
+    "用好排除法"
   ],
-  "aiIntro": "🛒 切换购物环节，看英语怎么应对——英语购物模拟器！",
+  "aiIntro": "🔍 三把斧稳拿细节题！",
+  "param": {
+    "name": "rd",
+    "label": "阅读站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "为什么\"看懂了\"还会选错？",
+    "题目和原文总是\"一模一样\"吗？",
+    "四个选项怎样排除最快？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "定位",
+      "subtitle": "第一斧",
+      "color": "blue",
+      "emoji": "📍",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "关键词定位三步",
+          "items": [
+            "读题干划关键词：人名·地名·数字·年代·专有名词（最好找的词）",
+            "拿着关键词回原文扫读——找到原句用笔标出",
+            "读原句上下各一句（上下文定答案）——不要只看孤句"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "⚡",
+          "title": "顺序原则",
+          "text": "中考英语阅读的出题顺序通常跟原文段落一致——第 1 题答案在前面·第 2 题在后面：定位时可以\"接力\"找·不用每次从头扫"
+        },
+        {
+          "kind": "highlight",
+          "text": "细节题不是读懂做的——是找到做的"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "替换",
+      "subtitle": "第二斧",
+      "color": "green",
+      "emoji": "🔄",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "正确答案的\"变装\"",
+          "items": [
+            {
+              "label": "同义词替换",
+              "value": "原文 like → 选项 enjoy；原文 big → 选项 large——最高频的替换"
+            },
+            {
+              "label": "词性转换",
+              "value": "原文 success(n) → 选项 succeed(v)；原文 happy(adj) → 选项 happiness(n)"
+            },
+            {
+              "label": "句式转换",
+              "value": "原文主动句 → 选项被动句；原文长句 → 选项简化短语"
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "🎯",
+          "title": "为什么变装",
+          "text": "如果选项照抄原文·谁都能选对——出题人故意换说法来测试你\"真懂还是碰巧\"：所以**长得像原文的选项反而要警惕·换了说法但意思一致的往往是答案**"
+        },
+        {
+          "kind": "highlight",
+          "text": "正确答案爱\"变装\"——照抄原词的可能是陷阱"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "排除",
+      "subtitle": "第三斧",
+      "color": "amber",
+      "emoji": "✂️",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "排除三步",
+          "items": [
+            "砍\"没提到的\"：原文完全找不到影子的选项最先删",
+            "砍\"张冠李戴的\"：A 做的事按到 B 头上（人名·地名对不上）",
+            "砍\"过度推断的\"：原文说 like·选项说 love（程度拔高）——\"最接近原文\"的就是答案"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "⏱️",
+          "title": "时间分配",
+          "text": "细节题 40 秒内：15 秒定位·15 秒比对·10 秒确认——卡壳超 40 秒先标记跳过·做完再回：不要为一道题拖垮全篇节奏"
+        },
+        {
+          "kind": "highlight",
+          "text": "三斧齐下：定位→替换→排除——细节题变成\"找证据\""
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "关键词定位",
+        "body": "【三步】题干划词→原文扫描→上下文确认。\n【顺序】出题序≈原文段落序。\n【工具】人名地名数字年代最好找。"
+      },
+      {
+        "title": "同义替换",
+        "body": "【词】like→enjoy·big→large。\n【性】success→succeed。\n【句】主动→被动·长→短。\n【警惕】照抄原文可能是陷阱。"
+      },
+      {
+        "title": "排除法",
+        "body": "【三砍】没提到·张冠李戴·过度推断。\n【节奏】40秒/题·卡壳先跳。\n【原则】最接近原文=答案。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "题干问 What did Tom do last weekend?",
+        "steps": [
+          "划词：Tom·last weekend",
+          "回文找 Tom 出现的段落",
+          "锁定 last weekend 对应句",
+          "比对选项找同义替换"
+        ],
+        "tip": "定位优先"
+      },
+      {
+        "q": "选项与原文一模一样能直接选吗？",
+        "steps": [
+          "警惕照抄陷阱",
+          "核对主语·时间·对象是否完全匹配",
+          "换了个说法但意思一致更可能是答案",
+          "照抄但偷换一个词是最毒的陷阱"
+        ],
+        "tip": "变装原则"
+      }
+    ],
+    "mistakes": [
+      "全文通读再做细节题（定位法效率高三倍）",
+      "选照抄原文的选项（正确答案通常换了说法）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "细节题最有效的方法是？",
+      "options": [
+        "全文背诵",
+        "看题感",
+        "猜",
+        "关键词定位法"
+      ],
+      "answer": 3,
+      "explain": "找到胜于读懂"
+    },
+    {
+      "q": "英语阅读出题顺序通常？",
+      "options": [
+        "跟原文段落一致",
+        "随机",
+        "从后往前",
+        "按难度"
+      ],
+      "answer": 0,
+      "explain": "接力定位"
+    },
+    {
+      "q": "正确答案通常的特征是？",
+      "options": [
+        "照抄原文",
+        "换了说法但意思一致",
+        "最长",
+        "最短"
+      ],
+      "answer": 1,
+      "explain": "变装原则"
+    },
+    {
+      "q": "排除法应最先砍掉？",
+      "options": [
+        "最长的",
+        "最短的",
+        "原文完全没提到的",
+        "含数字的"
+      ],
+      "answer": 2,
+      "explain": "无据可依"
+    },
+    {
+      "q": "细节题的时间预算约？",
+      "options": [
+        "5 分钟",
+        "不限时",
+        "2 分钟",
+        "40 秒"
+      ],
+      "answer": 3,
+      "explain": "节奏控制"
+    },
+    {
+      "q": "细节题不是读懂做的——是 ___ 做的",
+      "options": [
+        "找到",
+        "猜到"
+      ],
+      "answer": 0,
+      "explain": "定位为王",
+      "type": "blank",
+      "blank": {
+        "answerText": "找到",
+        "bank": [
+          "找到",
+          "猜到"
+        ]
+      }
+    }
+  ],
   "lab": {
     "params": [
       {
-        "name": "sc",
-        "label": "场景",
+        "name": "rd",
+        "label": "阅读站",
         "min": 1,
         "max": 3,
         "step": 1,
@@ -88,186 +314,106 @@
       }
     ]
   },
-  "teach": {
-    "sections": [
-      {
-        "title": "购物三步",
-        "body": "【①进店：Can I help you? → I'm looking for...\n【②询问：How much is it? What size? Can I try it on?\n【③决定：I'll take it.（买）/ That's too expensive.（嫌贵）\n礼貌离店：Thanks anyway.（不买也说谢谢）"
-      },
-      {
-        "title": "问价",
-        "body": "【How much is + 单数？How much are + 复数？\nHow much is this hat? How much are these shoes?\n【What's the price of...? 也可以问价】\n回答：It's ten dollars. / They're fifty yuan.\n讨价还价：Can you make it cheaper? / That's a bit expensive."
-      },
-      {
-        "title": "尺寸与颜色",
-        "body": "【What size do you want? → Size M / Medium】\n【Do you have this in blue? → 问问有没有别的颜色】\n【It's too small/big. Do you have a bigger/smaller one?】\n试穿：Where is the fitting room?（试衣间在哪）\nThat fits well.（很合身）/ It doesn't fit.（不合身）"
-      }
-    ],
-    "examples": [
-      {
-        "q": "你想买一条裤子，店员问 Can I help you?",
-        "steps": [
-          "回答意图",
-          "I'm looking for a pair of pants",
-          "或 I want to buy pants",
-          "不要只说Yes"
-        ],
-        "tip": "说出你要什么"
-      },
-      {
-        "q": "试穿后太小了怎么说？",
-        "steps": [
-          "It's too small",
-          "Do you have a bigger one",
-          "或 This doesn't fit",
-          "礼貌请求换号"
-        ],
-        "tip": "too+形容词"
-      }
-    ],
-    "mistakes": [
-      "How much is these shoes（复数用are）",
-      "不买时不打招呼就走（说Thanks anyway）"
-    ]
-  },
-  "exercises": [
-    {
-      "q": "How much ___ this shirt?",
-      "options": [
-        "does",
-        "are",
-        "do",
-        "is"
-      ],
-      "answer": 3,
-      "explain": "单数用is"
-    },
-    {
-      "q": "How much ___ these shoes?",
-      "options": [
-        "are",
-        "is",
-        "do",
-        "does"
-      ],
-      "answer": 0,
-      "explain": "复数用are"
-    },
-    {
-      "q": "Can I ___ it on?",
-      "options": [
-        "trying",
-        "try",
-        "tried",
-        "tries"
-      ],
-      "answer": 1,
-      "explain": "try on"
-    },
-    {
-      "q": "决定买了说？",
-      "options": [
-        "I'll see",
-        "I'll go",
-        "I'll take it",
-        "I'll try"
-      ],
-      "answer": 2,
-      "explain": "买了"
-    },
-    {
-      "q": "不买东西离开时说？",
-      "options": [
-        "Bye",
-        "Nothing",
-        "Go away",
-        "Thanks anyway"
-      ],
-      "answer": 3,
-      "explain": "礼貌拒绝"
-    },
-    {
-      "q": "想要大一号说？",
-      "options": [
-        "a bigger one",
-        "a big one",
-        "more big",
-        "biggest"
-      ],
-      "answer": 0,
-      "explain": "比较级"
-    }
-  ],
   "interact": {
     "views": [
       {
         "when": 1,
-        "title": "进店问候",
-        "color": "green",
+        "title": "定位",
+        "subtitle": "第一斧",
+        "color": "blue",
+        "emoji": "📍",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "Can I help you? / What can I do for you?"
+            "kind": "steps",
+            "title": "关键词定位三步",
+            "items": [
+              "读题干划关键词：人名·地名·数字·年代·专有名词（最好找的词）",
+              "拿着关键词回原文扫读——找到原句用笔标出",
+              "读原句上下各一句（上下文定答案）——不要只看孤句"
+            ]
           },
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "I'm looking for a T-shirt. / I want to buy a skirt."
+            "icon": "⚡",
+            "title": "顺序原则",
+            "text": "中考英语阅读的出题顺序通常跟原文段落一致——第 1 题答案在前面·第 2 题在后面：定位时可以\"接力\"找·不用每次从头扫"
           },
           {
             "kind": "highlight",
-            "text": "要领：店员问+你回答=对话开始"
+            "text": "细节题不是读懂做的——是找到做的"
           }
         ]
       },
       {
         "when": 2,
-        "title": "询问与试穿",
+        "title": "替换",
+        "subtitle": "第二斧",
         "color": "green",
+        "emoji": "🔄",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "How much is it? / What size do you have?"
+            "kind": "compare",
+            "title": "正确答案的\"变装\"",
+            "items": [
+              {
+                "label": "同义词替换",
+                "value": "原文 like → 选项 enjoy；原文 big → 选项 large——最高频的替换"
+              },
+              {
+                "label": "词性转换",
+                "value": "原文 success(n) → 选项 succeed(v)；原文 happy(adj) → 选项 happiness(n)"
+              },
+              {
+                "label": "句式转换",
+                "value": "原文主动句 → 选项被动句；原文长句 → 选项简化短语"
+              }
+            ]
           },
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "Can I try it on? / Do you have a bigger one?"
+            "icon": "🎯",
+            "title": "为什么变装",
+            "text": "如果选项照抄原文·谁都能选对——出题人故意换说法来测试你\"真懂还是碰巧\"：所以**长得像原文的选项反而要警惕·换了说法但意思一致的往往是答案**"
           },
           {
             "kind": "highlight",
-            "text": "要领：How much is/are + 单/复数"
+            "text": "正确答案爱\"变装\"——照抄原词的可能是陷阱"
           }
         ]
       },
       {
         "when": 3,
-        "title": "付款与礼貌",
-        "color": "green",
+        "title": "排除",
+        "subtitle": "第三斧",
+        "color": "amber",
+        "emoji": "✂️",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "I'll take it. / That's too expensive."
+            "kind": "steps",
+            "title": "排除三步",
+            "items": [
+              "砍\"没提到的\"：原文完全找不到影子的选项最先删",
+              "砍\"张冠李戴的\"：A 做的事按到 B 头上（人名·地名对不上）",
+              "砍\"过度推断的\"：原文说 like·选项说 love（程度拔高）——\"最接近原文\"的就是答案"
+            ]
           },
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "Here you are. / Thank you!"
+            "icon": "⏱️",
+            "title": "时间分配",
+            "text": "细节题 40 秒内：15 秒定位·15 秒比对·10 秒确认——卡壳超 40 秒先标记跳过·做完再回：不要为一道题拖垮全篇节奏"
           },
           {
             "kind": "highlight",
-            "text": "要领：即使不买也要说 Thanks anyway"
+            "text": "三斧齐下：定位→替换→排除——细节题变成\"找证据\""
           }
         ]
       }
     ],
     "explore": [
-      "店员怎么打招呼？",
-      "怎么问价格和试穿？",
-      "How much 和 How many 的区别？"
+      "为什么\"看懂了\"还会选错？",
+      "题目和原文总是\"一模一样\"吗？",
+      "四个选项怎样排除最快？"
     ]
   }
 }
