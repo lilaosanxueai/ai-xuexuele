@@ -1,0 +1,23 @@
+const fs = require('fs');
+const path = require('path');
+const d = path.join('C:', 'Users', '10166', '.agents', 'skills', 'creative-island', 'content', 'lessons');
+const fix = (f, qi, opts) => {
+  const p = path.join(d, f.replace('.json','') + '.json');
+  const l = JSON.parse(fs.readFileSync(p, 'utf8'));
+  l.exercises[qi].options = opts;
+  fs.writeFileSync(p, JSON.stringify(l, null, 2) + '\n', 'utf8');
+  console.log('fixed', f, 'Q' + (qi + 1));
+};
+fix('chn-40', 1, ['阅读速度快慢', '加工和思考的深度', '字体大小不同', '书的厚度']);
+fix('chn-40', 2, ['睡觉', '先浏览全书画好地图', '加速', '停下来不读了']);
+fix('eco-42', 0, ['看包装好不好看', '每克每毫升每个的价格', '看品牌大小', '看颜色']);
+fix('eco-42', 2, ['太便宜了不好', '原价可能虚标从没卖过', '没有任何问题', '一定是假货']);
+fix('psy-47', 1, ['好看的动作', '延长呼气激活副交感神经', '表演给别人看', '让肺变大']);
+fix('psy-47', 2, ['越多越好', '最多三个要点', '只说一个', '不用举例子']);
+fix('psy-47', 3, ['道歉然后下台', '微笑说让我想想', '开始瞎编', '直接跑走']);
+fix('psy-48', 0, ['完全一样的', '表面要求与深层需求', '对立的', '不需要区分']);
+fix('psy-48', 3, ['吵架就行', '先连接再谈把人和问题分开', '不理对方', '直接认输']);
+fix('psy-49', 2, ['永远绝交', '主动说我们和好吧', '告老师', '永远冷战']);
+fix('psy-49', 3, ['说明你很不好', '可能只是口味或时机不同', '你该消失', '世界末日']);
+fix('psy-50', 1, ['整天都在担忧', '设十五分钟专门担忧', '完全不许担忧', '吃药解决']);
+console.log('all done');
