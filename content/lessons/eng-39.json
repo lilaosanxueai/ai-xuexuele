@@ -1,7 +1,7 @@
 {
   "toolbox": [],
   "actor": {
-    "costume": "📦",
+    "costume": "📧",
     "x": 0,
     "y": 0
   },
@@ -9,7 +9,7 @@
   "tasks": [
     {
       "id": "e0",
-      "text": "探索：scene=1 和 scene=2 的 be 动词为什么不同？",
+      "text": "探索：em=2 英语邮件的固定格式是什么？",
       "check": {
         "type": "manual"
       },
@@ -20,7 +20,7 @@
     },
     {
       "id": "e1",
-      "text": "探索：scene=3 不可数名词用哪个？",
+      "text": "探索：em=3 怎样开头和结尾最礼貌？",
       "check": {
         "type": "manual"
       },
@@ -31,13 +31,13 @@
     },
     {
       "id": "e2",
-      "text": "探索：There be 和 have 的区别是什么？",
+      "text": "探索：中式英语最常犯的错？",
       "check": {
         "type": "manual"
       },
       "hintPrompts": [
-        "动手验证：把参数拖到两个极端对比观察",
-        "把发现说给 AI 老师听，让它帮你变成结论"
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
       ]
     },
     {
@@ -52,35 +52,273 @@
     }
   ],
   "celebrate": "新知识到手！",
-  "id": "eng-39",
   "island": "cross",
-  "order": 539,
-  "title": "There be 句型：某处有某物",
-  "emoji": "📦",
   "subjectArea": "英语",
-  "gradeBand": "primary",
-  "grade": 5,
-  "textbook": "人教PEP英语五年级上册",
+  "gradeBand": "junior",
+  "grade": 8,
+  "area": "英语",
+  "band": "junior",
+  "id": "eng-39",
+  "order": 873,
+  "title": "英语邮件：怎样写得清楚又礼貌",
+  "emoji": "📧",
+  "textbook": "人教PEP（八年级）",
   "curriculum": {
-    "module": "There be 句型",
+    "module": "实用写作",
     "points": [
-      "There is/are 的选择",
-      "就近原则",
-      "some 与 any"
+      "邮件结构",
+      "礼貌用语",
+      "常见错误"
     ]
   },
-  "story": "There is a book on the desk.——「桌上有本书」就这么说！There be 是英语里的「有」字句：某处存在某物用它，某人拥有用 have。is 还是 are？看后面的名词是单数还是复数！",
+  "story": "给外国笔友写邮件·给国外学校写申请——英语邮件不是\"把中文翻译过去\"就行：它有自己的格式和礼貌规则。一封写好的邮件让人印象深刻·一封写差的邮件可能直接被忽略。这一课学会写一封\"Professional\"的邮件。",
   "goals": [
-    "会选 is 或 are",
-    "理解就近原则",
-    "会用 some 和 any"
+    "掌握英语邮件结构",
+    "学会礼貌用语",
+    "避免中式英语"
   ],
-  "aiIntro": "📦 切换场景，看 is/are 怎么选——There be 演示台！",
+  "aiIntro": "📧 写一封让人印象深刻的英语邮件！",
+  "param": {
+    "name": "em",
+    "label": "邮件站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "英语邮件的固定格式是什么？",
+    "怎样开头和结尾最礼貌？",
+    "中式英语最常犯的错？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "结构",
+      "subtitle": "四段式",
+      "color": "blue",
+      "emoji": "📐",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "邮件四件套",
+          "items": [
+            "Subject 主题：简短说明来意——\"Question about Homework\" 不是\"Help!!!\"",
+            "Greeting 称呼：Dear Mr. Smith, / Hi Amy,（正式/非正式）",
+            "Body 正文：第一段说明来意·中间段展开·最后段说明希望对方做什么",
+            "Closing 结尾：Thank you. / Best wishes, / Best regards, + 签名"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "📏",
+          "title": "正文三句起步",
+          "text": "第一句为什么写（I am writing to ask about...）·中间具体内容·最后说期望（I would appreciate your reply）——不需要长·清楚就行"
+        },
+        {
+          "kind": "highlight",
+          "text": "Subject+Greeting+Body+Closing=邮件的骨架"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "礼貌",
+      "subtitle": "正式vs非正式",
+      "color": "green",
+      "emoji": "🎩",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "两种语气",
+          "items": [
+            {
+              "label": "正式（老师·机构）",
+              "value": "Dear Professor Brown, / I would like to inquire about... / I look forward to hearing from you. / Best regards,"
+            },
+            {
+              "label": "非正式（朋友）",
+              "value": "Hi Tom! / Just wanted to ask... / See you soon! / Cheers,"
+            },
+            {
+              "label": "选哪种",
+              "value": "看你写给谁——正式场合用正式·朋友用非正式：搞不清楚时宁正式勿随意"
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "🤝",
+          "title": "礼貌三宝",
+          "text": "①Please 和 Thank you 永远不嫌多；②用请求语气（Could you...? / Would you mind...?）而不是命令（Send me...）；③道歉及时（I am sorry for the late reply）——三样到位·好感翻倍"
+        },
+        {
+          "kind": "highlight",
+          "text": "礼貌不是客气话堆砌——是让对方感到被尊重"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "避坑",
+      "subtitle": "中式英语",
+      "color": "rose",
+      "emoji": "🚫",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "中式 vs 地道",
+          "items": [
+            {
+              "label": "开头",
+              "value": "中式：I am a student. I want to ask you a question. / 地道：I am writing to ask about..."
+            },
+            {
+              "label": "请求",
+              "value": "中式：Please answer me quickly. / 地道：I would appreciate your prompt reply."
+            },
+            {
+              "label": "结尾",
+              "value": "中式：I have no more words. / 地道：Thank you for your time. I look forward to hearing from you."
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "💡",
+          "title": "万能模板",
+          "text": "主题：Question About [具体事]\\n Dear [称呼],\\n I am writing to [说明来意].\\n [具体内容1-2句]\\n Could you please [希望对方做什么]?\\n Thank you for your time.\\n Best regards,\\n [你的名字]——照填就能用"
+        },
+        {
+          "kind": "highlight",
+          "text": "I am writing to... + Could you please... + Thank you = 万能邮件公式"
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "邮件结构",
+        "body": "【四件套】Subject+Greeting+Body+Closing。\n【正文】来意+内容+期望。"
+      },
+      {
+        "title": "礼貌用语",
+        "body": "【正式】Dear...+I would like to+Best regards。\n【非正式】Hi...+Just wanted to+Cheers。\n【三宝】Please·请求语气·及时道歉。"
+      },
+      {
+        "title": "中式英语",
+        "body": "【避免】直译中文句式。\n【用地道】I am writing to... / Could you please...\n【万能】模板照填就能用。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "给外教写邮件问作业",
+        "steps": [
+          "Subject: Question About Homework",
+          "Dear Ms. Smith,",
+          "I am writing to ask about...",
+          "Could you please clarify...?",
+          "Thank you. Best regards,"
+        ],
+        "tip": "正式模板"
+      },
+      {
+        "q": "给外国笔友回邮件",
+        "steps": [
+          "Hi Amy!",
+          "Thanks for your email!",
+          "回答她的问题+分享你的",
+          "See you soon! Cheers,"
+        ],
+        "tip": "非正式"
+      }
+    ],
+    "mistakes": [
+      "把中文逐字翻译成英语（用英语的惯用表达）",
+      "正式场合用太随意的语气（宁正式勿随意）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "邮件主题行的最佳写法？",
+      "options": [
+        "救命!!!",
+        "写清来意如问作业的事",
+        "很长很长的句子",
+        "什么都不写"
+      ],
+      "answer": 1,
+      "explain": "让人一眼知道来意"
+    },
+    {
+      "q": "给老师的邮件称呼用？",
+      "options": [
+        "喂!",
+        "尊敬的某老师加姓氏",
+        "随便叫名字",
+        "不写称呼就好"
+      ],
+      "answer": 2,
+      "explain": "正式称呼"
+    },
+    {
+      "q": "请求对方做某事最礼貌的是？",
+      "options": [
+        "Do it now",
+        "Hurry up",
+        "You must",
+        "Could you please...?"
+      ],
+      "answer": 3,
+      "explain": "请求语气"
+    },
+    {
+      "q": "\"中式英语\"指的是？",
+      "options": [
+        "直接把中文逐字翻",
+        "用了英语的地道表达方式",
+        "发音不够标准",
+        "写得太短太少了"
+      ],
+      "answer": 0,
+      "explain": "句式直译"
+    },
+    {
+      "q": "邮件万能公式的第一步是？",
+      "options": [
+        "你好!!!",
+        "我写这封信是想说",
+        "快帮帮我啊",
+        "谢谢再见吧"
+      ],
+      "answer": 1,
+      "explain": "开头说明来意"
+    },
+    {
+      "q": "I am writing to... + Could you please... + Thank you = 万能邮件 ___",
+      "options": [
+        null,
+        "灾难",
+        "公式"
+      ],
+      "answer": 2,
+      "explain": "照填就能用",
+      "type": "blank",
+      "blank": {
+        "answerText": "公式",
+        "bank": [
+          "公式",
+          "灾难"
+        ]
+      }
+    }
+  ],
   "lab": {
     "params": [
       {
-        "name": "scene",
-        "label": "场景",
+        "name": "em",
+        "label": "邮件站",
         "min": 1,
         "max": 3,
         "step": 1,
@@ -88,186 +326,116 @@
       }
     ]
   },
-  "teach": {
-    "sections": [
-      {
-        "title": "基本结构",
-        "body": "【There be + 某物 + 某处 = 某处有某物】\nThere is a cat under the tree.（树上有只猫）\nThere are some apples on the table.\nbe 动词看后面的名词：单数/不可数→is·复数→are。"
-      },
-      {
-        "title": "就近原则",
-        "body": "【多个名词并列时，be 与最近的名词一致】\nThere is a pen and two books on the desk.（最近的是 a pen → is）\nThere are two books and a pen on the desk.（最近的是 two books → are）\n口诀：be 看邻居，就近不商量。"
-      },
-      {
-        "title": "some/any 与否定疑问",
-        "body": "【肯定句用 some】There are some ducks on the lake.\n【否定/疑问句用 any】There are not any ducks. / Are there any ducks?\n【一般疑问回答】Yes, there is. / No, there are not.\nThere be 表存在；I have 表拥有——两码事。"
-      }
-    ],
-    "examples": [
-      {
-        "q": "翻译：书包里有两支铅笔。",
-        "steps": [
-          "两支铅笔复数→are",
-          "There are + 数量 + 复数",
-          "There are two pencils in the bag",
-          "地点用 in"
-        ],
-        "tip": "复数用are"
-      },
-      {
-        "q": "There ___ a dog and two cats here. 填？",
-        "steps": [
-          "并列名词看最近的",
-          "最近的是 a dog 单数",
-          "填 is",
-          "就近原则"
-        ],
-        "tip": "be看邻居"
-      }
-    ],
-    "mistakes": [
-      "见 There 就用 is（复数要用 are）",
-      "疑问句还用 some（应用 any）"
-    ]
-  },
-  "exercises": [
-    {
-      "q": "There ___ a book on the desk. 填？",
-      "options": [
-        "are",
-        "is",
-        "am",
-        "be"
-      ],
-      "answer": 1,
-      "explain": "单数用is"
-    },
-    {
-      "q": "There ___ some birds in the sky. 填？",
-      "options": [
-        "am",
-        "is",
-        "are",
-        "be"
-      ],
-      "answer": 2,
-      "explain": "复数用are"
-    },
-    {
-      "q": "There is some ___ in the glass.",
-      "options": [
-        "pens",
-        "eggs",
-        "apples",
-        "water"
-      ],
-      "answer": 3,
-      "explain": "不可数名词"
-    },
-    {
-      "q": "Are there ___ flowers? 填？",
-      "options": [
-        "any",
-        "some",
-        "a",
-        "much"
-      ],
-      "answer": 0,
-      "explain": "疑问用any"
-    },
-    {
-      "q": "There ___ a cat and two dogs. 填？",
-      "options": [
-        "are",
-        "is",
-        "am",
-        "were"
-      ],
-      "answer": 1,
-      "explain": "就近原则"
-    },
-    {
-      "q": "表达「桌上有本书」用？",
-      "options": [
-        "He has",
-        "I have",
-        "There is",
-        "It is"
-      ],
-      "answer": 2,
-      "explain": "存在用There be"
-    }
-  ],
   "interact": {
     "views": [
       {
         "when": 1,
-        "title": "单数名词用 There is",
-        "color": "green",
+        "title": "结构",
+        "subtitle": "四段式",
+        "color": "blue",
+        "emoji": "📐",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "There is a book on the desk."
+            "kind": "steps",
+            "title": "邮件四件套",
+            "items": [
+              "Subject 主题：简短说明来意——\"Question about Homework\" 不是\"Help!!!\"",
+              "Greeting 称呼：Dear Mr. Smith, / Hi Amy,（正式/非正式）",
+              "Body 正文：第一段说明来意·中间段展开·最后段说明希望对方做什么",
+              "Closing 结尾：Thank you. / Best wishes, / Best regards, + 签名"
+            ]
           },
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "a/an + 单数名词，动词用 is"
+            "icon": "📏",
+            "title": "正文三句起步",
+            "text": "第一句为什么写（I am writing to ask about...）·中间具体内容·最后说期望（I would appreciate your reply）——不需要长·清楚就行"
           },
           {
             "kind": "highlight",
-            "text": "There be 表存在 · have 表拥有"
+            "text": "Subject+Greeting+Body+Closing=邮件的骨架"
           }
         ]
       },
       {
         "when": 2,
-        "title": "复数名词用 There are",
+        "title": "礼貌",
+        "subtitle": "正式vs非正式",
         "color": "green",
+        "emoji": "🎩",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "There are two birds in the tree."
+            "kind": "compare",
+            "title": "两种语气",
+            "items": [
+              {
+                "label": "正式（老师·机构）",
+                "value": "Dear Professor Brown, / I would like to inquire about... / I look forward to hearing from you. / Best regards,"
+              },
+              {
+                "label": "非正式（朋友）",
+                "value": "Hi Tom! / Just wanted to ask... / See you soon! / Cheers,"
+              },
+              {
+                "label": "选哪种",
+                "value": "看你写给谁——正式场合用正式·朋友用非正式：搞不清楚时宁正式勿随意"
+              }
+            ]
           },
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "two/some + 复数名词，动词用 are"
+            "icon": "🤝",
+            "title": "礼貌三宝",
+            "text": "①Please 和 Thank you 永远不嫌多；②用请求语气（Could you...? / Would you mind...?）而不是命令（Send me...）；③道歉及时（I am sorry for the late reply）——三样到位·好感翻倍"
           },
           {
             "kind": "highlight",
-            "text": "There be 表存在 · have 表拥有"
+            "text": "礼貌不是客气话堆砌——是让对方感到被尊重"
           }
         ]
       },
       {
         "when": 3,
-        "title": "不可数名词也用 There is",
-        "color": "green",
+        "title": "避坑",
+        "subtitle": "中式英语",
+        "color": "rose",
+        "emoji": "🚫",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "There is some water in the glass."
+            "kind": "compare",
+            "title": "中式 vs 地道",
+            "items": [
+              {
+                "label": "开头",
+                "value": "中式：I am a student. I want to ask you a question. / 地道：I am writing to ask about..."
+              },
+              {
+                "label": "请求",
+                "value": "中式：Please answer me quickly. / 地道：I would appreciate your prompt reply."
+              },
+              {
+                "label": "结尾",
+                "value": "中式：I have no more words. / 地道：Thank you for your time. I look forward to hearing from you."
+              }
+            ]
           },
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "water/milk/bread 不可数，动词用 is"
+            "icon": "💡",
+            "title": "万能模板",
+            "text": "主题：Question About [具体事]\\n Dear [称呼],\\n I am writing to [说明来意].\\n [具体内容1-2句]\\n Could you please [希望对方做什么]?\\n Thank you for your time.\\n Best regards,\\n [你的名字]——照填就能用"
           },
           {
             "kind": "highlight",
-            "text": "There be 表存在 · have 表拥有"
+            "text": "I am writing to... + Could you please... + Thank you = 万能邮件公式"
           }
         ]
       }
     ],
     "explore": [
-      "和 scene=2 的 be 动词为什么不同？",
-      "不可数名词用哪个？",
-      "There be 和 have 的区别是什么？"
+      "英语邮件的固定格式是什么？",
+      "怎样开头和结尾最礼貌？",
+      "中式英语最常犯的错？"
     ]
   }
 }

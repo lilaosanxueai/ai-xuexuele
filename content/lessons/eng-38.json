@@ -1,7 +1,7 @@
 {
   "toolbox": [],
   "actor": {
-    "costume": "📊",
+    "costume": "🍔",
     "x": 0,
     "y": 0
   },
@@ -9,7 +9,7 @@
   "tasks": [
     {
       "id": "e0",
-      "text": "探索：adj=2 big 为什么要双写 g？",
+      "text": "探索：de=2 怎样用英语点一份汉堡？",
       "check": {
         "type": "manual"
       },
@@ -20,7 +20,7 @@
     },
     {
       "id": "e1",
-      "text": "探索：adj=3 heavy 的 y 怎么变？",
+      "text": "探索：de=3 怎样问\"多少钱\"？",
       "check": {
         "type": "manual"
       },
@@ -31,13 +31,13 @@
     },
     {
       "id": "e2",
-      "text": "探索：adj=4 为什么不合规则？",
+      "text": "探索：迷路了怎样用英语问路？",
       "check": {
         "type": "manual"
       },
       "hintPrompts": [
-        "动手验证：把参数拖到两个极端对比观察",
-        "把发现说给 AI 老师听，让它帮你变成结论"
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
       ]
     },
     {
@@ -52,250 +52,382 @@
     }
   ],
   "celebrate": "新知识到手！",
-  "id": "eng-38",
   "island": "cross",
-  "order": 538,
-  "title": "比较级与最高级：谁更谁最",
-  "emoji": "📊",
   "subjectArea": "英语",
-  "gradeBand": "primary",
-  "grade": 6,
-  "textbook": "人教PEP英语六年级上册",
+  "gradeBand": "junior",
+  "grade": 7,
+  "area": "英语",
+  "band": "junior",
+  "id": "eng-38",
+  "order": 872,
+  "title": "Daily English: 点餐·购物·问路",
+  "emoji": "🍔",
+  "textbook": "人教PEP（七年级）",
   "curriculum": {
-    "module": "形容词比较等级",
+    "module": "实用英语",
     "points": [
-      "比较级构成规则",
-      "最高级构成规则",
-      "than 与 the"
+      "点餐用语",
+      "购物砍价",
+      "问路指路"
     ]
   },
-  "story": "tall → taller → tallest：比较级比两人，最高级比一群！形容词变身有三条规则，还有 good→better→best 这样的捣蛋鬼——掌握规律，一句 Who is taller? 走天下。",
+  "story": "想象你在国外旅行：饿了要点餐·想买纪念品·迷路要问路——课本上的\"Is this a pen?\"帮不了你。这一课教三个最实用的日常场景——学完就能开口用。",
   "goals": [
-    "会构成比较级最高级",
-    "会用 than 句型",
-    "记住常见不规则变化"
+    "掌握点餐基本用语",
+    "掌握购物问价用语",
+    "掌握问路指路用语"
   ],
-  "aiIntro": "📊 切换形容词，看它怎么三段变身——比较级变化台！",
+  "aiIntro": "🍔 出国也不怕——实用场景英语！",
+  "param": {
+    "name": "de",
+    "label": "场景站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "怎样用英语点一份汉堡？",
+    "怎样问\"多少钱\"？",
+    "迷路了怎样用英语问路？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "点餐",
+      "subtitle": "Restaurant",
+      "color": "amber",
+      "emoji": "🍽️",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "点餐四句",
+          "items": [
+            "Could I have a cheeseburger and fries, please?（请给我一个芝士汉堡和薯条）——加 please 是礼貌",
+            "For here or to go?（在这儿吃还是带走？）——店员会问你",
+            "For here, please. / To go, please.",
+            "Anything else? No, thanks. That is all.（还要别的吗？不了谢谢）——收尾"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "💧",
+          "title": "加一句",
+          "text": "Could I get some water, please?（可以给我一些水吗？）——免费的水在大部分餐厅可以要：渴了别忍着"
+        },
+        {
+          "kind": "highlight",
+          "text": "Could I have... please? = 万能点餐句"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "购物",
+      "subtitle": "Shopping",
+      "color": "green",
+      "emoji": "🛍️",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "购物三句",
+          "items": [
+            {
+              "label": "问价",
+              "value": "How much is this? / How much are these?（这个/这些多少钱？）——最简单最万能"
+            },
+            {
+              "label": "试穿",
+              "value": "Can I try this on?（我可以试试吗？）——买衣服必问"
+            },
+            {
+              "label": "决定",
+              "value": "I will take it.（我要买它）/ I am just looking.（我只是看看）——买或不买都礼貌"
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "💰",
+          "title": "付钱",
+          "text": "Do you take credit cards?（可以刷卡吗？）/ Cash, please.（现金）——国外的支付方式跟国内不同·提前问清楚"
+        },
+        {
+          "kind": "highlight",
+          "text": "How much + I will take it = 购物闭环"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "问路",
+      "subtitle": "Directions",
+      "color": "blue",
+      "emoji": "🗺️",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "问路三句",
+          "items": [
+            "Excuse me, how can I get to the train station?（打扰一下·怎样到火车站？）——Excuse me 开头是礼貌",
+            "Is it far from here?（离这里远吗？）/ How long does it take to walk?（走路要多久？）",
+            "Thank you so much! / Thanks for your help!（非常感谢）——问完一定说谢谢"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "↩️",
+          "title": "听懂回答",
+          "text": "Go straight.（直走）/ Turn left.（左转）/ Turn right.（右转）/ It is next to the bank.（在银行旁边）——四个方向词+两个方位词就能听懂大部分指路"
+        },
+        {
+          "kind": "info",
+          "icon": "📱",
+          "title": "兜底策略",
+          "text": "Could you show me on the map?（能在地图上指给我看吗？）——听不懂没关系·打开手机地图让对方指：万无一失"
+        },
+        {
+          "kind": "highlight",
+          "text": "Excuse me + How can I get to... + Thank you = 问路三件套"
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "点餐用语",
+        "body": "【万能】Could I have... please?\n【问答】For here or to go?\n【结尾】That is all. Thanks."
+      },
+      {
+        "title": "购物用语",
+        "body": "【问价】How much is/are...?\n【试穿】Can I try it on?\n【决定】I will take it. / Just looking."
+      },
+      {
+        "title": "问路用语",
+        "body": "【开头】Excuse me...\n【核心】How can I get to...?\n【听懂】straight/left/right/next to。\n【兜底】Show me on the map."
+      }
+    ],
+    "examples": [
+      {
+        "q": "在麦当劳想点一个汉堡和可乐",
+        "steps": [
+          "Could I have a burger and a Coke, please?",
+          "For here or to go?",
+          "For here, please.",
+          "Thanks!"
+        ],
+        "tip": "万能句式"
+      },
+      {
+        "q": "在国外迷路了找不到酒店",
+        "steps": [
+          "Excuse me, how can I get to the hotel?",
+          "Is it far?",
+          "听不懂→Could you show me on the map?",
+          "Thank you so much!"
+        ],
+        "tip": "问路三件套"
+      }
+    ],
+    "mistakes": [
+      "直接说\"Give me...\"（不礼貌——用 Could I have... please?）",
+      "问完路不说谢谢（Thank you 是必须的）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "点餐最礼貌的说法是？",
+      "options": [
+        "Could I have a burger, please?",
+        "Give me a burger",
+        "Burger!",
+        "I want want want"
+      ],
+      "answer": 0,
+      "explain": "Could+please"
+    },
+    {
+      "q": "\"For here or to go?\"的意思是？",
+      "options": [
+        "你好吗",
+        "在这儿吃还是带走",
+        "多少钱",
+        "你是谁"
+      ],
+      "answer": 1,
+      "explain": "点餐高频问句"
+    },
+    {
+      "q": "问价钱应该用？",
+      "options": [
+        "What is this?",
+        "Where is it?",
+        "How much is it?",
+        "Who are you?"
+      ],
+      "answer": 2,
+      "explain": "万能问价"
+    },
+    {
+      "q": "问路时开头应该先说？",
+      "options": [
+        "Hey!",
+        "Stop!",
+        "Look!",
+        "Excuse me"
+      ],
+      "answer": 3,
+      "explain": "礼貌开头"
+    },
+    {
+      "q": "听不懂对方指路怎么办？",
+      "options": [
+        "地图上指给我看",
+        "你能不能在地图上面指一指",
+        "给我看看你的手机",
+        "直接跑掉算了"
+      ],
+      "answer": 0,
+      "explain": "地图兜底"
+    },
+    {
+      "q": "Excuse me + How can I get to... + Thank you = 问路 ___",
+      "options": [
+        "三座山",
+        "三件套"
+      ],
+      "answer": 1,
+      "explain": "完整流程",
+      "type": "blank",
+      "blank": {
+        "answerText": "三件套",
+        "bank": [
+          "三件套",
+          "三座山"
+        ]
+      }
+    }
+  ],
   "lab": {
     "params": [
       {
-        "name": "adj",
-        "label": "形容词",
+        "name": "de",
+        "label": "场景站",
         "min": 1,
-        "max": 4,
+        "max": 3,
         "step": 1,
         "value": 1
       }
     ]
   },
-  "teach": {
-    "sections": [
-      {
-        "title": "三条变身规则",
-        "body": "【规则一：一般直接加 -er / -est】tall→taller→tallest\n【规则二：重读闭音节双写末尾辅音】big→bigger→biggest·hot→hotter\n【规则三：辅音字母+y 变 i 再加】heavy→heavier→heaviest·easy→easier\n先看词尾，再选规则。"
-      },
-      {
-        "title": "句型",
-        "body": "【比较级：A … + er + than + B】Tom is taller than Mike.\n【最高级：the + …est + of/in 范围】He is the tallest in our class.\n比较的两者用 than 连接；最高级要说范围（in the class / of all）。\n问身高：Who is taller, Tom or Mike?"
-      },
-      {
-        "title": "不规则捣蛋鬼",
-        "body": "【必背四个】good/well→better→best\nbad→worse→worst　many/much→more→most\nlittle→less→least　far→farther→farthest\n口诀：好坏多少远，通通不规则。\n多音节词（beautiful）加 more/most，不加 er。"
-      }
-    ],
-    "examples": [
-      {
-        "q": "翻译：我的书包比你的重。",
-        "steps": [
-          "重 heavy→heavier",
-          "比较级句型：A is -er than B",
-          "My bag is heavier than yours",
-          "别忘了 than"
-        ],
-        "tip": "变y为i"
-      },
-      {
-        "q": "他是我们班最高的。",
-        "steps": [
-          "高 tall→tallest",
-          "最高级前加 the",
-          "范围 our class 用 in",
-          "He is the tallest in our class"
-        ],
-        "tip": "the+est"
-      }
-    ],
-    "mistakes": [
-      "比较级忘了 than（My bag is heavier yours ✗）",
-      "双写规则漏掉（biger ✗ 应为 bigger）"
-    ]
-  },
-  "exercises": [
-    {
-      "q": "tall 的比较级是？",
-      "options": [
-        "taller",
-        "tallerest",
-        "more tall",
-        "tallest"
-      ],
-      "answer": 0,
-      "explain": "直接加er"
-    },
-    {
-      "q": "big 的最高级是？",
-      "options": [
-        "biger",
-        "biggest",
-        "bigst",
-        "most big"
-      ],
-      "answer": 1,
-      "explain": "双写g加est"
-    },
-    {
-      "q": "heavy 的比较级是？",
-      "options": [
-        "more heavy",
-        "heavyer",
-        "heavier",
-        "heavest"
-      ],
-      "answer": 2,
-      "explain": "变y为i"
-    },
-    {
-      "q": "good 的比较级是？",
-      "options": [
-        "best",
-        "gooder",
-        "more good",
-        "better"
-      ],
-      "answer": 3,
-      "explain": "不规则"
-    },
-    {
-      "q": "比较级连接词用？",
-      "options": [
-        "than",
-        "then",
-        "that",
-        "the"
-      ],
-      "answer": 0,
-      "explain": "A er than B"
-    },
-    {
-      "q": "最高级前面要加？",
-      "options": [
-        "a",
-        "the",
-        "an",
-        "不加"
-      ],
-      "answer": 1,
-      "explain": "the + est"
-    }
-  ],
   "interact": {
     "views": [
       {
         "when": 1,
-        "title": "tall - taller -…",
-        "color": "blue",
+        "title": "点餐",
+        "subtitle": "Restaurant",
+        "color": "amber",
+        "emoji": "🍽️",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "💡",
-            "title": "规则一",
-            "text": "直接加 er / est"
+            "kind": "steps",
+            "title": "点餐四句",
+            "items": [
+              "Could I have a cheeseburger and fries, please?（请给我一个芝士汉堡和薯条）——加 please 是礼貌",
+              "For here or to go?（在这儿吃还是带走？）——店员会问你",
+              "For here, please. / To go, please.",
+              "Anything else? No, thanks. That is all.（还要别的吗？不了谢谢）——收尾"
+            ]
           },
           {
             "kind": "info",
-            "icon": "💡",
-            "title": "原级",
-            "text": "a tall boy；比较级/最高级例句：；Tom is taller than Mike."
+            "icon": "💧",
+            "title": "加一句",
+            "text": "Could I get some water, please?（可以给我一些水吗？）——免费的水在大部分餐厅可以要：渴了别忍着"
           },
           {
             "kind": "highlight",
-            "text": "比较级后接 than · 最高级前加 the"
+            "text": "Could I have... please? = 万能点餐句"
           }
         ]
       },
       {
         "when": 2,
-        "title": "big - bigger - …",
-        "color": "blue",
+        "title": "购物",
+        "subtitle": "Shopping",
+        "color": "green",
+        "emoji": "🛍️",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "💡",
-            "title": "规则二",
-            "text": "重读闭音节，双写末尾辅音再加"
+            "kind": "compare",
+            "title": "购物三句",
+            "items": [
+              {
+                "label": "问价",
+                "value": "How much is this? / How much are these?（这个/这些多少钱？）——最简单最万能"
+              },
+              {
+                "label": "试穿",
+                "value": "Can I try this on?（我可以试试吗？）——买衣服必问"
+              },
+              {
+                "label": "决定",
+                "value": "I will take it.（我要买它）/ I am just looking.（我只是看看）——买或不买都礼貌"
+              }
+            ]
           },
           {
             "kind": "info",
-            "icon": "💡",
-            "title": "原级",
-            "text": "a big boy；比较级/最高级例句：；My box is bigger than yours."
+            "icon": "💰",
+            "title": "付钱",
+            "text": "Do you take credit cards?（可以刷卡吗？）/ Cash, please.（现金）——国外的支付方式跟国内不同·提前问清楚"
           },
           {
             "kind": "highlight",
-            "text": "比较级后接 than · 最高级前加 the"
+            "text": "How much + I will take it = 购物闭环"
           }
         ]
       },
       {
         "when": 3,
-        "title": "heavy - heavier…",
+        "title": "问路",
+        "subtitle": "Directions",
         "color": "blue",
+        "emoji": "🗺️",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "💡",
-            "title": "规则三",
-            "text": "辅音字母+y，变 y 为 i 再加"
+            "kind": "steps",
+            "title": "问路三句",
+            "items": [
+              "Excuse me, how can I get to the train station?（打扰一下·怎样到火车站？）——Excuse me 开头是礼貌",
+              "Is it far from here?（离这里远吗？）/ How long does it take to walk?（走路要多久？）",
+              "Thank you so much! / Thanks for your help!（非常感谢）——问完一定说谢谢"
+            ]
           },
           {
             "kind": "info",
-            "icon": "💡",
-            "title": "原级",
-            "text": "a heavy boy；比较级/最高级例句：；This bag is heavier."
+            "icon": "↩️",
+            "title": "听懂回答",
+            "text": "Go straight.（直走）/ Turn left.（左转）/ Turn right.（右转）/ It is next to the bank.（在银行旁边）——四个方向词+两个方位词就能听懂大部分指路"
+          },
+          {
+            "kind": "info",
+            "icon": "📱",
+            "title": "兜底策略",
+            "text": "Could you show me on the map?（能在地图上指给我看吗？）——听不懂没关系·打开手机地图让对方指：万无一失"
           },
           {
             "kind": "highlight",
-            "text": "比较级后接 than · 最高级前加 the"
-          }
-        ]
-      },
-      {
-        "when": 4,
-        "title": "good - better -…",
-        "color": "blue",
-        "blocks": [
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "不规则变化，需要背下来"
-          },
-          {
-            "kind": "info",
-            "icon": "💡",
-            "title": "原级",
-            "text": "a good boy；比较级/最高级例句：；She is the best student."
-          },
-          {
-            "kind": "highlight",
-            "text": "比较级后接 than · 最高级前加 the"
+            "text": "Excuse me + How can I get to... + Thank you = 问路三件套"
           }
         ]
       }
     ],
     "explore": [
-      "big 为什么要双写 g？",
-      "heavy 的 y 怎么变？",
-      "为什么不合规则？"
+      "怎样用英语点一份汉堡？",
+      "怎样问\"多少钱\"？",
+      "迷路了怎样用英语问路？"
     ]
   }
 }
