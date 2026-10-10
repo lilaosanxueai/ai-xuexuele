@@ -1,0 +1,22 @@
+const fs = require('fs');
+const path = require('path');
+const d = path.join('C:', 'Users', '10166', '.agents', 'skills', 'creative-island', 'content', 'lessons');
+const fix = (f, qi, opts) => {
+  const p = path.join(d, f.replace('.json','') + '.json');
+  const l = JSON.parse(fs.readFileSync(p, 'utf8'));
+  l.exercises[qi].options = opts;
+  fs.writeFileSync(p, JSON.stringify(l, null, 2) + '\n', 'utf8');
+  console.log('fixed', f, 'Q' + (qi + 1));
+};
+fix('art-42', 3, ['用很贵的相机', '拍一个人在做事', '多加十层滤镜', '把什么都拍进去']);
+fix('art-42', 4, ['拍摄那天天气好', '最好的相机是你的眼睛', '摄影师的名气', '后期修图厉害']);
+fix('eco-44', 0, ['全部花掉买零食', '花三成存五成帮两成', '全部存起来不花', '全部给爸妈保管']);
+fix('mus-40', 0, ['大脑的痛觉区', '跟美食恋爱一样的奖赏系统', '大脑的睡眠区', '消化系统']);
+fix('mus-40', 2, ['听愉快的音乐让人短暂更专注', '让人一觉睡到天亮', '让不爱音乐的人爱上音乐', '让眼睛更明亮']);
+fix('mus-40', 3, ['立刻听欢快的歌', '先听匹配的歌让情绪流出来', '完全不听音乐', '大喊大叫发泄']);
+fix('mus-40', 4, ['摇滚和说唱', '慢节奏纯音乐约六十分贝', '交响乐', '重低音舞曲']);
+fix('pe-43', 1, '更强更团结（Together）');
+fix('pe-43', 3, ['多读书就行', '学好基础加多尝试加多问大人', '等长大再说', '只需要打游戏']);
+fix('soc-40', 1, ['政策强迫离开', '收入低机会少的推力', '城市空气好', '有人推着走']);
+fix('soc-41', 2, ['一种四种至少', '至少四种合作完成', '一百种', '零种']);
+console.log('all done');
