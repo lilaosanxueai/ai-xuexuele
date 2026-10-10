@@ -1,7 +1,7 @@
 {
   "toolbox": [],
   "actor": {
-    "costume": "🔄",
+    "costume": "🗣️",
     "x": 0,
     "y": 0
   },
@@ -9,7 +9,7 @@
   "tasks": [
     {
       "id": "e0",
-      "text": "探索：cs=1 主动句的宾语去哪了？",
+      "text": "探索：es=2 英语演讲怎样开头？",
       "check": {
         "type": "manual"
       },
@@ -20,7 +20,7 @@
     },
     {
       "id": "e1",
-      "text": "探索：by the boy 什么时候可以省略？",
+      "text": "探索：es=3 发音不好能演讲吗？",
       "check": {
         "type": "manual"
       },
@@ -31,13 +31,13 @@
     },
     {
       "id": "e2",
-      "text": "探索：三步变被动是哪三步？",
+      "text": "探索：站在台上手放哪？",
       "check": {
         "type": "manual"
       },
       "hintPrompts": [
-        "动手验证：把参数拖到两个极端对比观察",
-        "把发现说给 AI 老师听，让它帮你变成结论"
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
       ]
     },
     {
@@ -52,35 +52,261 @@
     }
   ],
   "celebrate": "新知识到手！",
-  "id": "eng-40",
   "island": "cross",
-  "order": 562,
-  "title": "被动语态：谁是主角",
-  "emoji": "🔄",
   "subjectArea": "英语",
   "gradeBand": "junior",
-  "grade": 8,
-  "textbook": "人教版英语（初中八年级）",
+  "grade": 7,
+  "area": "英语",
+  "band": "junior",
+  "id": "eng-40",
+  "order": 904,
+  "title": "English Speech: 怎样做好英文展示",
+  "emoji": "🗣️",
+  "textbook": "人教PEP（七年级）",
   "curriculum": {
-    "module": "被动语态",
+    "module": "口语表达",
     "points": [
-      "主动变被动",
-      "be + 过去分词",
-      "by 短语"
+      "演讲结构",
+      "发音技巧",
+      "肢体语言"
     ]
   },
-  "story": "The boy broke the window. 强调「谁干的」；The window was broken by the boy. 强调「窗户怎么样了」——同一件事，换主角就是换语态！当动作的承受者更重要时，用被动语态。",
+  "story": "下周英语课要做3分钟English presentation——大部分人的反应是\"can I speak Chinese?\"。其实用英语展示没有你想的那么难——准备好结构+练习三遍+几个关键技巧，你就能做出让老师眼前一亮的展示。",
   "goals": [
-    "理解被动含义",
-    "掌握主动变被动三步",
-    "会按时态变换 be"
+    "掌握英语演讲结构",
+    "改善发音技巧",
+    "用好肢体语言"
   ],
-  "aiIntro": "🔄 切换例句，看主语宾语怎么换座位——被动语态变形台！",
+  "aiIntro": "🗣️ Present in English with confidence! 演讲课",
+  "param": {
+    "name": "es",
+    "label": "演讲站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "英语演讲怎样开头？",
+    "发音不好能演讲吗？",
+    "站在台上手放哪？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "结构",
+      "subtitle": "三段式",
+      "color": "blue",
+      "emoji": "📐",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "Presentation 三步",
+          "items": [
+            "Opening 开头（30秒）：Good morning everyone. Today I want to talk about...（今天我想聊聊...）——直接告诉听众你要说什么",
+            "Body 主体（2分钟）：First... Second... Third...（用First/Second让听众跟得上你的节奏）",
+            "Closing 结尾（30秒）：Thank you for listening.（谢谢大家）+ 如果有提问：Any questions?"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "🪝",
+          "title": "好开头的三个方法",
+          "text": "提问题开头：Do you like pandas?（你喜欢熊猫吗？）·讲个人故事开头：Last weekend I went to...·展示图片：Look at this picture.——不要用\"Today my topic is...\"（太无聊）"
+        },
+        {
+          "kind": "highlight",
+          "text": "Structure = Opening + Body(First/Second/Third) + Closing"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "发音",
+      "subtitle": "不用完美",
+      "color": "green",
+      "emoji": "🗣️",
+      "blocks": [
+        {
+          "kind": "info",
+          "icon": "🎯",
+          "title": "两个重点",
+          "text": "①Loud enough：声音够大——后排能听到（紧张时人会变小声：刻意大声一点）；②Slow down：说慢一点——紧张时人会加速（刻意放慢20%）"
+        },
+        {
+          "kind": "info",
+          "icon": "💪",
+          "title": "发音不准怎么办",
+          "text": "完美口音≠好演讲——清晰>漂亮：把关键词说清楚就行：练习时把不会读的词查音标·跟着手机念三遍：没人期待你是BBC主播"
+        },
+        {
+          "kind": "info",
+          "icon": "⏸️",
+          "title": "停顿的力量",
+          "text": "说重点之前停1秒——Today... I want to talk about PANDAS.（停顿让PANDAS更有分量）——紧张的人不停·高手善用停顿"
+        },
+        {
+          "kind": "highlight",
+          "text": "声音大+说慢+关键词清楚——比口音漂亮重要一百倍"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "身体",
+      "subtitle": "不说谎的身体",
+      "color": "amber",
+      "emoji": "🧍",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "三个身体技巧",
+          "items": [
+            "站直+微笑：肩膀打开·看着观众（不是看天花板或地板）——微笑让你和观众都放松",
+            "手势：用手指表示First/Second/Third（数手指比说出来更有力）；描述大小高低时用手比划",
+            "走动：不要钉在原地——说到重点时往前一步——身体动了紧张就散了"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "👀",
+          "title": "眼睛看哪",
+          "text": "找三张友善的脸（左中右）——轮流看他们·像跟朋友聊天：不要只看老师一个人——老师也是观众"
+        },
+        {
+          "kind": "info",
+          "icon": "📝",
+          "title": "万无一失卡",
+          "text": "拿一张小卡片写关键词（不是全稿）——忘词时瞄一眼：写 opening 的第一句+三个 First/Second/Third 的关键词+最后一句话"
+        },
+        {
+          "kind": "highlight",
+          "text": "站直+微笑+眼神交流——身体在说\"我准备好了\""
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "演讲结构",
+        "body": "【Opening】问题/故事/图片开头。\n【Body】First/Second/Third。\n【Closing】Thank you + Any questions?"
+      },
+      {
+        "title": "发音技巧",
+        "body": "【声音】够大+说慢20%。\n【关键】关键词清楚>口音漂亮。\n【停顿】说重点前停1秒。"
+      },
+      {
+        "title": "肢体语言",
+        "body": "【站姿】直+微笑+眼神交流。\n【手势】数手指+比划。\n【工具】关键词卡片。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "3分钟英语展示My Hobby",
+        "steps": [
+          "开头：Do you have a hobby? Let me tell you about mine.",
+          "主体：First... Second... Third...",
+          "结尾：Thank you!",
+          "练习3遍"
+        ],
+        "tip": "三段式+练"
+      },
+      {
+        "q": "紧张到忘词",
+        "steps": [
+          "停顿（观众以为你在思考）",
+          "看关键词卡片",
+          "从最近的词继续",
+          "没人知道你忘了"
+        ],
+        "tip": "卡片保险"
+      }
+    ],
+    "mistakes": [
+      "拿全稿上台念（用关键词卡）",
+      "只看老师不看同学（观众是所有人）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "好的英语演讲开头方式是？",
+      "options": [
+        "Today my topic is...",
+        "提问/故事/图片",
+        "念课本",
+        "沉默"
+      ],
+      "answer": 1,
+      "explain": "吸引注意"
+    },
+    {
+      "q": "英语演讲最重要的不是？",
+      "options": [
+        "声音够大",
+        "说慢+关键词清楚",
+        "口音完美",
+        "眼神交流"
+      ],
+      "answer": 2,
+      "explain": "清晰>漂亮"
+    },
+    {
+      "q": "说重点之前应该？",
+      "options": [
+        "加速",
+        "停顿1秒",
+        "小声说",
+        "跳过"
+      ],
+      "answer": 1,
+      "explain": "停顿是武器"
+    },
+    {
+      "q": "上台拿的卡片上应该写？",
+      "options": [
+        "把演讲全稿写在上面",
+        "关键词（第一句加三个要点加结尾）",
+        "什么都不写",
+        "写笑话和段子"
+      ],
+      "answer": 1,
+      "explain": "关键词卡"
+    },
+    {
+      "q": "眼神应该看哪？",
+      "options": [
+        "天花板",
+        "左中右三张友善的脸",
+        "只看老师",
+        "地板"
+      ],
+      "answer": 1,
+      "explain": "眼神交流"
+    },
+    {
+      "q": "声音够大+说慢+关键词 ___",
+      "options": [
+        "清楚",
+        "模糊"
+      ],
+      "answer": 0,
+      "explain": "三个关键",
+      "type": "blank",
+      "blank": {
+        "answerText": "清楚",
+        "bank": [
+          "清楚",
+          "模糊"
+        ]
+      }
+    }
+  ],
   "lab": {
     "params": [
       {
-        "name": "cs",
-        "label": "例句",
+        "name": "es",
+        "label": "演讲站",
         "min": 1,
         "max": 3,
         "step": 1,
@@ -88,195 +314,106 @@
       }
     ]
   },
-  "teach": {
-    "sections": [
-      {
-        "title": "什么是被动",
-        "body": "【主动：主语是动作的执行者】We clean the classroom.\n【被动：主语是动作的承受者】The classroom is cleaned by us.\n用被动的时机：不知道谁做的·谁做不重要·强调承受者。"
-      },
-      {
-        "title": "三步变形",
-        "body": "【①宾语提前当主语】window → The window\n【②动词变 be + 过去分词】broke → was broken\n【③原主语放 by 后（可省略）】by the boy\n口诀：宾变主·动变被动·主变 by 宾。"
-      },
-      {
-        "title": "be 的时态",
-        "body": "【一般现在时】am/is/are done：is grown\n【一般过去时】was/were done：was broken\n【一般将来时】will be done：will be planted\n【现在完成时】have/has been done\nbe 像变形金刚·过去分词永不变。"
-      }
-    ],
-    "examples": [
-      {
-        "q": "把 They clean the room every day. 变成被动",
-        "steps": [
-          "宾语 the room 提前",
-          "clean → are cleaned（复数主语）",
-          "The room is cleaned…？注意 the room 单数",
-          "The room is cleaned by them every day."
-        ],
-        "tip": "be 看新主语"
-      },
-      {
-        "q": "被动句 Rice is grown in the south 的 by people 为什么省了？",
-        "steps": [
-          "people 是泛指「人们」",
-          "不知道/不必说明是谁",
-          "泛指的执行者可以省略",
-          "省后更简洁"
-        ],
-        "tip": "泛指可省"
-      }
-    ],
-    "mistakes": [
-      "被动句 be 的单复数还跟着旧主语（应跟新主语）",
-      "忘记把动词变成过去分词（was break ✗）"
-    ]
-  },
-  "exercises": [
-    {
-      "q": "被动语态的基本形式？",
-      "options": [
-        "have + 过去分词",
-        "be + 现在分词",
-        "do + 过去分词",
-        "be + 过去分词"
-      ],
-      "answer": 3,
-      "explain": "be done"
-    },
-    {
-      "q": "The window ___ broken by the boy. 填？",
-      "options": [
-        "was",
-        "is",
-        "were",
-        "are"
-      ],
-      "answer": 0,
-      "explain": "过去时单数"
-    },
-    {
-      "q": "Rice ___ grown in the south. 填？",
-      "options": [
-        "are",
-        "is",
-        "was",
-        "am"
-      ],
-      "answer": 1,
-      "explain": "现在时单数"
-    },
-    {
-      "q": "主动变被动第一步？",
-      "options": [
-        "加 by",
-        "动词提前",
-        "宾语提前当主语",
-        "变疑问"
-      ],
-      "answer": 2,
-      "explain": "宾变主"
-    },
-    {
-      "q": "Trees will be planted 属于什么时态被动？",
-      "options": [
-        "过去时",
-        "一般现在时",
-        "现在完成时",
-        "一般将来时"
-      ],
-      "answer": 3,
-      "explain": "will be done"
-    },
-    {
-      "q": "by people 什么时候可省？",
-      "options": [
-        "泛指人们时",
-        "永远不能省",
-        "过去时",
-        "有宾语时"
-      ],
-      "answer": 0,
-      "explain": "执行者不重要"
-    }
-  ],
   "interact": {
     "views": [
       {
         "when": 1,
-        "title": "主动 → 被动",
-        "color": "amber",
+        "title": "结构",
+        "subtitle": "三段式",
+        "color": "blue",
+        "emoji": "📐",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "The boy broke the window."
+            "kind": "steps",
+            "title": "Presentation 三步",
+            "items": [
+              "Opening 开头（30秒）：Good morning everyone. Today I want to talk about...（今天我想聊聊...）——直接告诉听众你要说什么",
+              "Body 主体（2分钟）：First... Second... Third...（用First/Second让听众跟得上你的节奏）",
+              "Closing 结尾（30秒）：Thank you for listening.（谢谢大家）+ 如果有提问：Any questions?"
+            ]
           },
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "The window was broken by the boy.；be 随时态变化 · 动词变过去分词"
+            "icon": "🪝",
+            "title": "好开头的三个方法",
+            "text": "提问题开头：Do you like pandas?（你喜欢熊猫吗？）·讲个人故事开头：Last weekend I went to...·展示图片：Look at this picture.——不要用\"Today my topic is...\"（太无聊）"
           },
           {
-            "kind": "info",
-            "icon": "💡",
-            "title": "一般过去时",
-            "text": "was/were + 过去分词"
+            "kind": "highlight",
+            "text": "Structure = Opening + Body(First/Second/Third) + Closing"
           }
-        ],
-        "subtitle": "一般过去时"
+        ]
       },
       {
         "when": 2,
-        "title": "主动 → 被动",
-        "color": "amber",
+        "title": "发音",
+        "subtitle": "不用完美",
+        "color": "green",
+        "emoji": "🗣️",
         "blocks": [
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "People grow rice in the south."
+            "icon": "🎯",
+            "title": "两个重点",
+            "text": "①Loud enough：声音够大——后排能听到（紧张时人会变小声：刻意大声一点）；②Slow down：说慢一点——紧张时人会加速（刻意放慢20%）"
           },
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "Rice is grown in the south (by people).；be 随时态变化 · 动词变过去分词"
+            "icon": "💪",
+            "title": "发音不准怎么办",
+            "text": "完美口音≠好演讲——清晰>漂亮：把关键词说清楚就行：练习时把不会读的词查音标·跟着手机念三遍：没人期待你是BBC主播"
           },
           {
             "kind": "info",
-            "icon": "💡",
-            "title": "一般现在时",
-            "text": "am/is/are + 过去分词；泛指人时 by 可省"
+            "icon": "⏸️",
+            "title": "停顿的力量",
+            "text": "说重点之前停1秒——Today... I want to talk about PANDAS.（停顿让PANDAS更有分量）——紧张的人不停·高手善用停顿"
+          },
+          {
+            "kind": "highlight",
+            "text": "声音大+说慢+关键词清楚——比口音漂亮重要一百倍"
           }
-        ],
-        "subtitle": "一般现在时"
+        ]
       },
       {
         "when": 3,
-        "title": "主动 → 被动",
+        "title": "身体",
+        "subtitle": "不说谎的身体",
         "color": "amber",
+        "emoji": "🧍",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "They will plant trees tomorrow."
+            "kind": "steps",
+            "title": "三个身体技巧",
+            "items": [
+              "站直+微笑：肩膀打开·看着观众（不是看天花板或地板）——微笑让你和观众都放松",
+              "手势：用手指表示First/Second/Third（数手指比说出来更有力）；描述大小高低时用手比划",
+              "走动：不要钉在原地——说到重点时往前一步——身体动了紧张就散了"
+            ]
           },
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "Trees will be planted tomorrow.；be 随时态变化 · 动词变过去分词"
+            "icon": "👀",
+            "title": "眼睛看哪",
+            "text": "找三张友善的脸（左中右）——轮流看他们·像跟朋友聊天：不要只看老师一个人——老师也是观众"
           },
           {
             "kind": "info",
-            "icon": "💡",
-            "title": "一般将来时",
-            "text": "will be + 过去分词"
+            "icon": "📝",
+            "title": "万无一失卡",
+            "text": "拿一张小卡片写关键词（不是全稿）——忘词时瞄一眼：写 opening 的第一句+三个 First/Second/Third 的关键词+最后一句话"
+          },
+          {
+            "kind": "highlight",
+            "text": "站直+微笑+眼神交流——身体在说\"我准备好了\""
           }
-        ],
-        "subtitle": "一般将来时"
+        ]
       }
     ],
     "explore": [
-      "主动句的宾语去哪了？",
-      "by the boy 什么时候可以省略？",
-      "三步变被动是哪三步？"
+      "英语演讲怎样开头？",
+      "发音不好能演讲吗？",
+      "站在台上手放哪？"
     ]
   }
 }
