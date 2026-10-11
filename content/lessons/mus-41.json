@@ -1,0 +1,459 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🎹",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：em2=2 声音怎样被\"造\"出来？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：em2=3 MIDI是什么？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：EDM为什么让人想跳？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "celebrate": "新知识到手！",
+  "island": "cross",
+  "subjectArea": "音乐",
+  "gradeBand": "senior",
+  "grade": 11,
+  "area": "音乐",
+  "band": "senior",
+  "id": "mus-41",
+  "order": 913,
+  "title": "电子音乐：合成器的魔法",
+  "emoji": "🎹",
+  "textbook": "音乐鉴赏（人音版）",
+  "curriculum": {
+    "module": "电子音乐",
+    "points": [
+      "声音的合成",
+      "MIDI与制作",
+      "电子音乐的流派"
+    ]
+  },
+  "story": "一个音符不需要乐器——用数学公式就能\"算\"出来。合成器把电波变成音乐·电脑变成录音棚·你变成制作人。从Kraftwerk到EDM到电影配乐——电子音乐改变了整个音乐工业。",
+  "goals": [
+    "理解声音合成的基本原理",
+    "了解MIDI制作流程",
+    "认识电子音乐流派"
+  ],
+  "aiIntro": "🎹 用数学造音乐——电子音乐",
+  "param": {
+    "name": "em2",
+    "label": "电音站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "声音怎样被\"造\"出来？",
+    "MIDI是什么？",
+    "EDM为什么让人想跳？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "合成",
+      "subtitle": "造声音",
+      "color": "violet",
+      "emoji": " oscillator",
+      "blocks": [
+        {
+          "kind": "info",
+          "icon": "〰️",
+          "title": "波形=声音的DNA",
+          "text": "正弦波（纯·像笛子）·方波（复古游戏机）·锯齿波（刺·像铜管）·噪声（鼓的沙沙声）——四种基本波叠加就能造出几乎所有音色：加法合成=调色"
+        },
+        {
+          "kind": "compare",
+          "title": "合成三招",
+          "items": [
+            {
+              "label": "振荡器",
+              "value": "发出基础波形——数学公式生成电信号：频=音高·波=音色"
+            },
+            {
+              "label": "滤波器",
+              "value": "砍掉某些频率——低通让声音闷·高通让声音薄"
+            },
+            {
+              "label": "包络ADSR",
+              "value": "Attack起音·Decay衰减·Sustain持续·Release释放——控制音量随时间变化：钢琴瞬间到峰（快A）·弦乐慢慢到峰（慢A）"
+            }
+          ]
+        },
+        {
+          "kind": "highlight",
+          "text": "合成器=数学造声音：振荡器出波形·滤波器调色·包络管呼吸"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "MIDI",
+      "subtitle": "数字乐谱",
+      "color": "green",
+      "emoji": "🎹",
+      "blocks": [
+        {
+          "kind": "info",
+          "icon": "📝",
+          "title": "MIDI是什么",
+          "text": "Musical Instrument Digital Interface——不录音·只录\"弹了哪个键·多大力·多长时间\"的指令：像数字乐谱。播放时让合成器\"照谱演奏\"——随时换音色"
+        },
+        {
+          "kind": "steps",
+          "title": "制作流程",
+          "items": [
+            "编曲：在DAW（数字音频工作站·GarageBand/FL Studio）里写MIDI",
+            "选音色：同一旋律用钢琴·合成器·鼓——一秒换",
+            "混音：调整每条轨道的音量·声像·效果",
+            "导出：合成最终音频文件——一首歌完成"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "💻",
+          "title": "一个人的乐队",
+          "text": "传统需要一个乐队（鼓手·贝斯手·吉他手）——现在一台电脑搞定全部：这就是为什么独立音乐人爆发式增长：工具的民主化"
+        },
+        {
+          "kind": "highlight",
+          "text": "MIDI=弹奏指令·合成器=执行演奏——两者组合=一个人的乐队"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "流派",
+      "subtitle": "从地下到主流",
+      "color": "amber",
+      "emoji": "🎧",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "电音家族",
+          "items": [
+            {
+              "label": "Techno",
+              "value": "底特律起源·机械重复——120-130BPM：地下文化的代表"
+            },
+            {
+              "label": "House",
+              "value": "芝加哥起源·律动感——Disco的电子后代：今天主流"
+            },
+            {
+              "label": "EDM",
+              "value": "电子舞曲的统称——Drop（爆点）让人跳起来：音乐节的主角"
+            },
+            {
+              "label": "Ambient",
+              "value": "氛围音乐·没有节拍—— Brian Eno——冥想和专注用的"
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "🎬",
+          "title": "电影配乐",
+          "text": "汉斯·季默用合成器+管弦乐混合——《星际穿越》的管风琴+电子低频：电子音乐不只是\"舞曲\"——它可以宇宙般宏大。今天的配乐大多混合电子+实录"
+        },
+        {
+          "kind": "highlight",
+          "text": "电子音乐从地下舞曲到电影配乐——数字工具重新定义了音乐"
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "声音合成",
+        "body": "【波形】正弦纯·方波复古·锯齿刺。\n【三招】振荡器出波·滤波器调色·包络管呼吸。\n【ADSR】起衰持释。"
+      },
+      {
+        "title": "MIDI制作",
+        "body": "【本质】数字乐谱只录指令。\n【流程】编曲→选音色→混音→导出。\n【工具】DAW一台电脑=一个乐队。"
+      },
+      {
+        "title": "流派",
+        "body": "【Techno】底特律机械重复。\n【House】律动主流。【EDM】Drop爆点。\n【Ambient】无节拍冥想。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "同一旋律怎样\"一秒换乐器\"",
+        "steps": [
+          "MIDI录的是指令不是声音",
+          "播放时选音色",
+          "选钢琴→钢琴版",
+          "选合成器→电音版——MIDI灵活性"
+        ],
+        "tip": "数字乐谱"
+      },
+      {
+        "q": "游戏音乐为什么常用8-bit风格",
+        "steps": [
+          "早期芯片只能发方波声",
+          "方波成了那代人的游戏记忆",
+          "今天故意用它唤起怀旧",
+          "音色也能变成文化符号"
+        ],
+        "tip": "音色与记忆"
+      }
+    ],
+    "mistakes": [
+      "认为电子音乐\"不真实\"（合成器创造了真实乐器做不到的声音）",
+      "认为MIDI就是音频文件（是弹奏指令不是录音）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "合成器产生声音的核心部件是？",
+      "options": [
+        "吉他弦",
+        "振荡器（发出波形）",
+        "鼓面",
+        "话筒"
+      ],
+      "answer": 1,
+      "explain": "数学造波"
+    },
+    {
+      "q": "ADSR包络的A指的是？",
+      "options": [
+        "音量",
+        "起音Attack",
+        "音高",
+        "节拍"
+      ],
+      "answer": 1,
+      "explain": "四种变化之一"
+    },
+    {
+      "q": "MIDI记录的是什么？",
+      "options": [
+        "声音",
+        "弹奏指令",
+        "歌词",
+        "视频"
+      ],
+      "answer": 1,
+      "explain": "数字乐谱"
+    },
+    {
+      "q": "EDM中让人想跳的\"爆点\"叫？",
+      "options": [
+        "Verse",
+        "Drop",
+        "Intro",
+        "Outro"
+      ],
+      "answer": 1,
+      "explain": "电子舞曲高潮"
+    },
+    {
+      "q": "没有节拍适合冥想的电音流派是？",
+      "options": [
+        "EDM",
+        "Techno",
+        "Ambient",
+        "House"
+      ],
+      "answer": 2,
+      "explain": "氛围音乐"
+    },
+    {
+      "q": "MIDI=弹奏指令·合成器= ___",
+      "options": [
+        "执行演奏",
+        "记录声音"
+      ],
+      "answer": 0,
+      "explain": "分工合作",
+      "type": "blank",
+      "blank": {
+        "answerText": "执行演奏",
+        "bank": [
+          "执行演奏",
+          "记录声音"
+        ]
+      }
+    }
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "em2",
+        "label": "电音站",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ]
+  },
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "合成",
+        "subtitle": "造声音",
+        "color": "violet",
+        "emoji": " oscillator",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "〰️",
+            "title": "波形=声音的DNA",
+            "text": "正弦波（纯·像笛子）·方波（复古游戏机）·锯齿波（刺·像铜管）·噪声（鼓的沙沙声）——四种基本波叠加就能造出几乎所有音色：加法合成=调色"
+          },
+          {
+            "kind": "compare",
+            "title": "合成三招",
+            "items": [
+              {
+                "label": "振荡器",
+                "value": "发出基础波形——数学公式生成电信号：频=音高·波=音色"
+              },
+              {
+                "label": "滤波器",
+                "value": "砍掉某些频率——低通让声音闷·高通让声音薄"
+              },
+              {
+                "label": "包络ADSR",
+                "value": "Attack起音·Decay衰减·Sustain持续·Release释放——控制音量随时间变化：钢琴瞬间到峰（快A）·弦乐慢慢到峰（慢A）"
+              }
+            ]
+          },
+          {
+            "kind": "highlight",
+            "text": "合成器=数学造声音：振荡器出波形·滤波器调色·包络管呼吸"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "MIDI",
+        "subtitle": "数字乐谱",
+        "color": "green",
+        "emoji": "🎹",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📝",
+            "title": "MIDI是什么",
+            "text": "Musical Instrument Digital Interface——不录音·只录\"弹了哪个键·多大力·多长时间\"的指令：像数字乐谱。播放时让合成器\"照谱演奏\"——随时换音色"
+          },
+          {
+            "kind": "steps",
+            "title": "制作流程",
+            "items": [
+              "编曲：在DAW（数字音频工作站·GarageBand/FL Studio）里写MIDI",
+              "选音色：同一旋律用钢琴·合成器·鼓——一秒换",
+              "混音：调整每条轨道的音量·声像·效果",
+              "导出：合成最终音频文件——一首歌完成"
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "💻",
+            "title": "一个人的乐队",
+            "text": "传统需要一个乐队（鼓手·贝斯手·吉他手）——现在一台电脑搞定全部：这就是为什么独立音乐人爆发式增长：工具的民主化"
+          },
+          {
+            "kind": "highlight",
+            "text": "MIDI=弹奏指令·合成器=执行演奏——两者组合=一个人的乐队"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "流派",
+        "subtitle": "从地下到主流",
+        "color": "amber",
+        "emoji": "🎧",
+        "blocks": [
+          {
+            "kind": "compare",
+            "title": "电音家族",
+            "items": [
+              {
+                "label": "Techno",
+                "value": "底特律起源·机械重复——120-130BPM：地下文化的代表"
+              },
+              {
+                "label": "House",
+                "value": "芝加哥起源·律动感——Disco的电子后代：今天主流"
+              },
+              {
+                "label": "EDM",
+                "value": "电子舞曲的统称——Drop（爆点）让人跳起来：音乐节的主角"
+              },
+              {
+                "label": "Ambient",
+                "value": "氛围音乐·没有节拍—— Brian Eno——冥想和专注用的"
+              }
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "🎬",
+            "title": "电影配乐",
+            "text": "汉斯·季默用合成器+管弦乐混合——《星际穿越》的管风琴+电子低频：电子音乐不只是\"舞曲\"——它可以宇宙般宏大。今天的配乐大多混合电子+实录"
+          },
+          {
+            "kind": "highlight",
+            "text": "电子音乐从地下舞曲到电影配乐——数字工具重新定义了音乐"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "声音怎样被\"造\"出来？",
+      "MIDI是什么？",
+      "EDM为什么让人想跳？"
+    ]
+  }
+}

@@ -1,7 +1,7 @@
 {
   "toolbox": [],
   "actor": {
-    "costume": "⏮",
+    "costume": "🧠",
     "x": 0,
     "y": 0
   },
@@ -9,7 +9,7 @@
   "tasks": [
     {
       "id": "e0",
-      "text": "探索：type=1 play 和 study 的变化为什么不同？",
+      "text": "探索：vm=2 为什么总是背了就忘？",
       "check": {
         "type": "manual"
       },
@@ -20,7 +20,7 @@
     },
     {
       "id": "e1",
-      "text": "探索：type=4 go 的过去式怎么背？",
+      "text": "探索：vm=3 词根词缀怎样帮记忆？",
       "check": {
         "type": "manual"
       },
@@ -31,13 +31,13 @@
     },
     {
       "id": "e2",
-      "text": "探索：哪些时间词提示用过去时？",
+      "text": "探索：什么时候复习最科学？",
       "check": {
         "type": "manual"
       },
       "hintPrompts": [
-        "动手验证：把参数拖到两个极端对比观察",
-        "把发现说给 AI 老师听，让它帮你变成结论"
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
       ]
     },
     {
@@ -52,224 +52,388 @@
     }
   ],
   "celebrate": "新知识到手！",
-  "id": "eng-41",
   "island": "cross",
-  "order": 563,
-  "title": "一般过去式：昨天的事",
-  "emoji": "⏮",
   "subjectArea": "英语",
-  "gradeBand": "primary",
-  "grade": 6,
-  "textbook": "人教PEP英语六年级下册",
+  "gradeBand": "junior",
+  "grade": 7,
+  "area": "英语",
+  "band": "junior",
+  "id": "eng-41",
+  "order": 916,
+  "title": "英语词汇记忆法：告别死记硬背",
+  "emoji": "🧠",
+  "textbook": "人教PEP（七年级）",
   "curriculum": {
-    "module": "一般过去时",
+    "module": "学习策略",
     "points": [
-      "动词过去式变化",
-      "时间标志词",
-      "疑问否定式"
+      "词根词缀法",
+      "联想法",
+      "间隔重复法"
     ]
   },
-  "story": "yesterday、last week、two days ago——看到这些词，动词就要「穿古装」变过去式！规则动词加 ed，不规则动词各自变身（go→went）。过去时讲昨天的故事，故事讲完记得回来！",
+  "story": "背了忘忘了背——词汇是英语最痛的事。但你知道吗：记不住不是记性差·是方法不对。这一课教你三个科学验证的记忆方法——让每个单词花更少时间记得更牢。",
   "goals": [
-    "掌握规则变化",
-    "背熟常见不规则",
-    "会用时间标志词"
+    "掌握词根词缀法",
+    "学会联想记忆法",
+    "了解间隔重复法"
   ],
-  "aiIntro": "⏮ 切换动词类型，看动词怎么穿古装——过去式变装台！",
+  "aiIntro": "🧠 告别死记硬背——词汇记忆法",
+  "param": {
+    "name": "vm",
+    "label": "记忆站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "为什么总是背了就忘？",
+    "词根词缀怎样帮记忆？",
+    "什么时候复习最科学？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "词根",
+      "subtitle": "拆单词",
+      "color": "blue",
+      "emoji": "🧩",
+      "blocks": [
+        {
+          "kind": "info",
+          "icon": "pre",
+          "title": "前缀=方向",
+          "text": "un-（不）·re-（再）·pre-（前）·dis-（否定）——unhappy不快乐·rewrite重写·preview预习——学会20个前缀=猜出几百个新词"
+        },
+        {
+          "kind": "info",
+          "icon": "📖",
+          "title": "词根=核心",
+          "text": "port=搬运：import进口（往里搬）·export出口（往外搬）·transport运输（跨着搬）——知道port=搬·看新词都能猜：一个词根串一串单词"
+        },
+        {
+          "kind": "info",
+          "icon": "post",
+          "title": "后缀=词性",
+          "text": "-tion名词·-ful形容词·-ly副词——action行动·careful小心的·quickly快速地：知道后缀→猜词性→语法不犯错"
+        },
+        {
+          "kind": "highlight",
+          "text": "前缀定方向+词根定意思+后缀定词性=拆解一切生词"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "联想",
+      "subtitle": "挂钩",
+      "color": "green",
+      "emoji": "🔗",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "三种联想",
+          "items": [
+            {
+              "label": "谐音法",
+              "value": "ambulance救护车 → 谐音\"俺不能死\"→记住意思。不是每个词都能谐音·能谐音的都是好记的"
+            },
+            {
+              "label": "词中词法",
+              "value": "island岛 → is+land（是陆地但被水围→岛）：拆出认识的短词+联想——好拆=好记"
+            },
+            {
+              "label": "画面法",
+              "value": "gloomy阴暗 → 想象一个房间gl-oom-y（昏暗的房间）：画面比文字的记忆深十倍"
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "😄",
+          "title": "越荒谬越好记",
+          "text": "联想的画面越离谱越忘不掉——\"俺不能死\"比\"A-M-B-U...\"好记一万倍。有趣的联想本身就是记忆的胶水"
+        },
+        {
+          "kind": "highlight",
+          "text": "联想=给新词挂钩——越荒谬挂得越牢"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "间隔",
+      "subtitle": "科学复习",
+      "color": "violet",
+      "emoji": "⏰",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "遗忘曲线",
+          "items": [
+            "刚背完：记住100%",
+            "20分钟后：忘42%",
+            "1天后：忘67%",
+            "7天后：忘75%——然后趋于稳定。如果不复习大部分一天就忘了"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "🔄",
+          "title": "对抗遗忘",
+          "text": "在快忘的时候复习一次→忘得慢十倍。节奏：当天→第2天→第4天→第7天→第15天——五次就能转入长期记忆。这叫间隔重复——AnkiApp自动化帮你做"
+        },
+        {
+          "kind": "info",
+          "icon": "📝",
+          "title": "组合拳",
+          "text": "新词：拆词根+联想 → 用手写三遍（肌肉记忆）→ 造一个句（用出来）→ 第二天复习。四步+间隔=记得又牢又久"
+        },
+        {
+          "kind": "highlight",
+          "text": "对抗遗忘的武器=在快忘的时候复习一次"
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "词根词缀",
+        "body": "【前缀】un不·re再·pre前·dis否。\n【词根】port搬→import/export/transport。\n【后缀】tion名·ful形·ly副。"
+      },
+      {
+        "title": "联想记忆",
+        "body": "【谐音】俺不能死=ambulance。\n【词中词】is+land。\n【画面】越荒谬越好记。"
+      },
+      {
+        "title": "间隔重复",
+        "body": "【遗忘】1天忘67%。\n【对策】当天→2天→4天→7天→15天。\n【四步】拆+写+造句+复习。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "记住 telescope（望远镜）",
+        "steps": [
+          "拆：tele（远）+ scope（看）",
+          "联想：看远处的东西",
+          "写三遍+造句：I look at stars with a telescope",
+          "明天复习一次"
+        ],
+        "tip": "词根+四步"
+      },
+      {
+        "q": "总是今天背明天忘",
+        "steps": [
+          "正常：1天忘67%",
+          "不是记性差是没复习",
+          "当天+第2天各复习一次",
+          "用Anki或自制卡片"
+        ],
+        "tip": "间隔重复"
+      }
+    ],
+    "mistakes": [
+      "一遍一遍抄写（被动重复效果差）",
+      "今天背完不复习（一天忘67%）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "前缀 un- 的意思是？",
+      "options": [
+        "再",
+        "不·否定",
+        "之前",
+        "之后"
+      ],
+      "answer": 1,
+      "explain": "unhappy不快乐"
+    },
+    {
+      "q": "词根 port 的意思是？",
+      "options": [
+        "看",
+        "搬运",
+        "说话",
+        "水"
+      ],
+      "answer": 1,
+      "explain": "import出口"
+    },
+    {
+      "q": "ambulance的谐音记忆法是？",
+      "options": [
+        "安不冷死",
+        "俺不能死",
+        "安静",
+        "阿妈"
+      ],
+      "answer": 1,
+      "explain": "荒谬=好记"
+    },
+    {
+      "q": "根据遗忘曲线一天后约忘多少？",
+      "options": [
+        "10%",
+        "30%",
+        "67%",
+        "100%"
+      ],
+      "answer": 2,
+      "explain": "所以要第2天复习"
+    },
+    {
+      "q": "科学的复习间隔是？",
+      "options": [
+        "每天十遍",
+        "当天起间隔复习5次",
+        "只背一次",
+        "每年一次"
+      ],
+      "answer": 1,
+      "explain": "间隔重复"
+    },
+    {
+      "q": "在快忘的时候复习一次——忘得慢 ___ 倍",
+      "options": [
+        "十",
+        "一"
+      ],
+      "answer": 0,
+      "explain": "科学验证",
+      "type": "blank",
+      "blank": {
+        "answerText": "十",
+        "bank": [
+          "十",
+          "一"
+        ]
+      }
+    }
+  ],
   "lab": {
     "params": [
       {
-        "name": "type",
-        "label": "动词类型",
+        "name": "vm",
+        "label": "记忆站",
         "min": 1,
-        "max": 4,
+        "max": 3,
         "step": 1,
         "value": 1
       }
     ]
   },
-  "teach": {
-    "sections": [
-      {
-        "title": "四条变化规则",
-        "body": "【一般动词 + ed】play→played\n【e 结尾 + d】like→liked\n【辅音+y：变 y 为 i + ed】study→studied\n【不规则：背】go→went·do→did·have→had\n规则靠理解·不规则靠背诵。"
-      },
-      {
-        "title": "时间标志词",
-        "body": "【看到这些词 = 用过去时】\nyesterday（昨天）·last night/week/month（上个……）\n…ago（……以前）·just now（刚才）·in 2020（在过去年份）\n标志词是时态的红绿灯。"
-      },
-      {
-        "title": "句型变换",
-        "body": "【肯定】I played football yesterday.\n【否定】I did not (did not) play…——动词还原！\n【疑问】Did you play…?——用 did 提问·动词还原。\n口诀：did 一出现·动词回原形。"
-      }
-    ],
-    "examples": [
-      {
-        "q": "把 I go to the park yesterday 改对",
-        "steps": [
-          "yesterday 提示过去时",
-          "go 变 went",
-          "I went to the park yesterday",
-          "别忘了动词变身"
-        ],
-        "tip": "标志词定 时态"
-      },
-      {
-        "q": "变疑问句：She watched TV last night.",
-        "steps": [
-          "过去时用 Did 提问",
-          "watched 还原成 watch",
-          "Did she watch TV last night?",
-          "did 出现动词回原形"
-        ],
-        "tip": "did+原形"
-      }
-    ],
-    "mistakes": [
-      "用了 did 还保留过去式（Did you went ✗ 应 watch）",
-      "辅音+y 动词直接加 ed（studyed ✗ 应 studied）"
-    ]
-  },
-  "exercises": [
-    {
-      "q": "哪个词提示用过去时？",
-      "options": [
-        "tomorrow",
-        "now",
-        "yesterday",
-        "usually"
-      ],
-      "answer": 2,
-      "explain": "昨天"
-    },
-    {
-      "q": "Did you ___ TV last night? 填？",
-      "options": [
-        "watching",
-        "watched",
-        "watches",
-        "watch"
-      ],
-      "answer": 3,
-      "explain": "did后还原"
-    },
-    {
-      "q": "like 的过去式是？",
-      "options": [
-        "liked",
-        "likeded",
-        "likeed",
-        "like"
-      ],
-      "answer": 0,
-      "explain": "e结尾加d"
-    },
-    {
-      "q": "I ___ football yesterday. 填？",
-      "options": [
-        "play",
-        "played",
-        "plays",
-        "playing"
-      ],
-      "answer": 1,
-      "explain": "加ed"
-    }
-  ],
   "interact": {
     "views": [
       {
         "when": 1,
-        "title": "规则一",
-        "color": "green",
+        "title": "词根",
+        "subtitle": "拆单词",
+        "color": "blue",
+        "emoji": "🧩",
         "blocks": [
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "play - played · visit - visited"
+            "icon": "pre",
+            "title": "前缀=方向",
+            "text": "un-（不）·re-（再）·pre-（前）·dis-（否定）——unhappy不快乐·rewrite重写·preview预习——学会20个前缀=猜出几百个新词"
           },
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "大部分动词这样变"
+            "icon": "📖",
+            "title": "词根=核心",
+            "text": "port=搬运：import进口（往里搬）·export出口（往外搬）·transport运输（跨着搬）——知道port=搬·看新词都能猜：一个词根串一串单词"
+          },
+          {
+            "kind": "info",
+            "icon": "post",
+            "title": "后缀=词性",
+            "text": "-tion名词·-ful形容词·-ly副词——action行动·careful小心的·quickly快速地：知道后缀→猜词性→语法不犯错"
           },
           {
             "kind": "highlight",
-            "text": "标志词：yesterday · last week · …ago · just now"
+            "text": "前缀定方向+词根定意思+后缀定词性=拆解一切生词"
           }
-        ],
-        "subtitle": "直接加 ed"
+        ]
       },
       {
         "when": 2,
-        "title": "规则二",
-        "color": "sky",
+        "title": "联想",
+        "subtitle": "挂钩",
+        "color": "green",
+        "emoji": "🔗",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "like - liked · live - lived"
+            "kind": "compare",
+            "title": "三种联想",
+            "items": [
+              {
+                "label": "谐音法",
+                "value": "ambulance救护车 → 谐音\"俺不能死\"→记住意思。不是每个词都能谐音·能谐音的都是好记的"
+              },
+              {
+                "label": "词中词法",
+                "value": "island岛 → is+land（是陆地但被水围→岛）：拆出认识的短词+联想——好拆=好记"
+              },
+              {
+                "label": "画面法",
+                "value": "gloomy阴暗 → 想象一个房间gl-oom-y（昏暗的房间）：画面比文字的记忆深十倍"
+              }
+            ]
           },
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "已经有 e 了就不重复加"
+            "icon": "😄",
+            "title": "越荒谬越好记",
+            "text": "联想的画面越离谱越忘不掉——\"俺不能死\"比\"A-M-B-U...\"好记一万倍。有趣的联想本身就是记忆的胶水"
           },
           {
             "kind": "highlight",
-            "text": "标志词：yesterday · last week · …ago · just now"
+            "text": "联想=给新词挂钩——越荒谬挂得越牢"
           }
-        ],
-        "subtitle": "e 结尾只加 d"
+        ]
       },
       {
         "when": 3,
-        "title": "规则三",
-        "color": "orange",
+        "title": "间隔",
+        "subtitle": "科学复习",
+        "color": "violet",
+        "emoji": "⏰",
         "blocks": [
           {
-            "kind": "info",
-            "icon": "📌",
-            "text": "study - studied · carry - carried"
+            "kind": "steps",
+            "title": "遗忘曲线",
+            "items": [
+              "刚背完：记住100%",
+              "20分钟后：忘42%",
+              "1天后：忘67%",
+              "7天后：忘75%——然后趋于稳定。如果不复习大部分一天就忘了"
+            ]
           },
           {
             "kind": "info",
-            "icon": "📌",
-            "text": "元音字母+y 直接加 ed：play - played"
+            "icon": "🔄",
+            "title": "对抗遗忘",
+            "text": "在快忘的时候复习一次→忘得慢十倍。节奏：当天→第2天→第4天→第7天→第15天——五次就能转入长期记忆。这叫间隔重复——AnkiApp自动化帮你做"
+          },
+          {
+            "kind": "info",
+            "icon": "📝",
+            "title": "组合拳",
+            "text": "新词：拆词根+联想 → 用手写三遍（肌肉记忆）→ 造一个句（用出来）→ 第二天复习。四步+间隔=记得又牢又久"
           },
           {
             "kind": "highlight",
-            "text": "标志词：yesterday · last week · …ago · just now"
-          }
-        ],
-        "subtitle": "辅音字母+y，变 y 为 i 加 ed"
-      },
-      {
-        "when": 4,
-        "title": "不规则：逐个背",
-        "color": "red",
-        "blocks": [
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "go-went · eat-ate · see-saw · do-did"
-          },
-          {
-            "kind": "info",
-            "icon": "📌",
-            "text": "不规则动词表每天读一遍"
-          },
-          {
-            "kind": "highlight",
-            "text": "标志词：yesterday · last week · …ago · just now"
+            "text": "对抗遗忘的武器=在快忘的时候复习一次"
           }
         ]
       }
     ],
     "explore": [
-      "play 和 study 的变化为什么不同？",
-      "go 的过去式怎么背？",
-      "哪些时间词提示用过去时？"
+      "为什么总是背了就忘？",
+      "词根词缀怎样帮记忆？",
+      "什么时候复习最科学？"
     ]
   }
 }
