@@ -220,7 +220,7 @@ const LESSONS = [
     ],
   }),
   L({
-    area: '英语', band: 'junior', grade: 7, id: 'eng-41', order: 916, title: '英语词汇记忆法：告别死记硬背', emoji: '🧠', textbook: '人教PEP（七年级）',
+    area: '英语', band: 'junior', grade: 7, id: 'eng-42', order: 916, title: '英语词汇记忆法：告别死记硬背', emoji: '🧠', textbook: '人教PEP（七年级）',
     curriculum: { module: '学习策略', points: ['词根词缀法', '联想法', '间隔重复法'] },
     story: '背了忘忘了背——词汇是英语最痛的事。但你知道吗：记不住不是记性差·是方法不对。这一课教你三个科学验证的记忆方法——让每个单词花更少时间记得更牢。',
     goals: ['掌握词根词缀法', '学会联想记忆法', '了解间隔重复法'],
