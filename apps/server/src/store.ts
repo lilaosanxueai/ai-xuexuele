@@ -194,6 +194,7 @@ export function mergeProgress(profileId: string, patch: {
         it.stage += 1;
         if (it.stage >= REVIEW_INTERVAL_DAYS.length) {
           cur.reviewQueue = cur.reviewQueue.filter((x) => x.id !== it.id);
+          cur.reviewGraduated = (cur.reviewGraduated ?? 0) + 1;
         } else {
           it.dueAt = new Date(Date.now() + REVIEW_INTERVAL_DAYS[it.stage] * 86_400_000).toISOString();
         }

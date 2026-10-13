@@ -412,6 +412,7 @@ function ReportTab({ profileId }: { profileId: string }) {
         <StatCard label="创作作品" value={`${projects.length} 个`} emoji="🖼" />
         <StatCard label="随堂练习" value={exTotal ? `${Math.round((exCorrect / exTotal) * 100)}%` : '—'} emoji="📝" />
         <StatCard label="错题练对" value={wrongItems.length + wrongCleared > 0 ? `${wrongCleared}/${wrongItems.length + wrongCleared}` : '—'} emoji="📖" />
+        <StatCard label="记忆盒毕业" value={(progress?.reviewGraduated ?? 0) + (progress?.reviewQueue?.length ?? 0) > 0 ? `${progress?.reviewGraduated ?? 0} 道` : '—'} emoji="🔔" />
       </div>
 
       {/* 错题本：薄弱知识点一目了然 */}

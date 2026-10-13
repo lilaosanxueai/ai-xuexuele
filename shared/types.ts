@@ -229,6 +229,8 @@ export interface ProfileProgress {
   wrongCleared?: number;
   /** 错题记忆盒：练对的错题按 2/4/7 天间隔复查，三次全过才真正毕业（防「假掌握」） */
   reviewQueue?: ReviewItem[];
+  /** 记忆盒累计毕业题数（三连过关） */
+  reviewGraduated?: number;
   /** 家长鼓励留言（悄悄话）：最新在前，保留最近 20 条 */
   parentNotes?: ParentNote[];
   /** 课程笔记（孩子自己写的学习笔记）：lessonId -> 文本 */

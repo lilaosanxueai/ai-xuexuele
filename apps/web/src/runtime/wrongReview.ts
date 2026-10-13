@@ -1,4 +1,5 @@
 import type { ReviewItem } from '@shared/types.ts';
+import { REVIEW_INTERVAL_DAYS } from '@shared/types.ts';
 
 /**
  * 错题记忆盒调度（纯函数，服务端只管存储，到期判断在展示端算）：
@@ -28,7 +29,7 @@ export function daysUntil(dueAt: string, now: Date = new Date()): number {
 }
 
 /** 阶段文案：第几次复查、还差几关毕业 */
-export function stageLabel(stage: number, intervals: number[] = [2, 4, 7]): string {
+export function stageLabel(stage: number, intervals: number[] = REVIEW_INTERVAL_DAYS): string {
   if (stage >= intervals.length) return '已毕业';
   const left = intervals.length - stage;
   return `第 ${stage + 1} 次复查（再过 ${left} 关毕业）`;

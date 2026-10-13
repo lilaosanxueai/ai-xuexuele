@@ -1,5 +1,6 @@
 import type { Lesson, ProfileProgress } from '@shared/types.ts';
 import { recommendNext } from './recommend.ts';
+import { dueReviews } from './wrongReview.ts';
 
 /**
  * 智能每日任务：把全 app 的学习动作串成一天的闯关清单。
@@ -12,10 +13,12 @@ export interface DailyCounters {
   flashcards: number;
   wrongsCleared: number;
   challenges: number;
+  /** 当天完成过的记忆盒复查轮数 */
+  reviews: number;
 }
 
 export interface Quest {
-  id: 'new-lesson' | 'review' | 'flashcards' | 'wrongbook' | 'challenge';
+  id: 'new-lesson' | 'review' | 'wrong-review' | 'flashcards' | 'wrongbook' | 'challenge';
   emoji: string;
   title: string;
   detail: string;
@@ -31,14 +34,14 @@ export function todayKey(now: Date = new Date()): string {
 
 /** 读当日计数器（跨天自动归零） */
 export function readCounters(raw: unknown, now: Date = new Date()): DailyCounters {
-  const blank: DailyCounters = { date: todayKey(now), flashcards: 0, wrongsCleared: 0, challenges: 0 };
+  const blank: DailyCounters = { date: todayKey(now), flashcards: 0, wrongsCleared: 0, challenges: 0, reviews: 0 };
   if (typeof raw !== 'object' || raw === null) return blank;
   const r = raw as Partial<DailyCounters>;
   if (r.date !== blank.date) return blank;
-  return { ...blank, flashcards: r.flashcards ?? 0, wrongsCleared: r.wrongsCleared ?? 0, challenges: r.challenges ?? 0 };
+  return { ...blank, flashcards: r.flashcards ?? 0, wrongsCleared: r.wrongsCleared ?? 0, challenges: r.challenges ?? 0, reviews: r.reviews ?? 0 };
 }
 
-export function bumpCounter(raw: unknown, key: 'flashcards' | 'wrongsCleared' | 'challenges', now: Date = new Date()): DailyCounters {
+export function bumpCounter(raw: unknown, key: 'flashcards' | 'wrongsCleared' | 'challenges' | 'reviews', now: Date = new Date()): DailyCounters {
   const c = readCounters(raw, now);
   c[key] += 1;
   return c;
@@ -106,7 +109,22 @@ export function generateQuests(
     });
   }
 
-  // ③ 闪卡
+  // ③ 记忆盒复查：练对过的错题到期（2/4/7 天间隔，防「假掌握」）
+  const dueBox = dueReviews(progress?.reviewQueue ?? [], now);
+  if (dueBox.length > 0) {
+    quests.push({
+      id: 'wrong-review',
+      emoji: '🔔',
+      title: `记忆盒复查 ${dueBox.length} 道到期错题`,
+      detail: '练对过的题再查一遍，三连过关才真正毕业',
+      goal: 1,
+      cur: Math.min(1, counters.reviews),
+      done: counters.reviews >= 1,
+      route: '/wrongbook',
+    });
+  }
+
+  // ④ 闪卡
   quests.push({
     id: 'flashcards',
     emoji: '🃏',
@@ -118,7 +136,7 @@ export function generateQuests(
     route: '/flashcards',
   });
 
-  // ④ 挑战赛
+  // ⑤ 挑战赛
   quests.push({
     id: 'challenge',
     emoji: '⚡',
@@ -130,7 +148,7 @@ export function generateQuests(
     route: '/challenge',
   });
 
-  // ⑤ 错题（有错题时）
+  // ⑥ 错题（有错题时）
   const wrongs = progress?.wrongBook?.length ?? 0;
   if (wrongs > 0) {
     quests.push({
