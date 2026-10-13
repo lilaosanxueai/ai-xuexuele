@@ -45,6 +45,18 @@ describe('offlineWeeklyComment 周报评语', () => {
     expect(c2).toContain('英语正确率 94%');
   });
 
+  it('记忆盒毕业达到 3 道时进入亮点候选', () => {
+    const seedNow = new Date('2026-10-06T10:00:00Z');
+    // 遍历措辞轮换：亮点句从候选池挑一条，多个种子下至少有一次提到记忆盒
+    const mentions: string[] = [];
+    for (let d = 0; d < 7; d++) {
+      const c = offlineWeeklyComment({ ...base, graduatedTotal: 4 }, new Date(seedNow.getTime() + d * 86400000));
+      if (c.includes('记忆盒')) mentions.push(c);
+    }
+    expect(mentions.length).toBeGreaterThan(0);
+    expect(mentions[0]).toContain('毕业 4 道');
+  });
+
   it('同一天数据稳定，不同日期可能轮换措辞', () => {
     const a = offlineWeeklyComment(base, now);
     const b = offlineWeeklyComment({ ...base }, new Date('2026-10-06T22:00:00Z'));

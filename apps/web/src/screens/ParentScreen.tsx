@@ -275,6 +275,8 @@ function ReportTab({ profileId }: { profileId: string }) {
       lessonsDone: report.lessonsDone.map((l) => l.title),
       subjectStats: report.subjectStats,
       weakLessons: report.weakLessons,
+      reviewInBox: report.reviewInBox,
+      graduatedTotal: report.graduatedTotal,
       delta,
     })
       .then(setAiComment)
@@ -353,6 +355,12 @@ function ReportTab({ profileId }: { profileId: string }) {
           <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-600">学习 {report.activeDays} 天</span>
           <span className="rounded-full bg-orange-50 px-3 py-1 text-xs font-bold text-orange-500">🔥 连续 {report.streak} 天</span>
           <span className="rounded-full bg-violet-50 px-3 py-1 text-xs font-bold text-violet-600">🏅 徽章 {badges.filter((b) => b.unlocked).length}/{badges.length}</span>
+          {report.reviewInBox > 0 && (
+            <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-bold text-indigo-600" title="错题练对后按 2/4/7 天间隔复查中">🔔 复习中 {report.reviewInBox} 道</span>
+          )}
+          {(report.graduatedTotal ?? 0) > 0 && (
+            <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-600" title="记忆盒三连过关（2/4/7 天复查全对）">🎓 记忆盒毕业 {report.graduatedTotal} 道</span>
+          )}
           <DeltaChip label="时长" v={delta.minutes} unit="分钟" />
           <DeltaChip label="天数" v={delta.activeDays} unit="天" />
           <DeltaChip label="新课" v={delta.lessons} unit="节" />

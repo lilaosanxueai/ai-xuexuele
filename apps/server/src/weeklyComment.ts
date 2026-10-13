@@ -11,6 +11,10 @@ export interface WeeklySummary {
   lessonsDone: string[];
   subjectStats: { subject: string; accuracy: number | null; correct: number; total: number }[];
   weakLessons: { title: string; subject: string; accuracy: number }[];
+  /** 记忆盒当前排队复查的错题数 */
+  reviewInBox?: number;
+  /** 记忆盒累计毕业题数（2/4/7 天三连过关） */
+  graduatedTotal?: number;
   delta?: { minutes: number; activeDays: number; lessons: number };
 }
 
@@ -55,6 +59,7 @@ export function offlineWeeklyComment(s: WeeklySummary, now: Date = new Date()): 
   else if (s.streak >= 3) parts.push(`已连续学习 ${s.streak} 天，坚持是最好的天赋`);
   const best = [...s.subjectStats].filter((x) => x.accuracy !== null && x.total >= 3).sort((a, b) => (b.accuracy ?? 0) - (a.accuracy ?? 0))[0];
   if (best && (best.accuracy ?? 0) >= 85) parts.push(`${best.subject}正确率 ${best.accuracy}%，状态出色`);
+  if ((s.graduatedTotal ?? 0) >= 3) parts.push(`错题记忆盒已毕业 ${s.graduatedTotal} 道（2/4/7 天三连复查全对），知识真正留下了`);
   const highlight = parts.length > 0 ? pick(parts, seed >> 1) + '。' : '';
 
   // 3) 建议 + 下周小目标：围绕最薄弱课（做过题的才提）

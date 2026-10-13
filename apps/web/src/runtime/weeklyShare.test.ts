@@ -12,6 +12,7 @@ const report: WeeklyReport = {
     { subject: '物理', correct: 5, total: 10, accuracy: 50 },
   ],
   weakLessons: [], headline: '本周学了 95 分钟，去随堂小练里测一测 📝',
+  reviewInBox: 2, graduatedTotal: 5,
 };
 
 describe('wrapComment 评语折行', () => {

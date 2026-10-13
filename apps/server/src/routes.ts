@@ -153,6 +153,8 @@ r.delete('/profiles/:id', (req, res) => {
           accuracy: Number(x.accuracy) || 0,
         }))
         : [],
+      reviewInBox: Number(summary.reviewInBox) || 0,
+      graduatedTotal: Number(summary.graduatedTotal) || 0,
       delta: summary.delta && typeof summary.delta === 'object' ? {
         minutes: Number(summary.delta.minutes) || 0,
         activeDays: Number(summary.delta.activeDays) || 0,

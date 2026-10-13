@@ -2,20 +2,26 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useProfileStore } from '../stores/profile.ts';
 import { levelFor } from '../runtime/xp.ts';
+import { dueReviews } from '../runtime/wrongReview.ts';
 
 export default function Header() {
   const { current, setCurrent } = useProfileStore();
   const nav = useNavigate();
   const [lv, setLv] = useState<number | null>(null);
+  const [dueCount, setDueCount] = useState(0);
 
-  // 等级徽章：随当前档案拉取 XP（本地接口，开销可忽略；档案切换时重拉）
+  // 等级徽章 + 记忆盒红点：随当前档案拉取 XP（本地接口，开销可忽略；档案切换时重拉）
   useEffect(() => {
-    if (!current) { setLv(null); return; }
+    if (!current) { setLv(null); setDueCount(0); return; }
     let alive = true;
     void fetch(`/api/progress/${current.id}`)
       .then((r) => (r.ok ? r.json() : Promise.reject()))
-      .then((p: { xp?: number }) => { if (alive) setLv(levelFor(p.xp ?? 0).level); })
-      .catch(() => { if (alive) setLv(null); });
+      .then((p: { xp?: number; reviewQueue?: Parameters<typeof dueReviews>[0] }) => {
+        if (!alive) return;
+        setLv(levelFor(p.xp ?? 0).level);
+        setDueCount(dueReviews(p.reviewQueue ?? []).length);
+      })
+      .catch(() => { if (alive) { setLv(null); setDueCount(0); } });
     return () => { alive = false; };
   }, [current]);
 
@@ -26,6 +32,14 @@ export default function Header() {
         <NavLink to="/map">📚 <span className="hidden sm:inline">学习中心</span></NavLink>
         <NavLink to="/ask">💬 <span className="hidden sm:inline">答疑</span></NavLink>
         <NavLink to="/gallery">🖼 <span className="hidden sm:inline">作品墙</span></NavLink>
+        <NavLink to="/wrongbook">
+          🐛 <span className="hidden sm:inline">错题本</span>
+          {dueCount > 0 && (
+            <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-rose-500 px-1 text-[10px] font-black text-white" title="记忆盒有到期复查">
+              {dueCount}
+            </span>
+          )}
+        </NavLink>
       </nav>
       <div className="ml-auto flex items-center gap-1.5 md:gap-2">
         {current && (
@@ -50,7 +64,7 @@ function NavLink({ to, children }: { to: string; children: React.ReactNode }) {
   return (
     <Link
       to={to}
-      className="rounded-full px-2 py-1 text-sm font-bold text-slate-600 transition hover:bg-white/70 hover:text-sky-700 md:px-4 md:py-1.5"
+      className="relative rounded-full px-2 py-1 text-sm font-bold text-slate-600 transition hover:bg-white/70 hover:text-sky-700 md:px-4 md:py-1.5"
     >
       {children}
     </Link>

@@ -32,6 +32,10 @@ export interface WeeklyReport {
   subjectStats: SubjectStat[];
   weakLessons: WeakLesson[];
   streak: number;
+  /** 记忆盒当前排队复查的错题数（快照值，非周增量） */
+  reviewInBox: number;
+  /** 记忆盒累计毕业题数（三连过关） */
+  graduatedTotal: number;
   /** 给孩子的一句话总结 */
   headline: string;
 }
@@ -139,5 +143,10 @@ export function computeWeeklyReport(
     headline = `本周学了 ${totalMinutes} 分钟，去随堂小练里测一测，看看掌握得怎么样 📝`;
   }
 
-  return { totalMinutes, activeDays, dayBars, lessonsDone, subjectStats, weakLessons: weakLessons.slice(0, 3), streak, headline };
+  return {
+    totalMinutes, activeDays, dayBars, lessonsDone, subjectStats,
+    weakLessons: weakLessons.slice(0, 3), streak, headline,
+    reviewInBox: progress?.reviewQueue?.length ?? 0,
+    graduatedTotal: progress?.reviewGraduated ?? 0,
+  };
 }
