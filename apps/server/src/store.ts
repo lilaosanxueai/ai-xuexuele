@@ -2,8 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { DATA_DIR } from './config.ts';
-import type { ParentNote, Profile, ProfileProgress, Project, Settings, WrongItem } from '@shared/types.ts';
-import { DEFAULT_SETTINGS } from '@shared/types.ts';
+import type { ParentNote, Profile, ProfileProgress, Project, ReviewItem, Settings, WrongItem } from '@shared/types.ts';
+import { DEFAULT_SETTINGS, REVIEW_INTERVAL_DAYS } from '@shared/types.ts';
 
 /** 家庭规模用 JSON 文件 + 启动时读入内存、写入即落盘，足够简单可靠 */
 
@@ -89,6 +89,8 @@ export function mergeProgress(profileId: string, patch: {
   wrongClears?: string[];
   /** 变式训练缓解：变式大部练对的错题 id 列表（eases+1，上限不超过历史错次） */
   wrongEases?: string[];
+  /** 记忆盒复查结果：correct=true 过关（stage+1，三次毕业）；false 送回错题本 */
+  wrongReviews?: { id: string; correct: boolean }[];
   parentNotes?: ParentNote[];
   lessonNotes?: Record<string, string>;
   /** 学习之星增量（0-200） */
@@ -154,15 +156,57 @@ export function mergeProgress(profileId: string, patch: {
   }
   if (Array.isArray(patch.wrongClears) && patch.wrongClears.length && cur.wrongBook?.length) {
     const cleared = new Set(patch.wrongClears.slice(0, 100).map(String));
-    const before = cur.wrongBook.length;
-    cur.wrongBook = cur.wrongBook.filter((x) => !cleared.has(x.id));
-    cur.wrongCleared = (cur.wrongCleared ?? 0) + (before - cur.wrongBook.length);
+    const moved: WrongItem[] = [];
+    cur.wrongBook = cur.wrongBook.filter((x) => {
+      if (!cleared.has(x.id)) return true;
+      moved.push(x);
+      return false;
+    });
+    cur.wrongCleared = (cur.wrongCleared ?? 0) + moved.length;
+    // 练对 ≠ 真掌握：错题快照进记忆盒，按 2/4/7 天复查三次才毕业
+    if (moved.length > 0) {
+      cur.reviewQueue = cur.reviewQueue ?? [];
+      const due = new Date(Date.now() + REVIEW_INTERVAL_DAYS[0] * 86_400_000).toISOString();
+      for (const w of moved) {
+        cur.reviewQueue = cur.reviewQueue.filter((x) => x.id !== w.id); // 再次入盒重置进度
+        cur.reviewQueue.push({
+          id: w.id, lessonId: w.lessonId, lessonTitle: w.lessonTitle, subjectArea: w.subjectArea,
+          q: w.q, options: w.options, answer: w.answer, explain: w.explain, stage: 0, dueAt: due,
+        });
+      }
+      if (cur.reviewQueue.length > 100) cur.reviewQueue = cur.reviewQueue.slice(-100);
+    }
   }
   // 变式缓解：eases + 1（封顶 times，历史错次不动，仅降低重练优先级）
   if (Array.isArray(patch.wrongEases) && patch.wrongEases.length && cur.wrongBook?.length) {
     for (const id of patch.wrongEases.slice(0, 50).map(String)) {
       const it = cur.wrongBook.find((x) => x.id === id);
       if (it) it.eases = Math.min((it.eases ?? 0) + 1, it.times);
+    }
+  }
+  // 记忆盒复查：过关升一段拉长间隔，三次毕业；忘了的送回错题本（错次+1）
+  if (Array.isArray(patch.wrongReviews) && patch.wrongReviews.length && cur.reviewQueue?.length) {
+    for (const r of patch.wrongReviews.slice(0, 30)) {
+      if (!r || typeof r.id !== 'string' || typeof r.correct !== 'boolean') continue;
+      const it: ReviewItem | undefined = cur.reviewQueue.find((x) => x.id === r.id);
+      if (!it) continue;
+      if (r.correct) {
+        it.stage += 1;
+        if (it.stage >= REVIEW_INTERVAL_DAYS.length) {
+          cur.reviewQueue = cur.reviewQueue.filter((x) => x.id !== it.id);
+        } else {
+          it.dueAt = new Date(Date.now() + REVIEW_INTERVAL_DAYS[it.stage] * 86_400_000).toISOString();
+        }
+      } else {
+        cur.reviewQueue = cur.reviewQueue.filter((x) => x.id !== it.id);
+        const exist = cur.wrongBook?.find((x) => x.id === it.id);
+        if (exist) {
+          exist.times += 1;
+          exist.lastWrongAt = new Date().toISOString();
+        } else if ((cur.wrongBook ?? []).length < 200) {
+          (cur.wrongBook ??= []).push({ ...it, wrongPicks: [], times: 1, lastWrongAt: new Date().toISOString() });
+        }
+      }
     }
   }
   if (Array.isArray(patch.parentNotes) && patch.parentNotes.length > 0 && patch.parentNotes.length <= 20) {

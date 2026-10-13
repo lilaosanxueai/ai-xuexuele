@@ -227,6 +227,8 @@ export interface ProfileProgress {
   wrongBook?: WrongItem[];
   /** 已消灭的错题总数（成长记录） */
   wrongCleared?: number;
+  /** 错题记忆盒：练对的错题按 2/4/7 天间隔复查，三次全过才真正毕业（防「假掌握」） */
+  reviewQueue?: ReviewItem[];
   /** 家长鼓励留言（悄悄话）：最新在前，保留最近 20 条 */
   parentNotes?: ParentNote[];
   /** 课程笔记（孩子自己写的学习笔记）：lessonId -> 文本 */
@@ -256,6 +258,26 @@ export interface WrongItem {
   /** 变式训练缓解的次数（变式大部练对 +1：不动历史错次，只降低重练优先级） */
   eases?: number;
   lastWrongAt: string;
+}
+
+/** 记忆盒间隔复查天数：入盒 2 天后第 1 查，4 天后第 2 查，7 天后毕业查 */
+export const REVIEW_INTERVAL_DAYS = [2, 4, 7];
+
+/** 错题记忆盒条目：错题练对后的快照，进间隔复查队列 */
+export interface ReviewItem {
+  /** 同错题 id：lessonId#题目序号 */
+  id: string;
+  lessonId: string;
+  lessonTitle: string;
+  subjectArea: string;
+  q: string;
+  options: string[];
+  answer: number;
+  explain: string;
+  /** 已通过的复查次数：0=刚入盒待第 1 查，2=已过 2 查待毕业查 */
+  stage: number;
+  /** 下次复查到期时间（ISO） */
+  dueAt: string;
 }
 
 export interface Project {
