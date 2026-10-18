@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { Exercise, Lesson, ProfileProgress, WrongItem } from '@shared/types.ts';
+import type { Exercise, Lesson, ProfileProgress, ReviewItem, WrongItem } from '@shared/types.ts';
 import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
@@ -9,13 +9,14 @@ import { SUBJECTS } from '../components/subjectMeta.ts';
 import { bumpCounter } from '../runtime/dailyQuests.ts';
 import { sortByDifficulty, sortByWrongPriority } from '../runtime/questionDifficulty.ts';
 import { pickVariants } from '../runtime/variants.ts';
+import { daysUntil, dueReviews, scheduledReviews, stageLabel } from '../runtime/wrongReview.ts';
 
 /** 打印样式：只打印练习卷浮层 */
 const PRINT_CSS = `@media print { body * { visibility: hidden !important; } #print-sheet, #print-sheet * { visibility: visible !important; } #print-sheet { position: absolute !important; left: 0; top: 0; width: 100%; background: #fff; } }`;
 
 /** 每日任务计数器：当天消灭的错题数 */
 const counterKey = (pid: string) => `island-daily-${pid}`;
-function bumpDaily(pid: string, key: 'wrongsCleared' | 'flashcards' | 'challenges') {
+function bumpDaily(pid: string, key: 'wrongsCleared' | 'flashcards' | 'challenges' | 'reviews') {
   try {
     const next = bumpCounter(JSON.parse(localStorage.getItem(counterKey(pid)) ?? '{}'), key);
     localStorage.setItem(counterKey(pid), JSON.stringify(next));
@@ -38,6 +39,8 @@ export default function WrongBookScreen() {
   const [variantWrong, setVariantWrong] = useState<WrongItem | null>(null);
   const [variantStage, setVariantStage] = useState<'variants' | 'origin'>('variants');
   const [variantSet, setVariantSet] = useState<Exercise[]>([]);
+  /** 记忆盒复查会话：到期错题的间隔复查 */
+  const [reviewing, setReviewing] = useState(false);
 
   useEffect(() => {
     if (!profile) { nav('/'); return; }
@@ -59,6 +62,31 @@ export default function WrongBookScreen() {
 
   const wrongs = progress?.wrongBook ?? [];
   const [printing, setPrinting] = useState(false);
+
+  // 记忆盒：今天到期的复查题（最早到期优先，最多 10 道）+ 排队中的
+  const dueList = useMemo<ReviewItem[]>(() => dueReviews(progress?.reviewQueue ?? []), [progress]);
+  const scheduledList = useMemo<ReviewItem[]>(() => scheduledReviews(progress?.reviewQueue ?? []), [progress]);
+
+  // 复查交卷：过关的升一段（stage+1），忘了的由服务端送回错题本
+  const finishReview = (_correct: number, wrongPicks: { idx: number; pick: number }[]) => {
+    if (!profile) return;
+    const wrongIdx = new Set(wrongPicks.map((w) => w.idx));
+    const results = dueList.map((it, i) => ({ id: it.id, correct: !wrongIdx.has(i) }));
+    const passed = results.filter((r) => r.correct).length;
+    const graduating = dueList.filter((it, i) => !wrongIdx.has(i) && it.stage >= 2).length;
+    void api.updateProgress(profile.id, { wrongReviews: results })
+      .then((p) => setProgress(p))
+      .catch(() => {});
+    if (results.length > 0) bumpDaily(profile.id, 'reviews');
+    setReviewing(false);
+    if (wrongIdx.size === 0) {
+      setCelebrate(graduating > 0
+        ? `🎉 复查全对！${graduating} 道错题从记忆盒毕业（2/4/7 天三连过关）！`
+        : `🎉 复查全对！下次复查时间已自动拉长——离毕业又近一步！`);
+    } else {
+      setCelebrate(`💪 复查对了 ${passed}/${results.length}——答错的已送回错题本，先点「📖 看讲解」明天再战！`);
+    }
+  };
 
   // 变式训练：每道错题可用的同考点变式数（数据变化时算一次，渲染时直接查）
   const variantCount = useMemo(() => {
@@ -244,6 +272,16 @@ export default function WrongBookScreen() {
           </div>
         )}
 
+        {/* 记忆盒到期提醒：练对过的错题按 2/4/7 天间隔复查（遗忘曲线），错题本清空了也照样提醒 */}
+        {dueList.length > 0 && !reviewing && (
+          <button
+            onClick={() => setReviewing(true)}
+            className="mb-5 w-full rounded-2xl bg-gradient-to-r from-violet-500 to-indigo-400 p-4 text-center text-lg font-black text-white shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl"
+          >
+            🔔 记忆盒复查时间到：{dueList.length} 道练对过的错题到期啦（间隔复习防遗忘）
+          </button>
+        )}
+
         {wrongs.length === 0 ? (
           <div className="rounded-3xl bg-white/80 p-10 text-center shadow-md">
             <div className="text-6xl">🌟</div>
@@ -377,6 +415,33 @@ export default function WrongBookScreen() {
             })}
           </>
         )}
+
+        {/* 记忆盒：排队复查中的错题（练对≠真掌握，2/4/7 天三连过关才毕业） */}
+        {scheduledList.length > 0 && (
+          <section className="mt-2 rounded-2xl bg-white/70 p-4 ring-1 ring-indigo-100">
+            <h2 className="mb-2 flex items-center gap-2 text-sm font-black text-indigo-600">
+              📥 记忆盒 · 复习中 {scheduledList.length} 道
+              <span className="font-normal text-slate-400">练对过的错题按 2/4/7 天自动复查，三连过关才真正毕业</span>
+            </h2>
+            <div className="space-y-1.5">
+              {scheduledList.slice(0, 8).map((it) => {
+                const meta = SUBJECTS[it.subjectArea] ?? { emoji: '📘' };
+                const d = daysUntil(it.dueAt);
+                return (
+                  <div key={it.id} className="flex items-center gap-2 rounded-xl bg-white px-3 py-1.5 text-xs">
+                    <span className="shrink-0 text-base">{meta.emoji}</span>
+                    <span className="min-w-0 flex-1 truncate font-semibold text-slate-700">{it.q}</span>
+                    <span className="shrink-0 rounded-full bg-indigo-50 px-2 py-0.5 font-bold text-indigo-500">{stageLabel(it.stage)}</span>
+                    <span className="w-16 shrink-0 text-right font-bold text-slate-400">{d === 0 ? '明天' : `${d} 天后`}</span>
+                  </div>
+                );
+              })}
+              {scheduledList.length > 8 && (
+                <p className="text-center text-xs text-slate-400">…还有 {scheduledList.length - 8} 道在排队</p>
+              )}
+            </div>
+          </section>
+        )}
       </main>
 
       {practicing && practiceSet.length > 0 && (
@@ -399,6 +464,15 @@ export default function WrongBookScreen() {
             : [{ q: variantWrong.q, options: variantWrong.options, answer: variantWrong.answer, explain: variantWrong.explain }]}
           onClose={() => { setVariantWrong(null); setVariantSet([]); }}
           onDone={variantStage === 'variants' ? finishVariants : finishOrigin}
+        />
+      )}
+
+      {reviewing && dueList.length > 0 && (
+        <ExercisePanel
+          title="🔔 记忆盒复查（答对拉长间隔 · 三连过关毕业）"
+          exercises={dueList.map((it) => ({ q: it.q, options: it.options, answer: it.answer, explain: it.explain }))}
+          onClose={() => setReviewing(false)}
+          onDone={finishReview}
         />
       )}
     </div>
