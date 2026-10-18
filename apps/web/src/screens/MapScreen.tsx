@@ -50,6 +50,59 @@ export default function MapScreen() {
     drawShareCard(canvas, buildShareStats(lessons, progress, { name: profile.name, avatar: profile.avatar }, recRaw));
   }, [shareOpen, lessons, progress, profile]);
 
+  // 间隔重复（Duolingo 式）：完成于 1/3/7/14 天前的课进入"复习黄金期"
+  const REVIEW_DAYS = [1, 3, 7, 14];
+  const todayMin = progress?.dailyUsage[new Date().toISOString().slice(0, 10)] ?? 0;
+  // 注意：所有 hooks 必须在下方「无档案/骨架屏」早退之前执行完，否则数据到达后重渲染会触发 React #310（白屏）
+  const reviews = useMemo(() => {
+    if (!progress) return [];
+    const now = Date.now();
+    const out: { lesson: Lesson; daysAgo: number }[] = [];
+    for (const l of lessons) {
+      const at = progress.lessons[l.id]?.completedAt;
+      if (!at) continue;
+      const days = Math.floor((now - new Date(at).getTime()) / 86_400_000);
+      if (REVIEW_DAYS.includes(days)) out.push({ lesson: l, daysAgo: days });
+    }
+    return out.sort((a, b) => a.daysAgo - b.daysAgo).slice(0, 4);
+  }, [progress, lessons]);
+
+  const badges = useMemo(() => {
+    if (!profile) return [];
+    let rec = EMPTY_RECORDS;
+    try { rec = readRecords(JSON.parse(localStorage.getItem(recordsKey(profile.id)) ?? '{}')); } catch { /* 忽略 */ }
+    return computeBadges(lessons, progress, rec);
+  }, [lessons, progress, profile?.id, todayMin]);
+  const unlockedCount = badges.filter((b) => b.unlocked).length;
+  const report = useMemo(() => computeWeeklyReport(lessons, progress), [lessons, progress]);
+  const recap = useMemo(() => computeWeeklyRecap(lessons, progress), [lessons, progress]);
+  const maxBarMinutes = Math.max(10, ...report.dayBars.map((d) => d.minutes));
+  // 近 8 周学习热力图（GitHub 式）：每天一格，颜色随分钟数加深
+  const heat = useMemo(() => {
+    const usage = progress?.dailyUsage ?? {};
+    const cells: { key: string; minutes: number; level: number }[] = [];
+    for (let i = 55; i >= 0; i--) {
+      const d = new Date();
+      d.setDate(d.getDate() - i);
+      const key = d.toISOString().slice(0, 10);
+      const minutes = usage[key] ?? 0;
+      const level = minutes === 0 ? 0 : minutes < 15 ? 1 : minutes < 30 ? 2 : minutes < 60 ? 3 : 4;
+      cells.push({ key, minutes, level });
+    }
+    return cells;
+  }, [progress]);
+  const heatColor = (lv: number) => ['bg-slate-100', 'bg-emerald-200', 'bg-emerald-400', 'bg-emerald-500', 'bg-emerald-600'][lv];
+  // 每日任务：完成状态由真实数据推导，完成动作在对应页面里发生
+  const quests = useMemo(() => {
+    if (!profile) return [];
+    let countersRaw: unknown = null;
+    try {
+      countersRaw = JSON.parse(localStorage.getItem(`island-daily-${profile.id}`) ?? '{}');
+    } catch { /* 空档案忽略 */ }
+    return generateQuests(lessons, progress, readCounters(countersRaw));
+  }, [lessons, progress, profile?.id, todayMin]);
+  const questsDone = quests.filter((q) => q.done).length;
+
   if (!profile) return null;
 
   // 首次加载课程库（约 4.7MB，本会话仅一次）：骨架占位，避免白屏等待
@@ -81,25 +134,8 @@ export default function MapScreen() {
   };
 
   const lessonDone = (id: string) => progress?.lessons[id]?.status === 'completed';
-  const today = new Date().toISOString().slice(0, 10);
-  const todayMin = progress?.dailyUsage[today] ?? 0;
   const rec = recommendNext(lessons, progress, profile.grade);
   const doneCount = lessons.filter((l) => lessonDone(l.id)).length;
-
-  // 间隔重复（Duolingo 式）：完成于 1/3/7/14 天前的课进入"复习黄金期"
-  const REVIEW_DAYS = [1, 3, 7, 14];
-  const reviews = useMemo(() => {
-    if (!progress) return [];
-    const now = Date.now();
-    const out: { lesson: Lesson; daysAgo: number }[] = [];
-    for (const l of lessons) {
-      const at = progress.lessons[l.id]?.completedAt;
-      if (!at) continue;
-      const days = Math.floor((now - new Date(at).getTime()) / 86_400_000);
-      if (REVIEW_DAYS.includes(days)) out.push({ lesson: l, daysAgo: days });
-    }
-    return out.sort((a, b) => a.daysAgo - b.daysAgo).slice(0, 4);
-  }, [progress, lessons]);
 
   // 按学科聚合
   const byArea = new Map<string, Lesson[]>();
@@ -108,40 +144,6 @@ export default function MapScreen() {
     if (!byArea.has(key)) byArea.set(key, []);
     byArea.get(key)!.push(l);
   }
-
-  const badges = useMemo(() => {
-    let rec = EMPTY_RECORDS;
-    try { rec = readRecords(JSON.parse(localStorage.getItem(recordsKey(profile.id)) ?? '{}')); } catch { /* 忽略 */ }
-    return computeBadges(lessons, progress, rec);
-  }, [lessons, progress, profile.id, todayMin]);
-  const unlockedCount = badges.filter((b) => b.unlocked).length;
-  const report = useMemo(() => computeWeeklyReport(lessons, progress), [lessons, progress]);
-  const recap = useMemo(() => computeWeeklyRecap(lessons, progress), [lessons, progress]);
-  const maxBarMinutes = Math.max(10, ...report.dayBars.map((d) => d.minutes));
-  // 近 8 周学习热力图（GitHub 式）：每天一格，颜色随分钟数加深
-  const heat = useMemo(() => {
-    const usage = progress?.dailyUsage ?? {};
-    const cells: { key: string; minutes: number; level: number }[] = [];
-    for (let i = 55; i >= 0; i--) {
-      const d = new Date();
-      d.setDate(d.getDate() - i);
-      const key = d.toISOString().slice(0, 10);
-      const minutes = usage[key] ?? 0;
-      const level = minutes === 0 ? 0 : minutes < 15 ? 1 : minutes < 30 ? 2 : minutes < 60 ? 3 : 4;
-      cells.push({ key, minutes, level });
-    }
-    return cells;
-  }, [progress]);
-  const heatColor = (lv: number) => ['bg-slate-100', 'bg-emerald-200', 'bg-emerald-400', 'bg-emerald-500', 'bg-emerald-600'][lv];
-  // 每日任务：完成状态由真实数据推导，完成动作在对应页面里发生
-  const quests = useMemo(() => {
-    let countersRaw: unknown = null;
-    try {
-      countersRaw = JSON.parse(localStorage.getItem(`island-daily-${profile.id}`) ?? '{}');
-    } catch { /* 空档案忽略 */ }
-    return generateQuests(lessons, progress, readCounters(countersRaw));
-  }, [lessons, progress, profile.id, todayMin]);
-  const questsDone = quests.filter((q) => q.done).length;
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -154,7 +156,7 @@ export default function MapScreen() {
 
         {/* 每日知识碎片：跨学科"你知道吗？"——激发好奇心 */}
         {(() => {
-          const rawFact = pickDailyFact(today, profile.id);
+          const rawFact = pickDailyFact(todayStr, profile.id);
           const fact = linkFactToLesson(rawFact, lessons);
           return (
             <div className="mb-4 flex items-center gap-3 rounded-2xl bg-gradient-to-r from-teal-50 to-cyan-50 p-3 shadow-sm ring-1 ring-teal-200">
