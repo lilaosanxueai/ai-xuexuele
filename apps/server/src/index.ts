@@ -18,8 +18,16 @@ app.use('/api', buildRouter(cfg));
 // 生产模式：托管前端构建产物
 const webDist = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../web/dist');
 if (fs.existsSync(webDist)) {
-  app.use(express.static(webDist));
-  app.get(/^(?!\/api).*/, (_req, res) => res.sendFile(path.join(webDist, 'index.html')));
+  app.use(express.static(webDist, {
+    setHeaders: (res, filePath) => {
+      // 入口 HTML 永远回源校验：构建后 JS 文件名哈希会变，旧缓存 HTML 指向不存在的资源会白屏
+      if (filePath.endsWith('.html')) res.setHeader('Cache-Control', 'no-cache');
+    },
+  }));
+  app.get(/^(?!\/api).*/, (_req, res) => {
+    res.setHeader('Cache-Control', 'no-cache');
+    res.sendFile(path.join(webDist, 'index.html'));
+  });
 }
 
 app.listen(cfg.server.port, cfg.server.host, () => {
