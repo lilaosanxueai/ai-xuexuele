@@ -103,13 +103,7 @@ export default function ExamScreen() {
     setPhase('doing');
   };
 
-  if (!profile) return null;
-
-  const q = queue[idx];
-  const correctCount = answers.filter((a) => a.pick === a.q.answer).length;
-  const mm = String(Math.floor(left / 60)).padStart(2, '0');
-  const ss = String(left % 60).padStart(2, '0');
-
+  // 注意：useMemo 必须在下方「无档案」早退之前执行，否则跨早退重渲染会触发 React #310（白屏）
   const moduleStats = useMemo<ModuleStat[]>(() => {
     const byId = new Map(lessons.map((l) => [l.id, l]));
     const m = new Map<string, ModuleStat>();
@@ -122,6 +116,13 @@ export default function ExamScreen() {
     }
     return [...m.values()].sort((a, b) => a.correct / Math.max(1, a.total) - b.correct / Math.max(1, b.total));
   }, [answers, lessons]);
+
+  if (!profile) return null;
+
+  const q = queue[idx];
+  const correctCount = answers.filter((a) => a.pick === a.q.answer).length;
+  const mm = String(Math.floor(left / 60)).padStart(2, '0');
+  const ss = String(left % 60).padStart(2, '0');
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-indigo-50 to-sky-50">
