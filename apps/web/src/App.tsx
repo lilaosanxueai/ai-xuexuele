@@ -2,16 +2,16 @@ import { lazy, Suspense, useEffect } from 'react';
 import { HashRouter, Navigate, Route, Routes, useParams } from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen.tsx';
 import MapScreen from './screens/MapScreen.tsx';
-import GalleryScreen from './screens/GalleryScreen.tsx';
 import ParentScreen from './screens/ParentScreen.tsx';
 import SubjectScreen from './screens/SubjectScreen.tsx';
 import AskScreen from './screens/AskScreen.tsx';
-import TutorScreen from './screens/TutorScreen.tsx';
-import LabScreen from './screens/LabScreen.tsx';
 import { useProfileStore } from './stores/profile.ts';
 
-// 重页面懒加载：进练习才下载 Blockly（776KB），进实验室才下载摄像头识别模块——
-// 首页/辅导页首屏显著变快，平板上尤其明显
+// 重页面懒加载：进练习/作品墙才下载 Blockly（776KB），进实验室才下载 Python 运行时和摄像头识别模块——
+// 首页/学习中心首屏显著变快，平板上尤其明显（作品墙 Gallery 也静态引了 Blockly，必须一并懒加载才能把它挡在首屏外）
+const TutorScreen = lazy(() => import('./screens/TutorScreen.tsx'));
+const LabScreen = lazy(() => import('./screens/LabScreen.tsx'));
+const GalleryScreen = lazy(() => import('./screens/GalleryScreen.tsx'));
 const WorkshopScreen = lazy(() => import('./screens/WorkshopScreen.tsx'));
 const PlaygroundScreen = lazy(() => import('./screens/PlaygroundScreen.tsx'));
 const WrongBookScreen = lazy(() => import('./screens/WrongbookScreen.tsx'));
