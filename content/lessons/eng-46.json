@@ -1,0 +1,477 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "💬",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：nw=2 lol 是什么意思？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：nw=3 缩写有规律吗？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：作文里能用吗？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "celebrate": "新知识到手！",
+  "island": "cross",
+  "subjectArea": "英语",
+  "gradeBand": "senior",
+  "grade": 10,
+  "area": "英语",
+  "band": "senior",
+  "id": "eng-46",
+  "order": 1052,
+  "title": "网络用语与缩写：数字英语",
+  "emoji": "💬",
+  "textbook": "英语（高中拓展）",
+  "curriculum": {
+    "module": "语言与文化",
+    "points": [
+      "常见网络用语",
+      "缩写的规律",
+      "正式与非正式的边界"
+    ]
+  },
+  "story": "brb·lol·FYI·ASAP——聊天窗口里的英语像另一种语言。它是英语的「堕落」还是活力？这一课读懂数字时代的英语·更学会什么时候该用·什么时候千万别用。",
+  "goals": [
+    "认识常见网络用语",
+    "掌握缩写规律",
+    "分清正式与非正式场合"
+  ],
+  "aiIntro": "💬 键盘上的英语——网络用语与缩写",
+  "param": {
+    "name": "nw",
+    "label": "网络语站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "lol 是什么意思？",
+    "缩写有规律吗？",
+    "作文里能用吗？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "词表",
+      "subtitle": "高频用语",
+      "color": "blue",
+      "emoji": "📇",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "高频缩写",
+          "items": [
+            {
+              "label": "ASAP",
+              "value": "as soon as possible 尽快——商务邮件也常用（不算太随意）"
+            },
+            {
+              "label": "FYI",
+              "value": "for your information 供参考——转发资料时的开头"
+            },
+            {
+              "label": "brb",
+              "value": "be right back 马上回来——聊天临时离开"
+            },
+            {
+              "label": "tbh / imo",
+              "value": "to be honest 说实话 / in my opinion 依我看——表达观点的缓冲垫"
+            }
+          ]
+        },
+        {
+          "kind": "compare",
+          "title": "高频俚语",
+          "items": [
+            {
+              "label": "lol",
+              "value": "laugh out loud 大声笑——注意：在长辈聊天里可能被理解成 lots of love（闹过大笑话）：语境！"
+            },
+            {
+              "label": "meme",
+              "value": "网络梗图——文化单位：一张图一个梗传播全球"
+            },
+            {
+              "label": "vlog / blog",
+              "value": "video blog / web log——v 和 b 开头的组合造词"
+            },
+            {
+              "label": "GOAT",
+              "value": "Greatest Of All Time 史上最佳（夸偶像用）——大写缩写成新词"
+            }
+          ]
+        },
+        {
+          "kind": "highlight",
+          "text": "ASAP 谈工作·lol 发梗图——数字英语有自己的词典"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "规律",
+      "subtitle": "造词三招",
+      "color": "green",
+      "emoji": "🧩",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "缩写三规律",
+          "items": [
+            "首字母法：FYI·ASAP·BTW（by the way 顺便说）——取每个词首字母",
+            "谐音法：u=you·c=see·b4=before·2moro=tomorrow——数字和字母代音：拼音输入的英语版",
+            "截短法：info(information)·app(application)·vocab(vocabulary)——砍尾巴留前段：很多已转正（app 谁还写全称？）"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "⏳",
+          "title": "语言的达尔文",
+          "text": "语言一直在变——莎士比亚时代的拼写和今天天差地别：网络用语是语言在数字环境的适应：有的会消失（谁还记得冲浪「surfing the web」的字面义）·有的会转正（OK 最初也是缩写梗）：活的语言不守规矩·但有自己的淘汰赛"
+        },
+        {
+          "kind": "highlight",
+          "text": "首字母·谐音·截短——三招看懂大多数缩写"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "边界",
+      "subtitle": "正式与非正式",
+      "color": "amber",
+      "emoji": "⚖️",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "场合对照",
+          "items": [
+            {
+              "label": "可以用的地方",
+              "value": "和朋友聊天·游戏语音·社交媒体评论——非正式场合用缩写自然亲切（全拼反而显得生分）"
+            },
+            {
+              "label": "别用的地方",
+              "value": "高考作文·申请信·正式邮件·学术论文——阅卷老师和招生官眼里 lol=u（you）是硬伤：正式文书一个缩写都不该出现"
+            },
+            {
+              "label": "灰色地带",
+              "value": "给老师的邮件（部分常用的 FYI/ASAP 尚可·lol 绝不）；公司内部聊天（看公司文化）：拿不准就全拼——全拼永远不会错"
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "🎯",
+          "title": "考察方式",
+          "text": "高考不考网络用语·但读理解可能出现（科技与文化类文章谈语言变迁）——读懂它即可：写作文用它=主动扣分：认识它·不成为它"
+        },
+        {
+          "kind": "highlight",
+          "text": "聊天随意用·考试全拼——拿不准就完整拼写"
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "高频词表",
+        "body": "【缩写】ASAP尽快·FYI参考·brb回来说。\n【俚语】lol笑·meme梗·GOAT史上最佳。"
+      },
+      {
+        "title": "三规律",
+        "body": "【首字母】FYI·BTW。【谐音】u·b4·2moro。\n【截短】info·app·vocab（多数已转正）。"
+      },
+      {
+        "title": "使用边界",
+        "body": "【可用】聊天社交媒体。【禁用】作文申请信论文。\n【灰色】邮件看对象——拿不准全拼。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "读游戏聊天记录",
+        "steps": [
+          "识别缩写类别",
+          "首字母/谐音/截短",
+          "上下文验证理解",
+          "积累进小本"
+        ],
+        "tip": "三招拆解"
+      },
+      {
+        "q": "给外教写邮件想用 thx",
+        "steps": [
+          "邮件属正式文书",
+          "改成 Thank you",
+          "全文检查无缩写",
+          "养成场合意识"
+        ],
+        "tip": "正式全拼"
+      }
+    ],
+    "mistakes": [
+      "作文里用 u/thx 省字数（正式文书零缩写）",
+      "把网络用语当「错误英语」（是语言的活变化·分场合即可）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "ASAP 的意思是？",
+      "options": [
+        "尽快",
+        "再见",
+        "谢谢",
+        "晚安"
+      ],
+      "answer": 0,
+      "explain": "as soon as possible"
+    },
+    {
+      "q": "FYI 用于？",
+      "options": [
+        "道歉",
+        "供对方参考",
+        "点餐",
+        "报警"
+      ],
+      "answer": 1,
+      "explain": "for your information"
+    },
+    {
+      "q": "b4（before）的造词方法是？",
+      "options": [
+        "首字母",
+        "数字代音",
+        "截短",
+        "倒写"
+      ],
+      "answer": 1,
+      "explain": "4=fore"
+    },
+    {
+      "q": "app（application）属于哪种缩写？",
+      "options": [
+        "首字母",
+        "谐音",
+        "截短",
+        "外来语"
+      ],
+      "answer": 2,
+      "explain": "砍尾巴留前段"
+    },
+    {
+      "q": "高考作文里应该？",
+      "options": [
+        "多用缩写显水平",
+        "零缩写全拼",
+        "用表情符号",
+        "中英混杂"
+      ],
+      "answer": 1,
+      "explain": "正式文书"
+    },
+    {
+      "q": "网络用语是语言对数字环境的？",
+      "options": [
+        "堕落",
+        "适应"
+      ],
+      "answer": 1,
+      "explain": "活的语言总在变",
+      "type": "blank",
+      "blank": {
+        "answerText": "适应",
+        "bank": [
+          "适应",
+          "堕落"
+        ]
+      }
+    }
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "nw",
+        "label": "网络语站",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ]
+  },
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "词表",
+        "subtitle": "高频用语",
+        "color": "blue",
+        "emoji": "📇",
+        "blocks": [
+          {
+            "kind": "compare",
+            "title": "高频缩写",
+            "items": [
+              {
+                "label": "ASAP",
+                "value": "as soon as possible 尽快——商务邮件也常用（不算太随意）"
+              },
+              {
+                "label": "FYI",
+                "value": "for your information 供参考——转发资料时的开头"
+              },
+              {
+                "label": "brb",
+                "value": "be right back 马上回来——聊天临时离开"
+              },
+              {
+                "label": "tbh / imo",
+                "value": "to be honest 说实话 / in my opinion 依我看——表达观点的缓冲垫"
+              }
+            ]
+          },
+          {
+            "kind": "compare",
+            "title": "高频俚语",
+            "items": [
+              {
+                "label": "lol",
+                "value": "laugh out loud 大声笑——注意：在长辈聊天里可能被理解成 lots of love（闹过大笑话）：语境！"
+              },
+              {
+                "label": "meme",
+                "value": "网络梗图——文化单位：一张图一个梗传播全球"
+              },
+              {
+                "label": "vlog / blog",
+                "value": "video blog / web log——v 和 b 开头的组合造词"
+              },
+              {
+                "label": "GOAT",
+                "value": "Greatest Of All Time 史上最佳（夸偶像用）——大写缩写成新词"
+              }
+            ]
+          },
+          {
+            "kind": "highlight",
+            "text": "ASAP 谈工作·lol 发梗图——数字英语有自己的词典"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "规律",
+        "subtitle": "造词三招",
+        "color": "green",
+        "emoji": "🧩",
+        "blocks": [
+          {
+            "kind": "steps",
+            "title": "缩写三规律",
+            "items": [
+              "首字母法：FYI·ASAP·BTW（by the way 顺便说）——取每个词首字母",
+              "谐音法：u=you·c=see·b4=before·2moro=tomorrow——数字和字母代音：拼音输入的英语版",
+              "截短法：info(information)·app(application)·vocab(vocabulary)——砍尾巴留前段：很多已转正（app 谁还写全称？）"
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "⏳",
+            "title": "语言的达尔文",
+            "text": "语言一直在变——莎士比亚时代的拼写和今天天差地别：网络用语是语言在数字环境的适应：有的会消失（谁还记得冲浪「surfing the web」的字面义）·有的会转正（OK 最初也是缩写梗）：活的语言不守规矩·但有自己的淘汰赛"
+          },
+          {
+            "kind": "highlight",
+            "text": "首字母·谐音·截短——三招看懂大多数缩写"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "边界",
+        "subtitle": "正式与非正式",
+        "color": "amber",
+        "emoji": "⚖️",
+        "blocks": [
+          {
+            "kind": "compare",
+            "title": "场合对照",
+            "items": [
+              {
+                "label": "可以用的地方",
+                "value": "和朋友聊天·游戏语音·社交媒体评论——非正式场合用缩写自然亲切（全拼反而显得生分）"
+              },
+              {
+                "label": "别用的地方",
+                "value": "高考作文·申请信·正式邮件·学术论文——阅卷老师和招生官眼里 lol=u（you）是硬伤：正式文书一个缩写都不该出现"
+              },
+              {
+                "label": "灰色地带",
+                "value": "给老师的邮件（部分常用的 FYI/ASAP 尚可·lol 绝不）；公司内部聊天（看公司文化）：拿不准就全拼——全拼永远不会错"
+              }
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "🎯",
+            "title": "考察方式",
+            "text": "高考不考网络用语·但读理解可能出现（科技与文化类文章谈语言变迁）——读懂它即可：写作文用它=主动扣分：认识它·不成为它"
+          },
+          {
+            "kind": "highlight",
+            "text": "聊天随意用·考试全拼——拿不准就完整拼写"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "lol 是什么意思？",
+      "缩写有规律吗？",
+      "作文里能用吗？"
+    ]
+  }
+}

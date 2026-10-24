@@ -1,0 +1,433 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "📊",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：cd2=2 「先涨后跌」怎么说？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：cd2=3 怎样比较两组数据？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：小作文怎样谋篇？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "celebrate": "新知识到手！",
+  "island": "cross",
+  "subjectArea": "英语",
+  "gradeBand": "senior",
+  "grade": 11,
+  "area": "英语",
+  "band": "senior",
+  "id": "eng-47",
+  "order": 1053,
+  "title": "图表描述：用英语说数据",
+  "emoji": "📊",
+  "textbook": "英语（高中拓展）",
+  "curriculum": {
+    "module": "学术英语",
+    "points": [
+      "趋势词汇",
+      "比较句型",
+      "小作文实战"
+    ]
+  },
+  "story": "一张折线图——英语怎么说「先涨后跌」「稳中有升」？新课标和高考越来越爱考图表描述。这一课装上一套「数据语言」工具箱·让图表开口说英语。",
+  "goals": [
+    "掌握趋势描述词汇",
+    "学会比较句型",
+    "完成图表小作文"
+  ],
+  "aiIntro": "📊 让图表开口说英语——图表描述",
+  "param": {
+    "name": "cd2",
+    "label": "图表站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "「先涨后跌」怎么说？",
+    "怎样比较两组数据？",
+    "小作文怎样谋篇？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "趋势",
+      "subtitle": "动词工具箱",
+      "color": "blue",
+      "emoji": "📈",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "趋势三态",
+          "items": [
+            {
+              "label": "上升",
+              "value": "rise / increase / go up / climb（升）·soar / surge / rocket（飙升）——程度副词：sharply 急剧·steadily 稳步·slightly 略微"
+            },
+            {
+              "label": "下降",
+              "value": "fall / drop / decline / decrease（降）·plunge / plummet（暴跌）——记住成对：升就配 sharply·降也配 sharply"
+            },
+            {
+              "label": "平稳与拐点",
+              "value": "remain stable / level off（走平）·fluctuate（波动）·peak at（达峰）·bottom out（触底）：先涨后跌 = rise to a peak in June, then decline"
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "🔁",
+          "title": "换词的学问",
+          "text": "一幅图写三段——rise 不能用三遍：第一段 rise·第二段 increase·第三段 climb up：词汇多样性是小作文的评分点：同义词轮换是最简单的提分术"
+        },
+        {
+          "kind": "highlight",
+          "text": "升·降·平三态+程度副词——同义词轮换取高分"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "比较",
+      "subtitle": "句型四式",
+      "color": "green",
+      "emoji": "⚖️",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "四组万能句型",
+          "items": [
+            "倍数：A is twice / three times as high as B——A 是 B 的两倍/三倍",
+            "差值：A is 20% higher than B / higher by 20%——比 B 高两成",
+            "最值：A is the largest / ranks first among all categories——居首",
+            "占 比：A accounts for 40% of the total / makes up...——占比四成"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "📊",
+          "title": "图表类型对应",
+          "text": "折线图写趋势（rise/decline）·柱状图写比较（higher than）·饼图写占比（account for）——先看懂图的「问题」再选句型：图会告诉你答案的形状"
+        },
+        {
+          "kind": "highlight",
+          "text": "倍数·差值·最值·占比——四式应对所有比较"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "成文",
+      "subtitle": "小作文三段",
+      "color": "amber",
+      "emoji": "✍️",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "三段式模板",
+          "items": [
+            "开头一句总述：The chart shows the changes in... from 2010 to 2020.（转述题目·别抄原句）",
+            "主体两三句抓关键：最大的变化+最值的对比——不必每个数据都写：抓大放小是图表作文第一心法",
+            "结尾一句概括：Overall, ... witnessed a significant increase / the gap between A and B widened.（总体趋势·不引入新数据）"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "⏱️",
+          "title": "考场节奏",
+          "text": "限时 15 分钟：2 分钟读图找关键→10 分钟写（6-8 句足矣）→3 分钟检查（时态！描述过去图表用过去时 rose/fell·普遍现状用现在时）：时态错误是图表作文头号扣分点"
+        },
+        {
+          "kind": "info",
+          "icon": "🧠",
+          "title": "底层能力",
+          "text": "图表描述=观察（哪根线最陡）+选择（写什么不写什么）+语言（句型词汇）：它同时训练理科的数据思维和文科的表达——难怪考试越来越爱考"
+        },
+        {
+          "kind": "highlight",
+          "text": "总述→关键两三句→概括：时态是头号陷阱"
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "趋势词汇",
+        "body": "【升】rise/increase/climb·soar飙升。\n【降】fall/decline/plunge暴跌。\n【平】level off·fluctuate·peak at。\n【副词】sharply/steadily/slightly。"
+      },
+      {
+        "title": "比较句型",
+        "body": "【倍数】twice as high as。【差值】20% higher than。\n【最值】ranks first。【占比】account for 40%。"
+      },
+      {
+        "title": "三段成文",
+        "body": "【结构】总述→关键数据→Overall概括。\n【心法】抓大放小·同义词轮换。\n【时态】过去图表用过去时。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "描述一条先升后降的曲线",
+        "steps": [
+          "rise steadily from Jan to May",
+          "peak at 60% in June",
+          "then decline sharply to 20%",
+          "检查时态统一"
+        ],
+        "tip": "拐点句"
+      },
+      {
+        "q": "比较两根柱子的高低",
+        "steps": [
+          "A is twice as high as B",
+          "或 A exceeds B by 30%",
+          "选一个句型写准",
+          "数据核對"
+        ],
+        "tip": "四式选一"
+      }
+    ],
+    "mistakes": [
+      "每个数据都写一遍（抓大放小·只写关键点）",
+      "描述过去年份的图表用现在时（应用过去时 rose/fell）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "「飙升」最贴切的表达是？",
+      "options": [
+        "go up a little",
+        "soar / surge",
+        "stay stable",
+        "sit down"
+      ],
+      "answer": 1,
+      "explain": "急剧上升"
+    },
+    {
+      "q": "remain stable 的意思是？",
+      "options": [
+        "暴涨",
+        "保持平稳",
+        "暴跌",
+        "消失"
+      ],
+      "answer": 1,
+      "explain": "走平"
+    },
+    {
+      "q": "「A 是 B 的三倍」用英语？",
+      "options": [
+        "A is three times as high as B",
+        "A is three high than B",
+        "A has three B",
+        "A triples B up"
+      ],
+      "answer": 0,
+      "explain": "倍数句型"
+    },
+    {
+      "q": "「占比 40%」的表达是？",
+      "options": [
+        "accounts for 40%",
+        "makes 40 tall",
+        "takes 40 up",
+        "gets 40% out"
+      ],
+      "answer": 0,
+      "explain": "account for"
+    },
+    {
+      "q": "描述 2015 年数据应使用？",
+      "options": [
+        "现在时",
+        "过去时",
+        "将来时",
+        "虚拟语气"
+      ],
+      "answer": 1,
+      "explain": "rose/fell"
+    },
+    {
+      "q": "图表作文第一心法是抓大放 ___",
+      "options": [
+        "小",
+        "大"
+      ],
+      "answer": 0,
+      "explain": "只写关键点",
+      "type": "blank",
+      "blank": {
+        "answerText": "小",
+        "bank": [
+          "小",
+          "大"
+        ]
+      }
+    }
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "cd2",
+        "label": "图表站",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ]
+  },
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "趋势",
+        "subtitle": "动词工具箱",
+        "color": "blue",
+        "emoji": "📈",
+        "blocks": [
+          {
+            "kind": "compare",
+            "title": "趋势三态",
+            "items": [
+              {
+                "label": "上升",
+                "value": "rise / increase / go up / climb（升）·soar / surge / rocket（飙升）——程度副词：sharply 急剧·steadily 稳步·slightly 略微"
+              },
+              {
+                "label": "下降",
+                "value": "fall / drop / decline / decrease（降）·plunge / plummet（暴跌）——记住成对：升就配 sharply·降也配 sharply"
+              },
+              {
+                "label": "平稳与拐点",
+                "value": "remain stable / level off（走平）·fluctuate（波动）·peak at（达峰）·bottom out（触底）：先涨后跌 = rise to a peak in June, then decline"
+              }
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "🔁",
+            "title": "换词的学问",
+            "text": "一幅图写三段——rise 不能用三遍：第一段 rise·第二段 increase·第三段 climb up：词汇多样性是小作文的评分点：同义词轮换是最简单的提分术"
+          },
+          {
+            "kind": "highlight",
+            "text": "升·降·平三态+程度副词——同义词轮换取高分"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "比较",
+        "subtitle": "句型四式",
+        "color": "green",
+        "emoji": "⚖️",
+        "blocks": [
+          {
+            "kind": "steps",
+            "title": "四组万能句型",
+            "items": [
+              "倍数：A is twice / three times as high as B——A 是 B 的两倍/三倍",
+              "差值：A is 20% higher than B / higher by 20%——比 B 高两成",
+              "最值：A is the largest / ranks first among all categories——居首",
+              "占 比：A accounts for 40% of the total / makes up...——占比四成"
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "📊",
+            "title": "图表类型对应",
+            "text": "折线图写趋势（rise/decline）·柱状图写比较（higher than）·饼图写占比（account for）——先看懂图的「问题」再选句型：图会告诉你答案的形状"
+          },
+          {
+            "kind": "highlight",
+            "text": "倍数·差值·最值·占比——四式应对所有比较"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "成文",
+        "subtitle": "小作文三段",
+        "color": "amber",
+        "emoji": "✍️",
+        "blocks": [
+          {
+            "kind": "steps",
+            "title": "三段式模板",
+            "items": [
+              "开头一句总述：The chart shows the changes in... from 2010 to 2020.（转述题目·别抄原句）",
+              "主体两三句抓关键：最大的变化+最值的对比——不必每个数据都写：抓大放小是图表作文第一心法",
+              "结尾一句概括：Overall, ... witnessed a significant increase / the gap between A and B widened.（总体趋势·不引入新数据）"
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "⏱️",
+            "title": "考场节奏",
+            "text": "限时 15 分钟：2 分钟读图找关键→10 分钟写（6-8 句足矣）→3 分钟检查（时态！描述过去图表用过去时 rose/fell·普遍现状用现在时）：时态错误是图表作文头号扣分点"
+          },
+          {
+            "kind": "info",
+            "icon": "🧠",
+            "title": "底层能力",
+            "text": "图表描述=观察（哪根线最陡）+选择（写什么不写什么）+语言（句型词汇）：它同时训练理科的数据思维和文科的表达——难怪考试越来越爱考"
+          },
+          {
+            "kind": "highlight",
+            "text": "总述→关键两三句→概括：时态是头号陷阱"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "「先涨后跌」怎么说？",
+      "怎样比较两组数据？",
+      "小作文怎样谋篇？"
+    ]
+  }
+}
