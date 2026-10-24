@@ -1,0 +1,433 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🛍️",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：sh=2 怎样问价砍价？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：sh=3 怎样试穿问码？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：买错了怎样退换？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "celebrate": "新知识到手！",
+  "island": "cross",
+  "subjectArea": "英语",
+  "gradeBand": "junior",
+  "grade": 7,
+  "area": "英语",
+  "band": "junior",
+  "id": "eng-48",
+  "order": 1062,
+  "title": "购物英语：怎么买更划算",
+  "emoji": "🛍️",
+  "textbook": "人教版英语（七年级）",
+  "curriculum": {
+    "module": "生活英语",
+    "points": [
+      "询价与砍价",
+      "尺寸与试穿",
+      "退换表达"
+    ]
+  },
+  "story": "出国旅行或在进口超市——「这个多少钱」「能便宜点吗」「有小一号吗」用英语怎么说？这一课装齐购物全流程的英语工具箱·做个体面的顾客。",
+  "goals": [
+    "掌握询价砍价句型",
+    "学会问尺寸试穿",
+    "懂得退换表达"
+  ],
+  "aiIntro": "🛍️ 血拼的正确打开方式——购物英语",
+  "param": {
+    "name": "sh",
+    "label": "购物站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "怎样问价砍价？",
+    "怎样试穿问码？",
+    "买错了怎样退换？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "询价",
+      "subtitle": "问价砍价",
+      "color": "blue",
+      "emoji": "💰",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "询价三句",
+          "items": [
+            {
+              "label": "How much",
+              "value": "How much is this? / How much are these?（单数 is·复数 are）——最通用的问价"
+            },
+            {
+              "label": "Do you have",
+              "value": "Do you have this in blue?（这个有蓝色的吗）——问颜色问款式一句搞定"
+            },
+            {
+              "label": "Any discount?",
+              "value": "Is there any discount? / Any discount for two?（买两个有折扣吗）——委婉探折扣"
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "🤝",
+          "title": "砍价的礼貌姿势",
+          "text": "Can you come down a little?（能便宜点吗）·That is a bit too expensive for me.（对我来说有点贵）——先表达喜欢再还价：漫天砍价在正规商场不适用·跳蚤市场集市才好玩：看场合出招"
+        },
+        {
+          "kind": "highlight",
+          "text": "问价·问款·探折扣——先喜欢后还价"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "试穿",
+      "subtitle": "尺寸合身",
+      "color": "green",
+      "emoji": "👕",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "试穿四句",
+          "items": [
+            "Can I try it on?（能试穿吗）——试衣间 fitting room",
+            "Do you have a smaller / bigger size?（有小/大一码吗）——size up 大一码·size down 小一码",
+            "It is too tight / too loose.（太紧/太松）——说出问题店员才能帮你",
+            "It fits perfectly! I will take it.（很合身！我买了）——满意就果断"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "📏",
+          "title": "尺码小知识",
+          "text": "S / M / L / XL（small medium large extra large）——鞋码 US UK EU 各不同（看标签）：拿不准就说 Can you help me find my size?——店员最喜欢目标明确的顾客"
+        },
+        {
+          "kind": "highlight",
+          "text": "try on 问码·说松紧·合身拿下"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "退换",
+      "subtitle": "售后表达",
+      "color": "amber",
+      "emoji": "↩️",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "退换三步",
+          "items": [
+            "I would like to return this.（我想退这个）——return 退货·exchange 换货",
+            "It does not fit. / There is something wrong with it.（不合身/有质量问题）——说明原因",
+            "Here is the receipt.（这是小票）——小票 receipt 是退换的通行证：保留好"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "💳",
+          "title": "结账用语",
+          "text": "How would you like to pay?（您怎么付款）——In cash. / By card.（现金/刷卡）；Could I get a bag, please?（能给个袋子吗）：一句话文明全款拿下"
+        },
+        {
+          "kind": "info",
+          "icon": "🎭",
+          "title": "情景小剧场",
+          "text": "两人一组演「买 T 恤」：顾客问价→问码→试穿→砍价→付款：五步连台词不超过十句——演三轮·这辈子忘不了：口语是演会的"
+        },
+        {
+          "kind": "highlight",
+          "text": "return/exchange + 原因 + receipt——售后三件套"
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "询价砍价",
+        "body": "【问价】How much is/are...?\n【问款】Do you have it in blue?\n【折扣】Any discount?\n【还价】Can you come down a little?（集市适用）"
+      },
+      {
+        "title": "试穿尺码",
+        "body": "【试穿】Can I try it on?·fitting room。\n【问码】a smaller/bigger size。\n【反馈】too tight/loose。【成交】I will take it。"
+      },
+      {
+        "title": "退换结账",
+        "body": "【退】return·【换】exchange。\n【原因】It does not fit.\n【凭据】Here is the receipt.\n【付款】In cash / By card。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "演一遍买鞋对话",
+        "steps": [
+          "Do you have these in size 38?",
+          "Can I try them on?",
+          "They are a bit tight.",
+          "Any bigger ones? I will take them"
+        ],
+        "tip": "四句走完"
+      },
+      {
+        "q": "买的杯子有裂痕",
+        "steps": [
+          "There is something wrong with it",
+          "I would like to exchange it",
+          "Here is the receipt",
+          "礼貌但明确"
+        ],
+        "tip": "售后三件套"
+      }
+    ],
+    "mistakes": [
+      "How much are this?（单数用 is·复数才用 are）",
+      "退换时不带小票空口说（receipt 是通行证）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "「这个多少钱」最地道的说法？",
+      "options": [
+        "How many is this?",
+        "How much is this?",
+        "What price this?",
+        "How money?"
+      ],
+      "answer": 1,
+      "explain": "how much 问价格"
+    },
+    {
+      "q": "想试穿应该问？",
+      "options": [
+        "Can I try it on?",
+        "Can I eat it?",
+        "Can I go home?",
+        "Can I see you?"
+      ],
+      "answer": 0,
+      "explain": "try on 试穿"
+    },
+    {
+      "q": "「有小一码的吗」用英语？",
+      "options": [
+        "Do you have a bigger size?",
+        "Do you have a smaller size?",
+        "Is this free?",
+        "Where is the door?"
+      ],
+      "answer": 1,
+      "explain": "smaller 小一码"
+    },
+    {
+      "q": "退货时最该递给店员的是？",
+      "options": [
+        "照片",
+        "receipt（小票）",
+        "书包",
+        "眼镜"
+      ],
+      "answer": 1,
+      "explain": "售后通行证"
+    },
+    {
+      "q": "「刷卡付款」的表达是？",
+      "options": [
+        "By card",
+        "By bike",
+        "On foot",
+        "By hand"
+      ],
+      "answer": 0,
+      "explain": "in cash 反义"
+    },
+    {
+      "q": "砍价先表达对商品的 ___",
+      "options": [
+        "喜欢",
+        "讨厌"
+      ],
+      "answer": 0,
+      "explain": "礼貌姿势",
+      "type": "blank",
+      "blank": {
+        "answerText": "喜欢",
+        "bank": [
+          "喜欢",
+          "讨厌"
+        ]
+      }
+    }
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "sh",
+        "label": "购物站",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ]
+  },
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "询价",
+        "subtitle": "问价砍价",
+        "color": "blue",
+        "emoji": "💰",
+        "blocks": [
+          {
+            "kind": "compare",
+            "title": "询价三句",
+            "items": [
+              {
+                "label": "How much",
+                "value": "How much is this? / How much are these?（单数 is·复数 are）——最通用的问价"
+              },
+              {
+                "label": "Do you have",
+                "value": "Do you have this in blue?（这个有蓝色的吗）——问颜色问款式一句搞定"
+              },
+              {
+                "label": "Any discount?",
+                "value": "Is there any discount? / Any discount for two?（买两个有折扣吗）——委婉探折扣"
+              }
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "🤝",
+            "title": "砍价的礼貌姿势",
+            "text": "Can you come down a little?（能便宜点吗）·That is a bit too expensive for me.（对我来说有点贵）——先表达喜欢再还价：漫天砍价在正规商场不适用·跳蚤市场集市才好玩：看场合出招"
+          },
+          {
+            "kind": "highlight",
+            "text": "问价·问款·探折扣——先喜欢后还价"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "试穿",
+        "subtitle": "尺寸合身",
+        "color": "green",
+        "emoji": "👕",
+        "blocks": [
+          {
+            "kind": "steps",
+            "title": "试穿四句",
+            "items": [
+              "Can I try it on?（能试穿吗）——试衣间 fitting room",
+              "Do you have a smaller / bigger size?（有小/大一码吗）——size up 大一码·size down 小一码",
+              "It is too tight / too loose.（太紧/太松）——说出问题店员才能帮你",
+              "It fits perfectly! I will take it.（很合身！我买了）——满意就果断"
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "📏",
+            "title": "尺码小知识",
+            "text": "S / M / L / XL（small medium large extra large）——鞋码 US UK EU 各不同（看标签）：拿不准就说 Can you help me find my size?——店员最喜欢目标明确的顾客"
+          },
+          {
+            "kind": "highlight",
+            "text": "try on 问码·说松紧·合身拿下"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "退换",
+        "subtitle": "售后表达",
+        "color": "amber",
+        "emoji": "↩️",
+        "blocks": [
+          {
+            "kind": "steps",
+            "title": "退换三步",
+            "items": [
+              "I would like to return this.（我想退这个）——return 退货·exchange 换货",
+              "It does not fit. / There is something wrong with it.（不合身/有质量问题）——说明原因",
+              "Here is the receipt.（这是小票）——小票 receipt 是退换的通行证：保留好"
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "💳",
+            "title": "结账用语",
+            "text": "How would you like to pay?（您怎么付款）——In cash. / By card.（现金/刷卡）；Could I get a bag, please?（能给个袋子吗）：一句话文明全款拿下"
+          },
+          {
+            "kind": "info",
+            "icon": "🎭",
+            "title": "情景小剧场",
+            "text": "两人一组演「买 T 恤」：顾客问价→问码→试穿→砍价→付款：五步连台词不超过十句——演三轮·这辈子忘不了：口语是演会的"
+          },
+          {
+            "kind": "highlight",
+            "text": "return/exchange + 原因 + receipt——售后三件套"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "怎样问价砍价？",
+      "怎样试穿问码？",
+      "买错了怎样退换？"
+    ]
+  }
+}
