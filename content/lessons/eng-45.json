@@ -1,0 +1,429 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🔍",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：gw=2 生词的意思藏在哪？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：gw=3 哪些生词根本不用猜？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：考试时怎样操作？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "celebrate": "新知识到手！",
+  "island": "cross",
+  "subjectArea": "英语",
+  "gradeBand": "junior",
+  "grade": 8,
+  "area": "英语",
+  "band": "junior",
+  "id": "eng-45",
+  "order": 1049,
+  "title": "阅读猜词：生词不用查",
+  "emoji": "🔍",
+  "textbook": "人教版英语（八年级）",
+  "curriculum": {
+    "module": "阅读策略",
+    "points": [
+      "五种猜词线索",
+      "哪些词可以跳过",
+      "实战练习"
+    ]
+  },
+  "story": "考场上没有词典——遇到生词就卡住·是阅读的大忌。真相是：文章里的生词·大部分答案就写在旁边。这一课学五条线索·让生词变成「可以推理的谜题」。",
+  "goals": [
+    "掌握五种猜词线索",
+    "学会跳过无用生词",
+    "在真题中运用"
+  ],
+  "aiIntro": "🔍 生词是谜题不是路障——阅读猜词",
+  "param": {
+    "name": "gw",
+    "label": "猜词站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "生词的意思藏在哪？",
+    "哪些生词根本不用猜？",
+    "考试时怎样操作？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "线索",
+      "subtitle": "五条路",
+      "color": "blue",
+      "emoji": "🧩",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "五种猜词线索",
+          "items": [
+            {
+              "label": "定义线索",
+              "value": "作者直接解释：or·that is·in other words 后面常是解释。He is a polyglot, that is, he can speak many languages.——生词的意思白送"
+            },
+            {
+              "label": "举例线索",
+              "value": "such as·for example 后面的例子在提示：Celestial bodies, such as the sun, the moon and stars——举的例子就是答案"
+            },
+            {
+              "label": "对比线索",
+              "value": "but·however·unlike 提示反义：Unlike her talkative sister, Mary is quite reticent.——reticent≈不爱说话"
+            },
+            {
+              "label": "因果线索",
+              "value": "because·so·as a result 推理原因或结果：The river was contaminated, so fish died.——污染没跑"
+            },
+            {
+              "label": "构词线索",
+              "value": "词根词缀（un-·re-·-tion）+ 合成词（snow+man）——学过的零件拼生词：课堂词根词缀知识直接调用"
+            }
+          ]
+        },
+        {
+          "kind": "highlight",
+          "text": "定义·举例·对比·因果·构词——五条线索通向谜底"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "取舍",
+      "subtitle": "跳过技术",
+      "color": "green",
+      "emoji": "⏭️",
+      "blocks": [
+        {
+          "kind": "info",
+          "icon": "🎯",
+          "title": "先问影响不影响做题",
+          "text": "不影响理解的生词（人名地名·修饰性副词·列举中的第三四项）——直接跳过：不是每个生词都值得停留：读文章是抓意思·不是逐词翻译"
+        },
+        {
+          "kind": "info",
+          "icon": "❓",
+          "title": "题目问到的必须猜",
+          "text": "如果生词正是考题（猜词题）——回到原句·找上面五条线索·再带选项验证（哪个答案跟线索吻合）：线索+选项双向夹击"
+        },
+        {
+          "kind": "info",
+          "icon": "🧠",
+          "title": "心态",
+          "text": "见到生词不慌是第一素质——把它当谜题：阅读高手的标志不是词汇量大到没有生词·而是遇到生词照样把文章读懂"
+        },
+        {
+          "kind": "highlight",
+          "text": "不影响就跳·考到就猜——生词是谜题不是路障"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "实战",
+      "subtitle": "三步操作",
+      "color": "amber",
+      "emoji": "⚔️",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "考场三步",
+          "items": [
+            "圈出生词·先读完整句（不停留在生词上）——整句的意思是谜面",
+            "扫描周边信号词（or? such as? but? so?）——选一条线索推理",
+            "把猜出的意思放回句子读一遍通不通；选择题再对选项验证"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "📏",
+          "title": "一个练习模板",
+          "text": "每天读一小段英文·划出2个生词——写下：①我猜的意思②用的哪条线索③查词典验证：坚持一个月·你的「猜感」会吓到自己"
+        },
+        {
+          "kind": "highlight",
+          "text": "读全句→找线索→代回验证——三步猜词法"
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "五条线索",
+        "body": "【定义】or/that is后是解释。\n【举例】such as后的例子即提示。\n【对比】but/unlike推反义。【因果】so推结果。\n【构词】词根词缀+合成。"
+      },
+      {
+        "title": "取舍",
+        "body": "【跳过】人名地名修饰词·不影响就跳。\n【必猜】考题问到的词回原句找线索。\n【心态】谜题不是路障。"
+      },
+      {
+        "title": "三步实战",
+        "body": "【流程】读全句→扫信号词→代回验证。\n【模板】每日两词：猜+线索+验证。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "猜 matriarch 的意思",
+        "steps": [
+          "The matriarch, that is, the oldest woman, led the family",
+          "that is 后是定义",
+          "猜出：家族中年长的女性掌管者",
+          "线索：定义"
+        ],
+        "tip": "白送答案"
+      },
+      {
+        "q": "Unlike his generous brother, Tom is quite stingy",
+        "steps": [
+          "Unlike 提示对比",
+          "generous 慷慨（学过）",
+          "stingy 应是反面",
+          "猜出：吝啬"
+        ],
+        "tip": "对比线索"
+      }
+    ],
+    "mistakes": [
+      "见生词立刻查词典/卡住（先读全句找线索）",
+      "试图弄懂每一个生词（不影响答题的果断跳过）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "or / that is 后面常是生词的？",
+      "options": [
+        "反义词",
+        "定义解释",
+        "词根",
+        "答案"
+      ],
+      "answer": 1,
+      "explain": "白送答案"
+    },
+    {
+      "q": "such as 提示的是哪条线索？",
+      "options": [
+        "举例",
+        "因果",
+        "对比",
+        "构词"
+      ],
+      "answer": 0,
+      "explain": "例子即提示"
+    },
+    {
+      "q": "Unlike 提示两词之间是？",
+      "options": [
+        "同义",
+        "反义对比",
+        "因果",
+        "并列"
+      ],
+      "answer": 1,
+      "explain": "推反面"
+    },
+    {
+      "q": "遇到不影响答题的生词应该？",
+      "options": [
+        "立刻查词典",
+        "卡住不读了",
+        "果断跳过继续读",
+        "全文抄一遍"
+      ],
+      "answer": 2,
+      "explain": "抓意思不逐词"
+    },
+    {
+      "q": "猜词题的正确操作顺序是？",
+      "options": [
+        "直接选最长的选项",
+        "读全句→找线索→代回验证",
+        "凭第一感觉",
+        "放弃"
+      ],
+      "answer": 1,
+      "explain": "三步法"
+    },
+    {
+      "q": "生词是谜题不是 ___",
+      "options": [
+        "路障",
+        "宝藏"
+      ],
+      "answer": 0,
+      "explain": "可以推理",
+      "type": "blank",
+      "blank": {
+        "answerText": "路障",
+        "bank": [
+          "路障",
+          "宝藏"
+        ]
+      }
+    }
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "gw",
+        "label": "猜词站",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ]
+  },
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "线索",
+        "subtitle": "五条路",
+        "color": "blue",
+        "emoji": "🧩",
+        "blocks": [
+          {
+            "kind": "compare",
+            "title": "五种猜词线索",
+            "items": [
+              {
+                "label": "定义线索",
+                "value": "作者直接解释：or·that is·in other words 后面常是解释。He is a polyglot, that is, he can speak many languages.——生词的意思白送"
+              },
+              {
+                "label": "举例线索",
+                "value": "such as·for example 后面的例子在提示：Celestial bodies, such as the sun, the moon and stars——举的例子就是答案"
+              },
+              {
+                "label": "对比线索",
+                "value": "but·however·unlike 提示反义：Unlike her talkative sister, Mary is quite reticent.——reticent≈不爱说话"
+              },
+              {
+                "label": "因果线索",
+                "value": "because·so·as a result 推理原因或结果：The river was contaminated, so fish died.——污染没跑"
+              },
+              {
+                "label": "构词线索",
+                "value": "词根词缀（un-·re-·-tion）+ 合成词（snow+man）——学过的零件拼生词：课堂词根词缀知识直接调用"
+              }
+            ]
+          },
+          {
+            "kind": "highlight",
+            "text": "定义·举例·对比·因果·构词——五条线索通向谜底"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "取舍",
+        "subtitle": "跳过技术",
+        "color": "green",
+        "emoji": "⏭️",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "🎯",
+            "title": "先问影响不影响做题",
+            "text": "不影响理解的生词（人名地名·修饰性副词·列举中的第三四项）——直接跳过：不是每个生词都值得停留：读文章是抓意思·不是逐词翻译"
+          },
+          {
+            "kind": "info",
+            "icon": "❓",
+            "title": "题目问到的必须猜",
+            "text": "如果生词正是考题（猜词题）——回到原句·找上面五条线索·再带选项验证（哪个答案跟线索吻合）：线索+选项双向夹击"
+          },
+          {
+            "kind": "info",
+            "icon": "🧠",
+            "title": "心态",
+            "text": "见到生词不慌是第一素质——把它当谜题：阅读高手的标志不是词汇量大到没有生词·而是遇到生词照样把文章读懂"
+          },
+          {
+            "kind": "highlight",
+            "text": "不影响就跳·考到就猜——生词是谜题不是路障"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "实战",
+        "subtitle": "三步操作",
+        "color": "amber",
+        "emoji": "⚔️",
+        "blocks": [
+          {
+            "kind": "steps",
+            "title": "考场三步",
+            "items": [
+              "圈出生词·先读完整句（不停留在生词上）——整句的意思是谜面",
+              "扫描周边信号词（or? such as? but? so?）——选一条线索推理",
+              "把猜出的意思放回句子读一遍通不通；选择题再对选项验证"
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "📏",
+            "title": "一个练习模板",
+            "text": "每天读一小段英文·划出2个生词——写下：①我猜的意思②用的哪条线索③查词典验证：坚持一个月·你的「猜感」会吓到自己"
+          },
+          {
+            "kind": "highlight",
+            "text": "读全句→找线索→代回验证——三步猜词法"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "生词的意思藏在哪？",
+      "哪些生词根本不用猜？",
+      "考试时怎样操作？"
+    ]
+  }
+}
