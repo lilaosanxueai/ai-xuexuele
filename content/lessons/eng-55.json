@@ -1,0 +1,439 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "⏪",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：pp3=2 过去完成时怎样构成？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：pp3=3 by the time 是什么信号？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：两个过去动作怎样排先后？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "celebrate": "新知识到手！",
+  "island": "cross",
+  "subjectArea": "英语",
+  "gradeBand": "junior",
+  "grade": 9,
+  "area": "英语",
+  "band": "junior",
+  "id": "eng-55",
+  "order": 1127,
+  "title": "过去完成时：过去的过去",
+  "emoji": "⏪",
+  "textbook": "人教版英语（九年级）",
+  "curriculum": {
+    "module": "时态",
+    "points": [
+      "结构与时序",
+      "常见信号词",
+      "与一般过去时区分"
+    ]
+  },
+  "story": "昨天到达电影院时·电影已经开始了——「到达」是过去·「开始」是过去的过去：这就需要过去完成时。时态的「时间机器」·专门回到过去某一时刻之前。",
+  "goals": [
+    "掌握过去完成时结构",
+    "识别信号词",
+    "区分与一般过去时"
+  ],
+  "aiIntro": "⏪ 过去的过去——过去完成时",
+  "param": {
+    "name": "pp3",
+    "label": "过完站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "过去完成时怎样构成？",
+    "by the time 是什么信号？",
+    "两个过去动作怎样排先后？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "结构",
+      "subtitle": "had done",
+      "color": "blue",
+      "emoji": "📐",
+      "blocks": [
+        {
+          "kind": "info",
+          "icon": "📜",
+          "title": "基本结构",
+          "text": "had + 过去分词——When I arrived, the train had left.（到达之前·火车已走）：核心是「过去的过去」——以过去某时刻为参照·描述在那之前完成的事"
+        },
+        {
+          "kind": "info",
+          "icon": "⏰",
+          "title": "时间轴理解",
+          "text": "画一条线：had left（更早）→ arrived（参照点过去）→ 现在：过去完成时永远依附一个「过去的参照点」（when I arrived/ by 5 p.m. yesterday）：没有参照点的孤立过去·用一般过去时就够"
+        },
+        {
+          "kind": "highlight",
+          "text": "had done=参照点之前已完成——必须有个过去锚点"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "信号",
+      "subtitle": "提示词",
+      "color": "green",
+      "emoji": "🚨",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "常见信号词",
+          "items": [
+            {
+              "label": "by + 过去时间",
+              "value": "By the time we got there, they had finished dinner. / By 2020, he had written three books.：最经典的触发"
+            },
+            {
+              "label": "before/ after",
+              "value": "He had studied English before he went to the UK.（before 天然标注先后）"
+            },
+            {
+              "label": "when/ as soon as",
+              "value": "When I had done my homework, I went out.（先完成→再出去）"
+            },
+            {
+              "label": "said/ told/ asked 引导的宾从",
+              "value": "He said he had seen the film.（转述时那件事更早发生）：间接引语的高频搭档"
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "🎯",
+          "title": "解题口诀",
+          "text": "看到 by the time/ before + 过去动作 → 优先考虑 had done；两个过去动作比先后 → 早的用 had done 晚的用过去时：先找锚点再定时态"
+        },
+        {
+          "kind": "highlight",
+          "text": "by the time·before·宾从转述——had done 三大信号"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "辨析",
+      "subtitle": "vs 一般过去时",
+      "color": "amber",
+      "emoji": "⚔️",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "两时态对比",
+          "items": [
+            {
+              "label": "一般过去时",
+              "value": "只描述「过去发生了什么」——I lost my key.（丢了·什么时候不确定）"
+            },
+            {
+              "label": "过去完成时",
+              "value": "强调「过去某点之前已完成」——When I got home, I found I had lost my key.（到家之前已丢）：多了「截至过去某时」的限定"
+            },
+            {
+              "label": "判断法",
+              "value": "两件事都在过去·需要排先后才用过完；只有一件事·老实用过去时：别见过去就 had——过完必须有参照"
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "📖",
+          "title": "叙事写作运用",
+          "text": "读后续写的高级开头：By the time the sun rose, we had reached the top.（先到顶·后日出）：一句话交代两件事的先后·叙事紧凑的利器：阅卷眼中的时态多样性"
+        },
+        {
+          "kind": "highlight",
+          "text": "两事排序用过完·单事过去就过去——写作紧凑利器"
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "结构",
+        "body": "【公式】had+过去分词。\n【核心】过去某参照点之前完成。\n【必须】有过去锚点。"
+      },
+      {
+        "title": "信号词",
+        "body": "【by the time】By the time we got there, they had finished.\n【before/after】先后标注。\n【宾从】He said he had seen it。"
+      },
+      {
+        "title": "辨析运用",
+        "body": "【过去时】只说发生。【过完】截至过去某时已完成。\n【判断】两事排序→had done。\n【写作】By the time…, we had…"
+      }
+    ],
+    "examples": [
+      {
+        "q": "When I arrived, the film ___ (begin)",
+        "steps": [
+          "两个过去动作",
+          "begin 更早",
+          "arrived 是锚点",
+          "had begun"
+        ],
+        "tip": "先找锚点"
+      },
+      {
+        "q": "转述 He said he ___ (finish) it",
+        "steps": [
+          "said 过去",
+          "finish 在 said 之前",
+          "宾从时态后移",
+          "had finished"
+        ],
+        "tip": "转述后移"
+      }
+    ],
+    "mistakes": [
+      "孤立的过去动作也用 had done（没有参照点就用过去时）",
+      "忘记过去分词形式（had went 应为 had gone）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "过去完成时的结构是？",
+      "options": [
+        "have done",
+        "had done",
+        "will do",
+        "do did"
+      ],
+      "answer": 1,
+      "explain": "had+过去分词"
+    },
+    {
+      "q": "过去完成时描述的是？",
+      "options": [
+        "现在",
+        "过去",
+        "过去的过去",
+        "将来"
+      ],
+      "answer": 2,
+      "explain": "以过去为锚"
+    },
+    {
+      "q": "By the time we ___, they had left.",
+      "options": [
+        "arrive",
+        "had arrived",
+        "arrived",
+        "will arrive"
+      ],
+      "answer": 2,
+      "explain": "锚点用过去时"
+    },
+    {
+      "q": "He said he ___ the film already.",
+      "options": [
+        "saw",
+        "had seen",
+        "sees",
+        "has seen"
+      ],
+      "answer": 1,
+      "explain": "转述后移"
+    },
+    {
+      "q": "只有一件过去的事应该用？",
+      "options": [
+        "过去完成时",
+        "一般过去时",
+        "将来时",
+        "进行时"
+      ],
+      "answer": 1,
+      "explain": "别见过去就 had"
+    },
+    {
+      "q": "过去完成时必须有过去的 ___ 点",
+      "options": [
+        "锚",
+        "字母"
+      ],
+      "answer": 0,
+      "explain": "参照时刻",
+      "type": "blank",
+      "blank": {
+        "answerText": "锚",
+        "bank": [
+          "锚",
+          "字母"
+        ]
+      }
+    }
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "pp3",
+        "label": "过完站",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ]
+  },
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "结构",
+        "subtitle": "had done",
+        "color": "blue",
+        "emoji": "📐",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📜",
+            "title": "基本结构",
+            "text": "had + 过去分词——When I arrived, the train had left.（到达之前·火车已走）：核心是「过去的过去」——以过去某时刻为参照·描述在那之前完成的事"
+          },
+          {
+            "kind": "info",
+            "icon": "⏰",
+            "title": "时间轴理解",
+            "text": "画一条线：had left（更早）→ arrived（参照点过去）→ 现在：过去完成时永远依附一个「过去的参照点」（when I arrived/ by 5 p.m. yesterday）：没有参照点的孤立过去·用一般过去时就够"
+          },
+          {
+            "kind": "highlight",
+            "text": "had done=参照点之前已完成——必须有个过去锚点"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "信号",
+        "subtitle": "提示词",
+        "color": "green",
+        "emoji": "🚨",
+        "blocks": [
+          {
+            "kind": "compare",
+            "title": "常见信号词",
+            "items": [
+              {
+                "label": "by + 过去时间",
+                "value": "By the time we got there, they had finished dinner. / By 2020, he had written three books.：最经典的触发"
+              },
+              {
+                "label": "before/ after",
+                "value": "He had studied English before he went to the UK.（before 天然标注先后）"
+              },
+              {
+                "label": "when/ as soon as",
+                "value": "When I had done my homework, I went out.（先完成→再出去）"
+              },
+              {
+                "label": "said/ told/ asked 引导的宾从",
+                "value": "He said he had seen the film.（转述时那件事更早发生）：间接引语的高频搭档"
+              }
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "🎯",
+            "title": "解题口诀",
+            "text": "看到 by the time/ before + 过去动作 → 优先考虑 had done；两个过去动作比先后 → 早的用 had done 晚的用过去时：先找锚点再定时态"
+          },
+          {
+            "kind": "highlight",
+            "text": "by the time·before·宾从转述——had done 三大信号"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "辨析",
+        "subtitle": "vs 一般过去时",
+        "color": "amber",
+        "emoji": "⚔️",
+        "blocks": [
+          {
+            "kind": "compare",
+            "title": "两时态对比",
+            "items": [
+              {
+                "label": "一般过去时",
+                "value": "只描述「过去发生了什么」——I lost my key.（丢了·什么时候不确定）"
+              },
+              {
+                "label": "过去完成时",
+                "value": "强调「过去某点之前已完成」——When I got home, I found I had lost my key.（到家之前已丢）：多了「截至过去某时」的限定"
+              },
+              {
+                "label": "判断法",
+                "value": "两件事都在过去·需要排先后才用过完；只有一件事·老实用过去时：别见过去就 had——过完必须有参照"
+              }
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "📖",
+            "title": "叙事写作运用",
+            "text": "读后续写的高级开头：By the time the sun rose, we had reached the top.（先到顶·后日出）：一句话交代两件事的先后·叙事紧凑的利器：阅卷眼中的时态多样性"
+          },
+          {
+            "kind": "highlight",
+            "text": "两事排序用过完·单事过去就过去——写作紧凑利器"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "过去完成时怎样构成？",
+      "by the time 是什么信号？",
+      "两个过去动作怎样排先后？"
+    ]
+  }
+}

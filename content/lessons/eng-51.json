@@ -1,0 +1,441 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🕐",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：ac2=2 九类状语从句各管什么？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：ac2=3 because 和 since 差在哪？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：「主将从现」是什么？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "celebrate": "新知识到手！",
+  "island": "cross",
+  "subjectArea": "英语",
+  "gradeBand": "senior",
+  "grade": 10,
+  "area": "英语",
+  "band": "senior",
+  "id": "eng-51",
+  "order": 1123,
+  "title": "状语从句：句子的副词",
+  "emoji": "🕐",
+  "textbook": "人教版英语（必修）",
+  "curriculum": {
+    "module": "语法",
+    "points": [
+      "九类状语从句",
+      "易混连词",
+      "主将从现"
+    ]
+  },
+  "story": "什么时候做（时间）·为什么做（原因）·如果怎样（条件）……修饰动作的句子=状语从句。九种逻辑关系·九组连接词——这一课把英语的「逻辑词地图」装进口袋。",
+  "goals": [
+    "掌握九类状语从句",
+    "区分易混连词",
+    "掌握主将从现"
+  ],
+  "aiIntro": "🕐 句子的副词——状语从句",
+  "param": {
+    "name": "ac2",
+    "label": "状从站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "九类状语从句各管什么？",
+    "because 和 since 差在哪？",
+    "「主将从现」是什么？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "九类",
+      "subtitle": "逻辑地图",
+      "color": "blue",
+      "emoji": "🗺️",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "九类状语从句",
+          "items": [
+            {
+              "label": "时间",
+              "value": "when/ while/ as/ before/ after/ until/ as soon as——When I got home, Mom was cooking.：最多的一族"
+            },
+            {
+              "label": "原因",
+              "value": "because/ since/ as/ now that——Because it rained, we stayed home.：直接回答 why"
+            },
+            {
+              "label": "条件",
+              "value": "if/ unless（如果不）/ as long as——If you work hard, you will pass.：与主将从现联动的高频"
+            },
+            {
+              "label": "目的·结果",
+              "value": "so that（为了）/ so…that（如此…以至于）——He got up early so that he could catch the bus.（目的）；He was so tired that he fell asleep.（结果）"
+            },
+            {
+              "label": "让步·比较·方式·地点",
+              "value": "although/ though/ even if（虽然）；than/ as…as（比较）；as if/ as though（好像）；where/ wherever（地点）：后四类 lesser 高频但常考"
+            }
+          ]
+        },
+        {
+          "kind": "highlight",
+          "text": "时·因·条·目·果·让·比·方·地——九种逻辑九组词"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "辨析",
+      "subtitle": "易混词",
+      "color": "green",
+      "emoji": "⚔️",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "三组易混",
+          "items": [
+            {
+              "label": "because / since / as",
+              "value": "because：语气最强·回答 why·可直接回答提问；since：显而易见的原因「既然」；as：附带原因·语气最弱：口气从重到轻"
+            },
+            {
+              "label": "so that vs so…that",
+              "value": "so that（目的·常配 could/can）：为了；so…that（结果）：如此…以至于——有无「…」是天壤之别"
+            },
+            {
+              "label": "if vs unless",
+              "value": "if（如果·正条件）；unless= if not（如果不·反条件）——Unless you hurry, you will miss it = If you do not hurry…"
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "⚠️",
+          "title": "although/ but 不共存",
+          "text": "中文「虽然…但是」成对出现——英语 although 和 but 只能用一个：Although he is poor, he is happy.（√）Although…but…（×）：中英思维的硬差异·写作第一检查点"
+        },
+        {
+          "kind": "highlight",
+          "text": "because 到 as 语气渐弱·although 和 but 势不两立"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "规则",
+      "subtitle": "主将从现",
+      "color": "amber",
+      "emoji": "⚡",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "主将从现三大应用",
+          "items": [
+            "时间条件状从（when/ if/ as soon as/ until…）——主句将来·从句现在：If it rains tomorrow, we will stay home（不是 will rain）",
+            "「一…就…」家族——as soon as/ the moment/ on doing：As soon as he arrives, I will call you",
+            "陷阱识别：宾语从句不受限——I do not know when he will come（宾从照常用将来）：只限状从·别扩大化"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "📝",
+          "title": "写作运用",
+          "text": "状语从句是句式升级的利器——把 I was tired. I kept working. 合成 Although I was tired, I kept working：简单句+逻辑词=复合句：阅卷眼中的「语法多样性」主要就看这个"
+        },
+        {
+          "kind": "highlight",
+          "text": "状从主将从现·宾从不受限——合成句是写作升级术"
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "九类",
+        "body": "【时间】when while until。【原因】because since as。\n【条件】if unless。【目的】so that。【结果】so…that。\n【让步】although。【比较】than as…as。【方式】as if。【地点】where。"
+      },
+      {
+        "title": "易混",
+        "body": "【因三兄弟】because强→as弱·since=既然。\n【so that】目的 vs so…that结果。\n【unless】=if not。【禁】although不与but连用。"
+      },
+      {
+        "title": "主将从现",
+        "body": "【规则】时/条状从用现在时表将来。\n【一…就…】as soon as 同理。\n【例外】宾语从句照常用将来。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "If it ___ tomorrow, we will stay home",
+        "steps": [
+          "if 条件状语从句",
+          "主将从现",
+          "用 rains",
+          "不是 will rain"
+        ],
+        "tip": "状从禁将来"
+      },
+      {
+        "q": "合并 He is young. He knows a lot",
+        "steps": [
+          "逻辑=让步",
+          "Although he is young, he knows a lot",
+          "不能加 but",
+          "句式升级"
+        ],
+        "tip": "二选一"
+      }
+    ],
+    "mistakes": [
+      "时间/条件状语从句用 will（主将从现用一般现在时）",
+      "although 和 but 连用（只能留一个）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "主句将来时·if 从句用什么时态？",
+      "options": [
+        "将来时",
+        "现在时",
+        "过去时",
+        "完成时"
+      ],
+      "answer": 1,
+      "explain": "主将从现"
+    },
+    {
+      "q": "He was ___ tired ___ he fell asleep.",
+      "options": [
+        "so…that",
+        "so that",
+        "such…that",
+        "too…to"
+      ],
+      "answer": 0,
+      "explain": "如此…以至于"
+    },
+    {
+      "q": "unless 的意思是？",
+      "options": [
+        "只要",
+        "如果不",
+        "因为",
+        "虽然"
+      ],
+      "answer": 1,
+      "explain": "= if not"
+    },
+    {
+      "q": "语气最强的原因连词是？",
+      "options": [
+        "as",
+        "since",
+        "because",
+        "for"
+      ],
+      "answer": 2,
+      "explain": "回答 why"
+    },
+    {
+      "q": "Although he is poor, ___ is happy（补主句）",
+      "options": [
+        "but he",
+        "he",
+        "and but he",
+        "however"
+      ],
+      "answer": 1,
+      "explain": "不再用 but"
+    },
+    {
+      "q": "时间条件状语从句遵循主将从 ___",
+      "options": [
+        "现",
+        "去"
+      ],
+      "answer": 0,
+      "explain": "现在时表将来",
+      "type": "blank",
+      "blank": {
+        "answerText": "现",
+        "bank": [
+          "现",
+          "去"
+        ]
+      }
+    }
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "ac2",
+        "label": "状从站",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ]
+  },
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "九类",
+        "subtitle": "逻辑地图",
+        "color": "blue",
+        "emoji": "🗺️",
+        "blocks": [
+          {
+            "kind": "compare",
+            "title": "九类状语从句",
+            "items": [
+              {
+                "label": "时间",
+                "value": "when/ while/ as/ before/ after/ until/ as soon as——When I got home, Mom was cooking.：最多的一族"
+              },
+              {
+                "label": "原因",
+                "value": "because/ since/ as/ now that——Because it rained, we stayed home.：直接回答 why"
+              },
+              {
+                "label": "条件",
+                "value": "if/ unless（如果不）/ as long as——If you work hard, you will pass.：与主将从现联动的高频"
+              },
+              {
+                "label": "目的·结果",
+                "value": "so that（为了）/ so…that（如此…以至于）——He got up early so that he could catch the bus.（目的）；He was so tired that he fell asleep.（结果）"
+              },
+              {
+                "label": "让步·比较·方式·地点",
+                "value": "although/ though/ even if（虽然）；than/ as…as（比较）；as if/ as though（好像）；where/ wherever（地点）：后四类 lesser 高频但常考"
+              }
+            ]
+          },
+          {
+            "kind": "highlight",
+            "text": "时·因·条·目·果·让·比·方·地——九种逻辑九组词"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "辨析",
+        "subtitle": "易混词",
+        "color": "green",
+        "emoji": "⚔️",
+        "blocks": [
+          {
+            "kind": "compare",
+            "title": "三组易混",
+            "items": [
+              {
+                "label": "because / since / as",
+                "value": "because：语气最强·回答 why·可直接回答提问；since：显而易见的原因「既然」；as：附带原因·语气最弱：口气从重到轻"
+              },
+              {
+                "label": "so that vs so…that",
+                "value": "so that（目的·常配 could/can）：为了；so…that（结果）：如此…以至于——有无「…」是天壤之别"
+              },
+              {
+                "label": "if vs unless",
+                "value": "if（如果·正条件）；unless= if not（如果不·反条件）——Unless you hurry, you will miss it = If you do not hurry…"
+              }
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "⚠️",
+            "title": "although/ but 不共存",
+            "text": "中文「虽然…但是」成对出现——英语 although 和 but 只能用一个：Although he is poor, he is happy.（√）Although…but…（×）：中英思维的硬差异·写作第一检查点"
+          },
+          {
+            "kind": "highlight",
+            "text": "because 到 as 语气渐弱·although 和 but 势不两立"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "规则",
+        "subtitle": "主将从现",
+        "color": "amber",
+        "emoji": "⚡",
+        "blocks": [
+          {
+            "kind": "steps",
+            "title": "主将从现三大应用",
+            "items": [
+              "时间条件状从（when/ if/ as soon as/ until…）——主句将来·从句现在：If it rains tomorrow, we will stay home（不是 will rain）",
+              "「一…就…」家族——as soon as/ the moment/ on doing：As soon as he arrives, I will call you",
+              "陷阱识别：宾语从句不受限——I do not know when he will come（宾从照常用将来）：只限状从·别扩大化"
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "📝",
+            "title": "写作运用",
+            "text": "状语从句是句式升级的利器——把 I was tired. I kept working. 合成 Although I was tired, I kept working：简单句+逻辑词=复合句：阅卷眼中的「语法多样性」主要就看这个"
+          },
+          {
+            "kind": "highlight",
+            "text": "状从主将从现·宾从不受限——合成句是写作升级术"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "九类状语从句各管什么？",
+      "because 和 since 差在哪？",
+      "「主将从现」是什么？"
+    ]
+  }
+}

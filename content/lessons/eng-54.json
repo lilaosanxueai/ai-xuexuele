@@ -1,0 +1,409 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🎲",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：md=2 must 一定是「必须」吗？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：md=3 can not 和 may not 差多远？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：对过去的推测怎么说？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "celebrate": "新知识到手！",
+  "island": "cross",
+  "subjectArea": "英语",
+  "gradeBand": "junior",
+  "grade": 9,
+  "area": "英语",
+  "band": "junior",
+  "id": "eng-54",
+  "order": 1126,
+  "title": "情态动词表推测：把握几何",
+  "emoji": "🎲",
+  "textbook": "人教版英语（九年级）",
+  "curriculum": {
+    "module": "语法",
+    "points": [
+      "肯定推测",
+      "否定推测",
+      "推测的把握等级"
+    ]
+  },
+  "story": "must·might·can not·could not——同样的情态动词·在推测语境里是四个把握等级：从「肯定是」到「绝不可能是」。这一课学会用英语表达「我有几成把握」。",
+  "goals": [
+    "掌握推测用法",
+    "区分把握等级",
+    "注意时态搭配"
+  ],
+  "aiIntro": "🎲 几成把握——情态动词表推测",
+  "param": {
+    "name": "md",
+    "label": "推测站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "must 一定是「必须」吗？",
+    "can not 和 may not 差多远？",
+    "对过去的推测怎么说？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "等级",
+      "subtitle": "把握光谱",
+      "color": "blue",
+      "emoji": "📊",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "把握从高到低",
+          "items": [
+            "must（90%+）：肯定——He must be tired（他一定是累了）：最接近确定",
+            "may / might / could（50% 上下）：可能——She might know（她可能知道）：might 比 may 更不确定",
+            "can not（95%-）：不可能——It can not be true（不可能是真的）",
+            "could not / must not（极少作推测）：注意 must not 是「禁止」不是「不可能」——不可能只认 can not"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "🎭",
+          "title": "一词多义的 must",
+          "text": "must 的两个身份：①义务「必须」（You must go）②推测「一定」（You must be hungry）：语境辨身份——后接状态动词（be/ know）多为推测·后接动作多为义务：考试最爱考的双重身份"
+        },
+        {
+          "kind": "highlight",
+          "text": "must 肯定→may 可能→can not 不可能：把握的光谱"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "过去",
+      "subtitle": "对已发生的事",
+      "color": "green",
+      "emoji": "⏮️",
+      "blocks": [
+        {
+          "kind": "info",
+          "icon": "📖",
+          "title": "情态+ have done",
+          "text": "对过去的推测：情态动词 + have + 过去分词——He must have missed the bus（他一定错过了公交车）；She might have forgotten（她可能忘了）：推断「已经发生的事」的标配"
+        },
+        {
+          "kind": "info",
+          "icon": "❗",
+          "title": "can not have done",
+          "text": "对过去的否定推测——He can not have said that（他不可能说过那话）：can 表推测只用于否定和疑问（Can it be true? / It can not be true）·肯定推测不用 can：这是 can 的独特规矩"
+        },
+        {
+          "kind": "info",
+          "icon": "💭",
+          "title": "should have done",
+          "text": "本应该做而没做（含责备）——You should have told me earlier（你本该早点告诉我）：不是推测·是「虚拟责备」·常与推测一起考"
+        },
+        {
+          "kind": "highlight",
+          "text": "推测过去=情态+have done·can 推测只用否定疑问"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "语境",
+      "subtitle": "实战推理",
+      "color": "amber",
+      "emoji": "🕵️",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "解题三步",
+          "items": [
+            "看线索：句中给了什么证据（灯亮着→有人在家）",
+            "定把握：证据强→must·证据弱→might·证据矛盾→can not",
+            "定时态：现在的事用原形·过去的事用 have done：三步锁定答案"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "🔦",
+          "title": "经典情境",
+          "text": "The lights are on. They must be at home.（强证据·高把握）；He is not answering. He might be sleeping.（弱证据·低把握）；That can not be John—John is in Beijing.（直接矛盾·否定）：证据决定把握——情态推测题本质是逻辑题"
+        },
+        {
+          "kind": "highlight",
+          "text": "证据定把握·时态看远近——情态推测=逻辑推理"
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "把握等级",
+        "body": "【must】90%肯定。【may/might】可能（might更弱）。\n【can not】不可能。【must not】=禁止不是推测。"
+      },
+      {
+        "title": "推测过去",
+        "body": "【结构】情态+have+done（must have missed）。\n【can】推测只用于否定疑问。\n【should have done】本该做（责备）。"
+      },
+      {
+        "title": "解题三步",
+        "body": "【看证据】【定把握】【定时态】。\n【本质】逻辑推理题。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "地上是湿的·推测",
+        "steps": [
+          "线索：地湿",
+          "可能是下雨（也可能洒水）→不百分百",
+          "It might have rained",
+          "不是 must have（证据不够铁）"
+        ],
+        "tip": "证据定词"
+      },
+      {
+        "q": "选 must not 还是 can not",
+        "steps": [
+          "意思=不可能",
+          "推测否定只用 can not",
+          "must not 是禁止",
+          "It can not be him"
+        ],
+        "tip": "身份辨析"
+      }
+    ],
+    "mistakes": [
+      "用 must not 表「不可能」（那是禁止·不可能用 can not）",
+      "对过去的推测忘记 have done（must have missed 不是 must missed）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "把握最高的推测用？",
+      "options": [
+        "might",
+        "must",
+        "may",
+        "could"
+      ],
+      "answer": 1,
+      "explain": "90%+肯定"
+    },
+    {
+      "q": "表示「不可能」用？",
+      "options": [
+        "must not",
+        "can not",
+        "need not",
+        "may not"
+      ],
+      "answer": 1,
+      "explain": "can 的否定推测"
+    },
+    {
+      "q": "He ___ have missed the bus（他一定没赶上）",
+      "options": [
+        "must",
+        "can",
+        "might",
+        "should"
+      ],
+      "answer": 0,
+      "explain": "强证据推测过去"
+    },
+    {
+      "q": "might 表示的把握约为？",
+      "options": [
+        "90%",
+        "50% 上下",
+        "0%",
+        "100%"
+      ],
+      "answer": 1,
+      "explain": "可能而已"
+    },
+    {
+      "q": "You should have told me 的意思是？",
+      "options": [
+        "你已经告诉我",
+        "你本该告诉我（责备）",
+        "你将要告诉我",
+        "别告诉我"
+      ],
+      "answer": 1,
+      "explain": "虚拟责备"
+    },
+    {
+      "q": "情态推测题的本质是 ___ 推理",
+      "options": [
+        "逻辑",
+        "抽奖"
+      ],
+      "answer": 0,
+      "explain": "证据定把握",
+      "type": "blank",
+      "blank": {
+        "answerText": "逻辑",
+        "bank": [
+          "逻辑",
+          "抽奖"
+        ]
+      }
+    }
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "md",
+        "label": "推测站",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ]
+  },
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "等级",
+        "subtitle": "把握光谱",
+        "color": "blue",
+        "emoji": "📊",
+        "blocks": [
+          {
+            "kind": "steps",
+            "title": "把握从高到低",
+            "items": [
+              "must（90%+）：肯定——He must be tired（他一定是累了）：最接近确定",
+              "may / might / could（50% 上下）：可能——She might know（她可能知道）：might 比 may 更不确定",
+              "can not（95%-）：不可能——It can not be true（不可能是真的）",
+              "could not / must not（极少作推测）：注意 must not 是「禁止」不是「不可能」——不可能只认 can not"
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "🎭",
+            "title": "一词多义的 must",
+            "text": "must 的两个身份：①义务「必须」（You must go）②推测「一定」（You must be hungry）：语境辨身份——后接状态动词（be/ know）多为推测·后接动作多为义务：考试最爱考的双重身份"
+          },
+          {
+            "kind": "highlight",
+            "text": "must 肯定→may 可能→can not 不可能：把握的光谱"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "过去",
+        "subtitle": "对已发生的事",
+        "color": "green",
+        "emoji": "⏮️",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📖",
+            "title": "情态+ have done",
+            "text": "对过去的推测：情态动词 + have + 过去分词——He must have missed the bus（他一定错过了公交车）；She might have forgotten（她可能忘了）：推断「已经发生的事」的标配"
+          },
+          {
+            "kind": "info",
+            "icon": "❗",
+            "title": "can not have done",
+            "text": "对过去的否定推测——He can not have said that（他不可能说过那话）：can 表推测只用于否定和疑问（Can it be true? / It can not be true）·肯定推测不用 can：这是 can 的独特规矩"
+          },
+          {
+            "kind": "info",
+            "icon": "💭",
+            "title": "should have done",
+            "text": "本应该做而没做（含责备）——You should have told me earlier（你本该早点告诉我）：不是推测·是「虚拟责备」·常与推测一起考"
+          },
+          {
+            "kind": "highlight",
+            "text": "推测过去=情态+have done·can 推测只用否定疑问"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "语境",
+        "subtitle": "实战推理",
+        "color": "amber",
+        "emoji": "🕵️",
+        "blocks": [
+          {
+            "kind": "steps",
+            "title": "解题三步",
+            "items": [
+              "看线索：句中给了什么证据（灯亮着→有人在家）",
+              "定把握：证据强→must·证据弱→might·证据矛盾→can not",
+              "定时态：现在的事用原形·过去的事用 have done：三步锁定答案"
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "🔦",
+            "title": "经典情境",
+            "text": "The lights are on. They must be at home.（强证据·高把握）；He is not answering. He might be sleeping.（弱证据·低把握）；That can not be John—John is in Beijing.（直接矛盾·否定）：证据决定把握——情态推测题本质是逻辑题"
+          },
+          {
+            "kind": "highlight",
+            "text": "证据定把握·时态看远近——情态推测=逻辑推理"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "must 一定是「必须」吗？",
+      "can not 和 may not 差多远？",
+      "对过去的推测怎么说？"
+    ]
+  }
+}

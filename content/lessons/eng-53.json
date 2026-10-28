@@ -1,0 +1,431 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🔦",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：em2=2 强调句怎样构成？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：em2=3 能强调哪些成分？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：怎样和定语从句区分？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "celebrate": "新知识到手！",
+  "island": "cross",
+  "subjectArea": "英语",
+  "gradeBand": "senior",
+  "grade": 11,
+  "area": "英语",
+  "band": "senior",
+  "id": "eng-53",
+  "order": 1125,
+  "title": "强调句：It is…that 的聚光灯",
+  "emoji": "🔦",
+  "textbook": "人教版英语（选择性必修）",
+  "curriculum": {
+    "module": "语法",
+    "points": [
+      "强调句结构",
+      "强调什么成分",
+      "与相似句型辨析"
+    ]
+  },
+  "story": "一句话里最想让人记住的部分·可以用一盏「聚光灯」打亮——It is…that… 就是这盏灯。 spotlight 打在主语·宾语·状语上·语气瞬间翻倍。",
+  "goals": [
+    "掌握强调句结构",
+    "会强调各成分",
+    "辨析相似句型"
+  ],
+  "aiIntro": "🔦 句子的聚光灯——强调句",
+  "param": {
+    "name": "em2",
+    "label": "强调站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "强调句怎样构成？",
+    "能强调哪些成分？",
+    "怎样和定语从句区分？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "结构",
+      "subtitle": "公式",
+      "color": "blue",
+      "emoji": "📐",
+      "blocks": [
+        {
+          "kind": "info",
+          "icon": "📜",
+          "title": "基本结构",
+          "text": "It is/ was + 被强调部分 + that/ who + 其余部分——It was Tom that/ who broke the window.（强调 Tom）：把 It is…that 去掉·句子依然完整（Tom broke the window）——这是判断强调句的金标准"
+        },
+        {
+          "kind": "info",
+          "icon": "🔧",
+          "title": "怎样「还原检验」",
+          "text": "任何强调句都能去掉「外壳」还原成普通句——It was in the park that I met her. → I met her in the park.：去掉后读不通的就不是强调句（是别的句型）——解题万能钥匙"
+        },
+        {
+          "kind": "highlight",
+          "text": "It is + 强调 + that + 其余——去掉外壳句子依然完整"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "强调",
+      "subtitle": "谁被照亮",
+      "color": "green",
+      "emoji": "🎯",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "三种常见强调",
+          "items": [
+            {
+              "label": "强调主语",
+              "value": "It was my mother who called me.（人可用 who）——突出「是谁」"
+            },
+            {
+              "label": "强调宾语",
+              "value": "It was this book that I wanted.——突出「要什么」"
+            },
+            {
+              "label": "强调状语",
+              "value": "It was yesterday that we met. / It was in Beijing that…（时间地点）——最常见·叙事作文高频"
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "❌",
+          "title": "不能强调什么",
+          "text": "谓语动词不能被强调（要强调语气就用 do/ does/ did——I DO like it）：表语也不能。只能强调主·宾·状：强调句的禁区记两条就够"
+        },
+        {
+          "kind": "highlight",
+          "text": "主宾状可以强调·谓语只能靠 do/ does/ did"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "辨析",
+      "subtitle": "三大相似",
+      "color": "amber",
+      "emoji": "🔍",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "三面辨析",
+          "items": [
+            {
+              "label": "vs 定语从句",
+              "value": "It was in the room that we met（还原通顺=强调句）；It was the room where we met（where 引导定从·修饰 room）：去掉 that 读不通=定从"
+            },
+            {
+              "label": "vs it 形式主语",
+              "value": "It is clear that he is right（clear 是形容词·that 从句是真主语——形式主语句）；It was he that was right（还原 he was right·强调句）：看 It is 后是形容词还是被强调成分"
+            },
+            {
+              "label": "vs 时间状语从句",
+              "value": "It was 8 o when we arrived（when 引导时间从句）；It was at 8 o that we arrived（强调 at 8 o·还原可通）：有 at=强调·无 at=时间从句·一介之差"
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "✍️",
+          "title": "写作运用",
+          "text": "读后续写点睛句：It was at that moment that I understood her love.（强调那一刻）——叙事高潮的标配：比 I understood at that moment 强十倍·阅卷看得见的文采"
+        },
+        {
+          "kind": "highlight",
+          "text": "还原检验一招通杀——去掉外壳读得通就是强调句"
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "结构",
+        "body": "【公式】It is/was+强调+that/who+其余。\n【检验】去掉外壳句子完整。"
+      },
+      {
+        "title": "强调对象",
+        "body": "【主】人可用who。【宾】this book that…。\n【状】时间地点最高频。【禁】谓语（用do强调）。"
+      },
+      {
+        "title": "辨析",
+        "body": "【定从】去掉读不通=定从。\n【形式主语】It is 形容词 that…。\n【时间从句】at 8 that=强调·8 when=从句。\n【写作】叙事高潮点睛句。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "判断 It was in the room ___ we met",
+        "steps": [
+          "去掉 It was…that",
+          "we met in the room 通顺",
+          "是强调句·用 that",
+          "若 the room 后接 where 则是定从"
+        ],
+        "tip": "还原检验"
+      },
+      {
+        "q": "强调 I met her yesterday",
+        "steps": [
+          "想强调 yesterday",
+          "It was yesterday that I met her",
+          "也可强调 her：It was her that I met yesterday",
+          "按需要选灯"
+        ],
+        "tip": "想照亮谁就框谁"
+      }
+    ],
+    "mistakes": [
+      "强调谓语动词用 It is…that（谓语只能用 do/does/did 强调）",
+      "把定语从句当强调句（还原读不通的是定从）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "强调句的万能判断法是？",
+      "options": [
+        "看长度",
+        "看时态",
+        "还原检验",
+        "数词数"
+      ],
+      "answer": 2,
+      "explain": "去掉外壳句子仍完整"
+    },
+    {
+      "q": "It was Tom ___ broke the window.",
+      "options": [
+        "which",
+        "who",
+        "what",
+        "whom"
+      ],
+      "answer": 1,
+      "explain": "人可用 who"
+    },
+    {
+      "q": "强调谓语动词应该用？",
+      "options": [
+        "It is…that",
+        "do/ does/ did",
+        "so that",
+        "such that"
+      ],
+      "answer": 1,
+      "explain": "I DO like it"
+    },
+    {
+      "q": "It was 8 o'clock ___ we arrived.",
+      "options": [
+        "that",
+        "when",
+        "which",
+        "who"
+      ],
+      "answer": 1,
+      "explain": "无 at=时间从句"
+    },
+    {
+      "q": "读后续写的高潮点睛常用？",
+      "options": [
+        "It was at that moment that…",
+        "I very understand",
+        "And then and then",
+        "The end"
+      ],
+      "answer": 0,
+      "explain": "强调那一刻"
+    },
+    {
+      "q": "强调句像给句子打 ___",
+      "options": [
+        "聚光灯",
+        "马赛克"
+      ],
+      "answer": 0,
+      "explain": "照亮重点",
+      "type": "blank",
+      "blank": {
+        "answerText": "聚光灯",
+        "bank": [
+          "聚光灯",
+          "马赛克"
+        ]
+      }
+    }
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "em2",
+        "label": "强调站",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ]
+  },
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "结构",
+        "subtitle": "公式",
+        "color": "blue",
+        "emoji": "📐",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📜",
+            "title": "基本结构",
+            "text": "It is/ was + 被强调部分 + that/ who + 其余部分——It was Tom that/ who broke the window.（强调 Tom）：把 It is…that 去掉·句子依然完整（Tom broke the window）——这是判断强调句的金标准"
+          },
+          {
+            "kind": "info",
+            "icon": "🔧",
+            "title": "怎样「还原检验」",
+            "text": "任何强调句都能去掉「外壳」还原成普通句——It was in the park that I met her. → I met her in the park.：去掉后读不通的就不是强调句（是别的句型）——解题万能钥匙"
+          },
+          {
+            "kind": "highlight",
+            "text": "It is + 强调 + that + 其余——去掉外壳句子依然完整"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "强调",
+        "subtitle": "谁被照亮",
+        "color": "green",
+        "emoji": "🎯",
+        "blocks": [
+          {
+            "kind": "compare",
+            "title": "三种常见强调",
+            "items": [
+              {
+                "label": "强调主语",
+                "value": "It was my mother who called me.（人可用 who）——突出「是谁」"
+              },
+              {
+                "label": "强调宾语",
+                "value": "It was this book that I wanted.——突出「要什么」"
+              },
+              {
+                "label": "强调状语",
+                "value": "It was yesterday that we met. / It was in Beijing that…（时间地点）——最常见·叙事作文高频"
+              }
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "❌",
+            "title": "不能强调什么",
+            "text": "谓语动词不能被强调（要强调语气就用 do/ does/ did——I DO like it）：表语也不能。只能强调主·宾·状：强调句的禁区记两条就够"
+          },
+          {
+            "kind": "highlight",
+            "text": "主宾状可以强调·谓语只能靠 do/ does/ did"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "辨析",
+        "subtitle": "三大相似",
+        "color": "amber",
+        "emoji": "🔍",
+        "blocks": [
+          {
+            "kind": "compare",
+            "title": "三面辨析",
+            "items": [
+              {
+                "label": "vs 定语从句",
+                "value": "It was in the room that we met（还原通顺=强调句）；It was the room where we met（where 引导定从·修饰 room）：去掉 that 读不通=定从"
+              },
+              {
+                "label": "vs it 形式主语",
+                "value": "It is clear that he is right（clear 是形容词·that 从句是真主语——形式主语句）；It was he that was right（还原 he was right·强调句）：看 It is 后是形容词还是被强调成分"
+              },
+              {
+                "label": "vs 时间状语从句",
+                "value": "It was 8 o when we arrived（when 引导时间从句）；It was at 8 o that we arrived（强调 at 8 o·还原可通）：有 at=强调·无 at=时间从句·一介之差"
+              }
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "✍️",
+            "title": "写作运用",
+            "text": "读后续写点睛句：It was at that moment that I understood her love.（强调那一刻）——叙事高潮的标配：比 I understood at that moment 强十倍·阅卷看得见的文采"
+          },
+          {
+            "kind": "highlight",
+            "text": "还原检验一招通杀——去掉外壳读得通就是强调句"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "强调句怎样构成？",
+      "能强调哪些成分？",
+      "怎样和定语从句区分？"
+    ]
+  }
+}

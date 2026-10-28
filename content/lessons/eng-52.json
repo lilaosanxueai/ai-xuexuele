@@ -1,0 +1,443 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🔄",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：inv=2 完全倒装和部分倒装差在哪？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：inv=3 什么情况必须倒装？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：Only 放句首一定倒装吗？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "celebrate": "新知识到手！",
+  "island": "cross",
+  "subjectArea": "英语",
+  "gradeBand": "senior",
+  "grade": 11,
+  "area": "英语",
+  "band": "senior",
+  "id": "eng-52",
+  "order": 1124,
+  "title": "倒装句：语序的反转",
+  "emoji": "🔄",
+  "textbook": "人教版英语（选择性必修）",
+  "curriculum": {
+    "module": "语法",
+    "points": [
+      "完全倒装",
+      "部分倒装",
+      "常见触发条件"
+    ]
+  },
+  "story": "英语语序一般是「主语+谓语」——但有时要把动词搬到主语前面：这就是倒装。为了强调·为了平衡·为了衔接——反常的语序反而制造出庄重与文采。",
+  "goals": [
+    "区分完全与部分倒装",
+    "掌握触发条件",
+    "会在写作中运用"
+  ],
+  "aiIntro": "🔄 反转的语序——倒装句",
+  "param": {
+    "name": "inv",
+    "label": "倒装站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "完全倒装和部分倒装差在哪？",
+    "什么情况必须倒装？",
+    "Only 放句首一定倒装吗？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "两类",
+      "subtitle": "倒装深浅",
+      "color": "blue",
+      "emoji": "🪜",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "完全 vs 部分倒装",
+          "items": [
+            {
+              "label": "完全倒装",
+              "value": "整个谓语动词搬到主语前——Here comes the bus. / On the hill stands a tower.：简单·「整个搬家」"
+            },
+            {
+              "label": "部分倒装",
+              "value": "只把助动词/ be/情态动词提前——Never have I seen such a thing.（have 提前·seen 留下）：像一般疑问句的结构：考点主力"
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "📍",
+          "title": "完全倒装两场景",
+          "text": "here/ there/ up/ down 开头+位移动词（come/ go/ rush）；介词短语开头+ be/ stand/ lie/ sit（地点存在句）：主语是代词时不倒装（Here he comes·不倒）：判断第一问——代词主语除外"
+        },
+        {
+          "kind": "highlight",
+          "text": "整个搬=完全·只提助动词=部分·代词主语不倒"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "触发",
+      "subtitle": "部分倒装条件",
+      "color": "green",
+      "emoji": "⚡",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "四大触发器",
+          "items": [
+            {
+              "label": "否定词开头",
+              "value": "Never/ Seldom/ Little/ Not only/ By no means 放句首——Never have I heard of it. / Not only did he come, but he also sang."
+            },
+            {
+              "label": "only + 状语开头",
+              "value": "Only then did I realize. / Only in this way can we win.（only+状语才触发·only+主语不触发：Only he knows—不倒）"
+            },
+            {
+              "label": "so/ neither 开头",
+              "text": "",
+              "value": "So am I. / Neither do I.（「我也/我也不」的倒装应答）：口语高频",
+              "hint": ""
+            },
+            {
+              "label": "省略 if 的虚拟",
+              "value": "Had I known, I would have helped. = If I had known…（had/ were/ should 提前替代 if）：书面高级句"
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "🏫",
+          "title": "考场口诀",
+          "text": "否定开头·only 加状语·so/neither 应答·虚拟去 if——四大触发器罩住 90% 的考题：先认触发器·再找助动词提前"
+        },
+        {
+          "kind": "highlight",
+          "text": "否定词·only状·so/neither·虚拟去if——四大触发"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "运用",
+      "subtitle": "写作加分",
+      "color": "amber",
+      "emoji": "✍️",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "升级你的作文",
+          "items": [
+            "普通句：I have never seen a better performance.",
+            "倒装升级：Never have I seen a better performance.",
+            "效果：否定词倒装自带强调语气·阅卷眼前一亮",
+            "同法：Only by working hard can we succeed.（替换 We can succeed only by working hard）"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "⚖️",
+          "title": "用而不过",
+          "text": "一篇文章用一两处倒装是亮点·满篇倒装是灾难——高级句式的法则是「点缀」不是「堆砌」：开头结尾各一处·效果最佳"
+        },
+        {
+          "kind": "highlight",
+          "text": "一两处倒装是亮点——点缀不堆砌"
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "两类倒装",
+        "body": "【完全】整个谓语提前（Here comes the bus）。\n【部分】只提助/be/情态（Never have I…）。\n【例外】代词主语不倒。"
+      },
+      {
+        "title": "四触发器",
+        "body": "【否定词】Never Seldom Not only。\n【only+状语】Only then did I…（only+主语不倒）。\n【so/neither】So am I。【虚拟】Had I known=If I had。"
+      },
+      {
+        "title": "写作运用",
+        "body": "【升级】普通句→倒装句强调。\n【节制】一篇一两处最佳。\n【常用】Never have I…/ Only by…can we…"
+      }
+    ],
+    "examples": [
+      {
+        "q": "改写 I have never heard such a story",
+        "steps": [
+          "否定词 never 开头",
+          "触发部分倒装",
+          "Never have I heard such a story",
+          "助动词 have 提前"
+        ],
+        "tip": "否定词搬家"
+      },
+      {
+        "q": "判断 Only he knows the answer 要不要倒装",
+        "steps": [
+          "only+主语 he",
+          "不是 only+状语",
+          "不触发倒装",
+          "Only then did he know 才倒"
+        ],
+        "tip": "看 only 后面"
+      }
+    ],
+    "mistakes": [
+      "only + 主语也倒装（只有 only+状语才触发）",
+      "代词主语也完全倒装（Here he comes 不倒）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "Never ___ I seen such a thing. 填？",
+      "options": [
+        "did",
+        "have",
+        "do",
+        "was"
+      ],
+      "answer": 1,
+      "explain": "have seen 现在完成"
+    },
+    {
+      "q": "Here ___ the bus!",
+      "options": [
+        "comes",
+        "does come",
+        "came he",
+        "he come"
+      ],
+      "answer": 0,
+      "explain": "完全倒装"
+    },
+    {
+      "q": "Only then ___ I realize the truth.",
+      "options": [
+        "I did",
+        "did I",
+        "I do",
+        "do I did"
+      ],
+      "answer": 1,
+      "explain": "only+状语倒装"
+    },
+    {
+      "q": "「我也不」的倒装表达？",
+      "options": [
+        "So do I",
+        "Neither do I",
+        "I not too",
+        "Me too not"
+      ],
+      "answer": 1,
+      "explain": "neither 应答"
+    },
+    {
+      "q": "Had I known earlier 是省略了？",
+      "options": [
+        "that",
+        "if",
+        "what",
+        "which"
+      ],
+      "answer": 1,
+      "explain": "虚拟倒装"
+    },
+    {
+      "q": "倒装在作文中的使用原则是 ___ 不堆砌",
+      "options": [
+        "点缀",
+        "全用"
+      ],
+      "answer": 0,
+      "explain": "一两处最佳",
+      "type": "blank",
+      "blank": {
+        "answerText": "点缀",
+        "bank": [
+          "点缀",
+          "全用"
+        ]
+      }
+    }
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "inv",
+        "label": "倒装站",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ]
+  },
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "两类",
+        "subtitle": "倒装深浅",
+        "color": "blue",
+        "emoji": "🪜",
+        "blocks": [
+          {
+            "kind": "compare",
+            "title": "完全 vs 部分倒装",
+            "items": [
+              {
+                "label": "完全倒装",
+                "value": "整个谓语动词搬到主语前——Here comes the bus. / On the hill stands a tower.：简单·「整个搬家」"
+              },
+              {
+                "label": "部分倒装",
+                "value": "只把助动词/ be/情态动词提前——Never have I seen such a thing.（have 提前·seen 留下）：像一般疑问句的结构：考点主力"
+              }
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "📍",
+            "title": "完全倒装两场景",
+            "text": "here/ there/ up/ down 开头+位移动词（come/ go/ rush）；介词短语开头+ be/ stand/ lie/ sit（地点存在句）：主语是代词时不倒装（Here he comes·不倒）：判断第一问——代词主语除外"
+          },
+          {
+            "kind": "highlight",
+            "text": "整个搬=完全·只提助动词=部分·代词主语不倒"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "触发",
+        "subtitle": "部分倒装条件",
+        "color": "green",
+        "emoji": "⚡",
+        "blocks": [
+          {
+            "kind": "compare",
+            "title": "四大触发器",
+            "items": [
+              {
+                "label": "否定词开头",
+                "value": "Never/ Seldom/ Little/ Not only/ By no means 放句首——Never have I heard of it. / Not only did he come, but he also sang."
+              },
+              {
+                "label": "only + 状语开头",
+                "value": "Only then did I realize. / Only in this way can we win.（only+状语才触发·only+主语不触发：Only he knows—不倒）"
+              },
+              {
+                "label": "so/ neither 开头",
+                "text": "",
+                "value": "So am I. / Neither do I.（「我也/我也不」的倒装应答）：口语高频",
+                "hint": ""
+              },
+              {
+                "label": "省略 if 的虚拟",
+                "value": "Had I known, I would have helped. = If I had known…（had/ were/ should 提前替代 if）：书面高级句"
+              }
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "🏫",
+            "title": "考场口诀",
+            "text": "否定开头·only 加状语·so/neither 应答·虚拟去 if——四大触发器罩住 90% 的考题：先认触发器·再找助动词提前"
+          },
+          {
+            "kind": "highlight",
+            "text": "否定词·only状·so/neither·虚拟去if——四大触发"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "运用",
+        "subtitle": "写作加分",
+        "color": "amber",
+        "emoji": "✍️",
+        "blocks": [
+          {
+            "kind": "steps",
+            "title": "升级你的作文",
+            "items": [
+              "普通句：I have never seen a better performance.",
+              "倒装升级：Never have I seen a better performance.",
+              "效果：否定词倒装自带强调语气·阅卷眼前一亮",
+              "同法：Only by working hard can we succeed.（替换 We can succeed only by working hard）"
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "⚖️",
+            "title": "用而不过",
+            "text": "一篇文章用一两处倒装是亮点·满篇倒装是灾难——高级句式的法则是「点缀」不是「堆砌」：开头结尾各一处·效果最佳"
+          },
+          {
+            "kind": "highlight",
+            "text": "一两处倒装是亮点——点缀不堆砌"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "完全倒装和部分倒装差在哪？",
+      "什么情况必须倒装？",
+      "Only 放句首一定倒装吗？"
+    ]
+  }
+}

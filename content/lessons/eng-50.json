@@ -1,0 +1,441 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "📦",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：nc=2 宾语从句和主语从句差在哪？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：nc=3 that 和 what 怎样选？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：从句里用什么语序？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "celebrate": "新知识到手！",
+  "island": "cross",
+  "subjectArea": "英语",
+  "gradeBand": "senior",
+  "grade": 10,
+  "area": "英语",
+  "band": "senior",
+  "id": "eng-50",
+  "order": 1122,
+  "title": "名词性从句：句子当名词用",
+  "emoji": "📦",
+  "textbook": "人教版英语（必修）",
+  "curriculum": {
+    "module": "语法",
+    "points": [
+      "宾语从句",
+      "主语从句与表语从句",
+      "同位语从句"
+    ]
+  },
+  "story": "一个完整的句子·可以打包当名词用——当宾语·当主语·当表语·当同位语。这就是名词性从句：句子的「集装箱化」。四种位置一个核心：怎么连接·怎么语序。",
+  "goals": [
+    "掌握四种名词性从句",
+    "掌握连接词的选择",
+    "注意语序与时态"
+  ],
+  "aiIntro": "📦 句子当名词用——名词性从句",
+  "param": {
+    "name": "nc",
+    "label": "名从站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "宾语从句和主语从句差在哪？",
+    "that 和 what 怎样选？",
+    "从句里用什么语序？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "四种",
+      "subtitle": "四个位置",
+      "color": "blue",
+      "emoji": "🧭",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "四种名词性从句",
+          "items": [
+            {
+              "label": "宾语从句",
+              "value": "从句当宾语——I know (that) he is honest. 动词/介词之后：最常见的一种"
+            },
+            {
+              "label": "主语从句",
+              "value": "从句当主语——What he said is true. / That he came late surprised us.（谓语前的「句子主语」）"
+            },
+            {
+              "label": "表语从句",
+              "value": "从句当表语（系动词后）——The problem is that we have no time. / The question is whether we should go."
+            },
+            {
+              "label": "同位语从句",
+              "value": "解释前面抽象名词的内容——The news that he won made us happy.（news 的内容就是 he won）：常考与定语从句的区分"
+            }
+          ]
+        },
+        {
+          "kind": "highlight",
+          "text": "宾·主·表·同位——位置不同·内核相同"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "连接",
+      "subtitle": "选词",
+      "color": "green",
+      "emoji": "🔗",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "三类连接词",
+          "items": [
+            {
+              "label": "that",
+              "value": "只起连接作用·不充当成分·无词义（宾从中可省略）：句子完整不缺成分就用 that"
+            },
+            {
+              "label": "what",
+              "value": "既连接又充当成分（主语/宾语）= the thing(s) that——What he needs is time（what 作 needs 的宾语）：句子缺主语或宾语就用 what"
+            },
+            {
+              "label": "whether / if",
+              "value": "表「是否」——Whether we go depends on the weather.（主语从句只能用 whether·if 不可提前）：介词后·同位语从句也只用 whether"
+            },
+            {
+              "label": "who / when / where / why / how",
+              "value": "保留疑问含义并充当成分——I do not know where he lives.（where 作地点状语）：按句意选词"
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "🔑",
+          "title": "选词口诀",
+          "text": "句意完整用 that·缺主宾用 what·「是否」用 whether/ if·其他按意思选 wh-：先判断从句缺不缺成分——这是所有选词题的第一问"
+        },
+        {
+          "kind": "highlight",
+          "text": "完整用 that·缺件用 what·是否 whether：先查缺不缺"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "注意",
+      "subtitle": "三大考点",
+      "color": "amber",
+      "emoji": "⚠️",
+      "blocks": [
+        {
+          "kind": "steps",
+          "title": "三大注意事项",
+          "items": [
+            "语序：从句一律用陈述语序（不是疑问语序）——I do not know where he lives（不是 where does he live）：名词性从句第一坑",
+            "时态呼应：主句过去时→从句用相关过去时态（He said he was tired）；客观真理除外（The teacher said the earth is round）",
+            "it 作形式主语：That he passed is good news. → It is good news that he passed.（避免头重脚轻）：主语从句的标配改写"
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "⚔️",
+          "title": "同位语从句 vs 定语从句",
+          "text": "同位语从句：that 不充当成分·解释内容（news/ fact/ idea/ hope 的内容）；定语从句：that 充当主语或宾语·修饰限定（the news that you told me——told 缺宾语·that 当宾语=定从）：一看 that 是否缺成分·二看抽象名词是否等于从句内容"
+        },
+        {
+          "kind": "highlight",
+          "text": "陈述语序·时态呼应·it 形式主语——同位语看 that 缺不缺件"
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "四种从句",
+        "body": "【宾】动词后。【主】谓语前·常用 it 形式主语。\n【表】系动词后。【同位】解释 news/fact/idea。"
+      },
+      {
+        "title": "连接词",
+        "body": "【that】完整句用·宾可省。【what】缺主宾=the thing that。\n【whether/if】是否。【wh-】按意选。\n【口诀】先查缺不缺。"
+      },
+      {
+        "title": "三考点",
+        "body": "【语序】陈述不疑问。【时态】主过从过·真理除外。\n【it】形式主语防头重。\n【辨析】同位语 that 不缺件·定从 that 缺件。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "选 that 还是 what",
+        "steps": [
+          "看从句缺不缺成分",
+          "___ he said is true（said 缺宾语）",
+          "用 what",
+          "I believe ___ you said（不缺）用 that 可省"
+        ],
+        "tip": "先查缺件"
+      },
+      {
+        "q": "改写头重脚轻的主语从句",
+        "steps": [
+          "That he passed is good news",
+          "主语太长用 it 替",
+          "It is good news that he passed",
+          "真正主语后移"
+        ],
+        "tip": "it 形式主语"
+      }
+    ],
+    "mistakes": [
+      "从句用疑问语序（一律陈述语序 where he lives）",
+      "主语从句的「是否」用 if（只能 whether）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "I know ___ he is honest. 填？",
+      "options": [
+        "what",
+        "that",
+        "which",
+        "who"
+      ],
+      "answer": 1,
+      "explain": "句意完整用 that"
+    },
+    {
+      "q": "___ he needs is time. 填？",
+      "options": [
+        "That",
+        "Which",
+        "What",
+        "Whether"
+      ],
+      "answer": 2,
+      "explain": "needs 缺宾语"
+    },
+    {
+      "q": "从句必须用哪种语序？",
+      "options": [
+        "疑问语序",
+        "陈述语序",
+        "倒装语序",
+        "任意"
+      ],
+      "answer": 1,
+      "explain": "第一坑"
+    },
+    {
+      "q": "主语从句表「是否」只能用？",
+      "options": [
+        "if",
+        "whether",
+        "that",
+        "what"
+      ],
+      "answer": 1,
+      "explain": "if 不能提前"
+    },
+    {
+      "q": "It is good news ___ he passed.",
+      "options": [
+        "what",
+        "that",
+        "which",
+        "how"
+      ],
+      "answer": 1,
+      "explain": "形式主语句"
+    },
+    {
+      "q": "名词性从句选词第一问：从句缺不缺 ___",
+      "options": [
+        "成分",
+        "字母"
+      ],
+      "answer": 0,
+      "explain": "缺件用 what",
+      "type": "blank",
+      "blank": {
+        "answerText": "成分",
+        "bank": [
+          "成分",
+          "字母"
+        ]
+      }
+    }
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "nc",
+        "label": "名从站",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ]
+  },
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "四种",
+        "subtitle": "四个位置",
+        "color": "blue",
+        "emoji": "🧭",
+        "blocks": [
+          {
+            "kind": "compare",
+            "title": "四种名词性从句",
+            "items": [
+              {
+                "label": "宾语从句",
+                "value": "从句当宾语——I know (that) he is honest. 动词/介词之后：最常见的一种"
+              },
+              {
+                "label": "主语从句",
+                "value": "从句当主语——What he said is true. / That he came late surprised us.（谓语前的「句子主语」）"
+              },
+              {
+                "label": "表语从句",
+                "value": "从句当表语（系动词后）——The problem is that we have no time. / The question is whether we should go."
+              },
+              {
+                "label": "同位语从句",
+                "value": "解释前面抽象名词的内容——The news that he won made us happy.（news 的内容就是 he won）：常考与定语从句的区分"
+              }
+            ]
+          },
+          {
+            "kind": "highlight",
+            "text": "宾·主·表·同位——位置不同·内核相同"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "连接",
+        "subtitle": "选词",
+        "color": "green",
+        "emoji": "🔗",
+        "blocks": [
+          {
+            "kind": "compare",
+            "title": "三类连接词",
+            "items": [
+              {
+                "label": "that",
+                "value": "只起连接作用·不充当成分·无词义（宾从中可省略）：句子完整不缺成分就用 that"
+              },
+              {
+                "label": "what",
+                "value": "既连接又充当成分（主语/宾语）= the thing(s) that——What he needs is time（what 作 needs 的宾语）：句子缺主语或宾语就用 what"
+              },
+              {
+                "label": "whether / if",
+                "value": "表「是否」——Whether we go depends on the weather.（主语从句只能用 whether·if 不可提前）：介词后·同位语从句也只用 whether"
+              },
+              {
+                "label": "who / when / where / why / how",
+                "value": "保留疑问含义并充当成分——I do not know where he lives.（where 作地点状语）：按句意选词"
+              }
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "🔑",
+            "title": "选词口诀",
+            "text": "句意完整用 that·缺主宾用 what·「是否」用 whether/ if·其他按意思选 wh-：先判断从句缺不缺成分——这是所有选词题的第一问"
+          },
+          {
+            "kind": "highlight",
+            "text": "完整用 that·缺件用 what·是否 whether：先查缺不缺"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "注意",
+        "subtitle": "三大考点",
+        "color": "amber",
+        "emoji": "⚠️",
+        "blocks": [
+          {
+            "kind": "steps",
+            "title": "三大注意事项",
+            "items": [
+              "语序：从句一律用陈述语序（不是疑问语序）——I do not know where he lives（不是 where does he live）：名词性从句第一坑",
+              "时态呼应：主句过去时→从句用相关过去时态（He said he was tired）；客观真理除外（The teacher said the earth is round）",
+              "it 作形式主语：That he passed is good news. → It is good news that he passed.（避免头重脚轻）：主语从句的标配改写"
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "⚔️",
+            "title": "同位语从句 vs 定语从句",
+            "text": "同位语从句：that 不充当成分·解释内容（news/ fact/ idea/ hope 的内容）；定语从句：that 充当主语或宾语·修饰限定（the news that you told me——told 缺宾语·that 当宾语=定从）：一看 that 是否缺成分·二看抽象名词是否等于从句内容"
+          },
+          {
+            "kind": "highlight",
+            "text": "陈述语序·时态呼应·it 形式主语——同位语看 that 缺不缺件"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "宾语从句和主语从句差在哪？",
+      "that 和 what 怎样选？",
+      "从句里用什么语序？"
+    ]
+  }
+}
