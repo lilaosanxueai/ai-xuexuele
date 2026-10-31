@@ -39,17 +39,17 @@ describe('bumpCounter', () => {
 });
 
 describe('generateQuests 每日任务', () => {
-  it('无错题时 3 项任务全未完成', () => {
+  it('无错题时 4 项任务全未完成（含补亮一颗星）', () => {
     const qs = generateQuests([mkLesson()], mkProgress(), readCounters(null));
-    expect(qs.map((q) => q.id)).toEqual(['new-lesson', 'flashcards', 'challenge']);
+    expect(qs.map((q) => q.id)).toEqual(['new-lesson', 'light-a-star', 'flashcards', 'challenge']);
     expect(qs.every((q) => !q.done)).toBe(true);
   });
   it('有错题时追加错题任务', () => {
     const p = mkProgress({ wrongBook: [{ id: 'x#0', lessonId: 'x', lessonTitle: 't', subjectArea: '数学', q: 'q', options: ['a', 'b', 'c', 'd'], answer: 0, explain: 'e', wrongPicks: [1], times: 1, lastWrongAt: '2026-09-20T00:00:00Z' }] });
     const qs = generateQuests([mkLesson()], p, readCounters(null));
-    expect(qs).toHaveLength(4);
-    expect(qs[3].id).toBe('wrongbook');
-    expect(qs[3].detail).toContain('1 道');
+    expect(qs).toHaveLength(5);
+    expect(qs[4].id).toBe('wrongbook');
+    expect(qs[4].detail).toContain('1 道');
   });
   it('今天完成过新课则第一项点亮', () => {
     const p = mkProgress({ lessons: { a: { status: 'completed', tasks: {}, completedAt: new Date().toISOString() } } });
@@ -86,5 +86,44 @@ describe('generateQuests 每日任务', () => {
     ];
     const qs = generateQuests([mkLesson()], mkProgress({ reviewQueue: queue }), readCounters(null));
     expect(qs.find((q) => q.id === 'wrong-review')).toBeUndefined();
+  });
+
+  it('今天点亮模块第一颗星→补亮任务完成·标题引用最大的全暗模块', () => {
+    const lessons = [
+      { ...mkLesson(), id: 'a', curriculum: { module: '函数', points: [], stage: '' } },
+      { ...mkLesson(), id: 'b', order: 2, curriculum: { module: '函数', points: [], stage: '' } },
+      { ...mkLesson(), id: 'c', order: 3, curriculum: { module: '几何', points: [], stage: '' } },
+    ];
+    const p = mkProgress({ lessons: { a: { status: 'completed', tasks: {}, completedAt: new Date().toISOString() } } });
+    const qs = generateQuests(lessons, p, readCounters(null));
+    const star = qs.find((q) => q.id === 'light-a-star')!;
+    expect(star).toBeDefined();
+    expect(star.done).toBe(true); // 函数的第一颗星今天点亮
+    expect(star.title).toContain('几何'); // 推荐最大的全暗模块
+    expect(star.detail).toContain('1 颗');
+  });
+
+  it('星昨天就点亮了：今天补第二节不算「今天点亮」', () => {
+    const y = new Date(); y.setDate(y.getDate() - 1);
+    const lessons = [
+      { ...mkLesson(), id: 'a', curriculum: { module: '函数', points: [], stage: '' } },
+      { ...mkLesson(), id: 'b', order: 2, curriculum: { module: '函数', points: [], stage: '' } },
+      { ...mkLesson(), id: 'c', order: 3, curriculum: { module: '几何', points: [], stage: '' } },
+    ];
+    const p = mkProgress({
+      lessons: {
+        a: { status: 'completed', tasks: {}, completedAt: y.toISOString() },
+        b: { status: 'completed', tasks: {}, completedAt: new Date().toISOString() },
+      },
+    });
+    const qs = generateQuests(lessons, p, readCounters(null));
+    expect(qs.find((q) => q.id === 'light-a-star')!.done).toBe(false); // 函数亮于昨天·几何仍全暗未学
+  });
+
+  it('没有全暗模块时不出现补亮任务', () => {
+    const lessons = [{ ...mkLesson(), id: 'a', curriculum: { module: '函数', points: [], stage: '' } }];
+    const p = mkProgress({ lessons: { a: { status: 'completed', tasks: {}, completedAt: new Date().toISOString() } } });
+    const qs = generateQuests(lessons, p, readCounters(null));
+    expect(qs.find((q) => q.id === 'light-a-star')).toBeUndefined();
   });
 });
