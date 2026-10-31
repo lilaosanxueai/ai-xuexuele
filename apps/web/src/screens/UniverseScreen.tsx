@@ -5,7 +5,7 @@ import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
 import { SUBJECTS } from '../components/subjectMeta.ts';
-import { buildUniverse, type UniverseNode } from '../runtime/knowledgeUniverse.ts';
+import { buildUniverse, universeWeakSpots, type UniverseNode } from '../runtime/knowledgeUniverse.ts';
 
 /** 学科主题色 → SVG 填充色（Tailwind 类名在 SVG 上不能用·映射到固定 hex） */
 const HEX: Record<string, string> = {
@@ -33,6 +33,8 @@ export default function UniverseScreen() {
   }, [profile, nav]);
 
   const graph = useMemo(() => buildUniverse(lessons, progress), [lessons, progress]);
+  const weak = useMemo(() => universeWeakSpots(graph, lessons, progress), [graph, lessons, progress]);
+  const doneLessons = graph.nodes.reduce((s, n) => s + n.doneCount, 0);
 
   const node = useMemo(() => graph.nodes.find((n) => n.id === (sel ?? '')) ?? null, [graph, sel]);
   const hoverNode = useMemo(() => graph.nodes.find((n) => n.id === (hover ?? '')) ?? null, [graph, hover]);
@@ -69,8 +71,8 @@ export default function UniverseScreen() {
           </div>
           <div className="ml-auto flex gap-4 text-center">
             <div><div className="text-2xl font-black">{graph.subjects.length}</div><div className="text-[10px] opacity-70">学科</div></div>
-            <div><div className="text-2xl font-black">{graph.nodes.length}</div><div className="text-[10px] opacity-70">模块</div></div>
-            <div><div className="text-2xl font-black">{lit}<span className="text-sm opacity-70">/{graph.nodes.length}</span></div><div className="text-[10px] opacity-70">已点亮</div></div>
+            <div><div className="text-2xl font-black">{doneLessons}<span className="text-sm opacity-70">/{lessons.length}</span></div><div className="text-[10px] opacity-70">已完成课</div></div>
+            <div><div className="text-2xl font-black">{lit}<span className="text-sm opacity-70">/{graph.nodes.length}</span></div><div className="text-[10px] opacity-70">已点亮模块</div></div>
             <div><div className="text-2xl font-black">{graph.edges.length}</div><div className="text-[10px] opacity-70">跨科连线</div></div>
           </div>
         </div>
@@ -78,13 +80,24 @@ export default function UniverseScreen() {
         <div className="mb-3 flex flex-wrap items-center gap-1.5">
           <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="🔍 搜索模块名（如：函数/光合/市场）" className="w-56 rounded-xl bg-white px-3 py-1.5 text-sm shadow-sm outline-none ring-1 ring-slate-200 focus:ring-sky-400" />
           <button onClick={() => { setFocus(null); setSel(null); setQuery(''); }} className="rounded-xl bg-white px-3 py-1.5 text-xs font-bold text-slate-500 shadow-sm hover:bg-slate-50">全部</button>
-          {graph.subjects.map((s) => (
-            <button key={s.subject} onClick={() => setFocus(focus === s.subject ? null : s.subject)}
-              className={`rounded-xl px-2.5 py-1 text-xs font-bold shadow-sm transition ${focus === s.subject ? 'text-white' : 'bg-white text-slate-500 hover:bg-slate-50'}`}
-              style={focus === s.subject ? { background: hexOf(s.subject) } : undefined}>
-              {SUBJECTS[s.subject]?.emoji} {s.subject}
-            </button>
-          ))}
+          {graph.subjects.map((s) => {
+            const pct = Math.round(s.doneRatio * 100);
+            const R = 6, C = 2 * Math.PI * R;
+            return (
+              <button key={s.subject} onClick={() => setFocus(focus === s.subject ? null : s.subject)}
+                className={`flex items-center gap-1.5 rounded-xl px-2.5 py-1 text-xs font-bold shadow-sm transition ${focus === s.subject ? 'text-white' : 'bg-white text-slate-500 hover:bg-slate-50'}`}
+                style={focus === s.subject ? { background: hexOf(s.subject) } : undefined}
+                title={`${s.subject}：${s.done}/${s.count} 课完成（${pct}%）${s.accuracy == null ? '' : ` · 平均正确率 ${s.accuracy}%`}`}>
+                <svg width="14" height="14" viewBox="0 0 16 16" className="shrink-0">
+                  <circle cx="8" cy="8" r={R} fill="none" stroke={focus === s.subject ? 'rgba(255,255,255,0.35)' : 'rgba(148,163,184,0.3)'} strokeWidth="2.5" />
+                  <circle cx="8" cy="8" r={R} fill="none" stroke={focus === s.subject ? '#fff' : hexOf(s.subject)} strokeWidth="2.5" strokeLinecap="round"
+                    strokeDasharray={`${(C * s.doneRatio).toFixed(2)} ${C.toFixed(2)}`} transform="rotate(-90 8 8)" />
+                </svg>
+                {SUBJECTS[s.subject]?.emoji} {s.subject}
+                <span className={`text-[10px] font-black ${focus === s.subject ? 'opacity-80' : 'text-slate-400'}`}>{pct}%</span>
+              </button>
+            );
+          })}
         </div>
 
         <div className="grid gap-4 lg:grid-cols-[1fr_320px]">
@@ -173,11 +186,41 @@ export default function UniverseScreen() {
                 <div className="mt-1 text-xs text-slate-500">{hoverNode.count} 课 · 完成 {hoverNode.doneCount} · 正确率 {hoverNode.accuracy == null ? '—' : hoverNode.accuracy + '%'}（点击查看详情）</div>
               </div>
             ) : (
-              <div className="rounded-3xl bg-white/70 p-6 text-center shadow-sm">
-                <div className="text-4xl">🌌</div>
-                <p className="mt-3 text-sm font-bold text-slate-500">点击任意星星看模块详情</p>
-                <p className="mt-1 text-xs text-slate-400">学科按星系分布 · 亮度=正确率 · ✓=全部完成 · 金线=与所选模块共享知识</p>
-              </div>
+              <>
+                <div className="rounded-3xl bg-white/90 p-4 shadow-md">
+                  <div className="mb-2 flex items-center gap-1.5">
+                    <span className="text-lg">🌫</span>
+                    <span className="text-xs font-black text-slate-500">薄弱星云 · 优先补亮</span>
+                    <span className="ml-auto text-[10px] font-bold text-slate-400">按紧急程度排序</span>
+                  </div>
+                  {weak.length === 0 ? (
+                    <p className="py-3 text-center text-xs font-bold text-emerald-500">🌟 暂无薄弱模块，知识版图一片明亮！</p>
+                  ) : (
+                    <div className="space-y-1.5">
+                      {weak.map((w) => {
+                        const lesson = lessons.find((l) => l.id === w.lessonId);
+                        const isLab = !!(lesson?.lab || lesson?.starterCode);
+                        return (
+                          <button key={w.id} onClick={() => w.lessonId && nav(isLab ? `/lab/${w.lessonId}` : `/tutor/${w.lessonId}`)}
+                            title={`跳到《${w.lessonTitle ?? ''}》`}
+                            className="flex w-full items-center gap-2 rounded-xl bg-slate-50 px-2.5 py-2 text-left transition hover:bg-amber-50">
+                            <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: hexOf(w.subject) }} />
+                            <span className="min-w-0 flex-1">
+                              <span className="block truncate text-xs font-black text-slate-700">{w.subject} · {w.module}</span>
+                              <span className="block truncate text-[10px] font-semibold text-slate-400">{w.reason}</span>
+                            </span>
+                            <span className="shrink-0 rounded-lg bg-amber-100 px-2 py-1 text-[10px] font-black text-amber-700">去补亮 →</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+                <div className="rounded-3xl bg-white/70 p-4 text-center shadow-sm">
+                  <p className="text-xs font-bold text-slate-500">点击任意星星看模块详情</p>
+                  <p className="mt-1 text-[10px] text-slate-400">亮度=正确率 · ✓=全部完成 · 金线=与所选模块共享知识 · 学科筛选环=完成率</p>
+                </div>
+              </>
             )}
             {query.trim() && (
               <div className="rounded-3xl bg-white/90 p-4 shadow-md">

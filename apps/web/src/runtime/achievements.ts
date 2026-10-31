@@ -61,6 +61,10 @@ export const BADGES: BadgeDef[] = [
   { id: 'challenge-180', name: '擂台高手', emoji: '⚔️', desc: '挑战赛单局 ≥ 180 分', goal: 1 },
   { id: 'exam-90', name: '期末优等生', emoji: '🥇', desc: '任一模拟卷正确率 ≥ 90%', goal: 1 },
   { id: 'weekly-goal-3', name: '言出必行', emoji: '🎯', desc: '达成 3 次周目标', goal: 3 },
+  { id: 'star-lit-10', name: '点亮之星', emoji: '🌟', desc: '在 10 个课标模块留下练习足迹', goal: 10 },
+  { id: 'star-lit-50', name: '星图半百', emoji: '✨', desc: '点亮 50 个课标模块（练过随堂练）', goal: 50 },
+  { id: 'galaxy-master-5', name: '满贯星系', emoji: '🪐', desc: '把 5 个模块的课程全部学完', goal: 5 },
+  { id: 'ten-galaxies', name: '十星巡礼', emoji: '🔭', desc: '在 10 个学科留下足迹', goal: 10 },
 ];
 
 /** 从「今天」往回数连续有学习记录的天数（当天没学不打断，从昨天起算） */
@@ -96,6 +100,19 @@ export function computeBadges(lessons: Lesson[], progress: ProfileProgress | nul
   const notes = Object.values(progress?.labNotes ?? {}).filter((v) => v && v.trim().length > 0).length;
   const streak = streakFrom(progress?.dailyUsage ?? {});
 
+  // 宇宙徽章：按 学科×模块 分组统计（与知识宇宙同一分组规则）
+  const moduleGroups = new Map<string, { total: number; done: number; anyEx: boolean }>();
+  for (const l of lessons) {
+    const key = (l.subjectArea ?? '信息科技') + '·' + (l.curriculum?.module ?? '其他');
+    const g = moduleGroups.get(key) ?? { total: 0, done: 0, anyEx: false };
+    g.total += 1;
+    if (doneIds.has(l.id)) g.done += 1;
+    if ((progress?.exercises?.[l.id]?.total ?? 0) > 0) g.anyEx = true;
+    moduleGroups.set(key, g);
+  }
+  const litModules = [...moduleGroups.values()].filter((g) => g.anyEx).length;
+  const fullModules = [...moduleGroups.values()].filter((g) => g.total >= 2 && g.done === g.total).length;
+
   const cur: Record<string, number> = {
     'first-lesson': done.length,
     'ten-lessons': done.length,
@@ -114,6 +131,10 @@ export function computeBadges(lessons: Lesson[], progress: ProfileProgress | nul
     'challenge-180': records.challengeBest >= 180 ? 1 : 0,
     'exam-90': records.examBest >= 90 ? 1 : 0,
     'weekly-goal-3': records.weeklyGoalsMet,
+    'star-lit-10': litModules,
+    'star-lit-50': litModules,
+    'galaxy-master-5': fullModules,
+    'ten-galaxies': subjects,
   };
   return BADGES.map((b) => ({ ...b, cur: Math.min(cur[b.id] ?? 0, b.goal), unlocked: (cur[b.id] ?? 0) >= b.goal }));
 }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildUniverse } from './knowledgeUniverse.ts';
+import { buildUniverse, universeWeakSpots } from './knowledgeUniverse.ts';
 import type { Lesson, ProfileProgress } from '@shared/types.ts';
 
 const L = (o: { id: string; subject: string; module: string; points: string[]; order: number }): Lesson => ({
@@ -75,5 +75,51 @@ describe('buildUniverse 知识宇宙', () => {
       degree.set(e.b, (degree.get(e.b) ?? 0) + 1);
     }
     for (const d of degree.values()) expect(d).toBeLessThanOrEqual(2);
+  });
+
+  it('学科统计：完成数/完成率/平均正确率聚合', () => {
+    const p = progress(['a1', 'a2', 'c1'], { a1: { correct: 6, total: 6 }, a2: { correct: 3, total: 6 } });
+    const g = buildUniverse(data, p);
+    const phy = g.subjects.find((s) => s.subject === '物理')!;
+    expect(phy.done).toBe(2);
+    expect(phy.doneRatio).toBe(1);
+    expect(phy.accuracy).toBe(75);
+    const math = g.subjects.find((s) => s.subject === '数学')!;
+    expect(math.done).toBe(1);
+    expect(math.doneRatio).toBeCloseTo(0.5);
+    expect(math.accuracy).toBeNull(); // 无练习记录
+  });
+
+  it('薄弱星云：低正确率模块入选并推荐未完成课', () => {
+    const p = progress([], { a1: { correct: 2, total: 6 } }); // 物理·波 ≈33%
+    const g = buildUniverse(data, p);
+    const weak = universeWeakSpots(g, data, p);
+    expect(weak.length).toBe(1); // 其余模块课数 <3 又无低正确率
+    expect(weak[0]!.id).toBe('物理·波');
+    expect(weak[0]!.accuracy).toBe(33);
+    expect(weak[0]!.lessonId).toBe('a1'); // 未完成的按顺序第一节
+    expect(weak[0]!.reason).toContain('33%');
+  });
+
+  it('薄弱星云：全完成但薄弱时推荐正确率最低的一课', () => {
+    const p = progress(['a1', 'a2'], { a1: { correct: 1, total: 6 }, a2: { correct: 5, total: 6 } });
+    const g = buildUniverse(data, p);
+    const weak = universeWeakSpots(g, data, p);
+    expect(weak[0]!.id).toBe('物理·波');
+    expect(weak[0]!.lessonId).toBe('a1'); // 两课全完成 → 挑正确率最低的 a1
+  });
+
+  it('薄弱星云：≥3 课全暗的大模块入选·健康模块不入·限量', () => {
+    const big = [1, 2, 3].map((i) => L({ id: `x${i}`, subject: '科学', module: '地球', points: ['地球结构'], order: 10 + i }));
+    const strong = [1, 2].map((i) => L({ id: `y${i}`, subject: '历史', module: '唐朝', points: ['盛唐气象'], order: 20 + i }));
+    const p = progress(['y1', 'y2'], { y1: { correct: 6, total: 6 }, y2: { correct: 6, total: 6 } });
+    const lessons = [...data, ...big, ...strong];
+    const g = buildUniverse(lessons, p);
+    const weak = universeWeakSpots(g, lessons, p);
+    const ids = weak.map((w) => w.id);
+    expect(ids).toContain('科学·地球'); // 3 课全暗
+    expect(ids).not.toContain('历史·唐朝'); // 全完成 + 100%
+    expect(weak.find((w) => w.id === '科学·地球')!.lessonId).toBe('x1'); // 从第一节点亮
+    expect(weak.length).toBeLessThanOrEqual(6); // 默认限量
   });
 });

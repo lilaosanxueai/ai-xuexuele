@@ -36,8 +36,30 @@ export interface UniverseSubject {
   subject: string;
   count: number;
   modules: number;
+  /** 已完成课程数 */
+  done: number;
+  /** 完成率 0-1 */
+  doneRatio: number;
+  /** 学科平均正确率 0-100（无数据为 null） */
+  accuracy: number | null;
   x: number;
   y: number;
+}
+
+/** 薄弱星云：值得优先补亮的模块（低正确率或大而未启动） */
+export interface WeakSpot {
+  id: string;
+  subject: string;
+  module: string;
+  accuracy: number | null;
+  doneCount: number;
+  count: number;
+  /** 给孩子看的一句话理由 */
+  reason: string;
+  /** 推荐先学/先练的一课（未完成优先·全完成则练正确率最低的） */
+  lessonId: string | null;
+  lessonTitle: string | null;
+  lessonEmoji: string;
 }
 
 export interface UniverseGraph {
@@ -162,10 +184,84 @@ export function buildUniverse(
     edges.push(e);
   }
 
-  const subjects: UniverseSubject[] = ordered.map((s) => ({
-    subject: s, count: byCount.get(s) ?? 0, modules: (bySubject.get(s) ?? []).length,
-    x: anchor.get(s)!.x, y: anchor.get(s)!.y,
-  }));
+  const subjects: UniverseSubject[] = ordered.map((s) => {
+    const list = bySubject.get(s) ?? [];
+    const count = byCount.get(s) ?? 0;
+    const done = list.reduce((sum, n) => sum + n.doneCount, 0);
+    const accs = list.map((n) => n.accuracy).filter((a): a is number => a != null);
+    return {
+      subject: s, count, modules: list.length,
+      done, doneRatio: count > 0 ? done / count : 0,
+      accuracy: accs.length > 0 ? Math.round(accs.reduce((x, v) => x + v, 0) / accs.length) : null,
+      x: anchor.get(s)!.x, y: anchor.get(s)!.y,
+    };
+  });
 
   return { nodes, edges, subjects };
+}
+
+/**
+ * 薄弱星云：从宇宙图里挑出最值得补亮的模块。
+ * 两类入选：① 练过但正确率低于阈值（默认 60%）② 课程 ≥3 节却一节没学（整片黑暗的大星球）。
+ * 排序：越薄弱越靠前（正确率升序 → 未启动按课数降序），同分按 firstOrder 稳定。
+ */
+export function universeWeakSpots(
+  graph: UniverseGraph,
+  lessons: Lesson[],
+  progress: ProfileProgress | null,
+  opts: { limit?: number; weakAcc?: number } = {},
+): WeakSpot[] {
+  const limit = opts.limit ?? 6;
+  const weakAcc = opts.weakAcc ?? 60;
+
+  // 模块内的课程清单（复用 lessons·保持与节点同一分组规则）
+  const byModule = new Map<string, Lesson[]>();
+  for (const l of lessons) {
+    const id = (l.subjectArea ?? '信息科技') + '·' + (l.curriculum?.module ?? '其他');
+    const list = byModule.get(id) ?? [];
+    list.push(l);
+    byModule.set(id, list);
+  }
+
+  type Cand = { score: number; spot: WeakSpot };
+  const cands: Cand[] = [];
+  for (const n of graph.nodes) {
+    const list = (byModule.get(n.id) ?? []).slice().sort((a, b) => a.order - b.order);
+    let score = 0;
+    let reason = '';
+    if (n.accuracy != null && n.accuracy < weakAcc) {
+      score = 1000 + (weakAcc - n.accuracy) * 10; // 越低越急
+      reason = `正确率只有 ${n.accuracy}%，练一练把星星补亮`;
+    } else if (n.doneCount === 0 && n.count >= 3) {
+      score = 300 + n.count * 10; // 大而未启动
+      reason = `${n.count} 节课还全暗，来点亮第一颗`;
+    } else {
+      continue; // 健康模块不进星云
+    }
+    // 推荐课：未完成的按顺序第一节；全完成则挑正确率最低的一课
+    let pick: Lesson | null = list.find((l) => progress?.lessons[l.id]?.status !== 'completed') ?? null;
+    if (!pick) {
+      let worst = 101;
+      for (const l of list) {
+        const ex = progress?.exercises?.[l.id];
+        if (ex && ex.total > 0) {
+          const acc = (ex.correct / ex.total) * 100;
+          if (acc < worst) { worst = acc; pick = l; }
+        }
+      }
+      pick = pick ?? list[0] ?? null;
+    }
+    cands.push({
+      // 同级先出现的模块略优先·保证确定性
+      score: score - Math.min(200, n.firstOrder / 1000),
+      spot: {
+        id: n.id, subject: n.subject, module: n.module,
+        accuracy: n.accuracy, doneCount: n.doneCount, count: n.count,
+        reason, lessonId: pick?.id ?? null, lessonTitle: pick?.title ?? null, lessonEmoji: pick?.emoji ?? '⭐',
+      },
+    });
+  }
+
+  cands.sort((a, b) => b.score - a.score);
+  return cands.slice(0, limit).map((c) => c.spot);
 }
