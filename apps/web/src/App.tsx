@@ -12,6 +12,7 @@ import { useProfileStore } from './stores/profile.ts';
 const TutorScreen = lazy(() => import('./screens/TutorScreen.tsx'));
 const LabScreen = lazy(() => import('./screens/LabScreen.tsx'));
 const GalleryScreen = lazy(() => import('./screens/GalleryScreen.tsx'));
+const UniverseScreen = lazy(() => import('./screens/UniverseScreen.tsx'));
 const WorkshopScreen = lazy(() => import('./screens/WorkshopScreen.tsx'));
 const PlaygroundScreen = lazy(() => import('./screens/PlaygroundScreen.tsx'));
 const WrongBookScreen = lazy(() => import('./screens/WrongbookScreen.tsx'));
@@ -74,6 +75,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomeScreen />} />
           <Route path="/map" element={<MapScreen />} />
+          <Route path="/universe" element={<UniverseScreen />} />
           <Route path="/tutor/:id" element={<TutorScreen />} />
           <Route path="/lab/:id" element={<LabScreen />} />
           <Route path="/lesson/:id" element={<LegacyLessonRoute />} />

@@ -154,6 +154,19 @@ export default function MapScreen() {
           <PomodoroTimer profileId={profile.id} />
         </div>
 
+        {/* 知识宇宙入口：全学科模块知识图谱（学科=星系 · 模块=星星 · 共享知识=连线） */}
+        <button
+          onClick={() => nav('/universe')}
+          className="mb-4 flex w-full items-center gap-3 rounded-3xl bg-gradient-to-r from-slate-900 to-indigo-900 px-4 py-3 text-left text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
+        >
+          <span className="text-3xl">🌌</span>
+          <span className="min-w-0 flex-1">
+            <span className="block text-sm font-black">知识宇宙 · 全学科知识图谱</span>
+            <span className="block text-xs opacity-75">学科是星系·模块是星星·连线是共享知识——看看你的知识版图点亮了多少</span>
+          </span>
+          <span className="shrink-0 rounded-xl bg-white/15 px-3 py-1.5 text-xs font-bold">探索 →</span>
+        </button>
+
         {/* 每日知识碎片：跨学科"你知道吗？"——激发好奇心 */}
         {(() => {
           const rawFact = pickDailyFact(todayStr, profile.id);
