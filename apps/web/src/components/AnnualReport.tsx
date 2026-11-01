@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import type { Lesson, Profile, ProfileProgress } from '@shared/types.ts';
 import { api } from '../api.ts';
 import { computeBadges, readRecords, recordsKey, EMPTY_RECORDS } from '../runtime/achievements.ts';
+import { annualUniverse, type AnnualUniverse } from '../runtime/knowledgeUniverse.ts';
 import { calcStreak } from '../utils/streak.ts';
 
 interface AnnualData {
@@ -20,6 +21,7 @@ interface AnnualData {
   monthlyMinutes: number[];
   noteCount: number;
   year: number;
+  universe: AnnualUniverse;
 }
 
 /** 年度学习成长报告：一键生成 A4 打印版 */
@@ -78,12 +80,14 @@ export default function AnnualReport({ profiles }: { profiles: Profile[] }) {
 
     const noteCount = Object.values(progress.lessonNotes ?? {}).filter((n) => n && n.trim().length > 10).length;
 
+    const universe = annualUniverse(lessons, progress, year);
+
     setData({
       profile, progress, lessons, totalMinutes, doneCount, exerciseTotal, exerciseCorrect, streak,
       wrongCleared: progress.wrongCleared ?? 0,
       badgesUnlocked: badges.filter((b) => b.unlocked).length,
       badgesTotal: badges.length,
-      subjectStats, monthlyMinutes, noteCount, year,
+      subjectStats, monthlyMinutes, noteCount, year, universe,
     });
   };
 
@@ -118,10 +122,11 @@ export default function AnnualReport({ profiles }: { profiles: Profile[] }) {
               <h1 className="text-4xl font-black">{data.year} 年度学习成长报告</h1>
               <p className="mt-3 text-xl">{data.profile.avatar} {data.profile.name}</p>
               <p className="mt-1 text-sm text-slate-400">AI学学乐 · {new Date().toLocaleDateString('zh-CN')} 生成</p>
-              <div className="mt-8 grid grid-cols-3 gap-4">
+              <div className="mt-8 grid grid-cols-4 gap-3">
                 <div className="rounded-2xl bg-slate-50 p-4"><div className="text-3xl font-black text-indigo-600">{Math.round(data.totalMinutes / 60)}h</div><div className="text-xs text-slate-400">累计学习时长</div></div>
                 <div className="rounded-2xl bg-slate-50 p-4"><div className="text-3xl font-black text-emerald-600">{data.doneCount}</div><div className="text-xs text-slate-400">完成课程</div></div>
                 <div className="rounded-2xl bg-slate-50 p-4"><div className="text-3xl font-black text-amber-500">{data.badgesUnlocked}</div><div className="text-xs text-slate-400">获得徽章</div></div>
+                <div className="rounded-2xl bg-slate-50 p-4"><div className="text-3xl font-black text-violet-600">🌟{data.universe.litThisYear}</div><div className="text-xs text-slate-400">今年点亮星座</div></div>
               </div>
             </div>
 
@@ -135,6 +140,7 @@ export default function AnnualReport({ profiles }: { profiles: Profile[] }) {
                   <tr className="border-b"><td className="py-2 font-bold">练习答题</td><td className="py-2 text-right">{data.exerciseTotal} 道（答对 {data.exerciseCorrect} 道{data.exerciseTotal > 0 ? `，正确率 ${Math.round((data.exerciseCorrect / data.exerciseTotal) * 100)}%` : ''}）</td></tr>
                   <tr className="border-b"><td className="py-2 font-bold">错题练对</td><td className="py-2 text-right">{data.wrongCleared} 道</td></tr>
                   <tr className="border-b"><td className="py-2 font-bold">学习笔记</td><td className="py-2 text-right">{data.noteCount} 篇</td></tr>
+                  <tr className="border-b"><td className="py-2 font-bold">点亮星座（知识模块）</td><td className="py-2 text-right">{data.universe.litTotal} 颗（今年 +{data.universe.litThisYear}）· 覆盖 {data.universe.galaxies} 个学科星系</td></tr>
                   <tr className="border-b"><td className="py-2 font-bold">最长连续学习</td><td className="py-2 text-right">{data.streak} 天</td></tr>
                 </tbody>
               </table>
@@ -172,6 +178,37 @@ export default function AnnualReport({ profiles }: { profiles: Profile[] }) {
               </div>
             </div>
 
+            {/* 知识星图：这一年的点亮故事 */}
+            <div className="mt-8">
+              <h2 className="mb-3 border-b-2 border-slate-200 pb-2 text-xl font-black">🌌 知识星图</h2>
+              {data.universe.firstStar ? (
+                <p className="mb-3 text-sm text-slate-600">
+                  第一颗星于 <b>{data.universe.firstStar.litAt.slice(0, 10)}</b> 点亮——{data.universe.firstStar.subject}「{data.universe.firstStar.module}」。到今年为止，知识宇宙共点亮 <b className="text-violet-600">{data.universe.litTotal}</b> 颗星，覆盖 {data.universe.galaxies} 个学科星系。
+                </p>
+              ) : (
+                <p className="mb-3 text-sm text-slate-400">还没有点亮的星座——新的一年，从第一颗星开始。</p>
+              )}
+              <div className="mb-1 text-xs font-bold text-slate-400">逐月点亮轨迹（今年 +{data.universe.litThisYear} 颗）</div>
+              <div className="flex items-end gap-1" style={{ height: 64 }}>
+                {data.universe.monthlyStars.map((n, i) => (
+                  <div key={i} className="flex flex-1 flex-col items-center gap-0.5">
+                    <div className="w-full rounded-t bg-amber-400" style={{ height: Math.max(2, (n / Math.max(...data.universe.monthlyStars, 1)) * 44) }} title={`${i + 1}月 点亮 ${n} 颗`} />
+                    <span className="text-[8px] text-slate-400">{i + 1}月</span>
+                  </div>
+                ))}
+              </div>
+              {data.universe.top.length > 0 && (
+                <>
+                  <div className="mb-1.5 mt-4 text-xs font-bold text-slate-400">学得最扎实的星座</div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {data.universe.top.map((t) => (
+                      <span key={t.subject + '·' + t.module} className="rounded-full bg-violet-50 px-2.5 py-1 text-xs font-bold text-violet-700">✨ {t.subject}·{t.module}（{t.count} 课）</span>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+
             {/* 第三页：徽章与寄语 */}
             <div className="break-before-page pt-8">
               <h2 className="mb-3 border-b-2 border-slate-200 pb-2 text-2xl font-black">成就徽章</h2>
@@ -204,7 +241,7 @@ export default function AnnualReport({ profiles }: { profiles: Profile[] }) {
 
       {!printing && data && (
         <div className="rounded-2xl bg-indigo-50 p-4 text-sm text-indigo-800">
-          ✅ 报告已生成（{data.profile.name} · {data.year} 年度）：累计 {Math.round(data.totalMinutes / 60)} 小时 · 完成 {data.doneCount} 课 · 徽章 {data.badgesUnlocked}/{data.badgesTotal}。点击"🖨 打印"查看完整版。
+          ✅ 报告已生成（{data.profile.name} · {data.year} 年度）：累计 {Math.round(data.totalMinutes / 60)} 小时 · 完成 {data.doneCount} 课 · 徽章 {data.badgesUnlocked}/{data.badgesTotal} · 点亮 {data.universe.litTotal} 颗星座。点击"🖨 打印"查看完整版。
         </div>
       )}
     </div>

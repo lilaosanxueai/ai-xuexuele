@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildUniverse, universeWeakSpots } from './knowledgeUniverse.ts';
+import { buildUniverse, universeWeakSpots, annualUniverse } from './knowledgeUniverse.ts';
 import type { Lesson, ProfileProgress } from '@shared/types.ts';
 
 const L = (o: { id: string; subject: string; module: string; points: string[]; order: number }): Lesson => ({
@@ -8,9 +8,13 @@ const L = (o: { id: string; subject: string; module: string; points: string[]; o
   subjectArea: o.subject, curriculum: { module: o.module, points: o.points }, island: 'cross',
 } as unknown as Lesson);
 
-const progress = (done: string[], acc: Record<string, { correct: number; total: number }> = {}): ProfileProgress => ({
+const progress = (
+  done: string[],
+  acc: Record<string, { correct: number; total: number }> = {},
+  at?: Record<string, string>,
+): ProfileProgress => ({
   profileId: 'p',
-  lessons: Object.fromEntries(done.map((id) => [id, { status: 'completed' as const, tasks: {} }])),
+  lessons: Object.fromEntries(done.map((id) => [id, { status: 'completed' as const, tasks: {}, ...(at?.[id] ? { completedAt: at[id] } : {}) }])),
   dailyUsage: {}, lessonDrafts: {}, lessonCodes: {},
   exercises: acc,
 });
@@ -121,5 +125,39 @@ describe('buildUniverse 知识宇宙', () => {
     expect(ids).not.toContain('历史·唐朝'); // 全完成 + 100%
     expect(weak.find((w) => w.id === '科学·地球')!.lessonId).toBe('x1'); // 从第一节点亮
     expect(weak.length).toBeLessThanOrEqual(6); // 默认限量
+  });
+
+  it('年度星图：首星/月度轨迹/年度归属/星座榜', () => {
+    const lessons = [
+      L({ id: 'm1', subject: '数学', module: '函数', points: [], order: 1 }),
+      L({ id: 'm2', subject: '数学', module: '函数', points: [], order: 2 }),
+      L({ id: 'p1', subject: '物理', module: '波', points: [], order: 3 }),
+    ];
+    const p = progress(['m1', 'm2', 'p1'], {}, {
+      m1: '2026-03-05T10:00:00.000Z',
+      m2: '2026-03-06T10:00:00.000Z',
+      p1: '2026-10-20T10:00:00.000Z',
+    });
+    const a = annualUniverse(lessons, p, 2026);
+    expect(a.litTotal).toBe(2); // 函数+波
+    expect(a.litThisYear).toBe(2);
+    expect(a.firstStar!.module).toBe('函数'); // 最早 3 月
+    expect(a.monthlyStars[2]).toBe(1); // 3 月
+    expect(a.monthlyStars[9]).toBe(1); // 10 月
+    expect(a.galaxies).toBe(2); // 数学+物理
+    expect(a.top[0]).toEqual({ subject: '数学', module: '函数', count: 2 }); // 完成最多
+  });
+
+  it('年度星图：跨年点亮只计当年·空档案全零', () => {
+    const lessons = [L({ id: 'm1', subject: '数学', module: '函数', points: [], order: 1 })];
+    const p = progress(['m1'], {}, { m1: '2025-12-31T10:00:00.000Z' });
+    const a = annualUniverse(lessons, p, 2026);
+    expect(a.litTotal).toBe(1);
+    expect(a.litThisYear).toBe(0); // 去年点的
+    expect(a.monthlyStars.every((n) => n === 0)).toBe(true);
+    const empty = annualUniverse(lessons, null, 2026);
+    expect(empty.litTotal).toBe(0);
+    expect(empty.firstStar).toBeNull();
+    expect(empty.top).toEqual([]);
   });
 });

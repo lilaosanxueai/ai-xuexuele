@@ -101,6 +101,48 @@ export function moduleStars(lessons: Lesson[], progress: ProfileProgress | null)
   return [...groups.values()];
 }
 
+/** 年度知识星图：把一年的「点亮」讲成一个故事（年度报告用） */
+export interface AnnualUniverse {
+  /** 累计点亮的模块数 */
+  litTotal: number;
+  /** 本年度点亮的模块数 */
+  litThisYear: number;
+  /** 第一颗星：全部档案里最早点亮的模块（没有则为 null） */
+  firstStar: { subject: string; module: string; litAt: string } | null;
+  /** 本年度逐月点亮数（12 格） */
+  monthlyStars: number[];
+  /** 点亮过的学科星系数 */
+  galaxies: number;
+  /** 完成课数最多的星座 top6 */
+  top: { subject: string; module: string; count: number }[];
+}
+
+export function annualUniverse(lessons: Lesson[], progress: ProfileProgress | null, year: number): AnnualUniverse {
+  const lit = moduleStars(lessons, progress).filter((g) => g.done > 0 && g.litAt);
+  const first = lit.slice().sort((a, b) => (a.litAt as string).localeCompare(b.litAt as string))[0] ?? null;
+  const monthlyStars = Array.from({ length: 12 }, () => 0);
+  let litThisYear = 0;
+  for (const g of lit) {
+    if (!(g.litAt as string).startsWith(`${year}-`)) continue;
+    litThisYear += 1;
+    const m = Number((g.litAt as string).slice(5, 7)) - 1;
+    if (m >= 0 && m < 12) monthlyStars[m] += 1;
+  }
+  const top = lit
+    .slice()
+    .sort((a, b) => b.done - a.done || (a.litAt as string).localeCompare(b.litAt as string))
+    .slice(0, 6)
+    .map((g) => ({ subject: g.subject, module: g.module, count: g.done }));
+  return {
+    litTotal: lit.length,
+    litThisYear,
+    firstStar: first ? { subject: first.subject, module: first.module, litAt: first.litAt as string } : null,
+    monthlyStars,
+    galaxies: new Set(lit.map((g) => g.subject)).size,
+    top,
+  };
+}
+
 /** 知识关键词：去掉括号注释·取前几个字（与 crossLink 同思路·稍宽） */
 function keyOf(point: string): string {
   return point.replace(/[（(].*$/, '').replace(/[·，。:：]/g, '').trim().slice(0, 4);
