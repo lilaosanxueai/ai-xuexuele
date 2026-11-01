@@ -46,12 +46,28 @@ describe('computeWeeklyReport weekOffset', () => {
     expect(d.activeDays).toBe(0);
   });
 
+  it('starsLit：星属于「第一节课完成」的那个周（b 上周先亮·a 本周补第二节不算新星）', () => {
+    const cur = computeWeeklyReport(lessons, progress, now, 0);
+    const prev = computeWeeklyReport(lessons, progress, now, 1);
+    expect(cur.starsLit).toEqual([]); // 该模块的星上周就点亮了
+    expect(prev.starsLit.map((s) => s.id)).toEqual(['数学·其他']);
+    expect(weekDelta(cur, prev).stars).toBe(-1);
+  });
+
+  it('本周点亮的新星：模块第一节课完成于本周', () => {
+    const mod = (id: string, module: string): Lesson => ({ ...lesson(id), curriculum: { module, points: [], stage: '' } }) as unknown as Lesson;
+    const p2 = { dailyUsage: {}, lessons: { a: { status: 'completed', completedAt: new Date(now.getTime() - 86_400_000).toISOString() } } } as unknown as ProfileProgress;
+    const r = computeWeeklyReport([mod('a', '函数')], p2, now, 0);
+    expect(r.starsLit.map((s) => s.id)).toEqual(['数学·函数']);
+    expect(r.starsLit[0]!.litAt).toBe(new Date(now.getTime() - 86_400_000).toISOString());
+  });
+
   it('无数据时 delta 全为 0', () => {
     const empty = { dailyUsage: {}, lessons: {} } as unknown as ProfileProgress;
     const d = weekDelta(
       computeWeeklyReport([], empty, now, 0),
       computeWeeklyReport([], empty, now, 1),
     );
-    expect(d).toEqual({ minutes: 0, activeDays: 0, lessons: 0 });
+    expect(d).toEqual({ minutes: 0, activeDays: 0, lessons: 0, stars: 0 });
   });
 });

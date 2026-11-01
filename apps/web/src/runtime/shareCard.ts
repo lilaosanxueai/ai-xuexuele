@@ -197,6 +197,8 @@ export interface WeeklyCardStats {
   activeDays: number;
   streak: number;
   lessons: number;
+  /** 本周新点亮的知识星数（>0 时画新星横幅） */
+  stars: number;
   delta: { minutes: number; activeDays: number; lessons: number };
   /** 正确率条（最多4条） */
   subjects: { subject: string; accuracy: number }[];
@@ -244,6 +246,7 @@ export function buildWeeklyCardStats(
     activeDays: report.activeDays,
     streak: report.streak,
     lessons: report.lessonsDone.length,
+    stars: report.starsLit.length,
     delta,
     subjects,
     comment: (comment ?? report.headline).slice(0, 400),
@@ -254,11 +257,12 @@ export function buildWeeklyCardStats(
 /** 画 750×(1000~1250 自适应) 周报分享卡（家庭群晒本周成长） */
 export function drawWeeklyCard(canvas: HTMLCanvasElement, s: WeeklyCardStats): void {
   const W = 750;
-  // 先按内容算高度：头部210 + 四格288 + 学科区 + 评语区 + 页脚
+  // 先按内容算高度：头部210 + 四格288 + 新星横幅 + 学科区 + 评语区 + 页脚
   const lines = wrapComment(s.comment);
   const commentBoxH = lines.length > 0 ? 64 + lines.length * 40 : 0;
   const barsH = s.subjects.length > 0 ? 50 + s.subjects.length * 46 + 26 : 0;
-  const H = Math.max(1000, Math.min(1250, 246 + 288 + 22 + barsH + commentBoxH + 130));
+  const starsH = s.stars > 0 ? 74 : 0;
+  const H = Math.max(1000, Math.min(1250, 246 + 288 + 22 + starsH + barsH + commentBoxH + 130));
   canvas.width = W;
   canvas.height = H;
   const ctx = canvas.getContext('2d');
@@ -309,8 +313,19 @@ export function drawWeeklyCard(canvas: HTMLCanvasElement, s: WeeklyCardStats): v
     }
   });
 
-  // 学科正确率条
+  // 新星横幅：本周点亮的星座
   let y = gy + 2 * (ch + 16) + 22;
+  if (s.stars > 0) {
+    ctx.fillStyle = 'rgba(254, 243, 199, 0.95)';
+    roundRect(ctx, gx, y, cw * 2 + 20, 58, 18);
+    ctx.fill();
+    ctx.fillStyle = '#b45309';
+    ctx.font = 'bold 26px sans-serif';
+    ctx.fillText(`🌟 知识宇宙新点亮 ${s.stars} 颗星——版图又扩大了`, 375, y + 38);
+    y += 74;
+  }
+
+  // 学科正确率条
   if (s.subjects.length > 0) {
     ctx.fillStyle = '#334155';
     ctx.font = 'bold 28px sans-serif';

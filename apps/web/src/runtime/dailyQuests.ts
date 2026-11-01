@@ -1,6 +1,7 @@
 import type { Lesson, ProfileProgress } from '@shared/types.ts';
 import { recommendNext } from './recommend.ts';
 import { dueReviews } from './wrongReview.ts';
+import { moduleStars } from './knowledgeUniverse.ts';
 
 /**
  * 智能每日任务：把全 app 的学习动作串成一天的闯关清单。
@@ -61,39 +62,6 @@ function findDueReview(lessons: Lesson[], progress: ProfileProgress | null, now:
     if (l) return l;
   }
   return null;
-}
-
-/** 模块星级状态：总课数/已完成/最早完成时间（「补亮一颗星」用） */
-interface ModuleStar {
-  subject: string;
-  module: string;
-  total: number;
-  done: number;
-  /** 模块内已完成课的最早完成时间——这颗星被点亮的那一刻 */
-  litAt: string | null;
-}
-
-function moduleStars(lessons: Lesson[], progress: ProfileProgress | null): ModuleStar[] {
-  const byId = new Map(lessons.map((l) => [l.id, l]));
-  const groups = new Map<string, ModuleStar>();
-  for (const l of lessons) {
-    const subject = l.subjectArea ?? '信息科技';
-    const module = l.curriculum?.module ?? '其他';
-    const key = subject + '·' + module;
-    const g = groups.get(key) ?? { subject, module, total: 0, done: 0, litAt: null };
-    g.total += 1;
-    groups.set(key, g);
-  }
-  for (const [id, lp] of Object.entries(progress?.lessons ?? {})) {
-    if (lp.status !== 'completed') continue;
-    const l = byId.get(id);
-    if (!l) continue;
-    const g = groups.get((l.subjectArea ?? '信息科技') + '·' + (l.curriculum?.module ?? '其他'));
-    if (!g) continue;
-    g.done += 1;
-    if (lp.completedAt && (!g.litAt || lp.completedAt < g.litAt)) g.litAt = lp.completedAt;
-  }
-  return [...groups.values()];
 }
 
 /** 今天点亮的新星数：某个模块的「第一节课完成」发生在今天（从全暗到点亮才算） */

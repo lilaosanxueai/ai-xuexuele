@@ -277,6 +277,7 @@ function ReportTab({ profileId }: { profileId: string }) {
       weakLessons: report.weakLessons,
       reviewInBox: report.reviewInBox,
       graduatedTotal: report.graduatedTotal,
+      starsLit: report.starsLit.map((st) => st.subject + '·' + st.module).slice(0, 8),
       delta,
     })
       .then(setAiComment)
@@ -361,6 +362,9 @@ function ReportTab({ profileId }: { profileId: string }) {
           {(report.graduatedTotal ?? 0) > 0 && (
             <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-600" title="记忆盒三连过关（2/4/7 天复查全对）">🎓 记忆盒毕业 {report.graduatedTotal} 道</span>
           )}
+          {report.starsLit.length > 0 && (
+            <span className="rounded-full bg-amber-50 px-3 py-1 text-xs font-bold text-amber-600" title="知识宇宙本周新点亮的课标模块（模块第一节课完成）">🌟 新星 {report.starsLit.length}</span>
+          )}
           <DeltaChip label="时长" v={delta.minutes} unit="分钟" />
           <DeltaChip label="天数" v={delta.activeDays} unit="天" />
           <DeltaChip label="新课" v={delta.lessons} unit="节" />
@@ -394,6 +398,14 @@ function ReportTab({ profileId }: { profileId: string }) {
               <span key={s.subject} className={`rounded-full px-2.5 py-1 text-xs font-bold ${s.accuracy !== null && s.accuracy >= 80 ? 'bg-emerald-100 text-emerald-700' : s.accuracy !== null && s.accuracy >= 60 ? 'bg-amber-100 text-amber-700' : 'bg-rose-100 text-rose-600'}`}>
                 {s.subject} {s.accuracy}%（{s.correct}/{s.total}）
               </span>
+            ))}
+          </div>
+        )}
+        {report.starsLit.length > 0 && (
+          <div className="mb-3 flex flex-wrap items-center gap-1.5">
+            <span className="text-xs font-bold text-amber-500">本周点亮的星座：</span>
+            {report.starsLit.map((st) => (
+              <span key={st.id} className="rounded-full bg-amber-50 px-2.5 py-1 text-xs font-bold text-amber-700 ring-1 ring-amber-100">✨ {st.subject}·{st.module}</span>
             ))}
           </div>
         )}

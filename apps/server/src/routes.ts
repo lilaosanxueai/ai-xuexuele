@@ -155,6 +155,9 @@ r.delete('/profiles/:id', (req, res) => {
         : [],
       reviewInBox: Number(summary.reviewInBox) || 0,
       graduatedTotal: Number(summary.graduatedTotal) || 0,
+      starsLit: Array.isArray(summary.starsLit)
+        ? summary.starsLit.slice(0, 8).map((x: unknown) => String(x ?? '').slice(0, 24)).filter(Boolean)
+        : [],
       delta: summary.delta && typeof summary.delta === 'object' ? {
         minutes: Number(summary.delta.minutes) || 0,
         activeDays: Number(summary.delta.activeDays) || 0,

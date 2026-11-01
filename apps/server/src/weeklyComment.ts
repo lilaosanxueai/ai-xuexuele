@@ -15,6 +15,8 @@ export interface WeeklySummary {
   reviewInBox?: number;
   /** 记忆盒累计毕业题数（2/4/7 天三连过关） */
   graduatedTotal?: number;
+  /** 本周新点亮的知识星（学科·模块 标签） */
+  starsLit?: string[];
   delta?: { minutes: number; activeDays: number; lessons: number };
 }
 
@@ -60,6 +62,10 @@ export function offlineWeeklyComment(s: WeeklySummary, now: Date = new Date()): 
   const best = [...s.subjectStats].filter((x) => x.accuracy !== null && x.total >= 3).sort((a, b) => (b.accuracy ?? 0) - (a.accuracy ?? 0))[0];
   if (best && (best.accuracy ?? 0) >= 85) parts.push(`${best.subject}正确率 ${best.accuracy}%，状态出色`);
   if ((s.graduatedTotal ?? 0) >= 3) parts.push(`错题记忆盒已毕业 ${s.graduatedTotal} 道（2/4/7 天三连复查全对），知识真正留下了`);
+  if ((s.starsLit?.length ?? 0) > 0) {
+    const names = (s.starsLit ?? []).slice(0, 3).join('、');
+    parts.push(`知识宇宙新点亮了 ${s.starsLit!.length} 颗星（${names}），知识版图在扩大`);
+  }
   const highlight = parts.length > 0 ? pick(parts, seed >> 1) + '。' : '';
 
   // 3) 建议 + 下周小目标：围绕最薄弱课（做过题的才提）

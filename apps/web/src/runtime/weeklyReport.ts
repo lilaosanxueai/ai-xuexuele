@@ -1,4 +1,5 @@
 import type { Lesson, ProfileProgress } from '@shared/types.ts';
+import { moduleStars } from './knowledgeUniverse.ts';
 
 /** 学情周报：全部由本地学习档案计算，回答「这周学得怎么样、哪里薄弱、下周干什么」 */
 export interface DayBar {
@@ -24,6 +25,15 @@ export interface WeakLesson {
   accuracy: number;
 }
 
+/** 本周新点亮的星：某模块的第一节课在本窗口内完成（知识宇宙从全暗到亮起） */
+export interface LitStar {
+  id: string;
+  subject: string;
+  module: string;
+  /** 点亮时间 ISO */
+  litAt: string;
+}
+
 export interface WeeklyReport {
   totalMinutes: number;
   activeDays: number;
@@ -36,6 +46,8 @@ export interface WeeklyReport {
   reviewInBox: number;
   /** 记忆盒累计毕业题数（三连过关） */
   graduatedTotal: number;
+  /** 本周新点亮的星（模块第一节课完成于本窗口） */
+  starsLit: LitStar[];
   /** 给孩子的一句话总结 */
   headline: string;
 }
@@ -47,6 +59,7 @@ export interface WeekDelta {
   minutes: number;
   activeDays: number;
   lessons: number;
+  stars: number;
 }
 
 export function weekDelta(cur: WeeklyReport, prev: WeeklyReport): WeekDelta {
@@ -54,6 +67,7 @@ export function weekDelta(cur: WeeklyReport, prev: WeeklyReport): WeekDelta {
     minutes: cur.totalMinutes - prev.totalMinutes,
     activeDays: cur.activeDays - prev.activeDays,
     lessons: cur.lessonsDone.length - prev.lessonsDone.length,
+    stars: cur.starsLit.length - prev.starsLit.length,
   };
 }
 
@@ -143,10 +157,21 @@ export function computeWeeklyReport(
     headline = `本周学了 ${totalMinutes} 分钟，去随堂小练里测一测，看看掌握得怎么样 📝`;
   }
 
+  // 本周新点亮的星：模块的最早完成时间落在本窗口内
+  const starsLit: LitStar[] = moduleStars(lessons, progress)
+    .filter((g) => {
+      if (!g.litAt) return false;
+      const t = new Date(g.litAt).getTime();
+      return t >= weekStart.getTime() && t < weekEnd.getTime();
+    })
+    .map((g) => ({ id: g.subject + '·' + g.module, subject: g.subject, module: g.module, litAt: g.litAt as string }))
+    .sort((a, b) => a.litAt.localeCompare(b.litAt));
+
   return {
     totalMinutes, activeDays, dayBars, lessonsDone, subjectStats,
     weakLessons: weakLessons.slice(0, 3), streak, headline,
     reviewInBox: progress?.reviewQueue?.length ?? 0,
     graduatedTotal: progress?.reviewGraduated ?? 0,
+    starsLit,
   };
 }

@@ -13,6 +13,10 @@ const report: WeeklyReport = {
   ],
   weakLessons: [], headline: '本周学了 95 分钟，去随堂小练里测一测 📝',
   reviewInBox: 2, graduatedTotal: 5,
+  starsLit: [
+    { id: '数学·函数', subject: '数学', module: '函数', litAt: '2026-10-05T10:00:00.000Z' },
+    { id: '物理·波', subject: '物理', module: '波', litAt: '2026-10-06T08:00:00.000Z' },
+  ],
 };
 
 describe('wrapComment 评语折行', () => {
@@ -34,14 +38,18 @@ describe('wrapComment 评语折行', () => {
 describe('buildWeeklyCardStats 周报卡数据', () => {
   const now = new Date('2026-10-06T12:00:00Z');
   it('日期区间为过去7天，delta 透传，评语缺省用 headline', () => {
-    const s = buildWeeklyCardStats({ name: '小明', avatar: '🚀' }, report, { minutes: 25, activeDays: 1, lessons: 2 }, null, now);
+    const s = buildWeeklyCardStats({ name: '小明', avatar: '🚀' }, report, { minutes: 25, activeDays: 1, lessons: 2, stars: 1 }, null, now);
     expect(s.dateRange).toBe('09.30 - 10.06');
     expect(s.delta.minutes).toBe(25);
     expect(s.commentSource).toBe('headline');
     expect(s.comment).toContain('95 分钟');
   });
+  it('新星数来自 starsLit（分享卡横幅用）', () => {
+    const s = buildWeeklyCardStats({ name: '小明', avatar: '🚀' }, report, { minutes: 0, activeDays: 0, lessons: 0, stars: 0 }, null, now);
+    expect(s.stars).toBe(2);
+  });
   it('学科条过滤题数<3 的，最多4条', () => {
-    const s = buildWeeklyCardStats({ name: 'a', avatar: 'b' }, report, { minutes: 0, activeDays: 0, lessons: 0 }, '评语文本', now);
+    const s = buildWeeklyCardStats({ name: 'a', avatar: 'b' }, report, { minutes: 0, activeDays: 0, lessons: 0, stars: 0 }, '评语文本', now);
     expect(s.subjects.map((x) => x.subject)).toEqual(['数学', '语文', '物理']);
     expect(s.commentSource).toBe('llm');
   });
