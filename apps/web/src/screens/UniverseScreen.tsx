@@ -5,7 +5,7 @@ import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
 import { SUBJECTS } from '../components/subjectMeta.ts';
-import { buildUniverse, universeWeakSpots, type UniverseNode } from '../runtime/knowledgeUniverse.ts';
+import { buildUniverse, universeRoutes, universeWeakSpots, type UniverseNode } from '../runtime/knowledgeUniverse.ts';
 
 /** 学科主题色 → SVG 填充色（Tailwind 类名在 SVG 上不能用·映射到固定 hex） */
 const HEX: Record<string, string> = {
@@ -34,6 +34,7 @@ export default function UniverseScreen() {
 
   const graph = useMemo(() => buildUniverse(lessons, progress), [lessons, progress]);
   const weak = useMemo(() => universeWeakSpots(graph, lessons, progress), [graph, lessons, progress]);
+  const routes = useMemo(() => universeRoutes(lessons, progress), [lessons, progress]);
   const doneLessons = graph.nodes.reduce((s, n) => s + n.doneCount, 0);
 
   const node = useMemo(() => graph.nodes.find((n) => n.id === (sel ?? '')) ?? null, [graph, sel]);
@@ -236,6 +237,42 @@ export default function UniverseScreen() {
             )}
           </div>
         </div>
+
+        {/* 星系航线：跨科共享知识串成的研学路线 */}
+        {routes.length > 0 && (
+          <div className="mt-4 rounded-3xl bg-white/80 p-4 shadow-sm">
+            <div className="mb-2 flex items-center gap-2">
+              <span className="text-lg">🛸</span>
+              <h2 className="text-sm font-black text-slate-700">星系航线 · 跨学科研学路线</h2>
+              <span className="hidden text-[10px] text-slate-400 sm:inline">跟着共享知识串门——每个学科出一站，从小学走到高中</span>
+            </div>
+            <div className="flex gap-3 overflow-x-auto pb-1">
+              {routes.map((r) => (
+                <div key={r.theme} className="w-64 shrink-0 rounded-2xl bg-slate-50 p-3 ring-1 ring-slate-100">
+                  <div className="mb-2 flex items-center gap-1.5">
+                    <span className="truncate rounded-full bg-indigo-100 px-2 py-0.5 text-[11px] font-black text-indigo-700">🔗 {r.theme}</span>
+                    <span className="ml-auto shrink-0 text-[10px] font-bold text-slate-400">{r.doneCount}/{r.stops.length} 站</span>
+                  </div>
+                  <div className="space-y-1">
+                    {r.stops.map((s, i) => {
+                      const lesson = lessons.find((l) => l.id === s.lessonId);
+                      const isLab = !!(lesson?.lab || lesson?.starterCode);
+                      return (
+                        <button key={s.subject + s.lessonId} onClick={() => nav(isLab ? `/lab/${s.lessonId}` : `/tutor/${s.lessonId}`)}
+                          title={`${s.subject}·${s.module}（${s.band === 'primary' ? '小学' : s.band === 'junior' ? '初中' : '高中'}）`}
+                          className={`flex w-full items-center gap-1.5 rounded-xl px-2 py-1.5 text-left text-[11px] font-semibold ring-1 transition ${s.done ? 'bg-emerald-50 text-emerald-700 ring-emerald-100' : 'bg-white text-slate-600 ring-slate-100 hover:bg-sky-50 hover:text-sky-700'}`}>
+                          <span className="w-3 shrink-0 text-center text-[9px] font-black text-slate-300">{i + 1}</span>
+                          <span className="shrink-0">{s.done ? '✅' : '⏳'}</span>
+                          <span className="min-w-0 flex-1 truncate">{s.emoji} {s.subject}·{s.lessonTitle}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );

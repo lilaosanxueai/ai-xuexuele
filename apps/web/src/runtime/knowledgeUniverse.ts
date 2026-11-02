@@ -143,6 +143,76 @@ export function annualUniverse(lessons: Lesson[], progress: ProfileProgress | nu
   };
 }
 
+/** 星系航线：把跨科共享关键词变成一条可走的研学路线（每站一个学科的一节课） */
+export interface RouteStop {
+  subject: string;
+  module: string;
+  lessonId: string;
+  lessonTitle: string;
+  emoji: string;
+  done: boolean;
+  band: string;
+  grade: number;
+}
+
+export interface UniverseRoute {
+  /** 航线主题 = 共享知识关键词 */
+  theme: string;
+  stops: RouteStop[];
+  doneCount: number;
+}
+
+const BAND_ORDER: Record<string, number> = { primary: 0, junior: 1, senior: 2 };
+
+/**
+ * 从课程库生成跨学科研学路线：同一知识关键词被 ≥2 个学科的课提到时，
+ * 每个学科出一站（未学完的课优先·按学段从低到高排成一条能走下去的路）。
+ */
+export function universeRoutes(
+  lessons: Lesson[],
+  progress: ProfileProgress | null,
+  opts: { limit?: number } = {},
+): UniverseRoute[] {
+  const limit = opts.limit ?? 6;
+
+  // 关键词 → 各学科候选课
+  const byKey = new Map<string, Map<string, Lesson[]>>();
+  for (const l of lessons) {
+    for (const k of keysOf(l)) {
+      const subjects = byKey.get(k) ?? new Map<string, Lesson[]>();
+      byKey.set(k, subjects);
+      const list = subjects.get(l.subjectArea ?? '信息科技') ?? [];
+      list.push(l);
+      subjects.set(l.subjectArea ?? '信息科技', list);
+    }
+  }
+
+  const routes: UniverseRoute[] = [];
+  for (const [theme, subjects] of byKey) {
+    if (subjects.size < 2) continue; // 单学科不成航线
+    const stops: RouteStop[] = [];
+    for (const [subject, list] of subjects) {
+      const done = (id: string) => progress?.lessons[id]?.status === 'completed';
+      // 未完成的优先；都未完成/都完成则取 order 最小（第一课）
+      const pool = list.slice().sort((a, b) => a.order - b.order);
+      const pick = pool.find((l) => !done(l.id)) ?? pool[0]!;
+      stops.push({
+        subject,
+        module: pick.curriculum?.module ?? '其他',
+        lessonId: pick.id, lessonTitle: pick.title, emoji: pick.emoji,
+        done: done(pick.id),
+        band: pick.gradeBand ?? 'primary',
+        grade: pick.grade ?? 1,
+      });
+    }
+    // 站序：学段从低到高——一条能跟着走下去的路
+    stops.sort((a, b) => (BAND_ORDER[a.band] ?? 9) - (BAND_ORDER[b.band] ?? 9) || a.grade - b.grade || a.subject.localeCompare(b.subject));
+    routes.push({ theme, stops, doneCount: stops.filter((s) => s.done).length });
+  }
+  routes.sort((a, b) => b.stops.length - a.stops.length || a.theme.localeCompare(b.theme));
+  return routes.slice(0, limit);
+}
+
 /** 知识关键词：去掉括号注释·取前几个字（与 crossLink 同思路·稍宽） */
 function keyOf(point: string): string {
   return point.replace(/[（(].*$/, '').replace(/[·，。:：]/g, '').trim().slice(0, 4);

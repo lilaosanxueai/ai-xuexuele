@@ -1,11 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { buildUniverse, universeWeakSpots, annualUniverse } from './knowledgeUniverse.ts';
+import { buildUniverse, universeWeakSpots, annualUniverse, universeRoutes } from './knowledgeUniverse.ts';
 import type { Lesson, ProfileProgress } from '@shared/types.ts';
 
-const L = (o: { id: string; subject: string; module: string; points: string[]; order: number }): Lesson => ({
+const L = (o: { id: string; subject: string; module: string; points: string[]; order: number; band?: 'primary' | 'junior' | 'senior'; grade?: number }): Lesson => ({
   id: o.id, order: o.order, title: o.id, emoji: '📘', story: '', goals: [],
   toolbox: [], actor: { costume: '📘', x: 0, y: 0 }, targets: [], tasks: [], aiIntro: '', celebrate: '',
   subjectArea: o.subject, curriculum: { module: o.module, points: o.points }, island: 'cross',
+  gradeBand: o.band ?? 'primary', grade: o.grade ?? 3,
 } as unknown as Lesson);
 
 const progress = (
@@ -159,5 +160,32 @@ describe('buildUniverse 知识宇宙', () => {
     expect(empty.litTotal).toBe(0);
     expect(empty.firstStar).toBeNull();
     expect(empty.top).toEqual([]);
+  });
+
+  it('星系航线：≥2 学科共享关键词才成航线·未完成课优先选站', () => {
+    const ls = [
+      L({ id: 'p1', subject: '物理', module: '波', points: ['波的传播'], order: 1 }),
+      L({ id: 'p2', subject: '物理', module: '波', points: ['波的传播'], order: 2 }),
+      L({ id: 'm1', subject: '音乐', module: '声学', points: ['波的传播'], order: 3 }),
+      L({ id: 'x1', subject: '数学', module: '函数', points: ['函数概念'], order: 4 }), // 单学科不成航线
+    ];
+    const p = progress(['p1']);
+    const rs = universeRoutes(ls, p);
+    expect(rs).toHaveLength(1);
+    expect(rs[0].theme).toBe('波的传播');
+    expect(rs[0].stops).toHaveLength(2); // 物理 + 音乐
+    const phy = rs[0].stops.find((s) => s.subject === '物理')!;
+    expect(phy.lessonId).toBe('p2'); // p1 已完成 → 选未完成的 p2
+    expect(rs[0].doneCount).toBe(0); // 两站选的都是未完成课
+  });
+
+  it('星系航线：站点按学段从低到高排成一条能走下去的路', () => {
+    const ls = [
+      L({ id: 's1', subject: '物理', module: '波', points: ['光的折射'], order: 1, band: 'senior', grade: 10 }),
+      L({ id: 'p1', subject: '科学', module: '光', points: ['光的折射'], order: 2, band: 'primary', grade: 4 }),
+      L({ id: 'j1', subject: '数学', module: '几何', points: ['光的折射'], order: 3, band: 'junior', grade: 8 }),
+    ];
+    const rs = universeRoutes(ls, null);
+    expect(rs[0].stops.map((s) => s.subject)).toEqual(['科学', '数学', '物理']); // 小→初→高
   });
 });
