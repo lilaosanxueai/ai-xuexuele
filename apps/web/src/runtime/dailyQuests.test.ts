@@ -126,4 +126,34 @@ describe('generateQuests 每日任务', () => {
     const qs = generateQuests(lessons, p, readCounters(null));
     expect(qs.find((q) => q.id === 'light-a-star')).toBeUndefined();
   });
+
+  it('走一站航线：有跨科航线时出现·引用下一站学科与课名', () => {
+    const ls = [
+      { ...mkLesson(), id: 'p1', subjectArea: '物理', curriculum: { module: '波', points: ['波的传播'], stage: '' } },
+      { ...mkLesson(), id: 'm1', order: 2, subjectArea: '音乐', curriculum: { module: '声学', points: ['波的传播'], stage: '' } },
+    ];
+    const qs = generateQuests(ls, mkProgress(), readCounters(null));
+    const q = qs.find((x) => x.id === 'route-stop')!;
+    expect(q).toBeDefined();
+    expect(q.title).toContain('波的传播');
+    expect(q.detail).toContain('物理·课'); // 下一站：物理的第一课
+    expect(q.done).toBe(false);
+    expect(q.route).toBe('/tutor/p1');
+  });
+
+  it('走一站航线：今天完成站点课即点亮', () => {
+    const ls = [
+      { ...mkLesson(), id: 'p1', subjectArea: '物理', curriculum: { module: '波', points: ['波的传播'], stage: '' } },
+      { ...mkLesson(), id: 'm1', order: 2, subjectArea: '音乐', curriculum: { module: '声学', points: ['波的传播'], stage: '' } },
+    ];
+    const p = mkProgress({ lessons: { m1: { status: 'completed', tasks: {}, completedAt: new Date().toISOString() } } });
+    const qs = generateQuests(ls, p, readCounters(null));
+    expect(qs.find((x) => x.id === 'route-stop')!.done).toBe(true);
+  });
+
+  it('没有跨科航线时不出现航线任务', () => {
+    const ls = [{ ...mkLesson(), id: 'a', curriculum: { module: '函数', points: ['函数概念'], stage: '' } }];
+    const qs = generateQuests(ls, mkProgress(), readCounters(null));
+    expect(qs.find((q) => q.id === 'route-stop')).toBeUndefined();
+  });
 });

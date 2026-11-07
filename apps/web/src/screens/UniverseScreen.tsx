@@ -247,10 +247,12 @@ export default function UniverseScreen() {
               <span className="hidden text-[10px] text-slate-400 sm:inline">跟着共享知识串门——每个学科出一站，从小学走到高中</span>
             </div>
             <div className="flex gap-3 overflow-x-auto pb-1">
-              {routes.map((r) => (
-                <div key={r.theme} className="w-64 shrink-0 rounded-2xl bg-slate-50 p-3 ring-1 ring-slate-100">
+              {routes.slice().sort((a, b) => (a.doneCount === a.stops.length ? 1 : 0) - (b.doneCount === b.stops.length ? 1 : 0)).map((r) => {
+                const complete = r.doneCount === r.stops.length;
+                return (
+                <div key={r.theme} className={`w-64 shrink-0 rounded-2xl p-3 ring-1 ${complete ? 'bg-emerald-50 ring-emerald-200' : 'bg-slate-50 ring-slate-100'}`}>
                   <div className="mb-2 flex items-center gap-1.5">
-                    <span className="truncate rounded-full bg-indigo-100 px-2 py-0.5 text-[11px] font-black text-indigo-700">🔗 {r.theme}</span>
+                    <span className={`truncate rounded-full px-2 py-0.5 text-[11px] font-black ${complete ? 'bg-emerald-100 text-emerald-700' : 'bg-indigo-100 text-indigo-700'}`}>{complete ? '🎉' : '🔗'} {r.theme}{complete ? ' ✓' : ''}</span>
                     <span className="ml-auto shrink-0 text-[10px] font-bold text-slate-400">{r.doneCount}/{r.stops.length} 站</span>
                   </div>
                   <div className="space-y-1">
@@ -269,7 +271,8 @@ export default function UniverseScreen() {
                     })}
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}

@@ -1,7 +1,7 @@
 import type { Lesson, ProfileProgress } from '@shared/types.ts';
 import { recommendNext } from './recommend.ts';
 import { dueReviews } from './wrongReview.ts';
-import { moduleStars } from './knowledgeUniverse.ts';
+import { moduleStars, universeRoutes } from './knowledgeUniverse.ts';
 
 /**
  * 智能每日任务：把全 app 的学习动作串成一天的闯关清单。
@@ -19,7 +19,7 @@ export interface DailyCounters {
 }
 
 export interface Quest {
-  id: 'new-lesson' | 'light-a-star' | 'review' | 'wrong-review' | 'flashcards' | 'wrongbook' | 'challenge';
+  id: 'new-lesson' | 'light-a-star' | 'route-stop' | 'review' | 'wrong-review' | 'flashcards' | 'wrongbook' | 'challenge';
   emoji: string;
   title: string;
   detail: string;
@@ -116,6 +116,28 @@ export function generateQuests(
       cur: Math.min(1, lit),
       done: lit >= 1,
       route: '/universe',
+    });
+  }
+
+  // ①.6 走一站航线：完成任意星系航线的当前站点课（跨学科串门）
+  const routes = universeRoutes(lessons, progress, { limit: 12 });
+  const openRoute = routes.find((r) => r.doneCount < r.stops.length);
+  if (openRoute) {
+    const stop = openRoute.stops.find((s) => !s.done)!;
+    const stopLesson = lessons.find((l) => l.id === stop.lessonId);
+    const stopIds = new Set(routes.flatMap((r) => r.stops.map((s) => s.lessonId)));
+    const walkedToday = Object.entries(progress?.lessons ?? {}).filter(([id, lp]) =>
+      lp.status === 'completed' && lp.completedAt?.slice(0, 10) === today && stopIds.has(id),
+    ).length;
+    quests.push({
+      id: 'route-stop',
+      emoji: '🛸',
+      title: `走一站「${openRoute.theme}」航线`,
+      detail: `下一站：${stop.subject}·${stop.lessonTitle}（跨学科串门）`,
+      goal: 1,
+      cur: Math.min(1, walkedToday),
+      done: walkedToday >= 1,
+      route: stopLesson && (stopLesson.lab || stopLesson.starterCode) ? `/lab/${stop.lessonId}` : `/tutor/${stop.lessonId}`,
     });
   }
 

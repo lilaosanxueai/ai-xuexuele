@@ -1,4 +1,5 @@
 import type { Lesson, ProfileProgress } from '@shared/types.ts';
+import { universeRoutes } from './knowledgeUniverse.ts';
 
 /** 成就徽章定义：全部由学习档案本地计算，不依赖任何外部接口 */
 export interface BadgeDef {
@@ -65,6 +66,8 @@ export const BADGES: BadgeDef[] = [
   { id: 'star-lit-50', name: '星图半百', emoji: '✨', desc: '点亮 50 个课标模块（练过随堂练）', goal: 50 },
   { id: 'galaxy-master-5', name: '满贯星系', emoji: '🪐', desc: '把 5 个模块的课程全部学完', goal: 5 },
   { id: 'ten-galaxies', name: '十星巡礼', emoji: '🔭', desc: '在 10 个学科留下足迹', goal: 10 },
+  { id: 'route-done-1', name: '星际旅人', emoji: '🛸', desc: '走完一条星系航线的全部站点', goal: 1 },
+  { id: 'route-done-3', name: '星际舰队', emoji: '🚀', desc: '走完 3 条星系航线', goal: 3 },
 ];
 
 /** 从「今天」往回数连续有学习记录的天数（当天没学不打断，从昨天起算） */
@@ -112,6 +115,9 @@ export function computeBadges(lessons: Lesson[], progress: ProfileProgress | nul
   }
   const litModules = [...moduleGroups.values()].filter((g) => g.anyEx).length;
   const fullModules = [...moduleGroups.values()].filter((g) => g.total >= 2 && g.done === g.total).length;
+  // 航线徽章：全部站点完成 = 该主题跨科课在每个学科都学尽（未学优先选站，全 ✅ 即走完）
+  const routesDone = universeRoutes(lessons, progress, { limit: 200 })
+    .filter((r) => r.stops.length >= 2 && r.doneCount === r.stops.length).length;
 
   const cur: Record<string, number> = {
     'first-lesson': done.length,
@@ -135,6 +141,8 @@ export function computeBadges(lessons: Lesson[], progress: ProfileProgress | nul
     'star-lit-50': litModules,
     'galaxy-master-5': fullModules,
     'ten-galaxies': subjects,
+    'route-done-1': routesDone,
+    'route-done-3': routesDone,
   };
   return BADGES.map((b) => ({ ...b, cur: Math.min(cur[b.id] ?? 0, b.goal), unlocked: (cur[b.id] ?? 0) >= b.goal }));
 }
