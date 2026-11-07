@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { Lesson, ProfileProgress } from '@shared/types.ts';
 import { api } from '../api.ts';
@@ -25,6 +25,36 @@ export default function UniverseScreen() {
   const [hover, setHover] = useState<string | null>(null);
   const [focus, setFocus] = useState<string | null>(null); // 只看某学科
   const [query, setQuery] = useState('');
+  // 星图漫游：view = {k: 缩放, x/y: 平移}（SVG viewBox 坐标系）
+  const [view, setView] = useState({ k: 1, x: 0, y: 0 });
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const dragRef = useRef<{ sx: number; sy: number; x: number; y: number; moved: boolean } | null>(null);
+  // AI 星空讲解员（按模块缓存一次结果）
+  const [aiTip, setAiTip] = useState<{ id: string; text: string; source: string } | null>(null);
+  const [tipLoading, setTipLoading] = useState(false);
+
+  /** 以 SVG 坐标 (cx,cy) 为锚点缩放 factor 倍；缩回 1 自动复位 */
+  const zoomAt = (factor: number, cx = 500, cy = 390) => setView((v) => {
+    const k = Math.min(6, Math.max(1, v.k * factor));
+    if (k === 1) return { k: 1, x: 0, y: 0 };
+    return { k, x: cx - ((cx - v.x) * k) / v.k, y: cy - ((cy - v.y) * k) / v.k };
+  });
+  /** 缩放到指定倍数并把星系锚点放到屏幕中心 */
+  const zoomTo = (k2: number, ax: number, ay: number) => setView({ k: k2, x: 500 - ax * k2, y: 390 - ay * k2 });
+
+  // 非被动滚轮缩放（以指针为锚点）
+  useEffect(() => {
+    const el = svgRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      const rect = el.getBoundingClientRect();
+      zoomAt(e.deltaY < 0 ? 1.18 : 1 / 1.18, ((e.clientX - rect.left) / rect.width) * 1000, ((e.clientY - rect.top) / rect.height) * 780);
+    };
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lessons.length]); // 课程库加载后 svg 才挂载，此时再绑滚轮
 
   useEffect(() => {
     if (!profile) { nav('/'); return; }
@@ -43,6 +73,26 @@ export default function UniverseScreen() {
 
   const selEdges = useMemo(() => new Set(graph.edges.filter((e) => e.a === sel || e.b === sel).flatMap((e) => [e.a, e.b])), [graph, sel]);
   const isLit = (n: UniverseNode) => selEdges.has(n.id);
+
+  /** AI 星空讲解员：讲这颗星是什么、为什么和别的学科相连、先学哪节 */
+  const askTip = () => {
+    if (!node || !profile || tipLoading) return;
+    setTipLoading(true);
+    const links = graph.edges.filter((e) => e.a === node.id || e.b === node.id).map((e) => {
+      const otherId = e.a === node.id ? e.b : e.a;
+      const other = graph.nodes.find((n) => n.id === otherId);
+      return { subject: other?.subject ?? '', module: other?.module ?? '', shared: e.shared };
+    });
+    const next = lessons
+      .filter((l) => (l.subjectArea ?? '信息科技') === node.subject && (l.curriculum?.module ?? '其他') === node.module && progress?.lessons[l.id]?.status !== 'completed')
+      .sort((a, b) => a.order - b.order).slice(0, 3).map((l) => l.title);
+    void api.universeExplain(profile.id, {
+      subject: node.subject, module: node.module, count: node.count, done: node.doneCount, accuracy: node.accuracy, links, next,
+    })
+      .then((r) => setAiTip({ id: node.id, text: r.tip, source: r.source }))
+      .catch(() => setAiTip({ id: node.id, text: '讲解员暂时不在星空里，稍后再试～', source: 'error' }))
+      .finally(() => setTipLoading(false));
+  };
 
   if (!profile) return null;
 
@@ -102,35 +152,79 @@ export default function UniverseScreen() {
         </div>
 
         <div className="grid gap-4 lg:grid-cols-[1fr_320px]">
-          <div className="overflow-hidden rounded-3xl bg-gradient-to-b from-slate-900 to-indigo-950 shadow-lg" style={{ minHeight: 480 }}>
-            <svg viewBox="0 0 1000 780" className="h-auto w-full" style={{ maxHeight: 640 }}>
-              {/* 连线 */}
-              {graph.edges.map((e, i) => {
-                const a = graph.nodes.find((n) => n.id === e.a);
-                const b = graph.nodes.find((n) => n.id === e.b);
-                if (!a || !b) return null;
-                const on = sel !== null && (e.a === sel || e.b === sel);
-                const dim = focus !== null && a.subject !== focus && b.subject !== focus;
-                return <line key={i} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={on ? '#fbbf24' : '#7dd3fc'} strokeWidth={on ? 2 : 1} opacity={dim ? 0.04 : on ? 0.9 : 0.16} />;
-              })}
-              {/* 学科锚点名 */}
-              {graph.subjects.map((s) => (
-                <text key={s.subject} x={s.x} y={s.y + 4} textAnchor="middle" fill={hexOf(s.subject)} fontSize={13} fontWeight={800} opacity={focus !== null && focus !== s.subject ? 0.12 : 0.45}>
-                  {SUBJECTS[s.subject]?.emoji} {s.subject}
-                </text>
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-slate-900 to-indigo-950 shadow-lg" style={{ minHeight: 480 }}>
+            <style>{`
+              @keyframes uni-twinkle { 0%,100% { opacity: .9 } 50% { opacity: .4 } }
+              .uni-tw { animation: uni-twinkle 2.8s ease-in-out infinite }
+              @keyframes uni-flow { to { stroke-dashoffset: -24 } }
+              .uni-flow { stroke-dasharray: 5 7; animation: uni-flow 1.1s linear infinite }
+            `}</style>
+            {/* 缩放漫游控件 */}
+            <div className="absolute right-3 top-3 z-10 flex flex-col gap-1">
+              {[['＋', () => zoomAt(1.3)], ['－', () => zoomAt(1 / 1.3)], ['⟲', () => setView({ k: 1, x: 0, y: 0 })]].map(([label, fn], i) => (
+                <button key={i} onClick={fn as () => void} title={i === 2 ? '复位视图' : i === 0 ? '放大' : '缩小'}
+                  className="h-8 w-8 rounded-xl bg-white/10 text-sm font-black text-white/80 backdrop-blur transition hover:bg-white/20">{label as string}</button>
               ))}
-              {/* 模块节点 */}
-              {graph.nodes.map((n) => {
-                const dim = (focus !== null && n.subject !== focus) || (sel !== null && !isLit(n) && n.id !== sel);
-                const acc = n.accuracy;
-                return (
-                  <g key={n.id} onClick={() => setSel(n.id === sel ? null : n.id)} onMouseEnter={() => setHover(n.id)} onMouseLeave={() => setHover(null)} style={{ cursor: 'pointer', opacity: dim ? 0.08 : 1 }}>
-                    <circle cx={n.x} cy={n.y} r={n.r + (n.id === sel ? 4 : 0)} fill={hexOf(n.subject)} fillOpacity={acc == null ? 0.16 : 0.3 + (acc / 100) * 0.7} stroke={n.id === sel ? '#fff' : hexOf(n.subject)} strokeWidth={n.id === sel ? 2.5 : 1.2} />
-                    {n.doneCount === n.count && n.count > 0 && <text x={n.x} y={n.y + 3.5} textAnchor="middle" fill="#fff" fontSize={9} fontWeight={800}>✓</text>}
-                    {(hover === n.id || n.id === sel) && <text x={n.x} y={n.y - n.r - 5} textAnchor="middle" fill="#fff" fontSize={10.5} fontWeight={700}>{n.module}</text>}
-                  </g>
-                );
-              })}
+            </div>
+            <div className="pointer-events-none absolute bottom-2 left-3 z-10 text-[10px] font-bold text-white/30">滚轮缩放 · 拖拽平移 · 双击学科名飞过去{view.k > 1.05 ? ` · ${(view.k * 100).toFixed(0)}%` : ''}</div>
+            <svg ref={svgRef} viewBox="0 0 1000 780" className="h-auto w-full touch-none select-none" style={{ maxHeight: 640, cursor: 'grab' }}
+              onPointerDown={(e) => { dragRef.current = { sx: e.clientX, sy: e.clientY, x: view.x, y: view.y, moved: false }; }}
+              onPointerMove={(e) => {
+                const d = dragRef.current;
+                if (!d) return;
+                const rect = svgRef.current?.getBoundingClientRect();
+                if (!rect) return;
+                if (Math.abs(e.clientX - d.sx) + Math.abs(e.clientY - d.sy) > 4) d.moved = true;
+                if (d.moved) setView((v) => ({ ...v, x: d.x + ((e.clientX - d.sx) / rect.width) * 1000, y: d.y + ((e.clientY - d.sy) / rect.height) * 780 }));
+              }}
+              onPointerUp={() => { setTimeout(() => { dragRef.current = null; }, 0); }}
+              onPointerLeave={() => { dragRef.current = null; }}
+            >
+              <defs>
+                {graph.subjects.map((s, i) => (
+                  <radialGradient key={s.subject} id={`neb-${i}`}>
+                    <stop offset="0%" stopColor={hexOf(s.subject)} stopOpacity="0.18" />
+                    <stop offset="70%" stopColor={hexOf(s.subject)} stopOpacity="0.05" />
+                    <stop offset="100%" stopColor={hexOf(s.subject)} stopOpacity="0" />
+                  </radialGradient>
+                ))}
+              </defs>
+              <g transform={`translate(${view.x} ${view.y}) scale(${view.k})`}>
+                {/* 星云光晕（每个学科一团学科色） */}
+                {graph.subjects.map((s, i) => (
+                  <ellipse key={s.subject} cx={s.x} cy={s.y} rx={170} ry={125} fill={`url(#neb-${i})`} opacity={focus !== null && focus !== s.subject ? 0.15 : 1} />
+                ))}
+                {/* 连线（选中时流光） */}
+                {graph.edges.map((e, i) => {
+                  const a = graph.nodes.find((n) => n.id === e.a);
+                  const b = graph.nodes.find((n) => n.id === e.b);
+                  if (!a || !b) return null;
+                  const on = sel !== null && (e.a === sel || e.b === sel);
+                  const dim = focus !== null && a.subject !== focus && b.subject !== focus;
+                  return <line key={i} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={on ? '#fbbf24' : '#7dd3fc'} strokeWidth={on ? 2 : 1} opacity={dim ? 0.04 : on ? 0.9 : 0.16} className={on ? 'uni-flow' : undefined} />;
+                })}
+                {/* 学科锚点名（双击飞过去） */}
+                {graph.subjects.map((s) => (
+                  <text key={s.subject} x={s.x} y={s.y + 4} textAnchor="middle" fill={hexOf(s.subject)} fontSize={13 / view.k} fontWeight={800}
+                    opacity={focus !== null && focus !== s.subject ? 0.12 : 0.5} style={{ cursor: 'zoom-in' }}
+                    onDoubleClick={() => zoomTo(2.6, s.x, s.y)}>
+                    {SUBJECTS[s.subject]?.emoji} {s.subject}
+                  </text>
+                ))}
+                {/* 模块节点（已点亮的星星会闪烁） */}
+                {graph.nodes.map((n, idx) => {
+                  const dim = (focus !== null && n.subject !== focus) || (sel !== null && !isLit(n) && n.id !== sel);
+                  const acc = n.accuracy;
+                  return (
+                    <g key={n.id} onClick={() => { if (dragRef.current?.moved) return; setSel(n.id === sel ? null : n.id); }} onMouseEnter={() => setHover(n.id)} onMouseLeave={() => setHover(null)} style={{ cursor: 'pointer', opacity: dim ? 0.08 : 1 }}>
+                      <circle cx={n.x} cy={n.y} r={n.r + (n.id === sel ? 4 : 0)} fill={hexOf(n.subject)} fillOpacity={acc == null ? 0.16 : 0.3 + (acc / 100) * 0.7} stroke={n.id === sel ? '#fff' : hexOf(n.subject)} strokeWidth={(n.id === sel ? 2.5 : 1.2) / view.k}
+                        className={acc != null && !dim ? 'uni-tw' : undefined} style={acc != null && !dim ? { animationDelay: `${(idx % 9) * 0.33}s` } : undefined} />
+                      {n.doneCount === n.count && n.count > 0 && <text x={n.x} y={n.y + 3.5 / view.k} textAnchor="middle" fill="#fff" fontSize={9 / Math.max(1, view.k / 1.6)} fontWeight={800}>✓</text>}
+                      {(hover === n.id || n.id === sel) && <text x={n.x} y={n.y - n.r - 5 / view.k} textAnchor="middle" fill="#fff" fontSize={10.5 / view.k} fontWeight={700}>{n.module}</text>}
+                    </g>
+                  );
+                })}
+              </g>
             </svg>
           </div>
 
@@ -150,6 +244,24 @@ export default function UniverseScreen() {
                   <div className="flex-1 rounded-xl bg-slate-50 p-2"><b className="block text-base text-slate-700">{node.count}</b>课</div>
                   <div className="flex-1 rounded-xl bg-slate-50 p-2"><b className="block text-base text-emerald-600">{node.doneCount}</b>完成</div>
                   <div className="flex-1 rounded-xl bg-slate-50 p-2"><b className="block text-base text-sky-600">{node.accuracy == null ? '—' : node.accuracy + '%'}</b>正确率</div>
+                </div>
+                <div className="mb-3 rounded-2xl bg-indigo-50 p-3">
+                  <div className="mb-1.5 flex items-center gap-1.5">
+                    <span className="text-sm">🤖</span>
+                    <span className="text-xs font-black text-indigo-700">AI 星空讲解员</span>
+                    <button onClick={askTip} disabled={tipLoading}
+                      className="ml-auto rounded-lg bg-indigo-500 px-2.5 py-1 text-[10px] font-bold text-white transition hover:bg-indigo-600 disabled:opacity-50">
+                      {tipLoading ? '讲解中…' : aiTip && aiTip.id === node.id ? '再讲一次' : '讲讲这颗星'}
+                    </button>
+                  </div>
+                  {aiTip && aiTip.id === node.id ? (
+                    <div>
+                      <p className="text-[12px] leading-relaxed text-indigo-900">{aiTip.text}</p>
+                      {aiTip.source !== 'error' && <p className="mt-1 text-right text-[10px] text-slate-400">{aiTip.source === 'llm' ? 'AI 生成' : '本地生成（配置 API Key 后为 AI 生成）'}</p>}
+                    </div>
+                  ) : (
+                    <p className="text-[11px] text-slate-400">点「讲讲这颗星」：AI 会讲这个模块是什么、为什么和别的学科相连、先学哪一节。</p>
+                  )}
                 </div>
                 <div className="mb-1 text-xs font-black text-slate-500">模块课程</div>
                 <div className="max-h-44 space-y-1 overflow-y-auto">

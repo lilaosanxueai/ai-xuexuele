@@ -38,6 +38,9 @@ export const api = {
   /** 家长端周报 AI 评语（服务端 LLM 优先，未配置时本地模板兜底） */
   weeklyComment: (profileId: string, summary: Record<string, unknown>) =>
     req<{ comment: string; source: 'llm' | 'template' }>('/api/parent/weekly-comment', { method: 'POST', body: JSON.stringify({ profileId, summary }) }),
+  /** 知识宇宙 AI 星空讲解员（服务端 LLM 优先，未配置时本地模板兜底） */
+  universeExplain: (profileId: string, payload: Record<string, unknown>) =>
+    req<{ tip: string; source: 'llm' | 'template' }>('/api/universe/explain', { method: 'POST', body: JSON.stringify({ profileId, payload }) }),
   projects: (profileId: string) => req<Project[]>(`/api/projects?profileId=${profileId}`),
   saveProject: (p: { profileId: string; title: string; xml: string; thumb: string; lessonId?: string; stage?: Project['stage']; code?: string; projectId?: string }) =>
     req<Project>('/api/projects', { method: 'POST', body: JSON.stringify(p) }),

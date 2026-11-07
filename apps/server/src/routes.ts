@@ -10,6 +10,7 @@ import { checkKidInput, stripUrls } from './safety.ts';
 import { appendChatLog, readChatLogs, listChatDates } from './logging.ts';
 import { getPlayground, savePlayground } from './playground.ts';
 import { offlineWeeklyComment, type WeeklySummary } from './weeklyComment.ts';
+import { offlineUniverseExplain, UNIVERSE_EXPLAIN_SYSTEM, type UniverseExplainPayload } from './universeExplain.ts';
 
 export function buildRouter(cfg: AppConfig): Router {
   const r = Router();
@@ -177,6 +178,40 @@ r.delete('/profiles/:id', (req, res) => {
       } catch { /* 落回本地模板 */ }
     }
     res.json({ comment: offlineWeeklyComment(s), source: 'template' });
+  });
+
+  // ---------- 知识宇宙 AI 星空讲解员（LLM 优先，未配置/失败时本地模板兜底） ----------
+  r.post('/universe/explain', async (req, res) => {
+    const { profileId, payload } = req.body ?? {};
+    if (!profileId || !payload || typeof payload !== 'object') {
+      return res.status(400).json({ error: '参数不完整' });
+    }
+    const p: UniverseExplainPayload = {
+      subject: String(payload.subject ?? '').slice(0, 12),
+      module: String(payload.module ?? '').slice(0, 24),
+      count: Math.max(0, Number(payload.count) || 0),
+      done: Math.max(0, Number(payload.done) || 0),
+      accuracy: payload.accuracy == null ? null : Math.min(100, Math.max(0, Number(payload.accuracy))),
+      links: Array.isArray(payload.links)
+        ? payload.links.slice(0, 6).map((x: Record<string, unknown>) => ({
+          subject: String(x.subject ?? '').slice(0, 12),
+          module: String(x.module ?? '').slice(0, 24),
+          shared: Array.isArray(x.shared) ? x.shared.slice(0, 4).map((k: unknown) => String(k ?? '').slice(0, 12)) : [],
+        }))
+        : [],
+      next: Array.isArray(payload.next) ? payload.next.slice(0, 3).map((x: unknown) => String(x ?? '').slice(0, 30)) : [],
+    };
+    if (!p.subject || !p.module) return res.status(400).json({ error: '参数不完整' });
+    if (llmConfigured(cfg)) {
+      try {
+        const text = await completeChat(cfg.llm, [
+          { role: 'system', content: UNIVERSE_EXPLAIN_SYSTEM },
+          { role: 'user', content: JSON.stringify(p) },
+        ], { mock: false });
+        if (text && text.trim()) return res.json({ tip: text.trim().slice(0, 400), source: 'llm' });
+      } catch { /* 落回本地模板 */ }
+    }
+    res.json({ tip: offlineUniverseExplain(p), source: 'template' });
   });
 
   // ---------- AI 对话（SSE 流式） ----------
