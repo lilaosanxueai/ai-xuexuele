@@ -10,7 +10,7 @@ import { checkKidInput, stripUrls } from './safety.ts';
 import { appendChatLog, readChatLogs, listChatDates } from './logging.ts';
 import { getPlayground, savePlayground } from './playground.ts';
 import { offlineWeeklyComment, type WeeklySummary } from './weeklyComment.ts';
-import { offlineUniverseExplain, UNIVERSE_EXPLAIN_SYSTEM, type UniverseExplainPayload } from './universeExplain.ts';
+import { offlineUniverseExplain, UNIVERSE_EXPLAIN_SYSTEM, UNIVERSE_ROUTE_SYSTEM, type UniverseExplainPayload } from './universeExplain.ts';
 
 export function buildRouter(cfg: AppConfig): Router {
   const r = Router();
@@ -187,6 +187,7 @@ r.delete('/profiles/:id', (req, res) => {
       return res.status(400).json({ error: '参数不完整' });
     }
     const p: UniverseExplainPayload = {
+      kind: payload.kind === 'route' ? 'route' : 'module',
       subject: String(payload.subject ?? '').slice(0, 12),
       module: String(payload.module ?? '').slice(0, 24),
       count: Math.max(0, Number(payload.count) || 0),
@@ -205,7 +206,7 @@ r.delete('/profiles/:id', (req, res) => {
     if (llmConfigured(cfg)) {
       try {
         const text = await completeChat(cfg.llm, [
-          { role: 'system', content: UNIVERSE_EXPLAIN_SYSTEM },
+          { role: 'system', content: p.kind === 'route' ? UNIVERSE_ROUTE_SYSTEM : UNIVERSE_EXPLAIN_SYSTEM },
           { role: 'user', content: JSON.stringify(p) },
         ], { mock: false });
         if (text && text.trim()) return res.json({ tip: text.trim().slice(0, 400), source: 'llm' });

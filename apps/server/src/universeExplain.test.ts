@@ -30,4 +30,20 @@ describe('offlineUniverseExplain 星空讲解员模板', () => {
     expect(c).not.toContain('共享同一片知识');
     expect(c).toContain('《波是什么》');
   });
+
+  it('kind=route：航线模板串学科名+报进度', () => {
+    const c = offlineUniverseExplain({
+      ...base, kind: 'route', module: '生活中的',
+      links: [
+        { subject: '科学', module: '磁铁', shared: [] },
+        { subject: '物理', module: '流体压强', shared: [] },
+        { subject: '音乐', module: '音乐的功能', shared: [] },
+      ],
+      done: 1,
+    });
+    expect(c).toContain('「生活中的」航线串起了 3 个学科');
+    expect(c).toContain('科学→物理→音乐');
+    expect(c).toContain('同一件事');
+    expect(c).toContain('已经走过 1/3 站');
+  });
 });

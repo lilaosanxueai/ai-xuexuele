@@ -5,7 +5,7 @@ import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
 import Header from '../components/Header.tsx';
 import { SUBJECTS } from '../components/subjectMeta.ts';
-import { buildUniverse, universeRoutes, universeWeakSpots, type UniverseNode } from '../runtime/knowledgeUniverse.ts';
+import { buildUniverse, universeRoutes, universeWeakSpots, type UniverseNode, type RouteStop } from '../runtime/knowledgeUniverse.ts';
 
 /** 学科主题色 → SVG 填充色（Tailwind 类名在 SVG 上不能用·映射到固定 hex） */
 const HEX: Record<string, string> = {
@@ -32,6 +32,11 @@ export default function UniverseScreen() {
   // AI 星空讲解员（按模块缓存一次结果）
   const [aiTip, setAiTip] = useState<{ id: string; text: string; source: string } | null>(null);
   const [tipLoading, setTipLoading] = useState(false);
+  // 航线播放器：镜头逐站飞行，路径流光
+  const [playing, setPlaying] = useState<{ theme: string; stops: RouteStop[] } | null>(null);
+  const [playIdx, setPlayIdx] = useState(0);
+  const [routeTip, setRouteTip] = useState<{ theme: string; text: string; source: string } | null>(null);
+  const [routeTipLoading, setRouteTipLoading] = useState(false);
 
   /** 以 SVG 坐标 (cx,cy) 为锚点缩放 factor 倍；缩回 1 自动复位 */
   const zoomAt = (factor: number, cx = 500, cy = 390) => setView((v) => {
@@ -73,6 +78,44 @@ export default function UniverseScreen() {
 
   const selEdges = useMemo(() => new Set(graph.edges.filter((e) => e.a === sel || e.b === sel).flatMap((e) => [e.a, e.b])), [graph, sel]);
   const isLit = (n: UniverseNode) => selEdges.has(n.id);
+
+  // 航线播放：逐站缩放飞行（2.4 倍看清楚站点），走完自动复位
+  const playStopNodes = useMemo(() => {
+    if (!playing) return [];
+    return playing.stops.map((s) => graph.nodes.find((n) => n.subject === s.subject && n.module === s.module) ?? null);
+  }, [playing, graph]);
+  const playStopIds = useMemo(() => new Set(playStopNodes.filter(Boolean).map((n) => n!.id)), [playStopNodes]);
+
+  useEffect(() => {
+    if (!playing) return;
+    const node = playStopNodes[playIdx];
+    if (node) zoomTo(2.4, node.x, node.y);
+    const t = setTimeout(() => {
+      if (playIdx + 1 >= playing.stops.length) {
+        setPlaying(null);
+        setView({ k: 1, x: 0, y: 0 });
+      } else {
+        setPlayIdx(playIdx + 1);
+      }
+    }, 1700);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playing, playIdx, playStopNodes]);
+
+  /** AI 讲解这条航线：为什么这些学科被串在一起 */
+  const askRouteTip = () => {
+    if (!playing || !profile || routeTipLoading) return;
+    setRouteTipLoading(true);
+    void api.universeExplain(profile.id, {
+      kind: 'route', subject: '跨科航线', module: playing.theme,
+      count: playing.stops.length, done: playing.stops.filter((s) => s.done).length, accuracy: null,
+      links: playing.stops.map((s) => ({ subject: s.subject, module: s.module, shared: [] })),
+      next: [],
+    })
+      .then((r) => setRouteTip({ theme: playing.theme, text: r.tip, source: r.source }))
+      .catch(() => setRouteTip({ theme: playing.theme, text: '讲解员暂时不在星空里，稍后再试～', source: 'error' }))
+      .finally(() => setRouteTipLoading(false));
+  };
 
   /** AI 星空讲解员：讲这颗星是什么、为什么和别的学科相连、先学哪节 */
   const askTip = () => {
@@ -166,6 +209,23 @@ export default function UniverseScreen() {
                   className="h-8 w-8 rounded-xl bg-white/10 text-sm font-black text-white/80 backdrop-blur transition hover:bg-white/20">{label as string}</button>
               ))}
             </div>
+            {/* 航线播放悬浮条 */}
+            {playing && (
+              <div className="absolute left-3 top-3 z-10 max-w-[280px] rounded-2xl bg-slate-900/85 p-3 text-white shadow-lg backdrop-blur">
+                <div className="flex items-center gap-2 text-xs font-black">
+                  <span className="animate-pulse">▶</span>
+                  <span className="min-w-0 truncate">播放航线：{playing.theme}（{Math.min(playIdx + 1, playing.stops.length)}/{playing.stops.length}）</span>
+                  <button onClick={() => { setPlaying(null); setView({ k: 1, x: 0, y: 0 }); }} className="ml-auto shrink-0 rounded-lg bg-white/20 px-2 py-0.5 text-[10px] hover:bg-white/30">⏹ 停止</button>
+                </div>
+                <div className="mt-0.5 truncate text-[10px] text-white/60">
+                  第 {Math.min(playIdx + 1, playing.stops.length)} 站：{playing.stops[Math.min(playIdx, playing.stops.length - 1)]?.subject}·{playing.stops[Math.min(playIdx, playing.stops.length - 1)]?.lessonTitle}
+                </div>
+                <button onClick={askRouteTip} disabled={routeTipLoading} className="mt-1.5 rounded-lg bg-indigo-500 px-2 py-1 text-[10px] font-bold text-white transition hover:bg-indigo-600 disabled:opacity-50">
+                  {routeTipLoading ? '讲解中…' : routeTip && routeTip.theme === playing.theme ? '🤖 再讲一次' : '🤖 讲讲这条线'}
+                </button>
+                {routeTip && routeTip.theme === playing.theme && <p className="mt-1.5 text-[11px] leading-relaxed text-white/90">{routeTip.text}</p>}
+              </div>
+            )}
             <div className="pointer-events-none absolute bottom-2 left-3 z-10 text-[10px] font-bold text-white/30">滚轮缩放 · 拖拽平移 · 双击学科名飞过去{view.k > 1.05 ? ` · ${(view.k * 100).toFixed(0)}%` : ''}</div>
             <svg ref={svgRef} viewBox="0 0 1000 780" className="h-auto w-full touch-none select-none" style={{ maxHeight: 640, cursor: 'grab' }}
               onPointerDown={(e) => { dragRef.current = { sx: e.clientX, sy: e.clientY, x: view.x, y: view.y, moved: false }; }}
@@ -194,15 +254,19 @@ export default function UniverseScreen() {
                 {graph.subjects.map((s, i) => (
                   <ellipse key={s.subject} cx={s.x} cy={s.y} rx={170} ry={125} fill={`url(#neb-${i})`} opacity={focus !== null && focus !== s.subject ? 0.15 : 1} />
                 ))}
-                {/* 连线（选中时流光） */}
+                {/* 连线（选中时流光；播放航线时让位给航线路径） */}
                 {graph.edges.map((e, i) => {
                   const a = graph.nodes.find((n) => n.id === e.a);
                   const b = graph.nodes.find((n) => n.id === e.b);
                   if (!a || !b) return null;
                   const on = sel !== null && (e.a === sel || e.b === sel);
-                  const dim = focus !== null && a.subject !== focus && b.subject !== focus;
-                  return <line key={i} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={on ? '#fbbf24' : '#7dd3fc'} strokeWidth={on ? 2 : 1} opacity={dim ? 0.04 : on ? 0.9 : 0.16} className={on ? 'uni-flow' : undefined} />;
+                  const dim = playing !== null || (focus !== null && a.subject !== focus && b.subject !== focus);
+                  return <line key={i} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={on ? '#fbbf24' : '#7dd3fc'} strokeWidth={on ? 2 : 1} opacity={dim ? 0.04 : on ? 0.9 : 0.16} className={on && playing === null ? 'uni-flow' : undefined} />;
                 })}
+                {/* 航线播放路径（金色流光串联站点） */}
+                {playing && playStopNodes.length > 1 && (
+                  <polyline points={playStopNodes.filter(Boolean).map((n) => `${n!.x},${n!.y}`).join(' ')} fill="none" stroke="#fbbf24" strokeWidth={2.8} strokeLinejoin="round" strokeLinecap="round" opacity={0.9} className="uni-flow" />
+                )}
                 {/* 学科锚点名（双击飞过去） */}
                 {graph.subjects.map((s) => (
                   <text key={s.subject} x={s.x} y={s.y + 4} textAnchor="middle" fill={hexOf(s.subject)} fontSize={13 / view.k} fontWeight={800}
@@ -211,16 +275,21 @@ export default function UniverseScreen() {
                     {SUBJECTS[s.subject]?.emoji} {s.subject}
                   </text>
                 ))}
-                {/* 模块节点（已点亮的星星会闪烁） */}
+                {/* 模块节点（已点亮的星星会闪烁；播放航线时只亮站点，当前站带白环） */}
                 {graph.nodes.map((n, idx) => {
-                  const dim = (focus !== null && n.subject !== focus) || (sel !== null && !isLit(n) && n.id !== sel);
+                  const isStop = playing !== null && playStopIds.has(n.id);
+                  const isNow = playing !== null && playStopNodes[playIdx]?.id === n.id;
+                  const dim = playing !== null
+                    ? !isStop
+                    : (focus !== null && n.subject !== focus) || (sel !== null && !isLit(n) && n.id !== sel);
                   const acc = n.accuracy;
                   return (
                     <g key={n.id} onClick={() => { if (dragRef.current?.moved) return; setSel(n.id === sel ? null : n.id); }} onMouseEnter={() => setHover(n.id)} onMouseLeave={() => setHover(null)} style={{ cursor: 'pointer', opacity: dim ? 0.08 : 1 }}>
-                      <circle cx={n.x} cy={n.y} r={n.r + (n.id === sel ? 4 : 0)} fill={hexOf(n.subject)} fillOpacity={acc == null ? 0.16 : 0.3 + (acc / 100) * 0.7} stroke={n.id === sel ? '#fff' : hexOf(n.subject)} strokeWidth={(n.id === sel ? 2.5 : 1.2) / view.k}
+                      {isNow && <circle cx={n.x} cy={n.y} r={n.r + 10} fill="none" stroke="#fff" strokeWidth={1.5 / view.k} opacity={0.9} className="uni-tw" />}
+                      <circle cx={n.x} cy={n.y} r={n.r + (n.id === sel || isNow ? 4 : 0)} fill={hexOf(n.subject)} fillOpacity={acc == null ? (isStop ? 0.55 : 0.16) : 0.3 + (acc / 100) * 0.7} stroke={n.id === sel || isNow ? '#fff' : hexOf(n.subject)} strokeWidth={(n.id === sel || isNow ? 2.5 : 1.2) / view.k}
                         className={acc != null && !dim ? 'uni-tw' : undefined} style={acc != null && !dim ? { animationDelay: `${(idx % 9) * 0.33}s` } : undefined} />
                       {n.doneCount === n.count && n.count > 0 && <text x={n.x} y={n.y + 3.5 / view.k} textAnchor="middle" fill="#fff" fontSize={9 / Math.max(1, view.k / 1.6)} fontWeight={800}>✓</text>}
-                      {(hover === n.id || n.id === sel) && <text x={n.x} y={n.y - n.r - 5 / view.k} textAnchor="middle" fill="#fff" fontSize={10.5 / view.k} fontWeight={700}>{n.module}</text>}
+                      {(hover === n.id || n.id === sel || isStop) && <text x={n.x} y={n.y - n.r - 5 / view.k} textAnchor="middle" fill={isNow ? '#fde68a' : '#fff'} fontSize={10.5 / view.k} fontWeight={700}>{n.module}</text>}
                     </g>
                   );
                 })}
@@ -364,7 +433,13 @@ export default function UniverseScreen() {
                 return (
                 <div key={r.theme} className={`w-64 shrink-0 rounded-2xl p-3 ring-1 ${complete ? 'bg-emerald-50 ring-emerald-200' : 'bg-slate-50 ring-slate-100'}`}>
                   <div className="mb-2 flex items-center gap-1.5">
-                    <span className={`truncate rounded-full px-2 py-0.5 text-[11px] font-black ${complete ? 'bg-emerald-100 text-emerald-700' : 'bg-indigo-100 text-indigo-700'}`}>{complete ? '🎉' : '🔗'} {r.theme}{complete ? ' ✓' : ''}</span>
+                    <button onClick={() => {
+                      if (playing?.theme === r.theme) { setPlaying(null); setView({ k: 1, x: 0, y: 0 }); }
+                      else { setPlayIdx(0); setPlaying({ theme: r.theme, stops: r.stops }); }
+                    }} title="在星图上播放这条航线（镜头逐站飞行）"
+                      className={`min-w-0 shrink truncate rounded-full px-2 py-0.5 text-[11px] font-black transition hover:brightness-95 ${complete ? 'bg-emerald-100 text-emerald-700' : 'bg-indigo-100 text-indigo-700'}`}>
+                      {complete ? '🎉' : '🔗'} {r.theme}{complete ? ' ✓' : ''} {playing?.theme === r.theme ? '⏹' : '▶'}
+                    </button>
                     <span className="ml-auto shrink-0 text-[10px] font-bold text-slate-400">{r.doneCount}/{r.stops.length} 站</span>
                   </div>
                   <div className="space-y-1">
