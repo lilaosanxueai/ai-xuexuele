@@ -255,7 +255,8 @@ export function buildUniverse(
   const anchor = new Map<string, { x: number; y: number }>();
   ordered.forEach((s, i) => {
     const ang = (i / ordered.length) * Math.PI * 2 - Math.PI / 2;
-    anchor.set(s, { x: CX + Math.cos(ang) * 330, y: CY + Math.sin(ang) * 250 });
+    // 椭圆半径留足星团+星辉光晕的余地：所有光晕完整落在画布内
+    anchor.set(s, { x: CX + Math.cos(ang) * 245, y: CY + Math.sin(ang) * 185 });
   });
 
   // 3) 模块节点：绕学科锚点成小星团
@@ -287,7 +288,7 @@ export function buildUniverse(
     // 学科内模块按首次出现顺序绕圈
     list.sort((p, q) => p.firstOrder - q.firstOrder);
     const m = list.length;
-    const ringR = 30 + Math.min(70, m * 4);
+    const ringR = 28 + Math.min(55, m * 3.2);
     list.forEach((n, j) => {
       const ang = (j / m) * Math.PI * 2;
       n.x = a.x + Math.cos(ang) * ringR;

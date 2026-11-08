@@ -85,6 +85,7 @@ export default function UniverseScreen() {
     return playing.stops.map((s) => graph.nodes.find((n) => n.subject === s.subject && n.module === s.module) ?? null);
   }, [playing, graph]);
   const playStopIds = useMemo(() => new Set(playStopNodes.filter(Boolean).map((n) => n!.id)), [playStopNodes]);
+  const subjectIdx = useMemo(() => new Map(graph.subjects.map((s, i) => [s.subject, i])), [graph]);
 
   useEffect(() => {
     if (!playing) return;
@@ -156,18 +157,18 @@ export default function UniverseScreen() {
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="mx-auto w-full max-w-6xl flex-1 px-6 pb-10">
-        <div className="mb-4 flex flex-wrap items-center gap-3 rounded-3xl bg-gradient-to-r from-indigo-500 via-violet-500 to-sky-500 p-5 text-white shadow-lg">
-          <button onClick={() => nav('/map')} className="rounded-xl bg-white/20 px-3 py-1.5 text-sm font-bold hover:bg-white/30">← 学科中心</button>
+        <div className="mb-4 flex flex-wrap items-center gap-3 rounded-3xl bg-gradient-to-r from-indigo-700 via-violet-700 to-indigo-800 p-5 text-white shadow-lg ring-1 ring-white/10">
+          <button onClick={() => nav('/map')} className="rounded-xl bg-white/15 px-3 py-1.5 text-sm font-bold hover:bg-white/25">← 学科中心</button>
           <span className="text-4xl">🌌</span>
           <div>
             <h1 className="text-2xl font-black">知识宇宙</h1>
-            <p className="text-xs opacity-80">学科是星系 · 模块是星星 · 连线是共享的知识关键词——看看你的知识版图点亮了多少</p>
+            <p className="text-xs opacity-75">学科是星系 · 模块是星星 · 连线是共享的知识关键词——看看你的知识版图点亮了多少</p>
           </div>
-          <div className="ml-auto flex gap-4 text-center">
-            <div><div className="text-2xl font-black">{graph.subjects.length}</div><div className="text-[10px] opacity-70">学科</div></div>
-            <div><div className="text-2xl font-black">{doneLessons}<span className="text-sm opacity-70">/{lessons.length}</span></div><div className="text-[10px] opacity-70">已完成课</div></div>
-            <div><div className="text-2xl font-black">{lit}<span className="text-sm opacity-70">/{graph.nodes.length}</span></div><div className="text-[10px] opacity-70">已点亮模块</div></div>
-            <div><div className="text-2xl font-black">{graph.edges.length}</div><div className="text-[10px] opacity-70">跨科连线</div></div>
+          <div className="ml-auto flex text-center">
+            <div className="px-5"><div className="text-2xl font-black tabular-nums">{graph.subjects.length}</div><div className="text-[11px] opacity-75">学科</div></div>
+            <div className="border-l-2 border-white/25 px-5"><div className="text-2xl font-black tabular-nums">{doneLessons}<span className="text-sm font-bold opacity-60"> / {lessons.length}</span></div><div className="text-[11px] opacity-75">已完成课</div></div>
+            <div className="border-l-2 border-white/25 px-5"><div className="text-2xl font-black tabular-nums">{lit}<span className="text-sm font-bold opacity-60"> / {graph.nodes.length}</span></div><div className="text-[11px] opacity-75">已点亮模块</div></div>
+            <div className="border-l-2 border-white/25 px-5"><div className="text-2xl font-black tabular-nums">{graph.edges.length}</div><div className="text-[11px] opacity-75">跨科连线</div></div>
           </div>
         </div>
 
@@ -182,13 +183,17 @@ export default function UniverseScreen() {
                 className={`flex items-center gap-1.5 rounded-xl px-2.5 py-1 text-xs font-bold shadow-sm transition ${focus === s.subject ? 'text-white' : 'bg-white text-slate-500 hover:bg-slate-50'}`}
                 style={focus === s.subject ? { background: hexOf(s.subject) } : undefined}
                 title={`${s.subject}：${s.done}/${s.count} 课完成（${pct}%）${s.accuracy == null ? '' : ` · 平均正确率 ${s.accuracy}%`}`}>
-                <svg width="14" height="14" viewBox="0 0 16 16" className="shrink-0">
-                  <circle cx="8" cy="8" r={R} fill="none" stroke={focus === s.subject ? 'rgba(255,255,255,0.35)' : 'rgba(148,163,184,0.3)'} strokeWidth="2.5" />
-                  <circle cx="8" cy="8" r={R} fill="none" stroke={focus === s.subject ? '#fff' : hexOf(s.subject)} strokeWidth="2.5" strokeLinecap="round"
-                    strokeDasharray={`${(C * s.doneRatio).toFixed(2)} ${C.toFixed(2)}`} transform="rotate(-90 8 8)" />
-                </svg>
+                {pct > 0 ? (
+                  <svg width="14" height="14" viewBox="0 0 16 16" className="shrink-0">
+                    <circle cx="8" cy="8" r={R} fill="none" stroke={focus === s.subject ? 'rgba(255,255,255,0.35)' : 'rgba(148,163,184,0.3)'} strokeWidth="2.5" />
+                    <circle cx="8" cy="8" r={R} fill="none" stroke={focus === s.subject ? '#fff' : hexOf(s.subject)} strokeWidth="2.5" strokeLinecap="round"
+                      strokeDasharray={`${(C * s.doneRatio).toFixed(2)} ${C.toFixed(2)}`} transform="rotate(-90 8 8)" />
+                  </svg>
+                ) : (
+                  <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: focus === s.subject ? '#fff' : hexOf(s.subject), opacity: focus === s.subject ? 0.9 : 0.45 }} />
+                )}
                 {SUBJECTS[s.subject]?.emoji} {s.subject}
-                <span className={`text-[10px] font-black ${focus === s.subject ? 'opacity-80' : 'text-slate-400'}`}>{pct}%</span>
+                {pct > 0 && <span className={`text-[10px] font-black ${focus === s.subject ? 'opacity-80' : 'text-slate-400'}`}>{pct}%</span>}
               </button>
             );
           })}
@@ -243,16 +248,27 @@ export default function UniverseScreen() {
               <defs>
                 {graph.subjects.map((s, i) => (
                   <radialGradient key={s.subject} id={`neb-${i}`}>
-                    <stop offset="0%" stopColor={hexOf(s.subject)} stopOpacity="0.18" />
-                    <stop offset="70%" stopColor={hexOf(s.subject)} stopOpacity="0.05" />
+                    <stop offset="0%" stopColor={hexOf(s.subject)} stopOpacity="0.10" />
+                    <stop offset="70%" stopColor={hexOf(s.subject)} stopOpacity="0.03" />
+                    <stop offset="100%" stopColor={hexOf(s.subject)} stopOpacity="0" />
+                  </radialGradient>
+                ))}
+                {graph.subjects.map((s, i) => (
+                  <radialGradient key={s.subject + '-star'} id={`star-${i}`}>
+                    <stop offset="0%" stopColor="#ffffff" stopOpacity="0.95" />
+                    <stop offset="35%" stopColor={hexOf(s.subject)} stopOpacity="0.85" />
                     <stop offset="100%" stopColor={hexOf(s.subject)} stopOpacity="0" />
                   </radialGradient>
                 ))}
               </defs>
               <g transform={`translate(${view.x} ${view.y}) scale(${view.k})`}>
-                {/* 星云光晕（每个学科一团学科色） */}
+                {/* 星云底色（每个学科一团很淡的学科色） */}
                 {graph.subjects.map((s, i) => (
-                  <ellipse key={s.subject} cx={s.x} cy={s.y} rx={170} ry={125} fill={`url(#neb-${i})`} opacity={focus !== null && focus !== s.subject ? 0.15 : 1} />
+                  <ellipse key={s.subject} cx={s.x} cy={s.y} rx={160} ry={120} fill={`url(#neb-${i})`} opacity={focus !== null && focus !== s.subject ? 0.15 : 1} />
+                ))}
+                {/* 背景暗星纹理（确定性撒点·给宇宙纵深） */}
+                {Array.from({ length: 80 }, (_, i) => (
+                  <circle key={`bg-${i}`} cx={(i * 137.51) % 1000} cy={(i * 89.73 + 37) % 780} r={0.7 + ((i * 7) % 5) * 0.22} fill="#dbeafe" opacity={0.1 + ((i * 13) % 10) / 55} />
                 ))}
                 {/* 连线（选中时流光；播放航线时让位给航线路径） */}
                 {graph.edges.map((e, i) => {
@@ -261,21 +277,29 @@ export default function UniverseScreen() {
                   if (!a || !b) return null;
                   const on = sel !== null && (e.a === sel || e.b === sel);
                   const dim = playing !== null || (focus !== null && a.subject !== focus && b.subject !== focus);
-                  return <line key={i} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={on ? '#fbbf24' : '#7dd3fc'} strokeWidth={on ? 2 : 1} opacity={dim ? 0.04 : on ? 0.9 : 0.16} className={on && playing === null ? 'uni-flow' : undefined} />;
+                  return <line key={i} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={on ? '#fbbf24' : '#7dd3fc'} strokeWidth={on ? 2 : 1} opacity={dim ? 0.015 : on ? 0.9 : 0.035} className={on && playing === null ? 'uni-flow' : undefined} />;
                 })}
                 {/* 航线播放路径（金色流光串联站点） */}
                 {playing && playStopNodes.length > 1 && (
                   <polyline points={playStopNodes.filter(Boolean).map((n) => `${n!.x},${n!.y}`).join(' ')} fill="none" stroke="#fbbf24" strokeWidth={2.8} strokeLinejoin="round" strokeLinecap="round" opacity={0.9} className="uni-flow" />
                 )}
-                {/* 学科锚点名（双击飞过去） */}
-                {graph.subjects.map((s) => (
-                  <text key={s.subject} x={s.x} y={s.y + 4} textAnchor="middle" fill={hexOf(s.subject)} fontSize={13 / view.k} fontWeight={800}
-                    opacity={focus !== null && focus !== s.subject ? 0.12 : 0.5} style={{ cursor: 'zoom-in' }}
-                    onDoubleClick={() => zoomTo(2.6, s.x, s.y)}>
-                    {SUBJECTS[s.subject]?.emoji} {s.subject}
-                  </text>
-                ))}
-                {/* 模块节点（已点亮的星星会闪烁；播放航线时只亮站点，当前站带白环） */}
+                {/* 学科锚点名（半透明圆角底衬保证任何光晕上可读·双击飞过去） */}
+                {graph.subjects.map((s) => {
+                  const fs = 13.5 / view.k;
+                  const label = `${SUBJECTS[s.subject]?.emoji ?? ''} ${s.subject}`;
+                  const w = (s.subject.length + 2.6) * fs + 8;
+                  const faded = focus !== null && focus !== s.subject;
+                  return (
+                    <g key={s.subject} onDoubleClick={() => zoomTo(2.6, s.x, s.y)} style={{ cursor: 'zoom-in' }} opacity={faded ? 0.12 : 1}>
+                      <rect x={s.x - w / 2} y={s.y - fs * 0.85} width={w} height={fs * 1.7} rx={6 / view.k} fill="#0b1020" opacity={faded ? 0.2 : 0.55} />
+                      <text x={s.x} y={s.y + fs * 0.36} textAnchor="middle" fill={hexOf(s.subject)} fontSize={fs} fontWeight={800}
+                        style={{ paintOrder: 'stroke', stroke: '#0b1020', strokeWidth: 2 / view.k, strokeLinejoin: 'round' }}>
+                        {label}
+                      </text>
+                    </g>
+                  );
+                })}
+                {/* 模块星星：星辉光晕+白星核（练过=亮星·没练=小暗星） */}
                 {graph.nodes.map((n, idx) => {
                   const isStop = playing !== null && playStopIds.has(n.id);
                   const isNow = playing !== null && playStopNodes[playIdx]?.id === n.id;
@@ -283,13 +307,23 @@ export default function UniverseScreen() {
                     ? !isStop
                     : (focus !== null && n.subject !== focus) || (sel !== null && !isLit(n) && n.id !== sel);
                   const acc = n.accuracy;
+                  const bright = acc != null || isStop; // 亮星：练过或航线站点
+                  const si = subjectIdx.get(n.subject) ?? -1;
                   return (
-                    <g key={n.id} onClick={() => { if (dragRef.current?.moved) return; setSel(n.id === sel ? null : n.id); }} onMouseEnter={() => setHover(n.id)} onMouseLeave={() => setHover(null)} style={{ cursor: 'pointer', opacity: dim ? 0.08 : 1 }}>
-                      {isNow && <circle cx={n.x} cy={n.y} r={n.r + 10} fill="none" stroke="#fff" strokeWidth={1.5 / view.k} opacity={0.9} className="uni-tw" />}
-                      <circle cx={n.x} cy={n.y} r={n.r + (n.id === sel || isNow ? 4 : 0)} fill={hexOf(n.subject)} fillOpacity={acc == null ? (isStop ? 0.55 : 0.16) : 0.3 + (acc / 100) * 0.7} stroke={n.id === sel || isNow ? '#fff' : hexOf(n.subject)} strokeWidth={(n.id === sel || isNow ? 2.5 : 1.2) / view.k}
-                        className={acc != null && !dim ? 'uni-tw' : undefined} style={acc != null && !dim ? { animationDelay: `${(idx % 9) * 0.33}s` } : undefined} />
-                      {n.doneCount === n.count && n.count > 0 && <text x={n.x} y={n.y + 3.5 / view.k} textAnchor="middle" fill="#fff" fontSize={9 / Math.max(1, view.k / 1.6)} fontWeight={800}>✓</text>}
-                      {(hover === n.id || n.id === sel || isStop) && <text x={n.x} y={n.y - n.r - 5 / view.k} textAnchor="middle" fill={isNow ? '#fde68a' : '#fff'} fontSize={10.5 / view.k} fontWeight={700}>{n.module}</text>}
+                    <g key={n.id} onClick={() => { if (dragRef.current?.moved) return; setSel(n.id === sel ? null : n.id); }} onMouseEnter={() => setHover(n.id)} onMouseLeave={() => setHover(null)} style={{ cursor: 'pointer', opacity: dim ? 0.07 : 1 }}>
+                      {isNow && <circle cx={n.x} cy={n.y} r={n.r * 1.7} fill="none" stroke="#fff" strokeWidth={1.2 / view.k} opacity={0.85} className="uni-tw" />}
+                      {/* 星辉 */}
+                      {si >= 0 && (
+                        <circle cx={n.x} cy={n.y} r={n.r * (bright ? 2.2 : 1.05)} fill={`url(#star-${si})`}
+                          opacity={bright ? (dim ? 0.18 : 0.7) : 0.08}
+                          className={bright && !dim ? 'uni-tw' : undefined}
+                          style={bright && !dim ? { animationDelay: `${(idx % 9) * 0.33}s` } : undefined} />
+                      )}
+                      {/* 星核 */}
+                      <circle cx={n.x} cy={n.y} r={Math.max(2.5, n.r * (bright ? 0.7 : 0.24))} fill={bright ? '#fff' : hexOf(n.subject)} fillOpacity={bright ? 0.95 : 0.28}
+                        stroke={n.id === sel || isNow ? '#fde68a' : 'none'} strokeWidth={(n.id === sel || isNow ? 2.2 : 0) / view.k} />
+                      {n.doneCount === n.count && n.count > 0 && <text x={n.x} y={n.y + 3.5 / view.k} textAnchor="middle" fill="#0f172a" fontSize={9 / Math.max(1, view.k / 1.6)} fontWeight={800}>✓</text>}
+                      {(hover === n.id || n.id === sel || isStop) && <text x={n.x} y={n.y - n.r * (bright ? 2.2 : 1.4) - 4 / view.k} textAnchor="middle" fill={isNow ? '#fde68a' : '#fff'} fontSize={10.5 / view.k} fontWeight={700}>{n.module}</text>}
                     </g>
                   );
                 })}
@@ -391,7 +425,7 @@ export default function UniverseScreen() {
                               <span className="block truncate text-xs font-black text-slate-700">{w.subject} · {w.module}</span>
                               <span className="block truncate text-[10px] font-semibold text-slate-400">{w.reason}</span>
                             </span>
-                            <span className="shrink-0 rounded-lg bg-amber-100 px-2 py-1 text-[10px] font-black text-amber-700">去补亮 →</span>
+                            <span className="shrink-0 rounded-lg bg-amber-100 px-2.5 py-1.5 text-[11px] font-black text-amber-700">去补亮 →</span>
                           </button>
                         );
                       })}
