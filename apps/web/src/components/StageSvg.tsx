@@ -194,12 +194,14 @@ export default function StageSvg({ cmds, grid = false }: { cmds: StageCmd[]; gri
     return { els, toX, toY, scale, cx, cy };
   }, [cmds]);
 
-  /** 网格规格：线对齐数据坐标（不是 viewBox 装饰线）；numbered=按数学单位标数字刻度（ox/oy=原点偏移·unitX/unitY 分轴比·xName/yName 轴名） */
+  /** 网格规格：线对齐数据坐标（不是 viewBox 装饰线）；numbered=按数学单位标数字刻度（ox/oy=原点偏移·unitX/unitY 分轴比·只给 unitX 则 y 轴不标数） */
   const gridSpec = useMemo(() => {
     if (grid === false) return null;
     const obj = typeof grid === 'object' && grid !== null ? grid : null;
     const numbered = obj ? !!(obj.unit ?? obj.unitX ?? obj.unitY) : typeof grid === 'number' && grid > 0;
     const unitX = obj?.unitX ?? obj?.unit ?? (typeof grid === 'number' ? grid : 1);
+    // 单轴模式：只给 unitX（如正弦波 y=A·sin 像素无单位）→ y 轴不标数字
+    const hasY = obj ? obj.unitY != null || (obj.unitX == null && obj.unit != null) : typeof grid === 'number';
     const unitY = obj?.unitY ?? obj?.unit ?? (typeof grid === 'number' ? grid : 1);
     const ox = obj?.ox ?? 0;
     const oy = obj?.oy ?? 0;
@@ -217,7 +219,7 @@ export default function StageSvg({ cmds, grid = false }: { cmds: StageCmd[]; gri
     for (let y = Math.ceil((yMin - oy) / stepY) * stepY + oy; y <= yMax; y += stepY) ys.push(Math.abs(y - oy) < stepY / 1e6 ? oy : y);
     const axisVisibleY = view.toY(oy) >= 8 && view.toY(oy) <= VH - 8; // x 轴在视野内
     const axisVisibleX = view.toX(ox) >= 8 && view.toX(ox) <= VW - 8; // y 轴在视野内
-    return { unitX, unitY, numbered, ox, oy, xs, ys, axisVisibleX, axisVisibleY, xName, yName };
+    return { unitX, unitY, numbered, hasY, ox, oy, xs, ys, axisVisibleX, axisVisibleY, xName, yName };
   }, [grid, view]);
 
   const onMove = (e: MouseEvent<HTMLDivElement>) => {
@@ -257,7 +259,7 @@ export default function StageSvg({ cmds, grid = false }: { cmds: StageCmd[]; gri
                     {fmtCoord((x - gridSpec.ox) / gridSpec.unitX)}
                   </text>
                 ))}
-                {gridSpec.ys.filter((y) => y !== gridSpec.oy && Math.abs(view.toY(y) - VH / 2) < VH / 2 - 10).map((y) => (
+                {gridSpec.hasY && gridSpec.ys.filter((y) => y !== gridSpec.oy && Math.abs(view.toY(y) - VH / 2) < VH / 2 - 10).map((y) => (
                   <text key={'ty' + y} x={gridSpec.axisVisibleX ? view.toX(gridSpec.ox) - 5 : 5} y={view.toY(y) + 3} textAnchor={gridSpec.axisVisibleX ? 'end' : 'start'}>
                     {fmtCoord((y - gridSpec.oy) / gridSpec.unitY)}
                   </text>
@@ -268,7 +270,7 @@ export default function StageSvg({ cmds, grid = false }: { cmds: StageCmd[]; gri
                     {gridSpec.xName}
                   </text>
                 )}
-                {gridSpec.yName && (
+                {gridSpec.hasY && gridSpec.yName && (
                   <text x={gridSpec.axisVisibleX ? view.toX(gridSpec.ox) + 5 : 5} y={12} textAnchor="start" fill="#94a3b8" fontStyle="italic">
                     {gridSpec.yName}
                   </text>
