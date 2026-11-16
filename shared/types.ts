@@ -132,8 +132,8 @@ export interface Teach {
 export interface LabDef {
   /** 可调参数（滑块）；name 需与演示代码里的顶层赋值变量名一致，运行时注入替换 */
   params: LabParam[];
-  /** 舞台坐标网格：true=对齐数据坐标的淡网格+0 轴高亮（无数字）；数字=几个舞台单位是 1 个数学单位并标数字刻度；对象={unit 数学单位比, ox/oy 原点偏移（舞台单位）}——函数图像课用 */
-  grid?: boolean | number | { unit: number; ox?: number; oy?: number };
+  /** 舞台坐标网格：true=对齐数据坐标的淡网格+0 轴高亮（无数字）；数字=几个舞台单位是 1 个数学单位并标数字刻度；对象={unit 同比, unitX/unitY 分轴比（v-t 图用）, ox/oy 原点偏移, xName/yName 轴名}——函数图像课用 */
+  grid?: boolean | number | { unit?: number; unitX?: number; unitY?: number; ox?: number; oy?: number; xName?: string; yName?: string };
   /** 探索问题（引导孩子做"实验"） */
   explore?: string[];
   /** 演示代码（缺省用 starterCode） */
