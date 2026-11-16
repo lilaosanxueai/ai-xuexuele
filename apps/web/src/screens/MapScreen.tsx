@@ -149,6 +149,72 @@ export default function MapScreen() {
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="mx-auto w-full max-w-5xl flex-1 px-6 pb-10">
+        {/* 学习概览 + 智能推荐（首屏动线：今天做什么第一时间可见） */}
+        <div className="mb-6 rounded-3xl bg-white/80 p-5 shadow-md">
+                    {/* 今日学习大 CTA（Duolingo 式每日入口）：推荐课 + 连续天数 + 正确路由 */}
+          {rec && (() => {
+            const recLesson = lessons.find((l) => l.id === rec.lessonId);
+            const recPath = recLesson && (recLesson.lab || recLesson.starterCode) ? `/lab/${rec.lessonId}` : `/tutor/${rec.lessonId}`;
+            const streakN = calcStreak(progress?.dailyUsage ?? {});
+            return (
+              <button
+                onClick={() => nav(recPath)}
+                className="mb-3 flex w-full items-center gap-4 rounded-3xl bg-gradient-to-br from-sky-500 via-indigo-500 to-violet-500 p-5 text-left text-white shadow-xl transition hover:-translate-y-1 hover:shadow-2xl"
+              >
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/20 text-4xl shadow-inner">{rec.emoji}</div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2 text-xs font-bold opacity-85">
+                    <span>🎯 今日学习</span>
+                    <span className="rounded-full bg-white/20 px-2 py-0.5">{rec.subjectArea}</span>
+                    {streakN > 0 && <span className="rounded-full bg-orange-500/90 px-2 py-0.5">🔥 连续 {streakN} 天</span>}
+                  </div>
+                  <div className="mt-1 truncate text-xl font-black">{rec.title}</div>
+                  <div className="mt-0.5 truncate text-sm opacity-90">{rec.reason}</div>
+                </div>
+                <div className="ml-auto shrink-0 rounded-2xl bg-white px-5 py-3 text-sm font-black text-indigo-600 shadow-lg">开始 →</div>
+              </button>
+            );
+          })()}
+
+<button
+            onClick={() => nav('/search')}
+            className="mb-3 flex w-full items-center gap-3 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left transition hover:border-sky-300"
+          >
+            <span className="text-xl">🔍</span>
+            <span className="flex-1 text-sm font-semibold text-slate-400">卡在哪个知识点？搜「浮力」「定语从句」「光合作用」…</span>
+            <span className="rounded-xl bg-sky-500 px-3 py-1.5 text-xs font-bold text-white">知识搜索</span>
+          </button>
+          {/* 每日任务：完成状态由各页面真实数据推导 */}
+          <div className="mb-3 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 p-3 ring-1 ring-amber-200">
+            <div className="mb-2 flex items-center gap-2">
+              <span className="text-sm font-black text-amber-700">📅 今日任务</span>
+              <span className="text-xs text-amber-600">{questsDone}/{quests.length} 完成</span>
+              {questsDone === quests.length && <span className="rounded-full bg-amber-500 px-2 py-0.5 text-[10px] font-black text-white">全部完成 🎉</span>}
+              <div className="ml-auto flex h-1.5 w-24 overflow-hidden rounded-full bg-amber-100">
+                <div className="h-full rounded-full bg-amber-500 transition-all" style={{ width: `${quests.length ? (questsDone / quests.length) * 100 : 0}%` }} />
+              </div>
+            </div>
+            <div className="grid gap-1.5 sm:grid-cols-2">
+              {quests.map((q) => (
+                <button
+                  key={q.id}
+                  onClick={() => nav(q.route)}
+                  className={`flex items-center gap-2 rounded-xl px-3 py-2 text-left transition ${q.done ? 'bg-white/70' : 'bg-white shadow-sm hover:-translate-y-0.5'}`}
+                >
+                  <span className={`text-lg ${q.done ? '' : 'grayscale opacity-60'}`}>{q.emoji}</span>
+                  <span className="min-w-0 flex-1">
+                    <span className={`block truncate text-xs font-bold ${q.done ? 'text-slate-400 line-through' : 'text-slate-700'}`}>{q.title}</span>
+                    <span className="block truncate text-[10px] text-slate-400">{q.detail}</span>
+                  </span>
+                  <span className={`shrink-0 rounded-lg px-2 py-0.5 text-[10px] font-black ${q.done ? 'bg-emerald-100 text-emerald-600' : 'bg-amber-100 text-amber-600'}`}>
+                    {q.done ? '✓ 完成' : `${q.cur}/${q.goal}`}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* 番茄钟：25 分钟专注 → 5 分钟休息，自动计时长 */}
         <div className="mb-4">
           <PomodoroTimer profileId={profile.id} />
@@ -241,70 +307,8 @@ export default function MapScreen() {
           </div>
         )}
 
-        {/* 学习概览 + 智能推荐 */}
+        {/* 本周数据区（概览卡：高光/等级/热力图/复习/周报） */}
         <div className="mb-6 rounded-3xl bg-white/80 p-5 shadow-md">
-                    {/* 今日学习大 CTA（Duolingo 式每日入口）：推荐课 + 连续天数 + 正确路由 */}
-          {rec && (() => {
-            const recLesson = lessons.find((l) => l.id === rec.lessonId);
-            const recPath = recLesson && (recLesson.lab || recLesson.starterCode) ? `/lab/${rec.lessonId}` : `/tutor/${rec.lessonId}`;
-            const streakN = calcStreak(progress?.dailyUsage ?? {});
-            return (
-              <button
-                onClick={() => nav(recPath)}
-                className="mb-3 flex w-full items-center gap-4 rounded-3xl bg-gradient-to-br from-sky-500 via-indigo-500 to-violet-500 p-5 text-left text-white shadow-xl transition hover:-translate-y-1 hover:shadow-2xl"
-              >
-                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/20 text-4xl shadow-inner">{rec.emoji}</div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2 text-xs font-bold opacity-85">
-                    <span>🎯 今日学习</span>
-                    <span className="rounded-full bg-white/20 px-2 py-0.5">{rec.subjectArea}</span>
-                    {streakN > 0 && <span className="rounded-full bg-orange-500/90 px-2 py-0.5">🔥 连续 {streakN} 天</span>}
-                  </div>
-                  <div className="mt-1 truncate text-xl font-black">{rec.title}</div>
-                  <div className="mt-0.5 truncate text-sm opacity-90">{rec.reason}</div>
-                </div>
-                <div className="ml-auto shrink-0 rounded-2xl bg-white px-5 py-3 text-sm font-black text-indigo-600 shadow-lg">开始 →</div>
-              </button>
-            );
-          })()}
-
-<button
-            onClick={() => nav('/search')}
-            className="mb-3 flex w-full items-center gap-3 rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-left transition hover:border-sky-300"
-          >
-            <span className="text-xl">🔍</span>
-            <span className="flex-1 text-sm font-semibold text-slate-400">卡在哪个知识点？搜「浮力」「定语从句」「光合作用」…</span>
-            <span className="rounded-xl bg-sky-500 px-3 py-1.5 text-xs font-bold text-white">知识搜索</span>
-          </button>
-          {/* 每日任务：完成状态由各页面真实数据推导 */}
-          <div className="mb-3 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 p-3 ring-1 ring-amber-200">
-            <div className="mb-2 flex items-center gap-2">
-              <span className="text-sm font-black text-amber-700">📅 今日任务</span>
-              <span className="text-xs text-amber-600">{questsDone}/{quests.length} 完成</span>
-              {questsDone === quests.length && <span className="rounded-full bg-amber-500 px-2 py-0.5 text-[10px] font-black text-white">全部完成 🎉</span>}
-              <div className="ml-auto flex h-1.5 w-24 overflow-hidden rounded-full bg-amber-100">
-                <div className="h-full rounded-full bg-amber-500 transition-all" style={{ width: `${quests.length ? (questsDone / quests.length) * 100 : 0}%` }} />
-              </div>
-            </div>
-            <div className="grid gap-1.5 sm:grid-cols-2">
-              {quests.map((q) => (
-                <button
-                  key={q.id}
-                  onClick={() => nav(q.route)}
-                  className={`flex items-center gap-2 rounded-xl px-3 py-2 text-left transition ${q.done ? 'bg-white/70' : 'bg-white shadow-sm hover:-translate-y-0.5'}`}
-                >
-                  <span className={`text-lg ${q.done ? '' : 'grayscale opacity-60'}`}>{q.emoji}</span>
-                  <span className="min-w-0 flex-1">
-                    <span className={`block truncate text-xs font-bold ${q.done ? 'text-slate-400 line-through' : 'text-slate-700'}`}>{q.title}</span>
-                    <span className="block truncate text-[10px] text-slate-400">{q.detail}</span>
-                  </span>
-                  <span className={`shrink-0 rounded-lg px-2 py-0.5 text-[10px] font-black ${q.done ? 'bg-emerald-100 text-emerald-600' : 'bg-amber-100 text-amber-600'}`}>
-                    {q.done ? '✓ 完成' : `${q.cur}/${q.goal}`}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
           {/* 本周高光（孩子端庆祝视角：只夸不说教；家长端分析归学情报告） */}
           {(recap.lessons.length > 0 || recap.totalMinutes > 0) && (
             <div className="mb-3 rounded-2xl bg-gradient-to-r from-fuchsia-50 via-violet-50 to-sky-50 p-3 ring-1 ring-violet-200">
