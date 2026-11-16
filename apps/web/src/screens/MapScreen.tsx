@@ -198,14 +198,14 @@ export default function MapScreen() {
               <span className="text-xs font-normal text-violet-400">来自《{daily.lessonTitle}》·答对打卡 ✓</span>
             </div>
             <div className="mb-3 text-[15px] font-bold leading-relaxed text-slate-700">{daily.q}</div>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="grid grid-cols-2 gap-1.5">
               {daily.options.map((opt, i) => {
                 const show = dailyPick !== null;
                 const isAns = i === daily.answer;
                 const isPick = dailyPick === i;
                 return (
                   <button key={i} onClick={() => answerDaily(i)} disabled={show}
-                    className={`rounded-xl px-3 py-1.5 text-xs font-bold transition ${
+                    className={`w-full rounded-xl px-3 py-1.5 text-left text-xs font-bold transition ${
                       show && isAns ? 'bg-emerald-100 text-emerald-700 ring-1 ring-emerald-400'
                         : show && isPick ? 'bg-rose-100 text-rose-600 ring-1 ring-rose-300'
                         : 'bg-white shadow-sm text-slate-600 hover:bg-violet-50'

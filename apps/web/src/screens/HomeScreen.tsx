@@ -76,21 +76,33 @@ export default function HomeScreen() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-gradient-to-b from-sky-50 to-slate-50">
-      <div className="text-center pt-16 pb-10">
+    <div className="relative flex min-h-screen flex-col overflow-hidden bg-gradient-to-b from-sky-50 to-slate-50">
+      {/* 漂浮装饰：给孩子的页面一点天空的趣味 */}
+      <div className="pointer-events-none absolute inset-0 select-none" aria-hidden>
+        <span className="absolute left-[8%] top-[12%] text-4xl opacity-30">☁️</span>
+        <span className="absolute right-[12%] top-[9%] text-3xl opacity-25">☁️</span>
+        <span className="absolute left-[18%] top-[30%] text-2xl opacity-20">✏️</span>
+        <span className="absolute right-[7%] top-[38%] text-3xl opacity-20">🎈</span>
+        <span className="absolute left-[6%] bottom-[26%] text-3xl opacity-20">📚</span>
+        <span className="absolute right-[16%] bottom-[32%] text-2xl opacity-20">🧩</span>
+        <span className="absolute left-[42%] top-[6%] text-xl opacity-30">✨</span>
+        <span className="absolute right-[38%] bottom-[16%] text-xl opacity-25">✨</span>
+      </div>
+
+      <div className="relative text-center pt-14 pb-10">
         <div className="text-7xl">📖</div>
         <h1 className="mt-3 text-4xl font-black text-sky-800">AI学学乐</h1>
         <p className="mt-2 text-slate-500">互动课程自学 · 18 学科 · 覆盖小学到高中</p>
       </div>
 
-      <div className="mx-auto w-full max-w-3xl px-6 pb-4">
+      <div className="relative mx-auto w-full max-w-3xl px-6 pb-4">
         <h2 className="mb-4 text-xl font-bold text-slate-700">今天是谁来学习？</h2>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
           {profiles.map((p) => (
             <div key={p.id} className="group relative">
               <button
                 onClick={() => enter(p)}
-                className="w-full rounded-3xl bg-white/90 p-6 text-center shadow-md transition hover:-translate-y-1 hover:shadow-xl"
+                className="flex min-h-[168px] w-full flex-col items-center justify-center rounded-3xl bg-white/90 p-6 text-center shadow-md transition hover:-translate-y-1 hover:shadow-xl"
               >
                 <div className="text-5xl">{p.avatar}</div>
                 <div className="mt-2 text-lg font-bold">{p.name}</div>
@@ -114,7 +126,7 @@ export default function HomeScreen() {
 
           <button
             onClick={() => setAdding(true)}
-            className="rounded-3xl border-4 border-dashed border-sky-300 bg-white/40 p-6 text-center text-sky-500 transition hover:border-sky-400 hover:bg-white/70"
+            className="flex min-h-[168px] flex-col items-center justify-center rounded-3xl border-4 border-dashed border-sky-300 bg-white/40 p-6 text-center text-sky-500 transition hover:border-sky-400 hover:bg-white/70"
           >
             <div className="text-5xl">➕</div>
             <div className="mt-2 text-lg font-bold">添加孩子</div>
@@ -122,8 +134,8 @@ export default function HomeScreen() {
         </div>
       </div>
 
-      <div className="mt-auto pb-6 text-center">
-        <a href="#/parent" className="text-sm text-slate-400 hover:text-slate-600">🛡 家长入口</a>
+      <div className="relative mt-auto pb-6 text-center">
+        <a href="#/parent" className="inline-flex items-center gap-1.5 rounded-xl bg-white/70 px-4 py-2 text-sm font-bold text-slate-500 shadow-sm transition hover:bg-white hover:text-slate-700">🛡 家长入口</a>
       </div>
 
       {adding && (

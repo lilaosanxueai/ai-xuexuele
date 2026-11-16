@@ -80,52 +80,55 @@ export default function LearningHeatmap({ dailyUsage }: { dailyUsage: Record<str
   }, [weeks]);
 
   return (
-    <div className="rounded-2xl bg-white/85 p-4 shadow-sm">
-      <div className="mb-2 flex items-baseline justify-between">
+    <div className="w-fit rounded-2xl bg-white/85 p-4 shadow-sm">
+      <div className="mb-2 flex items-baseline justify-between gap-6">
         <span className="text-sm font-black text-slate-700">📊 学习热力图</span>
         <span className="text-[11px] text-slate-400">
-          近12周学习 <b className="text-sky-600">{stats.active}</b>/{stats.total} 天（{stats.rate}%）
+          近12周 <b className="text-sky-600">{stats.active}</b>/{stats.total} 天（{stats.rate}%）
         </span>
       </div>
+      {/* 列宽：格 18px + 间距 4px = 22px/列；月份标签绝对定位对齐到列 */}
       <div className="relative">
-        {/* 月份标签 */}
-        <div className="mb-1 ml-7 flex h-4 gap-[3px] overflow-hidden">
+        {/* 月份标签（与格子列对齐） */}
+        <div className="relative mb-1 ml-5 h-4">
           {monthLabels.map((l) => (
-            <span key={l.text + l.col} className="shrink-0 text-[9px] font-bold text-slate-400" style={{ marginLeft: l.col === 0 ? 0 : `${(l.col - (monthLabels.find((x) => x.col < l.col)?.col ?? -1) - 1) * 15}px` }}>
+            <span key={l.text + l.col} className="absolute top-0 text-[10px] font-bold text-slate-400" style={{ left: `${l.col * 22}px` }}>
               {l.text}
             </span>
           ))}
         </div>
-        <div className="flex gap-[3px]">
+        <div className="flex items-start">
           {/* 星期标签 */}
-          <div className="flex w-6 shrink-0 flex-col gap-[3px] text-[8px] leading-[11px] text-slate-300">
+          <div className="mr-1 flex w-4 shrink-0 flex-col gap-1 text-[9px] leading-[18px] text-slate-300">
             {['一', '', '三', '', '五', '', '日'].map((d, i) => (
-              <span key={i} className="h-[11px]">{d}</span>
+              <span key={i} className="h-[18px]">{d}</span>
             ))}
           </div>
           {/* 格子网格 */}
-          {weeks.map((col, ci) => (
-            <div key={ci} className="flex flex-col gap-[3px]">
-              {col.map((d) => (
-                <div
-                  key={d.date}
-                  className="h-[11px] w-[11px] rounded-[2px] transition-transform hover:scale-125"
-                  style={{
-                    background: d.future ? 'transparent' : LEVELS[levelOf(d.min)].bg,
-                    border: d.future ? 'none' : '1px solid rgba(0,0,0,0.03)',
-                  }}
-                  title={d.future ? '' : `${d.date} · ${d.min} 分钟`}
-                />
-              ))}
-            </div>
-          ))}
+          <div className="flex gap-1">
+            {weeks.map((col, ci) => (
+              <div key={ci} className="flex flex-col gap-1">
+                {col.map((d) => (
+                  <div
+                    key={d.date}
+                    className="h-[18px] w-[18px] rounded-[3px] transition-transform hover:scale-125"
+                    style={{
+                      background: d.future ? 'transparent' : LEVELS[levelOf(d.min)].bg,
+                      border: d.future ? 'none' : '1px solid rgba(0,0,0,0.03)',
+                    }}
+                    title={d.future ? '' : `${d.date} · ${d.min} 分钟`}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       {/* 图例 */}
       <div className="mt-2 flex items-center justify-end gap-1 text-[9px] text-slate-400">
         <span>少</span>
         {LEVELS.map((l, i) => (
-          <span key={i} className="h-[10px] w-[10px] rounded-[2px]" style={{ background: l.bg }} title={l.label} />
+          <span key={i} className="h-[12px] w-[12px] rounded-[2px]" style={{ background: l.bg }} title={l.label} />
         ))}
         <span>多</span>
       </div>

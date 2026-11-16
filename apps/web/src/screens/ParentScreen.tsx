@@ -24,9 +24,10 @@ export default function ParentScreen() {
         <h1 className="text-2xl font-black">🛡 家长中心</h1>
         <Link to="/map" className="ml-auto rounded-xl bg-slate-200 px-3 py-1.5 text-sm font-bold hover:bg-slate-300">← 回应用</Link>
       </div>
-      <div className="mb-6 rounded-2xl bg-emerald-50 p-3 text-sm leading-relaxed text-emerald-800">
-        🔒 <b>隐私承诺</b>：孩子的全部数据（进度、作品、AI 对话、训练场样本与摄像头画面）都只保存在这台电脑上，不上云、不联网同步；摄像头画面只在本机浏览器内计算。
-      </div>
+      <details className="mb-6 rounded-2xl bg-emerald-50 px-4 py-2.5 text-sm leading-relaxed text-emerald-800">
+        <summary className="cursor-pointer list-none font-bold">🔒 隐私承诺：全部数据仅存本机，不上云、不联网同步 <span className="font-normal text-emerald-500">（点击展开详情）</span></summary>
+        <p className="mt-1.5 text-[13px] text-emerald-700">孩子的全部数据（进度、作品、AI 对话、训练场样本与摄像头画面）都只保存在这台电脑上；摄像头画面只在本机浏览器内计算。</p>
+      </details>
       <Tabs />
     </div>
   );
