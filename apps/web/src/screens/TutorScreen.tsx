@@ -105,7 +105,7 @@ export default function TutorScreen() {
                       onClick={s.onClick}
                       title={s.tip}
                       className={`flex shrink-0 items-center gap-1.5 rounded-full py-1 pl-1 pr-2.5 text-[11px] font-bold transition ${
-                        st === 'now' ? 'bg-sky-600 text-white shadow-sm' : st === 'done' ? 'text-emerald-700 hover:bg-emerald-50' : 'text-slate-400 hover:bg-slate-100'
+                        st === 'now' ? 'bg-sky-600 text-white shadow-sm' : st === 'done' ? 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100' : 'text-slate-400 hover:bg-slate-100'
                       }`}
                     >
                       <span className={`flex h-5 w-5 items-center justify-center rounded-full text-[10px] ${st === 'now' ? 'bg-white/25 text-white' : st === 'done' ? 'bg-emerald-500 text-white' : 'bg-slate-200 text-slate-500'}`}>
@@ -121,7 +121,7 @@ export default function TutorScreen() {
         })()}
       </div>
 
-      <main className="mx-auto grid w-full max-w-6xl flex-1 gap-4 p-4 lg:grid-cols-[320px_1fr]">
+      <main className="mx-auto grid w-full max-w-6xl flex-1 gap-4 p-4 lg:grid-cols-[340px_minmax(0,1fr)]">
         {/* 左：本课导学 */}
         <aside className="space-y-3">
           <button
@@ -202,9 +202,10 @@ export default function TutorScreen() {
           </div>
         </aside>
 
-        {/* 右：课本讲解正文是主区（现代自学阅读形态） */}
+        {/* 右：课本讲解正文是主区（现代自学阅读形态·正文限宽保证行长可读） */}
       {lesson.teach ? (
         <section className="min-h-[70vh] overflow-y-auto rounded-2xl bg-slate-50 p-4 shadow-md lg:h-[calc(100vh-7.5rem)]">
+          <div className="mx-auto max-w-3xl">
           {/* 开场一问（李永乐式钩子） */}
           {lesson.story && (
             <div className="mb-4 rounded-2xl bg-gradient-to-r from-indigo-50 to-sky-50 p-5 ring-1 ring-indigo-100">
@@ -244,6 +245,7 @@ export default function TutorScreen() {
               </div>
             );
           })()}
+          </div>
         </section>
       ) : (
         <section className="flex min-h-[70vh] flex-col items-center justify-center gap-4 rounded-2xl bg-white/80 p-8 text-center shadow-md lg:h-[calc(100vh-7.5rem)]">
