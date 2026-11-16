@@ -132,8 +132,8 @@ export interface Teach {
 export interface LabDef {
   /** 可调参数（滑块）；name 需与演示代码里的顶层赋值变量名一致，运行时注入替换 */
   params: LabParam[];
-  /** 舞台显示坐标网格（画函数图像/曲线时开） */
-  grid?: boolean;
+  /** 舞台坐标网格：true=对齐数据坐标的淡网格+0 轴高亮（无数字）；数字=几个舞台单位是 1 个数学单位，叠加按数学单位标注的数字刻度（函数图像课用） */
+  grid?: boolean | number;
   /** 探索问题（引导孩子做"实验"） */
   explore?: string[];
   /** 演示代码（缺省用 starterCode） */

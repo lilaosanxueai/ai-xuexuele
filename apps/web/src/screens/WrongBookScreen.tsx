@@ -228,7 +228,7 @@ export default function WrongBookScreen() {
           {wrongs.length > 0 ? (
             <span className="rounded-full bg-rose-100 px-3 py-1 text-sm font-bold text-rose-600">还有 {wrongs.length} 道待重练</span>
           ) : (
-            <span className="rounded-full bg-emerald-100 px-3 py-1 text-sm font-bold text-emerald-600">错题清空啦 ✨</span>
+            <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-400">错题清空啦 ✨</span>
           )}
           {(progress?.wrongCleared ?? 0) > 0 && (
             <span className="rounded-full bg-amber-100 px-3 py-1 text-sm font-bold text-amber-600">累计练对 {progress?.wrongCleared} 道</span>
@@ -283,12 +283,16 @@ export default function WrongBookScreen() {
         )}
 
         {wrongs.length === 0 ? (
-          <div className="rounded-3xl bg-white/80 p-10 text-center shadow-md">
-            <div className="text-6xl">🌟</div>
-            <p className="mt-4 text-lg font-bold text-slate-600">
-              {progress?.wrongCleared ? '错题都练对啦，太厉害了！' : '还没有错题——去上几课、做做随堂小练吧！'}
+          <div className="flex min-h-[46vh] flex-col items-center justify-center rounded-3xl bg-white/80 p-10 text-center shadow-md">
+            <div className="relative">
+              <div className="absolute inset-0 -m-4 rounded-full bg-amber-100/70 blur-md" aria-hidden />
+              <div className="relative text-6xl">🌟</div>
+            </div>
+            <p className="mt-5 text-lg font-bold text-slate-700">
+              {progress?.wrongCleared ? `错题都练对啦（累计消灭 ${progress.wrongCleared} 道），太厉害了！` : '一片明亮——还没有错题！'}
             </p>
-            <button onClick={() => nav('/map')} className="mt-5 rounded-xl bg-sky-500 px-6 py-2.5 font-bold text-white hover:bg-sky-600">回学科中心 →</button>
+            <p className="mt-1.5 text-sm text-slate-400">去上几节课、做做随堂小练，做错了会自动收进这里等着消灭</p>
+            <button onClick={() => nav('/map')} className="mt-6 rounded-xl bg-amber-500 px-6 py-2.5 font-bold text-white shadow transition hover:-translate-y-0.5 hover:bg-amber-600">去上课 →</button>
           </div>
         ) : (
           <>

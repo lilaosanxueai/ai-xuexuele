@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { fmtCoord, mapClientToView } from '../components/StageSvg.tsx';
+import { fmtCoord, mapClientToView, niceStep } from '../components/StageSvg.tsx';
 
 describe('mapClientToView（取点读数的逆映射）', () => {
   it('等比容器：像素坐标线性映射到 viewBox', () => {
@@ -31,5 +31,24 @@ describe('fmtCoord（坐标读数格式）', () => {
   });
   it('非有限数显示占位符', () => {
     expect(fmtCoord(NaN)).toBe('—');
+  });
+});
+
+describe('niceStep（数据对齐网格的好刻度）', () => {
+  it('取 1/2/5×10^k 系列里满足最小间距的第一个', () => {
+    // scale=1：52px 最小间距 → 步长 100（100×1≥52，50×1<52）
+    expect(niceStep(52, 1, 1)).toBe(100);
+    // scale=0.5：52/0.5=104 → 200
+    expect(niceStep(52, 0.5, 1)).toBe(200);
+    // scale=2：52/2=26 → 50
+    expect(niceStep(52, 2, 1)).toBe(50);
+  });
+  it('unit 模式：步长是 unit 的整数倍（数学单位刻度）', () => {
+    // unit=30（一次函数课）：scale≈1 → 候选 30/60/150/300，52px 门槛 → 60
+    const s = niceStep(52, 1, 30);
+    expect(s % 30).toBe(0);
+    expect(s).toBe(60);
+    // unit=20（数轴课）：scale=0.8 → 门槛 65 舞台单位 → 100（=5 个数学单位）
+    expect(niceStep(52, 0.8, 20)).toBe(100);
   });
 });

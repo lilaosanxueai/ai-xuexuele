@@ -28,6 +28,20 @@ export const fmtCoord = (n: number): string => {
 };
 
 /**
+ * 选「好刻度」步长（舞台单位）：在相邻线间距 ≥ minPx 的前提下取最小的 1/2/5×10^k 系列，
+ * unit = 几个舞台单位算 1 个数学单位（数字刻度按 x/unit 标注）。
+ */
+export function niceStep(minPx: number, scale: number, unit: number): number {
+  const base = Math.max(unit, 1e-9);
+  const pow = 10 ** Math.floor(Math.log10(minPx / scale / base));
+  for (const m of [1, 2, 5, 10]) {
+    const s = base * m * pow;
+    if (s * scale >= minPx) return s;
+  }
+  return base * 10 * pow;
+}
+
+/**
  * 配色纪律：全部课程色收敛到 5 个教育主题色（蓝·绿·琥珀·玫红·紫罗兰），
  * 任何原始颜色都吸附到最近的主题色——一页不再出现六色彩虹。
  */
@@ -73,7 +87,7 @@ function fontSizeOf(size: number): number {
  * 现代 SVG 舞台渲染器 v2：
  * 自动构图（内容包围盒缩放居中，杜绝偏心/裁切）+ 主题配色收敛 + 统一文字分级。
  */
-export default function StageSvg({ cmds, grid = false }: { cmds: StageCmd[]; grid?: boolean }) {
+export default function StageSvg({ cmds, grid = false }: { cmds: StageCmd[]; grid?: boolean | number }) {
   /** 取点读数（grid 舞台悬停时）：bx/by=气泡像素位，vx/vy=viewBox 准线位，x/y=数据坐标，w=容器宽 */
   const [probe, setProbe] = useState<{ bx: number; by: number; vx: number; vy: number; x: number; y: number; w: number } | null>(null);
   const view = useMemo(() => {
@@ -178,6 +192,25 @@ export default function StageSvg({ cmds, grid = false }: { cmds: StageCmd[]; gri
     return { els, toX, toY, scale, cx, cy };
   }, [cmds]);
 
+  /** 网格规格：线对齐数据坐标（不是 viewBox 装饰线）；numbered=按数学单位标数字刻度 */
+  const gridSpec = useMemo(() => {
+    if (grid === false) return null;
+    const numbered = typeof grid === 'number' && grid > 0;
+    const unit = numbered ? (grid as number) : 1;
+    const step = niceStep(52, view.scale, unit);
+    const xMin = view.cx - VW / 2 / view.scale - step;
+    const xMax = view.cx + VW / 2 / view.scale + step;
+    const yMin = view.cy - VH / 2 / view.scale - step;
+    const yMax = view.cy + VH / 2 / view.scale + step;
+    const xs: number[] = [];
+    const ys: number[] = [];
+    for (let x = Math.ceil(xMin / step) * step; x <= xMax; x += step) xs.push(Math.abs(x) < step / 1e6 ? 0 : x);
+    for (let y = Math.ceil(yMin / step) * step; y <= yMax; y += step) ys.push(Math.abs(y) < step / 1e6 ? 0 : y);
+    const axisVisibleY = view.toY(0) >= 8 && view.toY(0) <= VH - 8; // x 轴在视野内
+    const axisVisibleX = view.toX(0) >= 8 && view.toX(0) <= VW - 8; // y 轴在视野内
+    return { unit, step, numbered, xs, ys, axisVisibleX, axisVisibleY };
+  }, [grid, view]);
+
   const onMove = (e: MouseEvent<HTMLDivElement>) => {
     if (!grid) return;
     const rect = e.currentTarget.getBoundingClientRect();
@@ -196,14 +229,32 @@ export default function StageSvg({ cmds, grid = false }: { cmds: StageCmd[]; gri
       onMouseLeave={grid ? () => setProbe(null) : undefined}
     >
       <svg viewBox={'0 0 ' + VW + ' ' + VH} className="h-full w-full" preserveAspectRatio="xMidYMid meet">
-        {grid && (
+        {gridSpec && (
           <g>
-            {Array.from({ length: 13 }, (_, i) => (
-              <line key={'vx' + i} x1={(i * VW) / 12} y1={0} x2={(i * VW) / 12} y2={VH} stroke={i === 6 ? '#cbd5e1' : '#eef2f7'} strokeWidth={i === 6 ? 1.2 : 0.6} />
-            ))}
-            {Array.from({ length: 11 }, (_, i) => (
-              <line key={'hy' + i} x1={0} y1={(i * VH) / 10} x2={VW} y2={(i * VH) / 10} stroke={i === 5 ? '#cbd5e1' : '#eef2f7'} strokeWidth={i === 5 ? 1.2 : 0.6} />
-            ))}
+            {gridSpec.xs.map((x) => {
+              const vx = view.toX(x);
+              const axis = x === 0;
+              return <line key={'gx' + x} x1={vx} y1={0} x2={vx} y2={VH} stroke={axis ? '#94a3b8' : '#e8edf3'} strokeWidth={axis ? 1.3 : 0.6} />;
+            })}
+            {gridSpec.ys.map((y) => {
+              const vy = view.toY(y);
+              const axis = y === 0;
+              return <line key={'gy' + y} x1={0} y1={vy} x2={VW} y2={vy} stroke={axis ? '#94a3b8' : '#e8edf3'} strokeWidth={axis ? 1.3 : 0.6} />;
+            })}
+            {gridSpec.numbered && (
+              <g fontSize={8.5} fill="#64748b" fontWeight={700}>
+                {gridSpec.xs.filter((x) => Math.abs(view.toX(x) - VW / 2) < VW / 2 - 12).map((x) => (
+                  <text key={'tx' + x} x={view.toX(x)} y={gridSpec.axisVisibleY ? view.toY(0) + 10.5 : VH - 5} textAnchor="middle">
+                    {fmtCoord(x / gridSpec.unit)}
+                  </text>
+                ))}
+                {gridSpec.ys.filter((y) => y !== 0 && Math.abs(view.toY(y) - VH / 2) < VH / 2 - 10).map((y) => (
+                  <text key={'ty' + y} x={gridSpec.axisVisibleX ? view.toX(0) - 5 : 5} y={view.toY(y) + 3} textAnchor={gridSpec.axisVisibleX ? 'end' : 'start'}>
+                    {fmtCoord(y / gridSpec.unit)}
+                  </text>
+                ))}
+              </g>
+            )}
           </g>
         )}
         {view.els.map((e) => (
@@ -225,7 +276,7 @@ export default function StageSvg({ cmds, grid = false }: { cmds: StageCmd[]; gri
             transform: 'translateX(-50%)',
           }}
         >
-          ({fmtCoord(probe.x)}, {fmtCoord(probe.y)})
+          ({fmtCoord(probe.x / (gridSpec?.unit ?? 1))}, {fmtCoord(probe.y / (gridSpec?.unit ?? 1))})
         </div>
       )}
     </div>
