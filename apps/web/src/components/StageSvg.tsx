@@ -87,7 +87,9 @@ function fontSizeOf(size: number): number {
  * 现代 SVG 舞台渲染器 v2：
  * 自动构图（内容包围盒缩放居中，杜绝偏心/裁切）+ 主题配色收敛 + 统一文字分级。
  */
-export default function StageSvg({ cmds, grid = false }: { cmds: StageCmd[]; grid?: boolean | number }) {
+type GridOpt = boolean | number | { unit: number; ox?: number; oy?: number };
+
+export default function StageSvg({ cmds, grid = false }: { cmds: StageCmd[]; grid?: GridOpt }) {
   /** 取点读数（grid 舞台悬停时）：bx/by=气泡像素位，vx/vy=viewBox 准线位，x/y=数据坐标，w=容器宽 */
   const [probe, setProbe] = useState<{ bx: number; by: number; vx: number; vy: number; x: number; y: number; w: number } | null>(null);
   const view = useMemo(() => {
@@ -192,23 +194,26 @@ export default function StageSvg({ cmds, grid = false }: { cmds: StageCmd[]; gri
     return { els, toX, toY, scale, cx, cy };
   }, [cmds]);
 
-  /** 网格规格：线对齐数据坐标（不是 viewBox 装饰线）；numbered=按数学单位标数字刻度 */
+  /** 网格规格：线对齐数据坐标（不是 viewBox 装饰线）；numbered=按数学单位标数字刻度（ox/oy=原点偏移） */
   const gridSpec = useMemo(() => {
     if (grid === false) return null;
-    const numbered = typeof grid === 'number' && grid > 0;
-    const unit = numbered ? (grid as number) : 1;
-    const step = niceStep(52, view.scale, unit);
+    const obj = typeof grid === 'object' && grid !== null ? grid : null;
+    const numbered = obj ? obj.unit > 0 : typeof grid === 'number' && grid > 0;
+    const unit = obj ? obj.unit : typeof grid === 'number' ? grid : 1;
+    const ox = obj?.ox ?? 0;
+    const oy = obj?.oy ?? 0;
+    const step = niceStep(46, view.scale, unit);
     const xMin = view.cx - VW / 2 / view.scale - step;
     const xMax = view.cx + VW / 2 / view.scale + step;
     const yMin = view.cy - VH / 2 / view.scale - step;
     const yMax = view.cy + VH / 2 / view.scale + step;
     const xs: number[] = [];
     const ys: number[] = [];
-    for (let x = Math.ceil(xMin / step) * step; x <= xMax; x += step) xs.push(Math.abs(x) < step / 1e6 ? 0 : x);
-    for (let y = Math.ceil(yMin / step) * step; y <= yMax; y += step) ys.push(Math.abs(y) < step / 1e6 ? 0 : y);
-    const axisVisibleY = view.toY(0) >= 8 && view.toY(0) <= VH - 8; // x 轴在视野内
-    const axisVisibleX = view.toX(0) >= 8 && view.toX(0) <= VW - 8; // y 轴在视野内
-    return { unit, step, numbered, xs, ys, axisVisibleX, axisVisibleY };
+    for (let x = Math.ceil((xMin - ox) / step) * step + ox; x <= xMax; x += step) xs.push(Math.abs(x - ox) < step / 1e6 ? ox : x);
+    for (let y = Math.ceil((yMin - oy) / step) * step + oy; y <= yMax; y += step) ys.push(Math.abs(y - oy) < step / 1e6 ? oy : y);
+    const axisVisibleY = view.toY(oy) >= 8 && view.toY(oy) <= VH - 8; // x 轴在视野内
+    const axisVisibleX = view.toX(ox) >= 8 && view.toX(ox) <= VW - 8; // y 轴在视野内
+    return { unit, step, numbered, ox, oy, xs, ys, axisVisibleX, axisVisibleY };
   }, [grid, view]);
 
   const onMove = (e: MouseEvent<HTMLDivElement>) => {
@@ -233,24 +238,24 @@ export default function StageSvg({ cmds, grid = false }: { cmds: StageCmd[]; gri
           <g>
             {gridSpec.xs.map((x) => {
               const vx = view.toX(x);
-              const axis = x === 0;
+              const axis = x === gridSpec.ox;
               return <line key={'gx' + x} x1={vx} y1={0} x2={vx} y2={VH} stroke={axis ? '#94a3b8' : '#e8edf3'} strokeWidth={axis ? 1.3 : 0.6} />;
             })}
             {gridSpec.ys.map((y) => {
               const vy = view.toY(y);
-              const axis = y === 0;
+              const axis = y === gridSpec.oy;
               return <line key={'gy' + y} x1={0} y1={vy} x2={VW} y2={vy} stroke={axis ? '#94a3b8' : '#e8edf3'} strokeWidth={axis ? 1.3 : 0.6} />;
             })}
             {gridSpec.numbered && (
               <g fontSize={8.5} fill="#64748b" fontWeight={700}>
                 {gridSpec.xs.filter((x) => Math.abs(view.toX(x) - VW / 2) < VW / 2 - 12).map((x) => (
-                  <text key={'tx' + x} x={view.toX(x)} y={gridSpec.axisVisibleY ? view.toY(0) + 10.5 : VH - 5} textAnchor="middle">
-                    {fmtCoord(x / gridSpec.unit)}
+                  <text key={'tx' + x} x={view.toX(x)} y={gridSpec.axisVisibleY ? view.toY(gridSpec.oy) + 10.5 : VH - 5} textAnchor="middle">
+                    {fmtCoord((x - gridSpec.ox) / gridSpec.unit)}
                   </text>
                 ))}
-                {gridSpec.ys.filter((y) => y !== 0 && Math.abs(view.toY(y) - VH / 2) < VH / 2 - 10).map((y) => (
-                  <text key={'ty' + y} x={gridSpec.axisVisibleX ? view.toX(0) - 5 : 5} y={view.toY(y) + 3} textAnchor={gridSpec.axisVisibleX ? 'end' : 'start'}>
-                    {fmtCoord(y / gridSpec.unit)}
+                {gridSpec.ys.filter((y) => y !== gridSpec.oy && Math.abs(view.toY(y) - VH / 2) < VH / 2 - 10).map((y) => (
+                  <text key={'ty' + y} x={gridSpec.axisVisibleX ? view.toX(gridSpec.ox) - 5 : 5} y={view.toY(y) + 3} textAnchor={gridSpec.axisVisibleX ? 'end' : 'start'}>
+                    {fmtCoord((y - gridSpec.oy) / gridSpec.unit)}
                   </text>
                 ))}
               </g>
@@ -276,7 +281,7 @@ export default function StageSvg({ cmds, grid = false }: { cmds: StageCmd[]; gri
             transform: 'translateX(-50%)',
           }}
         >
-          ({fmtCoord(probe.x / (gridSpec?.unit ?? 1))}, {fmtCoord(probe.y / (gridSpec?.unit ?? 1))})
+          ({fmtCoord((probe.x - (gridSpec?.ox ?? 0)) / (gridSpec?.unit ?? 1))}, {fmtCoord((probe.y - (gridSpec?.oy ?? 0)) / (gridSpec?.unit ?? 1))})
         </div>
       )}
     </div>
