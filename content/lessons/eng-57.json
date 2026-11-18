@@ -1,0 +1,395 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🏊",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：cn1=2 can 放在句子哪里？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：cn1=3 不会做怎么说？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：怎么问别人会不会？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "celebrate": "新知识到手！",
+  "island": "cross",
+  "subjectArea": "英语",
+  "gradeBand": "primary",
+  "grade": 3,
+  "area": "英语",
+  "band": "primary",
+  "id": "eng-57",
+  "order": 1158,
+  "title": "I can swim：会与不会",
+  "emoji": "🏊",
+  "textbook": "英语（人教版三年级）",
+  "curriculum": {
+    "module": "情态动词",
+    "points": [
+      "can 表示会",
+      "否定和疑问",
+      "can 的用法"
+    ]
+  },
+  "story": "你会游泳吗？Can you swim? 会就是 I can! 不会也别慌——I can't 现在，但 can 的世界里没有「永远不行」：学会 can，一分钟介绍你的十八般武艺！",
+  "goals": [
+    "用 can 说会什么",
+    "会用 can't",
+    "会问 Can you…?"
+  ],
+  "aiIntro": "🏊 会还是不会——can 的小宇宙",
+  "param": {
+    "name": "cn1",
+    "label": "能力站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "can 放在句子哪里？",
+    "不会做怎么说？",
+    "怎么问别人会不会？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "can 三连",
+      "subtitle": "肯定否定疑问",
+      "color": "blue",
+      "emoji": "✅",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "一个 can 三种说法",
+          "items": [
+            {
+              "label": "肯定",
+              "value": "I can swim. 我会游泳——can + 动词原形：can 后面永远跟「裸动词」（不加 s 不加 ing）"
+            },
+            {
+              "label": "否定",
+              "value": "I can't swim. 我不会游泳——can + not = can't（cannot 缩写）：轻描淡写说不会·大方承认不丢人"
+            },
+            {
+              "label": "疑问",
+              "value": "Can you swim? 你会游泳吗？——can 搬到句首当问号开关：Can she dance? 她会跳舞吗？"
+            }
+          ]
+        },
+        {
+          "kind": "highlight",
+          "text": "can+动词原形；否定 can't；提问 can 打头"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "能力发布会",
+      "subtitle": "夸自己专用",
+      "color": "amber",
+      "emoji": "🌟",
+      "blocks": [
+        {
+          "kind": "info",
+          "icon": "🏆",
+          "title": "Can 三连夸",
+          "text": "I can play football. 我会踢球；I can draw pandas. 我会画熊猫；I can cook eggs! 我会煎蛋——can 后面装的就是你的本事清单：动词原形随便换·一句话一个本领"
+        },
+        {
+          "kind": "info",
+          "icon": "🎵",
+          "title": "唱出来的 can",
+          "text": "儿歌《I Can Sing a Rainbow》：I can sing a rainbow, sing a rainbow, sing a rainbow too——旋律一响句型就会了：can 歌是学 can 最快的路"
+        },
+        {
+          "kind": "highlight",
+          "text": "I can + 本事——一分钟自我介绍"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "问答实战",
+      "subtitle": "调查小采访",
+      "color": "green",
+      "emoji": "🎤",
+      "blocks": [
+        {
+          "kind": "info",
+          "icon": "📋",
+          "title": "班级能力调查",
+          "text": "拿表格采访同学：Can you play the piano? —Yes, I can. / No, I can't：回答不用整句·Yes/No + I can(c'n't) 就够——地道的省力回答法"
+        },
+        {
+          "kind": "info",
+          "icon": "🤝",
+          "title": "礼貌夸人",
+          "text": "别人展示才艺时说 You can dance so well!（你舞跳得真好）——can 不光说自己·也是夸人的好帮手：夸人一句·朋友+1"
+        },
+        {
+          "kind": "highlight",
+          "text": "Yes, I can. / No, I can't.——省力又地道"
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "can 三式",
+        "body": "【肯定】I can swim.\n【否定】I can't swim.\n【疑问】Can you swim?\n【铁律】can+动词原形。"
+      },
+      {
+        "title": "能力表达",
+        "body": "【句型】I can + 本事。\n【替换】play/draw/cook/sing。\n【儿歌】Rainbow 巩固。"
+      },
+      {
+        "title": "问答互动",
+        "body": "【简答】Yes, I can. No, I can't.\n【夸人】You can… so well!\n【活动】能力调查表。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "介绍自己的三个本领",
+        "steps": [
+          "写三个会做的事",
+          "动词放 can 后面",
+          "检查动词没加s",
+          "大声连说三句"
+        ],
+        "tip": "裸动词"
+      },
+      {
+        "q": "采访同学会不会钢琴",
+        "steps": [
+          "Can you play the piano?",
+          "等对方回答",
+          "记录 Yes 或 No",
+          "换下一个问题"
+        ],
+        "tip": "can 打头提问"
+      }
+    ],
+    "mistakes": [
+      "说 I can swims（can 后动词不加 s）",
+      "疑问句忘把 can 提到句首（You can swim? 不标准·应 Can you swim?）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "「我会游泳」是？",
+      "options": [
+        "I can swim.",
+        "I swim can.",
+        "I can swims.",
+        "Can I swim."
+      ],
+      "answer": 0,
+      "explain": "can+原形"
+    },
+    {
+      "q": "「我不会画画」是？",
+      "options": [
+        "I can draw.",
+        "I can't draw.",
+        "I not draw.",
+        "I don't can."
+      ],
+      "answer": 1,
+      "explain": "can't 表不会"
+    },
+    {
+      "q": "「你会跳舞吗？」是？",
+      "options": [
+        "You can dance?",
+        "Can you dance?",
+        "Do you can dance?",
+        "Can dance you?"
+      ],
+      "answer": 1,
+      "explain": "can 提句首"
+    },
+    {
+      "q": "can 后面的动词要？",
+      "options": [
+        "加 s",
+        "加 ing",
+        "用原形",
+        "大写"
+      ],
+      "answer": 2,
+      "explain": "裸动词"
+    },
+    {
+      "q": "Can you sing? 的简短肯定回答是？",
+      "options": [
+        "Yes, I can.",
+        "Yes, I sing.",
+        "I can sing good.",
+        "Sing!"
+      ],
+      "answer": 0,
+      "explain": "省力回答"
+    },
+    {
+      "q": "can 后面跟动词 ___",
+      "options": [
+        "原形",
+        "复数"
+      ],
+      "answer": 0,
+      "explain": "不加s不加ing",
+      "type": "blank",
+      "blank": {
+        "answerText": "原形",
+        "bank": [
+          "原形",
+          "复数"
+        ]
+      }
+    }
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "cn1",
+        "label": "能力站",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ]
+  },
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "can 三连",
+        "subtitle": "肯定否定疑问",
+        "color": "blue",
+        "emoji": "✅",
+        "blocks": [
+          {
+            "kind": "compare",
+            "title": "一个 can 三种说法",
+            "items": [
+              {
+                "label": "肯定",
+                "value": "I can swim. 我会游泳——can + 动词原形：can 后面永远跟「裸动词」（不加 s 不加 ing）"
+              },
+              {
+                "label": "否定",
+                "value": "I can't swim. 我不会游泳——can + not = can't（cannot 缩写）：轻描淡写说不会·大方承认不丢人"
+              },
+              {
+                "label": "疑问",
+                "value": "Can you swim? 你会游泳吗？——can 搬到句首当问号开关：Can she dance? 她会跳舞吗？"
+              }
+            ]
+          },
+          {
+            "kind": "highlight",
+            "text": "can+动词原形；否定 can't；提问 can 打头"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "能力发布会",
+        "subtitle": "夸自己专用",
+        "color": "amber",
+        "emoji": "🌟",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "🏆",
+            "title": "Can 三连夸",
+            "text": "I can play football. 我会踢球；I can draw pandas. 我会画熊猫；I can cook eggs! 我会煎蛋——can 后面装的就是你的本事清单：动词原形随便换·一句话一个本领"
+          },
+          {
+            "kind": "info",
+            "icon": "🎵",
+            "title": "唱出来的 can",
+            "text": "儿歌《I Can Sing a Rainbow》：I can sing a rainbow, sing a rainbow, sing a rainbow too——旋律一响句型就会了：can 歌是学 can 最快的路"
+          },
+          {
+            "kind": "highlight",
+            "text": "I can + 本事——一分钟自我介绍"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "问答实战",
+        "subtitle": "调查小采访",
+        "color": "green",
+        "emoji": "🎤",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "📋",
+            "title": "班级能力调查",
+            "text": "拿表格采访同学：Can you play the piano? —Yes, I can. / No, I can't：回答不用整句·Yes/No + I can(c'n't) 就够——地道的省力回答法"
+          },
+          {
+            "kind": "info",
+            "icon": "🤝",
+            "title": "礼貌夸人",
+            "text": "别人展示才艺时说 You can dance so well!（你舞跳得真好）——can 不光说自己·也是夸人的好帮手：夸人一句·朋友+1"
+          },
+          {
+            "kind": "highlight",
+            "text": "Yes, I can. / No, I can't.——省力又地道"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "can 放在句子哪里？",
+      "不会做怎么说？",
+      "怎么问别人会不会？"
+    ]
+  }
+}

@@ -1,0 +1,423 @@
+{
+  "toolbox": [],
+  "actor": {
+    "costume": "🕐",
+    "x": 0,
+    "y": 0
+  },
+  "targets": [],
+  "tasks": [
+    {
+      "id": "e0",
+      "text": "探索：tm2=2 整点怎么说？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e1",
+      "text": "探索：tm2=3 half past 是过半还是没到？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "动手验证：把参数拖到两个极端对比观察",
+        "把发现说给 AI 老师听，让它帮你变成结论"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": "探索：怎么问别人几点了？",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组对比再下结论",
+        "把发现记进「我的发现」"
+      ]
+    },
+    {
+      "id": "quiz",
+      "text": "完成随堂小练",
+      "check": {
+        "type": "manual"
+      },
+      "hintPrompts": [
+        "先做几组实验再答题，答案就藏在演示里"
+      ]
+    }
+  ],
+  "celebrate": "新知识到手！",
+  "island": "cross",
+  "subjectArea": "英语",
+  "gradeBand": "primary",
+  "grade": 3,
+  "area": "英语",
+  "band": "primary",
+  "id": "eng-56",
+  "order": 1157,
+  "title": "What time is it：几点了",
+  "emoji": "🕐",
+  "textbook": "英语（人教版三年级）",
+  "curriculum": {
+    "module": "时间表达",
+    "points": [
+      "整点表达",
+      "半点表达",
+      "问时间的句型"
+    ]
+  },
+  "story": "外国朋友问你 What time is it? 你只会说 yes？这一课学会报时三件套：整点、半点、还有最帅的一句 It's about time!（该出发啦）！",
+  "goals": [
+    "会问几点了",
+    "会说整点和半点",
+    "会用 o'clock"
+  ],
+  "aiIntro": "🕐 几点了？——What time is it",
+  "param": {
+    "name": "tm2",
+    "label": "时间站",
+    "min": 1,
+    "max": 3,
+    "step": 1,
+    "value": 1
+  },
+  "explore": [
+    "整点怎么说？",
+    "half past 是过半还是没到？",
+    "怎么问别人几点了？"
+  ],
+  "views": [
+    {
+      "when": 1,
+      "title": "问与答",
+      "subtitle": "报时句型",
+      "color": "blue",
+      "emoji": "❓",
+      "blocks": [
+        {
+          "kind": "info",
+          "icon": "💬",
+          "title": "两问一答",
+          "text": "问：What time is it?（几点了？）/ What's the time?；答：It's + 时间——It's seven.（七点了）· It's seven o'clock.（七点整）：o'clock 只用于整点——「七点半」绝不能说 seven o'clock"
+        },
+        {
+          "kind": "compare",
+          "title": "整点与半点",
+          "items": [
+            {
+              "label": "整点",
+              "value": "数字 + o'clock：7:00 = seven o'clock（七点整）：几点整几点说·最简单"
+            },
+            {
+              "label": "半点",
+              "value": "half past + 数字：7:30 = half past seven（七过一半）：half=一半·past=过了——七点过了一半"
+            }
+          ]
+        },
+        {
+          "kind": "highlight",
+          "text": "整点加 o'clock·半点 half past"
+        }
+      ]
+    },
+    {
+      "when": 2,
+      "title": "我的作息表",
+      "subtitle": "整点串串烧",
+      "color": "amber",
+      "emoji": "📋",
+      "blocks": [
+        {
+          "kind": "info",
+          "icon": "⏰",
+          "title": "一天六句话",
+          "text": "I get up at seven o'clock. 七点起；I go to school at eight. 八点上学；Lunch at twelve! 十二点午饭；I play at four o'clock. 四点玩；Homework at half past seven. 七点半作业；I sleep at nine. 九点睡——用六个时间点把一天串起来"
+        },
+        {
+          "kind": "info",
+          "icon": "🔁",
+          "title": "at 是时间钩子",
+          "text": "说「在几点」要加 at：at seven·at half past nine——at 像一枚图钉把时间和动作钉在一起：记住口诀：几点做事 at 打头"
+        },
+        {
+          "kind": "highlight",
+          "text": "at + 时间——把动作钉在时间上"
+        }
+      ]
+    },
+    {
+      "when": 3,
+      "title": "时间对话",
+      "subtitle": "实战演练",
+      "color": "green",
+      "emoji": "🎭",
+      "blocks": [
+        {
+          "kind": "compare",
+          "title": "三组真实对话",
+          "items": [
+            {
+              "label": "问路遇",
+              "value": "—What time is it? —It's half past three. Let's go!（三点半了·走吧！）"
+            },
+            {
+              "label": "约朋友",
+              "value": "—See you at five o'clock? —OK! At five.（五点见？——好·五点！）"
+            },
+            {
+              "label": "迟到了",
+              "value": "—Oh no, it's nine o'clock! —Hurry up!（九点了！——快点！）"
+            }
+          ]
+        },
+        {
+          "kind": "info",
+          "icon": "⏳",
+          "title": "about 差不多",
+          "text": "It's about seven.（七点左右）——about=大约：不确切的时间用 about 打头·最地道的口语缓冲词：时间没掐准也能大方开口"
+        },
+        {
+          "kind": "highlight",
+          "text": "about=大约——不确定就加它"
+        }
+      ]
+    }
+  ],
+  "teach": {
+    "sections": [
+      {
+        "title": "问与答",
+        "body": "【问】What time is it?\n【答】It's + 时间。\n【整点】数字+o'clock。"
+      },
+      {
+        "title": "半点",
+        "body": "【句型】half past + 数字。\n【理解】half 一半·past 过了。\n【例】7:30=half past seven。"
+      },
+      {
+        "title": "作息表达",
+        "body": "【介词】在几点用 at。\n【缓冲】about=大约。\n【例】at seven·about nine。"
+      }
+    ],
+    "examples": [
+      {
+        "q": "看钟说时间",
+        "steps": [
+          "看时针指向几",
+          "整点说 It's five o'clock",
+          "半点说 half past five",
+          "不确定加 about"
+        ],
+        "tip": "整半分开说"
+      },
+      {
+        "q": "介绍我的一天",
+        "steps": [
+          "列六个时间点",
+          "每个配一个动作",
+          "动词前加 at",
+          "连成六句话"
+        ],
+        "tip": "at 钉时间"
+      }
+    ],
+    "mistakes": [
+      "七点半说成 seven o'clock（o'clock 只用于整点）",
+      "忘了在时间前加 at（at seven 才对）"
+    ]
+  },
+  "exercises": [
+    {
+      "q": "「几点了？」英语是？",
+      "options": [
+        "What time is it?",
+        "How are you?",
+        "What's this?",
+        "Who are you?"
+      ],
+      "answer": 0,
+      "explain": "问时间专用"
+    },
+    {
+      "q": "7:00 的英语是？",
+      "options": [
+        "seven o'clock",
+        "half past seven",
+        "seven half",
+        "seven past"
+      ],
+      "answer": 0,
+      "explain": "整点加oclock"
+    },
+    {
+      "q": "half past seven 是？",
+      "options": [
+        "7:00",
+        "7:30",
+        "6:30",
+        "7:15"
+      ],
+      "answer": 1,
+      "explain": "七过一半"
+    },
+    {
+      "q": "「在七点」要说？",
+      "options": [
+        "on seven",
+        "at seven",
+        "in seven",
+        "to seven"
+      ],
+      "answer": 1,
+      "explain": "at 钉时间"
+    },
+    {
+      "q": "It's about nine 的意思是？",
+      "options": [
+        "九点整",
+        "九点左右",
+        "九点半",
+        "九点前"
+      ],
+      "answer": 1,
+      "explain": "about大约"
+    },
+    {
+      "q": "o'clock 只用于 ___ 点",
+      "options": [
+        "整",
+        "半"
+      ],
+      "answer": 0,
+      "explain": "整点专用",
+      "type": "blank",
+      "blank": {
+        "answerText": "整",
+        "bank": [
+          "整",
+          "半"
+        ]
+      }
+    }
+  ],
+  "lab": {
+    "params": [
+      {
+        "name": "tm2",
+        "label": "时间站",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "value": 1
+      }
+    ]
+  },
+  "interact": {
+    "views": [
+      {
+        "when": 1,
+        "title": "问与答",
+        "subtitle": "报时句型",
+        "color": "blue",
+        "emoji": "❓",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "💬",
+            "title": "两问一答",
+            "text": "问：What time is it?（几点了？）/ What's the time?；答：It's + 时间——It's seven.（七点了）· It's seven o'clock.（七点整）：o'clock 只用于整点——「七点半」绝不能说 seven o'clock"
+          },
+          {
+            "kind": "compare",
+            "title": "整点与半点",
+            "items": [
+              {
+                "label": "整点",
+                "value": "数字 + o'clock：7:00 = seven o'clock（七点整）：几点整几点说·最简单"
+              },
+              {
+                "label": "半点",
+                "value": "half past + 数字：7:30 = half past seven（七过一半）：half=一半·past=过了——七点过了一半"
+              }
+            ]
+          },
+          {
+            "kind": "highlight",
+            "text": "整点加 o'clock·半点 half past"
+          }
+        ]
+      },
+      {
+        "when": 2,
+        "title": "我的作息表",
+        "subtitle": "整点串串烧",
+        "color": "amber",
+        "emoji": "📋",
+        "blocks": [
+          {
+            "kind": "info",
+            "icon": "⏰",
+            "title": "一天六句话",
+            "text": "I get up at seven o'clock. 七点起；I go to school at eight. 八点上学；Lunch at twelve! 十二点午饭；I play at four o'clock. 四点玩；Homework at half past seven. 七点半作业；I sleep at nine. 九点睡——用六个时间点把一天串起来"
+          },
+          {
+            "kind": "info",
+            "icon": "🔁",
+            "title": "at 是时间钩子",
+            "text": "说「在几点」要加 at：at seven·at half past nine——at 像一枚图钉把时间和动作钉在一起：记住口诀：几点做事 at 打头"
+          },
+          {
+            "kind": "highlight",
+            "text": "at + 时间——把动作钉在时间上"
+          }
+        ]
+      },
+      {
+        "when": 3,
+        "title": "时间对话",
+        "subtitle": "实战演练",
+        "color": "green",
+        "emoji": "🎭",
+        "blocks": [
+          {
+            "kind": "compare",
+            "title": "三组真实对话",
+            "items": [
+              {
+                "label": "问路遇",
+                "value": "—What time is it? —It's half past three. Let's go!（三点半了·走吧！）"
+              },
+              {
+                "label": "约朋友",
+                "value": "—See you at five o'clock? —OK! At five.（五点见？——好·五点！）"
+              },
+              {
+                "label": "迟到了",
+                "value": "—Oh no, it's nine o'clock! —Hurry up!（九点了！——快点！）"
+              }
+            ]
+          },
+          {
+            "kind": "info",
+            "icon": "⏳",
+            "title": "about 差不多",
+            "text": "It's about seven.（七点左右）——about=大约：不确切的时间用 about 打头·最地道的口语缓冲词：时间没掐准也能大方开口"
+          },
+          {
+            "kind": "highlight",
+            "text": "about=大约——不确定就加它"
+          }
+        ]
+      }
+    ],
+    "explore": [
+      "整点怎么说？",
+      "half past 是过半还是没到？",
+      "怎么问别人几点了？"
+    ]
+  }
+}
