@@ -15,6 +15,7 @@ import { buildShotName, exportSvgToPng, svgToDataUrl } from '../runtime/stageSho
 import { parsePy, PyRunner } from '../runtime/pyinterp.ts';
 import { pyStageApi } from '../runtime/pyBridge.ts';
 import { lessonNeighbors, lessonRoute } from '../runtime/lessonNav.ts';
+import { useLessonHotkeys } from '../utils/lessonHotkeys.ts';
 
 /**
  * 课程学习页（现代互动教育形态）：
@@ -70,6 +71,9 @@ export default function LabScreen() {
   const { current: profile } = useProfileStore();
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [allLessons, setAllLessons] = useState<Lesson[]>([]);
+
+  // 桌面效率：←/→ 直接翻上一课/下一课（与顶部 ‹ › 同逻辑·加载中静默）
+  useLessonHotkeys(allLessons, id, nav);
   const [values, setValues] = useState<Record<string, number>>({});
   const [slowRunning, setSlowRunning] = useState(false);
   const [quizOpen, setQuizOpen] = useState(false);
@@ -330,8 +334,9 @@ export default function LabScreen() {
   };
 
   if (!profile || !lesson) {
-    return <div className="flex min-h-screen items-center justify-center text-slate-400">正在准备这一课…</div>;
+    return <div className="flex min-h-screen items-center justify-center text-slate-400">正在准备这一课…</div>
   }
+
 
   const exploreList = lesson.interact?.explore ?? lesson.lab?.explore ?? [];
   const bandText = lesson.gradeBand === 'senior' ? '高中' : lesson.gradeBand === 'junior' ? '初中' : '小学';

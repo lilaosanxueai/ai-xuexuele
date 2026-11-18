@@ -138,6 +138,36 @@ export default function UniverseScreen() {
       .finally(() => setTipLoading(false));
   };
 
+  /** 681 颗星星的渲染层：独立 memo——hover 面板更新时本层引用不变，跳过整棵子树重渲染（hover 标签由 CSS :hover 驱动，不进 deps） */
+  const nodeLayer = useMemo(() => graph.nodes.map((n, idx) => {
+    const isStop = playing !== null && playStopIds.has(n.id);
+    const isNow = playing !== null && playStopNodes[playIdx]?.id === n.id;
+    const dim = playing !== null
+      ? !isStop
+      : (focus !== null && n.subject !== focus) || (sel !== null && !isLit(n) && n.id !== sel);
+    const acc = n.accuracy;
+    const bright = acc != null || isStop;
+    const si = subjectIdx.get(n.subject) ?? -1;
+    return (
+      <g key={n.id} className="uni-node" onClick={() => { if (dragRef.current?.moved) return; setSel(n.id === sel ? null : n.id); }} onMouseEnter={() => setHover(n.id)} onMouseLeave={() => setHover(null)} style={{ cursor: 'pointer', opacity: dim ? 0.07 : 1 }}>
+        {isNow && <circle cx={n.x} cy={n.y} r={n.r * 1.7} fill="none" stroke="#fff" strokeWidth={1.2 / view.k} opacity={0.85} className="uni-tw" />}
+        {si >= 0 && (
+          <circle cx={n.x} cy={n.y} r={n.r * (bright ? 2.2 : 1.05)} fill={`url(#star-${si})`}
+            opacity={bright ? (dim ? 0.18 : 0.7) : 0.08}
+            className={bright && !dim ? 'uni-tw' : undefined}
+            style={bright && !dim ? { animationDelay: `${(idx % 9) * 0.33}s` } : undefined} />
+        )}
+        <circle cx={n.x} cy={n.y} r={Math.max(2.5, n.r * (bright ? 0.7 : 0.24))} fill={bright ? '#fff' : hexOf(n.subject)} fillOpacity={bright ? 0.95 : 0.28}
+          stroke={n.id === sel || isNow ? '#fde68a' : 'none'} strokeWidth={(n.id === sel || isNow ? 2.2 : 0) / view.k} />
+        {n.doneCount === n.count && n.count > 0 && <text x={n.x} y={n.y + 3.5 / view.k} textAnchor="middle" fill="#0f172a" fontSize={9 / Math.max(1, view.k / 1.6)} fontWeight={800} pointerEvents="none">✓</text>}
+        <text className="uni-lbl" x={n.x} y={n.y - n.r * (bright ? 2.2 : 1.4) - 4 / view.k} textAnchor="middle" fill={isNow ? '#fde68a' : '#fff'} fontSize={10.5 / view.k} fontWeight={700} pointerEvents="none" style={{ opacity: n.id === sel || isStop ? 1 : 0, transition: 'opacity .12s' }}>
+          {n.module}
+        </text>
+      </g>
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }), [graph, view, focus, sel, playing, playIdx, playStopIds, playStopNodes, subjectIdx]);
+
   if (!profile) return null;
 
   if (lessons.length === 0) {
@@ -206,6 +236,7 @@ export default function UniverseScreen() {
               .uni-tw { animation: uni-twinkle 2.8s ease-in-out infinite }
               @keyframes uni-flow { to { stroke-dashoffset: -24 } }
               .uni-flow { stroke-dasharray: 5 7; animation: uni-flow 1.1s linear infinite }
+              .uni-node:hover .uni-lbl { opacity: 1 !important }
             `}</style>
             {/* 缩放漫游控件 */}
             <div className="absolute right-3 top-3 z-10 flex flex-col gap-1">
@@ -299,34 +330,8 @@ export default function UniverseScreen() {
                     </g>
                   );
                 })}
-                {/* 模块星星：星辉光晕+白星核（练过=亮星·没练=小暗星） */}
-                {graph.nodes.map((n, idx) => {
-                  const isStop = playing !== null && playStopIds.has(n.id);
-                  const isNow = playing !== null && playStopNodes[playIdx]?.id === n.id;
-                  const dim = playing !== null
-                    ? !isStop
-                    : (focus !== null && n.subject !== focus) || (sel !== null && !isLit(n) && n.id !== sel);
-                  const acc = n.accuracy;
-                  const bright = acc != null || isStop; // 亮星：练过或航线站点
-                  const si = subjectIdx.get(n.subject) ?? -1;
-                  return (
-                    <g key={n.id} onClick={() => { if (dragRef.current?.moved) return; setSel(n.id === sel ? null : n.id); }} onMouseEnter={() => setHover(n.id)} onMouseLeave={() => setHover(null)} style={{ cursor: 'pointer', opacity: dim ? 0.07 : 1 }}>
-                      {isNow && <circle cx={n.x} cy={n.y} r={n.r * 1.7} fill="none" stroke="#fff" strokeWidth={1.2 / view.k} opacity={0.85} className="uni-tw" />}
-                      {/* 星辉 */}
-                      {si >= 0 && (
-                        <circle cx={n.x} cy={n.y} r={n.r * (bright ? 2.2 : 1.05)} fill={`url(#star-${si})`}
-                          opacity={bright ? (dim ? 0.18 : 0.7) : 0.08}
-                          className={bright && !dim ? 'uni-tw' : undefined}
-                          style={bright && !dim ? { animationDelay: `${(idx % 9) * 0.33}s` } : undefined} />
-                      )}
-                      {/* 星核 */}
-                      <circle cx={n.x} cy={n.y} r={Math.max(2.5, n.r * (bright ? 0.7 : 0.24))} fill={bright ? '#fff' : hexOf(n.subject)} fillOpacity={bright ? 0.95 : 0.28}
-                        stroke={n.id === sel || isNow ? '#fde68a' : 'none'} strokeWidth={(n.id === sel || isNow ? 2.2 : 0) / view.k} />
-                      {n.doneCount === n.count && n.count > 0 && <text x={n.x} y={n.y + 3.5 / view.k} textAnchor="middle" fill="#0f172a" fontSize={9 / Math.max(1, view.k / 1.6)} fontWeight={800}>✓</text>}
-                      {(hover === n.id || n.id === sel || isStop) && <text x={n.x} y={n.y - n.r * (bright ? 2.2 : 1.4) - 4 / view.k} textAnchor="middle" fill={isNow ? '#fde68a' : '#fff'} fontSize={10.5 / view.k} fontWeight={700}>{n.module}</text>}
-                    </g>
-                  );
-                })}
+                {/* 模块星星渲染层（memo 化：hover 不再重建 681 节点·标签由 CSS :hover 驱动） */}
+                {nodeLayer}
               </g>
             </svg>
           </div>

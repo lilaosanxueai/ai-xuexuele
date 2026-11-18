@@ -5,6 +5,7 @@ import MindmapView from '../components/MindmapView.tsx';
 import LessonNoteEditor from '../components/LessonNoteEditor.tsx';
 import { findCrossLinks } from '../runtime/crossLink.ts';
 import { lessonNeighbors, lessonRoute } from '../runtime/lessonNav.ts';
+import { useLessonHotkeys } from '../utils/lessonHotkeys.ts';
 import type { Lesson as LessonType } from '@shared/types.ts';
 import { api } from '../api.ts';
 import { useProfileStore } from '../stores/profile.ts';
@@ -31,6 +32,9 @@ export default function TutorScreen() {
   /** 课堂报告（学而思式课后反馈卡） */
   const [report, setReport] = useState<{ correct: number; total: number; wrongCount: number; xp: number } | null>(null);
   const [reportOpen, setReportOpen] = useState(false);
+
+  // 桌面效率：←/→ 直接翻上一课/下一课（与顶部 ‹ › 同逻辑）
+  useLessonHotkeys(allLessons, id, nav);
 
   useEffect(() => {
     if (!profile) { nav('/'); return; }
