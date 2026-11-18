@@ -47,7 +47,7 @@ function Tabs() {
 
   return (
     <div>
-      <div className="mb-6 flex gap-2">
+      <div className="mb-6 flex flex-wrap gap-2">
         {([['progress', '📈 学习进度'], ['report', '📗 学情报告'], ['annual', '📖 年度报告'], ['chats', '💬 AI 对话记录'], ['compare', '👥 档案对比'], ['backup', '💾 数据备份'],
         ['settings', '⚙️ 设置']] as [Tab, string][])
           .map(([k, label]) => (

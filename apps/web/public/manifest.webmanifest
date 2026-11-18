@@ -1,15 +1,25 @@
 {
-  "name": "AI学学乐",
-  "short_name": "学学乐",
-  "description": "中小学生的 AI 学科辅导：441 门课程、互动实验室、闪卡记忆盒、错题本与学情报告，数据全部本机保存。",
-  "start_url": "./index.html",
-  "scope": "./",
-  "display": "standalone",
-  "orientation": "any",
-  "background_color": "#f8fafc",
-  "theme_color": "#1d4ed8",
-  "icons": [
-    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
-    { "src": "icon-maskable.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
-  ]
+ "name": "AI学学乐",
+ "short_name": "学学乐",
+ "description": "中小学生的现代互动学科自学应用：18 学科 1149 课覆盖小初高，知识宇宙图谱+互动实验室+错题记忆盒+随堂练+考试+家长端，数据全部本机保存。",
+ "start_url": "./index.html",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "any",
+ "background_color": "#f8fafc",
+ "theme_color": "#1d4ed8",
+ "icons": [
+  {
+   "src": "icon.svg",
+   "sizes": "any",
+   "type": "image/svg+xml",
+   "purpose": "any"
+  },
+  {
+   "src": "icon-maskable.svg",
+   "sizes": "any",
+   "type": "image/svg+xml",
+   "purpose": "maskable"
+  }
+ ]
 }
